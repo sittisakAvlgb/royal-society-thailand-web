@@ -1,0 +1,28 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "royalsociety-static",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        ".claude/serve.py",
+        "5510"
+      ],
+      "port": 5510
+    },
+    {
+      "name": "royalsociety-dist",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5511",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "dist"
+      ],
+      "port": 5511
+    }
+  ]
+}

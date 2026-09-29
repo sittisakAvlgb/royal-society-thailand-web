@@ -1,0 +1,492 @@
+/* ============================================================================
+ * layout.css — Containers, sections, header, footer, page scaffolds
+ *  Mobile-first. Wider-screen rules live in responsive.css.
+ * ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.container--reading { max-width: calc(var(--reading) + 2 * var(--container-pad)); }
+
+main { display: block; }
+main:focus { outline: none; }
+
+/* ==============================
+   Sections
+================================ */
+
+.section { padding-block: var(--space-12); }
+.section--alt { background: var(--surface-alt); }
+.section + .section:not(.section--alt) { border-top: 1px solid var(--border); }
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.section-head__text { max-width: 720px; }
+
+/* Pill label with a status dot */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  padding: 3px var(--space-3) 3px 10px;
+  border: 1px solid var(--rst-green-200);
+  border-radius: var(--radius-pill);
+  background: var(--rst-green-50);
+  color: var(--rst-green-800);
+  font-family: var(--font-latin);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.eyebrow:lang(en) { letter-spacing: .06em; }
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rst-green-600);
+  box-shadow: 0 0 0 3px rgba(23, 168, 110, .18);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.section-desc {
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+}
+
+/* ==============================
+   Utility bar — thin dark top bar
+   Prototype note · organisation links · accessibility · language
+================================ */
+
+.utility-bar {
+  background: var(--rst-green-950);
+  color: rgba(255, 255, 255, .8);
+  font-size: var(--text-xs);
+}
+.utility-bar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 40px;
+}
+.utility-bar__note {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  color: var(--rst-green-300);
+}
+.utility-bar__note .icon { width: 14px; height: 14px; }
+.utility-bar__note span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.utility-bar__links { display: none; margin-left: auto; }
+.utility-bar__links ul { display: flex; gap: var(--space-6); }
+.utility-bar__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 40px;
+  color: inherit;
+  text-decoration: none;
+}
+.utility-bar__links a .icon { width: 13px; height: 13px; }
+.utility-bar__links a:hover { color: var(--white); text-decoration: underline; }
+
+.utility-bar__tools { display: flex; align-items: center; gap: var(--space-2); margin-left: auto; }
+.utility-bar__links + .utility-bar__tools { margin-left: 0; }
+
+.utility-bar__links a:focus-visible,
+.utility-btn:focus-visible,
+.lang-switch a:focus-visible { outline-color: var(--white); }
+
+/* ==============================
+   Global Header
+================================ */
+
+/* The slot must not become the sticky header's containing block */
+#app-header { display: contents; }
+
+/* Floating rounded card: brand · menu · search.
+   The sticky band is transparent and overlaps the first band of the page
+   (see --header-overlap); only the card itself takes pointer input. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  padding-block: var(--header-gap);
+  margin-bottom: calc(-1 * var(--header-overlap));
+  pointer-events: none;
+}
+
+.header-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--header-h);
+  padding-inline: var(--space-3) var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--white);   /* solid: a see-through card turns grey over the hero photos */
+  box-shadow: var(--shadow-sm);
+  pointer-events: auto;
+  transition: box-shadow var(--duration) var(--ease);
+}
+
+#app-header.is-scrolled .header-inner { box-shadow: var(--shadow-md); }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  margin-right: auto;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.brand-logo-img {
+  width: 34px;
+  height: 48px;
+  object-fit: contain;
+  transition: width var(--duration) var(--ease), height var(--duration) var(--ease);
+}
+
+.brand-text { display: grid; line-height: 1.25; min-width: 0; }
+.brand-title {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--rst-green-900);
+}
+.brand-sub {
+  display: none;
+  font-family: var(--font-latin);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.brand-sub:lang(en) { font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; }
+html[lang="en"] .brand-title { font-size: var(--text-base); }
+/* A Thai name must never break mid-word; English may wrap onto two lines */
+html:not([lang="en"]) .brand-title { white-space: nowrap; }
+
+/* Small phones: tighter bar */
+@media (max-width: 479px) {
+  .header-inner { gap: var(--space-2); padding-inline: var(--space-2) var(--space-1); }
+  .brand { gap: var(--space-2); }
+  .brand-logo-img { width: 28px; height: 40px; }
+  html:not([lang="en"]) .brand-title { font-size: var(--text-base); }
+}
+
+.main-nav { display: none; }
+
+.header-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* ==============================
+   Page header (inner pages)
+================================ */
+
+/* Inner-page banner.
+   Artwork slot: assets/images/page-header/page-header-bg.png (see the README
+   there). A white wash keeps the type readable; until the file exists the
+   gradient below shows on its own. */
+.page-header {
+  padding-block: calc(var(--header-overlap) + var(--space-6)) var(--space-10);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .82) 0%, rgba(255, 255, 255, .58) 38%, rgba(255, 255, 255, .18) 66%, rgba(255, 255, 255, 0) 90%),
+    url("../images/page-header/page-header-bg.png") center bottom / cover no-repeat,
+    var(--gradient-hero);
+  border-bottom: 1px solid var(--border);
+}
+.page-header h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  margin-top: var(--space-4);
+}
+.page-header__lead {
+  max-width: 720px;
+  margin-top: var(--space-3);
+  color: var(--text-secondary);
+  font-size: var(--text-md);
+}
+
+/* ==============================
+   Vertical rhythm helpers
+================================ */
+
+.stack > * + * { margin-top: var(--space-4); }
+.stack-lg > * + * { margin-top: var(--space-8); }
+
+/* ==============================
+   Footer
+================================ */
+
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;           /* the emblem below bleeds off the corner */
+  background: var(--gradient-dark);
+  color: var(--white);
+  font-size: var(--text-sm);
+  /* Hairline of gold across the top, the way a seal is edged */
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, var(--rst-green-800) 0%, var(--gold-500) 50%, var(--rst-green-800) 100%) 1;
+}
+
+/* The emblem, very faint, bleeding off the corner */
+.site-footer::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -48px;
+  bottom: -56px;
+  width: 250px;
+  height: 357px;
+  background: url("../images/logo-image.png") center / contain no-repeat;
+  filter: brightness(0) invert(1);
+  opacity: .07;
+  pointer-events: none;
+}
+
+.footer-main {
+  display: grid;
+  gap: var(--space-8);
+  padding-block: var(--space-10);
+}
+
+.footer-org__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.footer-org__logo {
+  width: 44px;
+  height: 62px;
+  object-fit: contain;   /* the emblem is transparent — it sits straight on the dark footer */
+}
+.footer-org__name {
+  position: relative;
+  padding-bottom: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--white);
+}
+.footer-org__name::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--gold-500);
+}
+.footer-org__name-en {
+  display: block;
+  font-family: var(--font-latin);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, .72);
+}
+
+.footer-address {
+  display: grid;
+  gap: var(--space-1);
+  color: rgba(255, 255, 255, .72);
+  line-height: var(--leading-normal);
+}
+.footer-address dd { margin: 0; }
+.footer-address .icon { flex: none; width: 16px; height: 16px; color: var(--rst-green-300); }
+/* Rows that are not links still line up with the ones that are */
+.footer-address__line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding-block: var(--space-1);
+}
+.footer-address__line .icon { margin-top: 3px; }
+
+.footer-org__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.site-footer .footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 38px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, .88);
+  transition: border-color var(--duration) var(--ease), background-color var(--duration) var(--ease),
+              color var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+.site-footer .footer-btn .icon { width: 16px; height: 16px; }
+.site-footer .footer-btn:hover {
+  border-color: rgba(255, 255, 255, .5);
+  background: rgba(255, 255, 255, .08);
+  color: var(--white);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+.site-footer .footer-btn--solid {
+  border-color: var(--rst-green-600);
+  background: var(--rst-green-600);
+  color: var(--white);
+}
+.site-footer .footer-btn--solid:hover { border-color: var(--gold-500); background: var(--gold-500); color: var(--rst-green-950); }
+
+.footer-col h2 {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--white);
+}
+.footer-col h2 span {
+  display: block;
+  font-family: var(--font-latin);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: rgba(255, 255, 255, .6);
+  letter-spacing: .04em;
+}
+.footer-col::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin-bottom: var(--space-3);
+  background: var(--gold-500);
+  transition: width var(--duration-slow) var(--ease);
+}
+.footer-col:hover::before,
+.footer-col:focus-within::before { width: 56px; }
+
+.footer-links { margin-top: var(--space-3); }
+/* A chevron slides in on the link being pointed at */
+.footer-links a { position: relative; transition: transform var(--duration) var(--ease); }
+.footer-links a::before {
+  content: "→";
+  position: absolute;
+  inset-inline-start: -18px;
+  opacity: 0;
+  color: var(--rst-green-300);
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+  transform: translateX(-4px);
+}
+.footer-links a:hover { transform: translateX(6px); }
+.footer-links a:hover::before { opacity: 1; transform: none; }
+
+.site-footer a {
+  color: rgba(255, 255, 255, .8);
+  text-decoration: none;
+  transition: color var(--duration) var(--ease);
+}
+.footer-links a,
+.footer-address a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 34px;
+  padding-block: var(--space-1);
+}
+
+/* Touch devices keep the full 44px target */
+@media (pointer: coarse) {
+  .footer-links a,
+  .footer-address a { min-height: 44px; }
+}
+.site-footer a:hover {
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+.site-footer a:active { color: var(--rst-green-100); }
+.site-footer a:focus-visible {
+  outline-color: var(--white);
+  color: var(--white);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, .14);
+}
+.footer-bottom .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-block: var(--space-4);
+  color: rgba(255, 255, 255, .72);
+  font-size: var(--text-xs);
+}
+.footer-bottom p { line-height: 1.6; }
+
+.footer-bottom__end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+  /* Clear of the floating accessibility button (56px + its 16px offset) */
+  padding-inline-end: 72px;
+}
+
+.footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 36px;
+  padding: var(--space-1) var(--space-4);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: var(--radius-pill);
+  background: none;
+  color: rgba(255, 255, 255, .8);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color var(--duration) var(--ease), background-color var(--duration) var(--ease), color var(--duration) var(--ease);
+}
+.footer-top .icon { width: 15px; height: 15px; transform: rotate(-90deg); transition: transform var(--duration) var(--ease); }
+.footer-top:hover { border-color: rgba(255, 255, 255, .45); background: rgba(255, 255, 255, .07); color: var(--white); }
+.footer-top:hover .icon { transform: rotate(-90deg) translateX(3px); }
+.footer-top:focus-visible { outline-color: var(--white); color: var(--white); }
+
+.visitor-count {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.visitor-count .icon { width: 15px; height: 15px; opacity: .6; }
+.visitor-count strong {
+  font-family: var(--font-latin);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, .9);
+  font-feature-settings: "tnum" 1;
+}

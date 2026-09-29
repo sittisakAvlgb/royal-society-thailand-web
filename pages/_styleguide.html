@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Design system | The Royal Society of Thailand">คู่มือองค์ประกอบ | ราชบัณฑิตยสภา</title>
+  <meta name="description" content="คู่มือองค์ประกอบและรูปแบบมาร์กอัปของเว็บไซต์ราชบัณฑิตยสภา สำหรับทีมออกแบบและพัฒนา" data-en-content="Component and markup reference for the Royal Society of Thailand website, for designers and developers.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#123D2B">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ราชบัณฑิตยสภา The Royal Society of Thailand">
+  <meta property="og:title" content="คู่มือองค์ประกอบ | ราชบัณฑิตยสภา">
+  <meta property="og:description" content="คู่มือองค์ประกอบและรูปแบบมาร์กอัปของเว็บไซต์ราชบัณฑิตยสภา">
+  <meta property="og:image" content="https://royalsociety.go.th/assets/images/cropped-logo-with-bg-1.png">
+  <meta property="og:locale" content="th_TH">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
+  <link rel="apple-touch-icon" href="../assets/images/cropped-logo-with-bg-1.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": "https://royalsociety.go.th/" },
+      { "@type": "ListItem", "position": 2, "name": "คู่มือองค์ประกอบ", "item": "https://royalsociety.go.th/pages/_styleguide.html" }
+    ]
+  }
+  </script>
+
+  <script defer src="../assets/js/00-core.js"></script>
+  <script defer src="../assets/js/01-config.js"></script>
+  <script defer src="../assets/js/data/search-index.js"></script>
+  <script defer src="../assets/js/02-components.js"></script>
+  <script defer src="../assets/js/03-accessibility.js"></script>
+  <script defer src="../assets/js/04-interactions.js"></script>
+  <script defer src="../assets/js/05-language.js"></script>
+  <script defer src="../assets/js/06-search.js"></script>
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main id="main-content" tabindex="-1">
+    <div class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
+            <li><span aria-current="page" data-en="Design system">คู่มือองค์ประกอบ</span></li>
+          </ol>
+        </nav>
+        <h1 data-en="Design system">คู่มือองค์ประกอบ</h1>
+        <p class="page-header__lead" data-en="Components, states and markup contracts used across the website. Copy the markup exactly — JavaScript relies on the classes, ids and data attributes shown here.">ส่วนประกอบ สถานะ และรูปแบบมาร์กอัปที่ใช้ทั้งเว็บไซต์ คัดลอกมาร์กอัปตามตัวอย่าง เพราะ JavaScript อ้างอิงคลาส id และ data attribute เหล่านี้</p>
+      </div>
+    </div>
+
+    <div class="container content-layout">
+
+      <nav aria-label="สารบัญคู่มือ" data-en-aria-label="Styleguide contents">
+        <ul class="tag-list" role="list">
+          <li><a class="tag" href="#sg-colours">Colour</a></li>
+          <li><a class="tag" href="#sg-typography">Typography</a></li>
+          <li><a class="tag" href="#sg-buttons">Buttons</a></li>
+          <li><a class="tag" href="#sg-links">Links</a></li>
+          <li><a class="tag" href="#sg-badges">Badges</a></li>
+          <li><a class="tag" href="#sg-tags">Tags</a></li>
+          <li><a class="tag" href="#sg-forms">Forms</a></li>
+          <li><a class="tag" href="#sg-search">Search box</a></li>
+          <li><a class="tag" href="#sg-breadcrumb">Breadcrumb</a></li>
+          <li><a class="tag" href="#sg-accordion">Accordion</a></li>
+          <li><a class="tag" href="#sg-tabs">Tabs</a></li>
+          <li><a class="tag" href="#sg-service">Service item</a></li>
+          <li><a class="tag" href="#sg-article">Article card</a></li>
+          <li><a class="tag" href="#sg-person">Person card</a></li>
+          <li><a class="tag" href="#sg-pagination">Pagination</a></li>
+          <li><a class="tag" href="#sg-modal">Modal</a></li>
+          <li><a class="tag" href="#sg-toast">Toast</a></li>
+          <li><a class="tag" href="#sg-states">Empty &amp; error</a></li>
+          <li><a class="tag" href="#sg-skeleton">Skeleton</a></li>
+          <li><a class="tag" href="#sg-trust">Trust blocks</a></li>
+          <li><a class="tag" href="#sg-citation">Citation</a></li>
+          <li><a class="tag" href="#sg-images">Image placeholders</a></li>
+        </ul>
+      </nav>
+
+      <!-- ==============================
+           Colour tokens
+      ================================ -->
+      <section class="sg-section" id="sg-colours" aria-labelledby="sg-colours-title">
+        <h2 id="sg-colours-title" data-en="Colour tokens">โทนสี</h2>
+        <p>ตัวแปรสีหลักจาก <code lang="en">assets/css/tokens.css</code> ใช้ผ่านตัวแปร CSS เสมอ ห้ามเขียนค่า hex ซ้ำในคอมโพเนนต์</p>
+        <div class="content-note">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
+          <p data-en="These colours are suggested values derived from the emblem. They are not verified official CI colours — confirm with the Office before treating them as brand standards.">ค่าสีเหล่านี้เป็นค่าที่เสนอโดยอ้างอิงจากตราสัญลักษณ์ ยังไม่ใช่สีอัตลักษณ์องค์กร (CI) ที่ได้รับการยืนยัน โปรดยืนยันกับสำนักงานก่อนใช้เป็นมาตรฐาน</p>
+        </div>
+        <ul class="sg-swatches" role="list">
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-green-900"></div><p lang="en"><strong>Green 900</strong><br><code>--rst-green-900</code><br>#0A3A29</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-green-800"></div><p lang="en"><strong>Green 800</strong><br><code>--rst-green-800</code><br>#0E6B47</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-green-700"></div><p lang="en"><strong>Green 700</strong><br><code>--rst-green-700</code><br>#12875A</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-green-100"></div><p lang="en"><strong>Green 100</strong><br><code>--rst-green-100</code><br>#D9F4E7</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-green-600"></div><p lang="en"><strong>Green 600</strong><br><code>--rst-green-600</code><br>#17A86E</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-green-300"></div><p lang="en"><strong>Green 300</strong><br><code>--rst-green-300</code><br>#8FE3BC</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-green-50"></div><p lang="en"><strong>Green 50</strong><br><code>--rst-green-50</code><br>#EEFAF4</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-surface"></div><p lang="en"><strong>Surface</strong><br><code>--surface</code><br>#FFFFFF</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-surface-alt"></div><p lang="en"><strong>Surface alt</strong><br><code>--surface-alt</code><br>#F1F7F4</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-text"></div><p lang="en"><strong>Text</strong><br><code>--text-primary</code><br>#0F1F18</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-text-2"></div><p lang="en"><strong>Text secondary</strong><br><code>--text-secondary</code><br>#4D5F56</p></li>
+          <li class="sg-swatch"><div class="sg-swatch__color sg-color-border"></div><p lang="en"><strong>Border</strong><br><code>--border</code><br>#DCE8E2</p></li>
+        </ul>
+      </section>
+
+      <!-- ==============================
+           Typography
+      ================================ -->
+      <section class="sg-section" id="sg-typography" aria-labelledby="sg-typography-title">
+        <h2 id="sg-typography-title" data-en="Typography">ตัวอักษร</h2>
+        <p>ตัวอักษรสามบทบาท: หัวเรื่อง (Noto Serif Thai) เนื้อความภาษาไทย (IBM Plex Sans Thai) และตัวเลข/ภาษาอังกฤษ (Geist) เนื้อความภาษาไทยใช้ขนาดขั้นต่ำ 17px</p>
+        <div class="sg-demo stack">
+          <p class="sg-label" lang="en">Display — .section-title · Noto Serif Thai 600</p>
+          <p class="section-title">ค้นคว้าองค์ความรู้จากราชบัณฑิตยสภา</p>
+          <p class="sg-label" lang="en">Body — IBM Plex Sans Thai 400 · 17px / 1.7</p>
+          <p>ราชบัณฑิตยสภาเป็นหน่วยงานด้านวิชาการของประเทศ ดูแลมาตรฐานภาษาไทยและองค์ความรู้</p>
+          <p class="sg-label" lang="en">Reading — .prose · 18px / 1.85 · max 760px</p>
+          <div class="prose">
+            <p>ข้อความสำหรับบทความขนาดยาว ใช้ระยะบรรทัดกว้างขึ้นเพื่อให้อ่านภาษาไทยที่มีวรรณยุกต์และสระบนล่างได้สบายตา</p>
+          </div>
+          <p class="sg-label" lang="en">Latin &amp; numerals — .font-latin · Geist</p>
+          <p class="font-latin" lang="en" data-keep-digits>The Royal Society of Thailand · 0123456789</p>
+          <p class="sg-label" lang="en">Eyebrow · secondary text · meta</p>
+          <p class="eyebrow" lang="en">Knowledge</p>
+          <p class="text-secondary">ข้อความรองสำหรับคำอธิบายสั้น</p>
+          <p class="meta-list">
+            <time datetime="2026-08-18">18 ส.ค. 2569</time>
+            <span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>อ่าน 8 นาที</span></span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Buttons
+      ================================ -->
+      <section class="sg-section" id="sg-buttons" aria-labelledby="sg-buttons-title">
+        <h2 id="sg-buttons-title" data-en="Buttons">ปุ่ม</h2>
+        <p>ใช้ <code lang="en">&lt;button&gt;</code> สำหรับการกระทำ และ <code lang="en">&lt;a class="btn"&gt;</code> สำหรับการไปยังหน้าอื่น ทุกปุ่มสูงอย่างน้อย 44px (ยกเว้น <code lang="en">.btn--sm</code> 36px)</p>
+        <div class="sg-demo">
+          <div class="sg-row">
+            <p class="sg-label" lang="en">Variants — .btn--primary · .btn--secondary · .btn--ghost</p>
+            <button class="btn btn--primary" type="button">ปุ่มหลัก</button>
+            <button class="btn btn--secondary" type="button">ปุ่มรอง</button>
+            <button class="btn btn--ghost" type="button">ปุ่มโปร่ง</button>
+          </div>
+          <div class="sg-row">
+            <p class="sg-label" lang="en">Sizes — .btn--sm · default · .btn--lg</p>
+            <button class="btn btn--primary btn--sm" type="button">เล็ก</button>
+            <button class="btn btn--primary" type="button">ปกติ</button>
+            <button class="btn btn--primary btn--lg" type="button">ใหญ่</button>
+          </div>
+          <div class="sg-row">
+            <p class="sg-label" lang="en">With icon · icon-only (needs aria-label)</p>
+            <a class="btn btn--primary" href="search.html">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+              <span>ค้นหา</span>
+            </a>
+            <button class="btn btn--secondary" type="button">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg>
+              <span>ดาวน์โหลด PDF</span>
+            </button>
+            <button class="header-btn" type="button" aria-label="ปิด">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg>
+            </button>
+          </div>
+          <p class="sg-label" lang="en">States — default · hover (simulated) · disabled. Press Tab to see the focus ring.</p>
+          <div class="sg-row sg-states">
+            <button class="btn btn--primary" type="button">ปกติ</button>
+            <button class="btn btn--primary" type="button">วางเมาส์</button>
+            <button class="btn btn--primary" type="button" disabled>ปิดใช้งาน</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Links
+      ================================ -->
+      <section class="sg-section" id="sg-links" aria-labelledby="sg-links-title">
+        <h2 id="sg-links-title" data-en="Links">ลิงก์</h2>
+        <p>ลิงก์ภายนอกต้องเปิดแท็บใหม่พร้อมไอคอนและข้อความสำหรับโปรแกรมอ่านหน้าจอเสมอ</p>
+        <div class="sg-demo stack">
+          <p>ข้อความในเนื้อหาที่มี <a href="about.html">ลิงก์ภายในเว็บไซต์</a> แทรกอยู่</p>
+          <div class="sg-row">
+            <p class="sg-label" lang="en">.link-arrow — internal</p>
+            <a class="link-arrow" href="services.html">
+              <span>ดูบริการทั้งหมด</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a>
+          </div>
+          <div class="sg-row">
+            <p class="sg-label" lang="en">.link-arrow — external (target="_blank" rel="noopener" + icon + visually-hidden text)</p>
+            <a class="link-arrow" href="https://coined-word.orst.go.th/" target="_blank" rel="noopener">
+              <span>ค้นหาศัพท์บัญญัติ</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
+              <span class="visually-hidden">(เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Badges
+      ================================ -->
+      <section class="sg-section" id="sg-badges" aria-labelledby="sg-badges-title">
+        <h2 id="sg-badges-title" data-en="Badges">ป้ายกำกับ</h2>
+        <p>ป้ายบอกประเภทเนื้อหาและที่มาของข้อมูล ใช้ <code lang="en">.badge--official</code> เฉพาะข้อมูลจากแหล่งทางการเท่านั้น</p>
+        <div class="sg-demo">
+          <div class="sg-row">
+            <span class="badge">ค่าเริ่มต้น</span>
+            <span class="badge badge--type">บทความวิชาการ</span>
+            <span class="badge badge--official">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-verified"></use></svg>
+              <span>ข้อมูลอย่างเป็นทางการ</span>
+            </span>
+            <span class="badge badge--accent">ทดลองใช้</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Tags
+      ================================ -->
+      <section class="sg-section" id="sg-tags" aria-labelledby="sg-tags-title">
+        <h2 id="sg-tags-title" data-en="Tags">แท็ก</h2>
+        <p>ลิงก์หัวข้อหรือปุ่มคำค้นด่วน ถ้าเป็นตัวเลือกเปิด/ปิดให้ใช้ <code lang="en">&lt;button aria-pressed&gt;</code></p>
+        <div class="sg-demo">
+          <ul class="tag-list" role="list">
+            <li><a class="tag" href="search.html?type=dictionary">พจนานุกรม</a></li>
+            <li><a class="tag" href="search.html?type=coined">ศัพท์บัญญัติ</a></li>
+            <li><button class="tag" type="button" aria-pressed="true">คำทับศัพท์</button></li>
+            <li><button class="tag" type="button" aria-pressed="false">บทความวิชาการ</button></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Form controls
+      ================================ -->
+      <section class="sg-section" id="sg-forms" aria-labelledby="sg-forms-title">
+        <h2 id="sg-forms-title" data-en="Form controls">ช่องกรอกข้อมูล</h2>
+        <p>ทุกช่องต้องมี <code lang="en">&lt;label for&gt;</code> ที่มองเห็นได้ ข้อความแนะนำและข้อผิดพลาดเชื่อมด้วย <code lang="en">aria-describedby</code></p>
+        <div class="sg-demo">
+          <div class="sg-grid">
+            <div class="field">
+              <label class="field__label" for="sg-input">ชื่อ สาขาวิชา หรือความเชี่ยวชาญ</label>
+              <input class="input" id="sg-input" name="sg-q" type="text" placeholder="เช่น ภาษาศาสตร์" aria-describedby="sg-input-hint">
+              <p class="field__hint" id="sg-input-hint">พิมพ์อย่างน้อย 2 ตัวอักษร</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="sg-select">สำนัก</label>
+              <select class="select" id="sg-select" name="sg-academy">
+                <option value="">ทุกสำนัก</option>
+                <option value="moral">สำนักธรรมศาสตร์และการเมือง</option>
+                <option value="science">สำนักวิทยาศาสตร์</option>
+                <option value="arts">สำนักศิลปกรรม</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field__label" for="sg-invalid">อีเมล</label>
+              <input class="input" id="sg-invalid" name="sg-email" type="email" value="name@" aria-invalid="true" aria-describedby="sg-invalid-hint">
+              <p class="field__hint" id="sg-invalid-hint">รูปแบบอีเมลไม่ถูกต้อง ตัวอย่าง: name@example.com</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="sg-disabled">ช่องที่ปิดใช้งาน</label>
+              <input class="input" id="sg-disabled" name="sg-disabled" type="text" value="แก้ไขไม่ได้" disabled>
+            </div>
+            <div class="field">
+              <label class="field__label" for="sg-textarea">รายละเอียด</label>
+              <textarea class="textarea" id="sg-textarea" name="sg-detail" rows="3"></textarea>
+            </div>
+            <fieldset class="filter-group">
+              <legend>ประเภทข้อมูล</legend>
+              <label class="check">
+                <input type="checkbox" name="sg-type" value="coined" checked>
+                <span>ศัพท์บัญญัติ</span>
+                <span class="check__count">12</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="sg-type" value="article">
+                <span>บทความวิชาการ</span>
+                <span class="check__count">8</span>
+              </label>
+            </fieldset>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Search box (static — not bound to 06-search.js)
+      ================================ -->
+      <section class="sg-section" id="sg-search" aria-labelledby="sg-search-title">
+        <h2 id="sg-search-title" data-en="Search box">ช่องค้นหา</h2>
+        <p>ตัวอย่างนี้ไม่เชื่อมระบบคำแนะนำ หากต้องการ autocomplete ให้ใช้ id <code lang="en">#smart-search</code> / <code lang="en">#global-search</code> / <code lang="en">#suggestions</code> ตามหน้าแรก (ใช้ได้หนึ่งชุดต่อหน้า)</p>
+        <div class="sg-demo">
+          <form class="search-box" role="search" action="search.html" aria-label="ตัวอย่างช่องค้นหา">
+            <label class="visually-hidden" for="sg-search-input">ค้นหาในเว็บไซต์</label>
+            <div class="search-box__field">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+              <input class="search-box__input" id="sg-search-input" name="q" type="search" placeholder="ค้นหาคำ ศัพท์บัญญัติ บทความ หรือองค์ความรู้…" enterkeyhint="search">
+              <button class="btn btn--primary search-box__submit" type="submit">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+                <span>ค้นหา</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Breadcrumb
+      ================================ -->
+      <section class="sg-section" id="sg-breadcrumb" aria-labelledby="sg-breadcrumb-title">
+        <h2 id="sg-breadcrumb-title" data-en="Breadcrumb">เส้นทางนำทาง</h2>
+        <p>อยู่ใน <code lang="en">.page-header</code> เหนือ h1 รายการสุดท้ายเป็น <code lang="en">&lt;span aria-current="page"&gt;</code> และต้องมี BreadcrumbList JSON-LD ที่ตรงกัน</p>
+        <div class="sg-demo">
+          <nav class="breadcrumb" aria-label="ตัวอย่างเส้นทางนำทาง">
+            <ol>
+              <li><a href="../index.html">หน้าแรก</a></li>
+              <li><a href="knowledge.html">องค์ความรู้</a></li>
+              <li><span aria-current="page">หลักการบัญญัติศัพท์วิชาการภาษาไทย</span></li>
+            </ol>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Accordion
+      ================================ -->
+      <section class="sg-section" id="sg-accordion" aria-labelledby="sg-accordion-title">
+        <h2 id="sg-accordion-title" data-en="Accordion">หัวข้อย่อ-ขยาย</h2>
+        <p>ใช้ <code lang="en">&lt;details&gt;</code> ของเบราว์เซอร์ ทำงานได้โดยไม่ต้องใช้ JavaScript</p>
+        <div class="sg-demo">
+          <div class="accordion">
+            <details class="accordion__item" open>
+              <summary>
+                <span>ศัพท์บัญญัติกับคำทับศัพท์ต่างกันอย่างไร</span>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>ข้อความตัวอย่างสำหรับเนื้อหาในหัวข้อที่ขยายออก</p>
+              </div>
+            </details>
+            <details class="accordion__item">
+              <summary>
+                <span>ค้นหาคำในพจนานุกรมได้ที่ไหน</span>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>ข้อความตัวอย่างสำหรับเนื้อหาในหัวข้อที่ขยายออก</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Tabs
+      ================================ -->
+      <section class="sg-section" id="sg-tabs" aria-labelledby="sg-tabs-title">
+        <h2 id="sg-tabs-title" data-en="Tabs">แท็บ</h2>
+        <p>สัญญา: <code lang="en">[data-tabs] &gt; [role=tablist] &gt; button[role=tab][aria-controls]</code> + <code lang="en">[role=tabpanel]</code> ใช้ปุ่มลูกศรซ้าย/ขวา Home และ End เพื่อสลับแท็บ (04-interactions.js)</p>
+        <div class="sg-demo">
+          <div class="tabs" data-tabs>
+            <div class="tabs__list" role="tablist" aria-label="ตัวอย่างแท็บ">
+              <button class="tabs__tab" role="tab" id="sg-tab-books" aria-controls="sg-panel-books" aria-selected="true" type="button">หลักเกณฑ์และหนังสืออ้างอิง</button>
+              <button class="tabs__tab" role="tab" id="sg-tab-journal" aria-controls="sg-panel-journal" aria-selected="false" type="button">วารสาร</button>
+              <button class="tabs__tab" role="tab" id="sg-tab-ebook" aria-controls="sg-panel-ebook" aria-selected="false" type="button">E-Book</button>
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="sg-panel-books" aria-labelledby="sg-tab-books">
+              <p>เนื้อหาแผงที่ 1</p>
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="sg-panel-journal" aria-labelledby="sg-tab-journal" hidden>
+              <p>เนื้อหาแผงที่ 2</p>
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="sg-panel-ebook" aria-labelledby="sg-tab-ebook" hidden>
+              <p>เนื้อหาแผงที่ 3</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Service item (static copy of 08-directory.js renderService output)
+      ================================ -->
+      <section class="sg-section" id="sg-service" aria-labelledby="sg-service-title">
+        <h2 id="sg-service-title" data-en="Service item">รายการบริการ</h2>
+        <p>ในหน้าจริงให้ใช้ <code lang="en">&lt;ul class="service-grid" data-service-list="primary|all"&gt;</code> แล้วให้ 08-directory.js สร้างรายการจาก <code lang="en">RS_CONFIG.services</code> ตัวอย่างด้านล่างเป็นมาร์กอัปที่ได้</p>
+        <div class="sg-demo">
+          <ul class="service-grid" role="list">
+            <li class="service-item stretched">
+              <span class="service-item__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-book"></use></svg></span>
+              <h3 class="service-item__title">
+                <a class="stretched-link" href="https://dictionary.orst.go.th/" target="_blank" rel="noopener"><span>พจนานุกรม</span><span class="visually-hidden"> (เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span></a>
+              </h3>
+              <span class="service-item__arrow" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
+              <p class="service-item__desc">ค้นหาความหมาย การสะกด และการอ่านคำ</p>
+              <p class="service-item__domain">dictionary.orst.go.th</p>
+            </li>
+            <li class="service-item stretched">
+              <span class="service-item__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-people"></use></svg></span>
+              <h3 class="service-item__title">
+                <a class="stretched-link" href="fellows.html">ค้นหาราชบัณฑิตและผู้เชี่ยวชาญ</a>
+              </h3>
+              <span class="service-item__arrow" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
+              <p class="service-item__desc">ค้นหาตามสำนัก สาขาวิชา และความเชี่ยวชาญ</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Article card
+      ================================ -->
+      <section class="sg-section" id="sg-article" aria-labelledby="sg-article-title">
+        <h2 id="sg-article-title" data-en="Article card">การ์ดบทความ</h2>
+        <p>แบบนำ (<code lang="en">.article-card--lead</code>) และแบบแถว (<code lang="en">.article-card--row</code>)</p>
+        <div class="sg-demo">
+          <div class="featured">
+            <article class="article-card article-card--lead">
+              <div class="image-placeholder">
+                <!-- Official image will be added here -->
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-book"></use></svg>
+              </div>
+              <div class="article-card__meta">
+                <span class="badge badge--type">บทความวิชาการ</span>
+                <span>ภาษาและวรรณกรรม</span>
+                <time datetime="2026-08-18">18 ส.ค. 2569</time>
+              </div>
+              <h3 class="article-card__title"><a href="article.html">หลักการบัญญัติศัพท์วิชาการภาษาไทย</a></h3>
+              <p class="article-card__excerpt">ข้อความตัวอย่างสรุปเนื้อหาบทความสั้น ๆ ไม่เกินสามบรรทัด</p>
+              <p class="meta-list">
+                <span>ผู้เขียนตัวอย่าง · สำนักศิลปกรรม</span>
+                <span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>อ่าน 8 นาที</span></span>
+              </p>
+            </article>
+            <div class="featured__list">
+              <article class="article-card article-card--row">
+                <div class="article-card__meta">
+                  <span class="badge badge--type">คลังความรู้</span>
+                  <time datetime="2026-05-21">21 พ.ค. 2569</time>
+                </div>
+                <h3 class="article-card__title"><a href="article.html">เขียนคำทับศัพท์ภาษาอังกฤษอย่างไรให้ถูกหลัก</a></h3>
+                <p class="article-card__excerpt">ข้อความตัวอย่างสรุปเนื้อหา</p>
+              </article>
+              <article class="article-card article-card--row">
+                <div class="article-card__meta">
+                  <span class="badge badge--type">บทความวิชาการ</span>
+                  <time datetime="2026-07-02">2 ก.ค. 2569</time>
+                </div>
+                <h3 class="article-card__title"><a href="article.html">ปัญญาประดิษฐ์กับการใช้ภาษาไทยในงานวิชาการ</a></h3>
+                <p class="article-card__excerpt">ข้อความตัวอย่างสรุปเนื้อหา</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Person card (static copy of 08-directory.js renderPerson output)
+      ================================ -->
+      <section class="sg-section" id="sg-person" aria-labelledby="sg-person-title">
+        <h2 id="sg-person-title" data-en="Person card">การ์ดบุคคล</h2>
+        <p>สีเส้นสำนักมาจาก <code lang="en">data-academy="moral|science|arts"</code> ในหน้าจริงให้ใช้ <code lang="en">data-fellows-preview</code> หรือ <code lang="en">#fellow-directory</code></p>
+        <div class="sg-demo">
+          <ul class="person-grid" role="list">
+            <li class="person-card stretched" data-academy="arts">
+              <div class="image-placeholder image-placeholder--portrait">
+                <!-- Official portrait will be added here -->
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-people"></use></svg>
+              </div>
+              <p class="person-card__title">ตำแหน่งทางวิชาการ</p>
+              <h3 class="person-card__name"><a class="stretched-link" href="fellow.html?id=sample-01">อรุณี ตัวอย่าง</a></h3>
+              <p class="person-card__field">สาขาวิชาตัวอย่าง · ราชบัณฑิต</p>
+              <p class="person-card__academy">สำนักศิลปกรรม</p>
+            </li>
+            <li class="person-card stretched" data-academy="science">
+              <div class="image-placeholder image-placeholder--portrait">
+                <!-- Official portrait will be added here -->
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-people"></use></svg>
+              </div>
+              <p class="person-card__title">ตำแหน่งทางวิชาการ</p>
+              <h3 class="person-card__name"><a class="stretched-link" href="fellow.html?id=sample-02">กิตติ ตัวอย่าง</a></h3>
+              <p class="person-card__field">สาขาวิชาตัวอย่าง · ราชบัณฑิต</p>
+              <p class="person-card__academy">สำนักวิทยาศาสตร์</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Pagination
+      ================================ -->
+      <section class="sg-section" id="sg-pagination" aria-labelledby="sg-pagination-title">
+        <h2 id="sg-pagination-title" data-en="Pagination">การแบ่งหน้า</h2>
+        <p>หน้าปัจจุบันใช้ <code lang="en">aria-current="page"</code> ปุ่มที่ใช้ไม่ได้ใช้ <code lang="en">aria-disabled="true"</code></p>
+        <div class="sg-demo">
+          <nav class="pagination" aria-label="ตัวอย่างการแบ่งหน้า">
+            <ul role="list">
+              <li><span aria-disabled="true">ก่อนหน้า</span></li>
+              <li><a href="?page=1#sg-pagination" aria-current="page" aria-label="หน้า 1">1</a></li>
+              <li><a href="?page=2#sg-pagination" aria-label="หน้า 2">2</a></li>
+              <li><a href="?page=3#sg-pagination" aria-label="หน้า 3">3</a></li>
+              <li><span aria-hidden="true">…</span></li>
+              <li><a href="?page=12#sg-pagination" aria-label="หน้า 12">12</a></li>
+              <li><a href="?page=2#sg-pagination">ถัดไป</a></li>
+            </ul>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Modal
+      ================================ -->
+      <section class="sg-section" id="sg-modal" aria-labelledby="sg-modal-title">
+        <h2 id="sg-modal-title" data-en="Modal">หน้าต่างซ้อน</h2>
+        <p>ใช้ <code lang="en">&lt;dialog class="modal"&gt;</code> เปิดด้วย <code lang="en">data-modal-open="id"</code> ปิดด้วย <code lang="en">data-modal-close</code> หรือคลิกพื้นหลัง (04-interactions.js) เบราว์เซอร์จัดการ Esc การกักโฟกัส และการคืนโฟกัสให้</p>
+        <div class="sg-demo">
+          <button class="btn btn--secondary" type="button" data-modal-open="demo-modal">เปิดหน้าต่าง</button>
+        </div>
+        <dialog class="modal" id="demo-modal" aria-labelledby="demo-modal-title">
+          <div class="modal__head">
+            <h2 id="demo-modal-title" data-en="Example dialog">ตัวอย่างหน้าต่าง</h2>
+            <button class="header-btn" type="button" data-modal-close aria-label="ปิด" data-en-aria-label="Close">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg>
+            </button>
+          </div>
+          <div class="modal__body">
+            <p>เนื้อหาในหน้าต่าง โฟกัสควรย้ายเข้ามาเมื่อเปิด และกลับไปที่ปุ่มเปิดเมื่อปิด</p>
+          </div>
+          <div class="modal__foot">
+            <button class="btn btn--ghost" type="button" data-modal-close>ยกเลิก</button>
+            <button class="btn btn--primary" type="button" data-modal-close>ตกลง</button>
+          </div>
+        </dialog>
+      </section>
+
+      <!-- ==============================
+           Toast
+      ================================ -->
+      <section class="sg-section" id="sg-toast" aria-labelledby="sg-toast-title">
+        <h2 id="sg-toast-title" data-en="Toast">ข้อความแจ้งชั่วคราว</h2>
+        <p>สร้างด้วย <code lang="en">RS.toast('ข้อความ')</code> แสดงใน <code lang="en">.toast-region</code> (role="status") และหายไปเองหลัง 3.2 วินาที</p>
+        <div class="sg-demo">
+          <div class="sg-row">
+            <button class="btn btn--secondary" type="button" data-copy-link>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg>
+              <span>คัดลอกลิงก์ (แสดง Toast)</span>
+            </button>
+          </div>
+          <div class="sg-row">
+            <p class="sg-label" lang="en">Static preview</p>
+            <div class="toast">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
+              <span>คัดลอกลิงก์แล้ว</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Empty and error states
+      ================================ -->
+      <section class="sg-section" id="sg-states" aria-labelledby="sg-states-title">
+        <h2 id="sg-states-title" data-en="Empty &amp; error states">สถานะไม่มีข้อมูลและข้อผิดพลาด</h2>
+        <p>บอกผู้ใช้เสมอว่าเกิดอะไรขึ้นและทำอะไรต่อได้</p>
+        <div class="sg-grid">
+          <div class="state state--empty">
+            <p class="state__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></p>
+            <h3 class="state__title">ไม่พบข้อมูลสำหรับ “คำค้นตัวอย่าง”</h3>
+            <p class="state__text">ลองวิธีเหล่านี้</p>
+            <ul class="state__list">
+              <li>ตรวจสอบการสะกด</li>
+              <li>ลองใช้คำใกล้เคียงหรือคำที่สั้นลง</li>
+              <li>
+                <a href="https://dictionary.orst.go.th/" target="_blank" rel="noopener">
+                  <span>ค้นหาในพจนานุกรม</span>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
+                  <span class="visually-hidden">(เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="state state--error">
+            <p class="state__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg></p>
+            <h3 class="state__title">บริการภายนอกไม่พร้อมใช้งานชั่วคราว</h3>
+            <p class="state__text">ไม่สามารถเชื่อมต่อระบบศัพท์บัญญัติได้ในขณะนี้ โปรดลองอีกครั้ง หรือเปิดระบบต้นทางโดยตรง</p>
+            <div class="trust-block__actions">
+              <button class="btn btn--secondary btn--sm" type="button">ลองอีกครั้ง</button>
+              <a class="btn btn--ghost btn--sm" href="https://coined-word.orst.go.th/" target="_blank" rel="noopener">
+                <span>เปิดระบบศัพท์บัญญัติ</span>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
+                <span class="visually-hidden">(เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="state state--error">
+            <p class="state__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></p>
+            <h3 class="state__title">เกิดข้อผิดพลาดของระบบ</h3>
+            <p class="state__text">ระบบไม่สามารถแสดงข้อมูลได้ในขณะนี้ (รหัส <span class="font-latin" data-keep-digits>500</span>) โปรดลองใหม่ภายหลัง หากยังพบปัญหา โปรดแจ้งผู้ดูแลเว็บไซต์</p>
+            <div class="trust-block__actions">
+              <button class="btn btn--secondary btn--sm" type="button">โหลดหน้าใหม่</button>
+              <a class="btn btn--ghost btn--sm" href="contact.html">
+                <span>ติดต่อเรา</span>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Skeleton
+      ================================ -->
+      <section class="sg-section" id="sg-skeleton" aria-labelledby="sg-skeleton-title">
+        <h2 id="sg-skeleton-title" data-en="Skeleton">โครงร่างระหว่างโหลด</h2>
+        <p>ใช้ระหว่างรอข้อมูล คู่กับ <code lang="en">aria-busy="true"</code> บนพื้นที่ที่กำลังโหลด ภาพเคลื่อนไหวหยุดเมื่อเปิดลดการเคลื่อนไหว</p>
+        <div class="sg-demo" aria-busy="true">
+          <div class="skeleton skeleton--title"></div>
+          <div class="skeleton skeleton--line"></div>
+          <div class="skeleton skeleton--line skeleton--w70"></div>
+          <div class="skeleton skeleton--block"></div>
+          <div class="skeleton skeleton--line skeleton--w40"></div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Official match (static copy of the 06-search.js results-page card)
+      ================================ -->
+      <section class="sg-section" id="sg-trust" aria-labelledby="sg-trust-title">
+        <h2 id="sg-trust-title" data-en="Trust blocks">กล่องแสดงที่มาของข้อมูล</h2>
+        <p>เมื่อคำค้นตรงกับข้อมูลในระบบทางการ หน้าผลการค้นหาแสดงการ์ดนี้เหนือผลลัพธ์ พร้อมแหล่งข้อมูล วันที่ และลิงก์ไปยังข้อมูลต้นฉบับ ข้อมูลในตัวอย่างเป็นข้อมูลตัวอย่าง</p>
+        <div class="stack">
+          <section class="trust-block trust-block--official" aria-labelledby="sg-official-title">
+            <header class="trust-block__head">
+              <span class="badge badge--official">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-verified"></use></svg>
+                <span id="sg-official-title">ข้อมูลอย่างเป็นทางการ</span>
+              </span>
+              <span class="trust-block__note">จากแหล่งข้อมูลของราชบัณฑิตยสภา</span>
+            </header>
+            <div class="official-record">
+              <p class="official-record__term" lang="th">ปัญญาประดิษฐ์</p>
+              <p class="official-record__alt" lang="en">artificial intelligence</p>
+              <p class="official-record__summary">ศัพท์บัญญัติ สาขาคอมพิวเตอร์และเทคโนโลยีสารสนเทศ (ข้อมูลตัวอย่าง)</p>
+              <dl class="official-record__meta">
+                <div>
+                  <dt>แหล่งข้อมูล</dt>
+                  <dd>
+                    <span>ระบบศัพท์บัญญัติ</span>
+                    <span class="badge badge--type"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-term"></use></svg><span>ศัพท์บัญญัติ</span></span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>วันที่เผยแพร่</dt>
+                  <dd>ดูวันที่ในระบบต้นทาง</dd>
+                </div>
+              </dl>
+              <a class="btn btn--secondary btn--sm" href="https://coined-word.orst.go.th/" target="_blank" rel="noopener">
+                <span>ดูข้อมูลต้นฉบับ</span>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
+                <span class="visually-hidden">(เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Citation
+      ================================ -->
+      <section class="sg-section" id="sg-citation" aria-labelledby="sg-citation-title">
+        <h2 id="sg-citation-title" data-en="Citation">การอ้างอิง</h2>
+        <p>สัญญา: <code lang="en">div.citation[data-citation]</code> ครอบแท็บรูปแบบ ปุ่ม <code lang="en">[data-copy-citation]</code> คัดลอกข้อความในแผงที่แสดงอยู่ (04-interactions.js) ข้อความด้านล่างเป็นตัวอย่าง</p>
+        <div class="citation" data-citation>
+          <div class="tabs" data-tabs>
+            <div class="tabs__list" role="tablist" aria-label="รูปแบบการอ้างอิง">
+              <button class="tabs__tab" role="tab" id="sg-cite-tab-apa" aria-controls="sg-cite-apa" aria-selected="true" type="button" lang="en">APA</button>
+              <button class="tabs__tab" role="tab" id="sg-cite-tab-mla" aria-controls="sg-cite-mla" aria-selected="false" type="button" lang="en">MLA</button>
+              <button class="tabs__tab" role="tab" id="sg-cite-tab-chicago" aria-controls="sg-cite-chicago" aria-selected="false" type="button" lang="en">Chicago</button>
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="sg-cite-apa" aria-labelledby="sg-cite-tab-apa">
+              <p class="citation__text">ผู้เขียนตัวอย่าง. (2569). หลักการบัญญัติศัพท์วิชาการภาษาไทย. ราชบัณฑิตยสภา. https://royalsociety.go.th/pages/article.html</p>
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="sg-cite-mla" aria-labelledby="sg-cite-tab-mla" hidden>
+              <p class="citation__text">ผู้เขียนตัวอย่าง. “หลักการบัญญัติศัพท์วิชาการภาษาไทย.” ราชบัณฑิตยสภา, 2569, royalsociety.go.th/pages/article.html.</p>
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="sg-cite-chicago" aria-labelledby="sg-cite-tab-chicago" hidden>
+              <p class="citation__text">ผู้เขียนตัวอย่าง. “หลักการบัญญัติศัพท์วิชาการภาษาไทย.” ราชบัณฑิตยสภา. 2569. https://royalsociety.go.th/pages/article.html.</p>
+            </div>
+          </div>
+          <div class="citation__actions">
+            <button class="btn btn--secondary btn--sm" type="button" data-copy-citation>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg>
+              <span>คัดลอกการอ้างอิง</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+           Image placeholders
+      ================================ -->
+      <section class="sg-section" id="sg-images" aria-labelledby="sg-images-title">
+        <h2 id="sg-images-title" data-en="Image placeholders">กรอบภาพตัวแทน</h2>
+        <p>ใช้แทนรูปภาพจนกว่าจะได้รูปทางการ ห้ามใช้ภาพสต็อกหรือภาพที่สร้างขึ้นแทนบุคคลจริง</p>
+        <div class="sg-demo">
+          <div class="person-grid">
+            <figure>
+              <div class="image-placeholder">
+                <!-- Official image will be added here -->
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-book"></use></svg>
+              </div>
+              <figcaption class="sg-label" lang="en">.image-placeholder · 16:10</figcaption>
+            </figure>
+            <figure>
+              <div class="image-placeholder image-placeholder--portrait">
+                <!-- Official image will be added here -->
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-people"></use></svg>
+              </div>
+              <figcaption class="sg-label" lang="en">--portrait · 4:5</figcaption>
+            </figure>
+            <figure>
+              <div class="image-placeholder image-placeholder--cover">
+                <!-- Official image will be added here -->
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-ebook"></use></svg>
+              </div>
+              <figcaption class="sg-label" lang="en">--cover · 3:4</figcaption>
+            </figure>
+            <figure>
+              <div class="image-placeholder image-placeholder--wide">
+                <!-- Official image will be added here -->
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg>
+              </div>
+              <figcaption class="sg-label" lang="en">--wide · 21:9</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+</body>
+</html>

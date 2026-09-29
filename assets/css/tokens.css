@@ -1,0 +1,172 @@
+/* ============================================================================
+ * tokens.css — Design tokens
+ * ============================================================================
+ *  Palette: green + white with depth. Emerald carries identity and actions,
+ *  deep forest green gives contrast bands, mint tints separate sections.
+ *  No gold or warm tones. The official emblem keeps its own colours.
+ *  These are suggested tokens, NOT verified official CI values.
+ *
+ *  Contrast on white: green-800 6.6:1 · green-700 4.6:1 · text-secondary 6.9:1
+ *  green-600 / 500 are for decoration, large display text and dark surfaces.
+ *
+ *  Breakpoints (mirror RS_CONFIG.breakpoints in 01-config.js):
+ *    sm 640 · md 768 · lg 1024 · nav 1280 · xl 1440
+ * ========================================================================== */
+
+:root {
+  /* ---- Palette -------------------------------------------------------- */
+  --rst-green-950: #062519;   /* dark bands */
+  --rst-green-900: #0A3A29;   /* footer, hover on primary */
+  --rst-green-800: #0E6B47;   /* primary actions, links */
+  --rst-green-700: #12875A;   /* accent text */
+  --rst-green-600: #17A86E;   /* bright accent — decoration, large text */
+  --rst-green-500: #2FC486;   /* glows and accents on dark */
+  --rst-green-300: #8FE3BC;   /* text accents on dark */
+  --rst-green-200: #BDEBD4;
+  --rst-green-100: #D9F4E7;
+  --rst-green-50:  #EEFAF4;
+
+  /* Warm accent taken from the crest — used sparingly to break up the greens */
+  --gold-700: #8F6A1E;
+  --gold-600: #B8892E;
+  --gold-500: #D4A94A;
+  --gold-100: #F7ECD2;
+  --cream:    #FBF7EE;
+
+  --surface: #FFFFFF;
+  --surface-alt: #F1F7F4;     /* alternating sections, panels */
+  --white: #FFFFFF;
+
+  --text-primary: #0F1F18;
+  --text-secondary: #4D5F56;
+  --border: #DCE8E2;
+  --border-strong: #B9CCC3;
+
+  /* Background gradients for large bands only; buttons, icons and badges use solid fills */
+  --gradient-dark:
+    radial-gradient(60% 90% at 100% 0%, rgba(47, 196, 134, .20) 0%, transparent 60%),
+    linear-gradient(135deg, #062519 0%, #0A3A29 100%);
+  --gradient-hero:
+    radial-gradient(55% 60% at 90% 0%, rgba(23, 168, 110, .16) 0%, transparent 70%),
+    radial-gradient(45% 55% at 0% 100%, rgba(47, 196, 134, .12) 0%, transparent 70%),
+    #F1F7F4;
+
+  /* Academy accents — distinct greens, all ≥5:1 on white */
+  --academy-moral: #0E6B47;
+  --academy-science: #0B7A6E;
+  --academy-arts: #2F7A3E;
+
+  /* Trust model */
+  --official: #0E6B47;
+  --official-bg: #D9F4E7;
+
+  --danger: #9B2C2C;
+  --danger-bg: #FBEFEF;
+
+  /* ---- Semantic aliases ---------------------------------------------- */
+  --color-primary: var(--rst-green-800);
+  --color-primary-dark: var(--rst-green-900);
+  --color-accent: var(--rst-green-600);
+  --color-background: var(--surface);
+  --color-surface: var(--white);
+  --color-text: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+  --color-link: var(--rst-green-800);
+  --color-focus: #1F5FBF;
+
+  /* ---- Typography ----------------------------------------------------- */
+  --font-display: "IBM Plex Sans Thai", "Leelawadee UI", Tahoma, sans-serif;   /* headings share the body family — one clean voice */
+  --font-body: "IBM Plex Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
+  --font-latin: "Geist", "IBM Plex Sans Thai", system-ui, sans-serif;
+
+  --text-xs: 0.8125rem;   /* 13 — metadata only */
+  --text-sm: 0.9375rem;   /* 15 */
+  --text-base: 1.0625rem; /* 17 — Thai body */
+  --text-md: 1.1875rem;   /* 19 */
+  --text-lg: 1.375rem;    /* 22 */
+  --text-xl: 1.75rem;     /* 28 */
+  --text-2xl: 2.125rem;   /* 34 */
+  --text-3xl: 2.75rem;    /* 44 */
+
+  --leading-tight: 1.35;
+  --leading-normal: 1.7;
+  --leading-reading: 1.85;
+
+  /* ---- Spacing -------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ---- Layout --------------------------------------------------------- */
+  /* Wide enough for large monitors, still capped so lines and cards stay readable.
+     Long-form text uses --reading instead. */
+  --container: 1680px;
+  --container-pad: var(--space-4);
+  --reading: 760px;
+  --header-h: 64px;           /* height of the floating header card */
+  --header-gap: var(--space-2);  /* space above and below the card */
+  /* The header floats over the first band of each page; that band adds this to its top padding */
+  --header-overlap: calc(var(--header-h) + 2 * var(--header-gap));
+
+  /* ---- Radius --------------------------------------------------------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;          /* hero media, large containers — the maximum */
+  --radius-pill: 999px;
+
+  /* ---- Elevation (green-tinted) --------------------------------------- */
+  --shadow-card: 0 1px 2px rgba(6, 37, 25, .04);   /* cards rely on their border */
+  --shadow-sm: 0 1px 2px rgba(6, 37, 25, .08);
+  --shadow-md: 0 12px 32px rgba(6, 37, 25, .12);
+  --shadow-lg: 0 24px 56px rgba(6, 37, 25, .18);
+  /* No coloured glows under buttons or icons — solid fills only */
+
+  /* ---- Motion --------------------------------------------------------- */
+  --duration-fast: 120ms;
+  --duration: 180ms;
+  --duration-slow: 240ms;
+  --ease: cubic-bezier(.2, .6, .2, 1);
+
+  /* ---- Z-index scale -------------------------------------------------- */
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-dropdown: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-skip: 600;
+}
+
+/* ---- User text-size preference (set by 03-accessibility.js) ----------- */
+html[data-font-size="small"] { font-size: 90%; }
+html[data-font-size="large"] { font-size: 112.5%; }
+html[data-font-size="xlarge"] { font-size: 125%; }
+
+/* ---- High contrast (set by 03-accessibility.js) ------------------------ */
+body.access-contrast {
+  --surface: #FFFFFF;
+  --surface-alt: #FFFFFF;
+  --text-primary: #000000;
+  --text-secondary: #1A1A1A;
+  --border: #000000;
+  --border-strong: #000000;
+  --rst-green-800: #0B2E1C;
+  --rst-green-700: #0B2E1C;
+  --rst-green-600: #0B2E1C;
+  --rst-green-200: #000000;
+  --rst-green-100: #FFFFFF;
+  --rst-green-50: #FFFFFF;
+  --gradient-hero: #FFFFFF;
+  --official-bg: #FFFFFF;
+  --color-focus: #000000;
+}

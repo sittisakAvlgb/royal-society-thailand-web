@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Search | The Royal Society of Thailand">ค้นหา | ราชบัณฑิตยสภา</title>
+  <meta name="description" content="ค้นหาคำ ศัพท์บัญญัติ คำทับศัพท์ อักขรานุกรมภูมิศาสตร์ บทความ สิ่งพิมพ์ และราชบัณฑิตจากราชบัณฑิตยสภาในที่เดียว" data-en-content="Search words, coined terms, transliteration, place names, articles, publications and Fellows of the Royal Society of Thailand in one place.">
+  <meta name="theme-color" content="#123D2B">
+
+  <link rel="canonical" href="https://royalsociety.go.th/pages/search.html">
+  <link rel="alternate" hreflang="th" href="https://royalsociety.go.th/pages/search.html">
+  <link rel="alternate" hreflang="en" href="https://royalsociety.go.th/pages/search.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://royalsociety.go.th/pages/search.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ค้นหา | ราชบัณฑิตยสภา">
+  <meta property="og:description" content="ค้นหาคำ ศัพท์บัญญัติ คำทับศัพท์ บทความ และองค์ความรู้จากราชบัณฑิตยสภา">
+  <meta property="og:url" content="https://royalsociety.go.th/pages/search.html">
+  <meta property="og:image" content="https://royalsociety.go.th/assets/images/cropped-logo-with-bg-1.png">
+  <meta property="og:locale" content="th_TH">
+
+  <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": "https://royalsociety.go.th/" },
+      { "@type": "ListItem", "position": 2, "name": "ค้นหา", "item": "https://royalsociety.go.th/pages/search.html" }
+    ]
+  }
+  </script>
+
+  <script defer src="../assets/js/00-core.js"></script>
+  <script defer src="../assets/js/01-config.js"></script>
+  <script defer src="../assets/js/data/search-index.js"></script>
+  <script defer src="../assets/js/data/fellows.js"></script>
+  <script defer src="../assets/js/02-components.js"></script>
+  <script defer src="../assets/js/03-accessibility.js"></script>
+  <script defer src="../assets/js/04-interactions.js"></script>
+  <script defer src="../assets/js/05-language.js"></script>
+  <script defer src="../assets/js/06-search.js"></script>
+</head>
+<body class="page-search">
+  <div id="app-header"></div>
+
+  <main id="main-content" tabindex="-1">
+    <div class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
+            <li><span aria-current="page" data-en="Search">ค้นหา</span></li>
+          </ol>
+        </nav>
+        <h1 data-results-heading data-en="Search">ค้นหา</h1>
+
+        <form class="search-box results-search" id="results-search" role="search" action="search.html">
+          <label class="visually-hidden" for="results-search-input" data-en="Search the website">ค้นหาในเว็บไซต์</label>
+          <div class="search-box__field">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+            <input class="search-box__input" id="results-search-input" name="q" type="search"
+                   placeholder="ค้นหาคำ ศัพท์บัญญัติ บทความ หรือองค์ความรู้…"
+                   data-en-placeholder="Search words, coined terms, articles or knowledge…"
+                   enterkeyhint="search">
+            <button class="btn btn--primary btn--lg search-box__submit" type="submit">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+              <span data-en="Search">ค้นหา</span>
+            </button>
+          </div>
+          <div class="suggestions" id="results-suggestions" hidden></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container search-layout" id="search-results">
+      <aside class="search-layout__filters" aria-labelledby="filters-title">
+        <button class="btn btn--secondary filter-toggle" type="button" data-filter-toggle aria-expanded="false" aria-controls="filter-panel" hidden>
+          <span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg>
+            <span data-en="Filters">ตัวกรอง</span>
+          </span>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+        </button>
+
+        <div class="filter-panel" id="filter-panel" data-filter-panel>
+          <h2 class="filter-panel__title" id="filters-title" data-en="Filter results">กรองผลการค้นหา</h2>
+          <form data-filters aria-labelledby="filters-title">
+            <p class="text-secondary" data-en="Loading filters…">กำลังโหลดตัวกรอง…</p>
+          </form>
+        </div>
+      </aside>
+
+      <section aria-labelledby="results-title">
+        <h2 class="visually-hidden" id="results-title" data-en="Results">ผลการค้นหา</h2>
+
+        <div id="search-answer" hidden></div>
+
+        <div class="results-bar">
+          <p data-results-summary aria-live="polite"></p>
+          <p class="results-bar__note" data-en="Prototype: sample data, not connected to live databases">ต้นแบบ: ข้อมูลตัวอย่าง ยังไม่เชื่อมต่อฐานข้อมูลจริง</p>
+        </div>
+
+        <div data-results-list aria-busy="true">
+          <div class="skeleton skeleton--title"></div>
+          <div class="skeleton skeleton--line"></div>
+          <div class="skeleton skeleton--line skeleton--w70"></div>
+          <div class="skeleton skeleton--title"></div>
+          <div class="skeleton skeleton--line"></div>
+          <div class="skeleton skeleton--line skeleton--w40"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Page not found | The Royal Society of Thailand">ไม่พบหน้าที่ต้องการ | ราชบัณฑิตยสภา</title>
+  <meta name="description" content="ไม่พบหน้าที่คุณต้องการ ลองค้นหาหรือไปยังหน้าหลักของเว็บไซต์ราชบัณฑิตยสภา" data-en-content="The page you were looking for could not be found. Try searching or go to the main pages of the Royal Society of Thailand website.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#123D2B">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ราชบัณฑิตยสภา The Royal Society of Thailand">
+  <meta property="og:title" content="ไม่พบหน้าที่ต้องการ | ราชบัณฑิตยสภา">
+  <meta property="og:image" content="https://royalsociety.go.th/assets/images/cropped-logo-with-bg-1.png">
+  <meta property="og:locale" content="th_TH">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <link rel="icon" type="image/png" href="assets/images/cropped-logo-with-bg-1.png">
+  <link rel="apple-touch-icon" href="assets/images/cropped-logo-with-bg-1.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <script defer src="assets/js/00-core.js"></script>
+  <script defer src="assets/js/01-config.js"></script>
+  <script defer src="assets/js/data/search-index.js"></script>
+  <script defer src="assets/js/02-components.js"></script>
+  <script defer src="assets/js/03-accessibility.js"></script>
+  <script defer src="assets/js/04-interactions.js"></script>
+  <script defer src="assets/js/05-language.js"></script>
+  <script defer src="assets/js/06-search.js"></script>
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main id="main-content" tabindex="-1">
+    <div class="container error-page">
+      <p class="error-page__code">404</p>
+      <h1 data-en="Page not found">ไม่พบหน้าที่ต้องการ</h1>
+      <p class="text-secondary" data-en="The page may have moved or been removed, or the address may be mistyped. Try searching, or choose one of the links below.">หน้าที่คุณต้องการอาจถูกย้ายหรือถูกลบ หรือพิมพ์ที่อยู่ไม่ถูกต้อง ลองค้นหา หรือเลือกลิงก์ด้านล่าง</p>
+
+      <!-- Same contract as the homepage hero search (06-search.js: #smart-search / #global-search / #suggestions) -->
+      <form class="search-box" id="smart-search" role="search" action="pages/search.html">
+        <label class="visually-hidden" for="global-search" data-en="Search the website">ค้นหาในเว็บไซต์</label>
+        <div class="search-box__field">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+          <input class="search-box__input" id="global-search" name="q" type="search"
+                 placeholder="ค้นหาคำ ศัพท์บัญญัติ บทความ หรือองค์ความรู้…"
+                 data-en-placeholder="Search words, coined terms, articles or knowledge…"
+                 enterkeyhint="search">
+          <button class="btn btn--primary search-box__submit" type="submit">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            <span data-en="Search">ค้นหา</span>
+          </button>
+        </div>
+        <div class="suggestions" id="suggestions" hidden></div>
+      </form>
+
+      <h2 class="state__title" id="try-title" data-en="Try these instead">ลองไปที่</h2>
+      <ul class="state__list" role="list" aria-labelledby="try-title">
+        <li>
+          <a href="index.html">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            <span data-en="Home">หน้าแรก</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://dictionary.orst.go.th/" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-book"></use></svg>
+            <span data-en="Search the Dictionary">ค้นหาในพจนานุกรม</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
+            <span class="visually-hidden" data-en="(external website, opens in a new tab)">(เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://coined-word.orst.go.th/" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-term"></use></svg>
+            <span data-en="Search coined terms">ค้นหาศัพท์บัญญัติ</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
+            <span class="visually-hidden" data-en="(external website, opens in a new tab)">(เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span>
+          </a>
+        </li>
+        <li>
+          <a href="pages/sitemap.html">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-doc"></use></svg>
+            <span data-en="Sitemap">ผังเว็บไซต์</span>
+          </a>
+        </li>
+        <li>
+          <a href="pages/contact.html">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg>
+            <span data-en="Contact us">ติดต่อเรา</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+</body>
+</html>

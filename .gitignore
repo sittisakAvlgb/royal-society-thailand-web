@@ -1,0 +1,24 @@
+# Build output — rebuild with: python .claude/build-dist.py
+dist/
+
+# Deploy tooling
+.netlify/
+
+# Source originals of the news photos: the site uses the .jpg copies
+# (14 MB of duplicates, and .claude/build-dist.py leaves them out anyway)
+assets/images/news/*.png
+
+# Editors and operating systems
+.vscode/
+.idea/
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Python helpers in .claude/
+__pycache__/
+*.py[cod]
+
+# Logs and local notes
+*.log
