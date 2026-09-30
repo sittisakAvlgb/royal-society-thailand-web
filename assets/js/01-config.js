@@ -325,7 +325,7 @@ window.RS_CONFIG = {
       children: [
         { label: { th: 'ค้นหาในเว็บไซต์', en: 'Search the website' }, href: 'pages/search.html' },
         { label: { th: 'องค์ความรู้', en: 'Knowledge' }, href: 'pages/knowledge.html' },
-        { label: { th: 'ตัวอย่างบทความวิชาการ', en: 'Sample academic article' }, href: 'pages/article.html' }
+        { label: { th: 'บทความวิชาการ', en: 'Academic article' }, href: 'pages/article.html' }
       ]
     },
     {

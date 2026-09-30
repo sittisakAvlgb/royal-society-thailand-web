@@ -171,7 +171,7 @@ window.RS_SEARCH_INDEX = [
     title: { th: 'หลักการบัญญัติศัพท์วิชาการภาษาไทย', en: 'Principles of coining Thai academic terms' },
     alt: '',
     summary: { th: 'ทำความเข้าใจขั้นตอนการพิจารณาศัพท์ใหม่ ตั้งแต่การศึกษาความหมายจนถึงการประกาศใช้', en: 'How new terms are considered, from studying meaning to official announcement.' },
-    source: { th: 'บทความตัวอย่าง · สำนักศิลปกรรม', en: 'Sample article · Academy of Arts' },
+    source: { th: 'บทความวิชาการ · สำนักศิลปกรรม', en: 'Academic article · Academy of Arts' },
     href: 'pages/article.html', date: '2026-08-18', academy: 'arts', topic: 'language', contentLang: 'th',
     keywords: ['ศัพท์บัญญัติ', 'coined terms', 'terminology']
   },
@@ -180,7 +180,7 @@ window.RS_SEARCH_INDEX = [
     title: { th: 'ปัญญาประดิษฐ์กับการใช้ภาษาไทยในงานวิชาการ', en: 'Artificial intelligence and Thai in academic writing' },
     alt: '',
     summary: { th: 'ข้อควรพิจารณาในการใช้เครื่องมือปัญญาประดิษฐ์ช่วยเขียนและแปลงานวิชาการ', en: 'Considerations when using AI tools to write and translate academic work.' },
-    source: { th: 'บทความตัวอย่าง · สำนักวิทยาศาสตร์', en: 'Sample article · Academy of Science' },
+    source: { th: 'บทความวิชาการ · สำนักวิทยาศาสตร์', en: 'Academic article · Academy of Science' },
     href: 'pages/article.html', date: '2026-07-02', academy: 'science', topic: 'technology', contentLang: 'th',
     keywords: ['ai', 'ปัญญาประดิษฐ์', 'artificial intelligence']
   },
@@ -189,7 +189,7 @@ window.RS_SEARCH_INDEX = [
     title: { th: 'เขียนคำทับศัพท์ภาษาอังกฤษอย่างไรให้ถูกหลัก', en: 'How to transliterate English words into Thai' },
     alt: '',
     summary: { th: 'สรุปหลักเกณฑ์ที่พบบ่อย เช่น การใช้วรรณยุกต์และตัวการันต์', en: 'A summary of common rules, such as tone marks and silent letters.' },
-    source: { th: 'คลังความรู้ (ตัวอย่าง)', en: 'Knowledge base (sample)' },
+    source: { th: 'คลังความรู้', en: 'Knowledge base' },
     href: 'pages/article.html', date: '2026-05-21', academy: 'arts', topic: 'language', contentLang: 'th',
     keywords: ['ทับศัพท์', 'transliteration', 'อีเมล']
   },
@@ -197,8 +197,8 @@ window.RS_SEARCH_INDEX = [
     id: 'research-biodiversity', type: 'research',
     title: { th: 'ความหลากหลายทางชีวภาพของป่าชายเลนไทย', en: 'Biodiversity of Thai mangrove forests' },
     alt: '',
-    summary: { th: 'รายงานการวิจัยตัวอย่างด้านนิเวศวิทยาชายฝั่ง', en: 'Sample research report on coastal ecology.' },
-    source: { th: 'งานวิจัยตัวอย่าง · สำนักวิทยาศาสตร์', en: 'Sample research · Academy of Science' },
+    summary: { th: 'รายงานการวิจัยด้านนิเวศวิทยาชายฝั่ง', en: 'A research report on coastal ecology.' },
+    source: { th: 'รายงานการวิจัย · สำนักวิทยาศาสตร์', en: 'Research report · Academy of Science' },
     href: 'pages/article.html', date: '2025-11-10', academy: 'science', topic: 'science', contentLang: 'th-en',
     keywords: ['mangrove', 'biodiversity', 'ป่าชายเลน']
   },
@@ -206,8 +206,8 @@ window.RS_SEARCH_INDEX = [
     id: 'research-ageing', type: 'research',
     title: { th: 'สังคมสูงวัยกับความมั่นคงทางรายได้ของครัวเรือนไทย', en: 'Ageing society and household income security in Thailand' },
     alt: '',
-    summary: { th: 'รายงานการวิจัยตัวอย่างว่าด้วยการออมและสวัสดิการผู้สูงอายุ', en: 'Sample research report on savings and welfare for older people.' },
-    source: { th: 'งานวิจัยตัวอย่าง · สำนักธรรมศาสตร์และการเมือง', en: 'Sample research · Academy of Moral and Political Sciences' },
+    summary: { th: 'รายงานการวิจัยว่าด้วยการออมและสวัสดิการผู้สูงอายุ', en: 'A research report on savings and welfare for older people.' },
+    source: { th: 'รายงานการวิจัย · สำนักธรรมศาสตร์และการเมือง', en: 'Research report · Academy of Moral and Political Sciences' },
     href: 'pages/article.html', date: '2026-02-12', academy: 'moral', topic: 'economics', contentLang: 'th',
     keywords: ['สังคมสูงวัย', 'ผู้สูงอายุ', 'ageing society', 'aged society']
   },
@@ -215,8 +215,8 @@ window.RS_SEARCH_INDEX = [
     id: 'research-ai-thai-nlp', type: 'research',
     title: { th: 'การประมวลผลภาษาไทยด้วยปัญญาประดิษฐ์: ปัญหาการตัดคำ', en: 'Thai language processing with AI: the word segmentation problem' },
     alt: '',
-    summary: { th: 'รายงานการวิจัยตัวอย่างเปรียบเทียบวิธีตัดคำภาษาไทยสำหรับระบบปัญญาประดิษฐ์', en: 'Sample research comparing Thai word segmentation methods for AI systems.' },
-    source: { th: 'งานวิจัยตัวอย่าง · สำนักวิทยาศาสตร์', en: 'Sample research · Academy of Science' },
+    summary: { th: 'รายงานการวิจัยเปรียบเทียบวิธีตัดคำภาษาไทยสำหรับระบบปัญญาประดิษฐ์', en: 'Research comparing Thai word segmentation methods for AI systems.' },
+    source: { th: 'รายงานการวิจัย · สำนักวิทยาศาสตร์', en: 'Research report · Academy of Science' },
     href: 'pages/article.html', date: '2025-08-05', academy: 'science', topic: 'technology', contentLang: 'th-en',
     keywords: ['ai', 'ปัญญาประดิษฐ์', 'nlp', 'ตัดคำ']
   },
@@ -224,8 +224,8 @@ window.RS_SEARCH_INDEX = [
     id: 'research-mural', type: 'research',
     title: { th: 'จิตรกรรมฝาผนังสมัยรัตนโกสินทร์ตอนต้น', en: 'Early Rattanakosin mural painting' },
     alt: '',
-    summary: { th: 'รายงานการวิจัยตัวอย่างด้านประวัติศาสตร์ศิลปะไทย', en: 'Sample research report on Thai art history.' },
-    source: { th: 'งานวิจัยตัวอย่าง · สำนักศิลปกรรม', en: 'Sample research · Academy of Arts' },
+    summary: { th: 'รายงานการวิจัยด้านประวัติศาสตร์ศิลปะไทย', en: 'A research report on Thai art history.' },
+    source: { th: 'รายงานการวิจัย · สำนักศิลปกรรม', en: 'Research report · Academy of Arts' },
     href: 'pages/article.html', date: '2024-10-21', academy: 'arts', topic: 'history', contentLang: 'th',
     keywords: ['จิตรกรรมฝาผนัง', 'mural', 'rattanakosin']
   },
@@ -233,8 +233,8 @@ window.RS_SEARCH_INDEX = [
     id: 'article-mangrove-carbon', type: 'article',
     title: { th: 'ป่าชายเลนกับการกักเก็บคาร์บอน', en: 'Mangroves and carbon storage' },
     alt: '',
-    summary: { th: 'บทความตัวอย่างสรุปบทบาทของป่าชายเลนต่อการลดภาวะโลกร้อน', en: 'Sample article on the role of mangroves in mitigating climate change.' },
-    source: { th: 'บทความตัวอย่าง · สำนักวิทยาศาสตร์', en: 'Sample article · Academy of Science' },
+    summary: { th: 'บทความสรุปบทบาทของป่าชายเลนต่อการลดภาวะโลกร้อน', en: 'An article on the role of mangroves in mitigating climate change.' },
+    source: { th: 'บทความวิชาการ · สำนักวิทยาศาสตร์', en: 'Academic article · Academy of Science' },
     href: 'pages/article.html', date: '2023-06-08', academy: 'science', topic: 'science', contentLang: 'th',
     keywords: ['ป่าชายเลน', 'mangrove', 'carbon', 'คาร์บอน']
   },
@@ -243,16 +243,16 @@ window.RS_SEARCH_INDEX = [
     title: { th: 'ภาษากฎหมายที่ประชาชนเข้าใจได้', en: 'Legal language the public can understand' },
     alt: '',
     summary: { th: 'แนวทางเขียนกฎหมายและประกาศราชการด้วยภาษาที่ชัดเจน', en: 'Guidance on writing laws and notices in plain language.' },
-    source: { th: 'บทความตัวอย่าง · สำนักธรรมศาสตร์และการเมือง', en: 'Sample article · Academy of Moral and Political Sciences' },
+    source: { th: 'บทความวิชาการ · สำนักธรรมศาสตร์และการเมือง', en: 'Academic article · Academy of Moral and Political Sciences' },
     href: 'pages/article.html', date: '2026-03-14', academy: 'moral', topic: 'law', contentLang: 'th',
     keywords: ['plain language', 'กฎหมาย']
   },
   {
     id: 'journal-sample', type: 'journal',
-    title: { th: 'วารสารราชบัณฑิตยสภา (ฉบับตัวอย่าง)', en: 'Journal of the Royal Society (sample issue)' },
+    title: { th: 'วารสารราชบัณฑิตยสภา', en: 'Journal of the Royal Society' },
     alt: '',
     summary: { th: 'รวมบทความวิชาการจากราชบัณฑิตและผู้ทรงคุณวุฒิ', en: 'Academic articles by Fellows and experts.' },
-    source: { th: 'วารสาร (ตัวอย่าง)', en: 'Journal (sample)' },
+    source: { th: 'วารสาร', en: 'Journal' },
     href: 'pages/knowledge.html#publications', date: '2026-06-30', academy: null, topic: null, contentLang: 'th-en',
     keywords: ['journal', 'วารสาร']
   },
@@ -269,8 +269,8 @@ window.RS_SEARCH_INDEX = [
     id: 'news-lecture', type: 'news',
     title: { th: 'บรรยายสาธารณะ “ภาษาไทยในยุคดิจิทัล”', en: 'Public lecture: “Thai in the digital age”' },
     alt: '',
-    summary: { th: 'กิจกรรมตัวอย่าง เปิดให้ประชาชนลงทะเบียนเข้าร่วม', en: 'Sample event open for public registration.' },
-    source: { th: 'ข่าวและกิจกรรม (ตัวอย่าง)', en: 'News & events (sample)' },
+    summary: { th: 'เปิดให้ประชาชนลงทะเบียนเข้าร่วม', en: 'Open for public registration.' },
+    source: { th: 'ข่าวและกิจกรรม', en: 'News & events' },
     href: 'pages/news.html', date: '2026-09-02', academy: 'arts', topic: 'language', contentLang: 'th',
     keywords: ['lecture', 'บรรยาย', 'ดิจิทัล']
   }

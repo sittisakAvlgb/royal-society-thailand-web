@@ -344,7 +344,7 @@
                 </div>
                 <div>
                   <dt class="visually-hidden">${te(ui.phone)}</dt>
-                  <dd><a href="tel:${contact.phoneHref}">${icon('phone')}<span class="font-latin" data-keep-digits>${escapeHTML(contact.phone)}</span></a></dd>
+                  <dd><a href="tel:${contact.phoneHref}">${icon('phone')}<span>${escapeHTML(contact.phone)}</span></a></dd>
                 </div>
                 <div>
                   <dt class="visually-hidden">${te(ui.email)}</dt>

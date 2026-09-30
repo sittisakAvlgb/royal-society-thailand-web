@@ -51,7 +51,6 @@
     bio: { th: 'ประวัติ', en: 'Biography' },
     works: { th: 'ผลงานสำคัญ', en: 'Selected works' },
     publications: { th: 'ผลงานตีพิมพ์', en: 'Publications' },
-    sample: { th: 'ข้อมูลตัวอย่าง', en: 'Sample data' },
     photo: { th: 'รูปถ่ายทางการจะแสดงที่นี่', en: 'Official portrait will appear here' },
     jump: { th: 'ทางลัดไปยังหมวด', en: 'Jump to a section' },
     filterPlaceholder: { th: 'พิมพ์เพื่อกรองหน้าในเว็บไซต์', en: 'Type to filter the pages on this site' },
@@ -459,7 +458,6 @@
         </aside>
 
         <div class="profile__main">
-          <span class="badge badge--accent">${te(L.sample)}</span>
           <p class="profile__title">${te(person.title)}</p>
           <h1 class="profile__name">${te(person.name)}</h1>
           <p class="profile__name-alt" lang="${other}">${escapeHTML(person.name[other])}</p>

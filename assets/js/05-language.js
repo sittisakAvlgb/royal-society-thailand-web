@@ -107,13 +107,14 @@
    *  never has to be undone.
    *
    *  Latin digits are kept where they are an address, not a number:
-   *  telephone, e-mail, domain, file name, English text — mark anything
-   *  else with [data-keep-digits].
+   *  e-mail, domain, file name, English text — mark anything else with
+   *  [data-keep-digits]. A telephone number is read aloud like any other
+   *  Thai number, so its text is converted; the tel: href stays Latin
+   *  because it is an attribute, not a text node.
    * ==================================================================== */
 
   const KEEP_DIGITS = [
     '[data-keep-digits]',
-    'a[href^="tel:"]',
     'a[href^="mailto:"]',
     '.service-item__domain',
     '[lang="en"]',
