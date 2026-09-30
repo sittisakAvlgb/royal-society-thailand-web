@@ -1336,7 +1336,8 @@
   pointer-events: none;
 }
 .cc.is-open .cc-biscuit { opacity: .16; transform: rotate(0) scale(1); }
-.cc-biscuit__body { fill: var(--gold-500); }
+/* Green, not biscuit-brown: the warm fill read as orange against the cream */
+.cc-biscuit__body { fill: var(--rst-green-100); }
 .cc-biscuit__chip { fill: var(--rst-green-800); }
 
 /* Head, intro and actions rise a beat apart */
@@ -1596,13 +1597,13 @@
   /* One soft shadow, close in — enough to float, nothing dramatic */
   box-shadow: 0 6px 20px rgba(6, 37, 25, .10);
 }
-/* The gold hairline the Office's surfaces carry */
+/* A green hairline, not gold: gold at this width reads as an orange stripe */
 .cc-bar__inner::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
   height: 3px;
-  background: linear-gradient(90deg, var(--gold-500), var(--gold-600));
+  background: linear-gradient(90deg, var(--rst-green-800), var(--rst-green-600));
 }
 
 .cc-bar__mark {
@@ -1611,7 +1612,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #FBF4E4;
+  background: var(--rst-green-50);
 }
 .cc-bar__mark .cc-biscuit {
   position: static;
@@ -1626,8 +1627,8 @@
 .cc-bar__text { min-width: 0; }
 .cc-bar__title { margin: 0 0 2px; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--rst-green-900); }
 .cc-bar__line { margin: 0; font-size: var(--text-xs); line-height: 1.6; color: var(--text-secondary); }
-.cc-bar__policy { color: var(--gold-700); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--gold-500); white-space: nowrap; }
-.cc-bar__policy:hover { color: var(--rst-green-800); }
+.cc-bar__policy { color: var(--rst-green-800); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rst-green-600); white-space: nowrap; }
+.cc-bar__policy:hover { color: var(--rst-green-900); }
 
 /* On a phone the two answers share a row and "settings" sits above them;
    from 640px all three sit inline at the end of the bar. */
