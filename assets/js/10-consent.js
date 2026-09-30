@@ -83,117 +83,144 @@
   /* ==================================================================== *
    * The notice
    * ----------------------------------------------------------------------
-   *  A native <dialog>, centred: the choice is worth stopping for, and the
-   *  browser gives the focus trap and the backdrop for free. It is written as
-   *  a notice from the Office rather than a consent widget — the two
-   *  categories are set like a printed table of contents, Thai numeral, dotted
-   *  leader, state on the right, the same treatment the knowledge lists use.
+   *  A centred card: one row per category, each with its own switch and a
+   *  chevron that opens the list of keys it actually covers — the same keys
+   *  the table on pages/policies.html#privacy-policy documents, so the two
+   *  cannot drift.
+   *
+   *  Everything moves: the card springs in, the rows arrive a beat apart, the
+   *  switch knob overshoots, the detail grows on grid-template-rows and the
+   *  biscuit turns slowly in the corner. All of it stops dead under
+   *  prefers-reduced-motion.
    * ==================================================================== */
 
-  const stateLabel = (category, on) =>
-    te(category.required ? ui.always : (on ? ui.on : ui.off));
+  /* Decorative, and marked so: the crumbs are drawn, not an emoji */
+  const BISCUIT = `
+    <svg class="cc-biscuit" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+      <path class="cc-biscuit__body" d="M60 6a54 54 0 1 0 54 54 30 30 0 0 1-30-24 30 30 0 0 1-24-30Z"/>
+      <circle class="cc-biscuit__chip" cx="44" cy="46" r="7"/>
+      <circle class="cc-biscuit__chip" cx="72" cy="72" r="6"/>
+      <circle class="cc-biscuit__chip" cx="42" cy="78" r="5"/>
+      <circle class="cc-biscuit__chip" cx="66" cy="40" r="4"/>
+      <circle class="cc-biscuit__chip" cx="88" cy="56" r="4"/>
+    </svg>`;
 
   function render() {
     /* Pages sit one folder deep, so the policy link is resolved from the root */
     const root = location.pathname.includes('/pages/') ? '../' : '';
 
-    const rows = categories.map((c, index) => {
-      const line = `
-        <span class="consent__line">
-          <span class="consent__name">${te(c.label)}</span>
-          <span class="consent__leader" aria-hidden="true"></span>
-          <span class="consent__state" data-consent-state>${stateLabel(c, false)}</span>
-        </span>
-        <span class="consent__hint">${te(c.hint)}</span>`;
+    const rows = categories.map(c => {
+      const id = `cc-detail-${escapeHTML(c.key)}`;
+      const keys = (c.keys || []).map(k => `<li><code lang="en">${escapeHTML(k)}</code></li>`).join('');
 
-      /* A required category is a statement; an optional one is the control */
-      const body = c.required
-        ? `<span class="consent__item">${line}</span>`
-        : `<button class="consent__item consent__item--choice" type="button" role="switch"
-                   aria-checked="false" data-consent-switch="${escapeHTML(c.key)}">${line}</button>`;
+      const control = c.required
+        ? `<span class="cc-row__always">${te(ui.always)}</span>`
+        : `<button class="cc-switch" type="button" role="switch" aria-checked="false"
+                   data-consent-switch="${escapeHTML(c.key)}">
+             <span class="cc-switch__knob" aria-hidden="true"></span>
+             <span class="visually-hidden">${te(c.label)}</span>
+           </button>`;
 
       return `
-        <li class="consent__row">
-          <span class="consent__num" aria-hidden="true">${index + 1}</span>
-          ${body}
+        <li class="cc-row" data-consent-row>
+          <div class="cc-row__main">
+            <span class="cc-row__icon" aria-hidden="true">${icon(c.icon || 'sliders')}</span>
+            <div class="cc-row__text">
+              <p class="cc-row__name">${te(c.label)}</p>
+              <p class="cc-row__hint">${te(c.hint)}</p>
+            </div>
+            <div class="cc-row__controls">
+              ${control}
+              <button class="cc-row__expand" type="button" aria-expanded="false" aria-controls="${id}"
+                      aria-label="${te(ui.showKeys)}">${icon('chevron')}</button>
+            </div>
+          </div>
+          <div class="cc-row__detail" id="${id}">
+            <div class="cc-row__detail-inner">
+              <p class="cc-row__detail-title">${te(ui.stored)}</p>
+              <ul class="cc-keys" role="list">${keys}</ul>
+            </div>
+          </div>
         </li>`;
     }).join('');
 
     return `
-      <dialog class="consent" id="cookie-bar" aria-labelledby="consent-title">
-        <div class="consent__sheet">
-          <p class="consent__eyebrow">${te(ui.regionLabel)}</p>
-          <h2 class="consent__title" id="consent-title">${te(conf.title)}</h2>
-          <p class="consent__intro">${te(conf.intro)}</p>
-
-          <ol class="consent__list" role="list">${rows}</ol>
-
-          <a class="consent__policy" href="${escapeHTML(root + conf.policyHref)}">
+      <dialog class="cc" id="cookie-bar" aria-labelledby="cc-title">
+        <div class="cc__sheet">
+          ${BISCUIT}
+          <p class="cc__eyebrow">${icon('info')}<span>${te(ui.regionLabel)}</span></p>
+          <h2 class="cc__title" id="cc-title">${te(conf.title)}</h2>
+          <p class="cc__intro">${te(conf.intro)}</p>
+          <a class="cc__policy" href="${escapeHTML(root + conf.policyHref)}">
             <span>${te(ui.policy)}</span>${icon('arrow')}
           </a>
 
-          <div class="consent__actions">
-            <button class="btn btn--primary" type="button" data-consent="all">${te(ui.acceptAll)}</button>
-            <button class="btn btn--secondary" type="button" data-consent="necessary">${te(ui.essential)}</button>
-            <button class="btn btn--primary" type="button" data-consent="chosen" hidden>${te(ui.save)}</button>
+          <ul class="cc__rows" role="list">${rows}</ul>
+
+          <div class="cc__actions">
+            <button class="btn btn--primary cc__btn" type="button" data-consent="all">
+              <span>${te(ui.acceptAll)}</span>${icon('arrow')}
+            </button>
+            <button class="btn btn--secondary cc__btn" type="button" data-consent="necessary">
+              <span>${te(ui.essential)}</span>
+            </button>
+            <button class="btn btn--primary cc__btn" type="button" data-consent="chosen" hidden>
+              <span>${te(ui.save)}</span>${icon('arrow')}
+            </button>
           </div>
         </div>
       </dialog>`;
   }
 
   let bar = null;
+  let closing = 0;
 
   function show() {
     clearTimeout(closing);
     if (bar.open) { bar.classList.add('is-open'); return; }
     bar.showModal();
-    /* Flush the closed state so the rise has something to animate from.
-       A reflow rather than requestAnimationFrame, which never runs while the
-       tab is in the background — the notice would then open invisible. */
+    /* Flush the closed state so the spring has something to move from. A
+       reflow, not requestAnimationFrame, which never runs in a background tab
+       and would leave the notice open but invisible. */
     void bar.offsetWidth;
     bar.classList.add('is-open');
   }
 
-  /* Close once it has faded. A timer rather than transitionend: the event can
-     be missed (an interrupted transition, a stylesheet swapped underneath) and
-     a notice that will not close is worse than one that closes a beat early. */
-  let closing = 0;
-
+  /* A timer rather than transitionend, which an interrupted transition can
+     swallow — a notice that will not close is worse than one that closes early */
   function hide() {
     bar.classList.remove('is-open');
     clearTimeout(closing);
-    const done = () => {
-      if (!bar.classList.contains('is-open') && bar.open) bar.close();
-    };
-    if (RS.reduceMotion?.()) done(); else closing = setTimeout(done, 300);
+    const done = () => { if (!bar.classList.contains('is-open') && bar.open) bar.close(); };
+    if (RS.reduceMotion?.()) done(); else closing = setTimeout(done, 280);
   }
 
-  /** Reflect a category's state in both the switch and the word beside it */
   function setSwitch(button, on) {
-    const category = categories.find(c => c.key === button.dataset.consentSwitch);
     button.setAttribute('aria-checked', String(on));
-    const state = qs('[data-consent-state]', button);
-    if (state && category) state.textContent = t(on ? ui.on : ui.off);
   }
 
-  /** The save button only matters once a choice has been touched */
-  function offerSave(show = true) {
-    qs('[data-consent="chosen"]', bar).hidden = !show;
+  /** The save button only matters once a switch has been touched */
+  function offerSave(visible = true) {
+    qs('[data-consent="chosen"]', bar).hidden = !visible;
   }
 
   function wire() {
-    /* The locked categories read "always on" from the start */
-    categories.filter(c => c.required).forEach(c => {
-      const row = qsa('.consent__row', bar)[categories.indexOf(c)];
-      qs('[data-consent-state]', row).textContent = t(ui.always);
-    });
-
     const current = get();
+
     qsa('[data-consent-switch]', bar).forEach(button => {
       setSwitch(button, current[button.dataset.consentSwitch] === true);
       button.addEventListener('click', () => {
         setSwitch(button, button.getAttribute('aria-checked') !== 'true');
         offerSave();
+      });
+    });
+
+    qsa('.cc-row__expand', bar).forEach(button => {
+      button.addEventListener('click', () => {
+        const row = button.closest('.cc-row');
+        const open = !row.classList.contains('is-expanded');
+        row.classList.toggle('is-expanded', open);
+        button.setAttribute('aria-expanded', String(open));
       });
     });
 

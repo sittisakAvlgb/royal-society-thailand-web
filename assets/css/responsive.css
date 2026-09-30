@@ -52,8 +52,10 @@
   .profile { grid-template-columns: 240px 1fr; }
 
 
-  /* Cookie notice: name, leader and state share one line */
-  .consent__name { flex: 0 1 auto; }
+
+  /* Cookie notice: icon, text and controls share one line */
+  .cc-row__main { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .cc-row__controls { grid-column: auto; justify-self: auto; }
 }
 
 /* ==============================

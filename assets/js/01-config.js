@@ -112,7 +112,9 @@ window.RS_CONFIG = {
       /* The word beside each line in the notice */
       always:     { th: 'เปิดเสมอ', en: 'Always on' },
       on:         { th: 'อนุญาต', en: 'Allowed' },
-      off:        { th: 'ไม่อนุญาต', en: 'Not allowed' }
+      off:        { th: 'ไม่อนุญาต', en: 'Not allowed' },
+      stored:     { th: 'ข้อมูลที่จัดเก็บ', en: 'What is stored' },
+      showKeys:   { th: 'ดูข้อมูลที่จัดเก็บ', en: 'Show what is stored' }
     }
   },
 
