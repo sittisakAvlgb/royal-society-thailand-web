@@ -75,6 +75,11 @@ window.RS_CONFIG = {
       th: 'ราชบัณฑิตยสภาจัดเก็บข้อมูลบางอย่างไว้ในเบราว์เซอร์ของคุณ เพื่อให้เว็บไซต์ทำงานได้และจดจำตัวเลือกของคุณ เว็บไซต์นี้ไม่ใช้คุกกี้เพื่อการวิเคราะห์ การติดตาม หรือการโฆษณา',
       en: 'The Royal Society stores a little information in your browser so the website works and remembers your choices. This website uses no analytics, tracking or advertising cookies.'
     },
+    /* The one line the summary bar shows; `intro` is the fuller text on the card */
+    summary: {
+      th: 'เราใช้คุกกี้ที่จำเป็นเพื่อให้เว็บไซต์ทำงานได้ และขอความยินยอมสำหรับการจดจำการตั้งค่าของคุณ',
+      en: 'We use the cookies the website needs to work, and ask before remembering your settings.'
+    },
     categories: [
       {
         key: 'necessary',

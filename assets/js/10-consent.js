@@ -144,7 +144,30 @@
         </li>`;
     }).join('');
 
-    return `
+    /* Tier one: a summary bar. This site sets no tracking cookies, so blocking
+       the whole page to ask about a language preference would be out of all
+       proportion — the bar answers in one click and the card (tier two) is
+       there for anyone who wants the detail. */
+    const summary = `
+      <section class="cc-bar" id="cookie-bar-summary" role="region"
+               aria-label="${te(ui.regionLabel)}" hidden>
+        <div class="cc-bar__inner">
+          <span class="cc-bar__mark" aria-hidden="true">${BISCUIT}</span>
+          <div class="cc-bar__text">
+            <p class="cc-bar__title">${te(conf.title)}</p>
+            <p class="cc-bar__line">${te(conf.summary || conf.intro)}
+              <a class="cc-bar__policy" href="${escapeHTML(root + conf.policyHref)}">${te(ui.policy)}</a>
+            </p>
+          </div>
+          <div class="cc-bar__actions">
+            <button class="cc-bar__more" type="button" data-consent-settings>${te(ui.manage)}</button>
+            <button class="cc-bar__btn" type="button" data-consent="necessary">${te(ui.essential)}</button>
+            <button class="cc-bar__btn cc-bar__btn--gold" type="button" data-consent="all">${te(ui.acceptAll)}</button>
+          </div>
+        </div>
+      </section>`;
+
+    return summary + `
       <dialog class="cc" id="cookie-bar" aria-labelledby="cc-title">
         <div class="cc__sheet">
           ${BISCUIT}
@@ -172,8 +195,21 @@
       </dialog>`;
   }
 
-  let bar = null;
+  let bar = null;      /* the card   */
+  let strip = null;    /* the summary bar */
   let closing = 0;
+
+  function showBar() {
+    strip.hidden = false;
+    void strip.offsetWidth;                       /* flush, so it slides in */
+    strip.classList.add('is-open');
+  }
+
+  function hideBar() {
+    strip.classList.remove('is-open');
+    const done = () => { if (!strip.classList.contains('is-open')) strip.hidden = true; };
+    if (RS.reduceMotion?.()) done(); else setTimeout(done, 280);
+  }
 
   function show() {
     clearTimeout(closing);
@@ -224,7 +260,7 @@
       });
     });
 
-    qsa('[data-consent]', bar).forEach(button => {
+    qsa('[data-consent]', document).forEach(button => {
       button.addEventListener('click', () => {
         const mode = button.dataset.consent;
         const choices = {};
@@ -235,9 +271,13 @@
         });
         save(choices);
         hide();
+        hideBar();
         RS.toast?.(t(ui.saved));
       });
     });
+
+    /* "Cookie settings" on the bar opens the card behind it */
+    qs('[data-consent-settings]', strip).addEventListener('click', () => open());
 
     /* Esc would be an answer nobody gave, so the notice stays until one is */
     bar.addEventListener('cancel', event => event.preventDefault());
@@ -257,9 +297,10 @@
   ready(() => {
     document.body.insertAdjacentHTML('beforeend', render());
     bar = qs('#cookie-bar');
+    strip = qs('#cookie-bar-summary');
     wire();
 
-    if (!stored()) show();
+    if (!stored()) showBar();
 
     document.addEventListener('click', event => {
       const trigger = event.target.closest('[data-cookie-settings]');

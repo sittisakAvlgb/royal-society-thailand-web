@@ -96,7 +96,8 @@ already return Thai numerals in Thai.
 
 **Cookies.** The site sets no tracking cookies; what it keeps is localStorage.
 `RS_CONFIG.cookies` lists every key and the category it belongs to, and
-`10-consent.js` turns that into the consent card and enforces the answer:
+`10-consent.js` turns that into a summary bar, a detail card behind its
+“cookie settings” link, and the enforcement of the answer:
 `RS.mayStore(key)` (00-core.js) refuses a write the visitor has not agreed to,
 and declining a category deletes its keys. Register a new key in
 `RS_CONFIG.cookies.categories` and in the table on

@@ -56,6 +56,12 @@
   /* Cookie notice: icon, text and controls share one line */
   .cc-row__main { grid-template-columns: auto minmax(0, 1fr) auto; }
   .cc-row__controls { grid-column: auto; justify-self: auto; }
+
+  /* Cookie bar: mark, text and actions on one line, clear of the FAB */
+  .cc-bar { bottom: var(--space-4); inset-inline: var(--space-4) calc(var(--space-4) + 72px); }
+  .cc-bar__inner { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; column-gap: var(--space-4); }
+  .cc-bar__actions { display: flex; flex-wrap: wrap; }
+  .cc-bar__more { grid-column: auto; }
 }
 
 /* ==============================

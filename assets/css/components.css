@@ -1557,3 +1557,110 @@
   text-align: left;
   cursor: pointer;
 }
+
+/* ==============================
+   Cookie summary bar (tier one)
+   A floating bar, not a band welded to the edge of the window: it answers in
+   one click, leaves the page readable, and hands anyone who wants the detail
+   over to the card above. Deep green with one gold action, so the accept is
+   the thing the eye lands on.
+   ============================== */
+.cc-bar {
+  position: fixed;
+  z-index: var(--z-toast);
+  inset-inline: var(--space-4);
+  /* Above the accessibility button, which owns the bottom-right corner */
+  bottom: calc(var(--space-4) + 64px);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 260ms var(--ease), transform 460ms cubic-bezier(.18, 1.15, .32, 1);
+}
+.cc-bar.is-open { opacity: 1; transform: none; }
+
+.cc-bar__inner {
+  display: grid;
+  gap: var(--space-3);
+  width: min(1040px, 100%);
+  margin-inline: auto;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 18px;
+  background: var(--rst-green-900);
+  color: var(--white);
+  box-shadow: 0 10px 28px rgba(6, 37, 25, .22);
+}
+
+.cc-bar__mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .10);
+}
+.cc-bar__mark .cc-biscuit {
+  position: static;
+  width: 26px;
+  height: 26px;
+  opacity: 1;
+  transform: none;
+  transition: transform 600ms cubic-bezier(.18, 1.1, .32, 1) 160ms;
+}
+.cc-bar.is-open .cc-bar__mark .cc-biscuit { transform: rotate(360deg); }
+
+.cc-bar__text { min-width: 0; }
+.cc-bar__title { margin: 0 0 2px; font-size: var(--text-sm); font-weight: 600; }
+.cc-bar__line { margin: 0; font-size: var(--text-xs); line-height: 1.6; color: rgba(255, 255, 255, .82); }
+.cc-bar__policy { color: var(--gold-500); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.cc-bar__policy:hover { color: var(--white); }
+
+/* On a phone the two answers share a row and "settings" sits above them;
+   from 640px all three sit inline at the end of the bar. */
+.cc-bar__actions { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: var(--space-2); }
+.cc-bar__more { grid-column: 1 / -1; justify-self: start; }
+.cc-bar__more {
+  min-height: 40px;
+  padding-inline: var(--space-2);
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, .86);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: color var(--duration) var(--ease);
+}
+.cc-bar__more:hover { color: var(--white); }
+
+.cc-bar__btn {
+  min-height: 40px;
+  padding-inline: var(--space-4);
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--white);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    color var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
+}
+.cc-bar__btn:hover { background: rgba(255, 255, 255, .12); border-color: var(--white); transform: translateY(-1px); }
+.cc-bar__btn:active { transform: translateY(0); }
+.cc-bar__btn--gold {
+  border-color: var(--gold-500);
+  background: var(--gold-500);
+  color: var(--rst-green-950, #06251A);
+}
+.cc-bar__btn--gold:hover { background: var(--gold-600); border-color: var(--gold-600); color: var(--white); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-bar, .cc-bar__btn, .cc-bar__mark .cc-biscuit { transition: none; }
+  .cc-bar { opacity: 1; transform: none; }
+}
