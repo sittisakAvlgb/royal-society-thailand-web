@@ -20,6 +20,33 @@
   const LANGS = ['th', 'en'];
   const LANG_KEY = 'rs-lang';
 
+  const CONSENT_KEY = 'rs-cookie-consent';
+
+  /**
+   * May this key be stored on the visitor's device?
+   *
+   * RS_CONFIG.cookies.categories says which key belongs to which category; a
+   * category marked `required` is what the website needs to run and is always
+   * allowed, the rest wait for the visitor to say yes (10-consent.js).
+   * A key that is in no category counts as necessary — so register every new
+   * key in the config, or it is neither offered nor withdrawable.
+   */
+  function mayStore(key) {
+    const cookies = window.RS_CONFIG?.cookies;
+    if (!cookies?.enabled) return true;
+
+    const category = (cookies.categories || []).find(c => (c.keys || []).includes(key));
+    if (!category || category.required) return true;
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null');
+      if (saved?.version !== cookies.version) return false;
+      return saved?.choices?.[category.key] === true;
+    } catch {
+      return false;
+    }
+  }
+
   const storage = {
     get(key, fallback = null) {
       try {
@@ -30,6 +57,7 @@
       }
     },
     set(key, value) {
+      if (!mayStore(key)) return;
       try { localStorage.setItem(key, value); } catch { /* private mode */ }
     }
   };
@@ -107,6 +135,9 @@
     },
 
     icon: name => `<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-${name}"></use></svg>`,
+
+    /** True when the cookie choice allows this key to be kept (see mayStore) */
+    mayStore,
 
     reduceMotion: () =>
       document.body.classList.contains('access-reduce-motion') ||

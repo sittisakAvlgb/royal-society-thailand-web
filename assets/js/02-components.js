@@ -108,6 +108,12 @@
 
   /** <a> for a config link, with external-link indication */
   function link(item, className = '') {
+    /* An entry with `action` is a control, not a destination: the cookie bar
+       has to be re-openable from the footer without leaving the page. */
+    if (item.action === 'cookie-settings') {
+      const cls = className ? ` ${className}` : '';
+      return `<button class="footer-action${cls}" type="button" data-cookie-settings><span>${te(item.label)}</span></button>`;
+    }
     const href = item.href.replace('{webmaster}', CFG.contact.webmaster);
     const external = item.external || RS.isExternal(href);
     const attrs = external ? ' target="_blank" rel="noopener"' : '';

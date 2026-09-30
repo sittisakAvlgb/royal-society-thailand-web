@@ -91,7 +91,10 @@
   /* ---- reminders (prototype: this browser only) ---- */
   const KEY = 'rs.reminders';
   const reminders = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
-  const saveReminders = list => { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch { /* private mode */ } };
+  const saveReminders = list => {
+    if (!RS.mayStore(KEY)) return;                 /* reminders need consent */
+    try { localStorage.setItem(KEY, JSON.stringify(list)); } catch { /* private mode */ }
+  };
   const hasReminder = id => reminders().includes(id);
 
   async function toggleReminder(ev) {

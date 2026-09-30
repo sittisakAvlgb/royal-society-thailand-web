@@ -47,6 +47,7 @@ assets/js/                 Loaded with defer, in this order
                            sitemap (filter · section rail · outline)
   09-calendar.js           Events calendar (day/week/month/year, reminders, .ics export)
   data/events.js           SAMPLE events for the calendar
+  10-consent.js            Cookie consent card and the choice it enforces
 ```
 
 Each page includes only the scripts it needs; header, footer and the search
@@ -92,6 +93,14 @@ text — via `[data-keep-digits]`, `a[href^="tel:"]`, `a[href^="mailto:"]`,
 `.service-item__domain`, `[lang="en"]` and `code`. `RS.digits()` does the same
 for strings built in JavaScript; `RS.formatNumber()` and `RS.formatDate()`
 already return Thai numerals in Thai.
+
+**Cookies.** The site sets no tracking cookies; what it keeps is localStorage.
+`RS_CONFIG.cookies` lists every key and the category it belongs to, and
+`10-consent.js` turns that into the consent card and enforces the answer:
+`RS.mayStore(key)` (00-core.js) refuses a write the visitor has not agreed to,
+and declining a category deletes its keys. Register a new key in
+`RS_CONFIG.cookies.categories` and in the table on
+`pages/policies.html#privacy-policy`, or it is neither offered nor withdrawable.
 
 **Official data.** Search results mark records from the official systems
 (dictionary, coined terms, transliteration, gazetteer). An exact match is shown

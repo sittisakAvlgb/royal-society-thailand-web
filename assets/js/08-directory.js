@@ -241,6 +241,8 @@
       const list = readBookmarks();
       const on = !list.includes(id);
       const next = on ? [...list, id] : list.filter(item => item !== id);
+      /* Saved items are a convenience, so they wait for the cookie choice */
+      if (!RS.mayStore(BOOKMARK_KEY)) return;
       try { localStorage.setItem(BOOKMARK_KEY, JSON.stringify(next)); } catch { /* private mode */ }
       button.setAttribute('aria-pressed', String(on));
       button.classList.remove('is-bumped');

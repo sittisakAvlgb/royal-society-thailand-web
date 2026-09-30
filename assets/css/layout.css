@@ -392,9 +392,12 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
 .footer-col:focus-within::before { width: 56px; }
 
 .footer-links { margin-top: var(--space-3); }
-/* A chevron slides in on the link being pointed at */
-.footer-links a { position: relative; transition: transform var(--duration) var(--ease); }
-.footer-links a::before {
+/* A chevron slides in on the link being pointed at. The cookie-settings
+   entry is a <button>, so it joins every rule the links have. */
+.footer-links a,
+.footer-links .footer-action { position: relative; transition: transform var(--duration) var(--ease); }
+.footer-links a::before,
+.footer-links .footer-action::before {
   content: "→";
   position: absolute;
   inset-inline-start: -18px;
@@ -403,15 +406,19 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
   transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
   transform: translateX(-4px);
 }
-.footer-links a:hover { transform: translateX(6px); }
-.footer-links a:hover::before { opacity: 1; transform: none; }
+.footer-links a:hover,
+.footer-links .footer-action:hover { transform: translateX(6px); }
+.footer-links a:hover::before,
+.footer-links .footer-action:hover::before { opacity: 1; transform: none; }
 
-.site-footer a {
+.site-footer a,
+.site-footer .footer-action {
   color: rgba(255, 255, 255, .8);
   text-decoration: none;
   transition: color var(--duration) var(--ease);
 }
 .footer-links a,
+.footer-links .footer-action,
 .footer-address a {
   display: inline-flex;
   align-items: center;
@@ -423,9 +430,11 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
 /* Touch devices keep the full 44px target */
 @media (pointer: coarse) {
   .footer-links a,
+  .footer-links .footer-action,
   .footer-address a { min-height: 44px; }
 }
-.site-footer a:hover {
+.site-footer a:hover,
+.site-footer .footer-action:hover {
   color: var(--white);
   text-decoration: underline;
   text-underline-offset: .25em;

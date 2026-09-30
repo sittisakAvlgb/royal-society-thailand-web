@@ -54,6 +54,7 @@
   <script defer src="../assets/js/04-interactions.js"></script>
   <script defer src="../assets/js/05-language.js"></script>
   <script defer src="../assets/js/06-search.js"></script>
+  <script defer src="../assets/js/10-consent.js"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -112,12 +113,14 @@
 
         <h3 id="device-storage-title" data-en="What this website stores on your device">ข้อมูลที่เว็บไซต์นี้จัดเก็บในอุปกรณ์ของคุณ</h3>
         <p data-en="This website does not use analytics or advertising cookies. It saves only the settings below in your browser, so that the website remembers your choices on this device.">เว็บไซต์นี้ไม่ใช้คุกกี้เพื่อการวิเคราะห์หรือการโฆษณา และจัดเก็บเฉพาะการตั้งค่าด้านล่างไว้ในเบราว์เซอร์ เพื่อให้เว็บไซต์จดจำตัวเลือกของคุณในอุปกรณ์นี้</p>
+        <p data-en="Items marked “Necessary” are what the website needs to work. The rest are stored only if you agree; you can change or withdraw your choice at any time with “Cookie settings” at the foot of every page, and anything you decline is deleted from this device.">รายการที่ระบุว่า “จำเป็น” คือสิ่งที่เว็บไซต์ต้องใช้เพื่อให้ทำงานได้ ส่วนรายการอื่นจะจัดเก็บก็ต่อเมื่อคุณยินยอมเท่านั้น คุณเปลี่ยนหรือถอนความยินยอมได้ตลอดเวลาที่ “ตั้งค่าคุกกี้” ด้านล่างของทุกหน้า และรายการที่คุณปฏิเสธจะถูกลบออกจากอุปกรณ์นี้</p>
         <div class="table-scroll">
           <table aria-labelledby="device-storage-title">
             <thead>
               <tr>
                 <th scope="col" data-en="Name">ชื่อ</th>
                 <th scope="col" data-en="Type">ประเภท</th>
+                <th scope="col" data-en="Category">หมวด</th>
                 <th scope="col" data-en="Purpose">วัตถุประสงค์</th>
                 <th scope="col" data-en="Duration">ระยะเวลา</th>
               </tr>
@@ -126,26 +129,58 @@
               <tr>
                 <td><code lang="en">rs-lang</code></td>
                 <td lang="en">localStorage</td>
+                <td data-en="Necessary">จำเป็น</td>
                 <td data-en="Remembers the language you chose (Thai or English)">จดจำภาษาที่เลือก (ไทยหรืออังกฤษ)</td>
                 <td data-en="Until you clear this website's data in your browser">จนกว่าจะล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs-accessibility-settings</code></td>
                 <td lang="en">localStorage</td>
+                <td data-en="Preferences">การตั้งค่า</td>
                 <td data-en="Remembers display settings: text size, high contrast, reduced motion and underlined links">จดจำการตั้งค่าการแสดงผล ได้แก่ ขนาดตัวอักษร คอนทราสต์สูง ลดการเคลื่อนไหว และขีดเส้นใต้ลิงก์</td>
                 <td data-en="Until you clear this website's data in your browser">จนกว่าจะล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs-recent-searches</code></td>
                 <td lang="en">localStorage</td>
+                <td data-en="Preferences">การตั้งค่า</td>
                 <td data-en="Up to 5 recent searches, shown in the search panel on this device only">คำค้นล่าสุดไม่เกิน ๕ รายการ แสดงในหน้าต่างค้นหาบนอุปกรณ์นี้เท่านั้น</td>
                 <td data-en="Until you select “Clear” in the search panel or clear this website's data">จนกว่าจะกด “ล้าง” ในหน้าต่างค้นหา หรือล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs-lang-scroll</code></td>
                 <td lang="en">sessionStorage</td>
+                <td data-en="Necessary">จำเป็น</td>
                 <td data-en="Keeps your scroll position when you switch language">จดจำตำแหน่งการเลื่อนหน้าเมื่อสลับภาษา</td>
                 <td data-en="Removed as soon as the new language page opens, or when the tab is closed">ลบทันทีเมื่อเปิดหน้าภาษาใหม่แล้ว หรือเมื่อปิดแท็บ</td>
+              </tr>
+              <tr>
+                <td><code lang="en">rs-cookie-consent</code></td>
+                <td lang="en">localStorage</td>
+                <td data-en="Necessary">จำเป็น</td>
+                <td data-en="Remembers the cookie choice you made, so you are not asked again">จดจำตัวเลือกคุกกี้ที่คุณเลือกไว้ เพื่อไม่ต้องถามซ้ำ</td>
+                <td data-en="Until you clear this website's data in your browser">จนกว่าจะล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</td>
+              </tr>
+              <tr>
+                <td><code lang="en">rs.bookmarks</code></td>
+                <td lang="en">localStorage</td>
+                <td data-en="Preferences">การตั้งค่า</td>
+                <td data-en="The Fellows and pages you saved with the bookmark button, on this device only">ราชบัณฑิตและหน้าที่คุณกดบันทึกไว้ เฉพาะบนอุปกรณ์นี้</td>
+                <td data-en="Until you remove them, decline this category, or clear this website's data">จนกว่าจะลบรายการ ปฏิเสธหมวดนี้ หรือล้างข้อมูลของเว็บไซต์</td>
+              </tr>
+              <tr>
+                <td><code lang="en">rs.reminders</code></td>
+                <td lang="en">localStorage</td>
+                <td data-en="Preferences">การตั้งค่า</td>
+                <td data-en="Event reminders you set in the calendar, shown while this browser is open">การเตือนกิจกรรมที่คุณตั้งไว้ในปฏิทิน แสดงเมื่อเปิดเบราว์เซอร์นี้</td>
+                <td data-en="Until you remove them, decline this category, or clear this website's data">จนกว่าจะลบรายการ ปฏิเสธหมวดนี้ หรือล้างข้อมูลของเว็บไซต์</td>
+              </tr>
+              <tr>
+                <td><code lang="en">rs-mobile-panel</code>, <code lang="en">rs-mobile-sub</code>, <code lang="en">rs-mobile-subsub</code></td>
+                <td lang="en">sessionStorage</td>
+                <td data-en="Preferences">การตั้งค่า</td>
+                <td data-en="Keeps the menu open where you left it while you move between pages">จดจำตำแหน่งที่เปิดค้างไว้ในเมนู ระหว่างที่คุณเปลี่ยนหน้า</td>
+                <td data-en="Removed when the tab is closed">ลบเมื่อปิดแท็บ</td>
               </tr>
             </tbody>
           </table>

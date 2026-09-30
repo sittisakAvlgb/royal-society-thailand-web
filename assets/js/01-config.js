@@ -55,6 +55,64 @@ window.RS_CONFIG = {
   },
 
   /* ---------------------------------------------------------------------- *
+   * Cookie consent (PDPA, พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. ๒๕๖๒)
+   * ----------------------------------------------------------------------
+   *  The bar appears once, until a choice is stored in `rs-cookie-consent`.
+   *  `categories` drives both the bar and what the site is allowed to keep:
+   *  a category with `required: true` cannot be switched off. Turning one off
+   *  removes every key it lists (10-consent.js), so adding a key here is all
+   *  that a new feature needs to be covered.
+   *
+   *  The Office must confirm this wording, and the table in
+   *  pages/policies.html#privacy-policy has to list the same keys.
+   * ---------------------------------------------------------------------- */
+  cookies: {
+    enabled: true,
+    version: 1,                        /* raise it to ask everyone again */
+    policyHref: 'pages/policies.html#privacy-policy',
+    title: { th: 'เว็บไซต์นี้ใช้คุกกี้', en: 'This website uses cookies' },
+    intro: {
+      th: 'ราชบัณฑิตยสภาจัดเก็บข้อมูลบางอย่างไว้ในเบราว์เซอร์ของคุณ เพื่อให้เว็บไซต์ทำงานได้และจดจำตัวเลือกของคุณ เว็บไซต์นี้ไม่ใช้คุกกี้เพื่อการวิเคราะห์ การติดตาม หรือการโฆษณา',
+      en: 'The Royal Society stores a little information in your browser so the website works and remembers your choices. This website uses no analytics, tracking or advertising cookies.'
+    },
+    categories: [
+      {
+        key: 'necessary',
+        required: true,
+        icon: 'verified',
+        label: { th: 'จำเป็นต่อการใช้งาน', en: 'Strictly necessary' },
+        hint: {
+          th: 'จดจำภาษาที่เลือกและตัวเลือกคุกกี้นี้ ปิดไม่ได้เพราะเว็บไซต์ต้องใช้',
+          en: 'Remembers your language and this cookie choice. Cannot be switched off.'
+        },
+        keys: ['rs-lang', 'rs-lang-scroll', 'rs-cookie-consent']
+      },
+      {
+        key: 'preferences',
+        required: false,
+        icon: 'sliders',
+        label: { th: 'การตั้งค่าและความสะดวก', en: 'Preferences' },
+        hint: {
+          th: 'จดจำการตั้งค่าการแสดงผล คำค้นล่าสุด รายการที่บันทึกไว้ และการเตือนกิจกรรม',
+          en: 'Remembers display settings, recent searches, saved items and event reminders.'
+        },
+        keys: ['rs-accessibility-settings', 'rs-recent-searches', 'rs.bookmarks', 'rs.reminders',
+               'rs-mobile-panel', 'rs-mobile-sub', 'rs-mobile-subsub']
+      }
+    ],
+    ui: {
+      acceptAll:  { th: 'ยอมรับทั้งหมด', en: 'Accept all' },
+      essential:  { th: 'ใช้เฉพาะที่จำเป็น', en: 'Necessary only' },
+      customise:  { th: 'ตั้งค่า', en: 'Customise' },
+      save:       { th: 'บันทึกตัวเลือก', en: 'Save choices' },
+      policy:     { th: 'อ่านนโยบายคุกกี้', en: 'Read the cookie policy' },
+      manage:     { th: 'ตั้งค่าคุกกี้', en: 'Cookie settings' },
+      regionLabel:{ th: 'การตั้งค่าคุกกี้', en: 'Cookie settings' },
+      saved:      { th: 'บันทึกตัวเลือกคุกกี้แล้ว', en: 'Your cookie choices are saved' }
+    }
+  },
+
+  /* ---------------------------------------------------------------------- *
    * Contact — verified against royalsociety.go.th/ติดต่อ (Sept 2026)
    * ---------------------------------------------------------------------- */
   contact: {
@@ -451,7 +509,8 @@ window.RS_CONFIG = {
           { label: { th: 'นโยบายเว็บไซต์', en: 'Website Policy' }, href: 'pages/policies.html#website-policy' },
           { label: { th: 'นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้', en: 'Privacy and Cookie Policy' }, href: 'pages/policies.html#privacy-policy' },
           { label: { th: 'นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์', en: 'Website Security Policy' }, href: 'pages/policies.html#security-policy' },
-          { label: { th: 'คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด', en: 'Copyright and Disclaimer' }, href: 'pages/policies.html#copyright' }
+          { label: { th: 'คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด', en: 'Copyright and Disclaimer' }, href: 'pages/policies.html#copyright' },
+          { label: { th: 'ตั้งค่าคุกกี้', en: 'Cookie settings' }, action: 'cookie-settings' }
         ]
       }
     ]
