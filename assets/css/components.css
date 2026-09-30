@@ -1583,13 +1583,11 @@
 .cc-bar.is-open { opacity: 1; transform: none; }
 
 .cc-bar__inner {
-  position: relative;
   display: grid;
   gap: var(--space-3);
   width: min(1040px, 100%);
   margin-inline: auto;
   padding: var(--space-3) var(--space-4);
-  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 18px;
   background: linear-gradient(180deg, var(--white), var(--cream));
@@ -1597,15 +1595,6 @@
   /* One soft shadow, close in — enough to float, nothing dramatic */
   box-shadow: 0 6px 20px rgba(6, 37, 25, .10);
 }
-/* A green hairline, not gold: gold at this width reads as an orange stripe */
-.cc-bar__inner::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: linear-gradient(90deg, var(--rst-green-800), var(--rst-green-600));
-}
-
 .cc-bar__mark {
   display: grid;
   place-items: center;
