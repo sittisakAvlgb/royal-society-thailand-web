@@ -108,7 +108,11 @@ window.RS_CONFIG = {
       policy:     { th: 'อ่านนโยบายคุกกี้', en: 'Read the cookie policy' },
       manage:     { th: 'ตั้งค่าคุกกี้', en: 'Cookie settings' },
       regionLabel:{ th: 'การตั้งค่าคุกกี้', en: 'Cookie settings' },
-      saved:      { th: 'บันทึกตัวเลือกคุกกี้แล้ว', en: 'Your cookie choices are saved' }
+      saved:      { th: 'บันทึกตัวเลือกคุกกี้แล้ว', en: 'Your cookie choices are saved' },
+      /* The word beside each line in the notice */
+      always:     { th: 'เปิดเสมอ', en: 'Always on' },
+      on:         { th: 'อนุญาต', en: 'Allowed' },
+      off:        { th: 'ไม่อนุญาต', en: 'Not allowed' }
     }
   },
 

@@ -51,8 +51,9 @@
   .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .profile { grid-template-columns: 240px 1fr; }
 
-  /* Wide enough that the cookie card clears the accessibility button */
-  .cookie-card { bottom: var(--space-4); }
+
+  /* Cookie notice: name, leader and state share one line */
+  .consent__name { flex: 0 1 auto; }
 }
 
 /* ==============================

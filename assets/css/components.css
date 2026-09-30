@@ -1285,170 +1285,137 @@
 
 /* ==============================
    Cookie consent (10-consent.js)
-   A card in the corner rather than a green band across the page: cream and
-   gold like the rest of the site, so it reads as a note from the Office and
-   leaves the page readable while the visitor decides.
-
-   The motion is the point. The card rises and settles with a soft overshoot,
-   its gold rule draws itself across the top, and the three rows arrive a beat
-   apart. The detail panel grows on grid-template-rows, so it expands instead
-   of appearing. All of it collapses to nothing under reduced motion.
+   A notice from the Office, centred and stopping the page, rather than a
+   cookie widget in the corner. The two categories are set like the contents
+   page of a printed volume — Thai numeral, dotted leader, the state on the
+   right — so it belongs to this site and not to every other site.
    ============================== */
-.cookie-card {
-  position: fixed;
-  z-index: var(--z-modal);
-  inset-inline-start: var(--space-4);
-  /* Room for the accessibility button, which shares this corner on a phone.
-     From 640px the card no longer reaches it (see responsive.css). */
-  bottom: calc(var(--space-4) + 64px);
-  width: min(460px, calc(100vw - var(--space-8)));
+.consent {
+  width: min(560px, calc(100vw - var(--space-8)));
   max-height: calc(100vh - var(--space-8));
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  /* A short screen scrolls the notice rather than cutting the buttons off */
   overflow: hidden auto;
-  border: 1px solid var(--border);
+  overscroll-behavior: contain;
+}
+/* Charcoal, never green: the same neutral scrim the photographs use */
+.consent::backdrop { background: rgba(12, 14, 16, 0); transition: background 260ms var(--ease); }
+.consent.is-open::backdrop { background: rgba(12, 14, 16, .58); }
+
+.consent__sheet {
+  padding: var(--space-6) var(--space-6) var(--space-5, 20px);
+  border-top: 3px solid var(--gold-500);
   border-radius: var(--radius-lg);
   background: var(--white);
-  /* One soft, close shadow — enough to lift it off the page, no drama */
-  box-shadow: 0 8px 24px rgba(6, 37, 25, .10);
   opacity: 0;
-  transform: translateY(20px) scale(.97);
+  transform: translateY(14px) scale(.98);
   transition:
-    opacity 260ms var(--ease),
-    transform 420ms cubic-bezier(.22, 1.2, .36, 1);
+    opacity 240ms var(--ease),
+    transform 420ms cubic-bezier(.22, 1.1, .36, 1);
 }
-.cookie-card.is-open { opacity: 1; transform: none; }
+.consent.is-open .consent__sheet { opacity: 1; transform: none; }
 
-/* The gold rule draws across the top as the card settles */
-.cookie-card__rule {
-  display: block;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold-500), var(--gold-600));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 520ms cubic-bezier(.22, 1, .36, 1) 120ms;
-}
-.cookie-card.is-open .cookie-card__rule { transform: scaleX(1); }
-
-.cookie-card__body { display: grid; gap: var(--space-3); padding: var(--space-5, 20px); }
-
-/* Head, text and buttons arrive a beat apart, top to bottom */
-.cookie-card__head,
-.cookie-card__intro,
-.cookie-card__policy,
-.cookie-card__actions {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 320ms var(--ease), transform 320ms var(--ease);
-}
-.cookie-card.is-open .cookie-card__head     { opacity: 1; transform: none; transition-delay: 160ms; }
-.cookie-card.is-open .cookie-card__intro    { opacity: 1; transform: none; transition-delay: 220ms; }
-.cookie-card.is-open .cookie-card__policy   { opacity: 1; transform: none; transition-delay: 270ms; }
-.cookie-card.is-open .cookie-card__actions  { opacity: 1; transform: none; transition-delay: 320ms; }
-
-.cookie-card__head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin: 0;
-}
-.cookie-card__mark {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--gold-50, #FBF4E4);
+.consent__eyebrow {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: .08em;
   color: var(--gold-700);
 }
-.cookie-card__mark .icon { width: 20px; height: 20px; }
-/* The crest mark gives one slow pulse as the card lands, then stops */
-.cookie-card.is-open .cookie-card__mark { animation: cookie-mark 900ms var(--ease) 260ms 1; }
-@keyframes cookie-mark {
-  0%   { box-shadow: 0 0 0 0 rgba(212, 169, 74, .55); }
-  100% { box-shadow: 0 0 0 12px rgba(212, 169, 74, 0); }
-}
-
-.cookie-card__title {
+.consent__title {
+  margin: 0 0 var(--space-2);
   font-family: var(--font-display);
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 600;
   color: var(--rst-green-900);
 }
-.cookie-card__intro { margin: 0; font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary); }
+.consent__intro { margin: 0; font-size: var(--text-sm); line-height: 1.65; color: var(--text-secondary); }
 
-.cookie-card__policy {
+/* The contents-page treatment */
+.consent__list {
+  margin: var(--space-5, 20px) 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+.consent__row {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: var(--space-2);
+  align-items: baseline;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border);
+}
+.consent__num {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  color: var(--gold-600);
+}
+.consent__item {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+.consent__item--choice { cursor: pointer; }
+/* On a phone a Thai label needs the whole line, so the leader and the state
+   drop to the row below it; from 640px the three sit on one line. */
+.consent__line { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2); min-width: 0; }
+.consent__name { flex: 1 1 100%; font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
+.consent__leader {
+  flex: 1 1 1.5rem;
+  min-width: 1.5rem;
+  border-bottom: 1px dotted var(--border-strong);
+  transition: border-color var(--duration) var(--ease);
+}
+.consent__state {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color var(--duration) var(--ease);
+}
+.consent__hint { font-size: var(--text-xs); line-height: 1.6; color: var(--text-secondary); }
+
+/* Choosing shows: the leader and the word go gold, the line goes green */
+.consent__item--choice:hover .consent__leader { border-color: var(--gold-500); }
+.consent__item--choice:hover .consent__name { color: var(--rst-green-800); }
+.consent__item--choice[aria-checked="true"] .consent__name { color: var(--rst-green-800); }
+.consent__item--choice[aria-checked="true"] .consent__leader { border-bottom-style: solid; border-color: var(--gold-500); }
+.consent__item--choice[aria-checked="true"] .consent__state { color: var(--gold-700); }
+
+.consent__policy {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
-  justify-self: start;
   color: var(--gold-700);
   font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
 }
-.cookie-card__policy .icon { width: 15px; height: 15px; transition: transform var(--duration) var(--ease); }
-.cookie-card__policy:hover { text-decoration: underline; text-underline-offset: 3px; }
-.cookie-card__policy:hover .icon { transform: translateX(3px); }
+.consent__policy .icon { width: 15px; height: 15px; transition: transform var(--duration) var(--ease); }
+.consent__policy:hover { text-decoration: underline; text-underline-offset: 3px; }
+.consent__policy:hover .icon { transform: translateX(3px); }
 
-/* Detail panel: 0fr -> 1fr grows the row, so the height animates */
-.cookie-card__detail {
-  display: grid;
-  grid-template-rows: 0fr;
-  visibility: hidden;
-  transition: grid-template-rows 360ms var(--ease), visibility 0s linear 360ms;
-}
-.cookie-card.is-expanded .cookie-card__detail {
-  grid-template-rows: 1fr;
-  visibility: visible;
-  transition: grid-template-rows 360ms var(--ease), visibility 0s;
-}
-.cookie-card__detail-inner { overflow: hidden; display: grid; gap: var(--space-3); }
-.cookie-card.is-expanded .cookie-card__detail-inner { padding-top: var(--space-1); }
-
-.cookie-card__locked {
+.consent__actions {
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap;
   gap: var(--space-2);
-  margin: 0;
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
+  margin-top: var(--space-5, 20px);
 }
-.cookie-card__locked .icon { flex: none; width: 17px; height: 17px; margin-top: 2px; color: var(--rst-green-700); }
-.cookie-card__locked strong { color: var(--text-primary); }
-.cookie-card__locked small { font-size: inherit; }
-
-.cookie-card__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
-.cookie-card__actions .btn { flex: 1 1 auto; }
-
-/* "Customise" is a quiet text control with a chevron that turns when open */
-.cookie-card__more {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  flex: 0 0 auto;
-  min-height: 44px;
-  padding-inline: var(--space-2);
-  border: 0;
-  background: none;
-  color: var(--rst-green-800);
-  font: inherit;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  cursor: pointer;
-}
-.cookie-card__more .icon { width: 16px; height: 16px; transition: transform var(--duration) var(--ease); }
-.cookie-card__more:hover { text-decoration: underline; text-underline-offset: 4px; }
-.cookie-card.is-expanded .cookie-card__more .icon { transform: rotate(180deg); }
+.consent__actions .btn { flex: 1 1 12rem; }
 
 @media (prefers-reduced-motion: reduce) {
-  .cookie-card,
-  .cookie-card__rule,
-  .cookie-card__head,
-  .cookie-card__intro,
-  .cookie-card__policy,
-  .cookie-card__actions,
-  .cookie-card__detail { transition: none; }
-  .cookie-card.is-open .cookie-card__mark { animation: none; }
-  .cookie-card.is-open .cookie-card__rule { transform: none; }
+  .consent__sheet,
+  .consent::backdrop { transition: none; }
+  .consent__sheet { opacity: 1; transform: none; }
 }
 
 /* Footer entry that opens the cookie bar. It is a button because it acts on

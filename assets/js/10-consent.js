@@ -80,108 +80,122 @@
 
   const ui = conf.ui || {};
 
+  /* ==================================================================== *
+   * The notice
+   * ----------------------------------------------------------------------
+   *  A native <dialog>, centred: the choice is worth stopping for, and the
+   *  browser gives the focus trap and the backdrop for free. It is written as
+   *  a notice from the Office rather than a consent widget — the two
+   *  categories are set like a printed table of contents, Thai numeral, dotted
+   *  leader, state on the right, the same treatment the knowledge lists use.
+   * ==================================================================== */
+
+  const stateLabel = (category, on) =>
+    te(category.required ? ui.always : (on ? ui.on : ui.off));
+
   function render() {
-    const rows = optional.map(c => `
-      <button class="switch-row" type="button" role="switch" aria-checked="false" data-consent-switch="${escapeHTML(c.key)}">
-        <span class="switch-row__icon" aria-hidden="true">${icon(c.icon || 'sliders')}</span>
-        <span class="switch-row__label">${te(c.label)}${c.hint ? `<small>${te(c.hint)}</small>` : ''}</span>
-        <i aria-hidden="true"></i>
-      </button>`).join('');
-
-    const locked = categories.filter(c => c.required).map(c => `
-      <p class="cookie-card__locked">
-        ${icon(c.icon || 'verified')}
-        <span><strong>${te(c.label)}</strong>${c.hint ? ` <small>${te(c.hint)}</small>` : ''}</span>
-      </p>`).join('');
-
     /* Pages sit one folder deep, so the policy link is resolved from the root */
-    const root = qs('[data-site-root]')?.getAttribute('data-site-root')
-      || (location.pathname.includes('/pages/') ? '../' : '');
+    const root = location.pathname.includes('/pages/') ? '../' : '';
 
-    /* A card in the corner, not a green wall across the page: the reader can
-       carry on while it waits, and it keeps the site's cream-and-gold voice. */
+    const rows = categories.map((c, index) => {
+      const line = `
+        <span class="consent__line">
+          <span class="consent__name">${te(c.label)}</span>
+          <span class="consent__leader" aria-hidden="true"></span>
+          <span class="consent__state" data-consent-state>${stateLabel(c, false)}</span>
+        </span>
+        <span class="consent__hint">${te(c.hint)}</span>`;
+
+      /* A required category is a statement; an optional one is the control */
+      const body = c.required
+        ? `<span class="consent__item">${line}</span>`
+        : `<button class="consent__item consent__item--choice" type="button" role="switch"
+                   aria-checked="false" data-consent-switch="${escapeHTML(c.key)}">${line}</button>`;
+
+      return `
+        <li class="consent__row">
+          <span class="consent__num" aria-hidden="true">${index + 1}</span>
+          ${body}
+        </li>`;
+    }).join('');
+
     return `
-      <section class="cookie-card" id="cookie-bar" role="region"
-               aria-label="${te(ui.regionLabel)}" hidden>
-        <span class="cookie-card__rule" aria-hidden="true"></span>
-        <div class="cookie-card__body">
-          <p class="cookie-card__head">
-            <span class="cookie-card__mark" aria-hidden="true">${icon('verified')}</span>
-            <span class="cookie-card__title">${te(conf.title)}</span>
-          </p>
-          <p class="cookie-card__intro">${te(conf.intro)}</p>
-          <a class="cookie-card__policy" href="${escapeHTML(root + conf.policyHref)}">
+      <dialog class="consent" id="cookie-bar" aria-labelledby="consent-title">
+        <div class="consent__sheet">
+          <p class="consent__eyebrow">${te(ui.regionLabel)}</p>
+          <h2 class="consent__title" id="consent-title">${te(conf.title)}</h2>
+          <p class="consent__intro">${te(conf.intro)}</p>
+
+          <ol class="consent__list" role="list">${rows}</ol>
+
+          <a class="consent__policy" href="${escapeHTML(root + conf.policyHref)}">
             <span>${te(ui.policy)}</span>${icon('arrow')}
           </a>
 
-          <div class="cookie-card__detail" data-consent-detail>
-            <div class="cookie-card__detail-inner">
-              ${locked}
-              <div class="access-list">${rows}</div>
-            </div>
-          </div>
-
-          <div class="cookie-card__actions">
-            <button class="btn btn--primary btn--pill" type="button" data-consent="all">${te(ui.acceptAll)}</button>
-            <button class="btn btn--secondary btn--pill" type="button" data-consent="necessary">${te(ui.essential)}</button>
-            <button class="cookie-card__more" type="button" data-consent-customise
-                    aria-expanded="false" aria-controls="cookie-bar-detail">
-              <span>${te(ui.customise)}</span>${icon('chevron')}
-            </button>
-            <button class="btn btn--primary btn--pill" type="button" data-consent="chosen" hidden>${te(ui.save)}</button>
+          <div class="consent__actions">
+            <button class="btn btn--primary" type="button" data-consent="all">${te(ui.acceptAll)}</button>
+            <button class="btn btn--secondary" type="button" data-consent="necessary">${te(ui.essential)}</button>
+            <button class="btn btn--primary" type="button" data-consent="chosen" hidden>${te(ui.save)}</button>
           </div>
         </div>
-      </section>`;
+      </dialog>`;
   }
 
   let bar = null;
 
-  /* The bar is only hidden once it has finished sliding out. Re-opening it
-     mid-slide has to cancel that, or the pending handler hides it again. */
-  let closing = null;
-
   function show() {
-    if (closing) { bar.removeEventListener('transitionend', closing); closing = null; }
-    bar.hidden = false;
-    /* It slides in, so it is noticed without stealing focus from the page */
-    requestAnimationFrame(() => bar.classList.add('is-open'));
+    clearTimeout(closing);
+    if (bar.open) { bar.classList.add('is-open'); return; }
+    bar.showModal();
+    /* Flush the closed state so the rise has something to animate from.
+       A reflow rather than requestAnimationFrame, which never runs while the
+       tab is in the background — the notice would then open invisible. */
+    void bar.offsetWidth;
+    bar.classList.add('is-open');
   }
+
+  /* Close once it has faded. A timer rather than transitionend: the event can
+     be missed (an interrupted transition, a stylesheet swapped underneath) and
+     a notice that will not close is worse than one that closes a beat early. */
+  let closing = 0;
 
   function hide() {
     bar.classList.remove('is-open');
+    clearTimeout(closing);
     const done = () => {
-      bar.removeEventListener('transitionend', done);
-      closing = null;
-      if (!bar.classList.contains('is-open')) bar.hidden = true;
+      if (!bar.classList.contains('is-open') && bar.open) bar.close();
     };
-    closing = done;
-    if (RS.reduceMotion?.()) done(); else bar.addEventListener('transitionend', done);
+    if (RS.reduceMotion?.()) done(); else closing = setTimeout(done, 300);
   }
 
+  /** Reflect a category's state in both the switch and the word beside it */
   function setSwitch(button, on) {
+    const category = categories.find(c => c.key === button.dataset.consentSwitch);
     button.setAttribute('aria-checked', String(on));
+    const state = qs('[data-consent-state]', button);
+    if (state && category) state.textContent = t(on ? ui.on : ui.off);
   }
 
-  /* The panel opens by animating its own height (grid 0fr -> 1fr) instead of
-     flipping display, so it grows rather than jumping. `visibility` is what
-     keeps the collapsed switches out of the tab order. */
-  function openDetail(open) {
-    const trigger = qs('[data-consent-customise]', bar);
-    bar.classList.toggle('is-expanded', open);
-    qs('[data-consent="chosen"]', bar).hidden = !open;
-    trigger.setAttribute('aria-expanded', String(open));
+  /** The save button only matters once a choice has been touched */
+  function offerSave(show = true) {
+    qs('[data-consent="chosen"]', bar).hidden = !show;
   }
 
   function wire() {
+    /* The locked categories read "always on" from the start */
+    categories.filter(c => c.required).forEach(c => {
+      const row = qsa('.consent__row', bar)[categories.indexOf(c)];
+      qs('[data-consent-state]', row).textContent = t(ui.always);
+    });
+
     const current = get();
     qsa('[data-consent-switch]', bar).forEach(button => {
       setSwitch(button, current[button.dataset.consentSwitch] === true);
-      button.addEventListener('click', () =>
-        setSwitch(button, button.getAttribute('aria-checked') !== 'true'));
+      button.addEventListener('click', () => {
+        setSwitch(button, button.getAttribute('aria-checked') !== 'true');
+        offerSave();
+      });
     });
-
-    qs('[data-consent-customise]', bar).addEventListener('click', () =>
-      openDetail(!bar.classList.contains('is-expanded')));
 
     qsa('[data-consent]', bar).forEach(button => {
       button.addEventListener('click', () => {
@@ -197,16 +211,18 @@
         RS.toast?.(t(ui.saved));
       });
     });
+
+    /* Esc would be an answer nobody gave, so the notice stays until one is */
+    bar.addEventListener('cancel', event => event.preventDefault());
   }
 
-  /** Re-open the bar from the footer link, with the saved answers filled in */
+  /** Re-open from the footer, showing what was chosen last time */
   function open() {
     const current = get();
     qsa('[data-consent-switch]', bar).forEach(button =>
       setSwitch(button, current[button.dataset.consentSwitch] === true));
-    openDetail(true);
+    offerSave(Boolean(stored()));
     show();
-    qs('[data-consent-customise]', bar)?.focus();
   }
 
   window.RS.consent = { get, allows, open, forget };
@@ -214,7 +230,6 @@
   ready(() => {
     document.body.insertAdjacentHTML('beforeend', render());
     bar = qs('#cookie-bar');
-    qs('[data-consent-detail]', bar).id = 'cookie-bar-detail';
     wire();
 
     if (!stored()) show();
