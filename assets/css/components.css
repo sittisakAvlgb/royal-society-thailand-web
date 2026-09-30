@@ -1562,8 +1562,12 @@
    Cookie summary bar (tier one)
    A floating bar, not a band welded to the edge of the window: it answers in
    one click, leaves the page readable, and hands anyone who wants the detail
-   over to the card above. Deep green with one gold action, so the accept is
-   the thing the eye lands on.
+   over to the card above.
+
+   Cream and white with a gold hairline, the way every other surface on this
+   site is dressed — a slab of dark green at the foot of the page reads as a
+   second footer and sits heavily on the reading. The green is spent on the
+   one button that matters.
    ============================== */
 .cc-bar {
   position: fixed;
@@ -1578,15 +1582,27 @@
 .cc-bar.is-open { opacity: 1; transform: none; }
 
 .cc-bar__inner {
+  position: relative;
   display: grid;
   gap: var(--space-3);
   width: min(1040px, 100%);
   margin-inline: auto;
   padding: var(--space-3) var(--space-4);
+  overflow: hidden;
+  border: 1px solid var(--border);
   border-radius: 18px;
-  background: var(--rst-green-900);
-  color: var(--white);
-  box-shadow: 0 10px 28px rgba(6, 37, 25, .22);
+  background: linear-gradient(180deg, var(--white), var(--cream));
+  color: var(--text-primary);
+  /* One soft shadow, close in — enough to float, nothing dramatic */
+  box-shadow: 0 6px 20px rgba(6, 37, 25, .10);
+}
+/* The gold hairline the Office's surfaces carry */
+.cc-bar__inner::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-600));
 }
 
 .cc-bar__mark {
@@ -1595,7 +1611,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, .10);
+  background: #FBF4E4;
 }
 .cc-bar__mark .cc-biscuit {
   position: static;
@@ -1608,10 +1624,10 @@
 .cc-bar.is-open .cc-bar__mark .cc-biscuit { transform: rotate(360deg); }
 
 .cc-bar__text { min-width: 0; }
-.cc-bar__title { margin: 0 0 2px; font-size: var(--text-sm); font-weight: 600; }
-.cc-bar__line { margin: 0; font-size: var(--text-xs); line-height: 1.6; color: rgba(255, 255, 255, .82); }
-.cc-bar__policy { color: var(--gold-500); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-.cc-bar__policy:hover { color: var(--white); }
+.cc-bar__title { margin: 0 0 2px; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--rst-green-900); }
+.cc-bar__line { margin: 0; font-size: var(--text-xs); line-height: 1.6; color: var(--text-secondary); }
+.cc-bar__policy { color: var(--gold-700); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--gold-500); white-space: nowrap; }
+.cc-bar__policy:hover { color: var(--rst-green-800); }
 
 /* On a phone the two answers share a row and "settings" sits above them;
    from 640px all three sit inline at the end of the bar. */
@@ -1622,7 +1638,7 @@
   padding-inline: var(--space-2);
   border: 0;
   background: none;
-  color: rgba(255, 255, 255, .86);
+  color: var(--rst-green-800);
   font: inherit;
   font-size: var(--text-sm);
   font-weight: 600;
@@ -1631,15 +1647,15 @@
   cursor: pointer;
   transition: color var(--duration) var(--ease);
 }
-.cc-bar__more:hover { color: var(--white); }
+.cc-bar__more:hover { color: var(--rst-green-900); }
 
 .cc-bar__btn {
   min-height: 40px;
   padding-inline: var(--space-4);
-  border: 1px solid rgba(255, 255, 255, .45);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
-  background: transparent;
-  color: var(--white);
+  background: var(--white);
+  color: var(--rst-green-800);
   font: inherit;
   font-size: var(--text-sm);
   font-weight: 600;
@@ -1651,14 +1667,15 @@
     color var(--duration) var(--ease),
     transform var(--duration) var(--ease);
 }
-.cc-bar__btn:hover { background: rgba(255, 255, 255, .12); border-color: var(--white); transform: translateY(-1px); }
+.cc-bar__btn:hover { border-color: var(--rst-green-800); background: var(--rst-green-50); transform: translateY(-1px); }
 .cc-bar__btn:active { transform: translateY(0); }
+/* The accept is the only filled thing in the bar, so it leads on its own */
 .cc-bar__btn--gold {
-  border-color: var(--gold-500);
-  background: var(--gold-500);
-  color: var(--rst-green-950, #06251A);
+  border-color: var(--rst-green-800);
+  background: var(--rst-green-800);
+  color: var(--white);
 }
-.cc-bar__btn--gold:hover { background: var(--gold-600); border-color: var(--gold-600); color: var(--white); }
+.cc-bar__btn--gold:hover { background: var(--rst-green-900); border-color: var(--rst-green-900); color: var(--white); }
 
 @media (prefers-reduced-motion: reduce) {
   .cc-bar, .cc-bar__btn, .cc-bar__mark .cc-biscuit { transition: none; }
