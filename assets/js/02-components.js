@@ -285,7 +285,7 @@
         <div class="container">
         <div class="header-inner">
           <a href="${escapeHTML(url('index.html'))}" class="brand"${active === 'home' && currentFile() === 'index.html' ? ' aria-current="page"' : ''}>
-            ${logo('brand-logo-img', 34, 48)}
+            ${logo('brand-logo-img', 32, 56)}
             <span class="brand-text">
               <span class="brand-title">${te(CFG.site.name)}</span>
               <span class="brand-sub" lang="${otherLang()}">${escapeHTML(CFG.site.name[otherLang()])}</span>
@@ -335,7 +335,7 @@
         <div class="container footer-main">
           <section class="footer-org" aria-labelledby="footer-org-name">
             <div class="footer-org__brand">
-              ${logo('footer-org__logo', 52, 74)}
+              ${logo('footer-org__logo', 40, 70)}
               <p id="footer-org-name" class="footer-org__name">
                 ${escapeHTML(site.name.th)}
                 <span class="footer-org__name-en" lang="en">${escapeHTML(site.nameEn)}</span>

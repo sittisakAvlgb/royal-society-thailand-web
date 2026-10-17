@@ -165,11 +165,16 @@ main:focus { outline: none; }
 }
 
 .brand-logo-img {
-  width: 34px;
-  height: 48px;
+  width: 32px;
+  height: 56px;
   object-fit: contain;
-  transition: width var(--duration) var(--ease), height var(--duration) var(--ease);
+  transition: width var(--duration) var(--ease), height var(--duration) var(--ease), transform .5s var(--ease);
 }
+.brand:hover .brand-logo-img { transform: translateY(-2px) scale(1.06); }
+@media (prefers-reduced-motion: no-preference) {
+  .brand-logo-img { animation: crest-in .9s var(--ease) both; }
+}
+@keyframes crest-in { from { opacity: 0; transform: translateY(-8px) scale(.92); } to { opacity: 1; transform: none; } }
 
 .brand-text { display: grid; line-height: 1.25; min-width: 0; }
 .brand-title {
@@ -195,7 +200,7 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
 @media (max-width: 479px) {
   .header-inner { gap: var(--space-2); padding-inline: var(--space-2) var(--space-1); }
   .brand { gap: var(--space-2); }
-  .brand-logo-img { width: 28px; height: 40px; }
+  .brand-logo-img { width: 25px; height: 44px; }
   html:not([lang="en"]) .brand-title { font-size: var(--text-base); }
 }
 
@@ -266,8 +271,8 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
   z-index: -1;
   right: -48px;
   bottom: -56px;
-  width: 250px;
-  height: 357px;
+  width: 220px;
+  height: 388px;
   background: url("../images/logo-image.png") center / contain no-repeat;
   filter: brightness(0) invert(1);
   opacity: .07;
@@ -287,8 +292,8 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
   margin-bottom: var(--space-4);
 }
 .footer-org__logo {
-  width: 44px;
-  height: 62px;
+  width: 40px;
+  height: 70px;
   object-fit: contain;   /* the emblem is transparent — it sits straight on the dark footer */
 }
 .footer-org__name {

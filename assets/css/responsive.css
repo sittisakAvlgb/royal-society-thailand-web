@@ -81,7 +81,7 @@
   .utility-bar__links { display: block; }
   .utility-btn__label { display: inline; }
 
-  .brand-logo-img { width: 38px; height: 54px; }
+  .brand-logo-img { width: 34px; height: 60px; }
   .brand-title,
   html[lang="en"] .brand-title { font-size: var(--text-lg); white-space: nowrap; }
 
