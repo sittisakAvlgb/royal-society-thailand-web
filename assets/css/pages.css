@@ -2208,7 +2208,7 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
 
 .article-toc-mobile { margin-bottom: var(--space-8); }
 
-.prose { max-width: var(--reading); font-size: 1.5625rem; line-height: var(--leading-reading); }
+.prose { max-width: var(--reading); font-size: 1.75rem; line-height: var(--leading-reading); }
 .prose > * + * { margin-top: var(--space-6); }
 .prose h2 { margin-top: var(--space-12); font-family: var(--font-display); font-size: var(--text-xl); }
 .prose h3 { margin-top: var(--space-8); font-size: var(--text-lg); }
