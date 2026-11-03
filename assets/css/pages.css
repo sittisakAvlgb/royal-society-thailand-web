@@ -1637,7 +1637,7 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
   grid-template-columns: repeat(7, minmax(0, 1fr));
   margin-bottom: var(--space-2);
   padding-inline: 1px;
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--rst-green-900);
   text-align: center;
@@ -1697,18 +1697,18 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
 .cal-cell__num {
   display: inline-grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   font-family: var(--font-latin);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--text-primary);
 }
 .cal-cell.is-today .cal-cell__num { background: var(--rst-green-800); color: var(--white); }
 .cal-cell.is-today:hover .cal-cell__num { background: var(--rst-green-900); }
 .cal-cell__events { display: grid; gap: 2px; min-width: 0; }
-.cal-cell__more { font-size: 10px; color: var(--text-secondary); padding-left: 4px; }
+.cal-cell__more { font-size: 0.75rem; color: var(--text-secondary); padding-left: 4px; }
 
 .cal-pill {
   --pill: var(--rst-green-800); --pill-bg: var(--rst-green-100);
@@ -1723,7 +1723,7 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
   background: var(--pill-bg);
   color: var(--rst-green-950);
   font: inherit;
-  font-size: 10px;
+  font-size: 0.8125rem;
   line-height: 1.4;
   text-align: left;
   cursor: pointer;
