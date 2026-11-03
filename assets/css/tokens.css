@@ -1,4 +1,37 @@
 /* ============================================================================
+ * Self-hosted national font — TH Sarabun New (SIPA/NECTEC), 4 weights.
+ * Loaded first so Thai text renders in the official font on every page.
+ * ============================================================================ */
+@font-face {
+  font-family: "TH Sarabun New";
+  src: url("../fonts/THSarabunNew-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TH Sarabun New";
+  src: url("../fonts/THSarabunNew-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TH Sarabun New";
+  src: url("../fonts/THSarabunNew-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TH Sarabun New";
+  src: url("../fonts/THSarabunNew-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============================================================================
  * tokens.css — Design tokens
  * ============================================================================
  *  Palette: green + white with depth. Emerald carries identity and actions,
@@ -76,9 +109,9 @@
   --color-focus: #1F5FBF;
 
   /* ---- Typography ----------------------------------------------------- */
-  --font-display: "IBM Plex Sans Thai", "Leelawadee UI", Tahoma, sans-serif;   /* headings share the body family — one clean voice */
-  --font-body: "IBM Plex Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
-  --font-latin: "Geist", "IBM Plex Sans Thai", system-ui, sans-serif;
+  --font-display: "TH Sarabun New", "Leelawadee UI", Tahoma, sans-serif;   /* headings share the body family — one clean voice */
+  --font-body: "TH Sarabun New", "Leelawadee UI", Tahoma, sans-serif;
+  --font-latin: "Geist", "TH Sarabun New", system-ui, sans-serif;
 
   --text-xs: 0.8125rem;   /* 13 — metadata only */
   --text-sm: 0.9375rem;   /* 15 */
