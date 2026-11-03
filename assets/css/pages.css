@@ -497,109 +497,76 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
 .field-card:hover .field-card__go,
 .field-card:focus-visible .field-card__go { opacity: 1; transform: none; }
 
-/* --- Explore knowledge: the Society's knowledge and its three academies --- */
-.explore-grid {
-  display: grid;
+/* --- Explore knowledge — set as a printed table of contents, not cards --- */
+.toc { display: grid; gap: var(--space-10); }
+.toc-academies { display: grid; gap: var(--space-8); }
+
+.toc-part { --ink: var(--rst-green-800); }
+.toc-part[data-topic="moral"]   { --ink: #2C5F7A; }
+.toc-part[data-topic="science"] { --ink: #2F7A3E; }
+.toc-part[data-topic="arts"]    { --ink: #5B3FA6; }
+
+/* Part heading — a bold folio numeral beside the title, over a coloured rule */
+.toc-part__head {
+  display: flex;
+  align-items: baseline;
   gap: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--ink);
 }
-.know-card {
-  --tint: var(--rst-green-50);
-  --tint-ink: var(--rst-green-800);
-  position: relative;
-  display: grid;
-  align-content: start;
-  gap: var(--space-5);
-  padding: var(--space-6) var(--space-6) var(--space-7);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--white);
-  overflow: hidden;
-  transition: border-color var(--duration) var(--ease), background-color var(--duration) var(--ease),
-              transform var(--duration) var(--ease);
-}
-/* A slim bar in the card's own colour sits on the top edge */
-.know-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: var(--tint-ink);
-  opacity: .9;
-}
-.know-card:hover { border-color: var(--tint-ink); background: var(--tint); transform: translateY(-2px); }
-
-/* Part one — the Society-wide knowledge — leads full width on a soft green */
-.know-card--lead { background: var(--rst-green-50); }
-.know-card--lead:hover { background: var(--rst-green-100); }
-
-/* Catalogue folio — the part number, set large and faint in the corner */
-.know-card__head { position: relative; padding-right: 2.4em; }
-.know-card__num {
-  position: absolute;
-  top: -0.1em;
-  right: 0;
+.toc-part__num {
+  flex: none;
   font-family: var(--font-display);
-  font-size: 2.25rem;
+  font-size: var(--text-2xl);
   font-weight: 600;
   line-height: 1;
-  color: var(--tint-ink);
-  opacity: .16;
-  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+  color: var(--ink);
 }
-.know-card:hover .know-card__num { opacity: .34; transform: translateY(-2px); }
-.know-card__name {
-  position: relative;
-  display: inline-block;
-  padding-bottom: var(--space-3);
+.toc-part--lead .toc-part__num { font-size: var(--text-3xl); }
+.toc-part__name {
   font-family: var(--font-display);
-  font-size: var(--text-md);
+  font-size: var(--text-lg);
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.3;
   color: var(--rst-green-900);
 }
-.know-card__name::after {
-  content: "";
-  position: absolute;
-  inset-inline-start: 0;
-  bottom: 0;
-  width: 34px;
-  height: 2px;
-  background: var(--tint-ink);
-  transition: width var(--duration-slow) var(--ease);
-}
-.know-card:hover .know-card__name::after { width: 56px; }
 
-.know-card__list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
-.know-card__list a {
-  position: relative;
+/* Entries — label, dotted leader, then a "go" arrow, like a contents line */
+.toc-list { margin: 0; padding: 0; list-style: none; }
+.toc-list li + li a { border-top: 1px solid var(--border); }
+.toc-list a {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: var(--space-2);
   padding: var(--space-3) 0;
   color: var(--text-primary);
   text-decoration: none;
   line-height: 1.5;
-  transition: color var(--duration) var(--ease), transform var(--duration) var(--ease);
+  transition: color var(--duration) var(--ease);
 }
-/* A chevron marks each entry; it brightens as the row is pointed at */
-.know-card__list a::before {
-  content: "›";
+.toc-entry__label { flex: 0 1 auto; min-width: 0; transition: transform var(--duration) var(--ease); }
+.toc-entry__dots {
+  flex: 1 1 2em;
+  min-width: 1.5em;
+  margin-bottom: .45em;
+  border-bottom: 1px dotted var(--border-strong);
+  transition: border-color var(--duration) var(--ease);
+}
+.toc-entry__go {
   flex: none;
-  margin-top: -0.04em;
-  color: var(--tint-ink);
-  font-weight: 700;
-  opacity: .45;
-  transition: opacity var(--duration) var(--ease);
+  width: 17px;
+  height: 17px;
+  margin-bottom: .08em;
+  color: var(--ink);
+  opacity: .4;
+  transform: translateX(-5px);
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
 }
-.know-card__list a:hover { color: var(--tint-ink); transform: translateX(3px); }
-.know-card__list a:hover::before { opacity: 1; }
-/* Hairline rules between entries on the academy cards — a printed contents list */
-.know-card:not(.know-card--lead) .know-card__list li + li a { border-top: 1px solid var(--border); }
-
-/* Academy tints — mirror the colours used for the Fellows' academies */
-.know-card[data-topic="moral"]   { --tint: #E2EEF6; --tint-ink: #2C5F7A; }
-.know-card[data-topic="science"] { --tint: #DDF2E4; --tint-ink: #2F7A3E; }
-.know-card[data-topic="arts"]    { --tint: #E9E1F8; --tint-ink: #5B3FA6; }
+.toc-list a:hover { color: var(--ink); }
+.toc-list a:hover .toc-entry__label { transform: translateX(3px); }
+.toc-list a:hover .toc-entry__dots { border-color: var(--ink); }
+.toc-list a:hover .toc-entry__go { opacity: 1; transform: none; }
+.toc-list a:focus-visible { outline-offset: 3px; }
 
 /* ==============================
    Home — Featured knowledge
