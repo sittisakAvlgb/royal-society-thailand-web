@@ -252,17 +252,7 @@ window.RS_CONFIG = {
       match: ['academic-works.html', 'knowledge.html', 'article.html'],
       intro: { th: 'วารสาร สิ่งพิมพ์ ข้อเสนอต่อรัฐบาล กิจกรรมวิชาการ และโครงการนำความรู้สู่สังคม', en: 'Journals, publications, proposals to Government, academic activities and the Knowledge for Society Programme' },
       children: [
-        {
-          label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' }, href: 'pages/academic-works.html#publications',
-          children: [
-            { label: { th: 'วารสารราชบัณฑิตยสภา', en: 'Journal of the Royal Society of Thailand (Thai)' }, href: 'pages/academic-works.html#journal-th' },
-            { label: { th: 'The Journal of the Royal Society of Thailand', en: 'The Journal of the Royal Society of Thailand' }, href: 'pages/academic-works.html#journal-en' },
-            { label: { th: 'จดหมายข่าวราชบัณฑิตยสภา', en: 'The Royal Society of Thailand Newsletter' }, href: 'pages/academic-works.html#newsletter' },
-            { label: { th: 'จุลสารสำนักวิทยาศาสตร์', en: 'Academy of Science Bulletin' }, href: 'pages/academic-works.html#science-bulletin' },
-            { label: { th: 'รายงานประจำปี', en: 'Annual Report' }, href: 'pages/academic-works.html#annual-report' },
-            { label: { th: 'สืบค้นผลงานวิชาการ', en: 'Search Academic Publications' }, href: 'pages/knowledge.html' }
-          ]
-        },
+        { label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' }, href: 'https://www.orst.go.th/iwfm_list.asp?u=6', external: true, domain: 'orst.go.th' },
         { label: { th: 'ข้อเสนอต่อรัฐบาล', en: 'Proposals to Government' }, href: 'pages/academic-works.html#policy-proposals' },
         {
           label: { th: 'กิจกรรมวิชาการ', en: 'Academic Activities' }, href: 'pages/academic-works.html#activities',
