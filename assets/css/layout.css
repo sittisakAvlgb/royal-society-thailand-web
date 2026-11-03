@@ -318,10 +318,10 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
   margin-top: 4px;
   font-family: var(--font-latin);
   font-size: .75rem;
-  font-weight: 500;
-  letter-spacing: .14em;
+  font-weight: 600;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .55);
+  color: var(--gold-500);
 }
 
 .footer-address {
@@ -385,9 +385,9 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
   margin-top: 5px;
   font-family: var(--font-latin);
   font-size: .75rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, .45);
-  letter-spacing: .14em;
+  font-weight: 600;
+  color: var(--gold-500);
+  letter-spacing: .18em;
   text-transform: uppercase;
 }
 .footer-col::before {
