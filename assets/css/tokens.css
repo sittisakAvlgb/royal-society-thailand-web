@@ -113,14 +113,16 @@
   --font-body: "TH Sarabun New", "Leelawadee UI", Tahoma, sans-serif;
   --font-latin: "Geist", "TH Sarabun New", system-ui, sans-serif;
 
-  --text-xs: 0.8125rem;   /* 13 — metadata only */
-  --text-sm: 0.9375rem;   /* 15 */
-  --text-base: 1.0625rem; /* 17 — Thai body */
-  --text-md: 1.1875rem;   /* 19 */
-  --text-lg: 1.375rem;    /* 22 */
-  --text-xl: 1.75rem;     /* 28 */
-  --text-2xl: 2.125rem;   /* 34 */
-  --text-3xl: 2.75rem;    /* 44 */
+  /* Scale sized for TH Sarabun New — a small-bodied font, so every step
+     runs larger than a typical Latin scale to read with presence. */
+  --text-xs: 0.875rem;    /* 14 — metadata only */
+  --text-sm: 1rem;        /* 16 */
+  --text-base: 1.25rem;   /* 20 — Thai body */
+  --text-md: 1.4375rem;   /* 23 */
+  --text-lg: 1.6875rem;   /* 27 */
+  --text-xl: 2.125rem;    /* 34 */
+  --text-2xl: 2.625rem;   /* 42 */
+  --text-3xl: 3.375rem;   /* 54 */
 
   --leading-tight: 1.35;
   --leading-normal: 1.7;
