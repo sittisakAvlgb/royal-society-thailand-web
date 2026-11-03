@@ -10,6 +10,10 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-overlap) + var(--space-4));
+  /* Fluid root — the whole rem-based type scale grows with the viewport,
+     so text keeps its presence on wide monitors. Floors at 16px (small
+     screens unchanged); caps at 21px so it never runs away. */
+  font-size: clamp(16px, 0.5vw + 11px, 21px);
 }
 
 body {
