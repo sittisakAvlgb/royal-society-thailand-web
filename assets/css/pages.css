@@ -497,6 +497,88 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
 .field-card:hover .field-card__go,
 .field-card:focus-visible .field-card__go { opacity: 1; transform: none; }
 
+/* --- Explore knowledge: the Society's knowledge and its three academies --- */
+.explore-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+.know-card {
+  --tint: var(--rst-green-50);
+  --tint-ink: var(--rst-green-800);
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  overflow: hidden;
+  transition: border-color var(--duration) var(--ease), transform var(--duration) var(--ease),
+              box-shadow var(--duration) var(--ease);
+}
+/* A slim bar in the card's own colour sits on the top edge */
+.know-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--tint-ink);
+  opacity: .9;
+}
+.know-card:hover { border-color: var(--tint-ink); transform: translateY(-2px); }
+
+/* Part one — the Society-wide knowledge — leads full width on a soft green */
+.know-card--lead { background: var(--rst-green-50); }
+
+.know-card__head { display: flex; align-items: baseline; gap: var(--space-3); }
+.know-card__num {
+  flex: none;
+  font-family: var(--font-latin);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--tint-ink);
+  opacity: .55;
+}
+.know-card__name {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--rst-green-900);
+}
+.know-card__list { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.know-card__list a {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  color: var(--text-primary);
+  text-decoration: none;
+  line-height: 1.5;
+  transition: color var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+.know-card__list a::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: .62em;
+  border-radius: 2px;
+  background: var(--tint-ink);
+  opacity: .45;
+  transition: opacity var(--duration) var(--ease);
+}
+.know-card__list a:hover { color: var(--tint-ink); transform: translateX(3px); }
+.know-card__list a:hover::before { opacity: 1; }
+
+/* Academy tints — mirror the colours used for the Fellows' academies */
+.know-card[data-topic="moral"]   { --tint: #E2EEF6; --tint-ink: #2C5F7A; }
+.know-card[data-topic="science"] { --tint: #DDF2E4; --tint-ink: #2F7A3E; }
+.know-card[data-topic="arts"]    { --tint: #E9E1F8; --tint-ink: #5B3FA6; }
+
 /* ==============================
    Home — Featured knowledge
    Light photo band (assets/images/featured/featured-bg.png): a soft white
