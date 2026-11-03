@@ -508,14 +508,14 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
   position: relative;
   display: grid;
   align-content: start;
-  gap: var(--space-4);
-  padding: var(--space-6);
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-6) var(--space-7);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--white);
   overflow: hidden;
-  transition: border-color var(--duration) var(--ease), transform var(--duration) var(--ease),
-              box-shadow var(--duration) var(--ease);
+  transition: border-color var(--duration) var(--ease), background-color var(--duration) var(--ease),
+              transform var(--duration) var(--ease);
 }
 /* A slim bar in the card's own colour sits on the top edge */
 .know-card::before {
@@ -526,53 +526,75 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
   background: var(--tint-ink);
   opacity: .9;
 }
-.know-card:hover { border-color: var(--tint-ink); transform: translateY(-2px); }
+.know-card:hover { border-color: var(--tint-ink); background: var(--tint); transform: translateY(-2px); }
 
 /* Part one — the Society-wide knowledge — leads full width on a soft green */
 .know-card--lead { background: var(--rst-green-50); }
+.know-card--lead:hover { background: var(--rst-green-100); }
 
-.know-card__head { display: flex; align-items: baseline; gap: var(--space-3); }
+/* Catalogue folio — the part number, set large and faint in the corner */
+.know-card__head { position: relative; padding-right: 2.4em; }
 .know-card__num {
-  flex: none;
-  font-family: var(--font-latin);
-  font-size: var(--text-lg);
+  position: absolute;
+  top: -0.1em;
+  right: 0;
+  font-family: var(--font-display);
+  font-size: 2.25rem;
   font-weight: 600;
   line-height: 1;
   color: var(--tint-ink);
-  opacity: .55;
+  opacity: .16;
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
 }
+.know-card:hover .know-card__num { opacity: .34; transform: translateY(-2px); }
 .know-card__name {
+  position: relative;
+  display: inline-block;
+  padding-bottom: var(--space-3);
   font-family: var(--font-display);
   font-size: var(--text-md);
   font-weight: 700;
   line-height: 1.35;
   color: var(--rst-green-900);
 }
-.know-card__list { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.know-card__name::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: 34px;
+  height: 2px;
+  background: var(--tint-ink);
+  transition: width var(--duration-slow) var(--ease);
+}
+.know-card:hover .know-card__name::after { width: 56px; }
+
+.know-card__list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
 .know-card__list a {
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: var(--space-3);
-  padding: var(--space-2) 0;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
   color: var(--text-primary);
   text-decoration: none;
   line-height: 1.5;
   transition: color var(--duration) var(--ease), transform var(--duration) var(--ease);
 }
+/* A chevron marks each entry; it brightens as the row is pointed at */
 .know-card__list a::before {
-  content: "";
+  content: "›";
   flex: none;
-  width: 7px;
-  height: 7px;
-  margin-top: .62em;
-  border-radius: 2px;
-  background: var(--tint-ink);
+  margin-top: -0.04em;
+  color: var(--tint-ink);
+  font-weight: 700;
   opacity: .45;
   transition: opacity var(--duration) var(--ease);
 }
 .know-card__list a:hover { color: var(--tint-ink); transform: translateX(3px); }
 .know-card__list a:hover::before { opacity: 1; }
+/* Hairline rules between entries on the academy cards — a printed contents list */
+.know-card:not(.know-card--lead) .know-card__list li + li a { border-top: 1px solid var(--border); }
 
 /* Academy tints — mirror the colours used for the Fellows' academies */
 .know-card[data-topic="moral"]   { --tint: #E2EEF6; --tint-ink: #2C5F7A; }
