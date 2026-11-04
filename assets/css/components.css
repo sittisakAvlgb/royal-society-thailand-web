@@ -212,13 +212,13 @@
   border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text-primary);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   transition: background-color var(--duration) var(--ease), border-color var(--duration) var(--ease);
 }
 .header-btn:hover { background: var(--rst-green-50); }
 .header-btn:active,
 .header-btn[aria-expanded="true"] { background: var(--rst-green-100); }
-.header-btn .icon { width: 22px; height: 22px; }
+.header-btn .icon { width: 20px; height: 20px; }
 .header-btn__label { display: none; }
 
 /* Primary header action — search is the site's main task */
