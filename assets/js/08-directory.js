@@ -99,15 +99,18 @@
 
   /** Index rows for the home split: <ol data-academy-list="compact"> */
   function renderAcademyRow(academy, index) {
-    const href = escapeHTML(RS.url(`pages/fellows.html?academy=${academy.id}`));
+    const external = Boolean(academy.external);
+    const href = academy.href ? escapeHTML(academy.href) : escapeHTML(RS.url(`pages/fellows.html?academy=${academy.id}`));
+    const nameAttrs = external ? ' target="_blank" rel="noopener"' : '';
     const fields = (academy.tags ? RS.t(academy.tags) : []).map(escapeHTML).join(' · ') || te(academy.fields);
+    const siteLabel = te(academy.siteLabel || { th: 'เว็บไซต์สำนัก', en: 'Academy website' });
     return `
       <li class="academy-index__item reveal reveal--delay-${index + 1}" data-academy="${academy.id}">
         <span class="academy-index__num" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
         <div class="academy-index__body">
-          <h3 class="academy-index__name"><a href="${href}">${te(academy.name)}</a></h3>
+          <h3 class="academy-index__name"><a href="${href}"${nameAttrs}>${te(academy.name)}</a></h3>
           <p class="academy-index__fields">${fields}</p>
-          ${academy.site ? `<a class="academy-index__site" href="${escapeHTML(academy.site)}" target="_blank" rel="noopener">${te({ th: 'เว็บไซต์สำนัก', en: 'Academy website' })}${icon('external')}</a>` : ''}
+          ${academy.site ? `<a class="academy-index__site" href="${escapeHTML(academy.site)}" target="_blank" rel="noopener">${siteLabel}${icon('external')}</a>` : ''}
         </div>
         <span class="academy-index__arrow" aria-hidden="true">${icon('arrow')}</span>
       </li>`;
@@ -161,7 +164,17 @@
   function initAcademyLists() {
     qsa('[data-academy-list]').forEach(list => {
       if (list.dataset.academyList === 'compact') {
-        list.innerHTML = CFG.academies.map(renderAcademyRow).join('');
+        /* The Office leads the list, above the three academies (home only) */
+        const office = {
+          id: 'office',
+          name: CFG.site.office,
+          fields: { th: 'งานบริหารและธุรการ · สนับสนุนงานวิชาการ · เผยแพร่องค์ความรู้', en: 'Administration · academic support · knowledge outreach' },
+          href: 'https://www.orst.go.th/',
+          external: true,
+          site: 'https://www.orst.go.th/',
+          siteLabel: { th: 'เว็บไซต์สำนักงาน', en: 'Office website' },
+        };
+        list.innerHTML = [office, ...CFG.academies].map(renderAcademyRow).join('');
         initAcademySpotlight(list);
         /* Rows rendered after the reveal observer ran: let it pick them up */
         document.dispatchEvent(new CustomEvent('rs:content-added', { detail: list }));
