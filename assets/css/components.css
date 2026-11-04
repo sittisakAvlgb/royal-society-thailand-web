@@ -354,8 +354,9 @@
 }
 
 .mega-feature { padding-right: var(--space-8); border-right: 1px solid var(--border); }
-.mega-feature__title { font-family: var(--font-display); font-size: var(--text-md); font-weight: 600; line-height: var(--leading-tight); }
+.mega-feature__title { font-family: var(--font-display); font-size: var(--text-base); font-weight: 600; line-height: var(--leading-tight); }
 .mega-feature__desc { margin-block: var(--space-3) var(--space-4); color: var(--text-secondary); font-size: var(--text-sm); }
+.mega-feature .link-arrow { min-height: 36px; font-size: var(--text-sm); }
 
 .mega-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--space-6); }
 .mega-group__title {
