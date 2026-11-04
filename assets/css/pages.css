@@ -2061,7 +2061,7 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
 .academy-index__body { display: grid; gap: 4px; min-width: 0; }
 .academy-index__name {
   font-family: var(--font-display);
-  font-size: var(--text-xl);
+  font-size: var(--text-md);
   font-weight: 600;
   line-height: var(--leading-tight);
   transition: transform var(--duration) var(--ease);

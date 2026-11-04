@@ -196,7 +196,7 @@
   .about-band__photo { aspect-ratio: auto; height: min(78vh, 640px); min-height: 440px; }
   .about-band__media { position: sticky; top: calc(var(--header-overlap, 96px) + var(--space-4)); }
   .academy-index__item { grid-template-columns: 56px minmax(0, 1fr) 32px; padding-block: var(--space-6); }
-  .academy-index__name { font-size: var(--text-2xl); }
+  .academy-index__name { font-size: var(--text-lg); }
 
   .bookshelf { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); }
   .person-grid[data-fellows-preview] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
