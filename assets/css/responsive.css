@@ -78,6 +78,7 @@
   .section { padding-block: var(--space-16); }
   .section-title { font-size: var(--text-2xl); }
 
+  .utility-bar__contact { display: inline-flex; }
   .utility-bar__links { display: block; }
   .utility-btn__label { display: inline; }
 

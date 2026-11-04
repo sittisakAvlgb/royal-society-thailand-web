@@ -98,6 +98,21 @@ main:focus { outline: none; }
 .utility-bar__note .icon { width: 14px; height: 14px; }
 .utility-bar__note span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+/* Quick contact on the left of the top bar — phone and office hours */
+.utility-bar__contact { display: none; align-items: center; gap: var(--space-3); min-width: 0; }
+.utility-bar__contact a,
+.utility-bar__contact .utility-bar__hours {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.utility-bar__contact .icon { width: 13px; height: 13px; color: var(--rst-green-300); }
+.utility-bar__contact a:hover { color: var(--white); text-decoration: underline; }
+.utility-bar__sep { width: 1px; height: 13px; background: rgba(255, 255, 255, .2); }
+
 .utility-bar__links { display: none; margin-left: auto; }
 .utility-bar__links ul { display: flex; gap: var(--space-6); }
 .utility-bar__links a {

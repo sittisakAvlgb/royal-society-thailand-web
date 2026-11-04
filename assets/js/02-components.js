@@ -159,12 +159,19 @@
             ${icon('info')}<span aria-hidden="true">${te(CFG.site.prototypeShort)}</span>
             <span class="visually-hidden">${te(CFG.site.prototypeNote)}</span>
           </p>` : '';
+    const c = CFG.contact;
+    const contact = `
+          <p class="utility-bar__contact">
+            <a href="tel:${c.phoneHref}">${icon('phone')}<span>${escapeHTML(c.phone)}</span></a>
+            <span class="utility-bar__sep" aria-hidden="true"></span>
+            <span class="utility-bar__hours">${icon('clock')}<span>${te(c.officeHours)}</span></span>
+          </p>`;
     const links = CFG.utilityLinks.map(item => `<li>${link(item)}</li>`).join('');
 
     return `
       <div class="utility-bar">
         <div class="container utility-bar__inner">
-          ${note}
+          ${note}${contact}
           <nav class="utility-bar__links" aria-label="${te(ui.utility)}"><ul role="list">${links}</ul></nav>
           <div class="utility-bar__tools">
             <div class="access-wrap" id="app-a11y"></div>
