@@ -192,6 +192,9 @@ main:focus { outline: none; }
 @keyframes crest-in { from { opacity: 0; transform: translateY(-8px) scale(.92); } to { opacity: 1; transform: none; } }
 
 .brand-text { display: grid; line-height: 1.25; min-width: 0; }
+/* In English the wordmark wraps awkwardly, so show the emblem alone;
+   the link keeps its name from the emblem's alt text. */
+html[lang="en"] .brand-text { display: none; }
 .brand-title {
   font-family: var(--font-display);
   font-size: var(--text-md);
