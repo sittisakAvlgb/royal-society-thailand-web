@@ -16,8 +16,16 @@ html {
   font-size: clamp(16px, 0.5vw + 11px, 21px);
 }
 /* The scale is tuned for TH Sarabun New, a small-bodied font. Latin (Geist)
-   has a larger apparent size, so English runs a step smaller to match. */
-html[lang="en"] { font-size: clamp(15px, 0.45vw + 9px, 18px); }
+   has a larger apparent size, so English runs a step smaller to match —
+   a smaller root for everything, and the display sizes reined in further so
+   headings don't shout. */
+html[lang="en"] {
+  font-size: clamp(15px, 0.45vw + 9px, 18px);
+  --text-lg: 1.5625rem;
+  --text-xl: 1.875rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 2.875rem;
+}
 
 body {
   margin: 0;
