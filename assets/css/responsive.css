@@ -84,7 +84,7 @@
 
   .brand-logo-img { width: 34px; height: 60px; }
   .brand-title,
-  html[lang="en"] .brand-title { font-size: var(--text-base); white-space: nowrap; }
+  html[lang="en"] .brand-title { font-size: 1.1875rem; white-space: nowrap; }
 
   .header-actions { gap: var(--space-2); }
   .search-action .header-btn__label { display: inline; }
