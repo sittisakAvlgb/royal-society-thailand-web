@@ -2026,11 +2026,11 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
 
 .about-band__text .section-title { color: var(--rst-green-900); }
 /* Introduction above the academies */
-.about-band__intro { display: grid; gap: var(--space-3); max-width: 62ch; margin-top: var(--space-4); color: var(--text-secondary); line-height: 1.8; }
+.about-band__intro { display: grid; gap: var(--space-4); max-width: 62ch; margin-top: var(--space-4); color: var(--text-secondary); line-height: 1.6; }
 .about-band__intro > * { margin: 0; }
 .about-band__intro strong { font-weight: 600; color: var(--rst-green-900); }
 .about-band__intro .link-arrow { justify-self: start; margin-top: var(--space-1); }
-.about-band__lead { font-family: var(--font-display); font-size: var(--text-md); font-weight: 500; line-height: 1.65; color: var(--text-primary); }
+.about-band__lead { font-family: var(--font-display); font-size: var(--text-md); font-weight: 500; line-height: 1.5; color: var(--text-primary); }
 .about-band__list-head { display: grid; gap: var(--space-1); margin-top: var(--space-10); }
 .about-band__list-head > * { margin: 0; }
 .about-band__list-title { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; color: var(--rst-green-900); }
