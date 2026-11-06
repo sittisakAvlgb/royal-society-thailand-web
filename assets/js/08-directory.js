@@ -6,7 +6,8 @@
  *
  *    <ul data-service-list="primary|all|group:<id>">  services (RS_CONFIG.services)
  *    <ul data-academy-list>                    academies (RS_CONFIG.academies)
- *    <ul data-fellows-preview="4">             first N people (RS_FELLOWS)
+ *    <ul data-fellows-preview="4">             first N people (RS_FELLOWS);
+ *                                              data-fellows-academy="<id>" narrows to one academy
  *    <section id="fellow-directory">           searchable directory
  *    <div id="fellow-profile">                 profile (?id=)
  * ========================================================================== */
@@ -100,7 +101,7 @@
   /** Index rows for the home split: <ol data-academy-list="compact"> */
   function renderAcademyRow(academy, index) {
     const external = Boolean(academy.external);
-    const href = academy.href ? escapeHTML(academy.href) : escapeHTML(RS.url(`pages/fellows.html?academy=${academy.id}`));
+    const href = academy.href ? escapeHTML(academy.href) : escapeHTML(RS.url(`pages/academy.html?id=${academy.id}`));
     const nameAttrs = external ? ' target="_blank" rel="noopener"' : '';
     const fields = (academy.tags ? RS.t(academy.tags) : []).map(escapeHTML).join(' · ') || te(academy.fields);
     const siteLabel = te(academy.siteLabel || { th: 'เว็บไซต์สำนัก', en: 'Academy website' });
@@ -137,7 +138,9 @@
     let timer = 0;
     function show(id) {
       clearTimeout(timer);
-      layers.forEach(img => img.classList.toggle('is-active', (img.dataset.academyPhoto || '') === (id || '')));
+      /* An academy without its own photo keeps the default one */
+      const photo = layers.some(img => id && img.dataset.academyPhoto === id) ? id : '';
+      layers.forEach(img => img.classList.toggle('is-active', (img.dataset.academyPhoto || '') === photo));
       stage.classList.toggle('is-spotlit', Boolean(id));
       if (caption) {
         const academy = CFG.academies.find(item => item.id === id);
@@ -268,7 +271,9 @@
   function initFellowsPreview() {
     qsa('[data-fellows-preview]').forEach(list => {
       const limit = Number(list.dataset.fellowsPreview) || 4;
-      list.innerHTML = PEOPLE.slice(0, limit).map(renderFellowTile).join('');
+      const academy = list.dataset.fellowsAcademy;      /* academy page: that academy only */
+      const people = academy ? PEOPLE.filter(person => person.academy === academy) : PEOPLE;
+      list.innerHTML = people.slice(0, limit).map(renderFellowTile).join('');
       initBookmarks(list);
       document.dispatchEvent(new CustomEvent('rs:content-added', { detail: list }));
     });

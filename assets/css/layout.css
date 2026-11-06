@@ -421,24 +421,36 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
 .footer-col:focus-within::before { width: 56px; }
 
 .footer-links { margin-top: var(--space-3); }
-/* A chevron slides in on the link being pointed at. The cookie-settings
-   entry is a <button>, so it joins every rule the links have. */
+/* The link being pointed at brightens and a gold hairline draws in beneath
+   it from the left, leaving to the right; the rest of its column dims. The
+   text itself never moves, so long labels stay inside their column. The
+   cookie-settings entry is a <button>, so it joins every rule the links have. */
 .footer-links a,
-.footer-links .footer-action { position: relative; transition: transform var(--duration) var(--ease); }
-.footer-links a::before,
-.footer-links .footer-action::before {
-  content: "→";
+.footer-links .footer-action { position: relative; }
+.footer-links a::after,
+.footer-links .footer-action::after {
+  content: "";
   position: absolute;
-  inset-inline-start: -18px;
-  opacity: 0;
-  color: var(--rst-green-300);
-  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
-  transform: translateX(-4px);
+  inset-inline: 0;
+  bottom: 3px;
+  height: 1px;
+  background: var(--gold-500);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
 }
-.footer-links a:hover,
-.footer-links .footer-action:hover { transform: translateX(6px); }
-.footer-links a:hover::before,
-.footer-links .footer-action:hover::before { opacity: 1; transform: none; }
+.footer-links a:hover::after,
+.footer-links a:focus-visible::after,
+.footer-links .footer-action:hover::after,
+.footer-links .footer-action:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+.footer-links:hover a:not(:hover),
+.footer-links:hover .footer-action:not(:hover) { color: rgba(255, 255, 255, .5); }
+.site-footer .footer-links a:hover,
+.site-footer .footer-links .footer-action:hover { text-decoration: none; }
+@media (prefers-reduced-motion: reduce) {
+  .footer-links a::after,
+  .footer-links .footer-action::after { transition: none; }
+}
 
 .site-footer a,
 .site-footer .footer-action {

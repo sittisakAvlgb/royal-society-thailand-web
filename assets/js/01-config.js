@@ -49,7 +49,7 @@ window.RS_CONFIG = {
        in `allow`. Set enabled: false before launch. */
     menuLock: {
       enabled: true,
-      allow: ['index.html', 'pages/sitemap.html'],
+      allow: ['index.html', 'pages/sitemap.html', 'pages/academy.html'],
       message: { th: 'ต้นแบบเว็บไซต์ — หน้านี้ยังไม่เปิดให้เข้าชม', en: 'Prototype — this page is not open yet' }
     }
   },
@@ -183,7 +183,7 @@ window.RS_CONFIG = {
       key: 'about',
       label: { th: 'เกี่ยวกับราชบัณฑิตยสภา', en: 'About the Royal Society' },
       href: 'pages/about.html',
-      match: ['about.html'],
+      match: ['about.html', 'academy.html'],
       intro: { th: 'ประวัติ อำนาจหน้าที่ ผู้บริหาร สำนักวิชาการ และกฎหมายที่เกี่ยวข้อง', en: 'History, mandate and authority, executives, academies, laws and regulations' },
       children: [
         {
@@ -206,9 +206,9 @@ window.RS_CONFIG = {
         {
           label: { th: 'สำนักวิชาการ', en: 'Academies' }, href: 'pages/about.html#academies',
           children: [
-            { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' }, href: 'pages/about.html#academy-moral' },
-            { label: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' }, href: 'pages/about.html#academy-science' },
-            { label: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' }, href: 'pages/about.html#academy-arts' }
+            { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' }, href: 'pages/academy.html?id=moral' },
+            { label: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' }, href: 'pages/academy.html?id=science' },
+            { label: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' }, href: 'pages/academy.html?id=arts' }
           ]
         },
         {

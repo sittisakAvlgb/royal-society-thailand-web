@@ -264,12 +264,10 @@
 
         <div class="about-band__media reveal">
           <div class="about-band__photo" data-academy-spotlight>
-            <!-- Official photograph: assets/images/about/about-bg.png (hidden if missing; the crest shows instead) -->
-            <img class="about-band__layer is-active" src="assets/images/about/about-bg.png" alt="" width="1200" height="1200" loading="lazy" decoding="async" data-academy-photo="">
-            <!-- TODO (Office): one photo per academy — temporary photos from assets/images/hero -->
-            <img class="about-band__layer" src="assets/images/hero/hero-1.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async" data-academy-photo="moral">
-            <img class="about-band__layer" src="assets/images/hero/hero-3.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async" data-academy-photo="science">
-            <img class="about-band__layer" src="assets/images/hero/hero-4.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async" data-academy-photo="arts">
+            <!-- Official photograph: the Office building, assets/images/about/about-office.jpg (hidden if missing; the crest shows instead) -->
+            <img class="about-band__layer is-active" src="assets/images/about/about-office.jpg" alt="" width="1080" height="1080" loading="lazy" decoding="async" data-academy-photo="">
+            <!-- Every row shows the building. A per-academy photo can be added back as
+                 <img class="about-band__layer" src="…" alt="" data-academy-photo="moral|science|arts"> -->
             <img class="about-band__crest" src="assets/images/logo-image.png" alt="" width="125" height="220" loading="lazy" decoding="async">
             <p class="about-band__caption" data-academy-caption hidden></p>
           </div>
@@ -840,7 +838,15 @@
           </a>
         </div>
 
-        <ul class="events-list reveal reveal--delay-1" role="list" data-events-list></ul>
+        <!-- A tear-off desk calendar: the next event is the top leaf, the ones after it line up below -->
+        <div class="tearoff reveal reveal--delay-1" data-tearoff="5">
+          <div class="tearoff__main">
+            <div class="tearoff__pad" data-tearoff-pad></div>
+            <div class="tearoff__detail" data-tearoff-detail aria-live="polite"></div>
+            <div class="tearoff__cal" data-tearoff-cal></div>
+          </div>
+          <ol class="tearoff__stack" role="list" data-tearoff-stack></ol>
+        </div>
       </div>
     </section>
   </main>

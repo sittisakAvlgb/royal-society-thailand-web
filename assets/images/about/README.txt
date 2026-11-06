@@ -1,12 +1,13 @@
 About band (home) — photographs
 
-  about-bg.png        default photo, shown until a visitor points at an academy
-                      (portrait or square, 1600 x 1600 px or larger, < 1 MB)
+  about-office.jpg    default photo — the Office building — shown until a visitor
+                      points at an academy (square, 1080 x 1080 px or larger, < 1 MB)
+  about-bg.png        the previous default photo, no longer referenced
 
 One photo per academy (optional) — shown while that academy's row is hovered
-or focused. Drop them here and change the src of the three
-<img data-academy-photo="…"> tags in index.html (they currently point at
-temporary photos in assets/images/hero):
+or focused. For now every row shows the building; to give an academy its own
+photo, drop it here and add an <img data-academy-photo="…"> tag in index.html
+(see the comment there). An academy without one keeps the default photo:
 
   academy-moral.png     สำนักธรรมศาสตร์และการเมือง
   academy-science.png   สำนักวิทยาศาสตร์

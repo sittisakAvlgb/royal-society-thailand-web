@@ -49,10 +49,18 @@
     close: { th: 'ปิด', en: 'Close' },
     weekOf: { th: 'สัปดาห์ที่', en: 'Week of' },
     selectDay: { th: 'เลือกวันที่', en: 'Select' },
-    reminderList: { th: 'ตั้งเตือนไว้', en: 'Reminders' }
+    reminderList: { th: 'ตั้งเตือนไว้', en: 'Reminders' },
+    inDays: { th: 'อีก <strong>{n}</strong> วัน', en: 'In <strong>{n}</strong> days' },
+    until: { th: 'ถึง', en: 'until' },
+    addCalShort: { th: 'เพิ่มลงปฏิทินของฉัน', en: 'Add to my calendar' },
+    prevMonth: { th: 'เดือนก่อนหน้า', en: 'Previous month' },
+    nextMonth: { th: 'เดือนถัดไป', en: 'Next month' }
   };
 
   const WEEKDAYS = TH ? ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'] : ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  const WEEKDAYS_FULL = TH
+    ? ['วันอาทิตย์', 'วันจันทร์', 'วันอังคาร', 'วันพุธ', 'วันพฤหัสบดี', 'วันศุกร์', 'วันเสาร์']
+    : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const MONTHS = TH
     ? ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม']
     : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -415,36 +423,166 @@
     render();
   }
 
-  /* ---- standalone upcoming-events list (home page) ---- */
-  function listRow(ev) {
-    const d = parse(ev.date);
-    return `
-      <li class="event-row">
-        <a class="event-row__link" href="${escapeHTML(RS.url(ev.href))}">
-          <span class="event-row__date" aria-hidden="true"><span class="event-row__day">${d.getDate()}</span><span class="event-row__mon">${MONTHS_SHORT[d.getMonth()]}</span></span>
-          <span class="event-row__body">
-            <span class="event-row__cat" data-type="${escapeHTML(ev.type)}">${te(TYPES[ev.type])}</span>
-            <span class="event-row__title">${te(ev.title)}</span>
-            <span class="event-row__meta">${icon('clock')}<span>${escapeHTML(timeText(ev))} · ${te(ev.location)}</span></span>
-          </span>
-          <span class="event-row__go" aria-hidden="true">${icon('arrow')}</span>
-        </a>
-      </li>`;
-  }
+  /* ---- home tear-off calendar ----
+   *  markup: [data-tearoff="<how many leaves>"] with [data-tearoff-pad],
+   *  [data-tearoff-detail] and [data-tearoff-stack], optionally [data-tearoff-cal]
+   *  for the small month calendar; optional
+   *  [data-tearoff-academy="<id>"] shows one academy's events. The next event is the top
+   *  leaf; picking another leaf tears the current one off the pad. */
+  function initTearoff(root) {
+    const pad = qs('[data-tearoff-pad]', root);
+    const detail = qs('[data-tearoff-detail]', root);
+    const stack = qs('[data-tearoff-stack]', root);
+    if (!pad || !detail || !stack) return;
 
-  function initEventsList(root) {
     const today = todayDate();
-    const limit = Number(root.dataset.eventsList) || 6;
-    const list = eventsBetween(today, addDays(today, 400)).slice(0, limit);
-    root.innerHTML = list.length
-      ? list.map(listRow).join('')
-      : `<li><p class="cal-empty">${icon('calendar')}<span>${te(L.none)}</span></p></li>`;
-    document.dispatchEvent(new CustomEvent('rs:content-added', { detail: root }));
+    const limit = Number(root.dataset.tearoff) || 5;
+    /* data-tearoff-academy narrows it to one academy; without it, academy-only meetings stay off */
+    const academy = root.dataset.tearoffAcademy;
+    const all = eventsBetween(today, addDays(today, 400))
+      .filter(ev => academy ? ev.academy === academy : !ev.academyOnly);
+    const list = all.slice(0, limit);
+    const cal = qs('[data-tearoff-cal]', root);
+    if (!list.length) {
+      detail.innerHTML = `<p class="cal-empty">${icon('calendar')}<span>${te(L.none)}</span></p>`;
+      return;
+    }
+    let current = list[0];
+    let month = null;                                /* first day of the month the calendar shows */
+    const firstMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const lastEvent = parse(all[all.length - 1].date);
+    const lastMonth = new Date(lastEvent.getFullYear(), lastEvent.getMonth(), 1);
+
+    function countText(ev) {
+      const days = Math.round((parse(ev.date) - today) / 86400000);
+      if (days <= 0) return `<strong>${te(L.todayIs)}</strong>`;
+      if (days === 1) return `<strong>${te(L.tomorrow)}</strong>`;
+      return t(L.inDays).replace('{n}', days);
+    }
+
+    const leaf = ev => {
+      const d = parse(ev.date);
+      const end = ev.end ? parse(ev.end) : null;
+      return `
+        <div class="leaf" data-type="${escapeHTML(ev.type)}" aria-hidden="true">
+          <p class="leaf__band"><span>${MONTHS[d.getMonth()]}</span><span>${year(d)}</span></p>
+          <p class="leaf__day">${d.getDate()}</p>
+          <p class="leaf__weekday">${WEEKDAYS_FULL[d.getDay()]}${end ? ` ${te(L.until)} ${end.getDate()} ${MONTHS_SHORT[end.getMonth()]}` : ''}</p>
+          <p class="leaf__count">${countText(ev)}</p>
+        </div>`;
+    };
+
+    const renderDetail = ev => {
+      detail.dataset.type = ev.type;
+      detail.innerHTML = `
+        <p class="tearoff__cat">${te(TYPES[ev.type])}</p>
+        <h3 class="tearoff__title">${te(ev.title)}</h3>
+        <ul class="tearoff__meta" role="list">
+          <li>${icon('calendar')}<span>${WEEKDAYS_FULL[parse(ev.date).getDay()]} · ${escapeHTML(dateText(ev))}</span></li>
+          <li>${icon('clock')}<span>${escapeHTML(timeText(ev))}</span></li>
+          <li>${icon('pin')}<span>${te(ev.location)}</span></li>
+        </ul>
+        <p class="tearoff__summary">${te(ev.summary)}</p>
+        <div class="tearoff__actions">
+          <a class="link-arrow link-arrow--strong" href="${escapeHTML(RS.url(ev.href))}"><span>${te(L.details)}</span>${icon('arrow')}</a>
+          <button class="tearoff__ics" type="button" data-tearoff-ics>${te(L.addCalShort)}</button>
+        </div>`;
+      /* replay the fade-in so the change reads */
+      detail.style.animation = 'none';
+      void detail.offsetWidth;
+      detail.style.animation = '';
+    };
+
+    const renderStack = () => {
+      stack.innerHTML = list.map(ev => {
+        const d = parse(ev.date);
+        const on = ev === current;
+        return `
+          <li>
+            <button class="mini-leaf${on ? ' is-active' : ''}" type="button" data-tearoff-pick="${escapeHTML(ev.id)}" data-type="${escapeHTML(ev.type)}" aria-pressed="${on}">
+              <span class="mini-leaf__band">${MONTHS_SHORT[d.getMonth()]} ${year(d)}</span>
+              <span class="mini-leaf__row"><span class="mini-leaf__day">${d.getDate()}</span><span class="mini-leaf__title">${te(ev.title)}</span></span>
+            </button>
+          </li>`;
+      }).join('');
+    };
+
+    /* The small month calendar printed on the page, as on a Thai tear-off
+       pad: Sundays in red, a dot in the event's colour on each event day,
+       and the leaf's own date circled. An event day tears the pad to it. */
+    function renderCal(dir = 0) {
+      if (!cal) return;
+      const weeks = Math.ceil((month.getDay() + new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate()) / 7);
+      const start = startOfWeek(month);
+      let cells = '';
+      for (let i = 0; i < weeks * 7; i++) {
+        const d = addDays(start, i);
+        if (d.getMonth() !== month.getMonth()) { cells += '<span class="tcal__day is-outside"></span>'; continue; }
+        const evs = all.filter(ev => ev.date === iso(d));
+        const on = evs.includes(current);
+        const cls = `tcal__day${d.getDay() === 0 ? ' is-sun' : ''}${sameDay(d, today) ? ' is-today' : ''}${d < today ? ' is-past' : ''}${on ? ' is-current' : ''}`;
+        cells += evs.length
+          ? `<button class="${cls} has-events" type="button" data-tearoff-day="${iso(d)}" data-type="${escapeHTML(evs[0].type)}" aria-pressed="${on}"
+                     aria-label="${d.getDate()} ${MONTHS[d.getMonth()]} ${year(d)} · ${te(evs[0].title)}">${d.getDate()}</button>`
+          : `<span class="${cls}">${d.getDate()}</span>`;
+      }
+      cal.dataset.dir = dir > 0 ? 'next' : dir < 0 ? 'prev' : 'none';
+      cal.innerHTML = `
+        <div class="tcal__head">
+          <button class="tcal__nav tcal__nav--prev" type="button" data-tearoff-month="-1" aria-label="${te(L.prevMonth)}"${month <= firstMonth ? ' disabled' : ''}>${icon('chevron')}</button>
+          <p class="tcal__title" aria-live="polite">${MONTHS[month.getMonth()]} ${year(month)}</p>
+          <button class="tcal__nav tcal__nav--next" type="button" data-tearoff-month="1" aria-label="${te(L.nextMonth)}"${month >= lastMonth ? ' disabled' : ''}>${icon('chevron')}</button>
+        </div>
+        <div class="tcal__weekdays" aria-hidden="true">${WEEKDAYS.map((w, i) => `<span${i === 0 ? ' class="is-sun"' : ''}>${w}</span>`).join('')}</div>
+        <div class="tcal__grid">${cells}</div>`;
+    }
+
+    function show(ev) {
+      const old = pad.querySelector('.leaf:not(.is-torn)');
+      pad.insertAdjacentHTML('afterbegin', leaf(ev));
+      if (old) {
+        old.classList.add('is-torn');                 /* tears away, revealing the new leaf beneath */
+        if (RS.reduceMotion()) old.remove();
+        else old.addEventListener('animationend', () => old.remove(), { once: true });
+      }
+      renderDetail(ev);
+      renderStack();
+      const d = parse(ev.date);
+      month = new Date(d.getFullYear(), d.getMonth(), 1);
+      renderCal();
+      document.dispatchEvent(new CustomEvent('rs:content-added', { detail: root }));
+    }
+
+    root.addEventListener('click', event => {
+      const pick = event.target.closest('[data-tearoff-pick]');
+      if (pick) {
+        const ev = list.find(item => item.id === pick.dataset.tearoffPick);
+        if (ev && ev !== current) { current = ev; show(ev); }
+        return;
+      }
+      const day = event.target.closest('[data-tearoff-day]');
+      if (day) {
+        const ev = all.find(item => item.date === day.dataset.tearoffDay);
+        if (ev && ev !== current) { current = ev; show(ev); }
+        return;
+      }
+      const nav = event.target.closest('[data-tearoff-month]');
+      if (nav) {
+        const step = Number(nav.dataset.tearoffMonth);
+        month = new Date(month.getFullYear(), month.getMonth() + step, 1);
+        renderCal(step);
+        document.dispatchEvent(new CustomEvent('rs:content-added', { detail: cal }));
+        return;
+      }
+      if (event.target.closest('[data-tearoff-ics]')) downloadIcs(current);
+    });
+
+    show(current);
   }
 
   RS.ready(() => {
     qsa('[data-calendar]').forEach(initCalendar);
-    qsa('[data-events-list]').forEach(initEventsList);
+    qsa('[data-tearoff]').forEach(initTearoff);
     checkReminders();
   });
 })();
