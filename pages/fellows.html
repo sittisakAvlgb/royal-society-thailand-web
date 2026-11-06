@@ -193,21 +193,6 @@
               </li>
             </ul>
           </div>
-          <div class="rs-select dir-filter" id="filter-year" data-select>
-            <span class="dir-filter__label" id="directory-year-label" data-en="Year appointed">ปีที่แต่งตั้ง</span>
-            <input type="hidden" name="year" value="">
-            <button class="rs-select__btn" type="button" id="directory-year" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="directory-year-label directory-year">
-              <svg class="icon rs-select__icon" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg>
-              <span class="rs-select__label" data-select-label data-en="All years">ทุกปี</span>
-              <svg class="icon rs-select__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-            <ul class="rs-select__list" role="listbox" aria-labelledby="directory-year-label" hidden>
-              <li class="rs-select__option" role="option" tabindex="-1" data-value="" aria-selected="true">
-                <span data-en="All years">ทุกปี</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
-              </li>
-            </ul>
-          </div>
         </form>
 
         <!-- Active filters as removable chips -->
@@ -215,31 +200,6 @@
 
         <div class="dir-results">
           <p class="dir-results__count" data-directory-count aria-live="polite"></p>
-          <div class="dir-results__tools">
-          <div class="rs-select dir-sort" data-select>
-            <span class="visually-hidden" id="directory-sort-label" data-en="Sort by">เรียงตาม</span>
-            <input type="hidden" name="sort" value="">
-            <button class="rs-select__btn" type="button" id="directory-sort" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="directory-sort-label directory-sort">
-              <svg class="icon rs-select__icon" aria-hidden="true" focusable="false"><use href="#i-sliders"></use></svg>
-              <span class="rs-select__label" data-select-label data-en="Name A–Z">ชื่อ ก–ฮ</span>
-              <svg class="icon rs-select__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-            <ul class="rs-select__list" role="listbox" aria-labelledby="directory-sort-label" hidden>
-              <li class="rs-select__option" role="option" tabindex="-1" data-value="" aria-selected="true">
-                <span data-en="Name A–Z">ชื่อ ก–ฮ</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
-              </li>
-              <li class="rs-select__option" role="option" tabindex="-1" data-value="newest" aria-selected="false">
-                <span data-en="Newest appointment">แต่งตั้งล่าสุด</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
-              </li>
-              <li class="rs-select__option" role="option" tabindex="-1" data-value="oldest" aria-selected="false">
-                <span data-en="Earliest appointment">แต่งตั้งนานสุด</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
-              </li>
-            </ul>
-          </div>
-          </div>
         </div>
 
         <ul class="fellow-grid" role="list" data-directory-list></ul>

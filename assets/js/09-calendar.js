@@ -415,8 +415,36 @@
     render();
   }
 
+  /* ---- standalone upcoming-events list (home page) ---- */
+  function listRow(ev) {
+    const d = parse(ev.date);
+    return `
+      <li class="event-row">
+        <a class="event-row__link" href="${escapeHTML(RS.url(ev.href))}">
+          <span class="event-row__date" aria-hidden="true"><span class="event-row__day">${d.getDate()}</span><span class="event-row__mon">${MONTHS_SHORT[d.getMonth()]}</span></span>
+          <span class="event-row__body">
+            <span class="event-row__cat" data-type="${escapeHTML(ev.type)}">${te(TYPES[ev.type])}</span>
+            <span class="event-row__title">${te(ev.title)}</span>
+            <span class="event-row__meta">${icon('clock')}<span>${escapeHTML(timeText(ev))} · ${te(ev.location)}</span></span>
+          </span>
+          <span class="event-row__go" aria-hidden="true">${icon('arrow')}</span>
+        </a>
+      </li>`;
+  }
+
+  function initEventsList(root) {
+    const today = todayDate();
+    const limit = Number(root.dataset.eventsList) || 6;
+    const list = eventsBetween(today, addDays(today, 400)).slice(0, limit);
+    root.innerHTML = list.length
+      ? list.map(listRow).join('')
+      : `<li><p class="cal-empty">${icon('calendar')}<span>${te(L.none)}</span></p></li>`;
+    document.dispatchEvent(new CustomEvent('rs:content-added', { detail: root }));
+  }
+
   RS.ready(() => {
     qsa('[data-calendar]').forEach(initCalendar);
+    qsa('[data-events-list]').forEach(initEventsList);
     checkReminders();
   });
 })();

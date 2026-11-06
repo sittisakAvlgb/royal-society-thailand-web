@@ -373,12 +373,11 @@
             return `
               <li><a class="latest-item" href="${escapeHTML(recordHref(record))}"${isExternalRecord(record) ? ' target="_blank" rel="noopener"' : ''}>
                 <span class="latest-item__num" aria-hidden="true">${index + 1}</span>
-                <span class="latest-item__line">
+                <span class="latest-item__body">
                   <span class="latest-item__title">${escapeHTML(t(record.title))}</span>
-                  <span class="latest-item__leader" aria-hidden="true"></span>
+                  <span class="latest-item__meta">${te(TYPES[record.type]?.label)}${academy ? ` · ${te(academy.name)}` : ''}</span>
                 </span>
                 <span class="latest-item__year">${yearLabel(record.date)}</span>
-                <span class="latest-item__meta">${te(TYPES[record.type]?.label)}${academy ? ` · ${te(academy.name)}` : ''}</span>
               </a></li>`;
           }).join('')
         : `<li class="latest-list__empty">${te(L.noLatest)}</li>`;

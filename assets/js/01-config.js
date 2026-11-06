@@ -246,13 +246,23 @@ window.RS_CONFIG = {
 
     {
       key: 'works',
-      label: { th: 'ผลงานและกิจกรรมวิชาการ', en: 'Publications and Academic Activities' },
-      short: { th: 'ผลงานและกิจกรรมวิชาการ', en: 'Publications & Activities' },
+      label: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' },
+      short: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' },
       href: 'pages/academic-works.html',
       match: ['academic-works.html', 'knowledge.html', 'article.html'],
       intro: { th: 'วารสาร สิ่งพิมพ์ ข้อเสนอต่อรัฐบาล กิจกรรมวิชาการ และโครงการนำความรู้สู่สังคม', en: 'Journals, publications, proposals to Government, academic activities and the Knowledge for Society Programme' },
       children: [
-        { label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' }, href: 'https://www.orst.go.th/iwfm_list.asp?u=6', external: true, domain: 'orst.go.th' },
+        {
+          label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' }, href: 'pages/academic-works.html#publications',
+          children: [
+            { label: { th: 'วารสารราชบัณฑิตยสภา', en: 'Journal of the Royal Society of Thailand (Thai)' }, href: 'pages/academic-works.html#journal-th' },
+            { label: { th: 'The Journal of the Royal Society of Thailand', en: 'The Journal of the Royal Society of Thailand' }, href: 'pages/academic-works.html#journal-en' },
+            { label: { th: 'จดหมายข่าวราชบัณฑิตยสภา', en: 'The Royal Society of Thailand Newsletter' }, href: 'pages/academic-works.html#newsletter' },
+            { label: { th: 'จุลสารสำนักวิทยาศาสตร์', en: 'Academy of Science Bulletin' }, href: 'pages/academic-works.html#science-bulletin' },
+            { label: { th: 'รายงานประจำปี', en: 'Annual Report' }, href: 'pages/academic-works.html#annual-report' },
+            { label: { th: 'สืบค้นผลงานวิชาการ', en: 'Search Academic Publications' }, href: 'pages/knowledge.html' }
+          ]
+        },
         { label: { th: 'ข้อเสนอต่อรัฐบาล', en: 'Proposals to Government' }, href: 'pages/academic-works.html#policy-proposals' },
         {
           label: { th: 'กิจกรรมวิชาการ', en: 'Academic Activities' }, href: 'pages/academic-works.html#activities',
@@ -277,58 +287,6 @@ window.RS_CONFIG = {
         { label: { th: 'แถลงข่าว', en: 'Press Releases' }, href: 'pages/news.html#press-releases' },
         { label: { th: 'ข่าวประชาสัมพันธ์', en: 'News and Announcements' }, href: 'pages/news.html#news' },
         { label: { th: 'คลังภาพและวิดีโอ', en: 'Photo and Video Gallery' }, href: 'pages/news.html#media-gallery' }
-      ]
-    },
-
-    {
-      key: 'services',
-      label: { th: 'บริการวิชาการออนไลน์', en: 'Online Academic Services' },
-      short: { th: 'บริการ', en: 'Services' },
-      alsoShow: ['audiences'],
-      href: 'pages/services.html',
-      match: ['services.html', 'audiences.html'],
-      intro: { th: 'พจนานุกรม ฐานข้อมูลศัพท์ คลังความรู้ หนังสือ และการทดสอบความรู้ภาษาไทยออนไลน์', en: 'Dictionaries, terminology databases, knowledge resources, books and Thai language testing' },
-      children: [
-        {
-          label: { th: 'พจนานุกรมและฐานข้อมูลศัพท์', en: 'Dictionaries and Terminology Databases' }, href: 'pages/services.html#dictionaries',
-          children: [
-            { label: { th: 'พจนานุกรม', en: 'Dictionary' }, href: 'https://dictionary.orst.go.th/', external: true },
-            { label: { th: 'ศัพท์บัญญัติ', en: 'Coined Terms' }, href: 'https://coined-word.orst.go.th/', external: true },
-            { label: { th: 'คำทับศัพท์', en: 'Transliteration' }, href: 'https://transliteration.orst.go.th/', external: true },
-            { label: { th: 'อักขรานุกรมภูมิศาสตร์', en: 'Gazetteer' }, href: 'https://gazetteer.orst.go.th/', external: true }
-          ]
-        },
-        {
-          label: { th: 'คลังความรู้และหนังสือ', en: 'Knowledge Base and Books' }, href: 'pages/services.html#knowledge-books',
-          children: [
-            { label: { th: 'คลังความรู้', en: 'Knowledge Base' }, href: 'https://www.orst.go.th/iwfm_table.asp?a=28', external: true },
-            { label: { th: 'E-Book', en: 'E-Books' }, href: 'https://www.orst.go.th/iwfm_list.asp?u=6', external: true },
-            { label: { th: 'สารานุกรมไทย', en: 'Thai Encyclopedia' }, href: 'https://lst.nectec.or.th/encyclopedia/', external: true },
-            { label: { th: 'คลังเอกสารดิจิทัล', en: 'Digital Archive' }, href: 'https://da2.thaidlt.org/', external: true }
-          ]
-        },
-        {
-          label: { th: 'เรียนรู้และทดสอบความรู้ภาษาไทย', en: 'Thai Language Learning and Testing' }, href: 'pages/services.html#learning',
-          children: [
-            { label: { th: 'ทดสอบความรู้ภาษาไทย', en: 'Thai Language Test' }, href: 'https://etest.orst.go.th/', external: true },
-            { label: { th: 'ค้นหาในเว็บไซต์', en: 'Search the website' }, href: 'pages/search.html' },
-            { label: { th: 'สอบถามข้อมูลทางวิชาการ', en: 'Academic enquiries' }, href: 'pages/contact.html' }
-          ]
-        }
-      ]
-    },
-
-    {
-      key: 'audiences',
-      label: { th: 'บริการตามกลุ่มผู้ใช้', en: 'Services by Audience' },
-      bar: false,
-      href: 'pages/audiences.html',
-      match: ['audiences.html'],
-      intro: { th: 'รวมบริการและข้อมูลที่เหมาะกับประชาชน หน่วยงานภาครัฐ และสมาชิกราชบัณฑิตยสภา', en: 'Services and information for the public, government agencies and members of the Royal Society' },
-      children: [
-        { label: { th: 'สำหรับประชาชน', en: 'For Citizens' }, href: 'pages/audiences.html#public' },
-        { label: { th: 'สำหรับหน่วยงานภาครัฐ', en: 'For Government Agencies' }, href: 'pages/audiences.html#government' },
-        { label: { th: 'สำหรับราชบัณฑิตและภาคีสมาชิก', en: 'For Fellows and Associate Fellows' }, href: 'pages/audiences.html#members' }
       ]
     },
 
@@ -485,10 +443,8 @@ window.RS_CONFIG = {
           { label: { th: 'หน้าแรก', en: 'Home' }, href: 'index.html' },
           { label: { th: 'เกี่ยวกับราชบัณฑิตยสภา', en: 'About the Royal Society' }, href: 'pages/about.html' },
           { label: { th: 'ราชบัณฑิตและภาคีสมาชิก', en: 'Fellows and Associate Fellows' }, href: 'pages/fellows.html' },
-          { label: { th: 'ผลงานและกิจกรรมวิชาการ', en: 'Publications and Academic Activities' }, href: 'pages/academic-works.html' },
+          { label: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' }, href: 'pages/academic-works.html' },
           { label: { th: 'ข่าวสาร', en: 'News' }, href: 'pages/news.html' },
-          { label: { th: 'บริการวิชาการออนไลน์', en: 'Online Academic Services' }, href: 'pages/services.html' },
-          { label: { th: 'บริการตามกลุ่มผู้ใช้', en: 'Services by Audience' }, href: 'pages/audiences.html' },
           { label: { th: 'การรับสมัคร', en: 'Applications for Membership' }, href: 'pages/admissions.html' },
           { label: { th: 'ติดต่อและมีส่วนร่วม', en: 'Contact and Participation' }, href: 'pages/contact.html' }
         ]
