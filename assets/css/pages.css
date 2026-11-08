@@ -3272,7 +3272,7 @@ html[lang="en"] .acad-mast__alt { font-family: "TH Sarabun New", sans-serif; fon
 .acad-links { display: grid; gap: 0 var(--space-12); margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border-strong); }
 .acad-link a { display: flex; align-items: baseline; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--border); color: inherit; text-decoration: none; }
 .acad-link__num { flex: none; width: 1.5em; font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--gold-600); }
-.acad-link__label { flex: none; max-width: 65%; font-size: var(--text-base); color: var(--rst-green-900); transition: color var(--duration) var(--ease); }
+.acad-link__label { flex: 0 1 auto; min-width: 0; font-size: var(--text-base); color: var(--rst-green-900); transition: color var(--duration) var(--ease); }
 .acad-link__dots { flex: 1; min-width: var(--space-6); border-bottom: 1px dotted var(--border-strong); transform: translateY(-4px); transition: border-color var(--duration) var(--ease); }
 .acad-link__host { flex: none; font-family: var(--font-latin); font-size: .8125rem; color: var(--text-secondary); }
 .acad-link__go { flex: none; display: grid; align-self: center; color: var(--gold-600); transition: transform var(--duration) var(--ease), color var(--duration) var(--ease); }

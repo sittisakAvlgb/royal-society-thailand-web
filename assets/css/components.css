@@ -87,6 +87,8 @@
 .link-arrow .icon { transition: transform var(--duration) var(--ease); }
 .link-arrow:hover { text-decoration: underline; }
 .link-arrow:hover .icon { transform: translateX(4px); }
+/* Long labels (an address after the text) may break onto a second line */
+.link-arrow--wrap { flex-wrap: wrap; column-gap: var(--space-2); row-gap: 0; }
 
 
 /* Stretched link: whole item clickable while keeping one focusable link */
