@@ -31,6 +31,10 @@
       ticking = false;
       header.classList.toggle('is-scrolled', window.scrollY > 24);
       const height = Math.ceil(qs('.site-header', header)?.getBoundingClientRect().height || 0);
+      /* Over the home hero photo the card floats on its own; the white band
+         behind it appears only once the photo has scrolled away */
+      const photo = qs('.hero-slides');
+      header.classList.toggle('is-over-photo', Boolean(photo) && photo.getBoundingClientRect().bottom > height);
       document.documentElement.style.setProperty('--rs-header-current-h', `${height}px`);
     }
 

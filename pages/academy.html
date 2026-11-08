@@ -26,7 +26,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
 
   <link rel="stylesheet" href="../assets/css/tokens.css">
   <link rel="stylesheet" href="../assets/css/base.css">
@@ -86,30 +86,26 @@
         </nav>
 
         <div class="acad-mast__grid">
-          <div class="acad-mast__text reveal">
-            <div class="acad-mast__lockup">
+          <div class="acad-mast__text">
+            <!-- The parent body first, small, as on a title page; then the academy -->
+            <p class="acad-mast__org">
               <img class="acad-mast__crest" src="../assets/images/logo-image-160.png" alt="" width="91" height="160" decoding="async">
-              <div>
-                <h1 class="acad-mast__name" data-acad-name></h1>
-                <p class="acad-mast__alt" data-acad-alt></p>
-                <p class="acad-mast__org" data-en="The Royal Society of Thailand">ราชบัณฑิตยสภา <span lang="en">| The Royal Society of Thailand</span></p>
-              </div>
+              <span class="acad-mast__org-name">
+                <span data-en="The Royal Society of Thailand">ราชบัณฑิตยสภา</span>
+                <span class="acad-mast__org-en" data-en="ราชบัณฑิตยสภา">The Royal Society of Thailand</span>
+              </span>
+            </p>
+            <h1 class="acad-mast__name" data-acad-name></h1>
+            <p class="acad-mast__alt" data-acad-alt></p>
+            <div class="acad-mast__fields">
+              <p class="acad-mast__fields-label" data-en="Fields">สาขาวิชา</p>
+              <ul class="acad-mast__field-list" role="list" data-acad-fields></ul>
             </div>
-            <p class="acad-mast__fields" data-acad-fields></p>
-            <a class="link-arrow acad-mast__site" href="#" target="_blank" rel="noopener" data-acad-site>
-              <span data-en="The academy's own website">เว็บไซต์สำนัก</span>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
-            </a>
           </div>
           <figure class="acad-mast__photo reveal reveal--delay-1">
             <img src="../assets/images/about/about-office.jpg" alt="" width="1080" height="1080" decoding="async" data-acad-photo>
           </figure>
         </div>
-
-        <!-- The three academies, so a reader can move between them -->
-        <nav class="acad-switch" aria-label="สำนักวิชาการ" data-en-aria-label="Academies">
-          <ul role="list" data-acad-switch></ul>
-        </nav>
       </div>
     </div>
 
@@ -135,10 +131,14 @@
           <p class="kicker" data-en="About">ข้อมูลหน่วยงาน</p>
           <h2 id="about-title" class="section-title" data-en="About the academy">เกี่ยวกับสำนัก</h2>
           <p class="acad-about__intro" data-acad-intro></p>
+          <a class="link-arrow acad-about__more" href="about.html#history">
+            <span data-en="The Royal Society's history">ประวัติราชบัณฑิตยสภา</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+          </a>
         </div>
-        <div class="acad-about__fields reveal reveal--delay-1">
-          <h3 class="acad-about__fields-title" data-en="Fields of the academy">สาขาวิชาในสำนัก</h3>
-          <ol class="acad-fields" role="list" data-acad-field-list></ol>
+        <div class="acad-work">
+          <h3 class="acad-work__title reveal" data-en="What the academy does">งานของสำนัก</h3>
+          <ol class="acad-work__list" role="list" data-acad-work></ol>
         </div>
       </div>
     </section>
@@ -174,12 +174,13 @@
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
         </div>
-        <div class="tearoff reveal reveal--delay-1" data-tearoff="5" data-acad-tearoff>
+        <div class="tearoff tearoff--side reveal reveal--delay-1" data-tearoff="8" data-acad-tearoff>
           <div class="tearoff__main">
             <div class="tearoff__pad" data-tearoff-pad></div>
             <div class="tearoff__detail" data-tearoff-detail aria-live="polite"></div>
             <div class="tearoff__cal" data-tearoff-cal></div>
           </div>
+          <p class="tearoff__next-label" data-en="All upcoming events of the academy — choose one to see it">กิจกรรมที่จะจัดขึ้นทั้งหมดของสำนัก — เลือกเพื่อดูรายละเอียด</p>
           <ol class="tearoff__stack" role="list" data-tearoff-stack></ol>
         </div>
       </div>
@@ -211,40 +212,38 @@
         <div class="band-head reveal">
           <div class="band-head__text">
             <p class="kicker" data-en="Fellows">ราชบัณฑิต</p>
-            <h2 id="fellows-title" class="section-title" data-en="Fellows of the academy">ราชบัณฑิตและภาคีสมาชิกในสำนัก</h2>
+            <h2 id="fellows-title" class="section-title acad-pair__title" data-en="Fellows of the academy">ราชบัณฑิตและภาคีสมาชิกในสำนัก</h2>
           </div>
           <a class="link-arrow link-arrow--strong" href="fellows.html" data-acad-fellows-more>
             <span data-en="Full list">ดูรายชื่อทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
         </div>
-        <div class="fellow-scroller reveal reveal--delay-1" data-scroller>
-          <ul class="fellow-scroller__track" role="list" data-fellows-preview="8" data-scroller-track></ul>
-          <div class="fellow-scroller__nav">
-            <button class="fellow-scroller__btn" type="button" data-scroller-prev aria-label="เลื่อนไปทางซ้าย" data-en-aria-label="Scroll left">
-              <svg class="icon icon--left" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-            <button class="fellow-scroller__btn" type="button" data-scroller-next aria-label="เลื่อนไปทางขวา" data-en-aria-label="Scroll right">
-              <svg class="icon icon--right" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-          </div>
-        </div>
+        <!-- The academy's members set as a printed roll: grouped by membership,
+             each name carried on a dotted leader to its field -->
+        <div class="acad-roll" data-acad-roll></div>
       </div>
     </section>
 
-    <!-- Useful links, then the other two academies -->
+    <!-- Useful links: each with the site it opens -->
     <section class="section acad-section" id="links" aria-labelledby="links-title">
-      <div class="container acad-foot">
+      <div class="container">
         <div class="reveal">
           <p class="kicker" data-en="Useful links">ลิงก์ที่น่าสนใจ</p>
           <h2 id="links-title" class="section-title acad-pair__title" data-en="Useful links">ลิงก์ที่น่าสนใจ</h2>
-          <ul class="acad-links" role="list" data-acad-links></ul>
         </div>
-        <div class="reveal reveal--delay-1">
-          <p class="kicker" data-en="Other academies">สำนักอื่น</p>
-          <h2 class="section-title acad-pair__title" data-en="The other academies">สำนักวิชาการอื่นในราชบัณฑิตยสภา</h2>
-          <ul class="acad-others" role="list" data-acad-others></ul>
+        <ul class="acad-links" role="list" data-acad-links></ul>
+      </div>
+    </section>
+
+    <!-- The other two academies: a photograph each, the name set over it -->
+    <section class="section section--alt acad-section acad-next" aria-labelledby="next-title">
+      <div class="container">
+        <div class="reveal">
+          <p class="kicker" data-en="Other academies">สำนักวิชาการอื่น</p>
+          <h2 id="next-title" class="section-title acad-pair__title" data-en="The other academies">สำนักวิชาการอื่น</h2>
         </div>
+        <ul class="acad-next__list" role="list" data-acad-others></ul>
       </div>
     </section>
   </main>

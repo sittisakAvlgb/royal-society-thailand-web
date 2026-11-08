@@ -25,7 +25,19 @@ html[lang="en"] {
   --text-xl: 1.625rem;
   --text-2xl: 1.9375rem;
   --text-3xl: 2.375rem;
+  /* English pairing: Newsreader, a book serif with optical sizes, carries
+     headings, numerals and names — the voice of a learned society; Geist
+     stays for running text and UI. Thai words inside English pages still
+     fall back to TH Sarabun New. */
+  --font-display: "Newsreader", "TH Sarabun New", Georgia, serif;
+  --font-body: "Geist", "TH Sarabun New", system-ui, sans-serif;
+  --text-xs: 0.875rem;
+  --text-sm: 0.96875rem;
+  --text-base: 1.125rem;
+  --text-md: 1.3125rem;
 }
+html[lang="en"] :is(h1, h2, h3, h4) { letter-spacing: -0.01em; }
+html[lang="en"] :where(h1, h2, h3, h4) { font-family: var(--font-display); font-optical-sizing: auto; }
 
 body {
   margin: 0;
@@ -101,7 +113,8 @@ hr {
 .font-latin,
 time { font-family: var(--font-latin); font-feature-settings: "tnum" 1; }
 
-:lang(en) { font-family: var(--font-latin); }
+/* English words inside Thai pages; English pages set their own stack on body */
+html:not([lang="en"]) :lang(en) { font-family: var(--font-latin); }
 
 /* ---- Utilities ---------------------------------------------------------- */
 .visually-hidden {

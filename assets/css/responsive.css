@@ -185,7 +185,7 @@
   /* News: a tall featured story beside a 3 x 2 grid of cards */
   .news-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-6); align-items: stretch; }
   .news-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .news-spotlight__title { font-size: var(--text-xl); }
+  .news-spotlight__title { font-size: var(--text-lg); }
 
   /* Calendar on its own band: a roomy month grid, the day list beside it */
   .cal-body { grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: var(--space-6); }
@@ -215,7 +215,7 @@
   .featured-quote { padding-left: var(--space-6); border-left: 2px solid var(--gold-500); }
   .featured-head__cta { justify-self: end; }
   .feature-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); align-items: stretch; }
-  .feature-slide__title { font-size: var(--text-xl); }
+  .feature-slide__title { font-size: var(--text-lg); }
   /* The three cards share the story card's height */
   .feature-list { grid-template-rows: repeat(3, minmax(0, 1fr)); }
 

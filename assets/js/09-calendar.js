@@ -448,6 +448,10 @@
       return;
     }
     let current = list[0];
+    /* .tearoff--side (academy pages): the details open inside the chosen row
+       of the list, like an agenda, instead of in a panel of their own */
+    const side = root.classList.contains('tearoff--side');
+    const dock = () => { if (side) stack.querySelector('.mini-leaf.is-active')?.closest('li')?.append(detail); };
     let month = null;                                /* first day of the month the calendar shows */
     const firstMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     const lastEvent = parse(all[all.length - 1].date);
@@ -547,6 +551,7 @@
       }
       renderDetail(ev);
       renderStack();
+      dock();
       const d = parse(ev.date);
       month = new Date(d.getFullYear(), d.getMonth(), 1);
       renderCal();

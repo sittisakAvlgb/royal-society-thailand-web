@@ -168,6 +168,22 @@ main:focus { outline: none; }
 }
 
 #app-header.is-scrolled .header-inner { box-shadow: var(--shadow-md); }
+/* Once the page scrolls, a frosted white band fills the strip around the
+   card, so text passing under the header never shows through the gaps */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, .9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration) var(--ease);
+}
+#app-header.is-scrolled:not(.is-over-photo) .site-header::before { opacity: 1; }
 
 .brand {
   display: flex;
@@ -322,6 +338,8 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
   font-weight: 600;
   color: var(--white);
 }
+/* English pages: the Thai name stays in TH Sarabun New at a size that reads */
+html[lang="en"] .footer-org__name { font-family: "TH Sarabun New", sans-serif; font-size: 1.75rem; line-height: 1.2; }
 .footer-org__name::after {
   content: "";
   position: absolute;
@@ -398,6 +416,7 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
   font-weight: 700;
   color: var(--white);
 }
+html[lang="en"] .footer-col h2 { font-family: var(--font-display); font-weight: 600; }
 .footer-col h2 span {
   display: block;
   margin-top: 5px;

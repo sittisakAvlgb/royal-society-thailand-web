@@ -331,7 +331,7 @@
 
     const columns = footer.columns.map(column => `
       <div class="footer-col footer-col--${column.id}">
-        <h2>${escapeHTML(column.heading.th)}${RS.lang === 'th' ? `<span lang="en">${escapeHTML(column.heading.en)}</span>` : ''}</h2>
+        <h2>${RS.lang === 'th' ? `${escapeHTML(column.heading.th)}<span lang="en">${escapeHTML(column.heading.en)}</span>` : escapeHTML(column.heading.en)}</h2>
         <ul class="footer-links" role="list">
           ${column.links.map(item => `<li>${link(item)}</li>`).join('')}
         </ul>

@@ -28,7 +28,11 @@
     org: { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' },
     noPosts: { th: 'ยังไม่มีรายการในหมวดนี้', en: 'Nothing in this category yet' },
     noWorks: { th: 'ยังไม่มีผลงานที่เผยแพร่', en: 'No published works yet' },
+    noFellows: { th: 'ยังไม่มีรายชื่อ', en: 'No members listed yet' },
     upcoming: { th: 'กำลังจะมาถึง', en: 'Coming up' },
+    inDays: { th: 'อีก {n} วัน', en: 'in {n} days' },
+    today: { th: 'วันนี้', en: 'Today' },
+    past: { th: 'บรรยายแล้ว', en: 'Held' },
     readMore: { th: 'อ่านต่อ', en: 'Read more' },
     external: { th: '(เปิดในแท็บใหม่)', en: '(opens in a new tab)' }
   };
@@ -52,21 +56,22 @@
     set('[data-acad-name]', te(academy.name));
     const alt = qs('[data-acad-alt]', root);
     if (alt) { alt.textContent = academy.name[other]; alt.lang = other; }
-    set('[data-acad-fields]', (t(academy.tags) || []).map(escapeHTML).join(' · '));
-    const site = qs('[data-acad-site]', root);
-    if (site) { if (academy.site) site.href = academy.site; else site.hidden = true; }
+    set('[data-acad-fields]', (t(academy.tags) || []).map((tag, i) => `<li style="--i:${i}">${escapeHTML(tag)}</li>`).join(''));
     const photo = qs('[data-acad-photo]', root);
     if (photo && page.photo) photo.src = RS.url(page.photo);
-
-    set('[data-acad-switch]', CFG.academies.map(item => `
-      <li><a href="${href(`pages/academy.html?id=${item.id}`)}" data-academy="${item.id}"${item === academy ? ' aria-current="page"' : ''}>${te(item.name)}</a></li>`).join(''));
   }
 
   /* ---- about: intro and the academy's fields, set like a contents page ---- */
   function renderAbout() {
     set('[data-acad-intro]', te(page.intro || academy.fields));
-    set('[data-acad-field-list]', (t(academy.tags) || []).map((tag, i) => `
-      <li><span class="acad-fields__num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><span>${escapeHTML(tag)}</span></li>`).join(''));
+    set('[data-acad-work]', (page.work || []).map((item, i) => `
+      <li class="acad-work__item reveal reveal--delay-${i + 1}">
+        <span class="acad-work__num" aria-hidden="true">${i + 1}</span>
+        <div class="acad-work__body">
+          <h4 class="acad-work__name">${te(item.title)}</h4>
+          <p class="acad-work__text">${te(item.text)}</p>
+        </div>
+      </li>`).join(''));
   }
 
   /* ---- news and activities: the newest as the lead, the rest beside it ---- */
@@ -78,26 +83,42 @@
       .filter(post => filter === 'all' || post.cat === filter)
       .sort((a, b) => b.date.localeCompare(a.date));
     if (!posts.length) { set('[data-acad-posts]', `<p class="cal-empty">${icon('info')}<span>${te(L.noPosts)}</span></p>`); return; }
-    const [lead, ...rest] = posts;
+    const [lead, ...more] = posts;
+    const rest = more.slice(0, 4);
+    /* Posts from the academy websites open there, in a new tab */
+    const target = post => post.external ? ' target="_blank" rel="noopener"' : '';
+    /* Photos come from the academy websites; a local one stands in if one fails */
+    const img = (post, w, h) => `<img src="${href(post.image)}" alt="" width="${w}" height="${h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="${href('assets/images/news/news-01.jpg')}">`;
     set('[data-acad-posts]', `
       <article class="acad-post acad-post--lead">
-        <a href="${href(lead.href)}">
-          <span class="acad-post__media"><img src="${href(lead.image)}" alt="" width="1200" height="800" loading="lazy" decoding="async"></span>
+        <a href="${href(lead.href)}"${target(lead)}>
+          <span class="acad-post__media">${img(lead, 890, 530)}</span>
           <span class="acad-post__body">
             ${postMeta(lead)}
             <span class="acad-post__title">${te(lead.title)}</span>
             <span class="acad-post__excerpt">${te(lead.excerpt)}</span>
-            <span class="link-arrow"><span>${te(L.readMore)}</span>${icon('arrow')}</span>
+            <span class="link-arrow"><span>${te(L.readMore)}</span>${icon(lead.external ? 'external' : 'arrow')}</span>
           </span>
         </a>
       </article>
       ${rest.length ? `<ul class="acad-post-list" role="list">${rest.map(post => `
         <li class="acad-post">
-          <a href="${href(post.href)}">
-            <span class="acad-post__media"><img src="${href(post.image)}" alt="" width="800" height="600" loading="lazy" decoding="async"></span>
+          <a href="${href(post.href)}"${target(post)}>
+            <span class="acad-post__media">${img(post, 890, 530)}</span>
             <span class="acad-post__body">${postMeta(post)}<span class="acad-post__title">${te(post.title)}</span></span>
           </a>
         </li>`).join('')}</ul>` : ''}`);
+  }
+
+  /* A photo that fails to load (a post moved on the academy website) falls back */
+  function initImageFallback() {
+    root.addEventListener('error', event => {
+      const img = event.target;
+      if (img.tagName !== 'IMG' || !img.dataset.fallback) return;
+      const next = img.dataset.fallback;
+      delete img.dataset.fallback;                      /* once only */
+      img.src = next;
+    }, true);
   }
 
   function initPostFilter() {
@@ -117,40 +138,60 @@
   }
 
   /* ---- lectures and works: numbered ledgers ---- */
-  const ledgerRow = (index, item) => {
-    const external = RS.isExternal(item.href);
-    return `
-      <li class="ledger-row">
-        <a href="${href(item.href)}"${external ? ' target="_blank" rel="noopener"' : ''}>
-          <span class="ledger-row__num" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
-          <span class="ledger-row__body">
-            ${item.flag ? `<span class="ledger-row__flag">${te(item.flag)}</span>` : ''}
-            <span class="ledger-row__title">${te(item.title)}${external ? `<span class="visually-hidden"> ${te(L.external)}</span>` : ''}</span>
-            <span class="ledger-row__meta">${item.meta}</span>
-          </span>
-          ${item.date ? `<span class="ledger-row__date">${date(item.date)}</span>` : ''}
-        </a>
-      </li>`;
-  };
 
+  /* Lectures as a printed programme: the date set large on the left; the next
+     one stands out on a cream panel with the days still to go */
   function renderLectures() {
     const lectures = [...(page.lectures || [])].sort((a, b) => b.date.localeCompare(a.date));
-    set('[data-acad-lectures]', lectures.map((lecture, i) => ledgerRow(i, {
-      href: lecture.href, title: lecture.title, date: lecture.date,
-      flag: lecture.date >= today ? L.upcoming : null,
-      meta: `${te(lecture.speaker)} · ${te(lecture.place)}`
-    })).join(''));
+    const now = new Date(`${today}T00:00:00`);
+    set('[data-acad-lectures]', lectures.map((lecture, i) => {
+      const upcoming = lecture.date >= today;
+      const days = Math.round((new Date(`${lecture.date}T00:00:00`) - now) / 864e5);
+      const when = days === 0 ? te(L.today) : escapeHTML(RS.digits(t(L.inDays).replace('{n}', days)));
+      const external = RS.isExternal(lecture.href);
+      return `
+      <li class="prog-row${upcoming ? ' is-upcoming' : ''} reveal reveal--delay-${Math.min(i + 1, 4)}">
+        <a href="${href(lecture.href)}"${external ? ' target="_blank" rel="noopener"' : ''}>
+          <span class="prog-row__date">
+            <span class="prog-row__day">${escapeHTML(RS.formatDate(lecture.date, { day: 'numeric' }))}</span>
+            <span class="prog-row__month">${escapeHTML(RS.formatDate(lecture.date, { month: 'short', year: '2-digit' }))}</span>
+          </span>
+          <span class="prog-row__body">
+            <span class="prog-row__flag">${upcoming ? `${te(L.upcoming)} · ${when}` : te(L.past)}</span>
+            <span class="prog-row__title">${te(lecture.title)}</span>
+            <span class="prog-row__meta">
+              <span>${icon('person')}${te(lecture.speaker)}</span>
+              <span>${icon('pin')}${te(lecture.place)}</span>
+            </span>
+          </span>
+          <span class="prog-row__go" aria-hidden="true">${icon('arrow')}</span>
+        </a>
+      </li>`;
+    }).join(''));
   }
 
+  /* Works: each entry carries its kind as a small mark and label */
   function renderWorks() {
     const works = INDEX.filter(record => record.academy === academy.id)
       .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
       .slice(0, 5);
     set('[data-acad-works]', works.length
-      ? works.map((record, i) => ledgerRow(i, {
-        href: record.href, title: record.title, date: record.date,
-        meta: te(TYPES[record.type]?.label) + (record.source ? ` · ${te(record.source)}` : '')
-      })).join('')
+      ? works.map((record, i) => {
+        const type = TYPES[record.type] || {};
+        const external = RS.isExternal(record.href);
+        return `
+      <li class="work-row reveal reveal--delay-${Math.min(i + 1, 4)}" data-kind="${escapeHTML(record.type)}">
+        <a href="${href(record.href)}"${external ? ' target="_blank" rel="noopener"' : ''}>
+          <span class="work-row__mark" aria-hidden="true">${icon(type.icon || 'doc')}</span>
+          <span class="work-row__body">
+            <span class="work-row__kind">${te(type.label)}${record.date ? ` · ${date(record.date)}` : ''}</span>
+            <span class="work-row__title">${te(record.title)}${external ? `<span class="visually-hidden"> ${te(L.external)}</span>` : ''}</span>
+            ${record.source ? `<span class="work-row__source">${te(record.source)}</span>` : ''}
+          </span>
+          <span class="work-row__go" aria-hidden="true">${icon(external ? 'external' : 'arrow')}</span>
+        </a>
+      </li>`;
+      }).join('')
       : `<li class="cal-empty">${icon('info')}<span>${te(L.noWorks)}</span></li>`);
     const more = qs('[data-acad-works-more]', root);
     if (more) more.href = RS.url(`pages/search.html?academy=${academy.id}`);
@@ -162,18 +203,63 @@
       ...(academy.site ? [{ label: { th: `เว็บไซต์${academy.name.th}`, en: `${academy.name.en} website` }, href: academy.site, external: true }] : []),
       ...(page.links || [])
     ];
-    set('[data-acad-links]', links.map(link => `
-      <li><a href="${href(link.href)}"${link.external ? ' target="_blank" rel="noopener"' : ''}>
-        <span>${te(link.label)}${link.external ? `<span class="visually-hidden"> ${te(L.external)}</span>` : ''}</span>${icon(link.external ? 'external' : 'arrow')}
+    const host = url => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; } };
+    /* Set like a printed list of references: numeral, title, a dotted leader
+       to the address it opens */
+    set('[data-acad-links]', links.map((link, i) => `
+      <li class="acad-link reveal reveal--delay-${Math.min(i + 1, 4)}"><a href="${href(link.href)}"${link.external ? ' target="_blank" rel="noopener"' : ''}>
+        <span class="acad-link__num" aria-hidden="true">${i + 1}</span>
+        <span class="acad-link__label">${te(link.label)}${link.external ? `<span class="visually-hidden"> ${te(L.external)}</span>` : ''}</span>
+        <span class="acad-link__dots" aria-hidden="true"></span>
+        <span class="acad-link__host" data-keep-digits>${escapeHTML(link.external ? host(link.href) : t(L.org))}</span>
+        <span class="acad-link__go" aria-hidden="true">${icon(link.external ? 'external' : 'arrow')}</span>
       </a></li>`).join(''));
-    set('[data-acad-others]', CFG.academies.filter(item => item !== academy).map(item => `
-      <li data-academy="${item.id}">
+    /* Each academy's own photograph if it has one, else the latest photo from
+       its news (taken from its website), else the Office building */
+    const photoOf = id => {
+      const data = PAGES[id] || {};
+      /* a photograph (.jpg), not a newsletter page or poster (.png) */
+      const post = (data.posts || []).find(item => item.external && /^https?:.*\.jpe?g$/i.test(item.image));
+      return data.photo || post?.image || 'assets/images/about/about-office.jpg';
+    };
+    set('[data-acad-others]', CFG.academies.filter(item => item !== academy).map((item, i) => `
+      <li class="acad-next__item reveal reveal--delay-${i + 1}" data-academy="${item.id}">
         <a href="${href(`pages/academy.html?id=${item.id}`)}">
-          <span class="acad-others__name">${te(item.name)}</span>
-          <span class="acad-others__fields">${(t(item.tags) || []).map(escapeHTML).join(' · ')}</span>
-          <span class="acad-others__go" aria-hidden="true">${icon('arrow')}</span>
+          <span class="acad-next__media">
+            <img src="${href(photoOf(item.id))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="${href('assets/images/about/about-office.jpg')}">
+          </span>
+          <span class="acad-next__caption">
+            <span class="acad-next__name">${te(item.name)}</span>
+            <span class="acad-next__alt">${escapeHTML(item.name[other])}</span>
+          </span>
+          <span class="acad-next__fields">${(t(item.tags) || []).map(escapeHTML).join(' · ')}</span>
+          <span class="acad-next__go" aria-hidden="true">${icon('arrow')}</span>
         </a>
       </li>`).join(''));
+  }
+
+  /* ---- Fellows: a printed roll of members, grouped by membership ---- */
+  function renderRoll() {
+    const people = (window.RS_FELLOWS || []).filter(person => person.academy === academy.id);
+    const types = window.RS_MEMBER_TYPES || {};
+    const order = ['fellow', 'honorary', 'associate'];
+    const groups = order.map(type => ({ type, people: people.filter(person => person.memberType === type) }))
+      .filter(group => group.people.length);
+    set('[data-acad-roll]', groups.length ? groups.map((group, g) => `
+      <section class="acad-roll__group reveal reveal--delay-${Math.min(g + 1, 4)}">
+        <h3 class="acad-roll__head"><span>${te(types[group.type])}</span><span class="acad-roll__count">${escapeHTML(RS.digits(group.people.length))}</span></h3>
+        <ol class="acad-roll__list" role="list">${group.people.map(person => `
+          <li><a href="${href(`pages/fellow.html?id=${encodeURIComponent(person.id)}`)}">
+            <span class="acad-roll__who">
+              <span class="acad-roll__title">${te(person.title)}</span>
+              <span class="acad-roll__name">${te(person.name)}</span>
+            </span>
+            <span class="acad-roll__dots" aria-hidden="true"></span>
+            <span class="acad-roll__field">${te(person.field)}</span>
+            <span class="acad-roll__go" aria-hidden="true">${icon('arrow')}</span>
+          </a></li>`).join('')}
+        </ol>
+      </section>`).join('') : `<p class="cal-empty">${icon('info')}<span>${te(L.noFellows)}</span></p>`);
   }
 
   /* ---- hand the academy to the shared Fellows track and calendar ---- */
@@ -187,7 +273,25 @@
   }
 
   /* ---- in-page menu: mark the section being read ---- */
+  /* Once the menu sticks under the floating header, it grows a white band
+     upward to the top of the window so the page never shows through the
+     gap around the header */
+  function initStuck() {
+    const nav = qs('.acad-nav', root);
+    if (!nav) return;
+    let frame = 0;
+    const check = () => {
+      frame = 0;
+      const top = parseFloat(getComputedStyle(nav).top) || 0;
+      nav.classList.toggle('is-stuck', nav.getBoundingClientRect().top <= top + 0.5);
+    };
+    window.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(check); }, { passive: true });
+    window.addEventListener('resize', check);
+    check();
+  }
+
   function initNav() {
+    initStuck();
     const links = qsa('[data-acad-nav] a', root);
     const sections = links.map(link => document.getElementById(link.hash.slice(1))).filter(Boolean);
     if (!('IntersectionObserver' in window) || !sections.length) return;
@@ -206,10 +310,12 @@
   RS.ready(() => {
     renderMast();
     renderAbout();
+    initImageFallback();
     renderPosts();
     initPostFilter();
     renderLectures();
     renderWorks();
+    renderRoll();
     renderFoot();
     tagShared();
     initNav();
