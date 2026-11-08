@@ -63,11 +63,20 @@
       document.body.appendChild(region);
     }
 
+    /* the same message again (e.g. repeated clicks on locked links) restarts
+       the one already showing instead of stacking copies */
+    const same = [...region.children].find(el => el.dataset.message === message);
+    if (same) {
+      clearTimeout(same._timer);
+      same._timer = setTimeout(() => same.remove(), 3200);
+      return;
+    }
     const item = document.createElement('div');
     item.className = 'toast';
+    item.dataset.message = message;
     item.innerHTML = `${icon('check')}<span>${escapeHTML(message)}</span>`;
     region.appendChild(item);
-    setTimeout(() => item.remove(), 3200);
+    item._timer = setTimeout(() => item.remove(), 3200);
   }
 
   RS.toast = toast;

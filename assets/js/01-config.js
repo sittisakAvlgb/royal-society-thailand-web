@@ -49,7 +49,7 @@ window.RS_CONFIG = {
        in `allow`. Set enabled: false before launch. */
     menuLock: {
       enabled: true,
-      allow: ['index.html', 'pages/sitemap.html', 'pages/academy.html'],
+      allow: ['index.html', 'pages/sitemap.html', 'pages/about.html', 'pages/academy.html', 'pages/knowledge.html', 'pages/article.html', 'pages/search.html'],
       message: { th: 'ต้นแบบเว็บไซต์ — หน้านี้ยังไม่เปิดให้เข้าชม', en: 'Prototype — this page is not open yet' }
     }
   },
