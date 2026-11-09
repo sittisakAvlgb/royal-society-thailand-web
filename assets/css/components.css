@@ -1246,7 +1246,7 @@
   border-radius: var(--radius-sm);
   background: var(--surface-alt);
   font-size: var(--text-sm);
-  line-height: 1.7;
+  line-height: 1.55;
   overflow-wrap: anywhere;
 }
 .citation__actions { display: flex; justify-content: flex-end; margin-top: var(--space-3); }
@@ -1379,7 +1379,7 @@
   line-height: 1.25;
   color: var(--rst-green-900);
 }
-.cc__intro { margin: 0; max-width: 46ch; font-size: var(--text-sm); line-height: 1.7; color: var(--text-secondary); }
+.cc__intro { margin: 0; max-width: 46ch; font-size: var(--text-sm); line-height: 1.55; color: var(--text-secondary); }
 .cc__policy {
   display: inline-flex;
   align-items: center;
@@ -1438,7 +1438,7 @@
 
 .cc-row__text { display: grid; gap: 2px; min-width: 0; }
 .cc-row__name { margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
-.cc-row__hint { margin: 0; font-size: var(--text-xs); line-height: 1.6; color: var(--text-secondary); }
+.cc-row__hint { margin: 0; font-size: var(--text-xs); line-height: 1.5; color: var(--text-secondary); }
 
 .cc-row__controls { display: flex; align-items: center; gap: var(--space-2); }
 .cc-row__always {
@@ -1618,7 +1618,7 @@
 
 .cc-bar__text { min-width: 0; }
 .cc-bar__title { margin: 0 0 2px; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--rst-green-900); }
-.cc-bar__line { margin: 0; font-size: var(--text-xs); line-height: 1.6; color: var(--text-secondary); }
+.cc-bar__line { margin: 0; font-size: var(--text-xs); line-height: 1.5; color: var(--text-secondary); }
 .cc-bar__policy { color: var(--rst-green-800); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rst-green-600); white-space: nowrap; }
 .cc-bar__policy:hover { color: var(--rst-green-900); }
 

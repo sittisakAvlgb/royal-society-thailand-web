@@ -126,9 +126,9 @@
   --text-2xl: 2.625rem;   /* 42 */
   --text-3xl: 3.1875rem;  /* 51 */
 
-  --leading-tight: 1.35;
-  --leading-normal: 1.6;
-  --leading-reading: 1.72;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-reading: 1.6;
 
   /* ---- Spacing -------------------------------------------------------- */
   --space-1: 4px;

@@ -63,8 +63,9 @@ main:focus { outline: none; }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: 600;
+  line-height: 1.2;
 }
 
 .section-desc {
@@ -265,7 +266,7 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
 }
 .page-header h1 {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   margin-top: var(--space-4);
 }
 .page-header__lead {
@@ -326,36 +327,37 @@ html:not([lang="en"]) .brand-title { white-space: nowrap; }
   margin-bottom: var(--space-4);
 }
 .footer-org__logo {
-  width: 40px;
-  height: 70px;
+  width: 34px;
+  height: 60px;
   object-fit: contain;   /* the emblem is transparent — it sits straight on the dark footer */
 }
 .footer-org__name {
   position: relative;
-  padding-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
   font-family: var(--font-display);
-  font-size: var(--text-lg);
+  font-size: 1.375rem;
+  line-height: 1.2;
   font-weight: 600;
   color: var(--white);
 }
 /* English pages: the Thai name stays in TH Sarabun New at a size that reads */
-html[lang="en"] .footer-org__name { font-family: "TH Sarabun New", sans-serif; font-size: 1.75rem; line-height: 1.2; }
+html[lang="en"] .footer-org__name { font-family: "TH Sarabun New", sans-serif; font-size: 1.375rem; line-height: 1.2; }
 .footer-org__name::after {
   content: "";
   position: absolute;
   inset-inline-start: 0;
   bottom: 0;
-  width: 40px;
+  width: 28px;
   height: 2px;
   background: var(--gold-500);
 }
 .footer-org__name-en {
   display: block;
-  margin-top: 4px;
+  margin-top: 2px;
   font-family: var(--font-latin);
   font-size: .75rem;
   font-weight: 600;
-  letter-spacing: .18em;
+  letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--gold-500);
 }
@@ -403,28 +405,31 @@ html[lang="en"] .footer-org__name { font-family: "TH Sarabun New", sans-serif; f
   text-decoration: none;
   transform: translateY(-1px);
 }
+/* Gold, like the seal edging the top of the footer; dark ink keeps it readable */
 .site-footer .footer-btn--solid {
-  border-color: var(--rst-green-600);
-  background: var(--rst-green-600);
-  color: var(--white);
+  border-color: var(--gold-500);
+  background: var(--gold-500);
+  color: var(--rst-green-950);
+  font-weight: 600;
 }
-.site-footer .footer-btn--solid:hover { border-color: var(--gold-500); background: var(--gold-500); color: var(--rst-green-950); }
+.site-footer .footer-btn--solid:hover { border-color: var(--gold-100); background: var(--gold-100); color: var(--rst-green-950); }
 
 .footer-col h2 {
   font-family: var(--font-body);
-  font-size: var(--text-md);
+  font-size: 1.25rem;
+  line-height: 1.25;
   font-weight: 700;
   color: var(--white);
 }
 html[lang="en"] .footer-col h2 { font-family: var(--font-display); font-weight: 600; }
 .footer-col h2 span {
   display: block;
-  margin-top: 5px;
+  margin-top: 3px;
   font-family: var(--font-latin);
   font-size: .75rem;
   font-weight: 600;
   color: var(--gold-500);
-  letter-spacing: .18em;
+  letter-spacing: .06em;
   text-transform: uppercase;
 }
 .footer-col::before {
@@ -483,7 +488,7 @@ html[lang="en"] .footer-col h2 { font-family: var(--font-display); font-weight: 
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 34px;
+  min-height: 32px;
   padding-block: var(--space-1);
 }
 
@@ -516,7 +521,7 @@ html[lang="en"] .footer-col h2 { font-family: var(--font-display); font-weight: 
   color: rgba(255, 255, 255, .72);
   font-size: var(--text-xs);
 }
-.footer-bottom p { line-height: 1.6; }
+.footer-bottom p { line-height: 1.5; }
 
 .footer-bottom__end {
   display: flex;
@@ -555,7 +560,12 @@ html[lang="en"] .footer-col h2 { font-family: var(--font-display); font-weight: 
 .visitor-count strong {
   font-family: var(--font-latin);
   font-weight: 500;
-  font-size: var(--text-sm);
+  font-size: inherit;
   color: rgba(255, 255, 255, .9);
   font-feature-settings: "tnum" 1;
 }
+
+/* Latin runs (email, the English name, numbers) sit a step under the Thai
+   around them — Geist reads much larger than TH Sarabun New at one size */
+.site-footer :is(.font-latin, [lang="en"]):not(.footer-org__name-en, .footer-col h2 span) { font-family: var(--font-latin); font-size: .85em; }
+html[lang="en"] .site-footer :is(.font-latin, [lang="en"]):not(.footer-org__name-en, .footer-col h2 span) { font-size: inherit; }

@@ -28,12 +28,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
 
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20261109b">
-  <link rel="stylesheet" href="assets/css/base.css?v=20261109b">
-  <link rel="stylesheet" href="assets/css/layout.css?v=20261109b">
-  <link rel="stylesheet" href="assets/css/components.css?v=20261109b">
-  <link rel="stylesheet" href="assets/css/pages.css?v=20261109b">
-  <link rel="stylesheet" href="assets/css/responsive.css?v=20261109b">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20261109c">
+  <link rel="stylesheet" href="assets/css/base.css?v=20261109c">
+  <link rel="stylesheet" href="assets/css/layout.css?v=20261109c">
+  <link rel="stylesheet" href="assets/css/components.css?v=20261109c">
+  <link rel="stylesheet" href="assets/css/pages.css?v=20261109c">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20261109c">
 
   <script type="application/ld+json">
   {
@@ -74,20 +74,20 @@
   }
   </script>
 
-  <script defer src="assets/js/00-core.js?v=20261109b"></script>
-  <script defer src="assets/js/01-config.js?v=20261109b"></script>
-  <script defer src="assets/js/data/search-index.js?v=20261109b"></script>
-  <script defer src="assets/js/data/fellows.js?v=20261109b"></script>
-  <script defer src="assets/js/02-components.js?v=20261109b"></script>
-  <script defer src="assets/js/03-accessibility.js?v=20261109b"></script>
-  <script defer src="assets/js/04-interactions.js?v=20261109b"></script>
-  <script defer src="assets/js/05-language.js?v=20261109b"></script>
-  <script defer src="assets/js/06-search.js?v=20261109b"></script>
-  <script defer src="assets/js/08-directory.js?v=20261109b"></script>
-  <script defer src="assets/js/data/events.js?v=20261109b"></script>
-  <script defer src="assets/js/09-calendar.js?v=20261109b"></script>
-  <script defer src="assets/js/11-news-filter.js?v=20261109b"></script>
-  <script defer src="assets/js/10-consent.js?v=20261109b"></script>
+  <script defer src="assets/js/00-core.js?v=20261109c"></script>
+  <script defer src="assets/js/01-config.js?v=20261109c"></script>
+  <script defer src="assets/js/data/search-index.js?v=20261109c"></script>
+  <script defer src="assets/js/data/fellows.js?v=20261109c"></script>
+  <script defer src="assets/js/02-components.js?v=20261109c"></script>
+  <script defer src="assets/js/03-accessibility.js?v=20261109c"></script>
+  <script defer src="assets/js/04-interactions.js?v=20261109c"></script>
+  <script defer src="assets/js/05-language.js?v=20261109c"></script>
+  <script defer src="assets/js/06-search.js?v=20261109c"></script>
+  <script defer src="assets/js/08-directory.js?v=20261109c"></script>
+  <script defer src="assets/js/data/events.js?v=20261109c"></script>
+  <script defer src="assets/js/09-calendar.js?v=20261109c"></script>
+  <script defer src="assets/js/11-news-filter.js?v=20261109c"></script>
+  <script defer src="assets/js/10-consent.js?v=20261109c"></script>
 </head>
 <body class="page-home">
   <div id="app-header"></div>
@@ -273,11 +273,14 @@
           </div>
           <!-- TODO (Office): confirm centenary wording.
                Founded 19 April 1926 (B.E. 2469) — source: en.wikipedia.org/wiki/Royal_Society_of_Thailand -->
-          <p class="about-band__badge">
-            <span class="about-band__badge-num"><span data-count-to="100">100</span></span>
-            <span class="about-band__badge-text">
-              <span data-en="years of the Royal Society">ปี ราชบัณฑิตยสภา</span>
-              <span class="about-band__badge-sub" data-en="1926–2026">พ.ศ. 2469–2569</span>
+          <!-- The centenary as a silk book ribbon hanging from the top of the photo -->
+          <p class="about-band__ribbon">
+            <span class="about-band__ribbon-name" data-en="Royal Society">ราชบัณฑิตยสภา</span>
+            <span class="about-band__ribbon-num"><span data-count-to="100">100</span></span>
+            <span class="about-band__ribbon-unit" data-en="years">ปี</span>
+            <span class="about-band__ribbon-years">
+              <span data-en="1926">พ.ศ. 2469</span>
+              <span data-en="2026">2569</span>
             </span>
           </p>
         </div>
@@ -285,15 +288,17 @@
         <div class="about-band__text">
           <!-- Introduction — drawn word for word from the history supplied by the Office
                (Sept 2026); the title is the phrase used in section 6 of the Royal Society Act B.E. 2558 -->
-          <p class="kicker reveal" data-en="About the Royal Society">เกี่ยวกับราชบัณฑิตยสภา</p>
-          <h2 id="about-title" class="section-title reveal" data-en="A house for all learning">สถานที่บำรุงสรรพวิชา</h2>
-          <div class="about-band__intro reveal">
-            <p class="about-band__lead" data-en="Founded on 19 April 1926 by King Prajadhipok (Rama VII) to revive the ancient Department of Royal Scholars.">ก่อตั้งเมื่อวันที่ <strong>19 เมษายน พ.ศ. 2469</strong> โดยพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว รัชกาลที่ 7 เพื่อฟื้นฟูกิจการของกรมราชบัณฑิตย์ซึ่งมีมาแต่โบราณ</p>
-            <p data-en="For a century the Society has studied, researched and fostered every field of learning. Its best-known work — the reference and standard for written Thai in government and in schools — is the Royal Institute Dictionary.">ดำเนินงานตามพันธกิจในการศึกษา ค้นคว้า วิจัย และบำรุงสรรพวิชามาอย่างต่อเนื่อง ผลงานที่เป็นที่รู้จักและใช้เป็นแหล่งอ้างอิงและมาตรฐานในการเขียนหนังสือไทย ทั้งหนังสือราชการและในการศึกษาเล่าเรียน คือ <strong>พจนานุกรม ฉบับราชบัณฑิตยสถาน</strong></p>
+          <p class="kicker reveal" data-en="History and mission">ประวัติและพันธกิจ</p>
+          <div class="about-band__head reveal">
+            <h2 id="about-title" class="section-title" data-en="About the Royal Society">เกี่ยวกับราชบัณฑิตยสภา</h2>
             <a class="link-arrow" href="pages/about.html#history">
               <span data-en="Read the history">อ่านประวัติความเป็นมา</span>
               <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
             </a>
+          </div>
+          <div class="about-band__intro reveal">
+            <p class="about-band__lead" data-en="A house for all learning, founded on 19 April 1926 by King Prajadhipok (Rama VII) to revive the ancient Department of Royal Scholars."><strong class="about-band__runin">สถานที่บำรุงสรรพวิชา</strong> ก่อตั้งเมื่อวันที่ <strong>19 เมษายน พ.ศ. 2469</strong> โดยพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว รัชกาลที่ 7 เพื่อฟื้นฟูกิจการของกรมราชบัณฑิตย์ซึ่งมีมาแต่โบราณ</p>
+            <p data-en="For a century the Society has studied, researched and fostered every field of learning. Its best-known work — the reference and standard for written Thai in government and in schools — is the Royal Institute Dictionary.">ดำเนินงานตามพันธกิจในการศึกษา ค้นคว้า วิจัย และบำรุงสรรพวิชามาอย่างต่อเนื่อง ผลงานที่เป็นที่รู้จักและใช้เป็นแหล่งอ้างอิงและมาตรฐานในการเขียนหนังสือไทย ทั้งหนังสือราชการและในการศึกษาเล่าเรียน คือ <strong>พจนานุกรม ฉบับราชบัณฑิตยสถาน</strong></p>
           </div>
 
           <div class="about-band__list-head reveal">
@@ -600,7 +605,7 @@
 
         <div class="section-head reveal">
           <div class="section-head__text">
-            <p class="eyebrow" data-en="Knowledge">องค์ความรู้</p>
+            <p class="kicker" data-en="Knowledge">องค์ความรู้</p>
             <h2 id="explore-title" class="section-title" data-en="Explore knowledge">สำรวจองค์ความรู้</h2>
             <p class="section-desc" data-en="Knowledge from the Royal Society and its three academies, in four parts.">องค์ความรู้จากราชบัณฑิตยสภาและ ๓ สำนักวิชาการ แบ่งเป็น ๔ ส่วน</p>
           </div>
