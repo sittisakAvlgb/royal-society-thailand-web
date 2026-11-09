@@ -2344,7 +2344,7 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
 /* Introduction above the academies */
 .about-band__intro { display: grid; gap: var(--space-4); max-width: 40rem; margin-top: var(--space-4); color: var(--text-secondary); font-size: var(--text-base); line-height: 1.45; }
 .about-band__intro > * { margin: 0; }
-.about-band__intro .link-arrow { justify-self: start; margin-top: var(--space-2); }
+.about-band__intro .link-arrow { justify-self: end; margin-top: calc(-1 * var(--space-2)); }
 .about-band__intro strong { font-weight: 600; color: var(--rst-green-900); }
 /* Set like the opening of a printed Thai text: a gold ฟองมัน (๏) starts the paragraph */
 .about-band__lead { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 500; line-height: 1.35; color: var(--text-primary); }
@@ -3614,3 +3614,14 @@ html:has(.about-page) { scroll-padding-top: calc(var(--header-overlap) + 64px); 
 @media (min-width: 1024px) {
   .featured-band .feature-slide__title, .news-band .news-spotlight__title { font-size: var(--text-md); }
 }
+
+
+/* Home events: the month calendar on the left, the details in the middle,
+   the leaf on the right; past events (when nothing is coming) keep their ink */
+@media (min-width: 1100px) {
+  .tearoff:not(.tearoff--side) .tearoff__main { grid-template-columns: 250px minmax(0, 1fr) 128px; }
+  .tearoff:not(.tearoff--side) .tearoff__cal { grid-column: 1; grid-row: 1; padding: 0 var(--space-6) 0 0; border-left: 0; border-right: 1px solid var(--border); }
+  .tearoff:not(.tearoff--side) .tearoff__detail { grid-column: 2; grid-row: 1; }
+  .tearoff:not(.tearoff--side) .tearoff__pad { grid-column: 3; grid-row: 1; justify-self: end; }
+}
+.tearoff[data-tearoff-past] .tcal__day.has-events.is-past { opacity: 1; }

@@ -51,6 +51,8 @@
     selectDay: { th: 'เลือกวันที่', en: 'Select' },
     reminderList: { th: 'ตั้งเตือนไว้', en: 'Reminders' },
     inDays: { th: 'อีก <strong>{n}</strong> วัน', en: 'In <strong>{n}</strong> days' },
+    daysAgo: { th: 'ผ่านมาแล้ว <strong>{n}</strong> วัน', en: '<strong>{n}</strong> days ago' },
+    pastDesc: { th: 'ยังไม่มีกิจกรรมที่จะจัดขึ้น — แสดงกิจกรรมที่ผ่านมาล่าสุด', en: 'Nothing is scheduled yet — these are the most recent events' },
     until: { th: 'ถึง', en: 'until' },
     addCalShort: { th: 'เพิ่มลงปฏิทินของฉัน', en: 'Add to my calendar' },
     prevMonth: { th: 'เดือนก่อนหน้า', en: 'Previous month' },
@@ -439,8 +441,17 @@
     const limit = Number(root.dataset.tearoff) || 5;
     /* data-tearoff-academy narrows it to one academy; without it, academy-only meetings stay off */
     const academy = root.dataset.tearoffAcademy;
-    const all = eventsBetween(today, addDays(today, 400))
-      .filter(ev => academy ? ev.academy === academy : !ev.academyOnly);
+    const mine = ev => academy ? ev.academy === academy : !ev.academyOnly;
+    let all = eventsBetween(today, addDays(today, 400)).filter(mine);
+    /* nothing coming up: show the events already held, newest first, and
+       say so in the band's description */
+    const past = !all.length;
+    if (past) {
+      all = eventsBetween(addDays(today, -400), addDays(today, -1)).filter(mine).reverse();
+      root.dataset.tearoffPast = '';
+      const desc = root.closest('section')?.querySelector('[data-tearoff-desc]');
+      if (desc) desc.innerHTML = te(L.pastDesc);
+    }
     const list = all.slice(0, limit);
     const cal = qs('[data-tearoff-cal]', root);
     if (!list.length) {
@@ -453,13 +464,17 @@
     const side = root.classList.contains('tearoff--side');
     const dock = () => { if (side) stack.querySelector('.mini-leaf.is-active')?.closest('li')?.append(detail); };
     let month = null;                                /* first day of the month the calendar shows */
-    const firstMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-    const lastEvent = parse(all[all.length - 1].date);
-    const lastMonth = new Date(lastEvent.getFullYear(), lastEvent.getMonth(), 1);
+    /* the calendar can browse from the earliest to the latest event shown,
+       and always includes this month */
+    const monthOf = d => new Date(d.getFullYear(), d.getMonth(), 1);
+    const dates = all.map(ev => parse(ev.date));
+    const firstMonth = monthOf(new Date(Math.min(today, ...dates)));
+    const lastMonth = monthOf(new Date(Math.max(today, ...dates)));
 
     function countText(ev) {
       const days = Math.round((parse(ev.date) - today) / 86400000);
-      if (days <= 0) return `<strong>${te(L.todayIs)}</strong>`;
+      if (days < 0) return t(L.daysAgo).replace('{n}', -days);
+      if (days === 0) return `<strong>${te(L.todayIs)}</strong>`;
       if (days === 1) return `<strong>${te(L.tomorrow)}</strong>`;
       return t(L.inDays).replace('{n}', days);
     }
