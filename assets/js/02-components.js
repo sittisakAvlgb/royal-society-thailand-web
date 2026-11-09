@@ -335,7 +335,7 @@
       open: { th: 'แชทกับเรา', en: 'Chat with us' },
       via: { th: 'แชทผ่าน Facebook Messenger', en: 'Chat on Facebook Messenger' },
       hello: { th: 'ยินดีให้บริการ', en: 'Happy to help' },
-      intro: { th: 'สอบถามเรื่องคำศัพท์ การใช้ภาษาไทย หรือบริการของสำนักงาน ส่งข้อความถึงเราทาง Messenger ได้เลย', en: 'Ask about terms, Thai usage or the Office’s services — send us a message on Messenger.' },
+      intro: { th: 'สอบถามเรื่องคำศัพท์ การใช้ภาษาไทย หรือบริการของสำนักงาน ทาง Messenger ได้เลย', en: 'Ask about terms, Thai usage or the Office’s services on Messenger.' },
       start: { th: 'เริ่มแชทใน Messenger', en: 'Start a chat in Messenger' },
       note: { th: 'เปิดในแท็บใหม่ · ต้องเข้าสู่ระบบ Facebook', en: 'Opens in a new tab · needs a Facebook sign-in' },
       other: { th: 'ช่องทางติดต่ออื่น', en: 'Other ways to contact us' },
