@@ -34,6 +34,7 @@
     today: { th: 'วันนี้', en: 'Today' },
     past: { th: 'บรรยายแล้ว', en: 'Held' },
     readMore: { th: 'อ่านต่อ', en: 'Read more' },
+    visit: { th: 'ไปที่หน้าสำนัก', en: 'Go to the academy' },
     external: { th: '(เปิดในแท็บใหม่)', en: '(opens in a new tab)' }
   };
 
@@ -239,18 +240,19 @@
       const post = (data.posts || []).find(item => item.external && /^https?:.*\.jpe?g$/i.test(item.image));
       return data.photo || post?.image || 'assets/images/about/about-office.jpg';
     };
+    /* The other two academies as typographic panels (no photographs): the
+       academy's number large in its own colour, a hairline, the two names,
+       and the way in. photoOf stays for a page that wants pictures back. */
+    void photoOf;
     set('[data-acad-others]', CFG.academies.filter(item => item !== academy).map((item, i) => `
-      <li class="acad-next__item reveal reveal--delay-${i + 1}" data-academy="${item.id}">
+      <li class="acad-other reveal reveal--delay-${i + 1}" data-academy="${item.id}">
         <a href="${href(`pages/academy.html?id=${item.id}`)}">
-          <span class="acad-next__media">
-            <img src="${href(photoOf(item.id))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="${href('assets/images/about/about-office.jpg')}">
+          <span class="acad-other__num" aria-hidden="true">${String(CFG.academies.indexOf(item) + 1).padStart(2, '0')}</span>
+          <span class="acad-other__names">
+            <span class="acad-other__name">${te(item.name)}</span>
+            <span class="acad-other__alt" lang="${other}">${escapeHTML(item.name[other])}</span>
           </span>
-          <span class="acad-next__caption">
-            <span class="acad-next__name">${te(item.name)}</span>
-            <span class="acad-next__alt">${escapeHTML(item.name[other])}</span>
-          </span>
-          <span class="acad-next__fields">${(t(item.tags) || []).map(escapeHTML).join(' · ')}</span>
-          <span class="acad-next__go" aria-hidden="true">${icon('arrow')}</span>
+          <span class="acad-other__go"><span class="visually-hidden">${te(L.visit)}</span>${icon('arrow')}</span>
         </a>
       </li>`).join(''));
   }

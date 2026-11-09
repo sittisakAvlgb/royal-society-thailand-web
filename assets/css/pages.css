@@ -3452,6 +3452,71 @@ html[lang="en"] .acad-mast__alt { font-family: "TH Sarabun New", sans-serif; fon
 
 /* The other academies: a photograph each with the name set over its foot
    (neutral charcoal scrim, no green); subjects underneath, an arrow on hover */
+/* Academy page: the other two academies as compact typographic rows — no
+   photos. The academy's number in its own colour, the Thai and English
+   names, an arrow. Hover: the number block fills with the academy colour in
+   a left-to-right sweep (the number turns white), the names step right and
+   the arrow slides out in that colour. */
+.acad-others { display: grid; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+.acad-other a {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--duration) var(--ease);
+}
+.acad-other__num {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-width: 84px;
+  padding: 0 var(--space-4);
+  border-right: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--academy-accent, var(--rst-green-800));
+  transition: color .3s var(--ease) .05s;
+}
+/* the ink that sweeps in behind the number */
+.acad-other__num::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--academy-accent, var(--rst-green-800));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+.acad-other__names { display: grid; align-content: center; gap: 0; min-width: 0; padding: var(--space-3) var(--space-4); transition: transform .35s var(--ease); }
+.acad-other__name { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; line-height: 1.3; color: var(--rst-green-900); transition: color var(--duration) var(--ease); }
+.acad-other__alt { font-family: var(--font-latin); font-size: var(--text-xs); color: var(--text-secondary); }
+.acad-other__alt:lang(th) { font-family: var(--font-body); }
+.acad-other__go { display: grid; place-items: center; padding-right: var(--space-4); color: var(--text-secondary); }
+.acad-other__go .icon { width: 34px; height: 34px; padding: 8px; border: 1px solid var(--border-strong); border-radius: 50%; transition: transform .35s var(--ease), background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease); }
+.acad-other a:hover, .acad-other a:focus-visible { border-color: var(--academy-accent, var(--rst-green-800)); }
+.acad-other a:hover .acad-other__num, .acad-other a:focus-visible .acad-other__num { color: var(--white); }
+.acad-other a:hover .acad-other__num::before, .acad-other a:focus-visible .acad-other__num::before { transform: scaleX(1); }
+.acad-other a:hover .acad-other__names, .acad-other a:focus-visible .acad-other__names { transform: translateX(6px); }
+.acad-other a:hover .acad-other__name, .acad-other a:focus-visible .acad-other__name { color: var(--academy-accent, var(--rst-green-800)); }
+.acad-other a:hover .acad-other__go .icon, .acad-other a:focus-visible .acad-other__go .icon { border-color: var(--academy-accent, var(--rst-green-800)); background: var(--academy-accent, var(--rst-green-800)); color: var(--white); transform: translateX(4px); }
+@media (min-width: 768px) {
+  .acad-others { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+}
+@media (max-width: 479px) {
+  .acad-other__num { min-width: 64px; font-size: 1.875rem; }
+}
+@media (prefers-reduced-motion: reduce) { .acad-other__num, .acad-other__num::before, .acad-other__names, .acad-other__go .icon { transition: none; } }
+
 .acad-next__list { display: grid; gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
 .acad-next__item a { position: relative; display: grid; gap: var(--space-3); color: inherit; text-decoration: none; }
 .acad-next__media { position: relative; display: block; overflow: hidden; border-radius: var(--radius-lg); aspect-ratio: 2 / 1; background: var(--surface-alt); }
