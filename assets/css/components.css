@@ -387,6 +387,17 @@
 .mega-group--wide { grid-column: span 2; }
 .mega-group--wide ul { columns: 2; column-gap: var(--space-8); }
 
+/* Menu text read too thin: TH Sarabun New ships only regular and bold, so the
+   regular menu text gets a hairline stroke (scales with the text) to sit
+   between the two; links a touch larger, descriptions a shade darker.
+   English uses Geist, which has a real medium weight. */
+.mega-group ul a { font-size: 1.125rem; }
+.mega-feature__desc { color: #3d4a44; }
+html:not([lang="en"]) :is(.nav-link, .mega-group ul a, .mega-feature__desc, .mega-feature .link-arrow) {
+  -webkit-text-stroke: .015em currentColor;
+}
+html[lang="en"] :is(.nav-link, .mega-group ul a, .mega-feature__desc) { font-weight: 500; }
+
 @keyframes fade-down {
   from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: none; }
@@ -485,8 +496,8 @@
 /* Floating accessibility button, bottom-right on every page */
 .access-fab {
   position: fixed;
-  right: var(--space-4);
-  bottom: var(--space-4);
+  right: var(--fab-edge, var(--space-4));
+  bottom: var(--fab-edge, var(--space-4));
   z-index: var(--z-sticky);
   display: grid;
   place-items: center;
@@ -507,6 +518,84 @@
 @media (max-width: 767px) {
   .access-fab[aria-expanded="true"] { opacity: 0; pointer-events: none; }   /* the bottom sheet covers it */
 }
+
+/* ==============================
+   Chat — the client's reference design: a Messenger-coloured round button
+   above the accessibility button (both on --fab-edge, so they line up), and
+   a card with a dark green header (crest, Office name, close), a cream body
+   with a white greeting box, the Messenger button, a note and a way to the
+   other contact channels.
+================================ */
+.chat-fab {
+  position: fixed;
+  right: var(--fab-edge, var(--space-4));
+  bottom: calc(var(--fab-edge, var(--space-4)) + 56px + var(--space-3));
+  z-index: var(--z-sticky);
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, .85);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0a7cff 0%, #a334fa 60%, #ff5c87 100%);
+  color: var(--white);
+  box-shadow: 0 10px 24px rgba(6, 37, 25, .22);
+  cursor: pointer;
+  animation: chat-fab-in .5s .4s cubic-bezier(.2, 1.3, .4, 1) both;
+  transition: transform var(--duration) var(--ease);
+}
+.chat-fab > * { grid-area: 1 / 1; transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease); }
+.chat-fab .chat-glyph { width: 28px; height: 28px; }
+.chat-fab .icon { width: 22px; height: 22px; opacity: 0; transform: rotate(-90deg); }
+.chat-widget.is-open .chat-fab .chat-glyph { opacity: 0; transform: rotate(90deg) scale(.6); }
+.chat-widget.is-open .chat-fab .icon { opacity: 1; transform: none; }
+.chat-fab:hover { transform: translateY(-2px) scale(1.04); }
+.chat-fab:focus-visible { outline: 3px solid var(--rst-green-300); outline-offset: 2px; }
+@keyframes chat-fab-in { from { opacity: 0; transform: translateY(12px) scale(.6); } to { opacity: 1; transform: none; } }
+
+.chat-panel {
+  position: fixed;
+  right: var(--fab-edge, var(--space-4));
+  bottom: calc(var(--fab-edge, var(--space-4)) + 2 * 56px + 2 * var(--space-3));
+  z-index: var(--z-overlay);
+  width: min(340px, calc(100vw - 2 * var(--fab-edge, var(--space-4))));
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--cream);
+  box-shadow: 0 16px 40px rgba(6, 37, 25, .18);
+  transform-origin: bottom right;
+  animation: chat-panel-in .26s var(--ease) both;
+}
+.chat-panel[hidden] { display: none; }
+@keyframes chat-panel-in { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: none; } }
+/* dark green header: crest in a white disc, the Office, the close button */
+.chat-panel__head { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: var(--rst-green-900); color: var(--white); }
+.chat-panel__avatar { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--white); }
+.chat-panel__logo { width: 22px; height: 38px; object-fit: contain; }
+.chat-panel__title { display: grid; flex: 1; min-width: 0; margin: 0; line-height: 1.3; }
+.chat-panel__title strong { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--white); }
+.chat-panel__title span { font-size: var(--text-xs); color: rgba(255, 255, 255, .75); }
+.chat-panel__close { display: grid; place-items: center; flex: none; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .14); color: var(--white); cursor: pointer; transition: background-color var(--duration) var(--ease); }
+.chat-panel__close .icon { width: 18px; height: 18px; }
+.chat-panel__close:hover { background: rgba(255, 255, 255, .26); }
+.chat-panel__close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+/* cream body */
+.chat-panel__body { display: grid; gap: var(--space-3); padding: var(--space-4); }
+.chat-greeting { display: grid; gap: 2px; margin: 0; padding: var(--space-3) var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--white); font-size: var(--text-sm); line-height: 1.55; color: var(--text-primary); }
+.chat-cta { display: flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 48px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); background: linear-gradient(90deg, #0a7cff 0%, #a334fa 60%, #ff5c87 100%); color: var(--white); font-weight: 700; text-decoration: none; transition: filter var(--duration) var(--ease), transform var(--duration) var(--ease); }
+.chat-cta .chat-glyph { width: 22px; height: 22px; }
+.chat-cta:hover { filter: brightness(1.06); transform: translateY(-1px); color: var(--white); text-decoration: none; }
+.chat-cta:focus-visible { outline: 3px solid var(--rst-green-300); outline-offset: 2px; }
+.chat-note { margin: -4px 0 0; font-size: var(--text-xs); text-align: center; color: var(--text-secondary); }
+.chat-alt { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 40px; font-size: var(--text-sm); font-weight: 600; color: var(--rst-green-900); text-decoration: none; }
+.chat-alt .icon { width: 16px; height: 16px; transition: transform var(--duration) var(--ease); }
+.chat-alt:hover { color: var(--rst-green-800); }
+.chat-alt:hover .icon { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) { .chat-fab, .chat-panel { animation: none; } }
+body.access-reduce-motion .chat-fab, body.access-reduce-motion .chat-panel { animation: none; }
+@media print { .chat-widget { display: none; } }
 
 /* Panel: bottom sheet on phones, dropdown card from 768px (responsive.css) */
 .access-panel {

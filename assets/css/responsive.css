@@ -102,7 +102,7 @@
     max-height: min(calc(100vh - 110px), 720px);
     transform-origin: bottom right;
   }
-  .access-fab { right: var(--space-6); bottom: var(--space-6); }
+  :root { --fab-edge: var(--space-6); }   /* the round buttons (accessibility, chat) sit this far in */
   .access-panel { right: var(--space-6); bottom: calc(var(--space-6) + 68px); }
   .toast-region { bottom: var(--space-6); right: calc(var(--space-6) + 72px); }
 

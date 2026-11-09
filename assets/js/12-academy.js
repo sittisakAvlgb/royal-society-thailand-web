@@ -64,19 +64,29 @@
   /* ---- about: intro and the academy's fields, set like a contents page ---- */
   function renderAbout() {
     set('[data-acad-intro]', te(page.intro || academy.fields));
-    set('[data-acad-work]', (page.work || []).map((item, i) => `
-      <li class="acad-work__item reveal reveal--delay-${i + 1}">
-        <span class="acad-work__num" aria-hidden="true">${i + 1}</span>
-        <div class="acad-work__body">
-          <h4 class="acad-work__name">${te(item.title)}</h4>
-          <p class="acad-work__text">${te(item.text)}</p>
-        </div>
+    /* The academy's own pages: each row opens that page on its website */
+    set('[data-acad-info]', (page.info || []).map((item, i) => `
+      <li class="acad-work__item reveal reveal--delay-${Math.min(i + 1, 4)}">
+        <a class="acad-work__link" href="${escapeHTML(item.href)}" target="_blank" rel="noopener">
+          <span class="acad-work__num" aria-hidden="true">${i + 1}</span>
+          <span class="acad-work__body">
+            <span class="acad-work__name">${te(item.title)}<span class="visually-hidden"> ${te(L.external)}</span></span>
+            <span class="acad-work__text">${te(item.text)}</span>
+          </span>
+          <span class="acad-work__go" aria-hidden="true">${icon('external')}</span>
+        </a>
       </li>`).join(''));
   }
 
-  /* ---- news and activities: the newest as the lead, the rest beside it ---- */
-  const postMeta = post => `
-    <span class="acad-post__meta"><span class="acad-post__cat" data-cat="${escapeHTML(post.cat)}">${te(CATS[post.cat])}</span><time datetime="${escapeHTML(post.date)}">${date(post.date)}</time></span>`;
+  /* ---- news and activities: the newest as the lead, four cards beside it ---- */
+  /* Same card as the home news band: the category above the title, and a
+     foot with the date on the left and "Read more" on the right */
+  const postCat = post => `<span class="acad-post__cat" data-cat="${escapeHTML(post.cat)}">${te(CATS[post.cat])}</span>`;
+  const postFoot = post => `
+    <span class="acad-post__foot">
+      <time datetime="${escapeHTML(post.date)}">${date(post.date)}</time>
+      <span class="news-cta"><span>${te(L.readMore)}</span><span class="news-cta__dot" aria-hidden="true">${icon(post.external ? 'external' : 'arrow')}</span></span>
+    </span>`;
 
   function renderPosts(filter = 'all') {
     const posts = (page.posts || [])
@@ -89,23 +99,30 @@
     const target = post => post.external ? ' target="_blank" rel="noopener"' : '';
     /* Photos come from the academy websites; a local one stands in if one fails */
     const img = (post, w, h) => `<img src="${href(post.image)}" alt="" width="${w}" height="${h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="${href('assets/images/news/news-01.jpg')}">`;
+    const box = qs('[data-acad-posts]', root);
+    if (box) box.classList.toggle('acad-posts--single', !rest.length);
+    const external = post => post.external ? `<span class="visually-hidden"> ${te(L.external)}</span>` : '';
     set('[data-acad-posts]', `
       <article class="acad-post acad-post--lead">
         <a href="${href(lead.href)}"${target(lead)}>
           <span class="acad-post__media">${img(lead, 890, 530)}</span>
           <span class="acad-post__body">
-            ${postMeta(lead)}
-            <span class="acad-post__title">${te(lead.title)}</span>
+            ${postCat(lead)}
+            <span class="acad-post__title">${te(lead.title)}${external(lead)}</span>
             <span class="acad-post__excerpt">${te(lead.excerpt)}</span>
-            <span class="link-arrow"><span>${te(L.readMore)}</span>${icon(lead.external ? 'external' : 'arrow')}</span>
+            ${postFoot(lead)}
           </span>
         </a>
       </article>
-      ${rest.length ? `<ul class="acad-post-list" role="list">${rest.map(post => `
+      ${rest.length ? `<ul class="acad-post-grid" role="list">${rest.map(post => `
         <li class="acad-post">
           <a href="${href(post.href)}"${target(post)}>
             <span class="acad-post__media">${img(post, 890, 530)}</span>
-            <span class="acad-post__body">${postMeta(post)}<span class="acad-post__title">${te(post.title)}</span></span>
+            <span class="acad-post__body">
+              ${postCat(post)}
+              <span class="acad-post__title">${te(post.title)}${external(post)}</span>
+              ${postFoot(post)}
+            </span>
           </a>
         </li>`).join('')}</ul>` : ''}`);
   }
@@ -242,7 +259,7 @@
   function renderRoll() {
     const people = (window.RS_FELLOWS || []).filter(person => person.academy === academy.id);
     const types = window.RS_MEMBER_TYPES || {};
-    const order = ['fellow', 'honorary', 'associate'];
+    const order = ['honorary', 'fellow', 'associate'];
     const groups = order.map(type => ({ type, people: people.filter(person => person.memberType === type) }))
       .filter(group => group.people.length);
     set('[data-acad-roll]', groups.length ? groups.map((group, g) => `
@@ -266,6 +283,11 @@
   function tagShared() {
     const track = qs('[data-fellows-preview]', root);
     if (track) track.dataset.fellowsAcademy = academy.id;
+    /* the Fellows search: scoped to this academy; its fields become the chips */
+    const field = qs('[data-acad-fellow-academy]', root);
+    if (field) field.value = academy.id;
+    set('[data-acad-fellow-chips]', (t(academy.tags) || []).map(tag =>
+      `<a href="${href(`pages/fellows.html?academy=${academy.id}&q=${encodeURIComponent(tag)}`)}">${escapeHTML(tag)}</a>`).join(''));
     const tearoff = qs('[data-acad-tearoff]', root);
     if (tearoff) tearoff.dataset.tearoffAcademy = academy.id;
     const more = qs('[data-acad-fellows-more]', root);
@@ -315,7 +337,7 @@
     initPostFilter();
     renderLectures();
     renderWorks();
-    renderRoll();
+    renderRoll();          /* no-op unless a [data-acad-roll] is on the page */
     renderFoot();
     tagShared();
     initNav();

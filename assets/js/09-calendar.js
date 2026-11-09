@@ -494,7 +494,7 @@
     const renderDetail = ev => {
       detail.dataset.type = ev.type;
       detail.innerHTML = `
-        <p class="tearoff__cat">${te(TYPES[ev.type])}</p>
+        <p class="tearoff__cat">${te(TYPES[ev.type])}<span class="tearoff__count">${countText(ev)}</span></p>
         <h3 class="tearoff__title">${te(ev.title)}</h3>
         <ul class="tearoff__meta" role="list">
           <li>${icon('calendar')}<span>${WEEKDAYS_FULL[parse(ev.date).getDay()]} · ${escapeHTML(dateText(ev))}</span></li>
@@ -561,7 +561,7 @@
       pad.insertAdjacentHTML('afterbegin', leaf(ev));
       if (old) {
         old.classList.add('is-torn');                 /* tears away, revealing the new leaf beneath */
-        if (RS.reduceMotion()) old.remove();
+        if (RS.reduceMotion() || !pad.offsetParent) old.remove();   /* hidden pad (agenda layout): no tear to wait for */
         else old.addEventListener('animationend', () => old.remove(), { once: true });
       }
       renderDetail(ev);

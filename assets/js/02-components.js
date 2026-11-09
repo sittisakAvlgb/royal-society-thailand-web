@@ -317,7 +317,53 @@
       ${renderMobilePanel(active)}
       <button class="access-fab" type="button" data-access-open aria-controls="access-drawer" aria-expanded="false" aria-label="${te(ui.accessibility)}" title="${te(ui.accessibility)}">
         ${icon('person')}
-      </button>`;
+      </button>
+      ${renderChat()}`;
+  }
+
+  /* ==================================================================== *
+   * Chat — a Messenger button above the accessibility button; it opens a
+   * small card from the Office with one way in (Messenger, new tab) and a
+   * way out to the other contact channels. 04-interactions.js runs it.
+   * ==================================================================== */
+
+  const messengerGlyph = `<svg class="chat-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2C6.4 2 2 6.1 2 11.6c0 2.9 1.2 5.4 3.2 7.1.2.1.3.4.3.6l.1 1.8c0 .6.6 1 1.2.7l2-.9c.2-.1.4-.1.6 0 .9.2 1.8.4 2.7.4 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm6 7.5-2.9 4.6c-.5.7-1.5.9-2.2.4l-2.3-1.7c-.2-.2-.5-.2-.7 0l-3.1 2.4c-.4.3-1-.2-.7-.6L9 10c.5-.7 1.5-.9 2.2-.4l2.3 1.7c.2.2.5.2.7 0l3.1-2.4c.4-.3 1 .2.7.6z"/></svg>`;
+
+  function renderChat() {
+    const { contact } = CFG;
+    const L = {
+      open: { th: 'แชทกับเรา', en: 'Chat with us' },
+      via: { th: 'แชทผ่าน Facebook Messenger', en: 'Chat on Facebook Messenger' },
+      hello: { th: 'ยินดีให้บริการ', en: 'Happy to help' },
+      intro: { th: 'สอบถามเรื่องคำศัพท์ การใช้ภาษาไทย หรือบริการของสำนักงาน ส่งข้อความถึงเราทาง Messenger ได้เลย', en: 'Ask about terms, Thai usage or the Office’s services — send us a message on Messenger.' },
+      start: { th: 'เริ่มแชทใน Messenger', en: 'Start a chat in Messenger' },
+      note: { th: 'เปิดในแท็บใหม่ · ต้องเข้าสู่ระบบ Facebook', en: 'Opens in a new tab · needs a Facebook sign-in' },
+      other: { th: 'ช่องทางติดต่ออื่น', en: 'Other ways to contact us' },
+      close: { th: 'ปิดหน้าต่างแชท', en: 'Close chat' }
+    };
+    const contactUrl = escapeHTML(RS.url('pages/contact.html'));
+    const chatUrl = contact.messenger ? escapeHTML(contact.messenger) : contactUrl;
+    return `
+      <div class="chat-widget" data-chat>
+        <div class="chat-panel" id="chat-panel" role="dialog" aria-labelledby="chat-title" hidden>
+          <div class="chat-panel__head">
+            <span class="chat-panel__avatar">${logo('chat-panel__logo', 22, 38)}</span>
+            <p class="chat-panel__title"><strong id="chat-title">${te(CFG.site.office)}</strong><span>${te(L.via)}</span></p>
+            <button class="chat-panel__close" type="button" data-chat-close aria-label="${te(L.close)}">${icon('x')}</button>
+          </div>
+          <div class="chat-panel__body">
+            <p class="chat-greeting"><span>${te(L.hello)}</span>${te(L.intro)}</p>
+            <a class="chat-cta" href="${chatUrl}"${contact.messenger ? ' target="_blank" rel="noopener"' : ''}>
+              ${messengerGlyph}<span>${te(L.start)}</span>${contact.messenger ? `<span class="visually-hidden"> ${te(ui.external)}</span>` : ''}
+            </a>
+            <p class="chat-note">${te(L.note)}</p>
+            <a class="chat-alt" href="${contactUrl}">${te(L.other)}${icon('arrow')}</a>
+          </div>
+        </div>
+        <button class="chat-fab" type="button" data-chat-toggle aria-controls="chat-panel" aria-expanded="false" aria-label="${te(L.open)}" title="${te(L.open)}">
+          ${messengerGlyph}${icon('x')}
+        </button>
+      </div>`;
   }
 
   /* ==================================================================== *

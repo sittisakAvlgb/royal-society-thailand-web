@@ -11,16 +11,16 @@ html {
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-overlap) + var(--space-4));
   /* Fluid root — the whole rem-based type scale grows with the viewport,
-     so text keeps its presence on wide monitors. Floors at 16px (small
-     screens unchanged); caps at 21px so it never runs away. */
-  font-size: clamp(16px, 0.5vw + 11px, 21px);
+     so text keeps its presence on wide monitors. Raised ~10% at the
+     client's request (Nov 2026): floors at 17.5px, caps at 23px. */
+  font-size: clamp(17.5px, 0.55vw + 12px, 23px);
 }
 /* The scale is tuned for TH Sarabun New, a small-bodied font. Latin (Geist)
    has a larger apparent size, so English runs a step smaller to match —
    a smaller root for everything, and the display sizes reined in further so
    headings don't shout. */
 html[lang="en"] {
-  font-size: clamp(15px, 0.45vw + 9px, 18px);
+  font-size: clamp(16.5px, 0.5vw + 10px, 20px);
   --text-lg: 1.375rem;
   --text-xl: 1.625rem;
   --text-2xl: 1.9375rem;

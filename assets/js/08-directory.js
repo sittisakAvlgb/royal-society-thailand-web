@@ -167,17 +167,8 @@
   function initAcademyLists() {
     qsa('[data-academy-list]').forEach(list => {
       if (list.dataset.academyList === 'compact') {
-        /* The Office leads the list, above the three academies (home only) */
-        const office = {
-          id: 'office',
-          name: CFG.site.office,
-          fields: { th: 'งานบริหารและธุรการ · สนับสนุนงานวิชาการ · เผยแพร่องค์ความรู้', en: 'Administration · academic support · knowledge outreach' },
-          href: 'https://www.orst.go.th/',
-          external: true,
-          site: 'https://www.orst.go.th/',
-          siteLabel: { th: 'เว็บไซต์สำนักงาน', en: 'Office website' },
-        };
-        list.innerHTML = [office, ...CFG.academies].map(renderAcademyRow).join('');
+        /* The three academies (home only; the Office row was removed at the client's request) */
+        list.innerHTML = CFG.academies.map(renderAcademyRow).join('');
         initAcademySpotlight(list);
         /* Rows rendered after the reveal observer ran: let it pick them up */
         document.dispatchEvent(new CustomEvent('rs:content-added', { detail: list }));
@@ -219,30 +210,37 @@
       </li>`;
   }
 
-  /* Discipline icon for the home tiles (portrait slot until photographs arrive) */
-  const TOPIC_ICON = {
-    language: 'book', technology: 'flask', law: 'scale', medicine: 'stetho', arts: 'palette',
-    economics: 'chart', science: 'leaf', social: 'people', history: 'archive'
-  };
 
   const BOOKMARK_KEY = 'rs.bookmarks';
   const readBookmarks = () => { try { return JSON.parse(localStorage.getItem(BOOKMARK_KEY) || '[]'); } catch { return []; } };
 
-  /** Home tile: discipline-tinted portrait slot, name, field, membership, "view details" */
+  /* The initial for the portrait plate: the first consonant of the given
+     name (Thai leading vowels เ แ โ ใ ไ are skipped), or the first letter */
+  const initialOf = person => {
+    const name = t(person.name) || '';
+    return (name.match(/[ก-ฮA-Za-z]/) || [name.charAt(0)])[0];
+  };
+
+  /** Fellow card: a portrait plate (the official photo, or the initial in a
+      gold frame until it arrives), then membership, title, name, field and
+      academy, with "view details" pinned to the foot so a row lines up */
   function renderFellowTile(person) {
     const href = escapeHTML(RS.url(`pages/fellow.html?id=${encodeURIComponent(person.id)}`));
     const saved = readBookmarks().includes(person.id);
+    const portrait = person.photo
+      ? `<img src="${escapeHTML(RS.url(person.photo))}" alt="" loading="lazy" decoding="async">`
+      : `<span class="fellow-tile__initial">${escapeHTML(initialOf(person))}</span>`;
     return `
-      <li class="fellow-tile" data-academy="${escapeHTML(person.academy)}" data-topic="${escapeHTML(person.topic || '')}">
-        <div class="fellow-tile__portrait" aria-hidden="true">
-          <!-- Official portrait will replace the discipline icon -->
-          <span class="fellow-tile__disc">${icon(TOPIC_ICON[person.topic] || 'people')}</span>
-        </div>
+      <li class="fellow-tile" data-academy="${escapeHTML(person.academy)}" data-topic="${escapeHTML(person.topic || '')}" data-type="${escapeHTML(person.memberType || '')}">
+        <div class="fellow-tile__portrait" aria-hidden="true">${portrait}</div>
         <button class="fellow-tile__save" type="button" data-bookmark="${escapeHTML(person.id)}" aria-pressed="${saved}" aria-label="${te(L.save)} ${te(person.name)}">${icon('bookmark')}</button>
-        <p class="fellow-tile__title">${te(person.title)}</p>
-        <h3 class="fellow-tile__name"><a href="${href}">${te(person.name)}</a></h3>
-        <p class="fellow-tile__field">${te(person.field)}</p>
-        <p class="fellow-tile__meta"><span class="fellow-tile__type">${te(MEMBER_TYPES[person.memberType])}</span><span class="fellow-tile__academy">${te(academyOf(person.academy)?.name)}</span></p>
+        <div class="fellow-tile__body">
+          <p class="fellow-tile__type">${te(MEMBER_TYPES[person.memberType])}</p>
+          <p class="fellow-tile__title">${te(person.title)}</p>
+          <h3 class="fellow-tile__name"><a href="${href}">${te(person.name)}</a></h3>
+          <p class="fellow-tile__field">${te(person.field)}</p>
+          <p class="fellow-tile__academy">${te(academyOf(person.academy)?.name)}</p>
+        </div>
         <p class="fellow-tile__foot"><span>${te(L.viewDetails)}</span><span class="fellow-tile__go">${icon('arrow')}</span></p>
       </li>`;
   }
@@ -271,8 +269,11 @@
   function initFellowsPreview() {
     qsa('[data-fellows-preview]').forEach(list => {
       const limit = Number(list.dataset.fellowsPreview) || 4;
-      const academy = list.dataset.fellowsAcademy;      /* academy page: that academy only */
-      const people = academy ? PEOPLE.filter(person => person.academy === academy) : PEOPLE;
+      const academy = list.dataset.fellowsAcademy;      /* academy page: that academy only, */
+      const rank = { honorary: 0, fellow: 1, associate: 2 }; /* honorary Fellows first, Associates last */
+      const people = academy
+        ? PEOPLE.filter(person => person.academy === academy).sort((a, b) => (rank[a.memberType] ?? 3) - (rank[b.memberType] ?? 3))
+        : PEOPLE;
       list.innerHTML = people.slice(0, limit).map(renderFellowTile).join('');
       initBookmarks(list);
       document.dispatchEvent(new CustomEvent('rs:content-added', { detail: list }));

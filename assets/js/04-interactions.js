@@ -620,7 +620,36 @@
     initCounters();
   }
 
+  /* ==================================================================== *
+   * Chat card (02-components.js renders it): the round button opens and
+   * closes it; Esc, the close button or a click outside closes it and
+   * focus returns to the button.
+   * ==================================================================== */
+
+  function initChat() {
+    const widget = qs('[data-chat]');
+    if (!widget) return;
+    const toggle = qs('[data-chat-toggle]', widget);
+    const panel = qs('.chat-panel', widget);
+    const setOpen = (open, focus = true) => {
+      panel.hidden = !open;
+      widget.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      if (open && focus) qs('.chat-cta', panel)?.focus();
+      if (!open && focus) toggle.focus();
+    };
+    toggle.addEventListener('click', () => setOpen(panel.hidden));
+    qs('[data-chat-close]', widget).addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !panel.hidden) setOpen(false);
+    });
+    document.addEventListener('click', event => {
+      if (!panel.hidden && !widget.contains(event.target)) setOpen(false, false);
+    });
+  }
+
   RS.ready(() => {
+    initChat();
     initAnimations();
     initHeroSlider();
     initFeatureSlider();

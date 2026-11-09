@@ -138,6 +138,10 @@ window.RS_CONFIG = {
     webmaster: 'saraban@orst.go.th',
     /* TODO (Office): confirm office hours */
     officeHours: { th: 'จันทร์–ศุกร์ 08:30–16:30 น.', en: 'Monday–Friday, 08:30–16:30' },
+    /* Chat button (bottom right): the Office's Facebook Messenger link, https://m.me/<page username>.
+       TODO (Office): supply the page — none is published on royalsociety.go.th.
+       While empty, "Start chat" opens the contact page instead. */
+    messenger: '',
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B8%B4%E0%B8%95%E0%B8%A2%E0%B8%AA%E0%B8%A0%E0%B8%B2+%E0%B8%A8%E0%B8%B9%E0%B8%99%E0%B8%A2%E0%B9%8C%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%81%E0%B8%B2%E0%B8%A3+%E0%B8%AD%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%A3%E0%B8%8B%E0%B8%B5'
   },
 
@@ -184,7 +188,7 @@ window.RS_CONFIG = {
       label: { th: 'เกี่ยวกับราชบัณฑิตยสภา', en: 'About the Royal Society' },
       href: 'pages/about.html',
       match: ['about.html', 'academy.html'],
-      intro: { th: 'ประวัติ อำนาจหน้าที่ ผู้บริหาร สำนักวิชาการ และกฎหมายที่เกี่ยวข้อง', en: 'History, mandate and authority, executives, academies, laws and regulations' },
+      intro: { th: 'ประวัติ อำนาจหน้าที่ ผู้บริหาร สำนัก และกฎหมายที่เกี่ยวข้อง', en: 'History, mandate and authority, executives, academies, laws and regulations' },
       children: [
         {
           label: { th: 'ข้อมูลองค์กร', en: 'Organisation Profile' }, href: 'pages/about.html#organization',
@@ -204,7 +208,7 @@ window.RS_CONFIG = {
           ]
         },
         {
-          label: { th: 'สำนักวิชาการ', en: 'Academies' }, href: 'pages/about.html#academies',
+          label: { th: 'สำนัก', en: 'Academies' }, href: 'pages/about.html#academies',
           children: [
             { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' }, href: 'pages/academy.html?id=moral' },
             { label: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' }, href: 'pages/academy.html?id=science' },
