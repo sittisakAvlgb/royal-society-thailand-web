@@ -8,8 +8,9 @@
  *    <ul data-academy-list>                    academies (RS_CONFIG.academies)
  *    <ul data-fellows-preview="4">             first N people (RS_FELLOWS);
  *                                              data-fellows-academy="<id>" narrows to one academy
- *    <section id="fellow-directory">           searchable directory
- *    <div id="fellow-profile">                 profile (?id=)
+ *    <div data-sitemap>                        the site map (RS_CONFIG.nav)
+ *
+ *  The Fellows directory and profile pages use 17-fellows.js.
  * ========================================================================== */
 
 (() => {
@@ -22,37 +23,11 @@
   const { qs, qsa, t, te, icon, escapeHTML } = RS;
   const PEOPLE = window.RS_FELLOWS || [];
   const MEMBER_TYPES = window.RS_MEMBER_TYPES || {};
-  const TOPICS = window.RS_TOPICS || {};
 
   const L = {
     viewDetails: { th: 'ดูรายละเอียด', en: 'View details' },
-    save: { th: 'บันทึก', en: 'Save' },
-    saved: { th: 'บันทึกไว้ในรายการของคุณแล้ว', en: 'Saved to your list' },
-    unsaved: { th: 'นำออกจากรายการแล้ว', en: 'Removed from your list' },
     fellowsIn: { th: 'ราชบัณฑิตในสำนัก', en: 'Fellows of this academy' },
     knowledgeOf: { th: 'องค์ความรู้ของสำนัก', en: 'Knowledge from this academy' },
-    count: { th: 'พบ {n} คน', en: '{n} people' },
-    emptyTitle: { th: 'ไม่พบรายชื่อที่ตรงกับเงื่อนไข', en: 'No one matches these filters' },
-    emptyText: { th: 'ลองใช้คำค้นที่สั้นลง หรือล้างตัวกรอง', en: 'Try a shorter search term or clear the filters.' },
-    clear: { th: 'ล้างตัวกรอง', en: 'Clear filters' },
-    chip: {
-      q: { th: 'คำค้น', en: 'Search' },
-      academy: { th: 'สำนัก', en: 'Academy' },
-      topic: { th: 'สาขาวิชา', en: 'Field' },
-      type: { th: 'ประเภท', en: 'Type' },
-      year: { th: 'ปีที่แต่งตั้ง', en: 'Year' }
-    },
-    notFound: { th: 'ไม่พบข้อมูลบุคคลนี้', en: 'Profile not found' },
-    notFoundText: { th: 'ลิงก์อาจไม่ถูกต้องหรือข้อมูลถูกย้ายแล้ว', en: 'The link may be incorrect or the profile has moved.' },
-    backToDirectory: { th: 'กลับไปหน้ารายชื่อ', en: 'Back to directory' },
-    academy: { th: 'สำนัก', en: 'Academy' },
-    memberType: { th: 'ประเภทสมาชิก', en: 'Membership' },
-    field: { th: 'สาขาวิชา', en: 'Field' },
-    expertise: { th: 'ความเชี่ยวชาญ', en: 'Expertise' },
-    bio: { th: 'ประวัติ', en: 'Biography' },
-    works: { th: 'ผลงานสำคัญ', en: 'Selected works' },
-    publications: { th: 'ผลงานตีพิมพ์', en: 'Publications' },
-    photo: { th: 'รูปถ่ายทางการจะแสดงที่นี่', en: 'Official portrait will appear here' },
     jump: { th: 'ทางลัดไปยังหมวด', en: 'Jump to a section' },
     filterPlaceholder: { th: 'พิมพ์เพื่อกรองหน้าในเว็บไซต์', en: 'Type to filter the pages on this site' },
     clearFilter: { th: 'ล้างคำค้น', en: 'Clear' },
@@ -101,6 +76,7 @@
   /** Index rows for the home split: <ol data-academy-list="compact"> */
   function renderAcademyRow(academy, index) {
     const external = Boolean(academy.external);
+    /* each academy opens its own page (pages/academy.html?id=…) */
     const href = academy.href ? escapeHTML(academy.href) : escapeHTML(RS.url(`pages/academy.html?id=${academy.id}`));
     const nameAttrs = external ? ' target="_blank" rel="noopener"' : '';
     const fields = (academy.tags ? RS.t(academy.tags) : []).map(escapeHTML).join(' · ') || te(academy.fields);
@@ -211,60 +187,53 @@
   }
 
 
-  const BOOKMARK_KEY = 'rs.bookmarks';
-  const readBookmarks = () => { try { return JSON.parse(localStorage.getItem(BOOKMARK_KEY) || '[]'); } catch { return []; } };
+  /* ==================================================================== *
+   * The member card — one markup for the home page, the academy pages and
+   * the Fellows directory (17-fellows.js uses RS.fellowCard too): a small
+   * portrait (the official photo, or the initial until it arrives) beside
+   * membership, title and name, field, academy.
+   * ==================================================================== */
 
-  /* The initial for the portrait plate: the first consonant of the given
-     name (Thai leading vowels เ แ โ ใ ไ are skipped), or the first letter */
+  /* the first consonant of the given name (Thai leading vowels เ แ โ ใ ไ are skipped), or the first letter */
   const initialOf = person => {
     const name = t(person.name) || '';
-    return (name.match(/[ก-ฮA-Za-z]/) || [name.charAt(0)])[0];
+    return (name.match(/[ก-ฮA-Za-z]/) || [name.charAt(0)])[0].toUpperCase();
+  };
+  /* image paths carry no ?lang= */
+  const assetURL = path => (/^https?:/i.test(path) ? path : RS.url(path).replace(/[?&]lang=\w+/, ''));
+
+  /** the portrait; the initial is set underneath, so a photo that fails to load (removed below) leaves the plate */
+  RS.fellowPortrait = (person, extra = '') => `<span class="fellowx-photo${extra}" data-academy="${escapeHTML(person.academy)}" aria-hidden="true"><span class="fellowx-photo__initial">${escapeHTML(initialOf(person))}</span>${person.photo
+    ? `<img src="${escapeHTML(assetURL(person.photo))}" alt="" loading="lazy" decoding="async">` : ''}</span>`;
+
+  /** the title written at the head of the name, each part kept whole when the name wraps */
+  /* นาย, นาง and นางสาว are written against the first name, as Thai writes
+     them ("นางสาวกนกวลี"); academic titles keep their space ("ศ. ดร. …") */
+  RS.fellowName = person => {
+    const title = t(person.title);
+    const parts = t(person.name).split(' ').map(escapeHTML);
+    if (/^(นาย|นาง|นางสาว)$/.test(title)) parts[0] = `<span class="fellow-name__title">${escapeHTML(title)}</span>${parts[0]}`;
+    else if (title) parts.unshift(`<span class="fellow-name__title">${escapeHTML(title)}</span>`);
+    return parts.map(part => `<span class="story__ph">${part}</span>`).join(' ');
   };
 
-  /** Fellow card: a portrait plate (the official photo, or the initial in a
-      gold frame until it arrives), then membership, title, name, field and
-      academy, with "view details" pinned to the foot so a row lines up */
-  function renderFellowTile(person) {
-    const href = escapeHTML(RS.url(`pages/fellow.html?id=${encodeURIComponent(person.id)}`));
-    const saved = readBookmarks().includes(person.id);
-    const portrait = person.photo
-      ? `<img src="${escapeHTML(RS.url(person.photo))}" alt="" loading="lazy" decoding="async">`
-      : `<span class="fellow-tile__initial">${escapeHTML(initialOf(person))}</span>`;
-    return `
-      <li class="fellow-tile" data-academy="${escapeHTML(person.academy)}" data-topic="${escapeHTML(person.topic || '')}" data-type="${escapeHTML(person.memberType || '')}">
-        <div class="fellow-tile__portrait" aria-hidden="true">${portrait}</div>
-        <button class="fellow-tile__save" type="button" data-bookmark="${escapeHTML(person.id)}" aria-pressed="${saved}" aria-label="${te(L.save)} ${te(person.name)}">${icon('bookmark')}</button>
-        <div class="fellow-tile__body">
-          <p class="fellow-tile__type">${te(MEMBER_TYPES[person.memberType])}</p>
-          <p class="fellow-tile__title">${te(person.title)}</p>
-          <h3 class="fellow-tile__name"><a href="${href}">${te(person.name)}</a></h3>
-          <p class="fellow-tile__field">${te(person.field)}</p>
-          <p class="fellow-tile__academy">${te(academyOf(person.academy)?.name)}</p>
-        </div>
-        <p class="fellow-tile__foot"><span>${te(L.viewDetails)}</span><span class="fellow-tile__go">${icon('arrow')}</span></p>
+  RS.fellowCard = (person, itemClass = 'newsx-item') => `
+      <li class="${itemClass}">
+        <a class="fellowx-card" href="${escapeHTML(RS.url(`pages/fellow.html?id=${encodeURIComponent(person.id)}`))}" data-academy="${escapeHTML(person.academy)}">
+          ${RS.fellowPortrait(person)}
+          <span class="fellowx-card__body">
+            <span class="fellowx-card__type">${te(MEMBER_TYPES[person.memberType])}</span>
+            <span class="fellowx-card__name">${RS.fellowName(person)}</span>
+            <span class="fellowx-card__field" title="${te(t(person.field) ? person.field : person.group)}">${te(t(person.field) ? person.field : person.group)}</span>
+            <span class="fellowx-card__academy">${te(academyOf(person.academy)?.name)}</span>
+          </span>
+        </a>
       </li>`;
-  }
 
-  /** Bookmark toggle — remembered per browser (prototype; a real account would store it) */
-  function initBookmarks(root) {
-    root.addEventListener('click', event => {
-      const button = event.target.closest('[data-bookmark]');
-      if (!button) return;
-      event.preventDefault();
-      const id = button.dataset.bookmark;
-      const list = readBookmarks();
-      const on = !list.includes(id);
-      const next = on ? [...list, id] : list.filter(item => item !== id);
-      /* Saved items are a convenience, so they wait for the cookie choice */
-      if (!RS.mayStore(BOOKMARK_KEY)) return;
-      try { localStorage.setItem(BOOKMARK_KEY, JSON.stringify(next)); } catch { /* private mode */ }
-      button.setAttribute('aria-pressed', String(on));
-      button.classList.remove('is-bumped');
-      button.getBoundingClientRect();
-      button.classList.add('is-bumped');
-      RS.toast?.(t(on ? L.saved : L.unsaved));
-    });
-  }
+  /* a member photo that fails to load is removed, showing the initial */
+  document.addEventListener('error', event => {
+    if (event.target.matches?.('.fellowx-photo img')) event.target.remove();
+  }, true);
 
   function initFellowsPreview() {
     qsa('[data-fellows-preview]').forEach(list => {
@@ -274,244 +243,15 @@
       const people = academy
         ? PEOPLE.filter(person => person.academy === academy).sort((a, b) => (rank[a.memberType] ?? 3) - (rank[b.memberType] ?? 3))
         : PEOPLE;
-      list.innerHTML = people.slice(0, limit).map(renderFellowTile).join('');
-      initBookmarks(list);
+      /* a sliding row (academy pages) or a plain grid (home page) */
+      const itemClass = list.hasAttribute('data-scroller-track') ? 'fellow-scroller__item' : 'newsx-item';
+      list.innerHTML = people.slice(0, limit).map(person => RS.fellowCard(person, itemClass)).join('');
       document.dispatchEvent(new CustomEvent('rs:content-added', { detail: list }));
     });
   }
 
-  const normalize = value => String(value || '').toLowerCase().trim();
-
-  function matches(person, { q, academy, topic, type, year }) {
-    if (academy && person.academy !== academy) return false;
-    if (topic && person.topic !== topic) return false;
-    if (type && person.memberType !== type) return false;
-    if (year && String(person.appointed) !== year) return false;
-    if (!q) return true;
-    const haystack = [
-      person.name.th, person.name.en, person.field.th, person.field.en,
-      person.expertise.th, person.expertise.en, ...(person.keywords || [])
-    ].map(normalize).join(' ');
-    return haystack.includes(normalize(q));
-  }
-
-  function initDirectory() {
-    const root = qs('#fellow-directory');
-    if (!root) return;
-
-    const form = qs('#directory-form', root);
-    const fields = {
-      q: qs('#directory-q', root),
-      academy: qs('input[name="academy"]', root) || qs('#directory-academy', root),
-      topic: qs('input[name="topic"]', root) || qs('#directory-topic', root),
-      type: qs('input[name="type"]', root) || qs('#directory-type', root),
-      year: qs('input[name="year"]', root) || qs('#directory-year', root)
-    };
-    /* Optional filters may be absent from a page */
-    Object.keys(fields).forEach(key => { if (!fields[key]) delete fields[key]; });
-    const sortField = qs('input[name="sort"]', root);
-
-    const list = qs('[data-directory-list]', root);
-    const count = qs('[data-directory-count]', root);
-    const chips = qs('[data-directory-chips]', root);
-    const tabs = qsa('[data-academy-tab]', root);
-
-    const optionHTML = (value, label) => `
-      <li class="rs-select__option" role="option" tabindex="-1" data-value="${escapeHTML(value)}" aria-selected="false">
-        <span>${label}</span>${icon('check')}
-      </li>`;
-
-    /* Filter options come from the data so they never list empty values */
-    const topicList = fields.topic?.closest('[data-select]')?.querySelector('[role="listbox"]');
-    if (topicList) {
-      const topics = [...new Set(PEOPLE.map(person => person.topic))];
-      topicList.insertAdjacentHTML('beforeend', topics.map(key => optionHTML(key, te(TOPICS[key] || key))).join(''));
-    }
-    const yearList = fields.year?.closest('[data-select]')?.querySelector('[role="listbox"]');
-    if (yearList) {
-      const years = [...new Set(PEOPLE.map(person => person.appointed).filter(Boolean))].sort((a, b) => b - a);
-      yearList.insertAdjacentHTML('beforeend', years.map(year => optionHTML(String(year), RS.lang === 'th' ? year + 543 : year)).join(''));
-    }
-
-    /* Tab counts */
-    qsa('[data-academy-count]', root).forEach(el => {
-      const id = el.dataset.academyCount;
-      el.textContent = RS.formatNumber(PEOPLE.filter(person => !id || person.academy === id).length);
-    });
-
-    const params = new URLSearchParams(location.search);
-    Object.entries(fields).forEach(([key, el]) => RS.selectSet(el, params.get(key) || ''));
-    if (sortField) RS.selectSet(sortField, params.get('sort') || '');
-
-    const labelFor = (key, value) => {
-      if (key === 'academy') return t(academyOf(value)?.name) || value;
-      if (key === 'topic') return t(TOPICS[value]) || value;
-      if (key === 'type') return t(MEMBER_TYPES[value]) || value;
-      if (key === 'year') return RS.lang === 'th' ? String(Number(value) + 543) : value;
-      return value;
-    };
-
-    function sorted(results) {
-      const mode = sortField?.value || '';
-      const byName = (a, b) => t(a.name).localeCompare(t(b.name), RS.lang === 'th' ? 'th' : 'en');
-      if (mode === 'newest') return [...results].sort((a, b) => (b.appointed || 0) - (a.appointed || 0) || byName(a, b));
-      if (mode === 'oldest') return [...results].sort((a, b) => (a.appointed || 0) - (b.appointed || 0) || byName(a, b));
-      return [...results].sort(byName);
-    }
-
-    function update() {
-      const state = Object.fromEntries(Object.entries(fields).map(([key, el]) => [key, el.value.trim()]));
-      const results = sorted(PEOPLE.filter(person => matches(person, state)));
-
-      const next = new URL(location.href);
-      Object.entries(state).forEach(([key, value]) => (value ? next.searchParams.set(key, value) : next.searchParams.delete(key)));
-      if (sortField) (sortField.value ? next.searchParams.set('sort', sortField.value) : next.searchParams.delete('sort'));
-      history.replaceState(null, '', next);
-
-      tabs.forEach(tab => {
-        const active = (tab.dataset.academyTab || '') === (state.academy || '');
-        tab.classList.toggle('is-active', active);
-        tab.setAttribute('aria-pressed', String(active));
-      });
-
-      if (chips) {
-        const active = Object.entries(state).filter(([, value]) => value);
-        chips.hidden = !active.length;
-        chips.innerHTML = active.length ? `
-          ${active.map(([key, value]) => `
-            <button class="dir-chip" type="button" data-directory-remove="${escapeHTML(key)}">
-              <span class="dir-chip__key">${te(L.chip[key] || key)}</span>
-              <span>${escapeHTML(labelFor(key, value))}</span>
-              ${icon('x')}
-            </button>`).join('')}
-          <button class="dir-chips__clear" type="button" data-directory-clear>${te(L.clear)}</button>` : '';
-      }
-
-      count.innerHTML = t(L.count).replace('{n}', `<strong>${RS.formatNumber(results.length)}</strong>`);
-      list.innerHTML = results.length
-        ? results.map(renderFellowTile).join('')
-        : `<li class="state state--empty">
-             <p class="state__icon" aria-hidden="true">${icon('people')}</p>
-             <h3 class="state__title">${te(L.emptyTitle)}</h3>
-             <p class="state__text">${te(L.emptyText)}</p>
-             <button class="btn btn--secondary btn--sm" type="button" data-directory-clear>${te(L.clear)}</button>
-           </li>`;
-      document.dispatchEvent(new CustomEvent('rs:content-added', { detail: list }));
-    }
-
-    let timer = null;
-    fields.q.addEventListener('input', () => {
-      clearTimeout(timer);
-      timer = setTimeout(update, 200);
-    });
-    ['academy', 'topic', 'type', 'year'].forEach(key => fields[key]?.addEventListener('change', update));
-    sortField?.addEventListener('change', update);
-
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      update();
-    });
-
-    root.addEventListener('click', event => {
-      const tab = event.target.closest('[data-academy-tab]');
-      if (tab && fields.academy) {
-        RS.selectSet(fields.academy, tab.dataset.academyTab || '');
-        update();
-        return;
-      }
-      const remove = event.target.closest('[data-directory-remove]');
-      if (remove) {
-        const key = remove.dataset.directoryRemove;
-        if (fields[key]) RS.selectSet(fields[key], '');
-        update();
-        return;
-      }
-      if (!event.target.closest('[data-directory-clear]')) return;
-      Object.values(fields).forEach(el => RS.selectSet(el, ''));
-      update();
-      fields.q.focus();
-    });
-
-    initBookmarks(list);
-    update();
-  }
-
-  /* ==================================================================== *
-   * Profile
-   * ==================================================================== */
-
-  function initProfile() {
-    const root = qs('#fellow-profile');
-    if (!root) return;
-
-    const id = new URLSearchParams(location.search).get('id') || PEOPLE[0]?.id;
-    const person = PEOPLE.find(item => item.id === id);
-    const crumb = qs('[data-profile-crumb]');
-
-    if (!person) {
-      root.innerHTML = `
-        <div class="state state--empty">
-          <p class="state__icon" aria-hidden="true">${icon('people')}</p>
-          <h1 class="state__title">${te(L.notFound)}</h1>
-          <p class="state__text">${te(L.notFoundText)}</p>
-          <a class="btn btn--secondary" href="${escapeHTML(RS.url('pages/fellows.html'))}">${te(L.backToDirectory)}</a>
-        </div>`;
-      return;
-    }
-
-    const other = RS.lang === 'th' ? 'en' : 'th';
-    const academy = academyOf(person.academy);
-    document.title = `${t(person.title)} ${t(person.name)} | ${t(CFG.site.name)}`;
-    if (crumb) crumb.textContent = t(person.name);
-
-    root.innerHTML = `
-      <div class="profile" data-academy="${escapeHTML(person.academy)}">
-        <aside class="profile__aside">
-          <div class="image-placeholder image-placeholder--portrait" role="img" aria-label="${te(L.photo)}">
-            <!-- Official portrait will be added here -->
-            ${icon('people')}
-          </div>
-          <dl class="profile__facts">
-            <div><dt>${te(L.academy)}</dt><dd class="person-card__academy">${te(academy?.name)}</dd></div>
-            <div><dt>${te(L.memberType)}</dt><dd>${te(MEMBER_TYPES[person.memberType])}</dd></div>
-            <div><dt>${te(L.field)}</dt><dd>${te(person.field)}</dd></div>
-          </dl>
-        </aside>
-
-        <div class="profile__main">
-          <p class="profile__title">${te(person.title)}</p>
-          <h1 class="profile__name">${te(person.name)}</h1>
-          <p class="profile__name-alt" lang="${other}">${escapeHTML(person.name[other])}</p>
-
-          <section class="profile__section" aria-labelledby="profile-expertise">
-            <h2 id="profile-expertise">${te(L.expertise)}</h2>
-            <ul class="tag-list" role="list">
-              ${t(person.expertise).split(/,\s*|\s(?=[ก-๙])/).filter(Boolean).map(item => `<li><span class="tag">${escapeHTML(item)}</span></li>`).join('')}
-            </ul>
-          </section>
-
-          <section class="profile__section" aria-labelledby="profile-bio">
-            <h2 id="profile-bio">${te(L.bio)}</h2>
-            <p>${te(person.bio)}</p>
-          </section>
-
-          <section class="profile__section" aria-labelledby="profile-works">
-            <h2 id="profile-works">${te(L.works)}</h2>
-            <ul class="profile__list">${person.works.map(work => `<li>${te(work)}</li>`).join('')}</ul>
-          </section>
-
-          <section class="profile__section" aria-labelledby="profile-pubs">
-            <h2 id="profile-pubs">${te(L.publications)}</h2>
-            <ol class="profile__pubs" role="list">
-              ${person.publications.map(pub => `
-                <li><span class="profile__year">${RS.lang === 'th' ? pub.year + 543 : pub.year}</span><span>${te(pub.title)}</span></li>`).join('')}
-            </ol>
-          </section>
-
-          <a class="link-arrow" href="${escapeHTML(RS.url('pages/fellows.html'))}"><span>${te(L.backToDirectory)}</span>${icon('arrow')}</a>
-        </div>
-      </div>`;
-  }
+  /* The directory (pages/fellows.html) and the profile (pages/fellow.html)
+     live in 17-fellows.js. */
 
   /* ==================================================================== *
    * Sitemap — the outline is built from RS_CONFIG.nav plus
@@ -728,8 +468,6 @@
     initServiceLists();
     initAcademyLists();
     initFellowsPreview();
-    initDirectory();
-    initProfile();
     initSitemap();
   });
 })();

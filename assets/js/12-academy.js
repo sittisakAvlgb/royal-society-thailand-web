@@ -66,15 +66,16 @@
   function renderAbout() {
     set('[data-acad-intro]', te(page.intro || academy.fields));
     /* The academy's own pages: each row opens that page on its website */
-    set('[data-acad-info]', (page.info || []).map((item, i) => `
+    /* only pages this site holds: rows that pointed at the academy's earlier website are left out */
+    set('[data-acad-info]', (page.info || []).filter(item => !OLD_SITE.test(item.href)).map((item, i) => `
       <li class="acad-work__item reveal reveal--delay-${Math.min(i + 1, 4)}">
-        <a class="acad-work__link" href="${escapeHTML(item.href)}" target="_blank" rel="noopener">
+        <a class="acad-work__link" href="${escapeHTML(href(item.href))}">
           <span class="acad-work__num" aria-hidden="true">${i + 1}</span>
           <span class="acad-work__body">
-            <span class="acad-work__name">${te(item.title)}<span class="visually-hidden"> ${te(L.external)}</span></span>
+            <span class="acad-work__name">${te(item.title)}</span>
             <span class="acad-work__text">${te(item.text)}</span>
           </span>
-          <span class="acad-work__go" aria-hidden="true">${icon('external')}</span>
+          <span class="acad-work__go" aria-hidden="true">${icon('arrow')}</span>
         </a>
       </li>`).join(''));
   }
@@ -89,8 +90,19 @@
       <span class="news-cta"><span>${te(L.readMore)}</span><span class="news-cta__dot" aria-hidden="true">${icon(post.external ? 'external' : 'arrow')}</span></span>
     </span>`;
 
+  /* every post opens on this site (activity.html); a photo kept on an
+     academy's earlier website is replaced by a local one */
+  const OLD_SITE = /^https?:\/\/(?:[a-z]+\.)?(?:royalsociety\.go\.th|orst\.go\.th)\//i;
+  const STAND_INS = ['assets/images/news/news-01.jpg', 'assets/images/news/news-02.jpg', 'assets/images/news/news-03.jpg', 'assets/images/news/news-04.jpg', 'assets/images/news/news-05.jpg', 'assets/images/news/news-06.jpg'];
+  const ownPost = (post, i) => ({
+    ...post,
+    href: OLD_SITE.test(post.href || '') ? `pages/activity.html?id=${encodeURIComponent(post.id)}` : post.href,
+    image: OLD_SITE.test(post.image || '') ? STAND_INS[i % STAND_INS.length] : post.image,
+    external: false
+  });
+
   function renderPosts(filter = 'all') {
-    const posts = (page.posts || [])
+    const posts = (page.posts || []).map(ownPost)
       .filter(post => filter === 'all' || post.cat === filter)
       .sort((a, b) => b.date.localeCompare(a.date));
     if (!posts.length) { set('[data-acad-posts]', `<p class="cal-empty">${icon('info')}<span>${te(L.noPosts)}</span></p>`); return; }

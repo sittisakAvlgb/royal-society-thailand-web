@@ -29,12 +29,11 @@ window.RS_ACADEMY_PAGES = {
       th: 'สำนักธรรมศาสตร์และการเมืองศึกษา ค้นคว้า และวิจัยในสาขาปรัชญา นิติศาสตร์ รัฐศาสตร์ เศรษฐศาสตร์ สังคมศาสตร์ และประวัติศาสตร์ จัดทำศัพท์บัญญัติและพจนานุกรมเฉพาะสาขา และนำความรู้สู่สังคมผ่านการบรรยาย การประชุมวิชาการ และโครงการราชบัณฑิตสัญจร',
       en: 'The Academy of Moral and Political Sciences studies and researches philosophy, law, political science, economics, the social sciences and history; it coins terminology and compiles specialist dictionaries, and takes its work to the public through lectures, conferences and the Fellows on Tour programme.'
     },
-    /* The academy's own pages, as listed under ข้อมูลหน่วยงาน on its website */
+    /* The academy's information, kept on this site */
     info: [
-      { title: { th: 'ผู้บริหารสำนัก', en: 'Executives' }, text: { th: 'คณะผู้บริหารของสำนัก', en: 'Who leads the academy' }, href: 'https://mps.royalsociety.go.th/%e0%b8%9c%e0%b8%b9%e0%b9%89%e0%b8%9a%e0%b8%a3%e0%b8%b4%e0%b8%ab%e0%b8%b2%e0%b8%a3-%e0%b8%aa%e0%b8%b3%e0%b8%99%e0%b8%b1%e0%b8%81%e0%b8%98%e0%b8%a3%e0%b8%a3%e0%b8%a1%e0%b8%a8%e0%b8%b2%e0%b8%aa%e0%b8%95/' },
-      { title: { th: 'รายนามตามประเภทวิชาและสาขาวิชา', en: 'Members by discipline and field' }, text: { th: 'ราชบัณฑิตและภาคีสมาชิก จัดตามประเภทวิชาและสาขาวิชา', en: 'Fellows and Associate Fellows, grouped by discipline and field' }, href: 'https://mps.royalsociety.go.th/fellows-associate_fellows/' },
-      { title: { th: 'บทบาทสำนักต่อการพัฒนาสังคมไทย', en: 'The academy and Thai society' }, text: { th: 'บทบาทของสำนักต่อการพัฒนาสังคมไทย', en: 'What the academy contributes to Thai society' }, href: 'https://mps.royalsociety.go.th/%e0%b8%9a%e0%b8%97%e0%b8%9a%e0%b8%b2%e0%b8%97%e0%b8%aa%e0%b8%b3%e0%b8%99%e0%b8%b1%e0%b8%81%e0%b8%98%e0%b8%a3%e0%b8%a3%e0%b8%a1%e0%b8%a8%e0%b8%b2%e0%b8%aa%e0%b8%95%e0%b8%a3%e0%b9%8c%e0%b9%81%e0%b8%a5/' },
-      { title: { th: 'ติดต่อสำนัก', en: 'Contact the academy' }, text: { th: 'ที่อยู่และช่องทางติดต่อ', en: 'Address and how to get in touch' }, href: 'https://mps.royalsociety.go.th/%e0%b8%95%e0%b8%b4%e0%b8%94%e0%b8%95%e0%b9%88%e0%b8%ad/' }
+      { title: { th: 'รายนามตามประเภทวิชาและสาขาวิชา', en: 'Members by discipline and field' }, text: { th: 'ราชบัณฑิตและภาคีสมาชิกของสำนัก', en: 'Fellows and Associate Fellows of the academy' }, href: 'pages/fellows.html?academy=moral' },
+      { title: { th: 'โครงสร้างและผู้บริหาร', en: 'Structure and executives' }, text: { th: 'แผนผังการบริหารราชบัณฑิตยสภา', en: 'How the Royal Society is governed' }, href: 'pages/about-structure.html' },
+      { title: { th: 'ติดต่อสำนัก', en: 'Contact the academy' }, text: { th: 'ที่อยู่และช่องทางติดต่อ', en: 'Address and how to get in touch' }, href: 'pages/contact.html' }
     ],
     posts: [
       { id: "moral-newsletter-3", cat: "activity", date: "2026-01-20", image: "https://mps.royalsociety.go.th/wp-content/uploads/2026/01/%E0%B8%88%E0%B8%94%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B8%97%E0%B8%B5%E0%B9%88-3png_Page1-890x530.png", href: "https://mps.royalsociety.go.th/%E0%B8%88%E0%B8%94%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B8%97%E0%B8%B5%E0%B9%88-3/", external: true,
@@ -57,15 +56,15 @@ window.RS_ACADEMY_PAGES = {
         excerpt: { th: "บทความวิชาการโดย ศ. ดร.ไผทชิต เอกจริยกร", en: "An academic article by Professor Dr Phaitoonchit Ekachariyakorn." } }
     ],
     lectures: [
-      { date: '2026-11-26', href: 'pages/academic-works.html#ideas-forum',
+      { date: '2026-11-26', href: 'pages/works-ideas-forum.html',
         title: { th: 'ภาษากฎหมายที่ประชาชนเข้าใจได้', en: 'Legal language the public can understand' },
         speaker: { th: 'ราชบัณฑิต สาขาวิชานิติศาสตร์', en: 'Fellow in Law' },
         place: { th: 'ออนไลน์', en: 'Online' } },
-      { date: '2026-08-22', href: 'pages/academic-works.html#on-tour',
+      { date: '2026-08-22', href: 'pages/works-on-tour.html',
         title: { th: 'การใช้ประวัติศาสตร์จากคำบอกเล่าในการศึกษาประวัติศาสตร์ท้องถิ่น', en: 'Oral history in the study of local history' },
         speaker: { th: 'ราชบัณฑิต สาขาวิชาประวัติศาสตร์', en: 'Fellow in History' },
         place: { th: 'ราชบัณฑิตสัญจร ภาคใต้', en: 'Fellows on Tour, the South' } },
-      { date: '2026-06-17', href: 'pages/academic-works.html',
+      { date: '2026-06-17', href: 'pages/works-calendar.html',
         title: { th: 'จิตวิทยาสังคมกับความเปลี่ยนแปลงของครอบครัวไทย', en: 'Social psychology and the changing Thai family' },
         speaker: { th: 'ภาคีสมาชิก สาขาวิชาจิตวิทยา', en: 'Associate Fellow in Psychology' },
         place: { th: 'ห้องประชุม 301 สำนักงานราชบัณฑิตยสภา', en: 'Room 301, Office of the Royal Society' } }
@@ -73,7 +72,7 @@ window.RS_ACADEMY_PAGES = {
     links: [
       { label: { th: 'พจนานุกรมศัพท์รัฐศาสตร์', en: 'Dictionary of political science terms' }, href: 'https://coined-word.orst.go.th/', external: true },
       { label: { th: 'พจนานุกรมศัพท์นิติศาสตร์', en: 'Dictionary of legal terms' }, href: 'https://coined-word.orst.go.th/', external: true },
-      { label: { th: 'คลังความรู้ราชบัณฑิตยสภา', en: 'Royal Society knowledge base' }, href: 'https://www.orst.go.th/iwfm_table.asp?a=28', external: true }
+      { label: { th: 'คลังความรู้ราชบัณฑิตยสภา', en: 'Royal Society knowledge base' }, href: 'pages/knowledge.html' }
     ]
   },
 
@@ -82,11 +81,11 @@ window.RS_ACADEMY_PAGES = {
       th: 'สำนักวิทยาศาสตร์ศึกษา ค้นคว้า และวิจัยในสาขาวิทยาศาสตร์กายภาพ วิทยาศาสตร์ชีวภาพ วิทยาศาสตร์ประยุกต์ แพทยศาสตร์ วิศวกรรมศาสตร์ และเทคโนโลยี บัญญัติศัพท์วิทยาศาสตร์ภาษาไทย และเผยแพร่บทความ หนังสือ และผลงานของราชบัณฑิตและภาคีสมาชิกเป็นประจำ',
       en: 'The Academy of Science studies and researches the physical, biological and applied sciences, medicine, engineering and technology; it coins Thai scientific terminology and regularly publishes the articles, books and other work of its Fellows and Associate Fellows.'
     },
-    /* The academy's own pages, as listed under ข้อมูลหน่วยงาน on its website */
+    /* The academy's information, kept on this site */
     info: [
-      { title: { th: 'ผู้บริหารสำนัก', en: 'Executives' }, text: { th: 'คณะผู้บริหารของสำนัก', en: 'Who leads the academy' }, href: 'https://science.royalsociety.go.th/%e0%b8%9c%e0%b8%b9%e0%b9%89%e0%b8%9a%e0%b8%a3%e0%b8%b4%e0%b8%ab%e0%b8%b2%e0%b8%a3-%e0%b8%aa%e0%b8%b3%e0%b8%99%e0%b8%b1%e0%b8%81%e0%b8%a7%e0%b8%b4%e0%b8%97%e0%b8%a2%e0%b8%b2%e0%b8%a8%e0%b8%b2%e0%b8%aa/' },
-      { title: { th: 'รายนามตามประเภทวิชาและสาขาวิชา', en: 'Members by discipline and field' }, text: { th: 'ราชบัณฑิตและภาคีสมาชิก จัดตามประเภทวิชาและสาขาวิชา', en: 'Fellows and Associate Fellows, grouped by discipline and field' }, href: 'https://science.royalsociety.go.th/fellows-associate_fellows/' },
-      { title: { th: 'ติดต่อสำนัก', en: 'Contact the academy' }, text: { th: 'ที่อยู่และช่องทางติดต่อ', en: 'Address and how to get in touch' }, href: 'https://science.royalsociety.go.th/%e0%b8%95%e0%b8%b4%e0%b8%94%e0%b8%95%e0%b9%88%e0%b8%ad/' }
+      { title: { th: 'รายนามตามประเภทวิชาและสาขาวิชา', en: 'Members by discipline and field' }, text: { th: 'ราชบัณฑิตและภาคีสมาชิกของสำนัก', en: 'Fellows and Associate Fellows of the academy' }, href: 'pages/fellows.html?academy=science' },
+      { title: { th: 'โครงสร้างและผู้บริหาร', en: 'Structure and executives' }, text: { th: 'แผนผังการบริหารราชบัณฑิตยสภา', en: 'How the Royal Society is governed' }, href: 'pages/about-structure.html' },
+      { title: { th: 'ติดต่อสำนัก', en: 'Contact the academy' }, text: { th: 'ที่อยู่และช่องทางติดต่อ', en: 'Address and how to get in touch' }, href: 'pages/contact.html' }
     ],
     posts: [
       { id: "science-centenary-coast", cat: "article", date: "2026-07-13", image: "assets/images/news/news-lead.jpg", href: "https://science.royalsociety.go.th/100year-coastal-erosion/", external: true,
@@ -109,15 +108,15 @@ window.RS_ACADEMY_PAGES = {
         excerpt: { th: "บทคัดย่อการบรรยายในการประชุมสำนักวิทยาศาสตร์ ฉบับเอกสาร PDF", en: "Abstracts of the lectures given at the academy's meetings, as a PDF." } }
     ],
     lectures: [
-      { date: '2026-12-09', href: 'pages/academic-works.html',
+      { date: '2026-12-09', href: 'pages/works-calendar.html',
         title: { th: 'วิทยาศาสตร์ไทยในศตวรรษใหม่ของราชบัณฑิตยสภา', en: 'Thai science in the Royal Society’s new century' },
         speaker: { th: 'ราชบัณฑิต สาขาวิชาฟิสิกส์', en: 'Fellow in Physics' },
         place: { th: 'ห้องประชุม 301 สำนักงานราชบัณฑิตยสภา', en: 'Room 301, Office of the Royal Society' } },
-      { date: '2026-10-21', href: 'pages/academic-works.html',
+      { date: '2026-10-21', href: 'pages/works-calendar.html',
         title: { th: 'ศัพท์บัญญัติวิทยาศาสตร์กับการสื่อสารสาธารณะ', en: 'Scientific terminology and public communication' },
         speaker: { th: 'ราชบัณฑิต สาขาวิชาเคมี', en: 'Fellow in Chemistry' },
         place: { th: 'ห้องประชุม 301 และ Zoom', en: 'Room 301 and Zoom' } },
-      { date: '2026-08-19', href: 'pages/academic-works.html',
+      { date: '2026-08-19', href: 'pages/works-calendar.html',
         title: { th: 'การแพทย์แม่นยำกับระบบสุขภาพไทย', en: 'Precision medicine and the Thai health system' },
         speaker: { th: 'ภาคีสมาชิก สาขาวิชาแพทยศาสตร์', en: 'Associate Fellow in Medicine' },
         place: { th: 'ออนไลน์', en: 'Online' } }
@@ -125,7 +124,7 @@ window.RS_ACADEMY_PAGES = {
     links: [
       { label: { th: 'ศัพท์บัญญัติวิทยาศาสตร์', en: 'Coined scientific terms' }, href: 'https://coined-word.orst.go.th/', external: true },
       { label: { th: 'คำทับศัพท์', en: 'Transliteration' }, href: 'https://transliteration.orst.go.th/', external: true },
-      { label: { th: 'จุลสารสำนักวิทยาศาสตร์', en: 'Academy of Science Bulletin' }, href: 'pages/academic-works.html#science-bulletin', external: false }
+      { label: { th: 'จุลสารสำนักวิทยาศาสตร์', en: 'Academy of Science Bulletin' }, href: 'pages/series.html?id=science-bulletin', external: false }
     ]
   },
 
@@ -134,11 +133,11 @@ window.RS_ACADEMY_PAGES = {
       th: 'สำนักศิลปกรรมศึกษา ค้นคว้า และวิจัยในสาขาภาษาและวรรณกรรม ภาษาศาสตร์ ดุริยางคศิลป์ ทัศนศิลป์ และสถาปัตยกรรม ดูแลงานพจนานุกรม หลักเกณฑ์การใช้ภาษาไทย และจัดประชุมสำนักพร้อมการบรรยายผลงานของราชบัณฑิตและภาคีสมาชิกทุกเดือน',
       en: 'The Academy of Arts studies and researches language and literature, linguistics, music, the visual arts and architecture; it looks after the dictionaries and the rules of written Thai, and meets every month to hear the work of its Fellows and Associate Fellows.'
     },
-    /* The academy's own pages, as listed under ข้อมูลหน่วยงาน on its website */
+    /* The academy's information, kept on this site */
     info: [
-      { title: { th: 'ผู้บริหารสำนัก', en: 'Executives' }, text: { th: 'คณะผู้บริหารของสำนัก', en: 'Who leads the academy' }, href: 'https://arts.royalsociety.go.th/%e0%b8%9c%e0%b8%b9%e0%b9%89%e0%b8%9a%e0%b8%a3%e0%b8%b4%e0%b8%ab%e0%b8%b2%e0%b8%a3-%e0%b8%aa%e0%b8%b3%e0%b8%99%e0%b8%b1%e0%b8%81%e0%b8%a8%e0%b8%b4%e0%b8%a5%e0%b8%9b%e0%b8%81%e0%b8%a3%e0%b8%a3%e0%b8%a1/' },
-      { title: { th: 'รายนามตามประเภทวิชาและสาขาวิชา', en: 'Members by discipline and field' }, text: { th: 'ราชบัณฑิตและภาคีสมาชิก จัดตามประเภทวิชาและสาขาวิชา', en: 'Fellows and Associate Fellows, grouped by discipline and field' }, href: 'https://arts.royalsociety.go.th/fellows-associate_fellows/' },
-      { title: { th: 'ติดต่อสำนัก', en: 'Contact the academy' }, text: { th: 'ที่อยู่และช่องทางติดต่อ', en: 'Address and how to get in touch' }, href: 'https://arts.royalsociety.go.th/%e0%b8%95%e0%b8%b4%e0%b8%94%e0%b8%95%e0%b9%88%e0%b8%ad/' }
+      { title: { th: 'รายนามตามประเภทวิชาและสาขาวิชา', en: 'Members by discipline and field' }, text: { th: 'ราชบัณฑิตและภาคีสมาชิกของสำนัก', en: 'Fellows and Associate Fellows of the academy' }, href: 'pages/fellows.html?academy=arts' },
+      { title: { th: 'โครงสร้างและผู้บริหาร', en: 'Structure and executives' }, text: { th: 'แผนผังการบริหารราชบัณฑิตยสภา', en: 'How the Royal Society is governed' }, href: 'pages/about-structure.html' },
+      { title: { th: 'ติดต่อสำนัก', en: 'Contact the academy' }, text: { th: 'ที่อยู่และช่องทางติดต่อ', en: 'Address and how to get in touch' }, href: 'pages/contact.html' }
     ],
     posts: [
       { id: "arts-meeting-11-2567", cat: "activity", date: "2024-06-05", image: "https://arts.royalsociety.go.th/wp-content/uploads/2024/06/447209918_869637738522578_2326131371159057780_n-890x530.jpg", href: "https://arts.royalsociety.go.th/11-2567/", external: true,
@@ -161,15 +160,15 @@ window.RS_ACADEMY_PAGES = {
         excerpt: { th: "บทความโดย ศ. ดร.มณีรัตน์ สวัสดิวัตน์ ณ อยุธยา ภาคีสมาชิก", en: "An article by Professor Dr Maneerat Svasti-xuto na Ayudhya, Associate Fellow." } }
     ],
     lectures: [
-      { date: '2026-12-02', href: 'pages/academic-works.html',
+      { date: '2026-12-02', href: 'pages/works-calendar.html',
         title: { th: 'ภาษาและวรรณกรรมไทยในโลกดิจิทัล', en: 'Thai language and literature in a digital world' },
         speaker: { th: 'ราชบัณฑิต สาขาวิชาวรรณศิลป์', en: 'Fellow in Literature' },
         place: { th: 'ห้องประชุม 301 และ Zoom', en: 'Room 301 and Zoom' } },
-      { date: '2024-03-05', href: 'pages/academic-works.html',
+      { date: '2024-03-05', href: 'pages/works-calendar.html',
         title: { th: 'ฮิตเลอร์กับซอฟต์พาวเวอร์', en: 'Hitler and soft power' },
         speaker: { th: 'ราชบัณฑิต สาขาวิชานาฏกรรม', en: 'Fellow in Dramatic Arts' },
         place: { th: 'ห้องประชุม 301 สำนักงานราชบัณฑิตยสภา', en: 'Room 301, Office of the Royal Society' } },
-      { date: '2024-02-12', href: 'pages/academic-works.html',
+      { date: '2024-02-12', href: 'pages/works-calendar.html',
         title: { th: 'คำยืมภาษาต่างประเทศในภาษาไทยปัจจุบัน', en: 'Foreign loanwords in present-day Thai' },
         speaker: { th: 'ราชบัณฑิต สาขาวิชาภาษาศาสตร์', en: 'Fellow in Linguistics' },
         place: { th: 'ห้องประชุม 301 สำนักงานราชบัณฑิตยสภา', en: 'Room 301, Office of the Royal Society' } }

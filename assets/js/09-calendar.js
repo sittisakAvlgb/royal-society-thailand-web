@@ -56,7 +56,9 @@
     until: { th: 'ถึง', en: 'until' },
     addCalShort: { th: 'เพิ่มลงปฏิทินของฉัน', en: 'Add to my calendar' },
     prevMonth: { th: 'เดือนก่อนหน้า', en: 'Previous month' },
-    nextMonth: { th: 'เดือนถัดไป', en: 'Next month' }
+    nextMonth: { th: 'เดือนถัดไป', en: 'Next month' },
+    monthCount: { th: '{n} กิจกรรมในเดือนนี้', en: '{n} events this month' },
+    monthNone: { th: 'ไม่มีกิจกรรมในเดือนนี้', en: 'No events this month' }
   };
 
   const WEEKDAYS = TH ? ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'] : ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
@@ -462,7 +464,9 @@
     /* .tearoff--side (academy pages): the details open inside the chosen row
        of the list, like an agenda, instead of in a panel of their own */
     const side = root.classList.contains('tearoff--side');
-    const dock = () => { if (side) stack.querySelector('.mini-leaf.is-active')?.closest('li')?.append(detail); };
+    /* the agenda (side) layout shows the chosen event as a card in the list
+       itself, so the separate detail panel stays empty and hidden */
+    if (side) { detail.hidden = true; stack.setAttribute('aria-live', 'polite'); }
     let month = null;                                /* first day of the month the calendar shows */
     /* the calendar can browse from the earliest to the latest event shown,
        and always includes this month */
@@ -512,7 +516,50 @@
       detail.style.animation = '';
     };
 
+    /* Agenda: the chosen event as a compact card — the date in a block of
+       its kind's colour, the title, time and place, the summary and the two
+       actions; every other event a row with its date on a chip, opening
+       into the card when picked */
+    const agendaCard = ev => {
+      const d = parse(ev.date);
+      return `
+          <li class="agenda__item is-active">
+            <article class="agenda-card" data-type="${escapeHTML(ev.type)}" aria-labelledby="agenda-title-${escapeHTML(ev.id)}" tabindex="-1">
+              <p class="agenda-card__date"><span class="agenda-card__day">${d.getDate()}</span><span class="agenda-card__my">${MONTHS_SHORT[d.getMonth()]} ${year(d)}</span></p>
+              <div class="agenda-card__body">
+                <p class="agenda-card__kind">${te(TYPES[ev.type])}<span class="agenda-card__count">${countText(ev)}</span></p>
+                <h3 class="agenda-card__title" id="agenda-title-${escapeHTML(ev.id)}">${te(ev.title)}</h3>
+                <ul class="agenda-card__meta" role="list">
+                  <li>${icon('clock')}<span>${escapeHTML(timeText(ev))}${TH && ev.start ? ' น.' : ''}</span></li>
+                  <li>${icon('pin')}<span>${te(ev.location)}</span></li>
+                </ul>
+                <p class="agenda-card__summary">${te(ev.summary)}</p>
+                <div class="agenda-card__actions">
+                  <a class="btn btn--primary btn--pill btn--sm" href="${escapeHTML(RS.url(ev.href))}"><span>${te(L.details)}</span>${icon('arrow')}</a>
+                  <button class="btn btn--secondary btn--pill btn--sm agenda-card__ics" type="button" data-tearoff-ics>${icon('calendar')}<span>${te(L.addCalShort)}</span></button>
+                </div>
+              </div>
+            </article>
+          </li>`;
+    };
+    const agendaRow = ev => {
+      const d = parse(ev.date);
+      return `
+          <li class="agenda__item">
+            <button class="agenda-row" type="button" data-tearoff-pick="${escapeHTML(ev.id)}" data-type="${escapeHTML(ev.type)}" aria-pressed="false">
+              <span class="agenda-row__date"><span class="agenda-row__day">${d.getDate()}</span><span class="agenda-row__my">${MONTHS_SHORT[d.getMonth()]} ${year(d)}</span></span>
+              <span class="agenda-row__title">${te(ev.title)}</span>
+              <span class="agenda-row__go" aria-hidden="true">${icon('chevron')}</span>
+            </button>
+          </li>`;
+    };
+
     const renderStack = () => {
+      if (side) {
+        stack.classList.add('agenda');
+        stack.innerHTML = list.map(ev => (ev === current ? agendaCard(ev) : agendaRow(ev))).join('');
+        return;
+      }
       stack.innerHTML = list.map(ev => {
         const d = parse(ev.date);
         const on = ev === current;
@@ -545,15 +592,28 @@
                      aria-label="${d.getDate()} ${MONTHS[d.getMonth()]} ${year(d)} · ${te(evs[0].title)}">${d.getDate()}</button>`
           : `<span class="${cls}">${d.getDate()}</span>`;
       }
+      /* the month's events: a count under the title and a key of their kinds under the grid */
+      const inMonth = all.filter(ev => { const d = parse(ev.date); return d.getFullYear() === month.getFullYear() && d.getMonth() === month.getMonth(); });
+      const kinds = [...new Set(inMonth.map(ev => ev.type))];
+      const sub = inMonth.length ? t(L.monthCount).replace('{n}', inMonth.length) : t(L.monthNone);
       cal.dataset.dir = dir > 0 ? 'next' : dir < 0 ? 'prev' : 'none';
       cal.innerHTML = `
         <div class="tcal__head">
-          <button class="tcal__nav tcal__nav--prev" type="button" data-tearoff-month="-1" aria-label="${te(L.prevMonth)}"${month <= firstMonth ? ' disabled' : ''}>${icon('chevron')}</button>
-          <p class="tcal__title" aria-live="polite">${MONTHS[month.getMonth()]} ${year(month)}</p>
-          <button class="tcal__nav tcal__nav--next" type="button" data-tearoff-month="1" aria-label="${te(L.nextMonth)}"${month >= lastMonth ? ' disabled' : ''}>${icon('chevron')}</button>
+          <div class="tcal__heading">
+            <p class="tcal__title" aria-live="polite"><span class="tcal__month">${MONTHS[month.getMonth()]}</span> <span class="tcal__year">${year(month)}</span></p>
+            <p class="tcal__sub">${escapeHTML(sub)}</p>
+          </div>
+          <div class="tcal__navs">
+            <button class="tcal__nav tcal__nav--prev" type="button" data-tearoff-month="-1" aria-label="${te(L.prevMonth)}"${month <= firstMonth ? ' disabled' : ''}>${icon('chevron')}</button>
+            <button class="tcal__nav tcal__nav--next" type="button" data-tearoff-month="1" aria-label="${te(L.nextMonth)}"${month >= lastMonth ? ' disabled' : ''}>${icon('chevron')}</button>
+          </div>
         </div>
         <div class="tcal__weekdays" aria-hidden="true">${WEEKDAYS.map((w, i) => `<span${i === 0 ? ' class="is-sun"' : ''}>${w}</span>`).join('')}</div>
-        <div class="tcal__grid">${cells}</div>`;
+        <div class="tcal__grid">${cells}</div>
+        <ul class="tcal__legend" role="list">
+          ${kinds.map(k => `<li data-type="${escapeHTML(k)}">${te(TYPES[k])}</li>`).join('')}
+          <li class="tcal__legend-today">${te(L.todayIs)}</li>
+        </ul>`;
     }
 
     function show(ev) {
@@ -564,9 +624,8 @@
         if (RS.reduceMotion() || !pad.offsetParent) old.remove();   /* hidden pad (agenda layout): no tear to wait for */
         else old.addEventListener('animationend', () => old.remove(), { once: true });
       }
-      renderDetail(ev);
+      if (!side) renderDetail(ev);
       renderStack();
-      dock();
       const d = parse(ev.date);
       month = new Date(d.getFullYear(), d.getMonth(), 1);
       renderCal();
@@ -577,7 +636,12 @@
       const pick = event.target.closest('[data-tearoff-pick]');
       if (pick) {
         const ev = list.find(item => item.id === pick.dataset.tearoffPick);
-        if (ev && ev !== current) { current = ev; show(ev); }
+        if (ev && ev !== current) {
+          current = ev;
+          show(ev);
+          /* the row became the card: keep the reader's place on it */
+          if (side) qs('.agenda-card', stack)?.focus({ preventScroll: true });
+        }
         return;
       }
       const day = event.target.closest('[data-tearoff-day]');

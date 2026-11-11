@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title data-en="News | The Royal Society of Thailand">ข่าวสาร | ราชบัณฑิตยสภา</title>
+  <title data-en="News and Announcements | The Royal Society of Thailand">ข่าวประชาสัมพันธ์ | ราชบัณฑิตยสภา</title>
   <meta name="description" content="ข่าว ประกาศ และกิจกรรมทางวิชาการของราชบัณฑิตยสภา เช่น การบรรยายสาธารณะ การอบรม และการประชุมวิชาการ" data-en-content="News, announcements and academic events from the Royal Society of Thailand, including public lectures, workshops and conferences.">
   <meta name="theme-color" content="#123D2B">
 
@@ -28,12 +28,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261109f">
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
 
   <script type="application/ld+json">
   {
@@ -46,190 +50,97 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261109f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261109f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261109f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261109f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261109f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261109f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261109f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261109f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
+  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/news.js?v=20261117f"></script>
+  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
+  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
+  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
+  <script defer src="../assets/js/14-news-list.js?v=20261117f"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
 </head>
 <body>
   <div id="app-header"></div>
+  <!-- Shown while the page sets itself up (header, Thai font); 02-components.js
+       lifts it, and CSS lifts it on its own after a few seconds regardless -->
+  <div class="page-skel" aria-hidden="true">
+    <div class="page-skel__bar"><span class="sk sk--logo"></span><span class="sk sk--nav"></span><span class="sk sk--btn"></span></div>
+    <div class="page-skel__body">
+      <span class="sk sk--crumb"></span>
+      <div class="page-skel__hero">
+        <div class="page-skel__text"><span class="sk sk--kicker"></span><span class="sk sk--title"></span><span class="sk sk--line"></span><span class="sk sk--line sk--short"></span></div>
+        <span class="sk sk--art"></span>
+      </div>
+      <div class="page-skel__cards"><span class="sk sk--card"></span><span class="sk sk--card"></span><span class="sk sk--card"></span></div>
+    </div>
+  </div>
 
-  <main id="main-content" tabindex="-1">
-
-    <div class="page-header">
+  <main id="main-content" tabindex="-1" data-news-list data-news-cats="news,announcement,activity">
+    <!-- Opening: the cream band of the story pages with the inner-page leaf
+         artwork — breadcrumb, title and lead; the filter bar overlaps its edge -->
+    <header class="story__head newsx-head">
       <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
-          <ol>
-            <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
-            <li><span aria-current="page" data-en="News">ข่าวสาร</span></li>
-          </ol>
-        </nav>
-        <h1 data-en="News">ข่าวสาร</h1>
-        <p class="page-header__lead" data-en="Press Releases, announcements, upcoming events and the photo and video gallery of the Royal Society.">แถลงข่าว ข่าวประชาสัมพันธ์ กิจกรรมที่จะมาถึง และคลังภาพและวิดีโอของราชบัณฑิตยสภา</p>
+        <div class="story__crumbbar">
+          <nav class="breadcrumb story__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+            <ol>
+              <li><a href="../index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-institution"></use></svg><span data-en="Home">หน้าแรก</span></a></li>
+              <li><span aria-current="page" data-en="News">ข่าวสาร</span></li>
+            </ol>
+          </nav>
+        </div>
+        <h1 class="story__title newsx-head__title" data-en="News and Announcements">ข่าวประชาสัมพันธ์</h1>
+        <p class="story__dek newsx-head__lead" data-en="News, announcements and activities of the Royal Society of Thailand.">ข่าว ประกาศ และกิจกรรมของราชบัณฑิตยสภา</p>
+
+      </div>
+    </header>
+
+    <!-- One control bar: category tabs on the left; search and the grid / list switch on the right -->
+    <div class="container newsx-toolbar">
+      <div class="newsx-tools">
+        <div class="news-tabs" role="group" aria-label="กรองข่าวตามหมวดหมู่" data-en-aria-label="Filter news by category" data-newsx-tabs>
+          <button class="news-tab is-active" type="button" data-filter="all" aria-pressed="true" data-en="All">ทั้งหมด</button>
+          <button class="news-tab" type="button" data-filter="news" aria-pressed="false" data-en="News">ข่าว</button>
+          <button class="news-tab" type="button" data-filter="announcement" aria-pressed="false" data-en="Announcements">ประกาศ</button>
+          <button class="news-tab" type="button" data-filter="activity" aria-pressed="false" data-en="Activities">กิจกรรม</button>
+        </div>
+        <div class="newsx-tools__end">
+        <label class="newsx-search">
+          <span class="visually-hidden" data-en="Search news">ค้นหาข่าว</span>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+          <input type="search" placeholder="ค้นหาข่าว" data-en-placeholder="Search news" autocomplete="off" data-newsx-search>
+        </label>
+        <div class="newsx-view" role="group" aria-label="รูปแบบการแสดงผล" data-en-aria-label="View">
+          <button class="btn btn--secondary btn--sm newsx-view__btn is-active" type="button" data-newsx-view="grid" aria-pressed="true" title="แบบตาราง" data-en-title="Grid view">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+            <span data-en="Grid">ตาราง</span>
+          </button>
+          <button class="btn btn--secondary btn--sm newsx-view__btn" type="button" data-newsx-view="list" aria-pressed="false" title="แบบรายการ" data-en-title="List view">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="15" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span data-en="List">รายการ</span>
+          </button>
+        </div>
+        </div>
       </div>
     </div>
 
-    <!-- ==============================
-         Press Releases (5.1)
-    ================================ -->
-    <section class="section" id="press-releases" aria-labelledby="press-releases-title">
-      <div class="container stack-lg">
-        <div class="section-head">
-          <div class="section-head__text">
-            <p class="eyebrow" data-en="News">ข่าวสาร</p>
-            <h2 id="press-releases-title" class="section-title" data-en="Press Releases">แถลงข่าว</h2>
-          </div>
-        </div>
-        <!-- TODO (Office): press releases feed -->
-        <div class="content-note">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <p data-en="Content will be provided by the Office of the Royal Society.">เนื้อหาจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-        </div>
+    <!-- The stories, newest first, all at one size: a grid of cards or a list of rows -->
+    <section class="section newsx" id="news" aria-labelledby="newsx-title">
+      <div class="container">
+        <h2 class="visually-hidden" id="newsx-title" data-en="All news">ข่าวทั้งหมด</h2>
+        <!-- Count on the left, the grid / list switch on the right -->
+        <p class="newsx-count" aria-live="polite" data-newsx-count></p>
+        <ul class="newsx-items newsx-items--grid" role="list" data-newsx-items></ul>
+        <p class="newsx-empty" data-newsx-empty hidden>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+          <span data-en="No news matches your search.">ไม่พบข่าวที่ตรงกับคำค้น</span>
+        </p>
+        <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-newsx-pages></nav>
       </div>
     </section>
 
-    <!-- ==============================
-         Announcements (5.2, sample content)
-    ================================ -->
-    <section class="section section--alt" id="news" aria-labelledby="news-title">
-      <div class="container stack-lg">
-        <div class="section-head">
-          <div class="section-head__text">
-            <p class="eyebrow" data-en="News">ข่าว</p>
-            <h2 id="news-title" class="section-title" data-en="News and Announcements">ข่าวประชาสัมพันธ์</h2>
-            <p class="section-desc" data-en="Announcements, academic activities and news from the Royal Society of Thailand.">ประกาศ กิจกรรมทางวิชาการ และความเคลื่อนไหวของราชบัณฑิตยสภา</p>
-          </div>
-        </div>
-
-        <div class="featured">
-          <article class="article-card article-card--lead">
-            <div class="image-placeholder">
-              <!-- Official image will be added here -->
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg>
-            </div>
-            <div class="article-card__meta">
-              <span class="badge badge--type" data-en="News">ข่าว</span>
-              <time datetime="2026-09-02" data-en="2 Sep 2026">2 ก.ย. 2569</time>
-            </div>
-            <h3 class="article-card__title"><a href="article.html" data-en="Registration opens for the public lecture “Thai in the digital age”">เปิดลงทะเบียนบรรยายสาธารณะ “ภาษาไทยในยุคดิจิทัล”</a></h3>
-            <p class="article-card__excerpt" data-en="Open to the public, with live streaming online.">เปิดให้ประชาชนทั่วไปเข้าร่วม พร้อมถ่ายทอดสดออนไลน์</p>
-          </article>
-
-          <ul class="news-list" role="list">
-            <li>
-              <div class="article-card__meta"><span class="badge badge--type" data-en="Announcement">ประกาศ</span><time datetime="2026-08-27" data-en="27 Aug 2026">27 ส.ค. 2569</time></div>
-              <a href="article.html" data-en="Announcement on newly considered terms">ประกาศเรื่องศัพท์ที่ผ่านการพิจารณาใหม่</a>
-            </li>
-            <li>
-              <div class="article-card__meta"><span class="badge badge--type" data-en="News">ข่าว</span><time datetime="2026-08-15" data-en="15 Aug 2026">15 ส.ค. 2569</time></div>
-              <a href="article.html" data-en="Academic meeting of the Academy of Science">การประชุมวิชาการสำนักวิทยาศาสตร์</a>
-            </li>
-            <li>
-              <div class="article-card__meta"><span class="badge badge--type" data-en="Activity">กิจกรรม</span><time datetime="2026-07-29" data-en="29 Jul 2026">29 ก.ค. 2569</time></div>
-              <a href="article.html" data-en="Thai language camp for teachers">ค่ายภาษาไทยสำหรับครู</a>
-            </li>
-            <li>
-              <div class="article-card__meta"><span class="badge badge--type" data-en="Announcement">ประกาศ</span><time datetime="2026-07-10" data-en="10 Jul 2026">10 ก.ค. 2569</time></div>
-              <a href="article.html" data-en="Channels for academic enquiries">ประกาศช่องทางสอบถามข้อมูลทางวิชาการ</a>
-            </li>
-            <li>
-              <div class="article-card__meta"><span class="badge badge--type" data-en="News">ข่าว</span><time datetime="2026-06-30" data-en="30 Jun 2026">30 มิ.ย. 2569</time></div>
-              <a href="article.html" data-en="A new issue of the Journal is published">เผยแพร่วารสารราชบัณฑิตยสภาฉบับใหม่</a>
-            </li>
-          </ul>
-        </div>
-
-        <nav class="pagination" aria-label="แบ่งหน้า" data-en-aria-label="Pagination">
-          <ul>
-            <li><span aria-disabled="true" data-en="Previous">ก่อนหน้า</span></li>
-            <li><a href="?page=1" aria-current="page" aria-label="หน้า 1" data-en-aria-label="Page 1">1</a></li>
-            <li><a href="?page=2" aria-label="หน้า 2" data-en-aria-label="Page 2">2</a></li>
-            <li><a href="?page=3" aria-label="หน้า 3" data-en-aria-label="Page 3">3</a></li>
-            <li><a href="?page=2" data-en="Next">ถัดไป</a></li>
-          </ul>
-        </nav>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Upcoming events (sample content)
-    ================================ -->
-    <section class="section" id="events" aria-labelledby="events-title">
-      <div class="container news-layout">
-        <div>
-          <div class="section-head">
-            <div class="section-head__text">
-              <p class="eyebrow" data-en="Events">กิจกรรม</p>
-              <h2 id="events-title" class="section-title" data-en="Upcoming events">กิจกรรมที่จะมาถึง</h2>
-              <p class="section-desc" data-en="Public lectures, workshops and academic meetings.">การบรรยายสาธารณะ การอบรม และการประชุมวิชาการ</p>
-            </div>
-          </div>
-
-          <ul class="event-list" role="list">
-            <li class="event">
-              <time class="event__date" datetime="2026-09-24"><span class="event__day">24</span><span class="event__month" data-en="Sep">ก.ย.</span></time>
-              <div>
-                <p class="event__title"><a href="article.html" data-en="Public lecture: Thai in the digital age">บรรยายสาธารณะ ภาษาไทยในยุคดิจิทัล</a></p>
-                <p class="meta-list"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="font-latin">13:30–16:00</span></span><span data-en="Online and on site">ออนไลน์และในสถานที่</span></p>
-              </div>
-            </li>
-            <li class="event">
-              <time class="event__date" datetime="2026-10-08"><span class="event__day">8</span><span class="event__month" data-en="Oct">ต.ค.</span></time>
-              <div>
-                <p class="event__title"><a href="article.html" data-en="Workshop: transliteration for editors">อบรมการเขียนคำทับศัพท์สำหรับบรรณาธิการ</a></p>
-                <p class="meta-list"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="font-latin">09:00–12:00</span></span></p>
-              </div>
-            </li>
-            <li class="event">
-              <time class="event__date" datetime="2026-11-12"><span class="event__day">12</span><span class="event__month" data-en="Nov">พ.ย.</span></time>
-              <div>
-                <p class="event__title"><a href="article.html" data-en="Annual academic conference">การประชุมวิชาการประจำปี</a></p>
-                <p class="meta-list"></p>
-              </div>
-            </li>
-            <li class="event">
-              <time class="event__date" datetime="2026-12-03"><span class="event__day">3</span><span class="event__month" data-en="Dec">ธ.ค.</span></time>
-              <div>
-                <p class="event__title"><a href="article.html" data-en="Panel discussion: science terms in the media">เสวนาวิชาการ การใช้ศัพท์วิทยาศาสตร์ในสื่อ</a></p>
-                <p class="meta-list"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="font-latin">13:00–15:30</span></span><span data-en="Online">ออนไลน์</span></p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="stack">
-          <a class="link-arrow" href="https://www.orst.go.th/" target="_blank" rel="noopener">
-            <span data-en="Office of the Royal Society">สำนักงานราชบัณฑิตยสภา</span>
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
-            <span class="visually-hidden" data-en="(external website, opens in a new tab)">(เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Photo and Video Gallery (5.3)
-    ================================ -->
-    <section class="section section--alt" id="media-gallery" aria-labelledby="media-gallery-title">
-      <div class="container stack-lg">
-        <div class="section-head">
-          <div class="section-head__text">
-            <p class="eyebrow" data-en="Gallery">คลัง</p>
-            <h2 id="media-gallery-title" class="section-title" data-en="Photo and Video Gallery">คลังภาพและวิดีโอ</h2>
-          </div>
-        </div>
-        <!-- TODO (Office): photo albums and video links -->
-        <div class="content-note">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <p data-en="Content will be provided by the Office of the Royal Society.">เนื้อหาจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-        </div>
-      </div>
-    </section>
   </main>
 
   <div id="app-footer"></div>

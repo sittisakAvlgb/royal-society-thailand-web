@@ -1,14 +1,15 @@
 /* ============================================================================
- * 14-about.js — the About page (pages/about.html)
+ * 14-about.js — the About hub (pages/about.html) and its topic pages
+ *  (pages/about-*.html)
  *  - the three academies as photo cards (the same cards the academy pages
  *    use for "other academies"), each with its own photo or its latest
  *    news photo from data/academies.js
- *  - the sticky "on this page" index marks the part being read
+ *  - old in-page links (about.html#history …) open the topic's own page
  * ========================================================================== */
 (() => {
   'use strict';
 
-  const { qs, qsa, t, te, icon, escapeHTML } = RS;
+  const { qs, t, te, icon, escapeHTML } = RS;
   const CFG = window.RS_CONFIG || {};
   const PAGES = window.RS_ACADEMY_PAGES || {};
   const other = RS.lang === 'th' ? 'en' : 'th';
@@ -39,33 +40,25 @@
       </li>`).join('');
   }
 
-  function initToc(root) {
-    const links = qsa('[data-about-toc] a', root);
-    const parts = links.map(link => document.getElementById(link.hash.slice(1))).filter(Boolean);
-    if (!('IntersectionObserver' in window) || !parts.length) return;
-    const list = qs('[data-about-toc]', root);
-    const mark = id => links.forEach(link => {
-      if (link.hash !== `#${id}`) { link.removeAttribute('aria-current'); return; }
-      link.setAttribute('aria-current', 'true');
-      /* on phones the index is a sideways row: keep the current one in view */
-      if (list.scrollWidth > list.clientWidth) {
-        list.scrollTo({ left: link.offsetLeft - 16, behavior: RS.reduceMotion() ? 'auto' : 'smooth' });
-      }
-    });
-    const observer = new IntersectionObserver(entries => {
-      const visible = entries.filter(entry => entry.isIntersecting)
-        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-      if (visible) mark(visible.target.id);
-    }, { rootMargin: '-30% 0px -60% 0px' });
-    parts.forEach(part => observer.observe(part));
-    mark(parts[0].id);
+  /* Each topic used to be a part of this page: old links such as
+     about.html#history now open the topic's own page */
+  const MOVED = {
+    history: 'history', authority: 'authority', direction: 'direction', structure: 'structure',
+    'current-executives': 'executives', 'past-presidents': 'past-presidents', 'president-message': 'president-message',
+    acts: 'acts', bylaws: 'bylaws', rules: 'rules', announcements: 'announcements'
+  };
+  function redirectOldLinks() {
+    const topic = MOVED[location.hash.slice(1)];
+    if (!topic || !/about\.html$/.test(location.pathname)) return false;
+    location.replace(RS.url(`pages/about-${topic}.html`));
+    return true;
   }
 
   RS.ready(() => {
     const root = qs('.about-page');
     if (!root) return;
+    if (redirectOldLinks()) return;
     renderAcademies(root);
-    initToc(root);
     document.dispatchEvent(new CustomEvent('rs:content-added', { detail: root }));
   });
 })();

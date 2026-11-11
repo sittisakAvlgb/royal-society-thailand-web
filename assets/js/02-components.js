@@ -114,6 +114,10 @@
       const cls = className ? ` ${className}` : '';
       return `<button class="footer-action${cls}" type="button" data-cookie-settings><span>${te(item.label)}</span></button>`;
     }
+    /* An entry without `href` is a heading over its links, not a destination */
+    if (!item.href) {
+      return `<span class="menu-label${className ? ` ${className}` : ''}"><span>${te(item.label)}</span></span>`;
+    }
     const href = item.href.replace('{webmaster}', CFG.contact.webmaster);
     const external = item.external || RS.isExternal(href);
     const attrs = external ? ' target="_blank" rel="noopener"' : '';
@@ -166,7 +170,21 @@
             <span class="utility-bar__sep" aria-hidden="true"></span>
             <span class="utility-bar__hours">${icon('clock')}<span>${te(c.officeHours)}</span></span>
           </p>`;
-    const links = CFG.utilityLinks.map(item => `<li>${link(item)}</li>`).join('');
+    /* an item with `menu` opens that nav item's children as a dropdown */
+    const links = CFG.utilityLinks.map(item => {
+      const menu = item.menu && CFG.nav.find(entry => entry.key === item.menu);
+      if (!menu?.children?.length) return `<li>${link(item)}</li>`;
+      const id = `utility-menu-${menu.key}`;
+      return `
+            <li class="utility-menu" data-utility-menu>
+              <button class="utility-menu__btn" type="button" aria-expanded="false" aria-controls="${id}">
+                <span>${te(item.label)}</span>${icon('chevron')}
+              </button>
+              <ul class="utility-menu__list" id="${id}" role="list" hidden>
+                ${menu.children.map(child => `<li>${link(child, 'utility-menu__link')}</li>`).join('')}
+              </ul>
+            </li>`;
+    }).join('');
 
     return `
       <div class="utility-bar">
@@ -197,7 +215,7 @@
 
     const columns = [...branches, ...guests].map(child => `
       <div class="mega-group">
-        <p class="mega-group__title">${link(child)}</p>
+        <p class="mega-group__title">${link({ ...child, href: null })}</p>
         <ul role="list">${child.children.map(sub => `<li>${link(sub)}</li>`).join('')}</ul>
       </div>`).join('');
 
@@ -211,9 +229,9 @@
         <div class="mega-feature">
           <p class="mega-feature__title">${te(item.label)}</p>
           ${item.intro ? `<p class="mega-feature__desc">${te(item.intro)}</p>` : ''}
-          <a class="link-arrow" href="${escapeHTML(url(item.href))}"${detectActive() === key ? ' aria-current="page"' : ''}>
+          ${item.href ? `<a class="link-arrow" href="${escapeHTML(url(item.href))}"${detectActive() === key ? ' aria-current="page"' : ''}>
             <span>${te(ui.viewSection)}</span>${icon('arrow')}
-          </a>
+          </a>` : ''}
         </div>
         <div class="mega-groups">${columns}${leafColumn}</div>
       </div>`;
@@ -241,7 +259,7 @@
 
   function renderMobilePanel(active) {
     const items = CFG.nav.map(item => {
-      const href = escapeHTML(url(item.href));
+      const href = item.href ? escapeHTML(url(item.href)) : '';
       const current = item.key === active ? ' aria-current="page"' : '';
 
       if (!item.children?.length) {
@@ -249,14 +267,14 @@
       }
 
       const links = item.children.map(child => `
-        ${link(child, 'rs-mobile-sub')}
+        ${link(child.children?.length ? { ...child, href: null } : child, 'rs-mobile-sub')}
         ${(child.children || []).map(sub => link(sub, 'rs-mobile-subsub')).join('')}`).join('');
 
       return `
         <details${item.key === active ? ' open' : ''}>
           <summary>${te(item.label)}${icon('chevron')}</summary>
           <div class="rs-mobile-links">
-            <a class="rs-mobile-landing" href="${href}"${current}>${te(ui.viewSection)}</a>
+            ${href ? `<a class="rs-mobile-landing" href="${href}"${current}>${te(ui.viewSection)}</a>` : ''}
             ${links}
           </div>
         </details>`;
@@ -432,7 +450,7 @@
 
         <div class="footer-bottom">
           <div class="container">
-            <p>© <span class="font-latin">${yearLabel}</span> ${escapeHTML(site.name.th)} <span lang="en">${escapeHTML(site.nameEn)}</span> · ${te(ui.rights)}</p>
+            <p>© <span>${yearLabel}</span> ${escapeHTML(site.name.th)} <span lang="en">${escapeHTML(site.nameEn)}</span> · ${te(ui.rights)}</p>
             <div class="footer-bottom__end">
               <p class="visitor-count">${icon('people')}<span>${te(ui.visitors)}</span> <strong>${escapeHTML(RS.formatNumber(CFG.visitorCount))}</strong></p>
               <button class="footer-top" type="button" data-scroll-top>
@@ -623,6 +641,20 @@
       url.pathname.endsWith(`/${path}`) || (path === 'index.html' && url.pathname.endsWith('/'))));
   }
   RS.lockedUrl = lockedUrl;
+
+  /* Sections that became pages of their own: an old link such as
+     fellows.html#recruitment opens the new page (the About, Academic Works
+     and News hubs handle theirs in 14-about.js, 18-works.js, 14-news-list.js) */
+  const MOVED = {
+    'fellows.html': { 'by-academy': 'pages/fellows-academies.html', recruitment: 'pages/fellows-recruitment.html', 'former-fellows': 'pages/fellows-past.html' },
+    'contact.html': { 'contact-form': 'pages/contact-form.html', faq: 'pages/contact-faq.html' },
+    'admissions.html': {
+      'associate-fellow-rules': 'pages/admissions-associate-rules.html', 'associate-fellow-form': 'pages/admissions-associate-form.html',
+      'fellow-rules': 'pages/admissions-fellow-rules.html', 'fellow-form': 'pages/admissions-fellow-form.html'
+    }
+  };
+  const movedTo = MOVED[location.pathname.split('/').pop()]?.[location.hash.slice(1)];
+  if (movedTo) location.replace(RS.url(movedTo));
   RS.lockNotice = () => RS.toast?.(RS.t(CFG.site.menuLock.message));
 
   const isLockedLink = link =>
@@ -654,9 +686,42 @@
   }
 
   /** Controls desktop and mobile navigation. */
+  /* Top-bar dropdowns (utilityLinks with `menu`): a disclosure button and
+     its list; Esc, a click elsewhere or leaving the menu closes it */
+  function initUtilityMenus() {
+    RS.qsa('[data-utility-menu]').forEach(menu => {
+      const btn = RS.qs('.utility-menu__btn', menu);
+      const list = RS.qs('.utility-menu__list', menu);
+      /* the page being read is marked in the list */
+      const here = location.pathname.split('/').pop();
+      RS.qsa('a', list).forEach(a => {
+        if (new URL(a.href, location.href).pathname.split('/').pop() === here && !a.target) a.setAttribute('aria-current', 'page');
+      });
+      const set = open => {
+        list.hidden = !open;
+        btn.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('is-open', open);
+      };
+      btn.addEventListener('click', () => {
+        set(list.hidden);
+        if (!list.hidden) RS.qs('a', list)?.focus();
+      });
+      menu.addEventListener('keydown', event => {
+        const links = RS.qsa('a', list);
+        const index = links.indexOf(document.activeElement);
+        if (event.key === 'Escape' && !list.hidden) { set(false); btn.focus(); }
+        else if (event.key === 'ArrowDown' && !list.hidden) { event.preventDefault(); links[(index + 1) % links.length]?.focus(); }
+        else if (event.key === 'ArrowUp' && !list.hidden) { event.preventDefault(); links[(index - 1 + links.length) % links.length]?.focus(); }
+      });
+      menu.addEventListener('focusout', event => { if (!menu.contains(event.relatedTarget)) set(false); });
+      document.addEventListener('click', event => { if (!menu.contains(event.target)) set(false); });
+    });
+  }
+
   function initNavigation() {
     initMegaMenu();
     initMobileMenu();
+    initUtilityMenus();
   }
 
   /* ==================================================================== *
@@ -672,6 +737,16 @@
 
     initNavigation();
     initMenuLock();
+
+    /* lift the page skeleton once the header is in and the Thai face has
+       loaded — but never wait longer than a moment for the font */
+    const fontsReady = document.fonts?.ready || Promise.resolve();
+    Promise.race([fontsReady, new Promise(resolve => setTimeout(resolve, 900))])
+      .then(() => requestAnimationFrame(() => {
+        document.documentElement.classList.add('rs-ready');
+        /* once it has faded, the skeleton leaves the page so nothing of it keeps running */
+        setTimeout(() => document.querySelector('.page-skel')?.remove(), 400);
+      }));
 
     /* Back to top — the page, not the browser, so it honours reduced motion */
     footerSlot?.querySelector('[data-scroll-top]')?.addEventListener('click', () => {

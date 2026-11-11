@@ -28,12 +28,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
 
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20261109f">
-  <link rel="stylesheet" href="assets/css/base.css?v=20261109f">
-  <link rel="stylesheet" href="assets/css/layout.css?v=20261109f">
-  <link rel="stylesheet" href="assets/css/components.css?v=20261109f">
-  <link rel="stylesheet" href="assets/css/pages.css?v=20261109f">
-  <link rel="stylesheet" href="assets/css/responsive.css?v=20261109f">
+  <link rel="preload" href="assets/fonts/THSarabunNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="preload" href="assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20261117f">
+  <link rel="stylesheet" href="assets/css/base.css?v=20261117f">
+  <link rel="stylesheet" href="assets/css/layout.css?v=20261117f">
+  <link rel="stylesheet" href="assets/css/components.css?v=20261117f">
+  <link rel="stylesheet" href="assets/css/pages.css?v=20261117f">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20261117f">
 
   <script type="application/ld+json">
   {
@@ -74,23 +78,36 @@
   }
   </script>
 
-  <script defer src="assets/js/00-core.js?v=20261109f"></script>
-  <script defer src="assets/js/01-config.js?v=20261109f"></script>
-  <script defer src="assets/js/data/search-index.js?v=20261109f"></script>
-  <script defer src="assets/js/data/fellows.js?v=20261109f"></script>
-  <script defer src="assets/js/02-components.js?v=20261109f"></script>
-  <script defer src="assets/js/03-accessibility.js?v=20261109f"></script>
-  <script defer src="assets/js/04-interactions.js?v=20261109f"></script>
-  <script defer src="assets/js/05-language.js?v=20261109f"></script>
-  <script defer src="assets/js/06-search.js?v=20261109f"></script>
-  <script defer src="assets/js/08-directory.js?v=20261109f"></script>
-  <script defer src="assets/js/data/events.js?v=20261109f"></script>
-  <script defer src="assets/js/09-calendar.js?v=20261109f"></script>
-  <script defer src="assets/js/11-news-filter.js?v=20261109f"></script>
-  <script defer src="assets/js/10-consent.js?v=20261109f"></script>
+  <script defer src="assets/js/00-core.js?v=20261117f"></script>
+  <script defer src="assets/js/01-config.js?v=20261117f"></script>
+  <script defer src="assets/js/data/search-index.js?v=20261117f"></script>
+  <script defer src="assets/js/data/fellows.js?v=20261117f"></script>
+  <script defer src="assets/js/02-components.js?v=20261117f"></script>
+  <script defer src="assets/js/03-accessibility.js?v=20261117f"></script>
+  <script defer src="assets/js/04-interactions.js?v=20261117f"></script>
+  <script defer src="assets/js/05-language.js?v=20261117f"></script>
+  <script defer src="assets/js/06-search.js?v=20261117f"></script>
+  <script defer src="assets/js/08-directory.js?v=20261117f"></script>
+  <script defer src="assets/js/data/events.js?v=20261117f"></script>
+  <script defer src="assets/js/09-calendar.js?v=20261117f"></script>
+  <script defer src="assets/js/11-news-filter.js?v=20261117f"></script>
+  <script defer src="assets/js/10-consent.js?v=20261117f"></script>
 </head>
 <body class="page-home">
   <div id="app-header"></div>
+  <!-- Shown while the page sets itself up (header, Thai font); 02-components.js
+       lifts it, and CSS lifts it on its own after a few seconds regardless -->
+  <div class="page-skel" aria-hidden="true">
+    <div class="page-skel__bar"><span class="sk sk--logo"></span><span class="sk sk--nav"></span><span class="sk sk--btn"></span></div>
+    <div class="page-skel__body">
+      <span class="sk sk--crumb"></span>
+      <div class="page-skel__hero">
+        <div class="page-skel__text"><span class="sk sk--kicker"></span><span class="sk sk--title"></span><span class="sk sk--line"></span><span class="sk sk--line sk--short"></span></div>
+        <span class="sk sk--art"></span>
+      </div>
+      <div class="page-skel__cards"><span class="sk sk--card"></span><span class="sk sk--card"></span><span class="sk sk--card"></span></div>
+    </div>
+  </div>
 
   <main id="main-content" tabindex="-1">
 
@@ -134,9 +151,9 @@
               <span data-en="About the Royal Society">รู้จักราชบัณฑิตยสภา</span>
               <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
             </a>
-            <a class="btn btn--secondary btn--lg" href="pages/academic-works.html">
+            <a class="btn btn--secondary btn--lg" href="pages/publications.html">
               <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-book"></use></svg>
-              <span data-en="Academic works">ผลงานทางวิชาการ</span>
+              <span data-en="Journals and publications">วารสารและสิ่งพิมพ์</span>
             </a>
           </div>
         </div>
@@ -264,9 +281,11 @@
 
         <div class="about-band__media reveal">
           <div class="about-band__photo" data-academy-spotlight>
-            <!-- Official photograph: the Office building, assets/images/about/about-office.jpg (hidden if missing; the crest shows instead) -->
-            <img class="about-band__layer is-active" src="assets/images/about/about-office.jpg" alt="" width="1080" height="1080" loading="lazy" decoding="async" data-academy-photo="">
-            <!-- Every row shows the building. A per-academy photo can be added back as
+            <!-- The painted royal portrait supplied for the centenary, assets/images/about/about-portrait.jpg
+                 (hidden if missing; the crest shows instead). TODO (Office): confirm the caption,
+                 the alt text and the right to use the image. -->
+            <img class="about-band__layer about-band__layer--portrait is-active" src="assets/images/about/about-portrait.jpg" alt="" width="736" height="1082" loading="lazy" decoding="async" data-academy-photo="">
+            <!-- Every row shows this picture. A per-academy photo can be added back as
                  <img class="about-band__layer" src="…" alt="" data-academy-photo="moral|science|arts"> -->
             <img class="about-band__crest" src="assets/images/logo-image.png" alt="" width="125" height="220" loading="lazy" decoding="async">
             <p class="about-band__caption" data-academy-caption hidden></p>
@@ -316,7 +335,7 @@
           <div>
             <p class="kicker" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</p>
             <h2 id="fellows-title" class="section-title" data-en="Find a Fellow or expert">ค้นหาราชบัณฑิตหรือผู้เชี่ยวชาญ</h2>
-            <p class="section-desc" data-en="Find Fellows, Associate Fellows and experts across disciplines — knowledge that serves society.">ค้นหาข้อมูลราชบัณฑิต ภาคีสมาชิก และผู้เชี่ยวชาญจากหลากหลายสาขาวิชา เพื่อต่อยอดองค์ความรู้สู่สังคม</p>
+            <p class="section-desc" data-en="Find Fellows, Associate Fellows and experts across disciplines — knowledge that serves society.">ค้นหาข้อมูลราชบัณฑิต ภาคีสมาชิก และผู้เชี่ยวชาญจากหลากหลายสาขาวิชา <span class="story__ph">เพื่อต่อยอดองค์ความรู้สู่สังคม</span></p>
           </div>
           <!-- TODO (Office): confirm the quotation and its attribution -->
           <blockquote class="fellows-quote">
@@ -326,78 +345,16 @@
           </blockquote>
         </div>
 
-        <form class="fellow-search reveal" action="pages/fellows.html" role="search">
-          <label class="visually-hidden" for="home-fellow-q" data-en="Name, field or expertise">ชื่อ สาขาวิชา หรือความเชี่ยวชาญ</label>
-          <div class="fellow-search__field">
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
-            <input class="fellow-search__input" id="home-fellow-q" name="q" type="search" autocomplete="off" placeholder="ค้นหาชื่อ สาขาวิชา หรือความเชี่ยวชาญ…" data-en-placeholder="Name, field or expertise…">
-          </div>
-          <div class="rs-select fellow-search__academy" data-select>
-            <span class="visually-hidden" id="home-fellow-academy-label" data-en="Academy">สำนัก</span>
-            <input type="hidden" name="academy" value="">
-            <button class="rs-select__btn" type="button" id="home-fellow-academy" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="home-fellow-academy-label home-fellow-academy">
-              <svg class="icon rs-select__icon" aria-hidden="true" focusable="false"><use href="#i-institution"></use></svg>
-              <span class="rs-select__label" data-select-label data-en="All academies">ทุกสำนัก</span>
-              <svg class="icon rs-select__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-            <ul class="rs-select__list" role="listbox" aria-labelledby="home-fellow-academy-label" hidden>
-              <li class="rs-select__option" role="option" tabindex="-1" data-value="" aria-selected="true">
-                <span data-en="All academies">ทุกสำนัก</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
-              </li>
-              <li class="rs-select__option" role="option" tabindex="-1" data-value="moral" aria-selected="false">
-                <span data-en="Academy of Moral and Political Sciences">สำนักธรรมศาสตร์และการเมือง</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
-              </li>
-              <li class="rs-select__option" role="option" tabindex="-1" data-value="science" aria-selected="false">
-                <span data-en="Academy of Science">สำนักวิทยาศาสตร์</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
-              </li>
-              <li class="rs-select__option" role="option" tabindex="-1" data-value="arts" aria-selected="false">
-                <span data-en="Academy of Arts">สำนักศิลปกรรม</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>
-              </li>
-            </ul>
-          </div>
-          <button class="fellow-search__submit" type="submit">
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
-            <span data-en="Search">ค้นหา</span>
-          </button>
-          <a class="fellow-search__more" href="pages/fellows.html#fellow-directory">
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-sliders"></use></svg>
-            <span data-en="More filters">ตัวกรองเพิ่มเติม</span>
-          </a>
-        </form>
+        <!-- Two rows of members (four on a phone); the rest on the Fellows page -->
+        <ul class="fellowx-grid fellows-band__grid reveal reveal--delay-2" role="list" data-fellows-preview="8"></ul>
 
-        <div class="fellow-chips-row reveal reveal--delay-1">
-          <p class="fellow-chips">
-            <span class="fellow-chips__label" data-en="Popular:">ค้นหาบ่อย:</span>
-            <a href="pages/fellows.html?q=%E0%B8%A0%E0%B8%B2%E0%B8%A9%E0%B8%B2%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C" data-en="Linguistics">ภาษาศาสตร์</a>
-            <a href="pages/fellows.html?q=%E0%B8%81%E0%B8%8E%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2" data-en="Law">กฎหมาย</a>
-            <a href="pages/fellows.html?q=%E0%B9%81%E0%B8%9E%E0%B8%97%E0%B8%A2%E0%B9%8C" data-en="Medicine">แพทย์</a>
-            <a href="pages/fellows.html?q=%E0%B9%80%E0%B8%A8%E0%B8%A3%E0%B8%A9%E0%B8%90" data-en="Economics">เศรษฐศาสตร์</a>
-            <a href="pages/fellows.html?q=%E0%B8%94%E0%B8%99%E0%B8%95%E0%B8%A3%E0%B8%B5" data-en="Music">ดนตรี</a>
-            <a href="pages/fellows.html?academy=science" data-en="Science">วิทยาศาสตร์</a>
-            <a href="pages/fellows.html?academy=arts" data-en="Arts">ศิลปกรรม</a>
-            <a href="pages/fellows.html?q=%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C" data-en="History">ประวัติศาสตร์</a>
-          </p>
-          <a class="link-arrow link-arrow--strong" href="pages/fellows.html">
-            <span data-en="Full directory">ดูรายชื่อทั้งหมด</span>
+        <!-- The full directory, under the cards on the right -->
+        <p class="band-foot">
+          <a class="btn btn--primary btn--pill" href="pages/fellows.html">
+            <span data-en="View all">ดูทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
-        </div>
-
-        <div class="fellow-scroller reveal reveal--delay-2" data-scroller>
-          <ul class="fellow-scroller__track" role="list" data-fellows-preview="8" data-scroller-track></ul>
-          <div class="fellow-scroller__nav">
-            <button class="fellow-scroller__btn" type="button" data-scroller-prev aria-label="เลื่อนไปทางซ้าย" data-en-aria-label="Scroll left">
-              <svg class="icon icon--left" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-            <button class="fellow-scroller__btn" type="button" data-scroller-next aria-label="เลื่อนไปทางขวา" data-en-aria-label="Scroll right">
-              <svg class="icon icon--right" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-          </div>
-        </div>
+        </p>
       </div>
     </section>
 
@@ -421,15 +378,10 @@
 
           <!-- TODO (Office): confirm the quotation and its attribution -->
           <blockquote class="featured-quote">
-            <p data-en="“The Thai language is the heritage of the nation and the strength of the land.”">“ภาษาไทย<br>คือมรดกของชาติ<br>คือพลังของแผ่นดิน”</p>
-            <footer data-en="— The Royal Society of Thailand">— ราชบัณฑิตยสภา</footer>
+            <p data-en="The Thai language is the heritage of the nation and the strength of the land.">ภาษาไทยคือมรดกของชาติ<br>คือพลังของแผ่นดิน</p>
+            <footer data-en="The Royal Society of Thailand">ราชบัณฑิตยสภา</footer>
           </blockquote>
 
-          <a class="btn btn--primary btn--pill featured-head__cta" href="pages/knowledge.html">
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grad"></use></svg>
-            <span data-en="All knowledge">ดูองค์ความรู้ทั้งหมด</span>
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
-          </a>
         </div>
 
         <div class="feature-grid">
@@ -585,6 +537,14 @@
           </li>
           </ol>
         </div>
+
+        <!-- The way on to all knowledge, under the cards on the right -->
+        <p class="featured-foot">
+          <a class="btn btn--primary btn--pill featured-head__cta" href="pages/knowledge.html">
+            <span data-en="View all">ดูทั้งหมด</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+          </a>
+        </p>
       </div>
     </section>
 
@@ -605,7 +565,7 @@
           </div>
           <div class="explore-actions">
             <a class="btn btn--primary btn--pill" href="pages/knowledge.html">
-              <span data-en="All knowledge">ดูองค์ความรู้ทั้งหมด</span>
+              <span data-en="View all">ดูทั้งหมด</span>
               <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
             </a>
           </div>
@@ -688,8 +648,8 @@
             <button class="news-tab" type="button" data-filter="announcement" aria-pressed="false" data-en="Announcements">ประกาศ</button>
             <button class="news-tab" type="button" data-filter="activity" aria-pressed="false" data-en="Activities">กิจกรรม</button>
           </div>
-          <a class="link-arrow link-arrow--strong" href="pages/news.html">
-            <span data-en="More news">ดูข่าวเพิ่มเติม</span>
+          <a class="btn btn--primary btn--pill" href="pages/news.html">
+            <span data-en="View all">ดูทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
         </div>
@@ -705,13 +665,15 @@
             <div class="news-spotlight__body">
               <p class="news-spotlight__meta">
                 <span class="news-cat" data-en="Key activity">กิจกรรมสำคัญ</span>
-                <time datetime="2026-09-02" data-en="2 Sep 2026">2 ก.ย. 2569</time>
               </p>
-              <h3 class="news-spotlight__title"><a href="pages/news.html" data-en="Registration opens for the public lecture “Thai in the digital age”">เปิดลงทะเบียนบรรยายสาธารณะ “ภาษาไทยในยุคดิจิทัล”</a></h3>
+              <h3 class="news-spotlight__title"><a href="pages/news-detail.html?id=public-lecture-digital-thai" data-en="Registration opens for the public lecture “Thai in the digital age”">เปิดลงทะเบียนบรรยายสาธารณะ “ภาษาไทยในยุคดิจิทัล”</a></h3>
               <p class="news-spotlight__excerpt" data-en="Open to the public, with live streaming from the Office — registration is free and places are limited.">เปิดให้ประชาชนทั่วไปเข้าร่วม พร้อมถ่ายทอดสดออนไลน์จากสำนักงาน ลงทะเบียนฟรี รับจำนวนจำกัด</p>
-              <span class="news-cta news-cta--solid">
-                <span data-en="Read more">อ่านต่อ</span>
-                <span class="news-cta__dot" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-arrow"></use></svg></span>
+              <span class="news-card__foot news-spotlight__foot">
+                <time datetime="2026-09-02" data-en="2 Sep 2026">2 ก.ย. 2569</time>
+                <span class="news-cta news-cta--solid">
+                  <span data-en="Read more">อ่านต่อ</span>
+                  <span class="news-cta__dot" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-arrow"></use></svg></span>
+                </span>
               </span>
             </div>
           </article>
@@ -719,7 +681,7 @@
           <ul class="news-cards reveal reveal--delay-1" role="list">
             <li class="news-card-li" data-category="announcement">
               <article class="news-card">
-                <a class="news-card__link" href="pages/news.html">
+                <a class="news-card__link" href="pages/news-detail.html?id=new-coined-terms">
                   <span class="news-card__media">
                     <!-- News photo: assets/images/news/ (see README there); a hero photo shows until the file exists -->
                     <img src="assets/images/news/news-01.jpg" data-fallback="assets/images/hero/hero-1.jpg" alt="" width="800" height="600" loading="lazy" decoding="async">
@@ -738,7 +700,7 @@
             </li>
             <li class="news-card-li" data-category="news">
               <article class="news-card">
-                <a class="news-card__link" href="pages/news.html">
+                <a class="news-card__link" href="pages/news-detail.html?id=science-academic-meeting">
                   <span class="news-card__media">
                     <!-- News photo: assets/images/news/ (see README there); a hero photo shows until the file exists -->
                     <img src="assets/images/news/news-02.jpg" data-fallback="assets/images/hero/hero-2.jpg" alt="" width="800" height="600" loading="lazy" decoding="async">
@@ -757,7 +719,7 @@
             </li>
             <li class="news-card-li" data-category="activity">
               <article class="news-card">
-                <a class="news-card__link" href="pages/news.html">
+                <a class="news-card__link" href="pages/news-detail.html?id=teacher-thai-camp">
                   <span class="news-card__media">
                     <!-- News photo: assets/images/news/ (see README there); a hero photo shows until the file exists -->
                     <img src="assets/images/news/news-03.jpg" data-fallback="assets/images/hero/hero-4.jpg" alt="" width="800" height="600" loading="lazy" decoding="async">
@@ -776,7 +738,7 @@
             </li>
             <li class="news-card-li" data-category="news">
               <article class="news-card">
-                <a class="news-card__link" href="pages/news.html#press-releases">
+                <a class="news-card__link" href="pages/news-detail.html?id=centenary-press-release">
                   <span class="news-card__media">
                     <!-- News photo: assets/images/news/ (see README there); a hero photo shows until the file exists -->
                     <img src="assets/images/news/news-04.jpg" data-fallback="assets/images/hero/hero-3.jpg" alt="" width="800" height="600" loading="lazy" decoding="async">
@@ -795,7 +757,7 @@
             </li>
             <li class="news-card-li" data-category="news">
               <article class="news-card">
-                <a class="news-card__link" href="pages/news.html">
+                <a class="news-card__link" href="pages/news-detail.html?id=journal-call-issue-3">
                   <span class="news-card__media">
                     <!-- News photo: assets/images/news/ (see README there); a hero photo shows until the file exists -->
                     <img src="assets/images/news/news-05.jpg" data-fallback="assets/images/hero/hero-1.jpg" alt="" width="800" height="600" loading="lazy" decoding="async">
@@ -814,7 +776,7 @@
             </li>
             <li class="news-card-li" data-category="announcement">
               <article class="news-card">
-                <a class="news-card__link" href="pages/news.html">
+                <a class="news-card__link" href="pages/news-detail.html?id=associate-fellow-results-2569">
                   <span class="news-card__media">
                     <!-- News photo: assets/images/news/ (see README there); a hero photo shows until the file exists -->
                     <img src="assets/images/news/news-06.jpg" data-fallback="assets/images/hero/hero-2.jpg" alt="" width="800" height="600" loading="lazy" decoding="async">
@@ -848,24 +810,23 @@
             <h2 id="events-title" class="section-title" data-en="Event calendar">ปฏิทินกิจกรรม</h2>
             <p class="section-desc" data-tearoff-desc data-en="Lectures, training, meetings and ceremonies organised by the Royal Society of Thailand.">บรรยาย อบรม ประชุม และกิจกรรมต่าง ๆ ที่สำนักงานราชบัณฑิตยสภาจัดขึ้น</p>
           </div>
-          <a class="btn btn--secondary btn--pill" href="pages/academic-works.html#calendar">
-            <span data-en="All events">กิจกรรมทั้งหมด</span>
+          <a class="btn btn--primary btn--pill" href="pages/works-calendar.html">
+            <span data-en="View all">ดูทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
         </div>
 
-        <!-- Agenda: the month calendar, the chosen event's details, and the list of events
-             beside them (the tear-off leaf stays hidden here; 09-calendar.js still drives it) -->
-        <div class="tearoff tearoff--agenda reveal reveal--delay-1" data-tearoff="5">
+        <!-- Month calendar beside one agenda list: the chosen event opens inside its
+             own row (same pattern as the academy pages; the tear-off leaf stays hidden,
+             09-calendar.js still drives it) -->
+        <div class="tearoff tearoff--side reveal reveal--delay-1" data-tearoff="5">
           <div class="tearoff__main">
             <div class="tearoff__pad" data-tearoff-pad></div>
-            <div class="tearoff__cal" data-tearoff-cal></div>
             <div class="tearoff__detail" data-tearoff-detail aria-live="polite"></div>
-            <div class="tearoff__list">
-              <p class="tearoff__list-label" data-en="Events">รายการกิจกรรม</p>
-              <ol class="tearoff__stack" role="list" data-tearoff-stack></ol>
-            </div>
+            <div class="tearoff__cal" data-tearoff-cal></div>
           </div>
+          <p class="tearoff__next-label" data-en="Upcoming events — choose one to see it">กิจกรรมที่จะจัดขึ้น — เลือกเพื่อดูรายละเอียด</p>
+          <ol class="tearoff__stack" role="list" data-tearoff-stack></ol>
         </div>
       </div>
     </section>

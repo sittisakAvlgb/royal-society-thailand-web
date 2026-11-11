@@ -28,12 +28,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261109f">
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
 
   <script type="application/ld+json">
   {
@@ -46,147 +50,130 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261109f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261109f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261109f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261109f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261109f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261109f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261109f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261109f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
+  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
+  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
+  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
+  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
 </head>
 <body>
   <div id="app-header"></div>
+  <!-- Shown while the page sets itself up (header, Thai font); 02-components.js
+       lifts it, and CSS lifts it on its own after a few seconds regardless -->
+  <div class="page-skel" aria-hidden="true">
+    <div class="page-skel__bar"><span class="sk sk--logo"></span><span class="sk sk--nav"></span><span class="sk sk--btn"></span></div>
+    <div class="page-skel__body">
+      <span class="sk sk--crumb"></span>
+      <div class="page-skel__hero">
+        <div class="page-skel__text"><span class="sk sk--kicker"></span><span class="sk sk--title"></span><span class="sk sk--line"></span><span class="sk sk--line sk--short"></span></div>
+        <span class="sk sk--art"></span>
+      </div>
+      <div class="page-skel__cards"><span class="sk sk--card"></span><span class="sk sk--card"></span><span class="sk sk--card"></span></div>
+    </div>
+  </div>
 
   <main id="main-content" tabindex="-1">
-    <div class="page-header">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+    <!-- Opening: the green band of the topic pages with the crest and the
+         building, the figures beneath -->
+    <div class="hhero hhero--study hhero--crestart">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/about/executives-hero.jpg" alt="" decoding="async"></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
           <ol>
             <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
             <li><span aria-current="page" data-en="Applications for Membership">การรับสมัคร</span></li>
           </ol>
         </nav>
-        <h1 data-en="Applications for Membership">การรับสมัคร</h1>
-        <p class="page-header__lead" data-en="Regulations and application forms for becoming an Associate Fellow, and for Associate Fellows applying to become Fellows of the Royal Society.">ระเบียบและแบบฟอร์มการรับสมัครเป็นภาคีสมาชิก และการรับสมัครภาคีสมาชิกเป็นราชบัณฑิต</p>
+        <div class="hhero__text">
+          <p class="hhero__kicker" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</p>
+          <h1 class="hhero__title" data-en="Applications for Membership">การรับสมัคร</h1>
+          <p class="hhero__lead" data-en="Becoming an Associate Fellow, and from Associate Fellow to Fellow"><span class="story__ph">เส้นทางสู่การเป็นภาคีสมาชิก</span> <span class="story__ph">และจากภาคีสมาชิก</span><span class="story__ph">สู่ราชบัณฑิต</span></p>
+          <p class="hhero__jump"><a class="btn btn--primary btn--pill hhero__btn" href="#path"><span data-en="See the two routes">ดูเส้นทางการสมัคร</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></p>
+        </div>
       </div>
     </div>
 
-    <div class="container content-layout">
+    <div class="container">
+      <dl class="hstats hstats--4">
+        <div class="hstats__item"><dt data-en="Routes to membership">เส้นทางการสมัคร</dt><dd>2<span data-en=" routes"> เส้นทาง</span></dd></div>
+        <div class="hstats__item"><dt data-en="Academies that elect">สำนักที่เปิดรับ</dt><dd>3<span data-en=" academies"> สำนัก</span></dd></div>
+        <div class="hstats__item"><dt data-en="Steps once a call opens">ขั้นตอนเมื่อเปิดรับสมัคร</dt><dd>4<span data-en=" steps"> ขั้น</span></dd></div>
+        <div class="hstats__item"><dt data-en="Fellows and associates today">ราชบัณฑิตและภาคีสมาชิกปัจจุบัน</dt><dd>215<span data-en=" people"> คน</span></dd></div>
+      </dl>
+    </div>
 
-      <!-- ==============================
-           8.1 Applying to become an Associate Fellow
-      ================================ -->
-      <section class="topic-section" id="associate-fellow" aria-labelledby="associate-fellow-title">
-        <div class="topic-section__head">
-          <h2 id="associate-fellow-title" data-en="Applying to Become an Associate Fellow">การรับสมัครบุคคลเป็นภาคีสมาชิก</h2>
-        </div>
-        <p data-en="For people of recognised academic standing who wish to apply for election as an Associate Fellow of an academy.">สำหรับผู้ทรงคุณวุฒิที่ประสงค์สมัครเข้ารับการคัดเลือกเป็นภาคีสมาชิกของสำนักวิชาการ</p>
-        <!-- TODO (Office): qualifications, application period, steps and enquiry contact -->
-        <div class="content-note">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <p data-en="Content will be provided by the Office of the Royal Society.">เนื้อหาจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-        </div>
-
-        <div class="stack-lg">
-          <section class="stack" id="associate-fellow-rules" aria-labelledby="associate-fellow-rules-title">
-            <h3 id="associate-fellow-rules-title" data-en="Regulations for Associate Fellow Applications">ระเบียบการรับสมัครบุคคลเป็นภาคีสมาชิก</h3>
-            <!-- TODO (Office): regulation text or PDF -->
-            <div class="content-note">
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-              <p data-en="Content will be provided by the Office of the Royal Society.">เนื้อหาจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-            </div>
-          </section>
-
-          <section class="stack" id="associate-fellow-form" aria-labelledby="associate-fellow-form-title">
-            <h3 id="associate-fellow-form-title" data-en="Associate Fellow Application Form">แบบฟอร์มการรับสมัครบุคคลเป็นภาคีสมาชิก</h3>
-            <!-- TODO (Office): downloadable form (PDF / Word) -->
-            <div class="content-note">
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-              <p data-en="The application form will be provided by the Office of the Royal Society.">แบบฟอร์มจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <!-- ==============================
-           8.2 Associate Fellows applying to become Fellows
-      ================================ -->
-      <section class="topic-section" id="fellow" aria-labelledby="fellow-title">
-        <div class="topic-section__head">
-          <h2 id="fellow-title" data-en="Associate Fellows Applying to Become Fellows">การรับสมัครภาคีสมาชิกเป็นราชบัณฑิต</h2>
-        </div>
-        <p data-en="For serving Associate Fellows applying for election as Fellows of the Royal Society.">สำหรับภาคีสมาชิกที่ประสงค์สมัครเข้ารับการคัดเลือกเป็นราชบัณฑิต</p>
-        <!-- TODO (Office): qualifications, application period, steps and enquiry contact -->
-        <div class="content-note">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <p data-en="Content will be provided by the Office of the Royal Society.">เนื้อหาจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-        </div>
-
-        <div class="stack-lg">
-          <section class="stack" id="fellow-rules" aria-labelledby="fellow-rules-title">
-            <h3 id="fellow-rules-title" data-en="Regulations for Fellow Applications">ระเบียบการรับสมัครภาคีสมาชิกเป็นราชบัณฑิต</h3>
-            <!-- TODO (Office): regulation text or PDF -->
-            <div class="content-note">
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-              <p data-en="Content will be provided by the Office of the Royal Society.">เนื้อหาจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-            </div>
-          </section>
-
-          <section class="stack" id="fellow-form" aria-labelledby="fellow-form-title">
-            <h3 id="fellow-form-title" data-en="Fellow Application Form">แบบฟอร์มการรับสมัครภาคีสมาชิกเป็นราชบัณฑิต</h3>
-            <!-- TODO (Office): downloadable form (PDF / Word) -->
-            <div class="content-note">
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-              <p data-en="The application form will be provided by the Office of the Royal Society.">แบบฟอร์มจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <!-- ==============================
-           Related links
-      ================================ -->
-      <section class="topic-section" aria-label="ลิงก์ที่เกี่ยวข้อง" data-en-aria-label="Related links">
-        <div class="link-columns">
-          <div>
-            <h2 data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</h2>
-            <ul role="list">
-              <li>
-                <a class="link-arrow" href="fellows.html#recruitment">
-                  <span data-en="Vacancies and Election of Fellows">ตำแหน่งว่างและการสรรหาสมาชิก</span>
-                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+    <!-- The way in, drawn as three stations along one line; beneath it the two
+         routes, each with its regulation, form and bylaw; then what happens
+         once a call opens, and the latest call -->
+    <div class="container about-sub__body">
+      <div class="auth adm-page">
+        <div class="auth__main">
+          <section class="auth__part" id="path" aria-labelledby="path-title">
+            <p class="kicker" data-en="Step one">เริ่มต้น</p>
+            <h2 id="path-title" class="auth__title" data-en="Choose your route"><span class="story__ph">เลือกเส้นทาง</span><span class="story__ph">ที่ตรงกับคุณ</span></h2>
+            <p class="auth__lead" data-th-only><span class="story__ph">ต้องเป็นภาคีสมาชิกก่อน</span> <span class="story__ph">จึงสมัครเป็นราชบัณฑิตได้</span></p>
+            <div class="adm-routes2">
+              <article class="adm-route2 adm-route2--first" id="associate-fellow" aria-labelledby="associate-fellow-title">
+                <p class="adm-route2__no" data-en="Route 1">เส้นทางที่ ๑</p>
+                <p class="adm-route2__path" aria-hidden="true"><span data-en="A qualified person">ผู้มีคุณวุฒิ</span><span class="adm-route2__arrow">→</span><strong data-en="Associate Fellow">ภาคีสมาชิก</strong></p>
+                <h3 id="associate-fellow-title" class="adm-route2__title" data-en="Apply to become an Associate Fellow"><span class="story__ph">สมัครเป็นภาคีสมาชิก</span></h3>
+                <p class="adm-route2__who" data-th-only>สำหรับผู้มีคุณวุฒิตามที่ข้อบังคับกำหนด สมัครได้เมื่อมีประกาศรับสมัครในสาขาวิชาที่ว่าง</p>
+                <a class="adm-route2__people" href="fellows.html?type=associate">
+                  <span class="adm-route2__faces" aria-hidden="true"><img src="../assets/images/fellows/mps-033.jpg" alt="" width="40" height="40" loading="lazy" decoding="async"><img src="../assets/images/fellows/science-058.jpg" alt="" width="40" height="40" loading="lazy" decoding="async"><img src="../assets/images/fellows/arts-032.jpg" alt="" width="40" height="40" loading="lazy" decoding="async"><img src="../assets/images/fellows/science-059.jpg" alt="" width="40" height="40" loading="lazy" decoding="async"></span>
+                  <span class="adm-route2__count"><strong>95</strong> <span data-en="Associate Fellows today">ภาคีสมาชิกปัจจุบัน</span></span>
                 </a>
-              </li>
-              <li>
-                <a class="link-arrow" href="fellows.html">
-                  <span data-en="Search Fellows">ค้นหาสมาชิก</span>
-                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+                <div class="adm-route2__do">
+                  <a class="btn btn--sm btn--pill adm-route2__main" href="admissions-associate-rules.html"><span data-en="Read the regulations">อ่านระเบียบ</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+                  <a class="btn btn--sm btn--pill adm-route2__alt" href="admissions-associate-form.html"><span data-en="Application form">แบบฟอร์ม</span></a>
+                </div>
+                <a class="adm-route2__pdf" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000156.PDF" target="_blank" rel="noopener"><span data-en="The bylaw (PDF)">ข้อบังคับว่าด้วยคุณวุฒิ (PDF)</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg><span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
+              </article>
+              <p class="adm-routes2__then" aria-hidden="true"><span data-en="then">แล้วจึง</span></p>
+              <article class="adm-route2 adm-route2--second" id="fellow" aria-labelledby="fellow-title">
+                <p class="adm-route2__no" data-en="Route 2">เส้นทางที่ ๒</p>
+                <p class="adm-route2__path" aria-hidden="true"><span data-en="Associate Fellow">ภาคีสมาชิก</span><span class="adm-route2__arrow">→</span><strong data-en="Fellow">ราชบัณฑิต</strong></p>
+                <h3 id="fellow-title" class="adm-route2__title" data-en="Associate Fellows applying to become Fellows"><span class="story__ph">ภาคีสมาชิก</span><span class="story__ph">สมัครเป็นราชบัณฑิต</span></h3>
+                <p class="adm-route2__who" data-th-only>สำหรับภาคีสมาชิก เมื่อมีตำแหน่งราชบัณฑิตว่างหรือตั้งขึ้นใหม่ในสาขาวิชา</p>
+                <a class="adm-route2__people" href="fellows.html?type=fellow">
+                  <span class="adm-route2__faces" aria-hidden="true"><img src="../assets/images/fellows/mps-001.jpg" alt="" width="40" height="40" loading="lazy" decoding="async"><img src="../assets/images/fellows/science-003.jpg" alt="" width="40" height="40" loading="lazy" decoding="async"><img src="../assets/images/fellows/arts-001.jpg" alt="" width="40" height="40" loading="lazy" decoding="async"><img src="../assets/images/fellows/science-004.jpg" alt="" width="40" height="40" loading="lazy" decoding="async"></span>
+                  <span class="adm-route2__count"><strong>118</strong> <span data-en="Fellows today">ราชบัณฑิตปัจจุบัน</span></span>
                 </a>
-              </li>
+                <div class="adm-route2__do">
+                  <a class="btn btn--sm btn--pill adm-route2__main" href="admissions-fellow-rules.html"><span data-en="Read the regulations">อ่านระเบียบ</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+                  <a class="btn btn--sm btn--pill adm-route2__alt" href="admissions-fellow-form.html"><span data-en="Application form">แบบฟอร์ม</span></a>
+                </div>
+                <a class="adm-route2__pdf" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000157.PDF" target="_blank" rel="noopener"><span data-en="The bylaw (PDF)">ข้อบังคับว่าด้วยการเลือก (PDF)</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg><span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
+              </article>
+            </div>
+          </section>
+
+          <section class="auth__part dir-band" id="steps" aria-labelledby="steps-title">
+            <p class="kicker" data-en="What happens next">ขั้นตอนถัดไป</p>
+            <h2 id="steps-title" class="auth__title" data-en="Four steps from call to appointment"><span class="story__ph">๔ ขั้นตอน</span><span class="story__ph">จากประกาศรับสมัคร</span><span class="story__ph">ถึงการแต่งตั้ง</span></h2>
+            <ol class="exec-steps" role="list">
+              <li><h3 class="exec-steps__title" data-en="The call">ประกาศรับสมัคร</h3><p class="exec-steps__text" data-en="The Office announces the vacancy and how to apply.">สำนักงานราชบัณฑิตยสภาประกาศรับสมัครหรือการสรรหาในตำแหน่งที่ว่างของแต่ละสำนัก</p></li>
+              <li><h3 class="exec-steps__title" data-en="Applying">ยื่นใบสมัคร</h3><p class="exec-steps__text" data-en="Candidates apply, or are nominated, with the documents the bylaws require.">ผู้สมัครหรือผู้ได้รับการเสนอชื่อยื่นเอกสารตามคุณวุฒิและหลักเกณฑ์ที่ข้อบังคับกำหนด</p></li>
+              <li><h3 class="exec-steps__title" data-en="The academy elects">สำนักพิจารณาเลือก</h3><p class="exec-steps__text" data-en="The academy meets and elects a candidate.">ที่ประชุมสำนักพิจารณาและเลือกผู้ที่เหมาะสม</p></li>
+              <li><h3 class="exec-steps__title" data-en="Approval and appointment">เห็นชอบและแต่งตั้ง</h3><p class="exec-steps__text" data-en="The Society approves the election and proceeds to appointment under the Act.">ราชบัณฑิตยสภาพิจารณาให้ความเห็นชอบ และดำเนินการเสนอแต่งตั้งตามพระราชบัญญัติ</p></li>
+            </ol>
+            <!-- TODO (Office): current vacancies by academy and discipline, with closing dates -->
+          </section>
+
+          <section class="auth__part" id="related" aria-labelledby="related-title">
+            <p class="kicker" data-en="Read on">อ่านต่อ</p>
+            <h2 id="related-title" class="auth__title" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</h2>
+            <ul class="about-hub__list auth-more" role="list">
+              <li><a class="about-hub__link" href="fellows-recruitment.html"><span class="about-hub__name" data-en="Vacancies and Election of Fellows">ตำแหน่งว่างและการสรรหาสมาชิก</span><span class="about-hub__desc" data-en="How members are elected">ขั้นตอนการสรรหาและข้อบังคับ</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
+              <li><a class="about-hub__link" href="fellows.html"><span class="about-hub__name" data-en="Search Fellows">ค้นหาสมาชิก</span><span class="about-hub__desc" data-en="Current members">ราชบัณฑิตและภาคีสมาชิกปัจจุบัน</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
+              <li><a class="about-hub__link" href="contact.html"><span class="about-hub__name" data-en="Enquiries about applications">สอบถามเรื่องการรับสมัคร</span><span class="about-hub__desc" data-en="The Office of the Royal Society">สำนักงานราชบัณฑิตยสภา</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
             </ul>
-          </div>
-          <div>
-            <h2 data-en="Laws and Regulations">กฎหมายและระเบียบ</h2>
-            <ul role="list">
-              <li>
-                <a class="link-arrow" href="about.html#rules">
-                  <span data-en="Royal Society Regulations">ระเบียบราชบัณฑิตยสภา</span>
-                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
-                </a>
-              </li>
-              <li>
-                <a class="link-arrow" href="contact.html#contact-form">
-                  <span data-en="Enquiries about applications">สอบถามเรื่องการรับสมัคร</span>
-                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
-                </a>
-              </li>
-            </ul>
-          </div>
+          </section>
         </div>
-      </section>
-
+      </div>
     </div>
   </main>
 

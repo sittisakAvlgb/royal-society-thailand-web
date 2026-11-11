@@ -553,19 +553,41 @@ html[lang="en"] .footer-col h2 { font-family: var(--font-display); font-weight: 
 
 .visitor-count {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--space-2);
 }
-.visitor-count .icon { width: 15px; height: 15px; opacity: .6; }
+.visitor-count .icon { align-self: center; width: 15px; height: 15px; opacity: .6; }
+html[lang="en"] .visitor-count strong { font-family: var(--font-latin) !important; font-weight: 500 !important; }
+/* Thai digits come from TH Sarabun New; sit them on the text's baseline */
 .visitor-count strong {
-  font-family: var(--font-latin);
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: inherit;
   color: rgba(255, 255, 255, .9);
   font-feature-settings: "tnum" 1;
 }
 
 /* Latin runs (email, the English name, numbers) sit a step under the Thai
-   around them — Geist reads much larger than TH Sarabun New at one size */
-.site-footer :is(.font-latin, [lang="en"]):not(.footer-org__name-en, .footer-col h2 span) { font-family: var(--font-latin); font-size: .85em; }
+   around them — Geist's x-height is ~1.37× TH Sarabun New's at one size, so
+   .72em puts the Latin lowercase level with the Thai letters */
+.site-footer :is(.font-latin, [lang="en"]):not(.footer-org__name-en, .footer-col h2 span) { font-family: var(--font-latin); font-size: .72em; }
 html[lang="en"] .site-footer :is(.font-latin, [lang="en"]):not(.footer-org__name-en, .footer-col h2 span) { font-size: inherit; }
+
+/* Top-bar dropdown ("ติดต่อและมีส่วนร่วม"): a white list under the link,
+   one row per destination, ruled like the mega menu */
+.utility-menu { position: relative; }
+.utility-menu__btn { display: inline-flex; align-items: center; gap: var(--space-1); min-height: 40px; padding: 0; border: 0; background: none; font: inherit; color: inherit; cursor: pointer; }
+.utility-menu__btn .icon { width: 13px; height: 13px; transition: transform var(--duration) var(--ease); }
+.utility-menu__btn:hover, .utility-menu.is-open .utility-menu__btn { color: var(--white); }
+.utility-menu.is-open .utility-menu__btn .icon { transform: rotate(180deg); }
+.utility-menu__btn:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.utility-menu__list { position: absolute; top: calc(100% - 2px); right: 0; z-index: 1200; display: grid; width: max-content; min-width: 260px; max-width: 340px; margin: 0; padding: var(--space-1) 0; list-style: none; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--white); animation: utility-menu-in .16s var(--ease) both; }
+.utility-menu__list[hidden] { display: none; }
+.utility-menu__list li + li { border-top: 1px solid var(--border); }
+.utility-bar__links .utility-menu__link { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 44px; padding: var(--space-2) var(--space-4); font-size: var(--text-sm); line-height: 1.35; color: var(--rst-green-900); text-decoration: none; }
+.utility-bar__links .utility-menu__link .icon { flex: none; width: 13px; height: 13px; color: var(--text-secondary); }
+.utility-bar__links .utility-menu__link:hover, .utility-bar__links .utility-menu__link:focus-visible { background: var(--rst-green-50, #eef5f1); color: var(--rst-green-800); text-decoration: none; outline: none; }
+.utility-bar__links .utility-menu__link[aria-current="page"] { font-weight: 700; color: var(--rst-green-800); box-shadow: inset 3px 0 0 var(--gold-500); }
+@keyframes utility-menu-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.utility-bar__links .utility-menu__list { display: grid; gap: 0; }
+.utility-bar__links .utility-menu__list[hidden] { display: none; }

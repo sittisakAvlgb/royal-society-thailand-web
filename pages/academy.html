@@ -28,12 +28,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261109f">
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
 
   <script type="application/ld+json">
   {
@@ -49,24 +53,37 @@
 
   <!-- 12-academy.js fills the page before 08-directory.js and 09-calendar.js
        render the Fellows and the calendar, so it is loaded ahead of them -->
-  <script defer src="../assets/js/00-core.js?v=20261109f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/fellows.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/events.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261109f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261109f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261109f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261109f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261109f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261109f"></script>
-  <script defer src="../assets/js/12-academy.js?v=20261109f"></script>
-  <script defer src="../assets/js/08-directory.js?v=20261109f"></script>
-  <script defer src="../assets/js/09-calendar.js?v=20261109f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261109f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
+  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/fellows.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/events.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261117f"></script>
+  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
+  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
+  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
+  <script defer src="../assets/js/12-academy.js?v=20261117f"></script>
+  <script defer src="../assets/js/08-directory.js?v=20261117f"></script>
+  <script defer src="../assets/js/09-calendar.js?v=20261117f"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
 </head>
 <body>
   <div id="app-header"></div>
+  <!-- Shown while the page sets itself up (header, Thai font); 02-components.js
+       lifts it, and CSS lifts it on its own after a few seconds regardless -->
+  <div class="page-skel" aria-hidden="true">
+    <div class="page-skel__bar"><span class="sk sk--logo"></span><span class="sk sk--nav"></span><span class="sk sk--btn"></span></div>
+    <div class="page-skel__body">
+      <span class="sk sk--crumb"></span>
+      <div class="page-skel__hero">
+        <div class="page-skel__text"><span class="sk sk--kicker"></span><span class="sk sk--title"></span><span class="sk sk--line"></span><span class="sk sk--line sk--short"></span></div>
+        <span class="sk sk--art"></span>
+      </div>
+      <div class="page-skel__cards"><span class="sk sk--card"></span><span class="sk sk--card"></span><span class="sk sk--card"></span></div>
+    </div>
+  </div>
 
   <main id="main-content" tabindex="-1" class="academy-page" data-academy-page>
 
@@ -132,10 +149,9 @@
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
         </div>
-        <!-- The academy's own pages (executives, members by discipline, contact),
-             as listed under ข้อมูลหน่วยงาน on its WordPress site -->
+        <!-- The academy's information on this site: members, structure, contact -->
         <div class="acad-work">
-          <h3 class="acad-work__title reveal" data-en="On the academy's website">ข้อมูลจากเว็บไซต์สำนัก</h3>
+          <h3 class="acad-work__title reveal" data-en="About the academy">ข้อมูลของสำนัก</h3>
           <ol class="acad-work__list" role="list" data-acad-info></ol>
         </div>
       </div>
@@ -167,7 +183,7 @@
             <p class="kicker" data-en="Events">ตารางกิจกรรม</p>
             <h2 id="events-title" class="section-title" data-en="Coming up at the academy">กิจกรรมที่จะจัดขึ้น</h2>
           </div>
-          <a class="btn btn--secondary btn--pill" href="academic-works.html#calendar">
+          <a class="btn btn--secondary btn--pill" href="works-calendar.html">
             <span data-en="Full calendar">ปฏิทินทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>

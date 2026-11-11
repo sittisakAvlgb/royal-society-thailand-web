@@ -28,12 +28,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261109f">
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
 
   <script type="application/ld+json">
   {
@@ -46,28 +50,39 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261109f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261109f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261109f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261109f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261109f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261109f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261109f"></script>
-  <script defer src="../assets/js/14-about.js?v=20261109f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261109f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
+  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
+  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
+  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
+  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261117f"></script>
+  <script defer src="../assets/js/14-about.js?v=20261117f"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
 </head>
 <body>
   <div id="app-header"></div>
+  <!-- Shown while the page sets itself up (header, Thai font); 02-components.js
+       lifts it, and CSS lifts it on its own after a few seconds regardless -->
+  <div class="page-skel" aria-hidden="true">
+    <div class="page-skel__bar"><span class="sk sk--logo"></span><span class="sk sk--nav"></span><span class="sk sk--btn"></span></div>
+    <div class="page-skel__body">
+      <span class="sk sk--crumb"></span>
+      <div class="page-skel__hero">
+        <div class="page-skel__text"><span class="sk sk--kicker"></span><span class="sk sk--title"></span><span class="sk sk--line"></span><span class="sk sk--line sk--short"></span></div>
+        <span class="sk sk--art"></span>
+      </div>
+      <div class="page-skel__cards"><span class="sk sk--card"></span><span class="sk sk--card"></span><span class="sk sk--card"></span></div>
+    </div>
+  </div>
 
   <main id="main-content" tabindex="-1" class="about-page">
 
     <!-- ==============================
-         About: a centenary masthead, then one reading column beside a sticky
-         "on this page" index. Text supplied by the Office (Sept 2026); the
-         English is a working translation. Sections still waiting for the
-         Office are listed as documents marked "coming soon", not empty boxes.
+         About: a centenary masthead, then the contents of the section.
+         Each topic has its own page (pages/about-*.html).
     ================================ -->
     <div class="page-header about-mast">
       <div class="container">
@@ -98,235 +113,90 @@
       </div>
     </div>
 
-    <!-- In-page menu: the same sticky bar as the academy pages -->
-    <nav class="acad-nav about-nav" aria-label="ในหน้านี้" data-en-aria-label="On this page">
-      <div class="container">
-        <ul role="list" data-about-toc>
-          <li><a href="#history" data-en="History">ประวัติความเป็นมา</a></li>
-          <li><a href="#authority" data-en="Mandate">อำนาจหน้าที่</a></li>
-          <li><a href="#academies" data-en="Academies">สำนัก</a></li>
-          <li><a href="#executives" data-en="Executives">ผู้บริหาร</a></li>
-          <li><a href="#laws" data-en="Laws and regulations">กฎหมายและระเบียบ</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="container about-body" id="organization">
-
-      <div class="about-content">
-
-        <!-- 1. History -->
-        <section class="about-part history" id="history" aria-labelledby="history-title">
-          <p class="kicker" data-en="History">ประวัติความเป็นมา</p>
-          <h2 id="history-title" class="about-part__title" data-en="A century of learning">หนึ่งศตวรรษแห่งการบำรุงสรรพวิชา</h2>
-          <p class="about-part__lead" data-en="On 19 April 1926 King Prajadhipok (Rama VII) founded the Royal Society, reviving the ancient Department of Royal Scholars — the office through which learned men were appointed to royal service.">เมื่อวันที่ 19 เมษายน พ.ศ. 2469 พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว รัชกาลที่ 7 ทรงพระกรุณาโปรดเกล้าฯ ประกาศให้จัดตั้ง “ราชบัณฑิตยสภา” ขึ้น เพื่อฟื้นฟูกิจการของกรมราชบัณฑิตย์ ซึ่งมีมาแต่โบราณและเป็นตำแหน่งสำหรับทรงตั้งผู้มีความรู้ศาสตราคมไว้รับราชการ</p>
-          <ol class="history-timeline" role="list">
-              <li class="history-event reveal">
-                <span class="history-event__year" data-en="1926">2469</span>
-                <div class="history-event__body">
-                  <p class="history-event__date" data-en="19 April">19 เมษายน</p>
-                  <p class="history-event__title" data-en="The Royal Society is founded">ก่อตั้ง “ราชบัณฑิตยสภา”</p>
-                  <p class="history-event__text" data-en="By royal command of King Prajadhipok, to revive the ancient Department of Royal Scholars.">พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว ทรงพระกรุณาโปรดเกล้าฯ ประกาศให้จัดตั้ง เพื่อฟื้นฟูกิจการของกรมราชบัณฑิตย์</p>
-                </div>
-              </li>
-              <li class="history-event reveal">
-                <span class="history-event__year" data-en="1933">2476</span>
-                <div class="history-event__body">
-                  <p class="history-event__title" data-en="The Royal Institute Act">ตราพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน</p>
-                  <p class="history-event__text" data-en="On the advice of the House of Representatives, the Royal Institute was set up to research, share knowledge with the public and produce textbooks.">ตามคำปรึกษาของสภาผู้แทนราษฎร ให้จัดตั้งราชบัณฑิตยสถาน เพื่อค้นคว้าหาความรู้นำมาเผยแพร่แก่ประชาชนและสร้างตำรับตำราให้แพร่หลาย</p>
-                </div>
-              </li>
-              <li class="history-event reveal">
-                <span class="history-event__year" data-en="1934">2477</span>
-                <div class="history-event__body">
-                  <p class="history-event__date" data-en="16 June">16 มิถุนายน</p>
-                  <p class="history-event__title" data-en="First meeting of Associate Fellows">ประชุมภาคีสมาชิกครั้งแรก ณ พระบรมมหาราชวัง</p>
-                  <p class="history-event__text" data-en="The same year the Institute began the annual contest for Buddhist books for children and took over the revision of the dictionary from the Ministry of Public Instruction.">ปีเดียวกันเริ่มการประกวดแต่งหนังสือสอนพระพุทธศาสนาแก่เด็กประจำปี และรับโอนงานชำระปทานุกรมจากกระทรวงธรรมการ</p>
-                </div>
-              </li>
-              <li class="history-event reveal">
-                <span class="history-event__year" data-en="1942">2485</span>
-                <div class="history-event__body">
-                  <p class="history-event__date" data-en="30 September">30 กันยายน</p>
-                  <p class="history-event__title" data-en="The first 51 Fellows are appointed">แต่งตั้งราชบัณฑิตครั้งแรก จำนวน 51 คน</p>
-                  <p class="history-event__text" data-en="By royal command, after the Royal Institute Act of 1942.">มีพระบรมราชโองการแต่งตั้ง ภายหลังการออกพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน พุทธศักราช 2485</p>
-                </div>
-              </li>
-              <li class="history-event reveal">
-                <span class="history-event__year" data-en="2006">2549</span>
-                <div class="history-event__body">
-                  <p class="history-event__title" data-en="A new home at Sanam Suea Pa, Dusit">ย้ายที่ทำการมาที่สนามเสือป่า เขตดุสิต</p>
-                  <p class="history-event__text" data-en="Where the Office remains today.">ที่ตั้งของสำนักงานจนถึงปัจจุบัน</p>
-                </div>
-              </li>
-              <li class="history-event reveal">
-                <span class="history-event__year" data-en="2013">2556</span>
-                <div class="history-event__body">
-                  <p class="history-event__title" data-en="Back to the original name">กลับไปใช้ชื่อเดิม “ราชบัณฑิตยสภา”</p>
-                  <p class="history-event__text" data-en="The Council of Fellows resolved to restore the name given by King Prajadhipok, in honour of the 120th anniversary of his birth.">สภาราชบัณฑิตเห็นสมควรใช้ชื่อที่พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัวทรงสถาปนา เพื่อเฉลิมพระเกียรติในโอกาส 120 ปี พระบรมราชสมภพ</p>
-                </div>
-              </li>
-              <li class="history-event reveal">
-                <span class="history-event__year" data-en="2015">2558</span>
-                <div class="history-event__body">
-                  <p class="history-event__date" data-en="14 February">14 กุมภาพันธ์</p>
-                  <p class="history-event__title" data-en="The Royal Society Act 2015 takes effect">พระราชบัญญัติราชบัณฑิตยสภา พ.ศ. 2558 มีผลบังคับใช้</p>
-                  <p class="history-event__text" data-en="The Royal Institute became the Office of the Royal Society, and the Council of Fellows became the Royal Society.">“ราชบัณฑิตยสถาน” เปลี่ยนเป็น “สำนักงานราชบัณฑิตยสภา” และ “สภาราชบัณฑิต” เปลี่ยนเป็น “ราชบัณฑิตยสภา”</p>
-                </div>
-              </li>
-            </ol>
-
-          <div class="history-works">
-              <div class="history-works__text reveal">
-                <h4 class="history-subtitle" data-en="Main works">งานหลัก</h4>
-                <p data-en="Besides the annual contest for Buddhist books for children, held since 1934, the Society has five main works.">นอกจากการประกวดแต่งหนังสือสอนพระพุทธศาสนาแก่เด็กประจำปี ที่ดำเนินการมาตั้งแต่ พ.ศ. 2477 จนถึงปัจจุบัน ยังมีงานหลักอีก 5 งาน</p>
-                <ol class="history-works__list" role="list">
-                  <li><span class="history-works__num" aria-hidden="true">1</span><span data-en="Revising the dictionary">งานชำระพจนานุกรม</span></li>
-                  <li><span class="history-works__num" aria-hidden="true">2</span><span data-en="The encyclopaedia">งานสารานุกรม</span></li>
-                  <li><span class="history-works__num" aria-hidden="true">3</span><span data-en="Coining Thai terms">งานบัญญัติศัพท์ภาษาไทย</span></li>
-                  <li><span class="history-works__num" aria-hidden="true">4</span><span data-en="The gazetteer">งานอักขรานุกรมภูมิศาสตร์</span></li>
-                  <li><span class="history-works__num" aria-hidden="true">5</span><span data-en="Romanisation rules for Thai">งานจัดทำหลักเกณฑ์การถอดอักษรไทยเป็นอักษรโรมัน</span></li>
-                </ol>
-              </div>
-              <blockquote class="history-quote reveal reveal--delay-1">
-                <p data-en="The work best known and used as the reference and standard for writing Thai — in official documents and in schools alike — is the Royal Institute Dictionary.">ผลงานที่เป็นที่รู้จัก ใช้เป็นแหล่งอ้างอิงและเป็นมาตรฐานในการเขียนหนังสือไทย ทั้งหนังสือราชการและในการศึกษาเล่าเรียน ให้เป็นระเบียบเดียวกัน คือ</p>
-                <cite data-en="The Royal Institute Dictionary">พจนานุกรม ฉบับราชบัณฑิตยสถาน</cite>
-              </blockquote>
-            </div>
-
-          <div class="history-homes reveal">
-              <h4 class="history-subtitle" data-en="Where the Society has worked">ที่ทำการ</h4>
-              <ol class="history-homes__list" role="list">
-                <li><span class="history-homes__when" data-en="First">แรกเริ่ม</span><span data-en="Upper floor of the Somdet residence, Bang Khun Phrom Palace">ตำหนักสมเด็จชั้นบน วังบางขุนพรหม</span></li>
-                <li><span class="history-homes__when" data-en="Until 1988">ถึง พ.ศ. 2531</span><span data-en="Thavaravatthu Building (north side of the Vajiravudh Library), Na Phra That Road">ตึกถาวรวัตถุ (อาคารหอสมุดวชิราวุธด้านทิศเหนือ) ถนนหน้าพระธาตุ</span></li>
-                <li><span class="history-homes__when" data-en="1988–2006">พ.ศ. 2531–2549</span><span data-en="Ratchawanlop Building, the Grand Palace">อาคารราชวัลลภ ในพระบรมมหาราชวัง</span></li>
-                <li><span class="history-homes__when" data-en="2006–today">พ.ศ. 2549–ปัจจุบัน</span><span data-en="Sanam Suea Pa, Dusit, Bangkok">สนามเสือป่า เขตดุสิต กรุงเทพมหานคร</span></li>
-              </ol>
-            </div>
-
-          <details class="accordion__item history-full">
-              <summary>
-                <span data-en="Read the full history (Thai)">อ่านความเป็นมาฉบับเต็ม</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-              </summary>
-              <div class="prose history-full__body" data-th-only>
-                <p>เมื่อวันที่ ๑๙ เมษายน พ.ศ. ๒๔๖๙ พระบาทสมเด็จพระปรมินทรมหาประชาธิปก พระปกเกล้าเจ้าอยู่หัว รัชกาลที่ ๗ แห่งราชวงศ์จักรีได้ทรงพระกรุณาโปรดเกล้าฯ ประกาศให้จัดตั้ง “ราชบัณฑิตยสภา” ขึ้น ทรงเห็นสมควรฟื้นฟูกิจการของ กรมราชบัณฑิตย์ ซึ่งมีมาแต่โบราณและเป็นตำแหน่งสำหรับทรงตั้งผู้มีความรู้ศาสตราคมไว้รับราชการ ต่อมาเมื่อ พ.ศ. ๒๔๗๖ สภาผู้แทนราษฎร ได้ถวายคำปรึกษาแด่พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว สมควรจัดตั้งราชบัณฑิตยสถานให้มีสมาชิกผู้ประกอบด้วยคุณวิชา สมควรจะได้เลือกตั้งเป็นราชบัณฑิตในภายหน้าเพื่อกระทำการค้นคว้าหาความรู้นำมาเผยแพร่แก่ประชาชนและสร้างตำรับตำราให้แพร่หลายต่อไปจึงทรงพระกรุณาโปรดเกล้าฯ ให้ตรา พระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน ขึ้นเมื่อ พ.ศ. ๒๔๗๖ และให้ยกเลิกประกาศตั้งราชบัณฑิตยสภา ฉบับลงวันที่ ๑๙ เมษายน พ.ศ. ๒๔๖๙</p>
-                <p>เริ่มแรกที่ตั้งราชบัณฑิตยสถานนั้น ยังไม่มีราชบัณฑิต มีแต่ภาคีสมาชิก ซึ่งจัดการประชุมครั้งแรกขึ้น ณ ในพระบรมมหาราชวัง เมื่อวันที่ ๑๖ มิถุนายน พุทธศักราช ๒๔๗๗ ภายหลังมีการออกพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน พุทธศักราช ๒๔๘๕ และมีพระบรมราชโองการแต่งตั้งราชบัณฑิตเป็นครั้งแรก เมื่อวันที่ ๓๐ กันยายน พุทธศักราช ๒๔๘๕ จำนวน ๕๑ คน</p>
-                <p>งานสำคัญในช่วงแรกเกิดจากพระราชดำริในพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว คือ การประกวดแต่งหนังสือสอนพระพุทธศาสนาแก่เด็กประจำปี ที่ราชบัณฑิตยสถานดำเนินการสืบเนื่องมาตั้งแต่พุทธศักราช ๒๔๗๗ จนถึงปัจจุบัน นอกจากนี้ ยังมีงานหลักอีก ๕ งาน ได้แก่ งานชำระพจนานุกรม ซึ่งเดิมคืองานชำระปทานุกรมที่รับโอนจากกระทรวงธรรมการมาตั้งแต่พุทธศักราช ๒๔๗๗ งานสารานุกรม งานบัญญัติศัพท์ภาษาไทย งานอักขรานุกรมภูมิศาสตร์ และงานจัดทำหลักเกณฑ์การถอดอักษรไทยเป็นอักษรโรมัน</p>
-                <p>ที่ทำการของราชบัณฑิตยสถานแรกเริ่มได้ใช้ตำหนักสมเด็จชั้นบน ณ วังบางขุนพรหม ต่อมาย้ายไปอยู่ที่ตึกถาวรวัตถุ หรืออาคารหอสมุดวชิราวุธด้านทิศเหนือ ถนนหน้าพระธาตุ จนถึงพุทธศักราช ๒๕๓๑ จากนั้นย้ายไปใช้อาคารราชวัลลภ ในพระบรมมหาราชวัง จนถึงพุทธศักราช ๒๕๔๙ ได้ย้ายมาอยู่ที่สนามเสือป่า เขตดุสิต กรุงเทพมหานคร จนถึงปัจจุบัน</p>
-                <p>การดำเนินงานของราชบัณฑิตยสถาน แบ่งเป็น ๒ ส่วน คือ ส่วนสภาราชบัณฑิตและส่วนข้าราชการประจำ</p>
-                <p>สภาราชบัณฑิตทำหน้าที่วางนโยบายในการดำเนินงานด้านวิชาการ ประกอบด้วยกรรมการสภา ซึ่งเป็นราชบัณฑิตจาก ๓ สำนัก ได้แก่ <a href="http://mps.royalsociety.go.th/" target="_blank" rel="noopener">สำนักธรรมศาสตร์และการเมือง</a> <a href="http://science.royalsociety.go.th/" target="_blank" rel="noopener">สำนักวิทยาศาสตร์</a> และ<a href="http://arts.royalsociety.go.th/" target="_blank" rel="noopener">สำนักศิลปกรรม</a> มีนายกราชบัณฑิตยสถาน เป็นนายกสภา อุปนายกราชบัณฑิตยสถานเป็นอุปนายกสภา มีเลขาธิการราชบัณฑิตยสถานทำหน้าที่เลขานุการสภา และรองเลขาธิการราชบัณฑิตยสถานทำหน้าที่ผู้ช่วยเลขานุการสภา</p>
-                <p>ส่วนข้าราชการประจำ มีเลขาธิการราชบัณฑิตยสถาน เป็นหัวหน้าส่วนราชการ และมีรองเลขาธิการราชบัณฑิตยสถาน ช่วยปฏิบัติราชการ กำกับดูแลการปฏิบัติงานด้านวิชาการและงานธุรการของสำนักงานเลขานุการกรม กองธรรมศาสตร์และการเมือง กองวิทยาศาสตร์ และกองศิลปกรรม รวมทั้งประสานการดำเนินงานกับทุกสำนัก</p>
-                <p>การดำเนินงานด้านวิชาการ ดำเนินงานในรูปของคณะกรรมการวิชาการ เพื่อจัดประชุมพิจารณาศัพท์ บัญญัติศัพท์ จัดทำคำอธิบายศัพท์ในสาขาวิชาต่าง ๆ ตลอดจนกำหนดหลักเกณฑ์ทางภาษา แล้วนำผลงานซึ่งเป็นองค์ความรู้เผยแพร่สู่ประชาชนในช่องต่าง ๆ ทั้งสื่อสิ่งพิมพ์ วิทยุ โทรทัศน์ สื่ออิเล็กทรอนิกส์ เพื่อให้เข้าถึงความต้องการของประชาชนได้อย่างกว้างขวาง และมีการรับฟังความความคิดเห็น เพื่อนำมาปรับปรุงการให้การบริการให้มีประสิทธิภาพยิ่งขึ้น</p>
-                <p>ราชบัณฑิตยสถานได้ดำเนินงานตามพันธกิจในการศึกษา ค้นคว้า วิจัย และบำรุงสรรพวิชามาอย่างต่อเนื่อง ผลงานทางวิชาการของราชบัณฑิตยสถานซึ่งเป็นที่รู้จักและใช้เป็นแหล่งอ้างอิงและเป็นมาตรฐานในการเขียนหนังสือไทย ทั้งหนังสือราชการและในการศึกษาเล่าเรียน ให้เป็นระเบียบเดียวกัน คือ พจนานุกรม ฉบับราชบัณฑิตยสถาน</p>
-                <p>ในปี ๒๕๕๖ ราชบัณฑิตยสภาโดยสภาราชบัณฑิตเห็นเป็นการสมควรเปลี่ยนชื่อ “ราชบัณฑิตยสถาน” เป็น “ราชบัณฑิตยสภา” อันเป็นชื่อเดิมที่พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัวได้ทรงสถาปนาขึ้นเมื่อวันที่ ๑๙ เมษายน พ.ศ. ๒๔๖๙ เพื่อเฉลิมพระเกียรติในโอกาส ๑๒๐ ปี พระบรมราชสมภพ รวมทั้งปรับปรุงอำนาจหน้าที่และการบริหารงานวิชาการของราชบัณฑิตยสภาให้แพร่หลายแก่วงวิชาการของประเทศและประชาชนทั่วไปมากขึ้น ประกอบกับให้มีการจัดตั้งกองทุนสวัสดิการสมาชิกราชบัณฑิตยสภาเพื่อเป็นประโยชน์แก่สมาชิกราชบัณฑิตยสภา และกำหนดให้รายได้ที่ราชบัณฑิตยสภาได้รับจากการบริหารทางด้านวิชาการและการจัดการศึกษาอบรมสามารถนำไปจ่ายในการดำเนินการตามอำนาจหน้าที่ของสำนักงานราชบัณฑิตยสภาโดยไม่ต้องนำส่งคลังเป็นรายได้แผ่นดิน เพื่อให้มีความคล่องตัวในการบริหารงานวิชาการมากขึ้น</p>
-                <p>ในปี ๒๕๕๘ พระบาทสมเด็จพระเจ้าอยู่หัวได้มีพระบรมราชโองการโปรดเกล้าโปรดกระหม่อมให้ประกาศว่าเป็นการสมควรปรับปรุงกฎหมายว่าด้วยราชบัณฑิตยสถาน และทรงพระกรุณาโปรดเกล้าโปรดกระหม่อมให้ตราพระราชบัญญัติราชบัณฑิตยสภา พ.ศ. ๒๕๕๘ ซึ่งได้ประกาศลงในราชกิจจานุเบกษา เล่ม ๑๓๒ ตอนที่ ๑๐ ก ลงวันที่ ๑๓ กุมภาพันธ์ ๒๕๕๘ และมีผลบังคับใช้ตั้งแต่วันที่ ๑๔ กุมภาพันธ์ พ.ศ. ๒๕๕๘ เป็นต้นไป ชื่อหน่วยงาน “ราชบัณฑิตยสถาน” จึงเปลี่ยนเป็น “สำนักงานราชบัณฑิตยสภา” และ “สภาราชบัณฑิต” จึงเปลี่ยนเป็น “ราชบัณฑิตยสภา”</p>
-              </div>
-            </details>
-        </section>
-
-        <!-- 2. Mandate: sections 6, 12 and 24 of the Royal Society Act B.E. 2558 -->
-        <section class="about-part" id="authority" aria-labelledby="authority-title">
-          <p class="kicker" data-en="Mandate">อำนาจหน้าที่</p>
-          <h2 id="authority-title" class="about-part__title" data-en="What the Act provides">ตามพระราชบัญญัติราชบัณฑิตยสภา พ.ศ. ๒๕๕๘</h2>
-          <p class="note-box" data-en-notice hidden>
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-            <span>The text of the Act is available in Thai only.</span>
-          </p>
-          <ol class="about-acts" role="list">
-            <li class="about-act">
-              <p class="about-act__sec">มาตรา ๖</p>
-              <p class="about-act__text" data-th-only>ราชบัณฑิตยสภาเป็นสถานที่บำรุงสรรพวิชา ซึ่งพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัวได้ทรงสถาปนาขึ้น มีวัตถุประสงค์ที่จะค้นคว้าและวิจัยเพื่อเผยแพร่ส่งเสริมแลกเปลี่ยนความรู้ พัฒนา อนุรักษ์ และให้บริการทางวิชาการให้เป็นคุณประโยชน์แก่ประเทศและประชาชน</p>
-            </li>
-            <li class="about-act">
-              <p class="about-act__sec">มาตรา ๑๒</p>
-              <div class="about-act__text" data-th-only>
-                <p>ราชบัณฑิตยสภามีสมาชิก ๓ ประเภท</p>
-                <ol class="about-act__members" role="list">
-                  <li>ภาคีสมาชิก</li>
-                  <li>ราชบัณฑิต</li>
-                  <li>ราชบัณฑิตกิตติมศักดิ์</li>
-                </ol>
-              </div>
-            </li>
-            <li class="about-act">
-              <p class="about-act__sec">มาตรา ๒๔</p>
-              <p class="about-act__text" data-th-only>ให้มีสภาขึ้นในสำนักงานราชบัณฑิตยสภา เรียกว่า “ราชบัณฑิตยสภา” ประกอบด้วยนายกราชบัณฑิตยสภาเป็นนายกสภา อุปนายกราชบัณฑิตยสภา ๒ คนเป็นอุปนายกสภา ราชบัณฑิตทุกคนเป็นกรรมการสภา โดยมีเลขาธิการราชบัณฑิตยสภาทำหน้าที่เลขานุการสภา และรองเลขาธิการราชบัณฑิตยสภาทำหน้าที่ผู้ช่วยเลขานุการสภา</p>
-            </li>
-          </ol>
-          <div class="prose about-part__prose" data-th-only>
-            <p>ราชบัณฑิตยสภามีอำนาจหน้าที่วางนโยบายการดำเนินงานด้านวิชาการตามอำนาจหน้าที่ของสำนักงานราชบัณฑิตยสภา พิจารณาให้ความเห็นชอบในการออกข้อบังคับ และระเบียบเกี่ยวกับการดำเนินงานของราชบัณฑิตยสภา เลือกนายกราชบัณฑิตยสภา อุปนายกราชบัณฑิตยสภา รวมทั้งมีมติให้ความเห็นชอบในการเสนอแต่งตั้งราชบัณฑิตและราชบัณฑิตกิตติมศักดิ์</p>
-            <p>หน้าที่ภารกิจและบทบาทสำคัญของสำนักงานราชบัณฑิตยสภา อันได้แก่ การสร้างองค์ความรู้ในศาสตร์สาขาต่าง ๆ การกำหนดมาตรฐานการใช้ภาษาไทย และการเพิ่มประสิทธิภาพในการให้บริการทางวิชาการแก่ประชาชน ได้ดำเนินการและพัฒนามาอย่างต่อเนื่องนับตั้งแต่วันที่ ๑๙ เมษายน พุทธศักราช ๒๔๖๙ จนถึงปัจจุบัน</p>
-          </div>
-        </section>
-
-        <!-- 3. Academies: the photo cards also used on the academy pages -->
-        <section class="about-part" id="academies" aria-labelledby="academies-title">
-          <p class="kicker" data-en="Academies">สำนักวิชาการ</p>
-          <h2 id="academies-title" class="about-part__title" data-en="Three academies">สามสำนักวิชาการ</h2>
-          <p class="about-part__lead" data-en="Every Fellow belongs to one of three academies, each covering a family of disciplines.">ราชบัณฑิตสังกัดสำนักใดสำนักหนึ่ง แต่ละสำนักครอบคลุมกลุ่มสาขาวิชาของตน</p>
-          <ul class="acad-next__list about-academies" role="list" data-about-academies></ul>
-          <span id="academy-moral"></span><span id="academy-science"></span><span id="academy-arts"></span>
-        </section>
-
-        <!-- 4. Executives, direction and structure: waiting for the Office -->
-        <section class="about-part" id="executives" aria-labelledby="executives-title">
-          <p class="kicker" data-en="Executives">ผู้บริหาร</p>
-          <h2 id="executives-title" class="about-part__title" data-en="Leadership and organisation">ผู้บริหารและโครงสร้างองค์กร</h2>
-          <ul class="about-docs" role="list">
-              <li id="current-executives">
-                <span class="about-doc__name" data-en="President and Vice-Presidents">นายกและอุปนายกปัจจุบัน</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
-              <li id="past-presidents">
-                <span class="about-doc__name" data-en="Past Presidents">ทำเนียบนายกราชบัณฑิตยสภา</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
-              <li id="president-message">
-                <span class="about-doc__name" data-en="Message from the President">สารจากนายกราชบัณฑิตยสภา</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
-              <li id="direction">
-                <span class="about-doc__name" data-en="Direction and operations">ทิศทางและการดำเนินงาน</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
-              <li id="structure">
-                <span class="about-doc__name" data-en="Governance chart">แผนผังการบริหาร</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
+    <!-- ==============================
+         The contents of the About section: every topic has its own page
+         (pages/about-*.html); the academies keep their photo cards.
+    ================================ -->
+    <div class="container about-hub">
+      <div class="about-hub__groups">
+        <section class="about-hub__group" id="organization" aria-labelledby="organization-title">
+          <h2 id="organization-title" class="about-hub__title" data-en="Organisation Profile">ข้อมูลองค์กร</h2>
+          <ul class="about-hub__list" role="list">
+            <li><a class="about-hub__link" href="about-history.html">
+              <span class="about-hub__name" data-en="History">ประวัติความเป็นมา</span>
+              <span class="about-hub__desc" data-en="A century since 1926">หนึ่งศตวรรษ ตั้งแต่ พ.ศ. 2469</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
+            <li><a class="about-hub__link" href="about-authority.html">
+              <span class="about-hub__name" data-en="Mandate and Authority">อำนาจหน้าที่</span>
+              <span class="about-hub__desc" data-en="Under the Royal Society Act 2015">ตามพระราชบัญญัติราชบัณฑิตยสภา พ.ศ. 2558</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
+            <li><a class="about-hub__link" href="about-direction.html">
+              <span class="about-hub__name" data-en="Direction and Operations">ทิศทางและการดำเนินงาน</span>
+              <span class="about-hub__desc" data-en="In step with the National Strategy">ให้สอดคล้องกับยุทธศาสตร์ชาติ</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
+            <li><a class="about-hub__link" href="about-structure.html">
+              <span class="about-hub__name" data-en="Governance Chart">แผนผังการบริหาร</span>
+              <span class="about-hub__desc" data-en="The Society, academies and Office">ราชบัณฑิตยสภา สำนัก และสำนักงาน</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
           </ul>
         </section>
-
-        <!-- 5. Laws and regulations -->
-        <section class="about-part" id="laws" aria-labelledby="laws-title">
-          <p class="kicker" data-en="Laws and regulations">กฎหมายและระเบียบ</p>
-          <h2 id="laws-title" class="about-part__title" data-en="Acts, bylaws and notifications">พระราชบัญญัติ ข้อบังคับ และประกาศ</h2>
-          <ul class="about-docs" role="list">
-              <li id="acts">
-                <span class="about-doc__name" data-en="Royal Society Act B.E. 2558 (2015)">พระราชบัญญัติราชบัณฑิตยสภา พ.ศ. ๒๕๕๘</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
-              <li id="bylaws">
-                <span class="about-doc__name" data-en="Royal Society Bylaws">ข้อบังคับราชบัณฑิตยสภา</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
-              <li id="rules">
-                <span class="about-doc__name" data-en="Royal Society Regulations">ระเบียบราชบัณฑิตยสภา</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
-              <li id="announcements">
-                <span class="about-doc__name" data-en="Royal Society Notifications">ประกาศราชบัณฑิตยสภา</span>
-                <span class="about-doc__state" data-en="Coming soon">เร็ว ๆ นี้</span>
-              </li>
+        <section class="about-hub__group" id="executives" aria-labelledby="executives-title">
+          <h2 id="executives-title" class="about-hub__title" data-en="Executives">ผู้บริหาร</h2>
+          <ul class="about-hub__list" role="list">
+            <li><a class="about-hub__link" href="about-executives.html">
+              <span class="about-hub__name" data-en="President and Vice-Presidents">นายกและอุปนายกปัจจุบัน</span>
+              <span class="about-hub__desc" data-en="The current term">วาระปัจจุบัน</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
+            <li><a class="about-hub__link" href="about-past-presidents.html">
+              <span class="about-hub__name" data-en="Past Presidents">ทำเนียบนายกราชบัณฑิตยสภา</span>
+              <span class="about-hub__desc" data-en="Since 1926">ตั้งแต่ พ.ศ. 2469 ถึงปัจจุบัน</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
+            <li><a class="about-hub__link" href="about-president-message.html">
+              <span class="about-hub__name" data-en="Message from the President">สารจากนายกราชบัณฑิตยสภา</span>
+              <span class="about-hub__desc" data-en="To the public and academic community">ถึงประชาชนและเครือข่ายวิชาการ</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
           </ul>
-
-          <ul class="about-more" role="list">
-            <li><a href="fellows.html"><span data-en="Find Fellows and Members">ค้นหาราชบัณฑิตและภาคีสมาชิก</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
-            <li><a href="contact.html"><span data-en="Address and contact details">ที่อยู่และช่องทางติดต่อ</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
-            <li><a href="https://www.orst.go.th/" target="_blank" rel="noopener"><span data-en="Office of the Royal Society website">เว็บไซต์สำนักงานราชบัณฑิตยสภา</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg><span class="visually-hidden" data-en="(external website, opens in a new tab)">(เว็บไซต์ภายนอก เปิดในแท็บใหม่)</span></a></li>
+        </section>
+        <section class="about-hub__group" id="laws" aria-labelledby="laws-title">
+          <h2 id="laws-title" class="about-hub__title" data-en="Laws and Regulations">กฎหมายและระเบียบ</h2>
+          <ul class="about-hub__list" role="list">
+            <li><a class="about-hub__link" href="about-acts.html">
+              <span class="about-hub__name" data-en="Relevant Acts">พระราชบัญญัติที่เกี่ยวข้อง</span>
+              <span class="about-hub__desc" data-en="4 documents">4 ฉบับ</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
+            <li><a class="about-hub__link" href="about-bylaws.html">
+              <span class="about-hub__name" data-en="Royal Society Bylaws">ข้อบังคับราชบัณฑิตยสภา</span>
+              <span class="about-hub__desc" data-en="12 documents">12 ฉบับ</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
+            <li><a class="about-hub__link" href="about-rules.html">
+              <span class="about-hub__name" data-en="Royal Society Regulations">ระเบียบราชบัณฑิตยสภา</span>
+              <span class="about-hub__desc" data-en="19 documents">19 ฉบับ</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
+            <li><a class="about-hub__link" href="about-announcements.html">
+              <span class="about-hub__name" data-en="Royal Society Notifications">ประกาศราชบัณฑิตยสภา</span>
+              <span class="about-hub__desc" data-en="19 documents">19 ฉบับ</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+            </a></li>
           </ul>
         </section>
       </div>
+
+      <section class="about-part about-hub__academies" id="academies" aria-labelledby="academies-title">
+        <h2 id="academies-title" class="about-hub__title" data-en="Academies">สำนัก</h2>
+        <p class="about-part__lead" data-en="Every Fellow belongs to one of three academies, each covering a family of disciplines.">ราชบัณฑิตสังกัดสำนักใดสำนักหนึ่ง แต่ละสำนักครอบคลุมกลุ่มสาขาวิชาของตน</p>
+        <ul class="acad-next__list about-academies" role="list" data-about-academies></ul>
+        <span id="academy-moral"></span><span id="academy-science"></span><span id="academy-arts"></span>
+      </section>
     </div>
   </main>
 

@@ -212,7 +212,6 @@
     gap: var(--space-8);
     margin-bottom: var(--space-8);
   }
-  .featured-quote { padding-left: var(--space-6); border-left: 2px solid var(--gold-500); }
   .featured-head__cta { justify-self: end; }
   .feature-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); align-items: stretch; }
   .feature-slide__title { font-size: var(--text-lg); }

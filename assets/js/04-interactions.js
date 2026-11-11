@@ -445,6 +445,107 @@
     });
   }
 
+  /* ==================================================================== *
+   * Pager — RS.pagerHTML({ page, pages, total, size, sizes, unit })
+   * The foot of a long list: what is shown ("1–10 of 17"), first /
+   * previous / numbers / next / last, and a dropdown of how many per page.
+   * The caller listens for clicks on [data-pager-page] and [data-pager-size].
+   * ==================================================================== */
+
+  const PAGER_L = {
+    shown: { th: 'แสดง {a}–{b} จาก {n} {unit}', en: 'Showing {a}–{b} of {n} {unit}' },
+    first: { th: 'หน้าแรก', en: 'First' },
+    prev: { th: 'ก่อนหน้า', en: 'Previous' },
+    next: { th: 'ถัดไป', en: 'Next' },
+    last: { th: 'สุดท้าย', en: 'Last' },
+    pageN: { th: 'หน้า {n}', en: 'Page {n}' },
+    ofN: { th: 'หน้า {p} จาก {n}', en: 'Page {p} of {n}' },
+    perPage: { th: 'แสดงต่อหน้า', en: 'Per page' }
+  };
+  let pagerSeq = 0;
+
+  /* the page numbers to show: always the first and last, two either side
+     of the current one, and a gap (…) where numbers are skipped */
+  function pageWindow(page, pages) {
+    const keep = new Set([1, pages]);
+    for (let n = page - 1; n <= page + 1; n++) if (n >= 1 && n <= pages) keep.add(n);
+    if (page <= 3) [2, 3, 4].forEach(n => n <= pages && keep.add(n));
+    if (page >= pages - 2) [pages - 1, pages - 2, pages - 3].forEach(n => n >= 1 && keep.add(n));
+    const list = [...keep].sort((a, b) => a - b);
+    return list.flatMap((n, i) => (i && n - list[i - 1] > 1 ? ['gap', n] : [n]));
+  }
+
+  RS.pagerHTML = ({ page, pages, total, size, sizes = [10, 20, 40], unit = { th: 'รายการ', en: 'items' } }) => {
+    const { t, te, escapeHTML } = RS;
+    const num = n => escapeHTML(RS.digits(String(n)));
+    const id = `pager-${++pagerSeq}`;
+    const a = total ? (page - 1) * size + 1 : 0;
+    const b = Math.min(page * size, total);
+    const go = (n, cls, label, html, off) => `<li><button class="pager__btn ${cls}" type="button" data-pager-page="${n}" aria-label="${escapeHTML(label)}"${off ? ' disabled' : ''}>${html}</button></li>`;
+    const chev = `<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>`;
+    const numbers = pageWindow(page, pages).map(n => (n === 'gap'
+      ? '<li class="pager__gap" aria-hidden="true">…</li>'
+      : `<li><button class="pager__btn pager__num" type="button" data-pager-page="${n}" aria-label="${escapeHTML(t(PAGER_L.pageN).replace('{n}', n))}"${n === page ? ' aria-current="page"' : ''}>${num(n)}</button></li>`)).join('');
+    return `
+      <p class="pager__summary" aria-live="polite">${escapeHTML(RS.digits(t(PAGER_L.shown).replace('{a}', a).replace('{b}', b).replace('{n}', total).replace('{unit}', t(unit))))}</p>
+      <ul class="pager__pages" role="list">
+        ${go(1, 'pager__edge pager__first', t(PAGER_L.first), `<span class="pager__chev pager__chev--double" aria-hidden="true">${chev}${chev}</span><span class="pager__word">${te(PAGER_L.first)}</span>`, page <= 1)}
+        ${go(page - 1, 'pager__edge pager__prev', t(PAGER_L.prev), `<span class="pager__chev" aria-hidden="true">${chev}</span><span class="pager__word">${te(PAGER_L.prev)}</span>`, page <= 1)}
+        ${numbers}
+        <li class="pager__of" aria-hidden="true">${escapeHTML(RS.digits(t(PAGER_L.ofN).replace('{p}', page).replace('{n}', pages)))}</li>
+        ${go(page + 1, 'pager__edge pager__next', t(PAGER_L.next), `<span class="pager__word">${te(PAGER_L.next)}</span><span class="pager__chev" aria-hidden="true">${chev}</span>`, page >= pages)}
+        ${go(pages, 'pager__edge pager__last', t(PAGER_L.last), `<span class="pager__word">${te(PAGER_L.last)}</span><span class="pager__chev pager__chev--double" aria-hidden="true">${chev}${chev}</span>`, page >= pages)}
+      </ul>
+      <div class="pager__size">
+        <span class="pager__size-label" id="${id}-label">${te(PAGER_L.perPage)}</span>
+        <div class="pager__menu" data-pager-menu>
+          <button class="pager__menu-btn" type="button" id="${id}-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="${id}-label ${id}-btn">
+            <span>${num(size)}</span>${chev}
+          </button>
+          <ul class="pager__menu-list" role="listbox" aria-labelledby="${id}-label" hidden>
+            ${sizes.map(n => `<li class="pager__menu-opt" role="option" tabindex="-1" data-pager-size="${n}" aria-selected="${n === size}"><span>${num(n)}</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg></li>`).join('')}
+          </ul>
+        </div>
+      </div>`;
+  };
+
+  /* the per-page dropdown: opens upward from the foot of the list; arrow
+     keys move, Enter / Space pick (a click on the option, which the list's
+     own script handles), Esc closes */
+  const closeMenus = except => qsa('[data-pager-menu].is-open').forEach(menu => {
+    if (menu === except) return;
+    menu.classList.remove('is-open');
+    qs('.pager__menu-list', menu).hidden = true;
+    qs('.pager__menu-btn', menu).setAttribute('aria-expanded', 'false');
+  });
+  document.addEventListener('click', event => {
+    const btn = event.target.closest('.pager__menu-btn');
+    if (!btn) { closeMenus(); return; }
+    const menu = btn.closest('[data-pager-menu]');
+    const list = qs('.pager__menu-list', menu);
+    const opening = list.hidden;
+    closeMenus(menu);
+    list.hidden = !opening;
+    menu.classList.toggle('is-open', opening);
+    btn.setAttribute('aria-expanded', String(opening));
+    if (opening) (qs('[aria-selected="true"]', list) || qs('[role="option"]', list))?.focus();
+  });
+  document.addEventListener('keydown', event => {
+    const menu = event.target.closest?.('[data-pager-menu]');
+    if (!menu) return;
+    const btn = qs('.pager__menu-btn', menu);
+    const items = qsa('[role="option"]', menu);
+    const index = items.indexOf(document.activeElement);
+    if (event.target === btn) {
+      if (event.key === 'ArrowUp' || event.key === 'ArrowDown') { event.preventDefault(); btn.click(); }
+      return;
+    }
+    if (event.key === 'ArrowDown') { event.preventDefault(); items[(index + 1) % items.length].focus(); }
+    else if (event.key === 'ArrowUp') { event.preventDefault(); items[(index - 1 + items.length) % items.length].focus(); }
+    else if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); if (index >= 0) items[index].click(); }
+    else if (event.key === 'Escape' || event.key === 'Tab') { closeMenus(); if (event.key === 'Escape') btn.focus(); }
+  });
+
   /** Set a custom select's value from code (falls back to plain inputs) */
   RS.selectSet = (input, value) => {
     const root = input?.closest('[data-select]');

@@ -253,7 +253,7 @@ window.RS_SEARCH_INDEX = [
     alt: '',
     summary: { th: 'รวมบทความวิชาการจากราชบัณฑิตและผู้ทรงคุณวุฒิ', en: 'Academic articles by Fellows and experts.' },
     source: { th: 'วารสาร', en: 'Journal' },
-    href: 'pages/knowledge.html#publications', date: '2026-06-30', academy: null, topic: null, contentLang: 'th-en',
+    href: 'pages/publication.html?id=journal-2569-1', date: '2026-06-30', academy: null, topic: null, contentLang: 'th-en',
     keywords: ['journal', 'วารสาร']
   },
   {
@@ -262,7 +262,7 @@ window.RS_SEARCH_INDEX = [
     alt: '',
     summary: { th: 'หนังสือหลักเกณฑ์ของสำนักงานราชบัณฑิตยสภา อ่านได้ในระบบ E-Book', en: 'Office of the Royal Society guideline book, available as an E-Book.' },
     source: { th: 'E-Book สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society E-Books' },
-    href: 'https://www.orst.go.th/iwfm_list.asp?u=6', date: null, academy: 'arts', topic: 'language', contentLang: 'th',
+    href: 'pages/publications.html', date: null, academy: 'arts', topic: 'language', contentLang: 'th',
     keywords: ['ทับศัพท์', 'transliteration', 'ebook']
   },
   {

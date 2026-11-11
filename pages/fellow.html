@@ -28,12 +28,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261109f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261109f">
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
 
   <script type="application/ld+json">
   {
@@ -47,53 +51,103 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261109f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261109f"></script>
-  <script defer src="../assets/js/data/fellows.js?v=20261109f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261109f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261109f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261109f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261109f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261109f"></script>
-  <script defer src="../assets/js/08-directory.js?v=20261109f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261109f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
+  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
+  <script defer src="../assets/js/data/fellows.js?v=20261117f"></script>
+  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
+  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
+  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
+  <script defer src="../assets/js/08-directory.js?v=20261117f"></script>
+  <script defer src="../assets/js/17-fellows.js?v=20261117f"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
 </head>
 <body>
   <div id="app-header"></div>
-
-  <main id="main-content" tabindex="-1">
-
-    <!-- The page <h1> is rendered inside the profile by 08-directory.js -->
-    <div class="page-header">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
-          <ol>
-            <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
-            <li><a href="fellows.html" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</a></li>
-            <li><span aria-current="page" data-profile-crumb data-en="Profile">โปรไฟล์</span></li>
-          </ol>
-        </nav>
+  <!-- Shown while the page sets itself up (header, Thai font); 02-components.js
+       lifts it, and CSS lifts it on its own after a few seconds regardless -->
+  <div class="page-skel" aria-hidden="true">
+    <div class="page-skel__bar"><span class="sk sk--logo"></span><span class="sk sk--nav"></span><span class="sk sk--btn"></span></div>
+    <div class="page-skel__body">
+      <span class="sk sk--crumb"></span>
+      <div class="page-skel__hero">
+        <div class="page-skel__text"><span class="sk sk--kicker"></span><span class="sk sk--title"></span><span class="sk sk--line"></span><span class="sk sk--line sk--short"></span></div>
+        <span class="sk sk--art"></span>
       </div>
+      <div class="page-skel__cards"><span class="sk sk--card"></span><span class="sk sk--card"></span><span class="sk sk--card"></span></div>
     </div>
+  </div>
 
-    <div class="container">
-      <div id="fellow-profile">
-        <!-- Loading skeleton — replaced by 08-directory.js -->
-        <p class="visually-hidden" data-en="Loading profile…">กำลังโหลดข้อมูลโปรไฟล์…</p>
-        <div class="profile" aria-hidden="true">
-          <div class="profile__aside">
-            <div class="skeleton skeleton--block"></div>
+  <!-- One template for every member: 17-fellows.js fills it from
+       assets/js/data/fellows.js by ?id= -->
+  <main id="main-content" tabindex="-1" class="story pub fellowp" data-fellow>
+    <article aria-labelledby="fellow-name" data-fellow-article>
+      <!-- Opening on the cream band: the portrait on the left, the record beside it -->
+      <header class="story__head pub-head">
+        <div class="container">
+          <div class="story__crumbbar">
+            <nav class="breadcrumb story__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+              <ol>
+                <li><a href="../index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-institution"></use></svg><span data-en="Home">หน้าแรก</span></a></li>
+                <li><a href="fellows.html" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</a></li>
+                <li><span aria-current="page" data-fellow-crumb></span></li>
+              </ol>
+            </nav>
           </div>
-          <div class="profile__main">
-            <div class="skeleton skeleton--title"></div>
-            <div class="skeleton skeleton--line"></div>
-            <div class="skeleton skeleton--line skeleton--w70"></div>
-            <div class="skeleton skeleton--block"></div>
+
+          <div class="pub-open fellowp-open">
+            <div class="fellowp-portrait" data-fellow-portrait><span class="skeleton fellowp-skel fellowp-skel--photo" aria-hidden="true"></span></div>
+
+            <div class="pub-record">
+              <p class="story__meta fellowp-meta"><span class="story__cat" data-fellow-type><span class="skeleton fellowp-skel fellowp-skel--meta" aria-hidden="true"></span></span><span class="fellowp-meta__academy" data-fellow-academy></span></p>
+              <h1 class="story__title fellowp-name" id="fellow-name" data-fellow-name><span class="skeleton fellowp-skel fellowp-skel--name" aria-hidden="true"></span><span class="visually-hidden">กำลังโหลด</span></h1>
+              <p class="fellowp-alt" data-fellow-alt></p>
+              <!-- the member's expertise as a quotation, from the profile (17-fellows.js) -->
+              <figure class="fellowp-quote" data-fellow-expertise hidden>
+                <span class="fellowp-quote__mark" aria-hidden="true">“</span>
+                <figcaption class="fellowp-quote__label" data-en="Expertise">ความเชี่ยวชาญ</figcaption>
+                <p class="fellowp-quote__text" data-fellow-expertise-text></p>
+              </figure>
+
+              <dl class="pub-facts" data-fellow-facts><div class="pub-facts__row"><span class="skeleton fellowp-skel fellowp-skel--dt" aria-hidden="true"></span><span class="skeleton fellowp-skel fellowp-skel--dd" aria-hidden="true"></span></div><div class="pub-facts__row"><span class="skeleton fellowp-skel fellowp-skel--dt" aria-hidden="true"></span><span class="skeleton fellowp-skel fellowp-skel--dd" aria-hidden="true"></span></div><div class="pub-facts__row"><span class="skeleton fellowp-skel fellowp-skel--dt" aria-hidden="true"></span><span class="skeleton fellowp-skel fellowp-skel--dd" aria-hidden="true"></span></div></dl>
+
+              <div class="pub-actions">
+                <button class="btn btn--secondary pub-actions__btn" type="button" data-share>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-share"></use></svg><span data-en="Share">แชร์</span>
+                </button>
+                <button class="btn btn--secondary pub-actions__btn" type="button" data-print>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-print"></use></svg><span data-en="Print">พิมพ์</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+      </header>
+
+      <div class="container">
+        <!-- The profile sections from assets/js/data/fellows/<id>.json -->
+        <div class="pub-body fellowp-body" data-fellow-sections aria-live="polite" aria-busy="true">
+          <div class="fellowp-main fellowp-skel-main" aria-hidden="true"><div class="fellowp-skel-sec"><span class="skeleton fellowp-skel fellowp-skel--title" aria-hidden="true"></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--year" aria-hidden="true"></span><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--year" aria-hidden="true"></span><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--year" aria-hidden="true"></span><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--year" aria-hidden="true"></span><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span></div><div class="fellowp-skel-sec"><span class="skeleton fellowp-skel fellowp-skel--title" aria-hidden="true"></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span><span class="fellowp-skel-row"><span class="skeleton fellowp-skel fellowp-skel--line" aria-hidden="true"></span></span></div></div>
+        </div>
       </div>
-    </div>
+    </article>
+
+    <!-- Other members of the same academy, the same discipline first: six
+         portraits on the green band, the type and field beneath each name -->
+    <section class="fellowp-others" aria-labelledby="fellow-more-title">
+      <div class="container">
+        <div class="fellowp-others__head">
+          <div>
+            <p class="fellowp-others__kicker" data-fellow-others-academy data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</p>
+            <h2 id="fellow-more-title" class="fellowp-others__title" data-en="Others in this academy">สมาชิกท่านอื่นในสำนัก</h2>
+          </div>
+          <a class="btn btn--sm btn--pill fellowp-others__all" href="fellows.html" data-fellow-all><span data-en="View all">ดูทั้งหมด</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+        </div>
+        <ul class="fellowp-others__list" role="list" data-fellow-more><li class="fellowp-other fellowp-other--skel" aria-hidden="true"><span class="fellowp-skel fellowp-other__photo"></span><span class="fellowp-skel fellowp-other__skel-a"></span><span class="fellowp-skel fellowp-other__skel-b"></span></li><li class="fellowp-other fellowp-other--skel" aria-hidden="true"><span class="fellowp-skel fellowp-other__photo"></span><span class="fellowp-skel fellowp-other__skel-a"></span><span class="fellowp-skel fellowp-other__skel-b"></span></li><li class="fellowp-other fellowp-other--skel" aria-hidden="true"><span class="fellowp-skel fellowp-other__photo"></span><span class="fellowp-skel fellowp-other__skel-a"></span><span class="fellowp-skel fellowp-other__skel-b"></span></li><li class="fellowp-other fellowp-other--skel" aria-hidden="true"><span class="fellowp-skel fellowp-other__photo"></span><span class="fellowp-skel fellowp-other__skel-a"></span><span class="fellowp-skel fellowp-other__skel-b"></span></li><li class="fellowp-other fellowp-other--skel" aria-hidden="true"><span class="fellowp-skel fellowp-other__photo"></span><span class="fellowp-skel fellowp-other__skel-a"></span><span class="fellowp-skel fellowp-other__skel-b"></span></li><li class="fellowp-other fellowp-other--skel" aria-hidden="true"><span class="fellowp-skel fellowp-other__photo"></span><span class="fellowp-skel fellowp-other__skel-a"></span><span class="fellowp-skel fellowp-other__skel-b"></span></li></ul>
+      </div>
+    </section>
   </main>
 
   <div id="app-footer"></div>

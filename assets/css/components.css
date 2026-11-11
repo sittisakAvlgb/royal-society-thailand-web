@@ -1779,3 +1779,54 @@ body.access-reduce-motion .chat-fab, body.access-reduce-motion .chat-panel { ani
   .cc-bar, .cc-bar__btn, .cc-bar__mark .cc-biscuit { transition: none; }
   .cc-bar { opacity: 1; transform: none; }
 }
+
+/* ==============================
+   Page skeleton (while a page sets itself up)
+   A layer over the page in the shapes of the floating header, a heading,
+   a picture and three cards, with a soft sheen. 02-components.js adds
+   html.rs-ready once the header is in place and the Thai face has loaded,
+   and the layer fades away; if a script never runs it fades by itself.
+================================ */
+.page-skel { position: fixed; inset: 0; z-index: 2000; overflow: hidden; background: var(--surface); pointer-events: none; animation: page-skel-out .3s ease 3s forwards; }
+html.rs-ready .page-skel { animation: page-skel-out .25s ease forwards; }
+@keyframes page-skel-out { to { opacity: 0; visibility: hidden; } }
+.page-skel .sk { display: block; border-radius: var(--radius-sm); background: linear-gradient(90deg, #ECEFEC 0%, #F6F8F6 50%, #ECEFEC 100%); background-size: 200% 100%; animation: skeleton 1.3s ease-in-out 3; }
+.page-skel__bar { display: flex; align-items: center; gap: var(--space-6); width: min(100% - 2 * var(--space-4), 1280px); height: var(--header-h); margin: var(--header-gap) auto 0; padding-inline: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); }
+.page-skel .sk--logo { width: 13rem; height: 2.25rem; }
+.page-skel .sk--nav { flex: 1; max-width: 34rem; height: 1rem; margin-left: auto; }
+.page-skel .sk--btn { width: 5.5rem; height: 2.5rem; border-radius: var(--radius-md); }
+.page-skel__body { width: min(100% - 2 * var(--space-4), 1280px); margin: var(--space-10) auto 0; padding-inline: var(--space-4); }
+.page-skel .sk--crumb { width: 14rem; height: .9rem; }
+.page-skel__hero { display: grid; gap: var(--space-8); align-items: center; margin-top: var(--space-6); }
+.page-skel__text { display: grid; gap: var(--space-3); }
+.page-skel .sk--kicker { width: 10rem; height: .9rem; }
+.page-skel .sk--title { width: min(28rem, 90%); height: 2.75rem; margin-block: var(--space-2); }
+.page-skel .sk--line { width: min(34rem, 100%); height: 1rem; }
+.page-skel .sk--short { width: min(22rem, 70%); }
+.page-skel .sk--art { height: 14rem; border-radius: var(--radius-lg); }
+.page-skel__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-10); }
+.page-skel .sk--card { height: 8rem; border-radius: var(--radius-lg); }
+@media (min-width: 1024px) {
+  .page-skel__hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .page-skel .sk--art { height: 20rem; }
+}
+@media (max-width: 767px) {
+  .page-skel .sk--nav { display: none; }
+  .page-skel .sk--logo { width: 9rem; }
+  .page-skel .sk--btn { width: 2.5rem; margin-left: auto; }
+  .page-skel__cards { grid-template-columns: minmax(0, 1fr); }
+  .page-skel__cards .sk--card + .sk--card { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-skel .sk { animation: none; }
+  html.rs-ready .page-skel { animation-duration: .01s; }
+}
+@media print { .page-skel { display: none; } }
+
+/* A menu heading that is not a link (its pages are listed beneath it):
+   the same place and weight as a heading link, but no pointer or underline */
+.mega-group__title .menu-label { display: flex; align-items: center; min-height: 36px; font-size: var(--text-sm); font-weight: 600; color: var(--rst-green-900); cursor: default; }
+.rs-mobile-links .menu-label { display: flex; align-items: center; min-height: 44px; color: var(--text-primary); cursor: default; }
+
+/* the skeleton's sheen stops as soon as the page is ready (the layer is then removed) */
+html.rs-ready .page-skel .sk { animation: none; }
