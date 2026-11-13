@@ -10335,3 +10335,4 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
    small printed sheet in the card's usual 3:2 frame, like its neighbours */
 .newsx-items--grid:not(.series-items) .series-card__media { display: grid !important; place-items: center; aspect-ratio: 3 / 2 !important; background: var(--rst-green-50); }
 .newsx-items--grid:not(.series-items) .series-card__media > .pub-cover { position: static; width: auto; height: 84%; aspect-ratio: 210 / 297; border-radius: 2px; padding: 8% 6%; }
+.newsx-card__media--tpl { position: relative; display: block !important; background: none !important; }

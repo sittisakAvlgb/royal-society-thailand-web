@@ -148,6 +148,25 @@
      data-cover-kind on the li or data-works-cover-kind on the list; the
      name from data-cover-name (default ราชบัณฑิตยสภา); the line under the
      rule from data-cover-sub, else the item's tab label. */
+  /* data-works-cover-all="template" (the proposals list): every card's
+     picture is the shared cover template, named by its tab (สมุดปกขาว,
+     ข้อเสนอเชิงนโยบาย…), so a logo, a typed title and a designed panel do
+     not sit side by side */
+  if (root.dataset.worksCoverAll === 'template' && RS.docCover) {
+    const names = {};
+    qsa('[data-works-tabs] .news-tab[data-filter]', root).forEach(tab => {
+      names[tab.dataset.filter] = (tab.childNodes[0] ? tab.childNodes[0].textContent : tab.textContent).trim();
+    });
+    const TONES = { whitepaper: 'strategy', policy: 'annual' };
+    items.forEach(({ li }) => {
+      const media = qs('.newsx-card__media', li);
+      if (!media) return;
+      const kind = names[li.dataset.academy] || '';
+      media.classList.add('newsx-card__media--tpl');
+      media.innerHTML = RS.docCover({ kind: { th: kind, en: kind }, when: { th: 'ข้อเสนอต่อรัฐบาล', en: 'Proposals to Government' }, org: { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' }, tone: TONES[li.dataset.academy] || 'other' });
+    });
+  }
+
   if (ROWS) {
     const tabName = {};
     qsa('[data-works-tabs] .news-tab[data-filter]', root).forEach(tab => {
