@@ -10294,3 +10294,5 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 .works-list__items.newsx-items--list .series-card__media .pub-cover { width: 100% !important; height: 100% !important; max-width: none; padding: 10% 8%; }
 .works-list__items.newsx-items--list .series-card__media .pub-cover__title { font-size: 9cqw; }
 .works-list__items.newsx-items--list .newsx-card__media .pub-cover__crest { position: static !important; inset: auto; width: 26cqw !important; height: auto !important; }
+/* the dark band: the plain (unlinked) crumb in the same light tone as the page name */
+.series-head .story__crumb li > span:not([aria-current]) { color: rgba(255, 255, 255, .78); }
