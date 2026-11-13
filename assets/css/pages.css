@@ -9608,3 +9608,18 @@ html.rs-mourning { filter: grayscale(1); }
 .splash--blurfill { background: #0d2a1e; }
 /* fit: 'cover' — the poster fills the screen above the bar */
 .splash--cover .splash__poster img { object-fit: cover; object-position: var(--poster-focus, 50% 50%); }
+
+/* Poster with the message set on it (overlay): the image keeps its own
+   shape on a canvas that covers the space above the bar (cqw/cqh of the
+   stage); the text is placed in the poster's own coordinates and sized
+   with it, so it stays on the panel whatever the screen */
+.splash__poster--canvas { position: relative; grid-row: 1; height: 100%; overflow: hidden; container-type: size; }
+.splash__canvas { position: absolute; left: 50%; width: max(100cqw, calc(100cqh * var(--ratio))); aspect-ratio: var(--ratio); top: calc((100cqh - max(calc(100cqw / var(--ratio)), 100cqh)) * var(--fy)); transform: translateX(-50%); container-type: inline-size; }
+.splash__canvas > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+.splash__overlay { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1cqw; text-align: center; color: #fff; }
+.splash__overlay p { margin: 0; font-size: 1.5cqw; line-height: 1.38; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
+.splash__overlay-rule { display: block; width: 26%; height: 1px; margin: .55cqw 0; background: linear-gradient(90deg, transparent, #E6C66E, transparent); }
+.splash__overlay .splash__overlay-from { font-size: 1.7cqw; font-weight: 700; }
+.splash__overlay p { font-size: 1.36cqw; line-height: 1.32; }
+.splash__overlay .splash__overlay-from { font-size: 1.5cqw; }
+.splash__overlay-rule { margin: .35cqw 0; }

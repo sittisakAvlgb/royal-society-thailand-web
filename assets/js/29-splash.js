@@ -66,13 +66,31 @@
       if (S.background === 'blur') el.classList.add('splash--blurfill');
       else if (S.background) el.style.background = S.background;
     }
+    /* overlay: the poster leaves a panel empty and the message is set on it
+       as live text from the record (sharp at any size, editable, read
+       out); the poster is drawn on a canvas of its own shape that covers
+       the screen, so the text keeps its place on the image */
+    function overlayHTML() {
+      const o = S.overlay;
+      const fy = parseFloat(String(S.focus || '50% 50%').split(/\s+/)[1]) / 100;
+      const ratio = o.ratio || 16 / 9;
+      return `<div class="splash__poster splash__poster--canvas" style="--ratio:${ratio};--fy:${Number.isFinite(fy) ? fy : 0.5}">
+        <div class="splash__canvas">
+          <img src="${esc(RS.url(poster.desktop))}" alt="" decoding="async">
+          <div class="splash__overlay" style="top:${o.top}%;left:${o.left}%;width:${o.width}%;height:${o.height}%">
+            ${(S.lines || []).map(l => `<p>${esc(t(l))}</p>`).join('')}
+            ${S.from ? `<span class="splash__overlay-rule" aria-hidden="true"></span><p class="splash__overlay-from">${esc(t(S.from))}</p>` : ''}
+          </div>
+        </div>
+      </div>`;
+    }
     const posterHTML = poster ? `
       <h1 class="visually-hidden" id="splash-title">${esc(t(S.title) || t(S.alt))}</h1>
       ${S.background === 'blur' ? `<span class="splash__fill" aria-hidden="true"><img src="${esc(RS.url(poster.desktop))}" alt="" decoding="async"></span>` : ''}
-      <picture class="splash__poster">
+      ${S.overlay ? overlayHTML() : `<picture class="splash__poster">
         ${poster.mobile ? `<source media="(max-width: 767.98px)" srcset="${esc(RS.url(poster.mobile))}">` : ''}
         <img src="${esc(RS.url(poster.desktop))}" alt="${esc(t(S.alt))}" decoding="async">
-      </picture>` : '';
+      </picture>`}` : '';
     el.innerHTML = poster ? `${posterHTML}
       ${S.mode === 'mourning' ? `<span class="splash__ribbon" aria-hidden="true">${RIBBON}</span>` : ''}
       <div class="splash__bar">

@@ -22,6 +22,10 @@
  *              'cover' (fills the screen; edges cut where the screen's shape
  *              differs — keep the wording inside the safe area)
  *    focus     with cover: the point kept in view, e.g. '50% 30%'
+ *    overlay   { top, left, width, height } in % of the poster: the
+ *              poster leaves that panel empty and lines + from are set on
+ *              it as live text (sharp, editable, read out); ratio = the
+ *              poster's width / height
  *    background  the colour around the poster when the screen's shape
  *              differs from the image's; 'blur' fills it with the poster
  *              itself, softened
