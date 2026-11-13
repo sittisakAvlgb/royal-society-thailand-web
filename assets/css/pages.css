@@ -10247,3 +10247,8 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 /* English covers: the Latin title runs larger than Thai at the same size */
 .pub-cover--en .pub-cover__title { font-size: 7cqw; line-height: 1.2; }
 .pub-cover--en .pub-cover__issue { font-size: 4.6cqw; }
+
+/* knowledge cards with a cover on top (grid); the list stays text only */
+.kn-items.newsx-items--grid .kn-card { grid-template-rows: auto 1fr; }
+.kn-card__media { position: relative; aspect-ratio: 16 / 9; }
+.newsx-items--list .kn-card__media { display: none; }

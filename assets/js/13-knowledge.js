@@ -57,6 +57,17 @@
         + DATA.fields.map(field => row(field.id, te(field.name), sorted.filter(item => item.field === field.id).length)).join('');
     }
 
+    /* each article's cover: its own picture when the record has one, else
+       the shared cover template (RS.docCover) with the field and the kind
+       of article; one pale tone per field */
+    const TONES = ['annual', 'strategy', 'report', 'assess', 'other', 'moral', 'science', 'arts'];
+    const cover = item => {
+      if (item.image) return `<img src="${href(item.image)}" alt="" width="640" height="400" loading="lazy" decoding="async">`;
+      const f = fieldOf(item.field);
+      const n = Math.max(0, DATA.fields.indexOf(f));
+      return RS.docCover({ kind: f ? f.name : { th: 'บทความ', en: 'Article' }, when: item.type || '', org: { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' }, tone: TONES[n % TONES.length] });
+    };
+
     function render(current) {
       const field = fieldOf(current);
       const items = field ? sorted.filter(item => item.field === field.id) : sorted;
@@ -71,6 +82,7 @@
       list.innerHTML = items.slice((page - 1) * size, page * size).map((item, i) => `
         <li class="newsx-item" style="animation-delay:${Math.min(i, 11) * 30}ms">
           <a class="newsx-card kn-card" href="${href(item.href)}">
+            <span class="newsx-card__media kn-card__media">${cover(item)}</span>
             <span class="newsx-card__body">
               <span class="news-cat kn-card__kicker">${field ? '' : `<span>${te(fieldOf(item.field)?.name)}</span>`}<span>${te(item.type)}</span></span>
               <span class="newsx-card__title">${te(item.title)}</span>
