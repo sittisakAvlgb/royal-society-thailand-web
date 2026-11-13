@@ -129,7 +129,7 @@
        green ground, the number above, the period as the title, and the
        year with "เปิดดู" at the foot. Takes any number of issues. */
     const box = qs('[data-series-groups]', root);
-    box.className = `newsx-items newsx-items--${view} series-items`;
+    box.className = `newsx-items newsx-items--${view} series-items works-list__items`;
     box.innerHTML = found.slice((page - 1) * size, page * size).map((item, n) => {
       const { no, period } = issueParts(item);
       return `
