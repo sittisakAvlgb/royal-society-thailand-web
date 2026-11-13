@@ -10185,3 +10185,28 @@ html[lang="en"] .hx-wk__since::before { content: "since "; }
 .plans-cover--science { background: linear-gradient(150deg, #EFF9F5 0%, #CDEEE0 100%); }
 .plans-cover--arts { background: linear-gradient(150deg, #F5FBF8 0%, #E1F3EA 100%); }
 .plans-cover__crest { max-width: 72px; }
+
+/* Academy news, as the home news band: the lead post and three beside it in
+   one row (the lead's picture fills its height, so nothing runs tall), every
+   card with its summary; View all opens the rest four to a row beneath */
+.acad-section .news-toolbar { margin-bottom: var(--space-6, 24px); }
+.acad-section .acad-posts { display: grid; gap: var(--space-4, 16px); }
+.acad-section .acad-post-grid { display: grid; gap: var(--space-4, 16px); grid-template-columns: 1fr; }
+@media (min-width: 40rem) { .acad-section .acad-post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64rem) {
+  .acad-section .acad-posts { grid-template-columns: minmax(0, 1.45fr) minmax(0, 3fr); align-items: stretch; }
+  .acad-section .acad-posts--single { grid-template-columns: minmax(0, 1fr); }
+  .acad-section .acad-post-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .acad-section .acad-post-grid--more { grid-column: 1 / -1; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .acad-section .acad-post--lead a { height: 100%; }
+  .acad-section .acad-post--lead .acad-post__media { flex: 1 1 0; min-height: 200px; aspect-ratio: auto; }
+}
+.acad-section .acad-post-grid--more { margin-top: 0; }
+.acad-section .acad-post a { display: flex; flex-direction: column; height: 100%; }
+.acad-section .acad-post__media { aspect-ratio: 16 / 10; }
+.acad-section .acad-post__title { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--text-base); line-height: 1.4; }
+.acad-section .acad-post--lead .acad-post__title { font-size: var(--text-md); -webkit-line-clamp: 2; }
+.acad-section .acad-post__excerpt { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--text-sm); line-height: 1.5; color: var(--text-secondary); }
+.acad-section .acad-post--lead .acad-post__excerpt { -webkit-line-clamp: 3; }
+.acad-section [data-acad-posts-all] .icon { transition: transform .25s ease; }
+.acad-section [data-acad-posts-all].is-open .icon { transform: rotate(-90deg); }

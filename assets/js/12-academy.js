@@ -103,13 +103,27 @@
     external: false
   });
 
-  function renderPosts(filter = 'all') {
+  /* the home news band: one lead post and three beside it, each with its
+     summary, date and Read more; View all opens the rest beneath */
+  let showAll = false;
+  let currentFilter = 'all';
+  function renderPosts(filter = currentFilter) {
+    currentFilter = filter;
     const posts = (page.posts || []).map(ownPost)
       .filter(post => filter === 'all' || post.cat === filter)
       .sort((a, b) => b.date.localeCompare(a.date));
-    if (!posts.length) { set('[data-acad-posts]', `<p class="cal-empty">${icon('info')}<span>${te(L.noPosts)}</span></p>`); return; }
+    const allBtn = qs('[data-acad-posts-all]', root);
+    if (!posts.length) { set('[data-acad-posts]', `<p class="cal-empty">${icon('info')}<span>${te(L.noPosts)}</span></p>`); if (allBtn) allBtn.hidden = true; return; }
     const [lead, ...more] = posts;
-    const rest = more.slice(0, 4);
+    const rest = more.slice(0, 3);
+    const extra = showAll ? more.slice(3) : [];
+    if (allBtn) {
+      allBtn.hidden = more.length <= 3;
+      allBtn.setAttribute('aria-expanded', String(showAll));
+      const label = qs('[data-acad-posts-all-label]', allBtn);
+      if (label) label.textContent = showAll ? t({ th: 'แสดงน้อยลง', en: 'Show fewer' }) : `${t({ th: 'ดูทั้งหมด', en: 'View all' })} (${RS.digits(String(posts.length))})`;
+      allBtn.classList.toggle('is-open', showAll);
+    }
     /* Posts from the academy websites open there, in a new tab */
     const target = post => post.external ? ' target="_blank" rel="noopener"' : '';
     /* Photos come from the academy websites; a local one stands in if one fails */
@@ -117,6 +131,18 @@
     const box = qs('[data-acad-posts]', root);
     if (box) box.classList.toggle('acad-posts--single', !rest.length);
     const external = post => post.external ? `<span class="visually-hidden"> ${te(L.external)}</span>` : '';
+    const card = post => `
+        <li class="acad-post">
+          <a href="${href(post.href)}"${target(post)}>
+            <span class="acad-post__media">${img(post, 890, 530)}</span>
+            <span class="acad-post__body">
+              ${postCat(post)}
+              <span class="acad-post__title">${te(post.title)}${external(post)}</span>
+              ${post.excerpt ? `<span class="acad-post__excerpt">${te(post.excerpt)}</span>` : ''}
+              ${postFoot(post)}
+            </span>
+          </a>
+        </li>`;
     set('[data-acad-posts]', `
       <article class="acad-post acad-post--lead">
         <a href="${href(lead.href)}"${target(lead)}>
@@ -129,17 +155,19 @@
           </span>
         </a>
       </article>
-      ${rest.length ? `<ul class="acad-post-grid" role="list">${rest.map(post => `
-        <li class="acad-post">
-          <a href="${href(post.href)}"${target(post)}>
-            <span class="acad-post__media">${img(post, 890, 530)}</span>
-            <span class="acad-post__body">
-              ${postCat(post)}
-              <span class="acad-post__title">${te(post.title)}${external(post)}</span>
-              ${postFoot(post)}
-            </span>
-          </a>
-        </li>`).join('')}</ul>` : ''}`);
+      ${rest.length ? `<ul class="acad-post-grid" role="list">${rest.map(card).join('')}</ul>` : ''}
+      ${extra.length ? `<ul class="acad-post-grid acad-post-grid--more" role="list">${extra.map(card).join('')}</ul>` : ''}`);
+  }
+
+  function initPostsAll() {
+    const btn = qs('[data-acad-posts-all]', root);
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      showAll = !showAll;
+      renderPosts();
+      document.dispatchEvent(new CustomEvent('rs:content-added', { detail: qs('[data-acad-posts]', root) }));
+      if (showAll) { const first = qs('.acad-post-grid--more a', root); if (first) first.focus({ preventScroll: true }); }
+    });
   }
 
   /* A photo that fails to load (a post moved on the academy website) falls back */
@@ -351,6 +379,7 @@
     initImageFallback();
     renderPosts();
     initPostFilter();
+    initPostsAll();
     renderLectures();
     renderWorks();
     renderRoll();          /* no-op unless a [data-acad-roll] is on the page */
