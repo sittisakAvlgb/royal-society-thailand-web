@@ -10244,3 +10244,6 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 .pub-cover--journal::after { opacity: .28; }
 .pub-cover--journal .pub-cover__rule { background: var(--rst-green-300); opacity: 1; }
 .pub-cover--journal .pub-cover__kind, .pub-cover--journal .pub-cover__org { color: var(--rst-green-200); opacity: 1; }
+/* English covers: the Latin title runs larger than Thai at the same size */
+.pub-cover--en .pub-cover__title { font-size: 7cqw; line-height: 1.2; }
+.pub-cover--en .pub-cover__issue { font-size: 4.6cqw; }
