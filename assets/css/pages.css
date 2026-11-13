@@ -9441,3 +9441,12 @@ html[lang="en"] .works-list--empty-en { display: none !important; }
   .msg-facts > div { grid-template-columns: 1fr; gap: 0; }
   .msg-news__list li { flex-direction: column; gap: 0; }
 }
+
+/* The President's page runs the full width like the rest of the site; on
+   wide screens the facts sit in two columns so each line stays readable */
+.msg__letter { max-width: none; }
+@media (min-width: 1200px) {
+  .msg-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-12, 48px); }
+  .msg-facts > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .msg-news__list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-12, 48px); }
+}
