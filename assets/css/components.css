@@ -1834,3 +1834,11 @@ html.rs-ready .page-skel .sk { animation: none; }
 /* mega panel title: a Thai title breaks only before "และ", never inside a word */
 .mega-feature__ph { white-space: nowrap; }
 .mega-feature__desc { text-wrap: pretty; }
+
+/* Service links (search panel): one size for every row — names one step
+   smaller on a single line, the service icon 18px, the external mark
+   14px (it is followed by a hidden label, so :last-child missed it) */
+.service-links a { min-height: 44px; gap: var(--space-3); font-size: var(--text-sm); line-height: 1.3; }
+.service-links a > .icon:first-child { flex: none; width: 18px; height: 18px; }
+.service-links a .icon + span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.service-links a > .icon:not(:first-child) { flex: none; width: 14px; height: 14px; color: var(--text-secondary); }
