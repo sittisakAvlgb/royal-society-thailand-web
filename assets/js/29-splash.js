@@ -57,7 +57,28 @@
     el.setAttribute('role', 'dialog');
     el.setAttribute('aria-modal', 'true');
     el.setAttribute('aria-labelledby', 'splash-title');
-    el.innerHTML = `
+    /* a designed poster (the usual case): the image as it was made, whole,
+       on its own background colour; its wording read out from alt */
+    const poster = S.poster && (typeof S.poster === 'object' ? S.poster : { desktop: S.poster });
+    if (poster) {
+      el.classList.add('splash--poster');
+      if (S.background) el.style.background = S.background;
+    }
+    const posterHTML = poster ? `
+      <h1 class="visually-hidden" id="splash-title">${esc(t(S.title) || t(S.alt))}</h1>
+      <picture class="splash__poster">
+        ${poster.mobile ? `<source media="(max-width: 767.98px)" srcset="${esc(RS.url(poster.mobile))}">` : ''}
+        <img src="${esc(RS.url(poster.desktop))}" alt="${esc(t(S.alt))}" decoding="async">
+      </picture>` : '';
+    el.innerHTML = poster ? `${posterHTML}
+      ${S.mode === 'mourning' ? `<span class="splash__ribbon" aria-hidden="true">${RIBBON}</span>` : ''}
+      <div class="splash__bar">
+        <div class="splash__org"><img src="${esc(logo)}" alt="" width="40" height="40"><span><strong>ราชบัณฑิตยสภา</strong><span>The Royal Society of Thailand</span></span></div>
+        <div class="splash__actions">
+          <button class="splash__enter" type="button" data-splash-enter="th" lang="th">${esc((S.enter && S.enter.th) || 'เข้าสู่เว็บไซต์')}</button>
+          <button class="splash__enter splash__enter--en" type="button" data-splash-enter="en" lang="en">${esc((S.enter && S.enter.en) || 'Enter site')}</button>
+        </div>
+      </div>` : `
       <div class="splash__art" aria-hidden="true">${S.image ? `<img src="${esc(RS.url(S.image))}" alt="" decoding="async">` : ''}</div>
       ${S.mode === 'mourning' ? `<span class="splash__ribbon" aria-hidden="true">${RIBBON}</span>` : ''}
       <div class="splash__stage">
