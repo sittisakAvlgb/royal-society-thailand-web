@@ -159,6 +159,19 @@
       if (!a || qs('.ann-cover', a)) return;
       const cover = document.createElement('span');
       cover.className = 'ann-cover';
+      /* data-works-cover-style="template" (the ITA list): the shared pale
+         green cover (RS.docCover) filling the picture area instead of the
+         small printed sheet; one tone per tab */
+      if (root.dataset.worksCoverStyle === 'template' && RS.docCover) {
+        const TONES = ['annual', 'strategy', 'report', 'assess', 'other', 'moral', 'science', 'arts'];
+        const keys = Object.keys(tabName).filter(k => k !== 'all');
+        const sub = li.dataset.coverSub || tabName[li.dataset.academy] || '';
+        cover.classList.add('ann-cover--tpl');
+        cover.setAttribute('aria-hidden', 'true');
+        cover.innerHTML = RS.docCover({ kind: { th: sub, en: sub }, when: { th: root.dataset.worksCoverWhen || '', en: root.dataset.worksCoverWhenEn || '' }, org: { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' }, tone: TONES[Math.max(0, keys.indexOf(li.dataset.academy)) % TONES.length] });
+        a.prepend(cover);
+        return;
+      }
       cover.setAttribute('aria-hidden', 'true');
       cover.innerHTML = `<span class="ann-cover__sheet"><img src="${crest}" alt="" width="40" height="40" loading="lazy"><span class="ann-cover__kind"></span><span class="ann-cover__org"></span><span class="ann-cover__rule"></span><span class="ann-cover__subject"></span></span>`;
       qs('.ann-cover__kind', cover).textContent = li.dataset.coverKind || root.dataset.worksCoverKind || '';

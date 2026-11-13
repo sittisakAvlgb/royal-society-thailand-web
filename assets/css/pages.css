@@ -10278,3 +10278,7 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 .works-list__items.newsx-items--list .newsx-card__media .act-video__play { position: absolute; inset: 0; width: 100%; height: 100%; }
 .works-list__items.newsx-items--list .newsx-card__media .act-video__play img { width: 100%; height: 100%; object-fit: cover; }
 .works-list__items.newsx-items--list .act-video__btn { transform: translate(-50%, -50%) scale(.7); }
+/* ITA: the shared cover template filling the card's picture area */
+.ann-list.is-grid .ann-cover--tpl { display: block; padding: 0; background: none; aspect-ratio: 16 / 10; }
+.ann-cover--tpl .plans-cover { position: absolute; inset: 0; }
+.ann-cover--tpl .plans-cover__when { font-size: min(5.4cqw, 9cqh); font-weight: 600; }
