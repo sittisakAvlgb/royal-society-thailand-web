@@ -9606,3 +9606,5 @@ html.rs-mourning { filter: grayscale(1); }
 .splash__fill { position: absolute; inset: 0; overflow: hidden; }
 .splash__fill img { width: 100%; height: 100%; object-fit: cover; filter: blur(28px) brightness(.75); transform: scale(1.1); }
 .splash--blurfill { background: #0d2a1e; }
+/* fit: 'cover' — the poster fills the screen above the bar */
+.splash--cover .splash__poster img { object-fit: cover; object-position: var(--poster-focus, 50% 50%); }

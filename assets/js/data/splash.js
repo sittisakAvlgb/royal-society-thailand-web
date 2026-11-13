@@ -18,6 +18,10 @@
  *              makes the image, the CMS uploads it here
  *    alt       {th,en} everything the poster says, read out to screen
  *              readers (required with a poster)
+ *    fit       'contain' (default: the whole poster, nothing cut) or
+ *              'cover' (fills the screen; edges cut where the screen's shape
+ *              differs — keep the wording inside the safe area)
+ *    focus     with cover: the point kept in view, e.g. '50% 30%'
  *    background  the colour around the poster when the screen's shape
  *              differs from the image's; 'blur' fills it with the poster
  *              itself, softened
@@ -51,6 +55,8 @@ window.RS_SPLASH = {
     th: '๑๐๐ ปี ราชบัณฑิตยสภา ร้อยปีแห่งการบำรุงสรรพวิชา ๑๙ เมษายน ๒๔๖๙ ถึง ๑๙ เมษายน ๒๕๖๙ นับแต่พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัวทรงสถาปนาราชบัณฑิตยสภา ราชบัณฑิตยสภาได้ค้นคว้า สร้างองค์ความรู้ และกำหนดมาตรฐานการใช้ภาษาไทย เพื่อประโยชน์ของประเทศและประชาชนตลอดมา ราชบัณฑิตยสภา และสำนักงานราชบัณฑิตยสภา',
     en: 'The Royal Society of Thailand at 100: a hundred years in the service of learning, 19 April 1926 to 19 April 2026.'
   },
+  fit: 'cover',
+  focus: '50% 6%',
   background: 'blur',
   image: 'assets/images/hero/hero-1.jpg',
   portrait: null,
