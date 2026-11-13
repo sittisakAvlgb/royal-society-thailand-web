@@ -36,7 +36,7 @@
     newTab: { th: '(เปิดในแท็บใหม่)', en: '(opens in a new tab)' },
     found: { th: 'พบ {n} ฉบับ', en: '{n} issues' },
     vol: { th: 'ปีที่ {n}', en: 'Vol. {n}' },
-    open: { th: 'เปิดดู', en: 'Open' }
+    open: { th: 'อ่านต่อ', en: 'Read more' }
   };
 
   const series = SERIES.find(s => s.id === new URLSearchParams(location.search).get('id')) || SERIES[0];
@@ -127,7 +127,7 @@
 
     /* one list, newest first, in the news card: the cover laid on a pale
        green ground, the number above, the period as the title, and the
-       year with "เปิดดู" at the foot. Takes any number of issues. */
+       year with "อ่านต่อ" at the foot. Takes any number of issues. */
     const box = qs('[data-series-groups]', root);
     box.className = `newsx-items newsx-items--${view} series-items works-list__items`;
     box.innerHTML = found.slice((page - 1) * size, page * size).map((item, n) => {
