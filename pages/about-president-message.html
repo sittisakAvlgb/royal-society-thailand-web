@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261127e">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261127e">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261127e">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261127e">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261127e">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261127e">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261127g">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261127g">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261127g">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261127g">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261127g">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261127g">
 
   <script type="application/ld+json">
   {
@@ -53,17 +53,17 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261127e"></script>
-  <script defer src="../assets/js/01-config.js?v=20261127e"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261127e"></script>
-  <script defer src="../assets/js/02-components.js?v=20261127e"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261127e"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261127e"></script>
-  <script defer src="../assets/js/05-language.js?v=20261127e"></script>
-  <script defer src="../assets/js/06-search.js?v=20261127e"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261127e"></script>
-  <script defer src="../assets/js/14-about.js?v=20261127e"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261127e"></script>
+  <script defer src="../assets/js/00-core.js?v=20261127g"></script>
+  <script defer src="../assets/js/01-config.js?v=20261127g"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261127g"></script>
+  <script defer src="../assets/js/02-components.js?v=20261127g"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261127g"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261127g"></script>
+  <script defer src="../assets/js/05-language.js?v=20261127g"></script>
+  <script defer src="../assets/js/06-search.js?v=20261127g"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261127g"></script>
+  <script defer src="../assets/js/14-about.js?v=20261127g"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261127g"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -128,17 +128,33 @@
 
             <article class="msg__letter">
               <img class="msg__crest" src="../assets/images/logo-image.png" alt="" width="56" height="56" decoding="async">
-              <p class="msg__from" data-en="From the President of the Royal Society">จากนายกราชบัณฑิตยสภา</p>
-              <h2 id="letter-title" class="msg__title" data-en="To the public and the academic community">ถึงประชาชนและเครือข่ายทางวิชาการ</h2>
-              <!-- TODO (Office): the President's message; the official site shows "being updated" (Nov 2026) -->
+              <p class="msg__from" data-en="President of the Royal Society">นายกราชบัณฑิตยสภา</p>
+              <h2 id="letter-title" class="msg__title" data-en="Professor Emeritus Surapol Issaragrisil, M.D."><span class="story__ph">ศาสตราจารย์เกียรติคุณ</span> <span class="story__ph">นพ.สุรพล อิสรไกรศีล</span></h2>
+              <!-- TODO (Office): the President's message. The official page shows
+                   "being updated" (Nov 2026); until the text arrives this block
+                   introduces the President from published records only: his
+                   Fellow profile (data/fellows/science-025.json) and the
+                   Office's press releases (data/press.js). -->
               <div class="msg__body">
-                <p class="msg__pending"><span class="msg__pending-label" data-en="Being prepared">อยู่ระหว่างการจัดทำ</span><span data-en="The President's message will be published here when the Office receives it.">สารจากนายกราชบัณฑิตยสภาจะเผยแพร่ในหน้านี้เมื่อสำนักงานได้รับต้นฉบับ</span></p>
-                <p data-en="In the meantime, the President's address on the direction of the Society sets out the priorities he holds for its work."><span class="story__ph">ระหว่างนี้</span> <span class="story__ph">แนวคิดของนายกราชบัณฑิตยสภา</span><span class="story__ph">อ่านได้จากการบรรยายเรื่อง</span> <span class="story__ph">“ทิศทางและการดำเนินงานของราชบัณฑิตยสภา”</span> <a class="msg__jump" href="#ideas" data-en="three points below">สรุป ๓ ประเด็นด้านล่าง</a></p>
+                <p class="msg__pending"><span class="msg__pending-label" data-en="Being prepared">สารจากนายกราชบัณฑิตยสภา</span><span data-en="The President's message will be published here when the Office receives it.">อยู่ระหว่างการจัดทำ จะเผยแพร่ในหน้านี้เมื่อสำนักงานได้รับต้นฉบับ</span></p>
+                <dl class="msg-facts" data-th-only>
+                  <div><dt>วาระ</dt><dd>นายกราชบัณฑิตยสภา พ.ศ. ๒๕๖๒–๒๕๖๔ และ พ.ศ. ๒๕๖๖–ปัจจุบัน · ประธานสำนักวิทยาศาสตร์ พ.ศ. ๒๕๖๐–๒๕๖๑</dd></div>
+                  <div><dt>ราชบัณฑิต</dt><dd>สาขาวิชาแพทยศาสตร์ ประเภทวิชาวิทยาศาสตร์สุขภาพ สำนักวิทยาศาสตร์ โปรดเกล้าฯ แต่งตั้งเมื่อ ๒๘ พฤศจิกายน พ.ศ. ๒๕๔๕</dd></div>
+                  <div><dt>ความเชี่ยวชาญ</dt><dd>โลหิตวิทยา การปลูกถ่ายไขกระดูก และเซลล์ต้นกำเนิดบำบัด · ผู้อำนวยการศูนย์ปลูกถ่ายไขกระดูกจุฬาภรณ์ ศาสตราจารย์เกียรติคุณ คณะแพทยศาสตร์ศิริราชพยาบาล มหาวิทยาลัยมหิดล</dd></div>
+                  <div><dt>ผลงานสำคัญ</dt><dd>ผู้ก่อตั้ง Asia Pacific Bone Marrow Transplantation (พ.ศ. ๒๕๓๑) และ Asian Hematology Association (พ.ศ. ๒๕๔๖) · งานวิจัยโรคโลหิตจางอะพลาสติกในประเทศไทย</dd></div>
+                  <div><dt>เกียรติคุณ</dt><dd>บุคคลดีเด่นของชาติ สาขาวิทยาศาสตร์และเทคโนโลยี (พ.ศ. ๒๕๕๔) · ผลงานวิจัยดีเยี่ยม สาขาวิทยาศาสตร์การแพทย์ สภาวิจัยแห่งชาติ (พ.ศ. ๒๕๓๖)</dd></div>
+                </dl>
+                <div class="msg-news" data-th-only>
+                  <h3 class="msg-news__title">นายกราชบัณฑิตยสภาในข่าว</h3>
+                  <ul class="msg-news__list" role="list">
+                    <li><a href="news-detail.html?id=press-1846">เป็นประธานการประชุมคณะกรรมการกิจการสำนักงานราชบัณฑิตยสภา ครั้งที่ ๔/๒๕๖๗</a><time datetime="2024-06-21">๒๑ มิ.ย. ๒๕๖๗</time></li>
+                    <li><a href="news-detail.html?id=press-1618">ให้สัมภาษณ์เรื่องศัพท์บัญญัติ กับรายการชัวร์ก่อนแชร์</a><time datetime="2020-08-01">๑ ส.ค. ๒๕๖๓</time></li>
+                    <li><a href="news-detail.html?id=press-814">แถลงข่าวสถานการณ์โรคไวรัสโคโรนาสายพันธุ์ใหม่ ๒๐๑๙ และแนวทางป้องกันและรักษา</a><time datetime="2020-01-30">๓๐ ม.ค. ๒๕๖๓</time></li>
+                    <li><a href="news-detail.html?id=press-795">แถลงข่าวสถานการณ์ฝุ่น PM2.5</a><time datetime="2020-01-25">๒๕ ม.ค. ๒๕๖๓</time></li>
+                  </ul>
+                </div>
+                <p class="msg__links"><a class="msg__jump" href="#ideas" data-en="Three points from his address">๓ ประเด็นจากการบรรยายของนายก</a> <a class="msg__jump" href="fellow.html?id=science-025" data-en="Full Fellow's profile">ประวัติราชบัณฑิตฉบับเต็ม</a></p>
               </div>
-              <p class="msg__sign">
-                <span class="msg__sign-name"><span class="story__ph">(ศาสตราจารย์เกียรติคุณ</span> <span class="story__ph">นพ.สุรพล อิสรไกรศีล)</span></span>
-                <span class="msg__sign-role" data-en="President of the Royal Society">นายกราชบัณฑิตยสภา</span>
-              </p>
             </article>
           </section>
 
