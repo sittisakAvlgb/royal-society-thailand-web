@@ -31,6 +31,7 @@
     lang: { th: 'ภาษา', en: 'Language' },
     download: { th: 'ดาวน์โหลด PDF', en: 'Download PDF' },
     readFull: { th: 'อ่านฉบับเต็ม', en: 'Read the full issue' },
+    preview: { th: 'ดูตัวอย่าง', en: 'Preview' },
     newTab: { th: '(เปิดในแท็บใหม่)', en: '(opens in a new tab)' },
     page: { th: 'หน้า', en: 'p.' }
   };
@@ -90,6 +91,10 @@
       btn.removeAttribute('download');
       btn.querySelector('use')?.setAttribute('href', '#i-download');
       set('[data-pub-download-label]', `${te(L.download)}<span class="visually-hidden"> ${te(L.newTab)}</span>`);
+      /* and ดูตัวอย่าง beside it: the issue in the site's PDF reader */
+      if (!qs('[data-pub-preview]', root)) {
+        btn.insertAdjacentHTML('afterend', `<button class="btn btn--secondary pub-actions__btn" type="button" data-pub-preview data-pdf-preview="${escapeHTML(pub.link)}" data-pdf-title="${escapeHTML(t(pub.title))}">${RS.icon('eye')}<span>${te(L.preview)}</span></button>`);
+      }
     } else if (pub.link && btn) {
       btn.href = RS.url(`pages/document.html?id=pub-${encodeURIComponent(pub.id)}`);
       btn.removeAttribute('target');

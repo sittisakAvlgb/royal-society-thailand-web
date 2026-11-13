@@ -48,6 +48,11 @@
   }
   const pdf = qs('[data-recruit-pdf]');
   if (pdf && lead.pdf) pdf.href = lead.pdf;
+  const preview = qs('[data-recruit-preview]');
+  if (preview) {
+    preview.hidden = !lead.pdf;
+    if (lead.pdf) { preview.dataset.pdfPreview = lead.pdf; preview.dataset.pdfTitle = t(lead.title); }
+  }
   root.classList.toggle('is-closed', !open);
 
   const count = qs('[data-recruit-count]');
@@ -67,5 +72,6 @@
           <span class="visually-hidden">${te(L.newTab)}</span>
         </a>
       </li>`).join('');
+    RS.upgradePdfCards?.(list);
   }
 })();

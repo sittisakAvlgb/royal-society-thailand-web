@@ -1076,6 +1076,57 @@
     RS.pdfPreview({ src: b.dataset.pdfPreview, title: b.dataset.pdfTitle, pages: Number(b.dataset.pdfPages) || 0, bytes: Number(b.dataset.pdfBytes) || 0 });
   });
 
+  /* ดูตัวอย่าง + เปิดเอกสาร: the pair every PDF on the site is offered with */
+  const PAIR = {
+    preview: { th: 'ดูตัวอย่าง', en: 'Preview' },
+    open: { th: 'เปิดเอกสาร', en: 'Open' },
+    newTab: { th: '(เปิดในแท็บใหม่)', en: '(opens in a new tab)' }
+  };
+  RS.pdfActions = (file, cls = '') => {
+    const src = escapeHTML(file.src);
+    return `<span class="act-doc__actions pdf-acts${cls ? ` ${cls}` : ''}">
+      <button class="act-doc__btn act-doc__btn--primary" type="button" data-pdf-preview="${src}" data-pdf-title="${escapeHTML(file.title || '')}"${file.pages ? ` data-pdf-pages="${Number(file.pages)}"` : ''}${file.bytes ? ` data-pdf-bytes="${Number(file.bytes)}"` : ''}>${icon('eye')}<span>${escapeHTML(RS.t(PAIR.preview))}</span></button>
+      <a class="act-doc__btn" href="${src}" target="_blank" rel="noopener">${icon('external')}<span>${escapeHTML(RS.t(PAIR.open))}</span><span class="visually-hidden"> ${escapeHTML(RS.t(PAIR.newTab))}</span></a>
+    </span>`;
+  };
+
+  /* A card that was one link to a PDF (laws and bylaws, notices, documents
+     on the about pages) becomes a card with the pair: the card keeps its
+     classes and look, its "open" mark is replaced by the two buttons, and a
+     click anywhere else on the card previews. Static pages and lists drawn
+     later (RS.upgradePdfCards(root)) alike. */
+  const PDF_CARDS = [
+    ['a.story__doc', '.story__file-name', '.story__doc-btn'],
+    ['a.acts-doc', '.acts-doc__name', '.acts-doc__open'],
+    ['a.rec-more__link', '.rec-more__title', '.rec-more__open'],
+    ['a.newsx-card', '.newsx-card__title', '.news-cta']
+  ];
+  const isPdf = href => /\.pdf($|[?#])/i.test(href || '') || /\/FILEROOM\//i.test(href || '');
+  RS.upgradePdfCards = (root = document) => {
+    PDF_CARDS.forEach(([sel, nameSel, openSel]) => qsa(sel, root).forEach(a => {
+      const href = a.getAttribute('href');
+      if (!isPdf(href)) return;
+      const card = document.createElement('div');
+      [...a.attributes].forEach(at => { if (!/^(href|target|rel|download|aria-label)$/.test(at.name)) card.setAttribute(at.name, at.value); });
+      card.dataset.pdfCard = '';
+      const name = qs(nameSel, a);
+      const title = (a.getAttribute('aria-label') || (name ? name.textContent : '')).trim();
+      qsa(':scope > .visually-hidden', a).forEach(n => n.remove());
+      const mark = qs(openSel, a);
+      const holder = document.createElement('span');
+      holder.innerHTML = RS.pdfActions({ src: href, title }, openSel.slice(1));
+      if (mark) mark.replaceWith(holder.firstElementChild); else a.appendChild(holder.firstElementChild);
+      card.append(...a.childNodes);
+      a.replaceWith(card);
+    }));
+  };
+  document.addEventListener('click', event => {
+    const card = event.target.closest('[data-pdf-card]');
+    if (!card || event.target.closest('a, button, input, select, textarea')) return;
+    qs('[data-pdf-preview]', card)?.click();
+  });
+  RS.ready(() => RS.upgradePdfCards());
+
   RS.checkImages = root => qsa('img', root || document).forEach(img => { if (isUnusable(img)) onBrokenImage(img); });
 
   function initUtilities() {

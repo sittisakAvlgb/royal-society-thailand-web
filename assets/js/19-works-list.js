@@ -95,6 +95,7 @@
       </li>`;
     };
     box.innerHTML = docs.map(docCard).join('');
+    RS.upgradePdfCards?.(box);
     /* English titles count as English for the English page */
     if (RS.lang === 'en') qsa('.acts-doc__name', box).forEach((el, i) => { if (docs[i].title && docs[i].title.en) el.dataset.en = docs[i].title.en; });
   }

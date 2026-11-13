@@ -3132,7 +3132,7 @@ window.RS_ACTIVITY_BODY = {
   ],
   "files": [
    [
-    "http://science.royalsociety.go.th/wp-content/uploads/2020/08/4.-การปรับตัวของภาคเกษตรและอาหารไทยภายใต้โควิด-19-คุณเอ็นนู.pdf",
+    "https://science.royalsociety.go.th/wp-content/uploads/2020/08/4.-การปรับตัวของภาคเกษตรและอาหารไทยภายใต้โควิด-19-คุณเอ็นนู.pdf",
     "เอกสารประกอบการบรรยาย (สไลด์นำเสนอ)",
     "assets/images/activities/forum-03/doc-1.jpg",
     87,
@@ -5479,7 +5479,7 @@ window.RS_ACTIVITY_BODY = {
   ],
   "files": [
    [
-    "http://science.royalsociety.go.th/wp-content/uploads/2026/07/สรุปการสัมมนาทางวิชาการ-100-ปี-กัดเซาะชายฝั.pdf",
+    "https://science.royalsociety.go.th/wp-content/uploads/2026/07/สรุปการสัมมนาทางวิชาการ-100-ปี-กัดเซาะชายฝั.pdf",
     "สรุปการสัมมนาทางวิชาการ 100 ปี กัดเซาะชายฝั",
     "assets/images/activities/science-centenary-coast/doc-1.jpg",
     7,

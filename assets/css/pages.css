@@ -9767,3 +9767,12 @@ html[lang="th"] .acad-ledger--grid > .prog-row:first-child .prog-row__title { fo
 .acad-ledger--grid > .prog-row:first-child .prog-row__go { position: relative; z-index: 1; display: grid; grid-column: 1; place-items: center; justify-self: start; width: 40px; height: 40px; border-radius: 50%; background: var(--white); color: var(--rst-green-800); opacity: 1; transform: none; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
 .acad-ledger--grid > .prog-row:first-child a:hover .prog-row__go { transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce) { .acad-ledger--grid .prog-row a, .acad-ledger--grid .prog-row a::after, .acad-ledger--grid .prog-row__go { transition: none; } .acad-ledger--grid .prog-row a:hover { transform: none; } }
+
+/* admissions: the bylaw for each route — ดูตัวอย่าง and the file itself */
+.adm-route2__docs { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px var(--space-4, 16px); align-self: flex-start; }
+button.adm-route2__pdf { padding: 0; border: 0; background: none; cursor: pointer; text-decoration: underline; text-underline-offset: .25em; font-family: inherit; }
+/* the pair in place of a card's "open" mark: side by side, at the start */
+.pdf-acts.acts-doc__open, .pdf-acts.rec-more__open, .pdf-acts.story__doc-btn, .pdf-acts.news-cta { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: var(--space-2, 8px); margin-top: 0; background: none; font-weight: inherit; }
+.pdf-acts .act-doc__btn { min-height: 36px; padding: 0 var(--space-3, 12px); font-size: var(--text-xs); }
+[data-pdf-card] { cursor: pointer; }
+.pdf-acts.news-cta { min-height: 0; padding: 0; border: 0; border-radius: 0; }
