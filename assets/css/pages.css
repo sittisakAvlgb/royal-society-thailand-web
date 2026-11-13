@@ -9662,3 +9662,26 @@ html.splash-reveal body > :not(.splash) { transform-origin: 50% 0; animation: si
   .splash :is(.splash__poster img, .splash__canvas, .splash__art img, .splash__stage, .splash__fill img, .splash__bar, .splash__enter) { transition: none; }
   html.splash-reveal body > :not(.splash) { animation: none; }
 }
+
+/* The lift, transform-only (composited, no repaint per frame): the whole
+   page slides up and away while the poster inside slides down by part of
+   that, so it reads as a curtain drawn up over a still picture. The blur
+   fill is off in cover mode (nothing shows beside a covering poster). */
+.splash--cover .splash__fill { display: none; }
+.splash { will-change: transform; }
+.splash.is-leaving { animation: splash-curtain 1.05s cubic-bezier(.65, 0, .35, 1) forwards; clip-path: none; }
+@keyframes splash-curtain { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -100%, 0); } }
+.splash :is(.splash__poster, .splash__art, .splash__stage) { will-change: transform; transition: transform 1.05s cubic-bezier(.65, 0, .35, 1); }
+.splash.is-leaving :is(.splash__poster, .splash__art, .splash__stage) { transform: translate3d(0, 38%, 0); }
+.splash.is-leaving :is(.splash__poster img, .splash__canvas, .splash__art img, .splash__fill img) { transform: none; }
+.splash.is-leaving .splash__canvas { transform: translateX(-50%); }
+.splash__bar { will-change: transform, opacity; transition: transform .35s cubic-bezier(.4, 0, 1, 1), opacity .25s linear; }
+html.splash-reveal body > :not(.splash) { animation: site-settle 1.05s cubic-bezier(.33, 1, .68, 1) both; }
+@keyframes site-settle { from { transform: scale(1.035); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .splash.is-leaving { animation: splash-out .01s both; }
+  .splash :is(.splash__poster, .splash__art, .splash__stage) { transition: none; }
+}
+/* only what is in view settles (fewer layers to start, no first-frame hitch) */
+html.splash-reveal body > :not(.splash) { animation: none; }
+html.splash-reveal :is(.site-header, main > :first-child) { animation: site-settle 1.05s cubic-bezier(.33, 1, .68, 1) both; transform-origin: 50% 0; }

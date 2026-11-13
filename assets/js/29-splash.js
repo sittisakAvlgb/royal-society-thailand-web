@@ -135,7 +135,11 @@
       el.classList.add('is-leaving');
       document.documentElement.classList.remove('splash-open');
       document.documentElement.classList.add('splash-reveal');
-      setTimeout(() => { el.remove(); document.documentElement.classList.remove('splash-reveal'); }, 1000);
+      /* cleared when the lift has finished (a timer only as a fallback) */
+      let done = false;
+      const finish = () => { if (done) return; done = true; el.remove(); document.documentElement.classList.remove('splash-reveal'); };
+      el.addEventListener('animationend', event => { if (event.target === el) finish(); });
+      setTimeout(finish, 1600);
       if (before && before.focus) before.focus();
     };
     let leaving = false;
@@ -143,8 +147,8 @@
       if (leaving) return;
       leaving = true;
       b.classList.add('is-pressed');
-      /* a beat for the press to show, then the curtain lifts */
-      setTimeout(() => close(b.dataset.splashEnter), 120);
+      /* the next frame, so the press shows as the curtain starts */
+      requestAnimationFrame(() => close(b.dataset.splashEnter));
     }));
     el.addEventListener('keydown', event => {
       if (event.key === 'Escape') { event.preventDefault(); close(); }
