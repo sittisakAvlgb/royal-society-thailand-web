@@ -10176,3 +10176,12 @@ html[lang="en"] .hx-wk__since::before { content: "since "; }
 .plans-cover--other { background: linear-gradient(150deg, #F1F7F4 0%, #DCEDE4 100%); }
 /* the page count back in the card's own green on the pale cover */
 .plans-card__media:has(.plans-cover) .plans-card__pages { background: var(--rst-green-800); color: #fff; }
+
+/* the shared cover template (RS.docCover) beyond the plans page: the period
+   or date as a line where there is no single year; a tone per academy */
+.plans-cover__when { position: relative; font-family: var(--font-display); font-size: min(6.4cqw, 9cqh); font-weight: 700; line-height: 1.25; color: var(--rst-green-700); }
+.plans-cover__crest { transform: none !important; position: relative; }
+.plans-cover--moral { background: linear-gradient(150deg, #F3FBF7 0%, #D6F0E3 100%); }
+.plans-cover--science { background: linear-gradient(150deg, #EFF9F5 0%, #CDEEE0 100%); }
+.plans-cover--arts { background: linear-gradient(150deg, #F5FBF8 0%, #E1F3EA 100%); }
+.plans-cover__crest { max-width: 72px; }

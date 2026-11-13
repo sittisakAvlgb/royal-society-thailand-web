@@ -34,16 +34,9 @@
      plain title page) gets the printed cover template: the crest, the kind
      of plan, the fiscal year, the Office */
   const OFFICE = { th: 'สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society' };
-  const cover = p => {
-    if (p.cover === 'image' && p.thumb) return `<img src="${escapeHTML(RS.url(p.thumb))}" alt="" loading="lazy" decoding="async">`;
-    const kind = GROUPS[p.group] || { th: 'เอกสาร', en: 'Document' };
-    return `<span class="plans-cover plans-cover--${escapeHTML(p.group || 'other')}" aria-hidden="true">
-      <img class="plans-cover__crest" src="${escapeHTML(RS.url('assets/images/logo-image-160.png'))}" alt="" width="44" height="44" loading="lazy" decoding="async">
-      <span class="plans-cover__kind">${escapeHTML(t(kind))}</span>
-      ${p.year ? `<span class="plans-cover__year"><small>${escapeHTML(t({ th: 'ปีงบประมาณ', en: 'Fiscal year' }))}</small>${escapeHTML(RS.digits(String(p.year)))}</span>` : ''}
-      <span class="plans-cover__org">${escapeHTML(t(OFFICE))}</span>
-    </span>`;
-  };
+  const cover = p => (p.cover === 'image' && p.thumb
+    ? `<img src="${escapeHTML(RS.url(p.thumb))}" alt="" loading="lazy" decoding="async">`
+    : RS.docCover({ kind: GROUPS[p.group] || { th: 'เอกสาร', en: 'Document' }, year: p.year, yearLabel: { th: 'ปีงบประมาณ', en: 'Fiscal year' }, when: '', org: OFFICE, tone: p.group || 'other' }));
   const actions = p => `
     <div class="plans-acts">
       <button class="act-doc__btn act-doc__btn--primary" type="button" data-plan="${p.i}">${svg('eye')}<span>${te(L.preview)}</span></button>

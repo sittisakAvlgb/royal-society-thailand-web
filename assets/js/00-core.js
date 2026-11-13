@@ -229,13 +229,18 @@
     const period = (title.match(/(?:ระหว่าง(?:เดือน)?|ประจำเดือน)\s*([^()]{4,40}?)(?:\s*\)|$)/) || [])[1];
     const when = item.when !== undefined ? t(item.when) : period ? period.trim() : (item.date ? RS.formatDate(item.date, { month: 'long', year: 'numeric' }) : '');
     const academy = item.org || ACADEMY_NAMES[item.academy] || { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' };
-    return `<span class="doc-cover${item.academy ? ` doc-cover--${RS.escapeHTML(item.academy)}` : ''}" aria-hidden="true"><span class="doc-cover__sheet">
-      <img src="${RS.escapeHTML(RS.url('assets/images/logo-image-160.png'))}" alt="" width="40" height="40" loading="lazy" decoding="async">
-      <span class="doc-cover__kind">${RS.escapeHTML(t(kind))}</span>
-      ${when ? `<span class="doc-cover__when">${RS.escapeHTML(lang === 'en' ? when : RS.digits(when))}</span>` : ''}
-      <span class="doc-cover__rule"></span>
-      <span class="doc-cover__org">${RS.escapeHTML(t(academy))}</span>
-    </span></span>`;
+    /* drawn as the pale green cover the plans page uses (.plans-cover):
+       the crest at the top right, what it is, the year large (item.year)
+       or the period/date as a line, the academy or Office at the foot */
+    const esc = RS.escapeHTML;
+    const year = item.year ? `<span class="plans-cover__year">${item.yearLabel ? `<small>${esc(t(item.yearLabel))}</small>` : ''}${esc(lang === 'en' ? String(item.year) : RS.digits(String(item.year)))}</span>` : '';
+    const whenLine = !year && when ? `<span class="plans-cover__when">${esc(lang === 'en' ? when : RS.digits(when))}</span>` : '';
+    return `<span class="plans-cover${item.tone ? ` plans-cover--${esc(item.tone)}` : ''}${item.academy ? ` plans-cover--${esc(item.academy)}` : ''}" aria-hidden="true">
+      <img class="plans-cover__crest" src="${esc(RS.url('assets/images/logo-image-160.png'))}" alt="" width="44" height="44" loading="lazy" decoding="async">
+      <span class="plans-cover__kind">${esc(t(kind))}</span>
+      ${year}${whenLine}
+      <span class="plans-cover__org">${esc(t(academy))}</span>
+    </span>`;
   };
 
   window.RS = RS;
