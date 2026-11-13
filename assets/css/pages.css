@@ -9723,31 +9723,47 @@ html.splash-reveal :is(.site-header, main > :first-child) { animation: site-thro
 .splash.is-leaving .splash__bar { opacity: 0; transform: none; transition: opacity .35s ease-out; }
 .site-through, .site-through-prep { animation: none; will-change: auto; }
 
-/* Academy lectures: set like a printed programme — no boxes; the row fills
-   the width (one column per lecture, up to three), each lecture under a rule
-   that draws across in green on hover; the date large in the display face,
-   the lecture still to come marked by a solid green rule and a green label */
-.acad-ledger--grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--space-6, 24px) var(--space-6, 32px); }
-@media (min-width: 64rem) { .acad-ledger--grid:has(> :nth-child(3)) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.acad-ledger--grid .prog-row a { position: relative; display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 18px 0 4px; border: 0; border-top: 1px solid var(--border-strong); border-radius: 0; background: none; }
-.acad-ledger--grid .prog-row a::before { content: ""; position: absolute; inset: -1px 0 auto; height: 2px; background: var(--rst-green-700); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
-.acad-ledger--grid .prog-row a:hover, .acad-ledger--grid .prog-row.is-upcoming a, .acad-ledger--grid .prog-row.is-upcoming a:hover { background: none; border-color: var(--border-strong); }
-.acad-ledger--grid .prog-row a:hover::before, .acad-ledger--grid .prog-row a:focus-visible::before, .acad-ledger--grid .prog-row.is-upcoming a::before { transform: none; }
-.acad-ledger--grid .prog-row__date { display: flex; align-items: baseline; gap: 8px; width: auto; height: auto; padding: 0; border: 0; border-radius: 0; background: none; text-align: left; }
-.acad-ledger--grid .prog-row__day { font-size: 2.25rem; font-weight: 700; line-height: 1; color: var(--text-secondary); transition: color .3s ease; }
-.acad-ledger--grid .prog-row__month { font-size: 13px; line-height: 1; color: var(--text-secondary); }
-html[lang="th"] .acad-ledger--grid .prog-row__month { font-size: 17px; }
-.acad-ledger--grid .prog-row.is-upcoming .prog-row__date { background: none; }
-.acad-ledger--grid .prog-row.is-upcoming .prog-row__day, .acad-ledger--grid .prog-row a:hover .prog-row__day { color: var(--rst-green-700); }
-.acad-ledger--grid .prog-row.is-upcoming .prog-row__month { color: var(--rst-green-700); }
-.acad-ledger--grid .prog-row__body { gap: 4px; }
-.acad-ledger--grid .prog-row__flag { justify-self: start; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-secondary); }
-html[lang="th"] .acad-ledger--grid .prog-row__flag { font-size: 15px; letter-spacing: 0; text-transform: none; }
-.acad-ledger--grid .prog-row.is-upcoming .prog-row__flag { padding: 1px 10px; border-radius: 999px; background: var(--rst-green-700); color: var(--white); }
-.acad-ledger--grid .prog-row__title { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--text-md); line-height: 1.35; }
-html[lang="th"] .acad-ledger--grid .prog-row__title { font-size: 1.25rem; }
-.acad-ledger--grid .prog-row__meta { display: grid; gap: 0; margin-top: 4px; }
+/* Academy lectures: cards in a feature layout — the newest lecture (the one
+   still to come) a large card in solid green on the left, its date set big
+   and the days to go; the earlier ones stacked beside it as white cards with
+   a date tile. Lift on hover, no shadow; one column on a phone */
+.acad-ledger--grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-3, 12px); }
+@media (min-width: 48rem) {
+  .acad-ledger--grid:has(> :nth-child(2)) { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .acad-ledger--grid:has(> :nth-child(3)) > :first-child { grid-row: span 2; }
+}
+.acad-ledger--grid .prog-row a { position: relative; display: grid; grid-template-columns: 3.75rem minmax(0, 1fr); align-items: start; gap: 0 var(--space-4, 16px); height: 100%; padding: 18px 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--white); transition: border-color .25s ease, transform .3s cubic-bezier(.2,.7,.2,1); }
+.acad-ledger--grid .prog-row a:hover, .acad-ledger--grid .prog-row.is-upcoming a:hover { border-color: var(--rst-green-600); background: var(--white); transform: translateY(-3px); }
+.acad-ledger--grid .prog-row.is-upcoming a { background: var(--white); border-color: var(--border); }
+.acad-ledger--grid .prog-row__date { display: grid; place-content: center; justify-items: center; gap: 4px; width: 3.75rem; height: 3.75rem; padding: 0; border: 1px solid var(--rst-green-100); border-radius: 10px; background: var(--rst-green-50); text-align: center; }
+.acad-ledger--grid .prog-row__day { font-size: 1.5rem; line-height: 1; color: var(--rst-green-800); }
+.acad-ledger--grid .prog-row__month { font-size: 12px; line-height: 1; color: var(--text-secondary); }
+html[lang="th"] .acad-ledger--grid .prog-row__month { font-size: 15px; }
+.acad-ledger--grid .prog-row__body { gap: 3px; align-content: start; }
+.acad-ledger--grid .prog-row__flag { justify-self: start; font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+html[lang="th"] .acad-ledger--grid .prog-row__flag { font-size: 15px; }
+.acad-ledger--grid .prog-row__title { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--text-base); line-height: 1.35; }
+html[lang="th"] .acad-ledger--grid .prog-row__title { font-size: 1.1875rem; }
+.acad-ledger--grid .prog-row__meta { display: grid; gap: 0; margin-top: 6px; }
 .acad-ledger--grid .prog-row__meta span { display: block; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .acad-ledger--grid .prog-row__meta .icon { display: inline-block; margin-right: 6px; vertical-align: -1px; }
 .acad-ledger--grid .prog-row__go { display: none; }
-@media (prefers-reduced-motion: reduce) { .acad-ledger--grid .prog-row a::before, .acad-ledger--grid .prog-row__day { transition: none; } }
+
+/* the feature: the newest lecture */
+.acad-ledger--grid > .prog-row:first-child a { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; gap: var(--space-4, 16px); min-height: 15rem; padding: 26px 28px 24px; border-color: var(--rst-green-800); background: var(--rst-green-800); color: var(--white); overflow: hidden; }
+.acad-ledger--grid > .prog-row:first-child a:hover { border-color: var(--rst-green-900); background: var(--rst-green-900); }
+.acad-ledger--grid > .prog-row:first-child a::after { content: ""; position: absolute; right: -3.5rem; bottom: -3.5rem; width: 13rem; height: 13rem; border: 1px solid rgba(255,255,255,.14); border-radius: 50%; outline: 1px solid rgba(255,255,255,.08); outline-offset: 1.75rem; transition: transform .6s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+.acad-ledger--grid > .prog-row:first-child a:hover::after { transform: scale(1.08); }
+.acad-ledger--grid > .prog-row:first-child .prog-row__date { display: flex; align-items: baseline; justify-content: start; gap: 10px; width: auto; height: auto; border: 0; border-radius: 0; background: none; }
+.acad-ledger--grid > .prog-row:first-child .prog-row__day { font-size: 3.25rem; color: var(--white); }
+.acad-ledger--grid > .prog-row:first-child .prog-row__month { font-size: 15px; color: rgba(255,255,255,.75); }
+html[lang="th"] .acad-ledger--grid > .prog-row:first-child .prog-row__month { font-size: 19px; }
+.acad-ledger--grid > .prog-row:first-child .prog-row__body { gap: 8px; }
+.acad-ledger--grid > .prog-row:first-child .prog-row__flag { padding: 2px 12px; border-radius: 999px; background: var(--white); color: var(--rst-green-800); }
+.acad-ledger--grid > .prog-row:first-child .prog-row__title { -webkit-line-clamp: 3; line-clamp: 3; font-size: var(--text-lg); color: var(--white); }
+html[lang="th"] .acad-ledger--grid > .prog-row:first-child .prog-row__title { font-size: 1.625rem; }
+.acad-ledger--grid > .prog-row:first-child .prog-row__meta { margin-top: 4px; }
+.acad-ledger--grid > .prog-row:first-child .prog-row__meta span, .acad-ledger--grid > .prog-row:first-child .prog-row__meta .icon { color: rgba(255,255,255,.82); }
+.acad-ledger--grid > .prog-row:first-child .prog-row__go { position: relative; z-index: 1; display: grid; grid-column: 1; place-items: center; justify-self: start; width: 40px; height: 40px; border-radius: 50%; background: var(--white); color: var(--rst-green-800); opacity: 1; transform: none; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+.acad-ledger--grid > .prog-row:first-child a:hover .prog-row__go { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { .acad-ledger--grid .prog-row a, .acad-ledger--grid .prog-row a::after, .acad-ledger--grid .prog-row__go { transition: none; } .acad-ledger--grid .prog-row a:hover { transform: none; } }
