@@ -9722,3 +9722,29 @@ html.splash-reveal :is(.site-header, main > :first-child) { animation: site-thro
 .splash.is-leaving :is(.splash__poster, .splash__art, .splash__stage) { transform: scale(1.06); }
 .splash.is-leaving .splash__bar { opacity: 0; transform: none; transition: opacity .35s ease-out; }
 .site-through, .site-through-prep { animation: none; will-change: auto; }
+
+/* Academy lectures: compact cards — a small calendar tile for the date (solid
+   green when the lecture is still to come), the title at card size, speaker
+   and place one line each; the card lifts a little on hover (no shadow) */
+.acad-ledger--grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: var(--space-3); }
+.acad-ledger--grid .prog-row a { grid-template-columns: 3.25rem minmax(0, 1fr); grid-template-rows: auto; gap: 0 var(--space-3); padding: 14px 16px; border-radius: var(--radius-md, 10px); transition: border-color .25s ease, transform .25s cubic-bezier(.2,.7,.2,1); }
+.acad-ledger--grid .prog-row a:hover { transform: translateY(-2px); }
+.acad-ledger--grid .prog-row.is-upcoming a { border-color: var(--border); background: var(--white); }
+.acad-ledger--grid .prog-row.is-upcoming a:hover { border-color: var(--rst-green-600); }
+.acad-ledger--grid .prog-row__date { display: grid; place-content: center; justify-items: center; gap: 2px; width: 3.25rem; height: 3.25rem; padding: 0; border: 0; border-radius: 8px; background: var(--rst-green-50); text-align: center; }
+.acad-ledger--grid .prog-row__day { font-size: 1.25rem; line-height: 1; color: var(--rst-green-800, var(--rst-green-900)); }
+.acad-ledger--grid .prog-row__month { font-size: 12px; line-height: 1; color: var(--text-secondary); }
+html[lang="th"] .acad-ledger--grid .prog-row__month { font-size: 15px; }
+.acad-ledger--grid .prog-row.is-upcoming .prog-row__date { background: var(--rst-green-800, var(--rst-green-900)); }
+.acad-ledger--grid .prog-row.is-upcoming .prog-row__day,
+.acad-ledger--grid .prog-row.is-upcoming .prog-row__month { color: var(--white); }
+.acad-ledger--grid .prog-row__body { gap: 2px; }
+.acad-ledger--grid .prog-row__flag { font-size: 12px; font-weight: 600; letter-spacing: .02em; }
+html[lang="th"] .acad-ledger--grid .prog-row__flag { font-size: 15px; letter-spacing: 0; }
+.acad-ledger--grid .prog-row.is-upcoming .prog-row__flag { color: var(--rst-green-700); }
+.acad-ledger--grid .prog-row__title { font-size: var(--text-sm); line-height: 1.35; }
+.acad-ledger--grid .prog-row__meta { gap: 0; margin-top: 6px; }
+.acad-ledger--grid .prog-row__meta span { display: block; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.acad-ledger--grid .prog-row__meta .icon { display: inline-block; margin-right: 5px; vertical-align: -1px; }
+.acad-ledger--grid .prog-row__go { display: none; }
+@media (prefers-reduced-motion: reduce) { .acad-ledger--grid .prog-row a:hover { transform: none; } }
