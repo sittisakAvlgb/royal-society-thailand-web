@@ -68,7 +68,11 @@
     set('[data-pub-kind]', te(KINDS[pub.kind]));
     const time = qs('[data-pub-date]', root);
     if (time) { time.dateTime = pub.date; time.textContent = RS.formatDate(pub.date, { day: 'numeric', month: 'long', year: 'numeric' }); }
-    set('[data-pub-title]', phrases(t(pub.title)));
+    /* a journal, newsletter or bulletin: the series as the heading and the
+       issue under it (the title only repeats the two); other publications
+       keep their own title */
+    const serial = ['journal', 'newsletter', 'bulletin'].includes(pub.kind) && pub.series;
+    set('[data-pub-title]', phrases(t(serial ? pub.series : pub.title)));
     set('[data-pub-issue]', te(pub.issue));
     const facts = [
       pub.editor && [L.editor, te(pub.editor)],

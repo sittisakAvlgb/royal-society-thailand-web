@@ -10296,3 +10296,6 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 .works-list__items.newsx-items--list .newsx-card__media .pub-cover__crest { position: static !important; inset: auto; width: 26cqw !important; height: auto !important; }
 /* the dark band: the plain (unlinked) crumb in the same light tone as the page name */
 .series-head .story__crumb li > span:not([aria-current]) { color: rgba(255, 255, 255, .78); }
+/* the publication heading set smaller, the issue line under it in green */
+.pub-record__title { font-size: clamp(1.75rem, 2.6vw, 2.25rem); line-height: 1.25; }
+.pub-record__title { font-size: clamp(2rem, 3vw, 2.5rem); }
