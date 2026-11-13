@@ -884,6 +884,21 @@
     let { q, filters } = readParams();
     if (input) input.value = q;
 
+    /* a clear button while there is something to clear; popular searches
+       under the box, as plain links */
+    const clear = qs('[data-search-clear]');
+    const syncClear = () => { if (clear && input) clear.hidden = !input.value; };
+    input?.addEventListener('input', syncClear);
+    clear?.addEventListener('click', () => { input.value = ''; syncClear(); input.focus(); });
+    syncClear();
+    const popular = qs('[data-popular-row]');
+    const POP = window.RS_POPULAR_SEARCHES || [];
+    if (popular && POP.length) {
+      popular.innerHTML = `<span class="search-hero__popular-label">${te(L.popular)}</span> ${POP.map(item =>
+        `<a href="${escapeHTML(RS.url(`pages/search.html?q=${encodeURIComponent(t(item))}`))}">${te(item)}</a>`).join('<span aria-hidden="true"> · </span>')}`;
+      popular.hidden = false;
+    }
+
     /* tabs by kind of result, with counts over the whole query; one kind
        at a time, the same choice as the kind checkboxes */
     const typeTabs = qs('[data-type-tabs]');
@@ -925,7 +940,10 @@
 
       if (push) writeParams(q, filters);
 
-      if (heading) heading.textContent = q ? `${t(P.resultsFor)} “${q}”` : t(P.browse);
+      /* the term reads large; "ผลการค้นหา" sits above it as a label */
+      const kicker = qs('[data-results-kicker]');
+      if (heading) heading.textContent = q ? `“${q}”` : t(P.browse);
+      if (kicker) { kicker.textContent = t(P.resultsFor); kicker.hidden = !q; }
       document.title = `${q ? `${q} — ` : ''}${t({ th: 'ค้นหา', en: 'Search' })} | ${t(CFG.site.name)}`;
 
       summary.textContent = fill(L.count, results.length);
