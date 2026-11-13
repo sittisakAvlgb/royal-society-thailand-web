@@ -89,7 +89,17 @@
     const obj = v => (v && typeof v === 'object' ? v : { th: v || '' });
     const lang = title => (title && title.en ? 'th-en' : 'th');
     const academyName = id => CFG.academies.find(a => a.id === id)?.name;
-    const push = r => { if (r.title && (r.title.th || r.title.en)) out.push({ academy: null, topic: null, keywords: [], ...r, contentLang: r.contentLang || lang(r.title) }); };
+    /* a summary that only repeats the title says nothing new */
+    const squash = v => String(v || '').replace(/[\s“”"'‘’.,:;–-]+/g, '');
+    const repeats = (title, summary) => {
+      const head = squash(title).slice(0, 24);
+      return head.length > 8 && squash(summary).startsWith(head);
+    };
+    const push = r => {
+      if (!r.title || !(r.title.th || r.title.en)) return;
+      if (r.summary && repeats(r.title.th, r.summary.th)) r = { ...r, summary: null };
+      out.push({ academy: null, topic: null, keywords: [], ...r, contentLang: r.contentLang || lang(r.title) });
+    };
 
     (w.RS_NEWS || []).forEach(n => push({
       id: `news-${n.id}`, type: 'news', title: obj(n.title), summary: obj(n.dek),
