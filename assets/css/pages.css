@@ -10042,3 +10042,4 @@ html[lang="en"] .hx-work--lead::after { content: "1934"; }
 }
 .hx-time__head--row .hx-time__title { font-size: clamp(1.6rem, 2.6vw, 2.4rem); }
 .hx-ruler__from { font-size: clamp(1.3rem, 1.8vw, 1.65rem); }
+.hx-tl__title { font-size: var(--text-md); line-height: 1.35; }
