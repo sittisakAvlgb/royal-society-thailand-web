@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261129a">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261129a">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261129a">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261129a">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261129a">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261129a">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261129b">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261129b">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261129b">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261129b">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261129b">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261129b">
 
   <script type="application/ld+json">
   {
@@ -53,19 +53,19 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261129a"></script>
-  <script defer src="../assets/js/01-config.js?v=20261129a"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261129a"></script>
-  <script defer src="../assets/js/02-components.js?v=20261129a"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261129a"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261129a"></script>
-  <script defer src="../assets/js/05-language.js?v=20261129a"></script>
-  <script defer src="../assets/js/06-search.js?v=20261129a"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261129a"></script>
-  <script defer src="../assets/js/14-about.js?v=20261129a"></script>
-  <script defer src="../assets/js/data/splash.js?v=20261129a"></script>
-  <script defer src="../assets/js/29-splash.js?v=20261129a"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261129a"></script>
+  <script defer src="../assets/js/00-core.js?v=20261129b"></script>
+  <script defer src="../assets/js/01-config.js?v=20261129b"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261129b"></script>
+  <script defer src="../assets/js/02-components.js?v=20261129b"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261129b"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261129b"></script>
+  <script defer src="../assets/js/05-language.js?v=20261129b"></script>
+  <script defer src="../assets/js/06-search.js?v=20261129b"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261129b"></script>
+  <script defer src="../assets/js/14-about.js?v=20261129b"></script>
+  <script defer src="../assets/js/data/splash.js?v=20261129b"></script>
+  <script defer src="../assets/js/29-splash.js?v=20261129b"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261129b"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -111,146 +111,186 @@
       </div>
     </div>
 
-    <div class="container about-sub__body">
-        <!-- History, set like the example the Office pointed to: an opening
-             statement, then one event per row with its year large and a
-             photo in a lotus-shaped frame, the sides alternating; the main
-             works,  the full text follow. -->
-        <section class="hintro reveal" aria-labelledby="history-title">
-          <figure class="hintro__portrait">
-            <span class="hline__frame hintro__frame"><img src="../assets/images/about/history-king.jpg" alt="พระบรมฉายาลักษณ์ พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว" decoding="async"></span>
-            <figcaption data-en="King Prajadhipok (Rama VII), founder of the Royal Society">พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว<br>ผู้ทรงสถาปนาราชบัณฑิตยสภา</figcaption>
-          </figure>
-          <div class="hintro__text">
-            <p class="kicker" data-en="A century of learning">หนึ่งศตวรรษแห่งการบำรุงสรรพวิชา</p>
-            <h2 id="history-title" class="hintro__title" data-en="A place for every branch of learning">สถานที่บำรุงสรรพวิชา</h2>
-            <p class="hintro__lead" data-en="On 19 April 1926 King Prajadhipok (Rama VII) founded the Royal Society, reviving the ancient Department of Royal Scholars — the office through which learned men were appointed to royal service.">เมื่อวันที่ 19 เมษายน พ.ศ. 2469 พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว รัชกาลที่ 7 ทรงพระกรุณาโปรดเกล้าฯ ประกาศให้จัดตั้ง “ราชบัณฑิตยสภา” ขึ้น เพื่อฟื้นฟูกิจการของกรมราชบัณฑิตย์ ซึ่งมีมาแต่โบราณและเป็นตำแหน่งสำหรับทรงตั้งผู้มีความรู้ศาสตราคมไว้รับราชการ</p>
-          </div>
+    <!-- 1. The founding: the king's portrait large in an arched frame, the
+         date set big, the opening statement, the century in four figures -->
+    <section class="hx-found" aria-labelledby="history-title">
+      <div class="container hx-found__inner">
+        <figure class="hx-found__portrait reveal">
+          <span class="hx-found__arch"><img src="../assets/images/about/history-king.jpg" alt="พระบรมฉายาลักษณ์ พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว" decoding="async"></span>
+          <figcaption data-en="King Prajadhipok (Rama VII), founder of the Royal Society">พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว<br>ผู้ทรงสถาปนาราชบัณฑิตยสภา</figcaption>
+        </figure>
+        <div class="hx-found__text reveal reveal--delay-1">
+          <p class="hx-kicker" data-en="Founded">วันสถาปนา</p>
+          <p class="hx-found__date"><span class="hx-found__day" data-en="19">๑๙</span><span class="hx-found__month"><span data-en="April">เมษายน</span><span data-en="1926">พ.ศ. ๒๔๖๙</span></span></p>
+          <h2 id="history-title" class="hx-found__title" data-en="A place for every branch of learning">สถานที่บำรุงสรรพวิชา</h2>
+          <p class="hx-found__lead" data-en="On 19 April 1926 King Prajadhipok (Rama VII) founded the Royal Society, reviving the ancient Department of Royal Scholars — the office through which learned men were appointed to royal service.">พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว รัชกาลที่ ๗ ทรงพระกรุณาโปรดเกล้าฯ ประกาศให้จัดตั้ง “ราชบัณฑิตยสภา” ขึ้น เพื่อฟื้นฟูกิจการของกรมราชบัณฑิตย์ ซึ่งมีมาแต่โบราณและเป็นตำแหน่งสำหรับทรงตั้งผู้มีความรู้ศาสตราคมไว้รับราชการ</p>
+        </div>
+      </div>
+      <div class="container">
+        <dl class="hx-stats">
+          <div class="hx-stats__item reveal"><dd data-en="100">๑๐๐</dd><dt data-en="years of looking after learning">ปีแห่งการบำรุงสรรพวิชา</dt></div>
+          <div class="hx-stats__item reveal reveal--delay-1"><dd data-en="51">๕๑</dd><dt data-en="Fellows first appointed, 1942">ราชบัณฑิตชุดแรก พ.ศ. ๒๔๘๕</dt></div>
+          <div class="hx-stats__item reveal reveal--delay-2"><dd data-en="3">๓</dd><dt data-en="academies of learning">สำนักวิชา</dt></div>
+          <div class="hx-stats__item reveal reveal--delay-3"><dd data-en="4">๔</dd><dt data-en="homes since 1926">ที่ทำการนับแต่สถาปนา</dt></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 2. The timeline on a dark band: the three eras as a bar across the
+         top, then each era with its name held at the left while its events
+         pass on the right, the years large and outlined -->
+    <section class="hx-time" aria-labelledby="hline-title">
+      <div class="container">
+        <div class="hx-time__head reveal">
+          <p class="hx-kicker hx-kicker--dark" data-en="Timeline">ลำดับเหตุการณ์</p>
+          <h2 id="hline-title" class="hx-time__title" data-en="From the Royal Society to the Royal Institute, and back">จากราชบัณฑิตยสภา สู่ราชบัณฑิตยสถาน และกลับมาเป็นราชบัณฑิตยสภา</h2>
+        </div>
+        <ol class="hx-eras" role="list" aria-label="สามยุค" data-en-aria-label="Three eras">
+          <li class="hx-eras__seg hx-eras__seg--a reveal"><a href="#era-1"><span class="hx-eras__name" data-en="The Royal Society">ราชบัณฑิตยสภา</span><span class="hx-eras__span" data-en="1926–1933">๒๔๖๙–๒๔๗๖</span></a></li>
+          <li class="hx-eras__seg hx-eras__seg--b reveal reveal--delay-1"><a href="#era-2"><span class="hx-eras__name" data-en="The Royal Institute">ราชบัณฑิตยสถาน</span><span class="hx-eras__span" data-en="1933–2015 · 82 years">๒๔๗๖–๒๕๕๘ · ๘๒ ปี</span></a></li>
+          <li class="hx-eras__seg hx-eras__seg--c reveal reveal--delay-2"><a href="#era-3"><span class="hx-eras__name" data-en="The Royal Society">ราชบัณฑิตยสภา</span><span class="hx-eras__span" data-en="2015–today">๒๕๕๘–ปัจจุบัน</span></a></li>
+        </ol>
+
+        <section class="hx-era" id="era-1" aria-labelledby="era-1-title">
+          <header class="hx-era__head">
+            <p class="hx-era__no" data-en="Era 1">ยุคที่ ๑</p>
+            <h3 class="hx-era__name" id="era-1-title" data-en="The Royal Society">ราชบัณฑิตยสภา</h3>
+            <p class="hx-era__span" data-en="1926–1933">พ.ศ. ๒๔๖๙–๒๔๗๖</p>
+            <p class="hx-era__note" data-en="Founded by King Prajadhipok">สถาปนาโดยพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว</p>
+          </header>
+          <ol class="hx-events" role="list">
+            <li class="hx-ev reveal">
+              <p class="hx-ev__year" data-en="1926">๒๔๖๙</p>
+              <div class="hx-ev__body">
+                <p class="hx-ev__date" data-en="19 April">๑๙ เมษายน</p>
+                <h4 class="hx-ev__title" data-en="The Royal Society is founded">ก่อตั้ง “ราชบัณฑิตยสภา”</h4>
+                <p class="hx-ev__text" data-en="By royal command of King Prajadhipok, to revive the ancient Department of Royal Scholars.">พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว รัชกาลที่ ๗ ทรงพระกรุณาโปรดเกล้าฯ ประกาศให้จัดตั้ง เพื่อฟื้นฟูกิจการของกรมราชบัณฑิตย์ ซึ่งมีมาแต่โบราณและเป็นตำแหน่งสำหรับทรงตั้งผู้มีความรู้ไว้รับราชการ</p>
+              </div>
+            </li>
+          </ol>
         </section>
 
-        <section class="hline-wrap" aria-labelledby="hline-title">
-          <div class="hline-wrap__head">
-            <p class="kicker" data-en="Timeline">ลำดับเหตุการณ์</p>
-            <h2 id="hline-title" class="hintro__title" data-en="From the Royal Society to the Royal Institute, and back">จากราชบัณฑิตยสภา สู่ราชบัณฑิตยสถาน และกลับมาเป็นราชบัณฑิตยสภา</h2>
-          </div>
-          <!-- Every event in view, grouped by era: the year in gold on the left,
-               a dot on the line, the story in a card (a photo where there is one) -->
-          <div class="hlist">
-            <section class="hlist__era hlist__era--society" aria-label="ราชบัณฑิตยสภา พ.ศ. 2469–2476">
-              <header class="hlist__era-head">
-                <span class="hlist__era-name" data-en="The Royal Society">ราชบัณฑิตยสภา</span>
-                <span class="hlist__era-span" data-en="1926–1933">พ.ศ. 2469–2476</span>
-                <span class="hlist__era-note" data-en="Founded by King Prajadhipok">สถาปนาโดยพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว</span>
-              </header>
-              <ol class="hlist__events" role="list">
-            <li class="hlist__item reveal">
-              <p class="hlist__year" data-en="1926">2469</p>
-              <span class="hlist__dot" aria-hidden="true"></span>
-              <article class="hlist__card">
-                <div class="hlist__text">
-                  <p class="hline__date" data-en="19 April">19 เมษายน</p>
-                  <h3 class="hline__title" data-en="The Royal Society is founded">ก่อตั้ง “ราชบัณฑิตยสภา”</h3>
-                  <p class="hline__body" data-en="By royal command of King Prajadhipok, to revive the ancient Department of Royal Scholars.">พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว รัชกาลที่ 7 ทรงพระกรุณาโปรดเกล้าฯ ประกาศให้จัดตั้ง เพื่อฟื้นฟูกิจการของกรมราชบัณฑิตย์ ซึ่งมีมาแต่โบราณและเป็นตำแหน่งสำหรับทรงตั้งผู้มีความรู้ไว้รับราชการ</p>
-                </div>
-              </article>
+        <section class="hx-era" id="era-2" aria-labelledby="era-2-title">
+          <header class="hx-era__head">
+            <p class="hx-era__no" data-en="Era 2">ยุคที่ ๒</p>
+            <h3 class="hx-era__name" id="era-2-title" data-en="The Royal Institute">ราชบัณฑิตยสถาน</h3>
+            <p class="hx-era__span" data-en="1933–2015">พ.ศ. ๒๔๗๖–๒๕๕๘</p>
+            <p class="hx-era__note" data-en="Under the Royal Institute Acts">ตามพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน</p>
+          </header>
+          <ol class="hx-events" role="list">
+            <li class="hx-ev reveal">
+              <p class="hx-ev__year" data-en="1933">๒๔๗๖</p>
+              <div class="hx-ev__body">
+                <h4 class="hx-ev__title" data-en="The Royal Institute Act">ตราพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน</h4>
+                <p class="hx-ev__text" data-en="On the advice of the House of Representatives, the Royal Institute was set up to research, share knowledge with the public and produce textbooks.">ตามคำปรึกษาของสภาผู้แทนราษฎร ให้จัดตั้งราชบัณฑิตยสถาน เพื่อค้นคว้าหาความรู้นำมาเผยแพร่แก่ประชาชนและสร้างตำรับตำราให้แพร่หลาย</p>
+              </div>
             </li>
-              </ol>
-            </section>
-            <section class="hlist__era hlist__era--institute" aria-label="ราชบัณฑิตยสถาน พ.ศ. 2476–2558">
-              <header class="hlist__era-head">
-                <span class="hlist__era-name" data-en="The Royal Institute">ราชบัณฑิตยสถาน</span>
-                <span class="hlist__era-span" data-en="1933–2015">พ.ศ. 2476–2558</span>
-                <span class="hlist__era-note" data-en="Under the Royal Institute Acts">ตามพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน</span>
-              </header>
-              <ol class="hlist__events" role="list">
-            <li class="hlist__item reveal">
-              <p class="hlist__year" data-en="1933">2476</p>
-              <span class="hlist__dot" aria-hidden="true"></span>
-              <article class="hlist__card">
-                <div class="hlist__text">
-                  
-                  <h3 class="hline__title" data-en="The Royal Institute Act">ตราพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน</h3>
-                  <p class="hline__body" data-en="On the advice of the House of Representatives, the Royal Institute was set up to research, share knowledge with the public and produce textbooks.">ตามคำปรึกษาของสภาผู้แทนราษฎร ให้จัดตั้งราชบัณฑิตยสถาน เพื่อค้นคว้าหาความรู้นำมาเผยแพร่แก่ประชาชนและสร้างตำรับตำราให้แพร่หลาย</p>
-                </div>
-              </article>
+            <li class="hx-ev reveal">
+              <p class="hx-ev__year" data-en="1934">๒๔๗๗</p>
+              <div class="hx-ev__body">
+                <p class="hx-ev__date" data-en="16 June">๑๖ มิถุนายน</p>
+                <h4 class="hx-ev__title" data-en="First meeting of Associate Fellows">ประชุมภาคีสมาชิกครั้งแรก ณ พระบรมมหาราชวัง</h4>
+                <p class="hx-ev__text" data-en="The same year the Institute began the annual contest for Buddhist books for children and took over the revision of the dictionary.">ปีเดียวกันเริ่มการประกวดแต่งหนังสือสอนพระพุทธศาสนาแก่เด็กประจำปี และรับโอนงานชำระปทานุกรมจากกระทรวงธรรมการ</p>
+              </div>
             </li>
-            <li class="hlist__item reveal">
-              <p class="hlist__year" data-en="1934">2477</p>
-              <span class="hlist__dot" aria-hidden="true"></span>
-              <article class="hlist__card">
-                <div class="hlist__text">
-                  <p class="hline__date" data-en="16 June">16 มิถุนายน</p>
-                  <h3 class="hline__title" data-en="First meeting of Associate Fellows">ประชุมภาคีสมาชิกครั้งแรก ณ พระบรมมหาราชวัง</h3>
-                  <p class="hline__body" data-en="The same year the Institute began the annual contest for Buddhist books for children and took over the revision of the dictionary.">ปีเดียวกันเริ่มการประกวดแต่งหนังสือสอนพระพุทธศาสนาแก่เด็กประจำปี และรับโอนงานชำระปทานุกรมจากกระทรวงธรรมการ</p>
-                </div>
-              </article>
+            <li class="hx-ev reveal">
+              <p class="hx-ev__year" data-en="1942">๒๔๘๕</p>
+              <div class="hx-ev__body">
+                <p class="hx-ev__date" data-en="30 September">๓๐ กันยายน</p>
+                <h4 class="hx-ev__title" data-en="The first 51 Fellows are appointed">แต่งตั้งราชบัณฑิตครั้งแรก ๕๑ คน</h4>
+                <p class="hx-ev__text" data-en="By royal command, after the Royal Institute Act of 1942.">มีพระบรมราชโองการแต่งตั้ง ภายหลังการออกพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน พุทธศักราช ๒๔๘๕</p>
+              </div>
             </li>
-            <li class="hlist__item reveal">
-              <p class="hlist__year" data-en="1942">2485</p>
-              <span class="hlist__dot" aria-hidden="true"></span>
-              <article class="hlist__card">
-                <div class="hlist__text">
-                  <p class="hline__date" data-en="30 September">30 กันยายน</p>
-                  <h3 class="hline__title" data-en="The first 51 Fellows are appointed">แต่งตั้งราชบัณฑิตครั้งแรก 51 คน</h3>
-                  <p class="hline__body" data-en="By royal command, after the Royal Institute Act of 1942.">มีพระบรมราชโองการแต่งตั้ง ภายหลังการออกพระราชบัญญัติว่าด้วยราชบัณฑิตยสถาน พุทธศักราช 2485</p>
-                </div>
-              </article>
+            <li class="hx-ev hx-ev--photo reveal">
+              <p class="hx-ev__year" data-en="2006">๒๕๔๙</p>
+              <div class="hx-ev__body">
+                <h4 class="hx-ev__title" data-en="A new home at Sanam Suea Pa, Dusit">ย้ายที่ทำการมาที่สนามเสือป่า เขตดุสิต</h4>
+                <p class="hx-ev__text" data-en="Where the Office remains today, after eighteen years in the Ratchawanlop Building of the Grand Palace.">ที่ตั้งของสำนักงานราชบัณฑิตยสภาจนถึงปัจจุบัน หลังจากใช้อาคารราชวัลลภในพระบรมมหาราชวังมาตั้งแต่ พ.ศ. ๒๕๓๑</p>
+                <figure class="hx-ev__photo"><img src="../assets/images/about/about-office.jpg" alt="" loading="lazy" decoding="async"></figure>
+              </div>
             </li>
-            <li class="hlist__item reveal">
-              <p class="hlist__year" data-en="2006">2549</p>
-              <span class="hlist__dot" aria-hidden="true"></span>
-              <article class="hlist__card has-photo">
-                <div class="hlist__text">
-                  
-                  <h3 class="hline__title" data-en="A new home at Sanam Suea Pa, Dusit">ย้ายที่ทำการมาที่สนามเสือป่า เขตดุสิต</h3>
-                  <p class="hline__body" data-en="Where the Office remains today, after eighteen years in the Ratchawanlop Building of the Grand Palace.">ที่ตั้งของสำนักงานราชบัณฑิตยสภาจนถึงปัจจุบัน หลังจากใช้อาคารราชวัลลภในพระบรมมหาราชวังมาตั้งแต่ พ.ศ. 2531</p>
-                </div>
-              <figure class="hlist__photo">
-                <span class="hline__frame"><img src="../assets/images/about/about-office.jpg" alt="" loading="lazy" decoding="async"></span>
-                <figcaption data-en="The Office of the Royal Society">อาคารสำนักงานราชบัณฑิตยสภา</figcaption>
-              </figure>
-              </article>
+            <li class="hx-ev reveal">
+              <p class="hx-ev__year" data-en="2013">๒๕๕๖</p>
+              <div class="hx-ev__body">
+                <h4 class="hx-ev__title" data-en="Back to the original name">กลับไปใช้ชื่อเดิม “ราชบัณฑิตยสภา”</h4>
+                <p class="hx-ev__text" data-en="The Council of Fellows restored the name given by King Prajadhipok, in honour of the 120th anniversary of his birth.">สภาราชบัณฑิตเห็นสมควรใช้ชื่อที่พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัวทรงสถาปนา เพื่อเฉลิมพระเกียรติในโอกาส ๑๒๐ ปี พระบรมราชสมภพ</p>
+              </div>
             </li>
-            <li class="hlist__item reveal">
-              <p class="hlist__year" data-en="2013">2556</p>
-              <span class="hlist__dot" aria-hidden="true"></span>
-              <article class="hlist__card">
-                <div class="hlist__text">
-                  
-                  <h3 class="hline__title" data-en="Back to the original name">กลับไปใช้ชื่อเดิม “ราชบัณฑิตยสภา”</h3>
-                  <p class="hline__body" data-en="The Council of Fellows restored the name given by King Prajadhipok, in honour of the 120th anniversary of his birth.">สภาราชบัณฑิตเห็นสมควรใช้ชื่อที่พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัวทรงสถาปนา เพื่อเฉลิมพระเกียรติในโอกาส 120 ปี พระบรมราชสมภพ</p>
-                </div>
-              </article>
-            </li>
-              </ol>
-            </section>
-            <section class="hlist__era hlist__era--society" aria-label="ราชบัณฑิตยสภา พ.ศ. 2558–ปัจจุบัน">
-              <header class="hlist__era-head">
-                <span class="hlist__era-name" data-en="The Royal Society">ราชบัณฑิตยสภา</span>
-                <span class="hlist__era-span" data-en="2015–today">พ.ศ. 2558–ปัจจุบัน</span>
-                <span class="hlist__era-note" data-en="Under the Royal Society Act 2015">ตามพระราชบัญญัติราชบัณฑิตยสภา พ.ศ. 2558</span>
-              </header>
-              <ol class="hlist__events" role="list">
-            <li class="hlist__item reveal">
-              <p class="hlist__year" data-en="2015">2558</p>
-              <span class="hlist__dot" aria-hidden="true"></span>
-              <article class="hlist__card has-photo">
-                <div class="hlist__text">
-                  <p class="hline__date" data-en="14 February">14 กุมภาพันธ์</p>
-                  <h3 class="hline__title" data-en="The Royal Society Act 2015 takes effect">พระราชบัญญัติราชบัณฑิตยสภา พ.ศ. 2558 มีผลบังคับใช้</h3>
-                  <p class="hline__body" data-en="The Royal Institute became the Office of the Royal Society, and the Council of Fellows became the Royal Society.">“ราชบัณฑิตยสถาน” เปลี่ยนเป็น “สำนักงานราชบัณฑิตยสภา” และ “สภาราชบัณฑิต” เปลี่ยนเป็น “ราชบัณฑิตยสภา” ซึ่งมีนายกราชบัณฑิตยสภาเป็นนายกสภา</p>
-                </div>
-              <figure class="hlist__photo">
-                <span class="hline__frame"><img src="../assets/images/about/leaders/santad.jpg" alt="" loading="lazy" decoding="async"></span>
-                <figcaption data-en="Santad Rojanasoonthon, first President under the 2015 Act">ศาสตราจารย์พิเศษ ดร.สันทัด โรจนสุนทร นายกราชบัณฑิตยสภาคนแรกตามพระราชบัญญัติ พ.ศ. 2558</figcaption>
-              </figure>
-              </article>
-            </li>
-              </ol>
-            </section>
-          </div>
+          </ol>
         </section>
 
+        <section class="hx-era" id="era-3" aria-labelledby="era-3-title">
+          <header class="hx-era__head">
+            <p class="hx-era__no" data-en="Era 3">ยุคที่ ๓</p>
+            <h3 class="hx-era__name" id="era-3-title" data-en="The Royal Society">ราชบัณฑิตยสภา</h3>
+            <p class="hx-era__span" data-en="2015–today">พ.ศ. ๒๕๕๘–ปัจจุบัน</p>
+            <p class="hx-era__note" data-en="Under the Royal Society Act 2015">ตามพระราชบัญญัติราชบัณฑิตยสภา พ.ศ. ๒๕๕๘</p>
+          </header>
+          <ol class="hx-events" role="list">
+            <li class="hx-ev hx-ev--person reveal">
+              <p class="hx-ev__year" data-en="2015">๒๕๕๘</p>
+              <div class="hx-ev__body">
+                <p class="hx-ev__date" data-en="14 February">๑๔ กุมภาพันธ์</p>
+                <h4 class="hx-ev__title" data-en="The Royal Society Act 2015 takes effect">พระราชบัญญัติราชบัณฑิตยสภา พ.ศ. ๒๕๕๘ มีผลบังคับใช้</h4>
+                <p class="hx-ev__text" data-en="The Royal Institute became the Office of the Royal Society, and the Council of Fellows became the Royal Society.">“ราชบัณฑิตยสถาน” เปลี่ยนเป็น “สำนักงานราชบัณฑิตยสภา” และ “สภาราชบัณฑิต” เปลี่ยนเป็น “ราชบัณฑิตยสภา” ซึ่งมีนายกราชบัณฑิตยสภาเป็นนายกสภา</p>
+                <figure class="hx-ev__person"><img src="../assets/images/about/leaders/santad.jpg" alt="" loading="lazy" decoding="async"><figcaption data-en="Santad Rojanasoonthon, first President under the 2015 Act">ศาสตราจารย์พิเศษ ดร.สันทัด โรจนสุนทร<br>นายกราชบัณฑิตยสภาคนแรกตามพระราชบัญญัติ พ.ศ. ๒๕๕๘</figcaption></figure>
+              </div>
+            </li>
+            <li class="hx-ev hx-ev--now reveal">
+              <p class="hx-ev__year" data-en="2026">๒๕๖๙</p>
+              <div class="hx-ev__body">
+                <p class="hx-ev__date" data-en="19 April">๑๙ เมษายน</p>
+                <h4 class="hx-ev__title" data-en="A hundred years">ครบ ๑๐๐ ปี ราชบัณฑิตยสภา</h4>
+                <p class="hx-ev__text" data-en="A century since the founding, in the service of learning and the Thai language.">หนึ่งศตวรรษนับแต่วันสถาปนา ในการบำรุงสรรพวิชาและภาษาไทย</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+      </div>
+    </section>
+
+    <!-- 3. The main works, from the full text: the contest the king began and
+         the five works the Society is known for -->
+    <section class="hx-works" aria-labelledby="hx-works-title">
+      <div class="container">
+        <div class="hx-sec-head reveal">
+          <p class="hx-kicker" data-en="Main works">งานสำคัญ</p>
+          <h2 id="hx-works-title" class="hx-sec-title" data-en="The work of a century">งานที่สืบมาตลอดหนึ่งศตวรรษ</h2>
+        </div>
+        <ol class="hx-works__grid" role="list">
+          <li class="hx-work hx-work--lead reveal"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bookmark"></use></svg><p class="hx-work__since" data-en="Since 1934">ตั้งแต่ พ.ศ. ๒๔๗๗</p><h3 class="hx-work__t" data-en="Buddhist books for children">ประกวดแต่งหนังสือสอนพระพุทธศาสนาแก่เด็ก</h3><p class="hx-work__d" data-en="An annual contest begun at King Prajadhipok's wish, held every year since.">งานประจำปีที่เกิดจากพระราชดำริในพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว ดำเนินการสืบเนื่องจนถึงปัจจุบัน</p></li>
+          <li class="hx-work reveal reveal--delay-1"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-book"></use></svg><h3 class="hx-work__t" data-en="The dictionary">พจนานุกรม</h3><p class="hx-work__d" data-en="Taken over from the Ministry of Public Instruction in 1934; the standard for written Thai.">รับโอนงานชำระปทานุกรมจากกระทรวงธรรมการ พ.ศ. ๒๔๗๗ เป็นมาตรฐานการเขียนหนังสือไทย</p></li>
+          <li class="hx-work reveal reveal--delay-2"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-archive"></use></svg><h3 class="hx-work__t" data-en="The encyclopaedia">สารานุกรม</h3><p class="hx-work__d" data-en="Knowledge in every field, set out for the public.">รวบรวมองค์ความรู้ทุกสาขาเผยแพร่แก่ประชาชน</p></li>
+          <li class="hx-work reveal reveal--delay-1"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-term"></use></svg><h3 class="hx-work__t" data-en="Technical terms">บัญญัติศัพท์</h3><p class="hx-work__d" data-en="Thai words for the terms of every discipline.">บัญญัติศัพท์วิชาการภาษาไทยในสาขาวิชาต่าง ๆ</p></li>
+          <li class="hx-work reveal reveal--delay-2"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"></use></svg><h3 class="hx-work__t" data-en="Geographical gazetteer">อักขรานุกรมภูมิศาสตร์</h3><p class="hx-work__d" data-en="The names of places, spelled and explained.">ชื่อภูมิศาสตร์ การสะกด และคำอธิบาย</p></li>
+          <li class="hx-work reveal reveal--delay-3"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-translit"></use></svg><h3 class="hx-work__t" data-en="Romanisation">ถอดอักษรไทยเป็นอักษรโรมัน</h3><p class="hx-work__d" data-en="The rules for writing Thai in Roman letters.">หลักเกณฑ์การถอดอักษรไทยเป็นอักษรโรมัน</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. Its homes: the four buildings in order beside the one it uses today -->
+    <section class="hx-homes" aria-labelledby="hx-homes-title">
+      <div class="container hx-homes__inner">
+        <figure class="hx-homes__photo reveal">
+          <img src="../assets/images/about/about-office.jpg" alt="อาคารสำนักงานราชบัณฑิตยสภา สนามเสือป่า" loading="lazy" decoding="async">
+          <figcaption data-en="Sanam Suea Pa, Dusit — since 2006">สนามเสือป่า เขตดุสิต · ตั้งแต่ พ.ศ. ๒๕๔๙</figcaption>
+        </figure>
+        <div class="hx-homes__text">
+          <div class="hx-sec-head reveal">
+            <p class="hx-kicker" data-en="Homes">ที่ทำการ</p>
+            <h2 id="hx-homes-title" class="hx-sec-title" data-en="Four homes in a hundred years">สี่ที่ทำการในหนึ่งร้อยปี</h2>
+          </div>
+          <ol class="hx-homes__list" role="list">
+            <li class="reveal"><span class="hx-homes__no" aria-hidden="true">๑</span><div><p class="hx-homes__t" data-en="Bang Khun Phrom Palace">วังบางขุนพรหม</p><p class="hx-homes__d" data-en="The upper floor of the Somdet residence">ตำหนักสมเด็จชั้นบน</p></div></li>
+            <li class="reveal reveal--delay-1"><span class="hx-homes__no" aria-hidden="true">๒</span><div><p class="hx-homes__t" data-en="Thawon Watthu Building, Na Phra That Road">ตึกถาวรวัตถุ ถนนหน้าพระธาตุ</p><p class="hx-homes__d" data-en="North side of the Vajiravudh Library · until 1988">อาคารหอสมุดวชิราวุธด้านทิศเหนือ · ถึง พ.ศ. ๒๕๓๑</p></div></li>
+            <li class="reveal reveal--delay-2"><span class="hx-homes__no" aria-hidden="true">๓</span><div><p class="hx-homes__t" data-en="Ratchawanlop Building, the Grand Palace">อาคารราชวัลลภ ในพระบรมมหาราชวัง</p><p class="hx-homes__d" data-en="1988–2006">พ.ศ. ๒๕๓๑–๒๕๔๙</p></div></li>
+            <li class="is-now reveal reveal--delay-3"><span class="hx-homes__no" aria-hidden="true">๔</span><div><p class="hx-homes__t" data-en="Sanam Suea Pa, Dusit, Bangkok">สนามเสือป่า เขตดุสิต กรุงเทพมหานคร</p><p class="hx-homes__d" data-en="2006 to today">พ.ศ. ๒๕๔๙–ปัจจุบัน</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <div class="container about-sub__body hx-full">
         <!-- The full text, set like a book: a ruled heading that opens it, one
              reading column in four chapters beside their contents, the years in gold -->
         <section class="hfull" aria-label="ความเป็นมาฉบับเต็ม" data-en-aria-label="The full history">
