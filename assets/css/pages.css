@@ -9528,3 +9528,8 @@ html:not([lang="en"]) .agenda-card__actions .btn { font-size: 15px; }
   .doc-cover__org { font-size: 6.6cqw; }
   .doc-cover__rule { margin: 2.5cqw 0; }
 }
+
+/* Activity report: the overview on the left, the report on the right */
+@media (min-width: 1024px) {
+  .act-layout { grid-template-columns: 19rem minmax(0, 1fr); grid-template-areas: "aside main"; }
+}
