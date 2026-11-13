@@ -9481,3 +9481,12 @@ html[lang="en"] :is(.pub-actions__size, .site-main .font-latin, main .font-latin
 html:not([lang="en"]) :is(.agenda-card__summary, .agenda-card__meta li), html:not([lang="en"]) :is(.agenda-card__summary, .agenda-card__meta li) :is(span, .story__ph) { font-size: 15px; }
 html[lang="en"] :is(.hintro__portrait, .hlist__photo) figcaption, html[lang="en"] :is(.pres__term, .pres__acting) { font-size: 12px; }
 html:not([lang="en"]) .agenda-card__actions .btn { font-size: 15px; }
+
+/* Thai-language page: the source PDF last; slides are landscape, so the
+   first-page preview is too */
+.tl-source { padding-block: var(--space-12, 48px) var(--space-16, 64px); }
+.tl-source .tl-title { margin-bottom: var(--space-6); }
+.tl-source__files { max-width: 52rem; }
+.act-doc--slides { grid-template-columns: 13rem minmax(0, 1fr); }
+.act-doc--slides .act-doc__thumb { aspect-ratio: 16 / 9; }
+@media (max-width: 479.98px) { .act-doc--slides { grid-template-columns: 1fr; } }
