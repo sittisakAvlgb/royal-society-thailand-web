@@ -10113,3 +10113,7 @@ html[lang="en"] .hx-wk__since::before { content: "since "; }
 @media (min-width: 48rem) { .hx-route__photo { aspect-ratio: 21 / 7; } }
 @media (max-width: 47.98rem) { .hx-homes ol.hx-route { padding-left: 32px; } }
 .hx-homes__num { font-size: 1.35em; line-height: 1; color: var(--rst-green-600); }
+/* the closing mark kept on the last words (never alone on a line), raised a little like the opening one */
+.vmb__quote p::after { content: none; }
+.vmb__q-end { white-space: nowrap; }
+.vmb__q-end::after { content: "\201D"; margin-left: .1em; font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 1.7em; line-height: 0; vertical-align: -.3em; color: var(--rst-green-800); }
