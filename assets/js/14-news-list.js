@@ -159,7 +159,7 @@
       nav.innerHTML = albums.length ? RS.pagerHTML({ page: albumPage, pages, total: albums.length, size: albumSize, sizes: ALBUM_SIZES, unit: { th: 'อัลบั้ม', en: albums.length === 1 ? 'album' : 'albums' } }) : '';
     }
     /* the news page's framed cards, in its grid or list view */
-    box.className = `newsx-items newsx-items--${view} newsx-albumlist`;
+    box.className = `newsx-items newsx-items--${view} newsx-albumlist works-list__items`;
     box.innerHTML = albums.slice((albumPage - 1) * albumSize, albumPage * albumSize).map((item, i) => `
       <li class="newsx-item" style="animation-delay:${Math.min(i, 11) * 30}ms">
         <a class="newsx-card newsx-album" href="${escapeHTML(RS.url(`pages/news-album.html?id=${encodeURIComponent(item.id)}`))}">
