@@ -10299,3 +10299,6 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 /* the publication heading set smaller, the issue line under it in green */
 .pub-record__title { font-size: clamp(1.75rem, 2.6vw, 2.25rem); line-height: 1.25; }
 .pub-record__title { font-size: clamp(2rem, 3vw, 2.5rem); }
+/* knowledge list rows: the title at the size the other lists use */
+.newsx-items--list .kn-card .newsx-card__title { font-size: var(--text-base); line-height: 1.4; }
+.newsx-items--list .kn-card .newsx-card__dek { font-size: var(--text-sm); }
