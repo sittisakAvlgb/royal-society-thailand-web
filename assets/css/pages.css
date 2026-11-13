@@ -9412,3 +9412,13 @@ html[lang="en"] .works-list--empty-en { display: none !important; }
 .auth-flow__who { font-size: var(--text-md); line-height: 1.35; }
 .auth-flow__what { font-size: var(--text-sm); line-height: 1.7; max-width: 30rem; }
 .auth-flow__step { margin-top: var(--space-4); font-size: var(--text-xs); letter-spacing: .02em; }
+
+/* The President's letter: a column of letter width beside the portrait
+   (the page is full width now), the double rule and the signature kept to
+   that column; the "being prepared" note a quiet line, no side bar */
+.msg__letter { justify-self: start; width: 100%; max-width: 40rem; }
+@media (min-width: 1024px) { .msg__letter { padding-inline: 0; } .msg__sign { margin-right: 0; } }
+.msg__body { max-width: none; width: 100%; line-height: 1.75; }
+.msg__pending { gap: 2px; padding: 0 0 var(--space-4); border-left: 0; border-bottom: 1px solid rgba(27, 115, 74, .2); font-size: var(--text-sm); font-weight: 400; color: #3d4a44; }
+.msg__pending-label { color: var(--rst-green-700); }
+.msg__sign { justify-self: end; text-align: center; }
