@@ -34,12 +34,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261130q">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261130q">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261130q">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261130q">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261130q">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261130q">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261130t">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261130t">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261130t">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261130t">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261130t">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261130t">
 
   <script type="application/ld+json">
   {
@@ -70,20 +70,20 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261130q"></script>
-  <script defer src="../assets/js/01-config.js?v=20261130q"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261130q"></script>
-  <script defer src="../assets/js/02-components.js?v=20261130q"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261130q"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261130q"></script>
-  <script defer src="../assets/js/05-language.js?v=20261130q"></script>
-  <script defer src="../assets/js/06-search.js?v=20261130q"></script>
-  <script defer src="../assets/js/data/knowledge.js?v=20261130q"></script>
-  <script defer src="../assets/js/data/knowledge-bodies.js?v=20261130q"></script>
-  <script defer src="../assets/js/25-article.js?v=20261130q"></script>
-  <script defer src="../assets/js/data/splash.js?v=20261130q"></script>
-  <script defer src="../assets/js/29-splash.js?v=20261130q"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261130q"></script>
+  <script defer src="../assets/js/00-core.js?v=20261130t"></script>
+  <script defer src="../assets/js/01-config.js?v=20261130t"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261130t"></script>
+  <script defer src="../assets/js/02-components.js?v=20261130t"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261130t"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261130t"></script>
+  <script defer src="../assets/js/05-language.js?v=20261130t"></script>
+  <script defer src="../assets/js/06-search.js?v=20261130t"></script>
+  <script defer src="../assets/js/data/knowledge.js?v=20261130t"></script>
+  <script defer src="../assets/js/data/knowledge-bodies.js?v=20261130t"></script>
+  <script defer src="../assets/js/25-article.js?v=20261130t"></script>
+  <script defer src="../assets/js/data/splash.js?v=20261130t"></script>
+  <script defer src="../assets/js/29-splash.js?v=20261130t"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261130t"></script>
 </head>
 <body class="page-article">
   <div id="app-header"></div>
@@ -180,8 +180,11 @@
 
             <section class="article-dl" aria-labelledby="download-title">
               <h2 id="download-title" data-en="Download">ดาวน์โหลด</h2>
-              <p class="text-secondary" data-en="The original PDF will be added by the Office. You can save this page as PDF from the print dialog.">ไฟล์ PDF ต้นฉบับจะเพิ่มโดยสำนักงาน ระหว่างนี้บันทึกหน้านี้เป็น PDF ได้จากหน้าต่างพิมพ์</p>
-              <p>
+              <!-- the article's PDF (data/knowledge.js pdf): the file with Preview
+                   and Open, as on every page that offers a PDF (25-article.js) -->
+              <div class="article-file" data-article-file hidden></div>
+              <p class="text-secondary" data-article-nofile data-en="The original PDF will be added by the Office. You can save this page as PDF from the print dialog.">ไฟล์ PDF ต้นฉบับจะเพิ่มโดยสำนักงาน ระหว่างนี้บันทึกหน้านี้เป็น PDF ได้จากหน้าต่างพิมพ์</p>
+              <p data-article-nofile>
                 <button class="btn btn--secondary" type="button" data-print>
                   <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg>
                   <span data-en="Save as PDF">บันทึกเป็น PDF</span>

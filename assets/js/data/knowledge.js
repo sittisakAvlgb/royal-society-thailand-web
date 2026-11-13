@@ -2,7 +2,10 @@
  * data/knowledge.js — the knowledge page: fields and their articles
  *  fields: { id, name {th,en}, desc {th,en} } in page order
  *  items:  { id, field, type {th,en}, date (ISO), href (pages/article.html?id=…),
- *            title {th,en}, excerpt {th,en} }
+ *            title {th,en}, excerpt {th,en},
+ *            pdf { src, pages, bytes } — the article as a PDF; the article page
+ *            offers ดูตัวอย่าง / เปิดเอกสาร (the sample PDFs are printed from
+ *            this site's article pages) }
  *  Sample content: replace with the Office's articles before launch.
  * ========================================================================== */
 window.RS_KNOWLEDGE = {
@@ -110,6 +113,7 @@ window.RS_KNOWLEDGE = {
   "items": [
     {
       "id": "kn-coined-terms",
+      "pdf": { "src": "assets/docs/knowledge/kn-coined-terms.pdf", "pages": 3, "bytes": 611865 },
       "field": "language",
       "type": {
         "th": "บทความวิชาการ",
@@ -128,6 +132,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-language-2026-08-18",
+      "pdf": { "src": "assets/docs/knowledge/kn-language-2026-08-18.pdf", "pages": 4, "bytes": 555358 },
       "field": "language",
       "type": {
         "th": "บทความวิชาการ",
@@ -146,6 +151,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-language-2026-06-09",
+      "pdf": { "src": "assets/docs/knowledge/kn-language-2026-06-09.pdf", "pages": 4, "bytes": 535776 },
       "field": "language",
       "type": {
         "th": "คลังความรู้",
@@ -164,6 +170,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-language-2026-02-20",
+      "pdf": { "src": "assets/docs/knowledge/kn-language-2026-02-20.pdf", "pages": 3, "bytes": 540682 },
       "field": "language",
       "type": {
         "th": "บทความวิชาการ",
@@ -182,6 +189,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-2025-11-10",
+      "pdf": { "src": "assets/docs/knowledge/kn-science-2025-11-10.pdf", "pages": 3, "bytes": 560090 },
       "field": "science",
       "type": {
         "th": "บทความวิชาการ",
@@ -200,6 +208,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-2026-07-21",
+      "pdf": { "src": "assets/docs/knowledge/kn-science-2026-07-21.pdf", "pages": 3, "bytes": 496106 },
       "field": "science",
       "type": {
         "th": "คลังความรู้",
@@ -218,6 +227,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-2026-04-02",
+      "pdf": { "src": "assets/docs/knowledge/kn-science-2026-04-02.pdf", "pages": 3, "bytes": 587133 },
       "field": "science",
       "type": {
         "th": "บทความวิชาการ",
@@ -236,6 +246,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-technology-2026-07-02",
+      "pdf": { "src": "assets/docs/knowledge/kn-technology-2026-07-02.pdf", "pages": 3, "bytes": 536939 },
       "field": "technology",
       "type": {
         "th": "บทความวิชาการ",
@@ -254,6 +265,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-technology-2026-05-12",
+      "pdf": { "src": "assets/docs/knowledge/kn-technology-2026-05-12.pdf", "pages": 3, "bytes": 510865 },
       "field": "technology",
       "type": {
         "th": "คลังความรู้",
@@ -272,6 +284,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-technology-2026-01-27",
+      "pdf": { "src": "assets/docs/knowledge/kn-technology-2026-01-27.pdf", "pages": 4, "bytes": 502476 },
       "field": "technology",
       "type": {
         "th": "บทความวิชาการ",
@@ -290,6 +303,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-medicine-2026-08-04",
+      "pdf": { "src": "assets/docs/knowledge/kn-medicine-2026-08-04.pdf", "pages": 4, "bytes": 549277 },
       "field": "medicine",
       "type": {
         "th": "คลังความรู้",
@@ -308,6 +322,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-medicine-2026-03-19",
+      "pdf": { "src": "assets/docs/knowledge/kn-medicine-2026-03-19.pdf", "pages": 4, "bytes": 650313 },
       "field": "medicine",
       "type": {
         "th": "บทความวิชาการ",
@@ -326,6 +341,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-medicine-2025-12-08",
+      "pdf": { "src": "assets/docs/knowledge/kn-medicine-2025-12-08.pdf", "pages": 4, "bytes": 644232 },
       "field": "medicine",
       "type": {
         "th": "บทความวิชาการ",
@@ -344,6 +360,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-social-2026-08-25",
+      "pdf": { "src": "assets/docs/knowledge/kn-social-2026-08-25.pdf", "pages": 4, "bytes": 560865 },
       "field": "social",
       "type": {
         "th": "บทความวิชาการ",
@@ -362,6 +379,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-social-2026-06-17",
+      "pdf": { "src": "assets/docs/knowledge/kn-social-2026-06-17.pdf", "pages": 3, "bytes": 558101 },
       "field": "social",
       "type": {
         "th": "คลังความรู้",
@@ -380,6 +398,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-social-2025-10-30",
+      "pdf": { "src": "assets/docs/knowledge/kn-social-2025-10-30.pdf", "pages": 3, "bytes": 572962 },
       "field": "social",
       "type": {
         "th": "บทความวิชาการ",
@@ -398,6 +417,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-2026-07-14",
+      "pdf": { "src": "assets/docs/knowledge/kn-arts-2026-07-14.pdf", "pages": 3, "bytes": 534645 },
       "field": "arts",
       "type": {
         "th": "บทความวิชาการ",
@@ -416,6 +436,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-2026-04-23",
+      "pdf": { "src": "assets/docs/knowledge/kn-arts-2026-04-23.pdf", "pages": 4, "bytes": 536756 },
       "field": "arts",
       "type": {
         "th": "คลังความรู้",
@@ -434,6 +455,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-2026-01-15",
+      "pdf": { "src": "assets/docs/knowledge/kn-arts-2026-01-15.pdf", "pages": 3, "bytes": 571460 },
       "field": "arts",
       "type": {
         "th": "บทความวิชาการ",
@@ -452,6 +474,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-history-2026-08-11",
+      "pdf": { "src": "assets/docs/knowledge/kn-history-2026-08-11.pdf", "pages": 4, "bytes": 557415 },
       "field": "history",
       "type": {
         "th": "บทความวิชาการ",
@@ -470,6 +493,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-history-2026-05-28",
+      "pdf": { "src": "assets/docs/knowledge/kn-history-2026-05-28.pdf", "pages": 4, "bytes": 501120 },
       "field": "history",
       "type": {
         "th": "คลังความรู้",
@@ -488,6 +512,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-history-2025-09-22",
+      "pdf": { "src": "assets/docs/knowledge/kn-history-2025-09-22.pdf", "pages": 3, "bytes": 569400 },
       "field": "history",
       "type": {
         "th": "บทความวิชาการ",
@@ -506,6 +531,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-law-2026-03-14",
+      "pdf": { "src": "assets/docs/knowledge/kn-law-2026-03-14.pdf", "pages": 3, "bytes": 595616 },
       "field": "law",
       "type": {
         "th": "บทความวิชาการ",
@@ -524,6 +550,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-law-2026-06-24",
+      "pdf": { "src": "assets/docs/knowledge/kn-law-2026-06-24.pdf", "pages": 4, "bytes": 576965 },
       "field": "law",
       "type": {
         "th": "บทความวิชาการ",
@@ -542,6 +569,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-law-2026-02-05",
+      "pdf": { "src": "assets/docs/knowledge/kn-law-2026-02-05.pdf", "pages": 3, "bytes": 539313 },
       "field": "law",
       "type": {
         "th": "คลังความรู้",
@@ -560,6 +588,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-economics-2026-07-30",
+      "pdf": { "src": "assets/docs/knowledge/kn-economics-2026-07-30.pdf", "pages": 3, "bytes": 634864 },
       "field": "economics",
       "type": {
         "th": "บทความวิชาการ",
@@ -578,6 +607,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-economics-2026-05-06",
+      "pdf": { "src": "assets/docs/knowledge/kn-economics-2026-05-06.pdf", "pages": 3, "bytes": 560757 },
       "field": "economics",
       "type": {
         "th": "คลังความรู้",
@@ -596,6 +626,7 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-economics-2025-11-26",
+      "pdf": { "src": "assets/docs/knowledge/kn-economics-2025-11-26.pdf", "pages": 4, "bytes": 596970 },
       "field": "economics",
       "type": {
         "th": "คลังความรู้",

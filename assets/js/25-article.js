@@ -84,6 +84,24 @@
   if (tocBox) tocBox.hidden = !hasToc;
   if (!hasToc) qs('.article-layout', root)?.classList.add('article-layout--single');
 
+  /* the article's PDF: the file named and measured, with ดูตัวอย่าง (the
+     preview dialog, RS.pdfPreview) and เปิดเอกสาร; without one, the note
+     and the print button stay */
+  const pdf = item.pdf;
+  const fileBox = qs('[data-article-file]', root);
+  if (pdf && pdf.src && fileBox && RS.pdfActions) {
+    const file = { src: RS.url(pdf.src), title, pages: pdf.pages, bytes: pdf.bytes };
+    fileBox.innerHTML = `
+      <span class="article-file__icon" aria-hidden="true">PDF</span>
+      <span class="article-file__body">
+        <span class="article-file__name">${escapeHTML(title)}</span>
+        <span class="article-file__meta">${escapeHTML(RS.pdfMeta ? RS.pdfMeta({ pages: pdf.pages, bytes: pdf.bytes }) : 'PDF')}</span>
+      </span>
+      ${RS.pdfActions(file, 'article-file__acts')}`;
+    fileBox.hidden = false;
+    qsa('[data-article-nofile]', root).forEach(el => { el.hidden = true; });
+  }
+
   /* references */
   const refs = body && body.refs ? body.refs : [];
   const refsBox = qs('[data-article-refs-box]', root);
