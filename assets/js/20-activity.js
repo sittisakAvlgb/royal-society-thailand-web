@@ -325,7 +325,7 @@
       set('[data-activity-files-list]', files.map((f, i) => `
         <li class="act-doc">
           <button class="act-doc__thumb" type="button" data-pdf="${i}" aria-label="${escapeHTML(t(L.previewOf).replace('{t}', f.title))}">
-            ${f.thumb ? `<img src="${escapeHTML(RS.url(f.thumb))}" alt="" loading="lazy" decoding="async">` : ''}
+            ${f.thumb ? `<img src="${escapeHTML(RS.url(f.thumb))}" alt="" loading="lazy" decoding="async" onload="if(this.naturalWidth>this.naturalHeight)this.closest('.act-doc').classList.add('act-doc--slides')">` : ''}
             <span class="act-doc__type" aria-hidden="true">PDF</span>
           </button>
           <div class="act-doc__body">

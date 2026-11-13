@@ -10302,3 +10302,28 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 /* knowledge list rows: the title at the size the other lists use */
 .newsx-items--list .kn-card .newsx-card__title { font-size: var(--text-base); line-height: 1.4; }
 .newsx-items--list .kn-card .newsx-card__dek { font-size: var(--text-sm); }
+
+/* the article's PDF: a file row — the PDF mark, its name and size, then
+   Preview and Open — as on the other pages that offer a PDF */
+.article-file { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--space-3, 12px) var(--space-4, 16px); padding: var(--space-4, 16px); border: 1px solid var(--rst-green-100); border-radius: 14px; background: var(--rst-green-50); }
+.article-file[hidden] { display: none; }
+.article-file__icon { display: grid; place-items: center; width: 48px; height: 58px; border-radius: 6px; background: var(--rst-green-800); font-family: var(--font-latin); font-size: .75rem; font-weight: 700; letter-spacing: .06em; color: #fff; }
+.article-file__body { display: grid; gap: 2px; min-width: 0; }
+.article-file__name { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; line-height: 1.35; color: var(--rst-green-900); }
+.article-file__meta { font-size: var(--text-sm); color: var(--text-secondary, #4a5a52); }
+.article-file .pdf-acts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--space-2, 8px); }
+@media (min-width: 40rem) { .article-file { grid-template-columns: auto minmax(0, 1fr) auto; } .article-file .pdf-acts { grid-column: auto; } }
+/* an article printed (and its PDF): the text, its references and citation only */
+@media print {
+  .article-page :is(.article-progress, .article-dl, .article-related, .breadcrumb), .article-page .section--alt, .cookie-banner, [class*="consent"], .chat-widget, .a11y-fab, .mourning-ribbon, .splash, .breadcrumb { display: none !important; }
+  .article-header { background: none !important; color: #000 !important; padding: 0 0 12pt !important; }
+  .article-header :is(h1, p, a, span) { color: #000 !important; }
+  .article-layout { display: block !important; }
+}
+@media print { .cc-bar, .cc, .skip-link, .access-fab, .chat-fab, .chat-widget, .search-dialog { display: none !important; } }
+/* a document whose first page is landscape (slides): the thumbnail wide and
+   shown whole, so the slide reads as a slide, not a cropped strip */
+.act-doc--slides { grid-template-columns: 13rem minmax(0, 1fr); }
+.act-doc--slides .act-doc__thumb { aspect-ratio: 16 / 9; background: #0b0d0c; }
+.act-doc--slides .act-doc__thumb img { object-fit: contain; object-position: center; }
+@media (max-width: 479.98px) { .act-doc--slides { grid-template-columns: minmax(0, 1fr); } }
