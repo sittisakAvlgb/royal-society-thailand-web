@@ -101,7 +101,10 @@ window.RS_CONFIG = {
           en: 'Remembers display settings, recent searches, saved items and event reminders.'
         },
         keys: ['rs-accessibility-settings', 'rs-recent-searches', 'rs.bookmarks', 'rs.reminders',
-               'rs-mobile-panel', 'rs-mobile-sub', 'rs-mobile-subsub']
+               'rs-mobile-panel', 'rs-mobile-sub', 'rs-mobile-subsub',
+               /* how lists are shown: grid or list, and per page */
+               'rs-news-view', 'rs-news-size', 'rs-gallery-size', 'rs-works-view', 'rs-works-size',
+               'rs-series-view', 'rs-fellows-view', 'rs-fellows-size', 'rs-roll-view']
       }
     ],
     ui: {
@@ -130,8 +133,10 @@ window.RS_CONFIG = {
       th: 'สำนักงานราชบัณฑิตยสภา เลขที่ ๑๒๐ หมู่ ๓ ศูนย์ราชการเฉลิมพระเกียรติ ๘๐ พรรษา ๕ ธันวาคม ๒๕๕๐ (อาคารซี) ถนนแจ้งวัฒนะ แขวงทุ่งสองห้อง เขตหลักสี่ กรุงเทพมหานคร ๑๐๒๑๐',
       en: 'Office of the Royal Society, 120 Moo 3, Government Complex Commemorating His Majesty the King’s 80th Birthday Anniversary (Building C), Chaeng Watthana Road, Thung Song Hong, Lak Si, Bangkok 10210'
     },
-    phone: '02 141 1718',
-    phoneHref: '+6621411718',
+    /* general enquiries; 02 141 1718 is the bookshop (orst.go.th, Nov 2026) */
+    phone: '02 141 1717',
+    phoneHref: '+6621411717',
+    fax: '0 2356 0490, 0 2356 0491',
     email: 'saraban@orst.go.th',
     /* TODO (Office): confirm the dedicated webmaster address — none is published */
     webmaster: 'saraban@orst.go.th',
@@ -141,6 +146,11 @@ window.RS_CONFIG = {
        TODO (Office): supply the page — none is published on royalsociety.go.th.
        While empty, "Start chat" opens the contact page instead. */
     messenger: '',
+    /* official channels (sitemap 1.16.5). The YouTube channel is the one
+       orst.go.th links to. TODO (Office): add the Facebook page */
+    social: [
+      { label: { th: 'YouTube สำนักงานราชบัณฑิตยสภา', en: 'YouTube: Office of the Royal Society' }, href: 'https://www.youtube.com/channel/UCFGKmCXh_pWaawbilPgZ69g' }
+    ],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B8%B4%E0%B8%95%E0%B8%A2%E0%B8%AA%E0%B8%A0%E0%B8%B2+%E0%B8%A8%E0%B8%B9%E0%B8%99%E0%B8%A2%E0%B9%8C%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%81%E0%B8%B2%E0%B8%A3+%E0%B8%AD%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%A3%E0%B8%8B%E0%B8%B5'
   },
 
@@ -154,6 +164,7 @@ window.RS_CONFIG = {
     /* an entry with `menu: '<nav key>'` would open that item's children as a
        dropdown here (02-components.js); Contact now has its own place in the
        main menu, so the top bar keeps only the Office link */
+    { label: { th: 'สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society' }, href: 'https://www.orst.go.th/', external: true }
   ],
 
   /* ---------------------------------------------------------------------- *
@@ -187,24 +198,30 @@ window.RS_CONFIG = {
       key: 'about',
       label: { th: 'เกี่ยวกับราชบัณฑิตยสภา', en: 'About the Royal Society' },
       href: 'pages/about.html',
-      match: ['about.html', 'academy.html', 'about-history.html', 'about-authority.html', 'about-direction.html', 'about-structure.html', 'about-executives.html', 'about-past-presidents.html', 'about-president-message.html', 'about-acts.html', 'about-bylaws.html', 'about-rules.html', 'about-announcements.html'],
+      match: ['about.html', 'academy.html', 'about-history.html', 'about-authority.html', 'about-direction.html', 'about-structure.html', 'about-executives.html', 'about-past-presidents.html', 'about-president-message.html', 'about-vision.html', 'about-thai-language.html', 'about-wellbeing.html', 'about-acts.html', 'about-bylaws.html', 'about-rules.html', 'about-announcements.html'],
       intro: { th: 'ประวัติ อำนาจหน้าที่ ผู้บริหาร สำนัก และกฎหมายที่เกี่ยวข้อง', en: 'History, mandate and authority, executives, academies, laws and regulations' },
       children: [
         {
           label: { th: 'ข้อมูลองค์กร', en: 'Organisation Profile' }, href: 'pages/about.html#organization',
           children: [
             { label: { th: 'ประวัติความเป็นมา', en: 'History' }, href: 'pages/about-history.html' },
-            { label: { th: 'อำนาจหน้าที่', en: 'Mandate and Authority' }, href: 'pages/about-authority.html' },
+            { label: { th: 'วิสัยทัศน์และพันธกิจ', en: 'Vision and Mission' }, href: 'pages/about-vision.html' },
+            { label: { th: 'อำนาจหน้าที่ของราชบัณฑิตยสภา', en: 'Powers and Duties' }, menu: { th: 'อำนาจหน้าที่', en: 'Powers and Duties' }, href: 'pages/about-authority.html' },
             { label: { th: 'ทิศทางและการดำเนินงาน', en: 'Direction and Operations' }, href: 'pages/about-direction.html' },
-            { label: { th: 'แผนผังการบริหาร', en: 'Governance Chart' }, href: 'pages/about-structure.html' }
+            { label: { th: 'แผนผังการบริหารราชบัณฑิตยสภาและสำนักงานราชบัณฑิตยสภา', en: 'Administrative Chart of the Royal Society and its Office' }, menu: { th: 'แผนผังการบริหาร', en: 'Governance Chart' }, href: 'pages/about-structure.html' },
+            /* the Office publishes the annual plans and reports (sitemap 1.9) */
+            { label: { th: 'แผนงาน โครงการ และรายงานผลการดำเนินงานประจำปี', en: 'Annual Plans and Performance Reports' }, menu: { th: 'แผนงานและผลการดำเนินงาน', en: 'Plans and Reports' }, href: 'pages/about-plans.html' }
           ]
         },
         {
           label: { th: 'ผู้บริหาร', en: 'Executives' }, href: 'pages/about.html#executives',
           children: [
-            { label: { th: 'นายกและอุปนายกปัจจุบัน', en: 'President and Vice-Presidents' }, href: 'pages/about-executives.html' },
-            { label: { th: 'ทำเนียบนายกราชบัณฑิตยสภา', en: 'Past Presidents' }, href: 'pages/about-past-presidents.html' },
-            { label: { th: 'สารจากนายกราชบัณฑิตยสภา', en: 'Message from the President' }, href: 'pages/about-president-message.html' }
+            { label: { th: 'ผู้บริหารราชบัณฑิตยสภาปัจจุบัน', en: 'Current Executives' }, menu: { th: 'ผู้บริหารปัจจุบัน', en: 'Current Executives' }, href: 'pages/about-executives.html' },
+            { label: { th: 'สารจากผู้บริหารราชบัณฑิตยสภา', en: 'Message from the President' }, menu: { th: 'สารจากผู้บริหาร', en: 'Message from the President' }, href: 'pages/about-president-message.html' },
+            { label: { th: 'ทำเนียบผู้บริหาร', en: 'Past Executives' }, href: 'pages/about-past-presidents.html' },
+            { label: { th: 'พันธกิจของราชบัณฑิตยสภาด้านภาษาไทย', en: 'Thai Language Mission' }, menu: { th: 'พันธกิจด้านภาษาไทย', en: 'Thai Language Mission' }, href: 'pages/about-thai-language.html' },
+            { label: { th: 'สุขภาวะโดยองค์รวมกับคุณภาพชีวิต', en: 'Holistic Well-being and Quality of Life' }, menu: { th: 'สุขภาวะและคุณภาพชีวิต', en: 'Well-being' }, href: 'pages/about-wellbeing.html' },
+            { label: { th: 'ผู้บริหารเทคโนโลยีสารสนเทศระดับสูง (CIO)', en: 'Chief Information Officer (CIO)' }, menu: { th: 'ผู้บริหารสารสนเทศ (CIO)', en: 'Chief Information Officer' }, href: 'pages/about-cio.html' }
           ]
         },
         {
@@ -216,7 +233,7 @@ window.RS_CONFIG = {
           ]
         },
         {
-          label: { th: 'กฎหมายและระเบียบ', en: 'Laws and Regulations' }, href: 'pages/about.html#laws',
+          label: { th: 'กฎหมาย ระเบียบ และข้อบังคับที่เกี่ยวข้อง', en: 'Laws and Regulations' }, menu: { th: 'กฎหมายและระเบียบ', en: 'Laws and Regulations' }, href: 'pages/about.html#laws',
           children: [
             { label: { th: 'พระราชบัญญัติที่เกี่ยวข้อง', en: 'Relevant Acts' }, href: 'pages/about-acts.html' },
             { label: { th: 'ข้อบังคับราชบัณฑิตยสภา', en: 'Royal Society Bylaws' }, href: 'pages/about-bylaws.html' },
@@ -230,21 +247,28 @@ window.RS_CONFIG = {
     {
       key: 'fellows',
       label: { th: 'ราชบัณฑิตและภาคีสมาชิก', en: 'Fellows and Associate Fellows' },
-      alsoShow: ['admissions'],
       href: 'pages/fellows.html',
       match: ['fellows.html', 'fellow.html', 'admissions.html', 'fellows-academies.html', 'fellows-recruitment.html', 'fellows-past.html', 'admissions-associate-rules.html', 'admissions-associate-form.html', 'admissions-fellow-rules.html', 'admissions-fellow-form.html'],
+      /* the panel's own link goes to the search, so it says so */
+      viewLabel: { th: 'ค้นหาสมาชิก', en: 'Search Fellows' },
       intro: { th: 'ค้นหาสมาชิก รายนามตามสำนัก การสรรหา และทำเนียบอดีตราชบัณฑิต', en: 'Search Fellows, directory by academy, vacancies and election, and past Fellows' },
       children: [
         {
-          label: { th: 'ค้นหาสมาชิก', en: 'Search Fellows' }, href: 'pages/fellows.html',
+          label: { th: 'รายนามราชบัณฑิตและภาคีสมาชิก', en: 'Directory of Fellows and Associate Fellows' }, href: 'pages/fellows.html',
           children: [
-            { label: { th: 'กรองตามสำนักและประเภทวิชา', en: 'Filter by Academy and Discipline' }, href: 'pages/fellows.html' },
-            { label: { th: 'กรองตามปีที่แต่งตั้งและความเชี่ยวชาญ', en: 'Filter by Appointment Year and Expertise' }, href: 'pages/fellows.html' }
+            { label: { th: 'ค้นหาสมาชิก', en: 'Search Fellows' }, href: 'pages/fellows.html' },
+            { label: { th: 'รายนามตามสำนัก', en: 'Directory by Academy' }, href: 'pages/fellows-academies.html' },
+            { label: { th: 'ทำเนียบอดีตราชบัณฑิต', en: 'Past Fellows' }, href: 'pages/fellows-past.html' }
           ]
         },
-        { label: { th: 'รายนามตามสำนัก', en: 'Directory by Academy' }, href: 'pages/fellows-academies.html' },
-        { label: { th: 'ตำแหน่งว่างและการสรรหาสมาชิก', en: 'Vacancies and Election of Fellows' }, href: 'pages/fellows-recruitment.html' },
-        { label: { th: 'ทำเนียบอดีตราชบัณฑิต', en: 'Past Fellows' }, href: 'pages/fellows-past.html' }
+        {
+          label: { th: 'การสรรหาและรับสมัคร', en: 'Election and Applications' }, href: 'pages/fellows-recruitment.html',
+          children: [
+            { label: { th: 'ตำแหน่งว่างและการสรรหาสมาชิก', en: 'Vacancies and Election of Fellows' }, href: 'pages/fellows-recruitment.html' },
+            { label: { th: 'การรับสมัครบุคคลเป็นภาคีสมาชิก', en: 'Applying to Become an Associate Fellow' }, href: 'pages/admissions.html#associate-fellow' },
+            { label: { th: 'การรับสมัครภาคีสมาชิกเป็นราชบัณฑิต', en: 'Associate Fellows Applying to Become Fellows' }, href: 'pages/admissions.html#fellow' }
+          ]
+        }
       ]
     },
 
@@ -267,7 +291,6 @@ window.RS_CONFIG = {
             { label: { th: 'สืบค้นผลงานวิชาการ', en: 'Search Academic Publications' }, href: 'pages/knowledge.html' }
           ]
         },
-        { label: { th: 'ข้อเสนอต่อรัฐบาล', en: 'Proposals to Government' }, href: 'pages/works-proposals.html' },
         {
           label: { th: 'กิจกรรมวิชาการ', en: 'Academic Activities' },   /* a heading: the activities are below */
           children: [
@@ -279,7 +302,14 @@ window.RS_CONFIG = {
             { label: { th: 'กิจกรรมอื่น ๆ', en: 'Other Activities' }, href: 'pages/news.html?cat=activity' }
           ]
         },
-        { label: { th: 'โครงการนำความรู้สู่สังคม', en: 'Knowledge for Society Programme' }, href: 'pages/works-knowledge-to-society.html' }
+        /* the two that stood alone, under a heading of their own like the rest */
+        {
+          label: { th: 'ข้อเสนอและโครงการ', en: 'Proposals and Programmes' },
+          children: [
+            { label: { th: 'ข้อเสนอต่อรัฐบาล', en: 'Proposals to Government' }, href: 'pages/works-proposals.html' },
+            { label: { th: 'โครงการนำความรู้สู่สังคม', en: 'Knowledge for Society Programme' }, href: 'pages/works-knowledge-to-society.html' }
+          ]
+        }
       ]
     },
 
@@ -324,10 +354,9 @@ window.RS_CONFIG = {
     {
       key: 'contact',
       label: { th: 'ติดต่อและมีส่วนร่วม', en: 'Contact and Participation' },
-      alsoShow: ['audiences'],
       short: { th: 'ติดต่อเรา', en: 'Contact' },
       href: 'pages/contact.html',
-      match: ['contact.html', 'contact-form.html', 'contact-faq.html', 'accessibility.html', 'ita.html', 'ita-item.html'],
+      match: ['contact.html', 'contact-form.html', 'survey.html', 'contact-faq.html', 'ita.html', 'ita-item.html'],
       intro: { th: 'ช่องทางติดต่อสำนักงาน คำถามที่พบบ่อย การแสดงความคิดเห็น และช่องทางร้องเรียน', en: 'How to reach the Office, frequently asked questions, feedback and complaint channels' },
       children: [
         {
@@ -335,38 +364,31 @@ window.RS_CONFIG = {
           children: [
             { label: { th: 'ติดต่อราชบัณฑิตยสภา', en: 'Contact the Royal Society' }, href: 'pages/contact.html' },
             { label: { th: 'แบบฟอร์มติดต่อออนไลน์', en: 'Online Contact Form' }, href: 'pages/contact-form.html' },
-            { label: { th: 'คำถามที่พบบ่อย (FAQ)', en: 'Frequently Asked Questions (FAQ)' }, href: 'pages/contact-faq.html' },
-            { label: { th: 'การเข้าถึงและการใช้งานเว็บไซต์ (Help)', en: 'Accessibility and Help' }, href: 'pages/accessibility.html' }
+            { label: { th: 'คำถามที่พบบ่อย (FAQ)', en: 'Frequently Asked Questions (FAQ)' }, href: 'pages/contact-faq.html' }
           ]
         },
         /* the Office's own feedback form and complaint channels (orst.go.th, Nov 2026) */
         {
           label: { th: 'มีส่วนร่วมและร้องเรียน', en: 'Feedback and Complaints' }, href: 'pages/contact-form.html',
           children: [
-            { label: { th: 'แบบรับฟังความคิดเห็นและข้อเสนอแนะ', en: 'Feedback and Suggestions' }, href: 'https://forms.gle/mc1qF9RCDQbvLnho6', external: true },
-            { label: { th: 'ช่องทางการแจ้งเรื่องร้องเรียน', en: 'Complaints to the Office' }, href: 'pages/contact-form.html' },
+            { label: { th: 'แบบรับฟังความคิดเห็นและข้อเสนอแนะ', en: 'Feedback and Suggestions' }, menu: { th: 'รับฟังความคิดเห็น', en: 'Feedback' }, href: 'https://forms.gle/mc1qF9RCDQbvLnho6', external: true },
+            { label: { th: 'ช่องทางการแจ้งเรื่องร้องเรียน', en: 'Complaints to the Office' }, menu: { th: 'แจ้งเรื่องร้องเรียน', en: 'Complaints' }, href: 'pages/contact-form.html?topic=complaint' },
+            { label: { th: 'แบบสำรวจความพึงพอใจการใช้งานเว็บไซต์', en: 'Website Satisfaction Survey' }, menu: { th: 'แบบสำรวจความพึงพอใจ', en: 'Satisfaction Survey' }, href: 'pages/survey.html' },
             { label: { th: 'ศูนย์ร้องเรียน ป.ป.ช.', en: 'NACC Complaints Centre' }, href: 'https://www.nacc.go.th/', external: true },
             { label: { th: 'ศูนย์ร้องเรียน ป.ป.ท.', en: 'PACC Complaints Centre' }, href: 'https://www.pacc.go.th/', external: true }
           ]
         },
-        /* the public disclosure assessed each year by the NACC */
-        { label: { th: 'การประเมินคุณธรรมและความโปร่งใส (ITA)', en: 'Integrity and Transparency Assessment (ITA)' }, href: 'pages/ita.html' }
-      ]
-    },
-
-    /* the live site's "การแบ่งตามผู้ใช้งาน": kept out of the bar, shown as a
-       column in the Contact panel, in the drawer, footer and sitemap */
-    {
-      key: 'audiences',
-      label: { th: 'บริการตามกลุ่มผู้ใช้', en: 'Services by Audience' },
-      bar: false,
-      href: 'pages/audiences.html',
-      match: ['audiences.html'],
-      intro: { th: 'บริการและข้อมูลสำหรับประชาชน หน่วยงานภาครัฐ และราชบัณฑิตและภาคีสมาชิก', en: 'Services and information for citizens, government agencies, and Fellows and Associate Fellows' },
-      children: [
-        { label: { th: 'สำหรับประชาชน', en: 'For Citizens' }, href: 'pages/audiences.html#public' },
-        { label: { th: 'สำหรับหน่วยงานภาครัฐ', en: 'For Government Agencies' }, href: 'pages/audiences.html#government' },
-        { label: { th: 'สำหรับราชบัณฑิตและภาคีสมาชิก', en: 'For Fellows and Associate Fellows' }, href: 'pages/audiences.html#members' }
+        /* transparency: the ITA disclosure and the open-data portal, under a heading */
+        {
+          label: { th: 'ความโปร่งใสและข้อมูลเปิด', en: 'Transparency and Open Data' },
+          children: [
+            /* the public disclosure assessed each year by the NACC */
+            { label: { th: 'การประเมินคุณธรรมและความโปร่งใส (ITA)', en: 'Integrity and Transparency Assessment (ITA)' }, menu: { th: 'การประเมิน ITA', en: 'ITA' }, href: 'pages/ita.html' },
+            /* sitemap 1.15: the national open-data portal
+               TODO (Office): confirm whether the Royal Society publishes its own datasets */
+            { label: { th: 'ข้อมูลเปิดภาครัฐ (Open Data)', en: 'Government Open Data' }, menu: { th: 'ข้อมูลเปิดภาครัฐ', en: 'Open Data' }, href: 'https://data.go.th/', external: true }
+          ]
+        }
       ]
     }
   ],
@@ -377,6 +399,19 @@ window.RS_CONFIG = {
    *   sitemap can never drift out of step with the header.
    * ---------------------------------------------------------------------- */
   sitemapExtra: [
+    {
+      key: 'academy-activities',
+      label: { th: 'กิจกรรมสำนัก', en: 'Academy Activities' },
+      children: [
+        { label: { th: 'ราชบัณฑิตสัญจร สำนักธรรมศาสตร์และการเมือง', en: 'Fellows on Tour: Moral and Political Sciences' }, href: 'pages/works-on-tour.html?academy=moral' },
+        { label: { th: 'ราชบัณฑิตสัญจร สำนักวิทยาศาสตร์', en: 'Fellows on Tour: Science' }, href: 'pages/works-on-tour.html?academy=science' },
+        { label: { th: 'ราชบัณฑิตสัญจร สำนักศิลปกรรม', en: 'Fellows on Tour: Arts' }, href: 'pages/works-on-tour.html?academy=arts' },
+        { label: { th: 'อาศรมความคิด สำนักวิทยาศาสตร์', en: 'Think Tank Forum: Science' }, href: 'pages/works-ideas-forum.html' },
+        { label: { th: 'ข่าวและกิจกรรม สำนักธรรมศาสตร์และการเมือง', en: 'News: Moral and Political Sciences' }, href: 'pages/academy.html?id=moral#news' },
+        { label: { th: 'ข่าวและกิจกรรม สำนักวิทยาศาสตร์', en: 'News: Science' }, href: 'pages/academy.html?id=science#news' },
+        { label: { th: 'ข่าวและกิจกรรม สำนักศิลปกรรม', en: 'News: Arts' }, href: 'pages/academy.html?id=arts#news' }
+      ]
+    },
     {
       key: 'explore',
       label: { th: 'ค้นคว้า', en: 'Explore' },
@@ -390,11 +425,12 @@ window.RS_CONFIG = {
       key: 'website',
       label: { th: 'ข้อมูลเว็บไซต์และนโยบาย', en: 'Website Information and Policies' },
       children: [
-        { label: { th: 'การเข้าถึงเว็บไซต์', en: 'Accessibility' }, href: 'pages/accessibility.html' },
         { label: { th: 'นโยบายเว็บไซต์', en: 'Website Policy' }, href: 'pages/policies.html#website-policy' },
         { label: { th: 'นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้', en: 'Privacy and Cookie Policy' }, href: 'pages/policies.html#privacy-policy' },
         { label: { th: 'นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์', en: 'Website Security Policy' }, href: 'pages/policies.html#security-policy' },
         { label: { th: 'คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด', en: 'Copyright and Disclaimer' }, href: 'pages/policies.html#copyright' },
+        { label: { th: 'นโยบายคุกกี้', en: 'Cookie Policy' }, href: 'pages/policies.html#device-storage-title' },
+        { label: { th: 'RSS ข่าวสาร', en: 'RSS feed' }, href: 'rss.xml' },
         { label: { th: 'ผังเว็บไซต์', en: 'Sitemap' }, href: 'pages/sitemap.html' }
       ]
     }
@@ -497,8 +533,7 @@ window.RS_CONFIG = {
           { label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' }, href: 'pages/publications.html' },
           { label: { th: 'ข่าวสาร', en: 'News' }, href: 'pages/news.html' },
           { label: { th: 'การรับสมัคร', en: 'Applications for Membership' }, href: 'pages/admissions.html' },
-          { label: { th: 'ติดต่อและมีส่วนร่วม', en: 'Contact and Participation' }, href: 'pages/contact.html' },
-          { label: { th: 'บริการตามกลุ่มผู้ใช้', en: 'Services by Audience' }, href: 'pages/audiences.html' }
+          { label: { th: 'ติดต่อและมีส่วนร่วม', en: 'Contact and Participation' }, href: 'pages/contact.html' }
         ]
       },
       {
@@ -506,8 +541,8 @@ window.RS_CONFIG = {
         heading: { th: 'ข้อมูลเว็บไซต์', en: 'Website Information' },
         links: [
           { label: { th: 'ผังเว็บไซต์', en: 'Sitemap' }, href: 'pages/sitemap.html' },
-          { label: { th: 'อีเมลผู้ดูแลเว็บไซต์', en: 'Webmaster e-mail' }, href: 'mailto:{webmaster}' },
-          { label: { th: 'การเข้าถึงเว็บไซต์', en: 'Accessibility' }, href: 'pages/accessibility.html' },
+            { label: { th: 'แบบสำรวจความพึงพอใจ', en: 'Satisfaction survey' }, href: 'pages/survey.html' },
+          { label: { th: 'RSS ข่าวสาร', en: 'RSS feed' }, href: 'rss.xml' },
           { label: { th: 'ติดต่อเรา', en: 'Contact us' }, href: 'pages/contact.html' }
         ]
       },
@@ -520,9 +555,19 @@ window.RS_CONFIG = {
           { label: { th: 'นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้', en: 'Privacy and Cookie Policy' }, href: 'pages/policies.html#privacy-policy' },
           { label: { th: 'นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์', en: 'Website Security Policy' }, href: 'pages/policies.html#security-policy' },
           { label: { th: 'คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด', en: 'Copyright and Disclaimer' }, href: 'pages/policies.html#copyright' },
+          { label: { th: 'นโยบายคุกกี้', en: 'Cookie Policy' }, href: 'pages/policies.html#device-storage-title' },
           { label: { th: 'ตั้งค่าคุกกี้', en: 'Cookie settings' }, action: 'cookie-settings' }
         ]
       }
+    ],
+    /* sitemap footer: เว็บลิงก์หน่วยงานที่เกี่ยวข้อง
+       TODO (Office): confirm the list */
+    related: [
+      { label: { th: 'สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society' }, href: 'https://www.orst.go.th/' },
+      { label: { th: 'พจนานุกรม ฉบับราชบัณฑิตยสถาน', en: 'Royal Institute Dictionary' }, href: 'https://dictionary.orst.go.th/' },
+      { label: { th: 'ราชกิจจานุเบกษา', en: 'Royal Thai Government Gazette' }, href: 'https://ratchakitcha.soc.go.th/' },
+      { label: { th: 'ศูนย์กลางข้อมูลเปิดภาครัฐ', en: 'Government Open Data' }, href: 'https://data.go.th/' },
+      { label: { th: 'ศูนย์ราชการสะดวก', en: 'Government Easy Contact Center' }, href: 'https://www.gecc.go.th/' }
     ]
   },
 
@@ -572,6 +617,10 @@ window.RS_CONFIG = {
     mapShort: { th: 'แผนที่และการเดินทาง', en: 'Map & directions' },
     rights: { th: 'สงวนลิขสิทธิ์', en: 'All rights reserved' },
     visitors: { th: 'จำนวนผู้เข้าชมเว็บไซต์', en: 'Visitor counter' },
+    fax: { th: 'โทรสาร', en: 'Fax' },
+    related: { th: 'เว็บลิงก์หน่วยงานที่เกี่ยวข้อง', en: 'Related agencies' },
+    followUs: { th: 'ติดตามเรา', en: 'Follow us' },
+    updated: { th: 'ปรับปรุงข้อมูลล่าสุด', en: 'Last updated' },
     viewAll: { th: 'ดูทั้งหมด', en: 'View all' },
     backToTop: { th: 'ขึ้นบนสุด', en: 'Back to top' },
     contactUs: { th: 'ติดต่อเรา', en: 'Contact us' },

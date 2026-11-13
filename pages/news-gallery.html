@@ -21,6 +21,7 @@
   <meta property="og:locale" content="th_TH">
   <meta property="og:locale:alternate" content="en_GB">
 
+  <link rel="alternate" type="application/rss+xml" title="ข่าวสารและกิจกรรม ราชบัณฑิตยสภา" href="../rss.xml">
   <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
   <link rel="apple-touch-icon" href="../assets/images/cropped-logo-with-bg-1.png">
 
@@ -32,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
 
   <script type="application/ld+json">
   {
@@ -50,18 +51,19 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/news.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/press.js?v=20261117f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
-  <script defer src="../assets/js/14-news-list.js?v=20261117f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
+  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/news.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/press.js?v=20261123w"></script>
+  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
+  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
+  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/videos.js?v=20261123w"></script>
+  <script defer src="../assets/js/14-news-list.js?v=20261123w"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -100,8 +102,7 @@
     </header>
 
     <!-- One album per story: its cover, how many photos, and the story
-         (where the photos open in the viewer).
-         TODO (Office): videos (YouTube or the Office's video channel) -->
+         (where the photos open in the viewer); the videos follow. -->
     <section class="section newsx newsx-albums" aria-labelledby="albums-title">
       <div class="container">
         <h2 class="visually-hidden" id="albums-title" data-en="Photo albums">อัลบั้มภาพ</h2>
@@ -110,8 +111,55 @@
         <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-newsx-gallery-pages hidden></nav>
       </div>
     </section>
+
+    <!-- Videos (sitemap 3.14): the recordings from the activity reports
+         (data/videos.js); a still with a play button, the player loading
+         only when asked; the report it belongs to beneath -->
+    <section class="section section--alt gallery-videos" id="videos" aria-labelledby="videos-title" data-gallery-videos hidden>
+      <div class="container">
+        <div class="band-head">
+          <div class="band-head__text">
+            <p class="kicker" data-en="Videos">วิดีโอ</p>
+            <h2 id="videos-title" class="section-title" data-en="Lectures and events on video">วิดีโอการบรรยายและกิจกรรม</h2>
+          </div>
+          <a class="btn btn--primary btn--pill" href="https://www.youtube.com/channel/UCFGKmCXh_pWaawbilPgZ69g" target="_blank" rel="noopener"><span data-en="YouTube channel">ช่อง YouTube</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg><span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
+        </div>
+        <ul class="gallery-videos__list" role="list" data-gallery-videos-list></ul>
+      </div>
+    </section>
   </main>
 
   <div id="app-footer"></div>
+  <script>
+    /* gallery videos: a still with a play button; the YouTube player loads only when asked */
+    document.addEventListener('DOMContentLoaded', () => window.RS && RS.ready(() => {
+      const box = document.querySelector('[data-gallery-videos]');
+      const list = document.querySelector('[data-gallery-videos-list]');
+      const items = window.RS_VIDEOS || [];
+      if (!box || !list || !items.length) return;
+      const esc = RS.escapeHTML;
+      const play = RS.lang === 'th' ? 'เล่นวิดีโอ' : 'Play the video';
+      const read = RS.lang === 'th' ? 'อ่านรายงาน' : 'Read the report';
+      list.innerHTML = items.map(v => `
+        <li class="gallery-video reveal">
+          <div class="act-video">
+            <button type="button" class="act-video__play" data-video="${esc(v.id)}" aria-label="${play}: ${esc(v.title)}">
+              <img src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+              <span class="act-video__btn" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>
+            </button>
+          </div>
+          <p class="gallery-video__meta"><span>${esc(v.cat)}</span> · <time datetime="${esc(v.date)}">${RS.formatDate(v.date, { day: 'numeric', month: 'short', year: 'numeric' })}</time></p>
+          <a class="gallery-video__title" href="${esc(RS.url('pages/activity.html?id=' + encodeURIComponent(v.report)))}">${esc(v.title)}</a>
+          <span class="visually-hidden">${read}</span>
+        </li>`).join('');
+      box.hidden = false;
+      list.addEventListener('click', event => {
+        const b = event.target.closest('[data-video]');
+        if (!b) return;
+        b.parentElement.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(b.dataset.video)}?autoplay=1&rel=0" title="${play}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+      });
+      document.dispatchEvent(new CustomEvent('rs:content-added', { detail: box }));
+    }));
+  </script>
 </body>
 </html>

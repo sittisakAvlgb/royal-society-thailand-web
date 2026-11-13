@@ -204,6 +204,10 @@
    * Level-2 items that have children become columns (heading + level-3 links);
    * level-2 items without children share one column.
    */
+  /* the mega panels and the drawer use an entry's short `menu` name when it has
+     one; the sitemap and the pages keep the full name */
+  const menuName = item => (item.menu ? { ...item, label: item.menu } : item);
+
   function renderMega(key) {
     const item = CFG.nav.find(entry => entry.key === key);
     if (!item?.children?.length) return '';
@@ -215,22 +219,22 @@
 
     const columns = [...branches, ...guests].map(child => `
       <div class="mega-group">
-        <p class="mega-group__title">${link({ ...child, href: null })}</p>
-        <ul role="list">${child.children.map(sub => `<li>${link(sub)}</li>`).join('')}</ul>
+        <p class="mega-group__title">${link({ ...menuName(child), href: null })}</p>
+        <ul role="list">${child.children.map(sub => `<li>${link(menuName(sub))}</li>`).join('')}</ul>
       </div>`).join('');
 
     const leafColumn = leaves.length ? `
       <div class="mega-group mega-group--leaves${leaves.length > 5 ? ' mega-group--wide' : ''}">
-        <ul role="list">${leaves.map(child => `<li>${link(child, 'mega-group__lead')}</li>`).join('')}</ul>
+        <ul role="list">${leaves.map(child => `<li>${link(menuName(child), 'mega-group__lead')}</li>`).join('')}</ul>
       </div>` : '';
 
     return `
       <div class="mega-inner">
         <div class="mega-feature">
-          <p class="mega-feature__title">${te(item.label)}</p>
+          <p class="mega-feature__title">${te(item.label).replace(/^(.+?)(และ.+)$/, '<span class="mega-feature__ph">$1</span><wbr><span class="mega-feature__ph">$2</span>')}</p>
           ${item.intro ? `<p class="mega-feature__desc">${te(item.intro)}</p>` : ''}
           ${item.href ? `<a class="link-arrow" href="${escapeHTML(url(item.href))}"${detectActive() === key ? ' aria-current="page"' : ''}>
-            <span>${te(ui.viewSection)}</span>${icon('arrow')}
+            <span>${te(item.viewLabel || ui.viewSection)}</span>${icon('arrow')}
           </a>` : ''}
         </div>
         <div class="mega-groups">${columns}${leafColumn}</div>
@@ -267,14 +271,14 @@
       }
 
       const links = item.children.map(child => `
-        ${link(child.children?.length ? { ...child, href: null } : child, 'rs-mobile-sub')}
-        ${(child.children || []).map(sub => link(sub, 'rs-mobile-subsub')).join('')}`).join('');
+        ${link(child.children?.length ? { ...menuName(child), href: null } : menuName(child), 'rs-mobile-sub')}
+        ${(child.children || []).map(sub => link(menuName(sub), 'rs-mobile-subsub')).join('')}`).join('');
 
       return `
         <details${item.key === active ? ' open' : ''}>
           <summary>${te(item.label)}${icon('chevron')}</summary>
           <div class="rs-mobile-links">
-            ${href ? `<a class="rs-mobile-landing" href="${href}"${current}>${te(ui.viewSection)}</a>` : ''}
+            ${href ? `<a class="rs-mobile-landing" href="${href}"${current}>${te(item.viewLabel || ui.viewSection)}</a>` : ''}
             ${links}
           </div>
         </details>`;
@@ -423,6 +427,10 @@
                   <dt class="visually-hidden">${te(ui.phone)}</dt>
                   <dd><a href="tel:${contact.phoneHref}">${icon('phone')}<span>${escapeHTML(contact.phone)}</span></a></dd>
                 </div>
+                ${contact.fax ? `<div>
+                  <dt class="visually-hidden">${te(ui.fax)}</dt>
+                  <dd class="footer-address__line">${icon('print')}<span>${te(ui.fax)} ${escapeHTML(contact.fax)}</span></dd>
+                </div>` : ''}
                 <div>
                   <dt class="visually-hidden">${te(ui.email)}</dt>
                   <dd><a href="mailto:${escapeHTML(contact.email)}">${icon('mail')}<span class="font-latin" data-keep-digits>${escapeHTML(contact.email)}</span></a></dd>
@@ -450,7 +458,10 @@
 
         <div class="footer-bottom">
           <div class="container">
-            <p>© <span>${yearLabel}</span> ${escapeHTML(site.name.th)} <span lang="en">${escapeHTML(site.nameEn)}</span> · ${te(ui.rights)}</p>
+            <div class="footer-bottom__start">
+              <p>© <span>${yearLabel}</span> ${escapeHTML(site.name.th)} <span lang="en">${escapeHTML(site.nameEn)}</span> · ${te(ui.rights)}</p>
+              <p class="footer-updated">${te(ui.updated)} <time datetime="${new Date(document.lastModified).toISOString().slice(0, 10)}">${escapeHTML(RS.formatDate(new Date(document.lastModified).toISOString().slice(0, 10), { day: 'numeric', month: 'long', year: 'numeric' }))}</time></p>
+            </div>
             <div class="footer-bottom__end">
               <p class="visitor-count">${icon('people')}<span>${te(ui.visitors)}</span> <strong>${escapeHTML(RS.formatNumber(CFG.visitorCount))}</strong></p>
               <button class="footer-top" type="button" data-scroll-top>

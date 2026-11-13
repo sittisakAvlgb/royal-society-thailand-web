@@ -59,12 +59,13 @@
   --rst-green-100: #D9F4E7;
   --rst-green-50:  #EEFAF4;
 
-  /* Warm accent taken from the crest — used sparingly to break up the greens */
-  --gold-700: #8F6A1E;
-  --gold-600: #B8892E;
-  --gold-500: #D4A94A;
-  --gold-100: #F7ECD2;
-  --cream:    #FBF7EE;
+  /* The former warm accents, now greens: the site is green and white only.
+     The names stay so existing rules keep working. */
+  --gold-700: #12875A;   /* = green-700, accent text on white */
+  --gold-600: #12875A;
+  --gold-500: #2FC486;   /* = green-500, hairlines and accents on dark */
+  --gold-100: #D9F4E7;   /* = green-100 */
+  --cream:    #F1F7F4;   /* = surface-alt */
 
   --surface: #FFFFFF;
   --surface-alt: #F1F7F4;     /* alternating sections, panels */

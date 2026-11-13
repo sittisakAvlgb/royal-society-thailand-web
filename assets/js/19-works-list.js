@@ -130,6 +130,11 @@
       render();
       qs('[data-works-tools]', root)?.scrollIntoView({ block: 'start', behavior: RS.reduceMotion() ? 'auto' : 'smooth' });
     });
+    /* ?academy=moral|science|arts opens on that academy's tab (the sitemap's
+       "ราชบัณฑิตสัญจร สำนัก…" links) */
+    const asked = new URLSearchParams(location.search).get('academy');
+    if (asked && qs(`[data-works-tabs] .news-tab[data-filter="${CSS.escape(asked)}"]`, root)) filter = asked;
+    if (filter !== 'all') setFilter(filter);
     setView(view);
   });
 })();

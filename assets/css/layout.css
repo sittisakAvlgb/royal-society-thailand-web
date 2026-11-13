@@ -591,3 +591,15 @@ html[lang="en"] .site-footer :is(.font-latin, [lang="en"]):not(.footer-org__name
 @keyframes utility-menu-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 .utility-bar__links .utility-menu__list { display: grid; gap: 0; }
 .utility-bar__links .utility-menu__list[hidden] { display: none; }
+
+/* footer: related agencies and the official channels in one row; the page's
+   last-updated date under the copyright */
+.footer-extra { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-12); padding-block: var(--space-6); border-top: 1px solid rgba(255, 255, 255, .12); }
+.footer-extra__group { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-4); }
+.footer-extra__title { margin: 0; font-size: var(--text-sm); font-weight: 700; color: #7FDDB1; }
+.footer-extra ul { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin: 0; padding: 0; list-style: none; }
+.footer-extra a { font-size: var(--text-sm); color: rgba(255, 255, 255, .82); text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .25); text-underline-offset: .2em; }
+.footer-extra a:hover { color: var(--white); text-decoration-color: currentColor; }
+.footer-bottom__start { display: grid; gap: 2px; }
+.footer-bottom__start p { margin: 0; }
+.footer-updated { font-size: var(--text-xs); opacity: .75; }

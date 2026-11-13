@@ -633,17 +633,231 @@
    * Shows the stand-in until the real file has been added.
    * ==================================================================== */
 
-  function initImageFallbacks() {
-    qsa('img[data-fallback]').forEach(img => {
-      const swap = () => {
-        if (img.dataset.fallbackUsed) return;
-        img.dataset.fallbackUsed = 'true';
-        img.src = img.dataset.fallback;
-      };
-      if (img.complete && !img.naturalWidth && img.currentSrc) swap();
-      else img.addEventListener('error', swap, { once: true });
-    });
+  /* Any picture that cannot be shown — a missing file, an empty or "#" path
+     from the CMS — first tries its data-fallback; failing that it is hidden
+     and, when it is the only thing in its frame, the frame becomes a quiet
+     placeholder (.media-empty: pale green with the crest) instead of the
+     browser's broken-image icon or a bare grey box. Member portraits keep
+     their own handling (08-directory.js shows the initial). */
+  function onBrokenImage(img) {
+    if (!img || img.closest('.fellowx-photo')) return;
+    if (img.dataset.fallback && !img.dataset.fallbackUsed) {
+      img.dataset.fallbackUsed = 'true';
+      img.src = img.dataset.fallback;
+      return;
+    }
+    if (img.dataset.broken) return;
+    img.dataset.broken = 'true';
+    img.hidden = true;
+    const frame = img.parentElement;
+    if (frame && frame.children.length === 1) frame.classList.add('media-empty');
   }
+
+  /* an empty src="" is a template waiting to be filled (the photo viewer),
+     not a missing picture; "#" is what RS.url() gives for an empty path */
+  const isUnusable = img => {
+    const src = img.getAttribute('src');
+    if (!src || !src.trim()) return false;
+    return src === '#' || (img.complete && !img.naturalWidth && !!img.currentSrc);
+  };
+
+  function initImageFallbacks() {
+    document.addEventListener('error', event => {
+      const img = event.target;
+      if (img instanceof HTMLImageElement && (img.getAttribute('src') || '').trim()) onBrokenImage(img);
+    }, true);
+    /* a picture given a working file later (a viewer, a lazy swap) comes back */
+    document.addEventListener('load', event => {
+      const img = event.target;
+      if (!(img instanceof HTMLImageElement) || !img.dataset.broken || !img.naturalWidth) return;
+      delete img.dataset.broken;
+      img.hidden = false;
+      img.parentElement?.classList.remove('media-empty');
+    }, true);
+    /* pictures that failed before this script ran, or were never given a file */
+    qsa('img').forEach(img => { if (isUnusable(img)) onBrokenImage(img); });
+  }
+  /* ==================================================================== *
+   * Photo viewer — one for the whole site (news stories, activity reports,
+   * anything a CMS page adds): every photograph in one frame size on a
+   * light frosted backdrop, the photo whole with its own blurred copy
+   * filling the frame; a horizontal track that snaps, so a swipe, a
+   * trackpad, a drag, the arrow buttons or keys all slide it; thumbnails
+   * beneath jump to any one; the caption, when there is one, under it.
+   *
+   *   const open = RS.photoViewer([{ src, caption }, …]);  open(index);
+   * ==================================================================== */
+  const LB = {
+    label: { th: 'ภาพบรรยากาศ', en: 'Photographs' },
+    photo: { th: 'ภาพที่ {n}', en: 'Photo {n}' },
+    close: { th: 'ปิด', en: 'Close' },
+    prev: { th: 'ภาพก่อนหน้า', en: 'Previous photo' },
+    next: { th: 'ภาพถัดไป', en: 'Next photo' }
+  };
+  RS.photoViewer = list => {
+    const photos = (list || []).map(p => (Array.isArray(p) ? { src: p[0] } : p)).filter(p => p && p.src);
+    if (!photos.length || typeof HTMLDialogElement !== 'function') return null;
+    const tt = key => RS.t(LB[key]);
+    const dialog = document.createElement('dialog');
+    dialog.className = 'act-lb';
+    dialog.setAttribute('aria-label', tt('label'));
+    const label = i => tt('photo').replace('{n}', RS.digits(i + 1));
+    const caption = p => escapeHTML(RS.t(p.caption) || '');
+    dialog.innerHTML = `
+      <div class="act-lb__bar">
+        <p class="act-lb__count" aria-live="polite" data-lb-count></p>
+        <button class="act-lb__close" type="button" data-lb-close aria-label="${escapeHTML(tt('close'))}">${icon('x')}</button>
+      </div>
+      <div class="act-lb__stage">
+        <button class="act-lb__nav act-lb__nav--prev" type="button" data-lb-step="-1" aria-label="${escapeHTML(tt('prev'))}">${icon('chevron')}</button>
+        <div class="act-lb__track" data-lb-track>${photos.map((p, i) => `
+          <figure class="act-lb__slide" aria-roledescription="slide" aria-label="${escapeHTML(label(i))}">
+            <img class="act-lb__bg" data-src="${escapeHTML(RS.url(p.src))}" alt="" aria-hidden="true">
+            <img class="act-lb__img" data-src="${escapeHTML(RS.url(p.src))}" alt="${caption(p) || escapeHTML(label(i))}">
+          </figure>`).join('')}</div>
+        <button class="act-lb__nav act-lb__nav--next" type="button" data-lb-step="1" aria-label="${escapeHTML(tt('next'))}">${icon('chevron')}</button>
+      </div>
+      <p class="act-lb__caption" data-lb-caption hidden></p>
+      <div class="act-lb__thumbs">${photos.length > 1 ? photos.map((p, i) => `
+        <button class="act-lb__thumb" type="button" data-lb-thumb="${i}" aria-label="${escapeHTML(label(i))}">
+          <img src="${escapeHTML(RS.url(p.src))}" alt="" loading="lazy" decoding="async">
+        </button>`).join('') : ''}</div>`;
+    document.body.appendChild(dialog);
+
+    const track = qs('[data-lb-track]', dialog);
+    const count = qs('[data-lb-count]', dialog);
+    const cap = qs('[data-lb-caption]', dialog);
+    const slides = [...track.children];
+    const marks = qsa('[data-lb-thumb]', dialog);
+    const prev = qs('.act-lb__nav--prev', dialog);
+    const next = qs('.act-lb__nav--next', dialog);
+    let at = 0;
+
+    /* load the photo shown and its neighbours only */
+    const load = i => [i - 1, i, i + 1].forEach(n => {
+      slides[n]?.querySelectorAll('img[data-src]').forEach(img => { img.src = img.dataset.src; img.removeAttribute('data-src'); });
+    });
+    const mark = i => {
+      at = i;
+      load(i);
+      count.textContent = RS.digits(`${i + 1} / ${photos.length}`);
+      const c = caption(photos[i]);
+      cap.innerHTML = c;
+      cap.hidden = !c;
+      marks.forEach((m, n) => m.setAttribute('aria-current', String(n === i)));
+      marks[i]?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+      prev.disabled = i === 0;
+      next.disabled = i === photos.length - 1;
+    };
+    const go = (i, smooth = true) => {
+      i = Math.max(0, Math.min(photos.length - 1, i));
+      track.scrollTo({ left: i * track.clientWidth, behavior: smooth && !RS.reduceMotion() ? 'smooth' : 'auto' });
+      mark(i);
+    };
+    /* the slide in view after a swipe or a trackpad scroll */
+    let settle;
+    track.addEventListener('scroll', () => {
+      clearTimeout(settle);
+      settle = setTimeout(() => { const i = Math.round(track.scrollLeft / track.clientWidth); if (i !== at) mark(i); }, 80);
+    }, { passive: true });
+    /* a mouse drag slides too */
+    let drag = null;
+    track.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse') { drag = { x: e.clientX, left: track.scrollLeft }; track.classList.add('is-dragging'); } });
+    window.addEventListener('pointermove', e => { if (drag) track.scrollLeft = drag.left - (e.clientX - drag.x); });
+    window.addEventListener('pointerup', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      track.classList.remove('is-dragging');
+      drag = null;
+      go(Math.abs(dx) > 60 ? at + (dx < 0 ? 1 : -1) : at);
+    });
+    dialog.addEventListener('click', event => {
+      const step = event.target.closest('[data-lb-step]');
+      if (step) { go(at + Number(step.dataset.lbStep)); return; }
+      const thumb = event.target.closest('[data-lb-thumb]');
+      if (thumb) { go(Number(thumb.dataset.lbThumb)); return; }
+      if (event.target.closest('[data-lb-close]') || event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); go(at + 1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); go(at - 1); }
+    });
+    window.addEventListener('resize', () => { if (dialog.open) go(at, false); });
+    return i => { dialog.showModal(); go(i || 0, false); };
+  };
+
+  /* ==================================================================== *
+   * PDF preview — one for the whole site: the document in the browser's
+   * own PDF reader inside a popup, loaded only when asked (some files are
+   * tens of megabytes), with "open in a new tab" and "download" beside the
+   * close button. On a phone, where an embedded PDF reads badly, it simply
+   * opens the file in a new tab.
+   *
+   *   RS.pdfPreview({ src, title, pages, bytes });
+   * ==================================================================== */
+  const PDF = {
+    label: { th: 'ตัวอย่างเอกสาร', en: 'Document preview' },
+    open: { th: 'เปิดในแท็บใหม่', en: 'Open in a new tab' },
+    download: { th: 'ดาวน์โหลด', en: 'Download' },
+    close: { th: 'ปิด', en: 'Close' },
+    loading: { th: 'กำลังโหลดเอกสาร…', en: 'Loading the document…' },
+    pages: { th: '{n} หน้า', en: '{n} pages' }
+  };
+  RS.fileSize = bytes => {
+    if (!bytes) return '';
+    const mb = bytes / 1048576;
+    return RS.digits(mb >= 1 ? `${mb >= 10 ? Math.round(mb) : mb.toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`);
+  };
+  RS.pdfMeta = f => ['PDF', f.pages ? RS.t(PDF.pages).replace('{n}', RS.digits(f.pages)) : '', RS.fileSize(f.bytes)].filter(Boolean).join(' · ');
+  let pdfDialog = null;
+  RS.pdfPreview = file => {
+    if (!file || !file.src) return;
+    const narrow = matchMedia('(max-width: 767.98px)').matches || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (narrow || typeof HTMLDialogElement !== 'function') { window.open(file.src, '_blank', 'noopener'); return; }
+    const tt = key => RS.t(PDF[key]);
+    if (!pdfDialog) {
+      pdfDialog = document.createElement('dialog');
+      pdfDialog.className = 'pdf-lb';
+      pdfDialog.setAttribute('aria-label', tt('label'));
+      pdfDialog.innerHTML = `
+        <div class="pdf-lb__bar">
+          <div class="pdf-lb__head"><p class="pdf-lb__title" data-pdf-title></p><p class="pdf-lb__meta" data-pdf-meta></p></div>
+          <div class="pdf-lb__tools">
+            <a class="pdf-lb__btn" data-pdf-open target="_blank" rel="noopener">${icon('external')}<span>${escapeHTML(tt('open'))}</span></a>
+            <a class="pdf-lb__btn" data-pdf-download download>${icon('download')}<span>${escapeHTML(tt('download'))}</span></a>
+            <button class="pdf-lb__close" type="button" data-pdf-close aria-label="${escapeHTML(tt('close'))}">${icon('x')}</button>
+          </div>
+        </div>
+        <div class="pdf-lb__stage"><p class="pdf-lb__loading" data-pdf-loading>${escapeHTML(tt('loading'))}</p><iframe class="pdf-lb__frame" title="${escapeHTML(tt('label'))}"></iframe></div>`;
+      document.body.appendChild(pdfDialog);
+      pdfDialog.addEventListener('click', event => {
+        if (event.target.closest('[data-pdf-close]') || event.target === pdfDialog) pdfDialog.close();
+      });
+      /* closing drops the document, so a long PDF stops loading and frees memory */
+      pdfDialog.addEventListener('close', () => { qs('iframe', pdfDialog).src = 'about:blank'; });
+      qs('iframe', pdfDialog).addEventListener('load', event => {
+        if (event.target.getAttribute('src') !== 'about:blank') qs('[data-pdf-loading]', pdfDialog).hidden = true;
+      });
+    }
+    qs('[data-pdf-title]', pdfDialog).textContent = file.title || tt('label');
+    qs('[data-pdf-meta]', pdfDialog).textContent = RS.pdfMeta(file);
+    qs('[data-pdf-open]', pdfDialog).href = file.src;
+    qs('[data-pdf-download]', pdfDialog).href = file.src;
+    qs('[data-pdf-loading]', pdfDialog).hidden = false;
+    pdfDialog.showModal();
+    qs('iframe', pdfDialog).src = `${file.src}#view=FitH`;
+  };
+
+  /* any page (or CMS content) can ask for a preview without a script of its
+     own: <button data-pdf-preview="file.pdf" data-pdf-title="…" data-pdf-pages="3" data-pdf-bytes="40769"> */
+  document.addEventListener('click', event => {
+    const b = event.target.closest('[data-pdf-preview]');
+    if (!b) return;
+    event.preventDefault();
+    RS.pdfPreview({ src: b.dataset.pdfPreview, title: b.dataset.pdfTitle, pages: Number(b.dataset.pdfPages) || 0, bytes: Number(b.dataset.pdfBytes) || 0 });
+  });
+
+  RS.checkImages = root => qsa('img', root || document).forEach(img => { if (isUnusable(img)) onBrokenImage(img); });
 
   function initUtilities() {
     document.addEventListener('click', async event => {

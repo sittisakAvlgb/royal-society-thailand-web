@@ -3,11 +3,11 @@
  * ============================================================================
  *
  *  One template for every series in RS_SERIES (data/series.js): the latest
- *  cover and the series record on the cream band, then every issue grouped
- *  by volume (the Thai journal) or by year, as a shelf of covers or a list
- *  (the reader's choice, remembered in this browser), with a search across
- *  the issues. Each issue opens on pages/publication.html. The other series
- *  close the page as a shelf.
+ *  covers and the series record on the green band, then every issue in one
+ *  list, newest first, in the news page's cards: grid or list (the reader's
+ *  choice, remembered in this browser), a year picker, a search and a pager,
+ *  so it takes any number of issues from the CMS. Each issue opens on
+ *  pages/publication.html. The other series close the page as a shelf.
  * ========================================================================== */
 
 (() => {
@@ -25,6 +25,7 @@
 
   const L = {
     org: { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' },
+    anyYear: { th: 'ทุกปี', en: 'Every year' },
     frequency: { th: 'กำหนดออก', en: 'Frequency' },
     lang: { th: 'ภาษา', en: 'Language' },
     count: { th: 'จำนวน', en: 'Issues' },
@@ -50,18 +51,31 @@
   const year = iso => RS.formatDate(iso, { year: 'numeric' });
   const digits = n => escapeHTML(RS.digits(String(n)));
 
-  /* groups: the Thai journal by volume (ปีที่ …), the rest by year */
-  const groupKey = item => {
-    if (series.groupBy === 'volume') {
-      const vol = Number(item.id.split('-')[1]);
-      return { key: `v${vol}`, label: `${t(L.vol).replace('{n}', vol)} · ${year(item.date)}`, main: RS.digits(t(L.vol).replace('{n}', vol)), sub: year(item.date) };
-    }
-    return { key: item.date.slice(0, 4), label: year(item.date), main: year(item.date), sub: '' };
+  /* an issue line ("ปีที่ ๔๓ ฉบับที่ ๑ มกราคม–เมษายน ๒๕๖๑" or
+     "Vol. 43, No. 1, January–April 2018") splits into the number, shown
+     small above, and the period, shown as the title. */
+  const SPLIT = {
+    th: /^((?:ปีที่\s*\S+\s*)?ฉบับที่\s*\S+)\s+(.+)$/,
+    en: /^((?:Vol\.\s*[^,]+,\s*)?No\.\s*[^,]+),\s*(.+)$/
+  };
+  const issueParts = item => {
+    const text = t(item.issue) || t(item.title);
+    const m = text.match(SPLIT.th) || text.match(SPLIT.en);
+    if (m) return { no: m[1].replace(/\s+/g, ' ').replace(/,\s*$/, ''), period: m[2] };
+    /* an edition or volume line that does not split: it goes small above,
+       and the publication's own title is the card's title */
+    return item.issue && t(item.title) ? { no: t(item.issue), period: t(item.title) } : { no: t(KINDS[item.kind]) || '', period: text };
   };
 
-  let view = 'shelf';
+  /* grid of covers or list of rows, and issues per page — the news page's
+     controls, each remembered in this browser */
+  const SIZE_KEY = 'rs-series-size';
+  const SIZES = [12, 24, 48];
+  let view = 'grid', size = SIZES[0];
   try { if (localStorage.getItem(VIEW_KEY) === 'list') view = 'list'; } catch { /* storage unavailable */ }
-  let query = '';
+  try { const saved = Number(localStorage.getItem(SIZE_KEY)); if (SIZES.includes(saved)) size = saved; } catch { /* storage unavailable */ }
+  let query = '', yr = '', page = 1;
+  const yearOf = item => String(item.date || '').slice(0, 4);
 
   function renderHead() {
     document.title = `${t(series.title)} | ${t(L.org)}`;
@@ -88,50 +102,64 @@
 `);
   }
 
+  /* the year picker: every year that has an issue, newest first */
+  function renderYears() {
+    const pick = qs('[data-series-jump]', root);
+    if (!pick) return;
+    const years = [...new Set(items.map(yearOf).filter(Boolean))].sort((a, b) => b.localeCompare(a));
+    pick.hidden = years.length < 2;
+    const tick = '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>';
+    qs('[data-series-jump-list]', pick).innerHTML = [['', t(L.anyYear)], ...years.map(y => [y, year(`${y}-06-30`)])]
+      .map(([v, label], i) => `
+        <li class="rs-select__option" role="option" tabindex="-1" data-value="${v}" aria-selected="${i === 0}"><span>${escapeHTML(label)}</span>${tick}</li>`).join('');
+    const label = qs('[data-select-label]', pick);
+    if (label) label.textContent = t(L.anyYear);
+  }
+
   function render() {
     const q = query.trim().toLowerCase();
-    const found = items.filter(item => !q || `${item.issue.th} ${item.issue.en} ${t(item.title)} ${RS.digits(item.issue.en)}`.toLowerCase().includes(q));
+    const found = items.filter(item => (!yr || yearOf(item) === yr)
+      && (!q || `${item.issue.th} ${item.issue.en} ${t(item.title)} ${RS.digits(item.issue.en)}`.toLowerCase().includes(q)));
     qs('[data-series-count]', root).textContent = RS.digits(t(L.found).replace('{n}', found.length));
     qs('[data-series-empty]', root).hidden = found.length > 0;
+    const pages = Math.max(1, Math.ceil(found.length / size));
+    page = Math.min(page, pages);
 
-    const groups = [];
-    found.forEach(item => {
-      const g = groupKey(item);
-      const last = groups[groups.length - 1];
-      if (last && last.key === g.key) last.items.push(item); else groups.push({ ...g, items: [item] });
-    });
-
-    /* volumes to jump to, when there are enough of them to scroll past */
-    const jump = qs('[data-series-jump]', root);
-    if (jump) {
-      jump.hidden = groups.length < 5;
-      jump.innerHTML = groups.map(g => `<a class="series-jump__link" href="#series-${g.key}">${escapeHTML(g.main)}</a>`).join('');
-    }
-
-    set('[data-series-groups]', groups.map(g => `
-      <section class="series-group" id="series-${g.key}" aria-label="${escapeHTML(g.label)}">
-        <h3 class="series-group__label">${escapeHTML(g.label)}</h3>
-        ${view === 'shelf' ? `
-          <ul class="pub-shelf series-shelf" role="list">${g.items.map(item => `
-            <li><a class="pub-shelf__item" href="${link(item)}">${RS.pubCover(item)}
-              <span class="pub-shelf__title">${te(item.issue)}</span></a></li>`).join('')}
-          </ul>` : `
-          <ul class="series-list" role="list">${g.items.map(item => `
-            <li><a class="series-row" href="${link(item)}">
-              <span class="series-row__cover">${RS.pubCover(item)}</span>
-              <span class="series-row__text">
-                <span class="series-row__title">${te(item.title)}</span>
-                <span class="series-row__issue">${te(item.issue)}</span>
-              </span>
+    /* one list, newest first, in the news card: the cover laid on a pale
+       green ground, the number above, the period as the title, and the
+       year with "เปิดดู" at the foot. Takes any number of issues. */
+    const box = qs('[data-series-groups]', root);
+    box.className = `newsx-items newsx-items--${view} series-items`;
+    box.innerHTML = found.slice((page - 1) * size, page * size).map((item, n) => {
+      const { no, period } = issueParts(item);
+      return `
+      <li class="newsx-item" style="animation-delay:${Math.min(n, 11) * 30}ms">
+        <a class="newsx-card series-card" href="${link(item)}">
+          <span class="newsx-card__media series-card__media">${RS.pubCover(item)}</span>
+          <span class="newsx-card__body">
+            ${no ? `<span class="series-card__no">${escapeHTML(no)}</span>` : ''}
+            <span class="newsx-card__title series-card__title">${escapeHTML(period)}</span>
+            <span class="news-card__foot newsx-card__foot series-card__foot">
+              <time datetime="${escapeHTML(item.date)}">${escapeHTML(year(item.date))}</time>
               <span class="news-cta"><span>${te(L.open)}</span><span class="news-cta__dot" aria-hidden="true">${icon('arrow')}</span></span>
-            </a></li>`).join('')}
-          </ul>`}
-      </section>`).join(''));
+            </span>
+          </span>
+        </a>
+      </li>`;
+    }).join('');
+
+    const nav = qs('[data-series-pages]', root);
+    if (nav) {
+      nav.hidden = !found.length;
+      nav.classList.add('pager');
+      nav.classList.toggle('pager--single', pages < 2);
+      nav.innerHTML = found.length ? RS.pagerHTML({ page, pages, total: found.length, size, sizes: SIZES, unit: { th: 'ฉบับ', en: found.length === 1 ? 'issue' : 'issues' } }) : '';
+    }
     document.dispatchEvent(new CustomEvent('rs:content-added', { detail: root }));
   }
 
   function setView(value) {
-    view = value === 'list' ? 'list' : 'shelf';
+    view = value === 'list' ? 'list' : 'grid';
     try { localStorage.setItem(VIEW_KEY, view); } catch { /* storage unavailable */ }
     qsa('[data-series-view]', root).forEach(btn => {
       const on = btn.dataset.seriesView === view;
@@ -155,14 +183,31 @@
   RS.ready(() => {
     renderHead();
     renderOthers();
+    renderYears();
     qs('.newsx-view', root)?.addEventListener('click', event => {
       const btn = event.target.closest('[data-series-view]');
       if (btn) setView(btn.dataset.seriesView);
     });
+    qs('[data-series-pages]', root)?.addEventListener('click', event => {
+      const sizeBtn = event.target.closest('[data-pager-size]');
+      if (sizeBtn) {
+        size = Number(sizeBtn.dataset.pagerSize);
+        try { localStorage.setItem(SIZE_KEY, String(size)); } catch { /* storage unavailable */ }
+        page = 1; render();
+        return;
+      }
+      const btn = event.target.closest('[data-pager-page]');
+      if (!btn || btn.disabled) return;
+      page = Number(btn.dataset.pagerPage);
+      render();
+      qs('.series-bar', root)?.scrollIntoView({ block: 'start', behavior: RS.reduceMotion() ? 'auto' : 'smooth' });
+    });
+    /* the year dropdown narrows the list to that year */
+    qs('[data-series-jump-input]', root)?.addEventListener('change', event => { yr = event.target.value; page = 1; render(); });
     let timer;
     qs('[data-series-search]', root)?.addEventListener('input', event => {
       clearTimeout(timer);
-      timer = setTimeout(() => { query = event.target.value; render(); }, 150);
+      timer = setTimeout(() => { query = event.target.value; page = 1; render(); }, 150);
     });
     setView(view);
   });

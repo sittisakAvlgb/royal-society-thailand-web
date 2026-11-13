@@ -21,6 +21,7 @@
   <meta property="og:locale" content="th_TH">
   <meta property="og:locale:alternate" content="en_GB">
 
+  <link rel="alternate" type="application/rss+xml" title="ข่าวสารและกิจกรรม ราชบัณฑิตยสภา" href="../rss.xml">
   <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
   <link rel="apple-touch-icon" href="../assets/images/cropped-logo-with-bg-1.png">
 
@@ -32,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
 
   <script type="application/ld+json">
   {
@@ -50,15 +51,15 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
+  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
+  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
+  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
+  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -76,67 +77,175 @@
     </div>
   </div>
 
-  <main id="main-content" tabindex="-1">
-    <div class="page-header">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+  <!-- ==============================
+       Online Contact Form: the green opening band; the form in a card —
+       the topic as a row of choices, then who you are and the message —
+       centred on the page.
+       Prototype only: nothing is sent; the page says so when submitted.
+       TODO (Backend): connect to the enquiry system and add spam protection
+  ================================ -->
+  <main id="main-content" tabindex="-1" class="cf-page">
+    <div class="hhero hhero--study hhero--crestart hhero--slim">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/about/executives-hero.jpg" alt="" decoding="async"></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
           <ol>
             <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
-            <li><a href="contact.html" data-en="Contact and Participation">ติดต่อและมีส่วนร่วม</a></li>
+            <li><a href="contact.html" data-en="Contact the Royal Society">ติดต่อราชบัณฑิตยสภา</a></li>
             <li><span aria-current="page" data-en="Online Contact Form">แบบฟอร์มติดต่อออนไลน์</span></li>
           </ol>
         </nav>
-        <h1 data-en="Online Contact Form">แบบฟอร์มติดต่อออนไลน์</h1>
-        <p class="page-header__lead" data-en="Send a question or comment to the Office of the Royal Society; the Office replies by email.">ส่งคำถามหรือข้อเสนอแนะถึงสำนักงานราชบัณฑิตยสภา สำนักงานจะตอบกลับทางอีเมล</p>
+        <div class="hhero__text">
+          <h1 class="hhero__title" data-en="Online Contact Form">แบบฟอร์มติดต่อออนไลน์</h1>
+          <p class="hhero__lead" data-en="Questions, feedback and complaints to the Office of the Royal Society, answered by email"><span class="story__ph">สอบถาม แสดงความคิดเห็น หรือร้องเรียน</span> <span class="story__ph">ถึงสำนักงานราชบัณฑิตยสภา</span> <span class="story__ph">สำนักงานตอบกลับทางอีเมล</span></p>
+        </div>
       </div>
     </div>
 
-    <div class="container content-layout">
-      <!-- ==============================
-           8.2 Online Contact Form
-           Prototype only: the form is not wired to a backend.
-      ================================ -->
-      <section class="topic-section" id="contact-form" aria-labelledby="contact-form-title">
-        <h2 id="contact-form-title" class="visually-hidden" data-en="Online Contact Form">แบบฟอร์มติดต่อออนไลน์</h2>
-        <p data-en="Send a question or comment to the Office. Fields marked * are required.">ส่งคำถามหรือข้อเสนอแนะถึงสำนักงาน ช่องที่มีเครื่องหมาย * จำเป็นต้องกรอก</p>
-        <!-- TODO (Backend): connect to the enquiry system and add spam protection -->
-        <form class="stack" action="contact-form.html" method="get" aria-labelledby="contact-form-title">
-          <div class="field">
-            <label class="field__label" for="cf-name"><span data-en="Full name">ชื่อ-นามสกุล</span> *</label>
-            <input class="input" id="cf-name" name="name" type="text" autocomplete="name" required>
+    <div class="container cf-body">
+      <section class="cf-card" id="contact-form" aria-labelledby="contact-form-title">
+        <h2 id="contact-form-title" class="cf-card__title" data-en="Write to the Office">ส่งข้อความถึงสำนักงาน</h2>
+        <p class="cf-card__note" data-en="Fields marked * are required.">ช่องที่มีเครื่องหมาย <span class="cf-req">*</span> จำเป็นต้องกรอก</p>
+
+        <form class="cf-form cf-form--plain" action="contact-form.html" method="get" novalidate data-cf-form>
+          <div class="cf-grid">
+            <div class="field">
+              <label class="field__label" for="cf-topic" id="cf-topic-label"><span data-en="Topic">เรื่องที่ติดต่อ</span> <span class="cf-req">*</span></label>
+              <select class="select cf-native" id="cf-topic" name="topic" required tabindex="-1" aria-hidden="true">
+                <option value="" data-en="Choose a topic">เลือกเรื่องที่ติดต่อ</option>
+                <option value="language" data-en="Words, terms and Thai usage">สอบถามศัพท์และภาษา</option>
+                <option value="academic" data-en="Academic enquiry">ข้อมูลทางวิชาการ</option>
+                <option value="publications" data-en="Journals and publications">วารสารและสิ่งพิมพ์</option>
+                <option value="feedback" data-en="Feedback and suggestions">ความคิดเห็นและข้อเสนอแนะ</option>
+                <option value="complaint" data-en="Complaint">ร้องเรียน</option>
+                <option value="website" data-en="Website problem">ปัญหาการใช้งานเว็บไซต์</option>
+                <option value="other" data-en="Other">อื่น ๆ</option>
+              </select>
+              <div class="cf-pick" data-cf-pick>
+                <button class="cf-pick__btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cf-topic-label cf-topic-value" data-cf-pick-btn>
+                  <span id="cf-topic-value" class="cf-pick__value is-empty" data-cf-pick-value data-en="Choose a topic">เลือกเรื่องที่ติดต่อ</span>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+                </button>
+                <ul class="cf-pick__list" role="listbox" aria-labelledby="cf-topic-label" tabindex="-1" hidden data-cf-pick-list></ul>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="cf-subject"><span data-en="Subject">หัวเรื่อง</span> <span class="cf-req">*</span></label>
+              <input class="input" id="cf-subject" name="subject" type="text" maxlength="150" required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="cf-name"><span data-en="Full name">ชื่อ-นามสกุล</span> <span class="cf-req">*</span></label>
+              <input class="input" id="cf-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="cf-email"><span data-en="Email">อีเมล</span> <span class="cf-req">*</span></label>
+              <input class="input" id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="cf-phone"><span data-en="Telephone">โทรศัพท์</span> <span class="cf-opt" data-en="(optional)">(ถ้ามี)</span></label>
+              <input class="input" id="cf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+            </div>
+            <div class="field">
+              <label class="field__label" for="cf-org"><span data-en="Organisation">หน่วยงาน</span> <span class="cf-opt" data-en="(optional)">(ถ้ามี)</span></label>
+              <input class="input" id="cf-org" name="organisation" type="text" autocomplete="organization">
+            </div>
+            <div class="field cf-grid__full">
+              <label class="field__label" for="cf-message"><span data-en="Message">รายละเอียด</span> <span class="cf-req">*</span></label>
+              <textarea class="textarea" id="cf-message" name="message" rows="7" maxlength="2000" required data-cf-count></textarea>
+              <p class="field__hint cf-count"><span data-cf-count-now>0</span>/2,000</p>
+            </div>
           </div>
-          <div class="field">
-            <label class="field__label" for="cf-email"><span data-en="Email">อีเมล</span> *</label>
-            <input class="input" id="cf-email" name="email" type="email" autocomplete="email" required>
-            <p class="field__hint" data-en="We will reply to this address.">สำนักงานจะตอบกลับทางอีเมลนี้</p>
-          </div>
-          <div class="field">
-            <label class="field__label" for="cf-topic"><span data-en="Topic">เรื่องที่ติดต่อ</span> *</label>
-            <select class="select" id="cf-topic" name="topic" required>
-              <option value="" data-en="Choose a topic">เลือกเรื่องที่ติดต่อ</option>
-              <option value="language" data-en="Words, terms and the Thai language">สอบถามศัพท์และภาษา</option>
-              <option value="academic" data-en="Academic enquiry">สอบถามข้อมูลทางวิชาการ</option>
-              <option value="publications" data-en="Journals and Publications">วารสารและสิ่งพิมพ์</option>
-              <option value="website" data-en="Website problem">ปัญหาการใช้งานเว็บไซต์</option>
-              <option value="other" data-en="Other">อื่น ๆ</option>
-            </select>
-          </div>
-          <div class="field">
-            <label class="field__label" for="cf-message"><span data-en="Message">ข้อความ</span> *</label>
-            <textarea class="textarea" id="cf-message" name="message" rows="6" required></textarea>
-          </div>
-          <div>
-            <button class="btn btn--primary" type="submit">
-              <span data-en="Send message">ส่งข้อความ</span>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
-            </button>
+          <label class="cf-consent"><input type="checkbox" name="consent" required><span data-en="I agree that the Office may use these details to reply to me, under the privacy policy.">ยินยอมให้สำนักงานใช้ข้อมูลข้างต้นเพื่อติดต่อกลับ ตาม<a href="policies.html#privacy-policy">นโยบายคุ้มครองข้อมูลส่วนบุคคล</a></span></label>
+          <p class="cf-error" data-cf-error="form" hidden data-en="Please complete the fields marked *">กรุณากรอกช่องที่มีเครื่องหมาย * ให้ครบ</p>
+          <div class="cf-submit">
+            <p class="cf-submit__note" data-en="The Office replies to the email you give.">สำนักงานจะตอบกลับทางอีเมลที่ระบุ</p>
+            <button class="btn btn--primary btn--pill" type="submit"><span data-en="Send">ส่งข้อความ</span></button>
           </div>
         </form>
+
+        <div class="cf-done" data-cf-done hidden tabindex="-1">
+          <p class="cf-done__title" data-en="Message ready to send">ข้อความพร้อมส่งแล้ว</p>
+          <p data-en="This is a prototype page: the message has not been sent. Once the form is connected, the Office will reply to the email you gave.">หน้านี้เป็นต้นแบบ ระบบยังไม่ได้ส่งข้อความจริง เมื่อเชื่อมต่อระบบแล้ว สำนักงานจะตอบกลับทางอีเมลที่ระบุ</p>
+          <button class="btn btn--secondary btn--pill btn--sm" type="button" data-cf-again><span data-en="Write another">เขียนข้อความใหม่</span></button>
+        </div>
       </section>
 
     </div>
   </main>
 
   <div id="app-footer"></div>
+  <script>
+    /* the contact form (prototype): the topic from ?topic=, a character count,
+       checks on submit, and a note that nothing has been sent */
+    (() => {
+      const form = document.querySelector('[data-cf-form]');
+      if (!form) return;
+      const asked = new URLSearchParams(location.search).get('topic');
+      const sel = form.querySelector('#cf-topic');
+      if (asked && sel && [...sel.options].some(o => o.value === asked)) sel.value = asked;
+
+      /* the topic picker: a styled list in place of the native one; the
+         native select stays in the form (hidden) so checks and sending work */
+      const native = form.querySelector('#cf-topic');
+      const pick = form.querySelector('[data-cf-pick]');
+      if (native && pick) {
+        const btn = pick.querySelector('[data-cf-pick-btn]');
+        const list = pick.querySelector('[data-cf-pick-list]');
+        const label = pick.querySelector('[data-cf-pick-value]');
+        const opts = [...native.options].filter(o => o.value);
+        list.innerHTML = opts.map((o, i) => `<li class="cf-pick__opt" role="option" id="cf-opt-${i}" data-value="${o.value}" aria-selected="false"><span>${o.textContent}</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg></li>`).join('');
+        const items = [...list.children];
+        let active = -1;
+        const sync = () => {
+          const o = native.selectedOptions[0];
+          label.textContent = o && o.value ? o.textContent : native.options[0].textContent;
+          label.classList.toggle('is-empty', !native.value);
+          items.forEach(li => li.setAttribute('aria-selected', String(li.dataset.value === native.value)));
+          pick.classList.toggle('is-invalid', form.classList.contains('was-checked') && !native.value);
+        };
+        const mark = i => { active = i; items.forEach((li, n) => li.classList.toggle('is-active', n === i)); if (items[i]) { list.setAttribute('aria-activedescendant', items[i].id); items[i].scrollIntoView({ block: 'nearest' }); } };
+        const open = () => { list.hidden = false; btn.setAttribute('aria-expanded', 'true'); pick.classList.add('is-open'); mark(Math.max(0, items.findIndex(li => li.dataset.value === native.value))); list.focus(); };
+        const close = (focus = true) => { list.hidden = true; btn.setAttribute('aria-expanded', 'false'); pick.classList.remove('is-open'); if (focus) btn.focus(); };
+        const choose = i => { if (!items[i]) return; native.value = items[i].dataset.value; native.dispatchEvent(new Event('change', { bubbles: true })); sync(); close(); };
+        btn.addEventListener('click', () => (list.hidden ? open() : close()));
+        btn.addEventListener('keydown', e => { if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(e.key)) { e.preventDefault(); open(); } });
+        list.addEventListener('click', e => { const li = e.target.closest('.cf-pick__opt'); if (li) choose(items.indexOf(li)); });
+        list.addEventListener('mousemove', e => { const li = e.target.closest('.cf-pick__opt'); if (li) mark(items.indexOf(li)); });
+        list.addEventListener('keydown', e => {
+          if (e.key === 'ArrowDown') { e.preventDefault(); mark(Math.min(items.length - 1, active + 1)); }
+          else if (e.key === 'ArrowUp') { e.preventDefault(); mark(Math.max(0, active - 1)); }
+          else if (e.key === 'Home') { e.preventDefault(); mark(0); }
+          else if (e.key === 'End') { e.preventDefault(); mark(items.length - 1); }
+          else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(active); }
+          else if (e.key === 'Escape' || e.key === 'Tab') { close(e.key === 'Escape'); }
+        });
+        document.addEventListener('click', e => { if (!pick.contains(e.target) && !list.hidden) close(false); });
+        native.addEventListener('invalid', () => { pick.classList.add('is-invalid'); });
+        form.addEventListener('reset', () => setTimeout(sync));
+        form.addEventListener('submit', () => setTimeout(sync));
+        pick.focusTarget = btn;
+        sync();
+      }
+      const msg = form.querySelector('[data-cf-count]');
+      const now = form.querySelector('[data-cf-count-now]');
+      const count = () => { if (now) now.textContent = msg.value.length.toLocaleString(); };
+      msg && msg.addEventListener('input', count);
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        const ok = form.checkValidity();
+        form.querySelector('[data-cf-error="form"]').hidden = ok;
+        form.classList.add('was-checked');
+        if (!ok) { const bad = form.querySelector(':invalid'); (bad && bad.id === 'cf-topic' ? form.querySelector('[data-cf-pick-btn]') : bad)?.focus(); return; }
+        form.hidden = true;
+        const done = document.querySelector('[data-cf-done]');
+        done.hidden = false; done.focus();
+      });
+      document.querySelector('[data-cf-again]')?.addEventListener('click', () => {
+        form.reset(); count(); form.classList.remove('was-checked');
+        form.hidden = false; document.querySelector('[data-cf-done]').hidden = true;
+        form.querySelector('[data-cf-pick-btn]').focus();
+      });
+    })();
+  </script>
 </body>
 </html>

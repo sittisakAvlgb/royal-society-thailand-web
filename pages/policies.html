@@ -21,6 +21,7 @@
   <meta property="og:locale" content="th_TH">
   <meta property="og:locale:alternate" content="en_GB">
 
+  <link rel="alternate" type="application/rss+xml" title="ข่าวสารและกิจกรรม ราชบัณฑิตยสภา" href="../rss.xml">
   <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
   <link rel="apple-touch-icon" href="../assets/images/cropped-logo-with-bg-1.png">
 
@@ -32,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
 
   <script type="application/ld+json">
   {
@@ -50,15 +51,15 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
+  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
+  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
+  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
+  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -76,176 +77,187 @@
     </div>
   </div>
 
-  <main id="main-content" tabindex="-1">
-    <div class="page-header">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+  <!-- ==============================
+       Policies and Legal: the green opening band; the four policies as an
+       index; then each policy. The privacy policy carries what is already
+       true of this website — what it keeps on your device, and the outside
+       services it uses — with a button to change the cookie choice.
+       TODO (Office): the official text of each policy and its date
+  ================================ -->
+  <main id="main-content" tabindex="-1" class="pol-page">
+    <div class="hhero hhero--study hhero--slim">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/about/authority-hero.jpg" alt="" decoding="async"></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
           <ol>
             <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
             <li><span aria-current="page" data-en="Policies &amp; Legal">นโยบายและข้อกำหนด</span></li>
           </ol>
         </nav>
-        <h1 data-en="Policies &amp; Legal">นโยบายและข้อกำหนด</h1>
-        <p class="page-header__lead" data-en="Policies for using this website, protecting personal data, website security, and copyright.">นโยบายการใช้งานเว็บไซต์ การคุ้มครองข้อมูลส่วนบุคคล ความมั่นคงปลอดภัย และลิขสิทธิ์</p>
+        <div class="hhero__text">
+          <h1 class="hhero__title" data-en="Policies &amp; Legal">นโยบายและข้อกำหนด</h1>
+          <p class="hhero__lead" data-en="Using this website, protecting personal data, security and copyright"><span class="story__ph">การใช้งานเว็บไซต์</span> <span class="story__ph">การคุ้มครองข้อมูลส่วนบุคคล</span> <span class="story__ph">ความมั่นคงปลอดภัย และลิขสิทธิ์</span></p>
+        </div>
       </div>
     </div>
 
-    <div class="container container--reading content-layout">
-
-      <nav aria-label="หัวข้อในหน้านี้" data-en-aria-label="On this page">
-        <ul class="tag-list" role="list">
-          <li><a class="tag" href="#website-policy" data-en="Website Policy">นโยบายเว็บไซต์</a></li>
-          <li><a class="tag" href="#privacy-policy" data-en="Privacy and Cookie Policy">นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้</a></li>
-          <li><a class="tag" href="#security-policy" data-en="Website Security Policy">นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์</a></li>
-          <li><a class="tag" href="#copyright" data-en="Copyright and Disclaimer">คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด</a></li>
-        </ul>
+    <div class="container pol-body">
+      <nav class="pol-index" aria-label="นโยบายในหน้านี้" data-en-aria-label="Policies on this page">
+        <ol role="list">
+          <li><a class="pol-index__item" href="#website-policy"><span class="pol-index__no">๐๑</span><span class="pol-index__body"><strong data-en="Website Policy">นโยบายเว็บไซต์</strong><span data-en="Scope and terms of use of this website">ขอบเขตและเงื่อนไขการใช้งานเว็บไซต์ราชบัณฑิตยสภา</span></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
+          <li><a class="pol-index__item" href="#privacy-policy"><span class="pol-index__no">๐๒</span><span class="pol-index__body"><strong data-en="Privacy and Cookie Policy">นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้</strong><span data-en="What the website keeps, and your rights under the PDPA">ข้อมูลที่เว็บไซต์จัดเก็บ และสิทธิของคุณตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล</span></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
+          <li><a class="pol-index__item" href="#security-policy"><span class="pol-index__no">๐๓</span><span class="pol-index__body"><strong data-en="Website Security Policy">นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์</strong><span data-en="How the website and its data are protected">มาตรการดูแลระบบและข้อมูลของเว็บไซต์</span></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
+          <li><a class="pol-index__item" href="#copyright"><span class="pol-index__no">๐๔</span><span class="pol-index__body"><strong data-en="Copyright and Disclaimer">คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด</strong><span data-en="Using the content, and the limits of responsibility">การนำเนื้อหาไปใช้ และขอบเขตความรับผิดชอบ</span></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></li>
+        </ol>
       </nav>
 
-      <!-- ==============================
-           1. Website policy
-      ================================ -->
-      <section class="prose" id="website-policy" aria-labelledby="website-policy-title">
-        <h2 id="website-policy-title" data-en="Website Policy">นโยบายเว็บไซต์</h2>
-        <div class="content-note">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <p data-en="Official text will be provided by the Office of the Royal Society.">เนื้อหาฉบับทางการจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-        </div>
-        <p class="meta-list">
-          <span data-en="Last updated:">ปรับปรุงล่าสุด:</span>
-          <!-- TODO (Office): last-updated date, e.g. <time datetime="YYYY-MM-DD">…</time> -->
-          <span>—</span>
-        </p>
+      <section class="pol-sec" id="website-policy" aria-labelledby="website-policy-title">
+            <header class="pol-sec__head">
+              <span class="pol-sec__no" aria-hidden="true">๐๑</span>
+              <h2 id="website-policy-title" class="pol-sec__title" data-en="Website Policy">นโยบายเว็บไซต์</h2>
+            </header>
+            <div class="pol-sec__body prose">
+              <p class="pol-pending"><span class="pol-pending__dot" aria-hidden="true"></span><span data-en="The official text is being prepared by the Office of the Royal Society.">เนื้อหาฉบับทางการอยู่ระหว่างจัดทำโดยสำนักงานราชบัณฑิตยสภา</span></p>
+              <!-- TODO (Office): last-updated date, e.g. <time datetime="YYYY-MM-DD">…</time> -->
+              <p class="pol-updated"><span data-en="Last updated:">ปรับปรุงล่าสุด:</span> <span data-en="awaiting the official text">รอเนื้อหาฉบับทางการ</span></p>
+            </div>
       </section>
 
-      <!-- ==============================
-           2. Privacy & cookie policy
-      ================================ -->
-      <section class="prose" id="privacy-policy" aria-labelledby="privacy-policy-title">
-        <h2 id="privacy-policy-title" data-en="Privacy and Cookie Policy">นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้</h2>
-        <div class="content-note">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <p data-en="Official text will be provided by the Office of the Royal Society.">เนื้อหาฉบับทางการจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-        </div>
-        <p data-en="Reference: Personal Data Protection Act B.E. 2562 (2019).">อ้างอิง: พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. ๒๕๖๒</p>
+      <section class="pol-sec pol-sec--privacy" id="privacy-policy" aria-labelledby="privacy-policy-title">
+            <header class="pol-sec__head">
+              <span class="pol-sec__no" aria-hidden="true">๐๒</span>
+              <h2 id="privacy-policy-title" class="pol-sec__title" data-en="Privacy and Cookie Policy">นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้</h2>
+            </header>
+            <div class="pol-sec__body prose">
+              <p class="pol-pending"><span class="pol-pending__dot" aria-hidden="true"></span><span data-en="The official text is being prepared by the Office of the Royal Society.">เนื้อหาฉบับทางการอยู่ระหว่างจัดทำโดยสำนักงานราชบัณฑิตยสภา</span></p>
+              <p class="pol-ref" data-en="Reference: Personal Data Protection Act B.E. 2562 (2019).">อ้างอิง: พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. ๒๕๖๒</p>
 
-        <h3 id="device-storage-title" data-en="What this website stores on your device">ข้อมูลที่เว็บไซต์นี้จัดเก็บในอุปกรณ์ของคุณ</h3>
-        <p data-en="This website does not use analytics or advertising cookies. It saves only the settings below in your browser, so that the website remembers your choices on this device.">เว็บไซต์นี้ไม่ใช้คุกกี้เพื่อการวิเคราะห์หรือการโฆษณา และจัดเก็บเฉพาะการตั้งค่าด้านล่างไว้ในเบราว์เซอร์ เพื่อให้เว็บไซต์จดจำตัวเลือกของคุณในอุปกรณ์นี้</p>
-        <p data-en="Items marked “Necessary” are what the website needs to work. The rest are stored only if you agree; you can change or withdraw your choice at any time with “Cookie settings” at the foot of every page, and anything you decline is deleted from this device.">รายการที่ระบุว่า “จำเป็น” คือสิ่งที่เว็บไซต์ต้องใช้เพื่อให้ทำงานได้ ส่วนรายการอื่นจะจัดเก็บก็ต่อเมื่อคุณยินยอมเท่านั้น คุณเปลี่ยนหรือถอนความยินยอมได้ตลอดเวลาที่ “ตั้งค่าคุกกี้” ด้านล่างของทุกหน้า และรายการที่คุณปฏิเสธจะถูกลบออกจากอุปกรณ์นี้</p>
-        <div class="table-scroll">
-          <table aria-labelledby="device-storage-title">
-            <thead>
-              <tr>
-                <th scope="col" data-en="Name">ชื่อ</th>
-                <th scope="col" data-en="Type">ประเภท</th>
-                <th scope="col" data-en="Category">หมวด</th>
-                <th scope="col" data-en="Purpose">วัตถุประสงค์</th>
-                <th scope="col" data-en="Duration">ระยะเวลา</th>
-              </tr>
-            </thead>
-            <tbody>
+              <div class="pol-facts">
+                <div class="pol-fact"><strong data-en="No tracking">ไม่ติดตามผู้ใช้</strong><span data-en="No analytics or advertising cookies">ไม่ใช้คุกกี้เพื่อการวิเคราะห์หรือการโฆษณา</span></div>
+                <div class="pol-fact"><strong data-en="On your device only">เก็บในอุปกรณ์ของคุณเท่านั้น</strong><span data-en="Your settings stay in this browser">การตั้งค่าอยู่ในเบราว์เซอร์นี้ ไม่ส่งไปที่ใด</span></div>
+                <div class="pol-fact"><strong data-en="Your choice">คุณเป็นผู้เลือก</strong><span data-en="Change or withdraw consent at any time">เปลี่ยนหรือถอนความยินยอมได้ตลอดเวลา</span></div>
+              </div>
+
+              <h3 id="device-storage-title" data-en="What this website stores on your device">ข้อมูลที่เว็บไซต์นี้จัดเก็บในอุปกรณ์ของคุณ</h3>
+              <p data-en="Items marked “Necessary” are what the website needs to work. The rest are stored only if you agree; anything you decline is deleted from this device.">รายการที่ระบุว่า “จำเป็น” คือสิ่งที่เว็บไซต์ต้องใช้เพื่อให้ทำงานได้ ส่วนรายการอื่นจะจัดเก็บก็ต่อเมื่อคุณยินยอมเท่านั้น และรายการที่คุณปฏิเสธจะถูกลบออกจากอุปกรณ์นี้</p>
+              <div class="table-scroll pol-table">
+                <table aria-labelledby="device-storage-title">
+                  <thead>
+                    <tr>
+                      <th scope="col" data-en="Name">ชื่อ</th>
+                      <th scope="col" data-en="Type">ประเภท</th>
+                      <th scope="col" data-en="Category">หมวด</th>
+                      <th scope="col" data-en="Purpose">วัตถุประสงค์</th>
+                      <th scope="col" data-en="Duration">ระยะเวลา</th>
+                    </tr>
+                  </thead>
+                  <tbody>
               <tr>
                 <td><code lang="en">rs-lang</code></td>
                 <td lang="en">localStorage</td>
-                <td data-en="Necessary">จำเป็น</td>
+                <td><span class="pol-cat pol-cat--need" data-en="Necessary">จำเป็น</span></td>
                 <td data-en="Remembers the language you chose (Thai or English)">จดจำภาษาที่เลือก (ไทยหรืออังกฤษ)</td>
                 <td data-en="Until you clear this website's data in your browser">จนกว่าจะล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs-accessibility-settings</code></td>
                 <td lang="en">localStorage</td>
-                <td data-en="Preferences">การตั้งค่า</td>
+                <td><span class="pol-cat" data-en="Preferences">การตั้งค่า</span></td>
                 <td data-en="Remembers display settings: text size, high contrast, reduced motion and underlined links">จดจำการตั้งค่าการแสดงผล ได้แก่ ขนาดตัวอักษร คอนทราสต์สูง ลดการเคลื่อนไหว และขีดเส้นใต้ลิงก์</td>
                 <td data-en="Until you clear this website's data in your browser">จนกว่าจะล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs-recent-searches</code></td>
                 <td lang="en">localStorage</td>
-                <td data-en="Preferences">การตั้งค่า</td>
+                <td><span class="pol-cat" data-en="Preferences">การตั้งค่า</span></td>
                 <td data-en="Up to 5 recent searches, shown in the search panel on this device only">คำค้นล่าสุดไม่เกิน ๕ รายการ แสดงในหน้าต่างค้นหาบนอุปกรณ์นี้เท่านั้น</td>
                 <td data-en="Until you select “Clear” in the search panel or clear this website's data">จนกว่าจะกด “ล้าง” ในหน้าต่างค้นหา หรือล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs-lang-scroll</code></td>
                 <td lang="en">sessionStorage</td>
-                <td data-en="Necessary">จำเป็น</td>
+                <td><span class="pol-cat pol-cat--need" data-en="Necessary">จำเป็น</span></td>
                 <td data-en="Keeps your scroll position when you switch language">จดจำตำแหน่งการเลื่อนหน้าเมื่อสลับภาษา</td>
                 <td data-en="Removed as soon as the new language page opens, or when the tab is closed">ลบทันทีเมื่อเปิดหน้าภาษาใหม่แล้ว หรือเมื่อปิดแท็บ</td>
               </tr>
               <tr>
                 <td><code lang="en">rs-cookie-consent</code></td>
                 <td lang="en">localStorage</td>
-                <td data-en="Necessary">จำเป็น</td>
+                <td><span class="pol-cat pol-cat--need" data-en="Necessary">จำเป็น</span></td>
                 <td data-en="Remembers the cookie choice you made, so you are not asked again">จดจำตัวเลือกคุกกี้ที่คุณเลือกไว้ เพื่อไม่ต้องถามซ้ำ</td>
                 <td data-en="Until you clear this website's data in your browser">จนกว่าจะล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs.bookmarks</code></td>
                 <td lang="en">localStorage</td>
-                <td data-en="Preferences">การตั้งค่า</td>
+                <td><span class="pol-cat" data-en="Preferences">การตั้งค่า</span></td>
                 <td data-en="The Fellows and pages you saved with the bookmark button, on this device only">ราชบัณฑิตและหน้าที่คุณกดบันทึกไว้ เฉพาะบนอุปกรณ์นี้</td>
                 <td data-en="Until you remove them, decline this category, or clear this website's data">จนกว่าจะลบรายการ ปฏิเสธหมวดนี้ หรือล้างข้อมูลของเว็บไซต์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs.reminders</code></td>
                 <td lang="en">localStorage</td>
-                <td data-en="Preferences">การตั้งค่า</td>
+                <td><span class="pol-cat" data-en="Preferences">การตั้งค่า</span></td>
                 <td data-en="Event reminders you set in the calendar, shown while this browser is open">การเตือนกิจกรรมที่คุณตั้งไว้ในปฏิทิน แสดงเมื่อเปิดเบราว์เซอร์นี้</td>
                 <td data-en="Until you remove them, decline this category, or clear this website's data">จนกว่าจะลบรายการ ปฏิเสธหมวดนี้ หรือล้างข้อมูลของเว็บไซต์</td>
               </tr>
               <tr>
                 <td><code lang="en">rs-mobile-panel</code>, <code lang="en">rs-mobile-sub</code>, <code lang="en">rs-mobile-subsub</code></td>
                 <td lang="en">sessionStorage</td>
-                <td data-en="Preferences">การตั้งค่า</td>
+                <td><span class="pol-cat" data-en="Preferences">การตั้งค่า</span></td>
                 <td data-en="Keeps the menu open where you left it while you move between pages">จดจำตำแหน่งที่เปิดค้างไว้ในเมนู ระหว่างที่คุณเปลี่ยนหน้า</td>
                 <td data-en="Removed when the tab is closed">ลบเมื่อปิดแท็บ</td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-        <p data-en="You can remove all of this information by clearing this website's data in your browser settings.">คุณลบข้อมูลทั้งหมดนี้ได้ด้วยการล้างข้อมูลของเว็บไซต์ในการตั้งค่าเบราว์เซอร์</p>
+                <tr>
+                  <td><code lang="en">rs-news-view</code>, <code lang="en">rs-news-size</code>, <code lang="en">rs-gallery-size</code>, <code lang="en">rs-works-view</code>, <code lang="en">rs-works-size</code>, <code lang="en">rs-series-view</code>, <code lang="en">rs-fellows-view</code>, <code lang="en">rs-fellows-size</code>, <code lang="en">rs-roll-view</code></td>
+                  <td lang="en">localStorage</td>
+                  <td><span class="pol-cat" data-en="Preferences">การตั้งค่า</span></td>
+                  <td data-en="Remembers how you like lists shown — grid or list, and how many per page">จดจำรูปแบบการแสดงรายการที่เลือก เช่น แบบตารางหรือแบบรายการ และจำนวนต่อหน้า</td>
+                  <td data-en="Until you decline this category or clear this website's data">จนกว่าจะปฏิเสธหมวดนี้ หรือล้างข้อมูลของเว็บไซต์</td>
+                </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pol-choice">
+                <p data-en="You can change your choice now, or remove everything by clearing this website's data in your browser.">เปลี่ยนตัวเลือกได้ทันที หรือลบข้อมูลทั้งหมดด้วยการล้างข้อมูลของเว็บไซต์ในเบราว์เซอร์</p>
+                <button class="btn btn--primary btn--pill btn--sm" type="button" data-cookie-settings><span data-en="Cookie settings">ตั้งค่าคุกกี้</span></button>
+              </div>
 
-        <h3 data-en="Web fonts">แบบอักษรบนเว็บไซต์</h3>
-        <p data-en="This website loads its fonts from Google Fonts (fonts.googleapis.com and fonts.gstatic.com). When a page opens, your browser connects to Google's servers, which receive your IP address.">เว็บไซต์นี้โหลดแบบอักษรจาก Google Fonts (fonts.googleapis.com และ fonts.gstatic.com) เมื่อเปิดหน้าเว็บ เบราว์เซอร์ของคุณจะเชื่อมต่อกับเซิร์ฟเวอร์ของ Google ซึ่งจะได้รับหมายเลข IP ของคุณ</p>
-
-        <p class="meta-list">
-          <span data-en="Last updated:">ปรับปรุงล่าสุด:</span>
-          <!-- TODO (Office): last-updated date, e.g. <time datetime="YYYY-MM-DD">…</time> -->
-          <span>—</span>
-        </p>
+              <h3 data-en="Outside services">บริการภายนอกที่ใช้</h3>
+              <ul class="pol-services" role="list">
+                <li><strong data-en="Google Fonts">Google Fonts</strong><span data-en="Some fonts load from fonts.googleapis.com and fonts.gstatic.com; your browser connects to Google's servers, which receive your IP address.">แบบอักษรบางส่วนโหลดจาก fonts.googleapis.com และ fonts.gstatic.com เบราว์เซอร์ของคุณจะเชื่อมต่อกับเซิร์ฟเวอร์ของ Google ซึ่งจะได้รับหมายเลข IP ของคุณ</span></li>
+                <li><strong data-en="Google Maps">Google Maps</strong><span data-en="The map on the contact page is shown from Google Maps; Google receives your IP address when it loads.">แผนที่ในหน้าติดต่อราชบัณฑิตยสภาแสดงจาก Google Maps เมื่อแผนที่โหลด Google จะได้รับหมายเลข IP ของคุณ</span></li>
+              </ul>
+              <!-- TODO (Office): last-updated date, e.g. <time datetime="YYYY-MM-DD">…</time> -->
+              <p class="pol-updated"><span data-en="Last updated:">ปรับปรุงล่าสุด:</span> <span data-en="awaiting the official text">รอเนื้อหาฉบับทางการ</span></p>
+            </div>
       </section>
 
-      <!-- ==============================
-           3. Website security policy
-      ================================ -->
-      <section class="prose" id="security-policy" aria-labelledby="security-policy-title">
-        <h2 id="security-policy-title" data-en="Website Security Policy">นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์</h2>
-        <div class="content-note">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <p data-en="Official text will be provided by the Office of the Royal Society.">เนื้อหาฉบับทางการจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-        </div>
-        <p class="meta-list">
-          <span data-en="Last updated:">ปรับปรุงล่าสุด:</span>
-          <!-- TODO (Office): last-updated date, e.g. <time datetime="YYYY-MM-DD">…</time> -->
-          <span>—</span>
-        </p>
+      <section class="pol-sec" id="security-policy" aria-labelledby="security-policy-title">
+            <header class="pol-sec__head">
+              <span class="pol-sec__no" aria-hidden="true">๐๓</span>
+              <h2 id="security-policy-title" class="pol-sec__title" data-en="Website Security Policy">นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์</h2>
+            </header>
+            <div class="pol-sec__body prose">
+              <p class="pol-pending"><span class="pol-pending__dot" aria-hidden="true"></span><span data-en="The official text is being prepared by the Office of the Royal Society.">เนื้อหาฉบับทางการอยู่ระหว่างจัดทำโดยสำนักงานราชบัณฑิตยสภา</span></p>
+              <!-- TODO (Office): last-updated date, e.g. <time datetime="YYYY-MM-DD">…</time> -->
+              <p class="pol-updated"><span data-en="Last updated:">ปรับปรุงล่าสุด:</span> <span data-en="awaiting the official text">รอเนื้อหาฉบับทางการ</span></p>
+            </div>
       </section>
 
-      <!-- ==============================
-           4. Copyright & disclaimer
-      ================================ -->
-      <section class="prose" id="copyright" aria-labelledby="copyright-title">
-        <h2 id="copyright-title" data-en="Copyright and Disclaimer">คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด</h2>
-        <div class="content-note">
-          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <p data-en="Official text will be provided by the Office of the Royal Society.">เนื้อหาฉบับทางการจะจัดทำโดยสำนักงานราชบัณฑิตยสภา</p>
-        </div>
-        <p class="meta-list">
-          <span data-en="Last updated:">ปรับปรุงล่าสุด:</span>
-          <!-- TODO (Office): last-updated date, e.g. <time datetime="YYYY-MM-DD">…</time> -->
-          <span>—</span>
-        </p>
+      <section class="pol-sec" id="copyright" aria-labelledby="copyright-title">
+            <header class="pol-sec__head">
+              <span class="pol-sec__no" aria-hidden="true">๐๔</span>
+              <h2 id="copyright-title" class="pol-sec__title" data-en="Copyright and Disclaimer">คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด</h2>
+            </header>
+            <div class="pol-sec__body prose">
+              <p class="pol-pending"><span class="pol-pending__dot" aria-hidden="true"></span><span data-en="The official text is being prepared by the Office of the Royal Society.">เนื้อหาฉบับทางการอยู่ระหว่างจัดทำโดยสำนักงานราชบัณฑิตยสภา</span></p>
+              <!-- TODO (Office): last-updated date, e.g. <time datetime="YYYY-MM-DD">…</time> -->
+              <p class="pol-updated"><span data-en="Last updated:">ปรับปรุงล่าสุด:</span> <span data-en="awaiting the official text">รอเนื้อหาฉบับทางการ</span></p>
+            </div>
       </section>
 
+      <p class="pol-ask"><span data-en="Questions about these policies?">มีข้อสงสัยเกี่ยวกับนโยบาย</span> <a href="contact-form.html" data-en="Contact the Office">ติดต่อสำนักงาน</a></p>
     </div>
   </main>
 

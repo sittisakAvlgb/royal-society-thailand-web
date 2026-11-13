@@ -18,6 +18,7 @@
   <meta property="og:image" content="https://royalsociety.go.th/assets/images/cropped-logo-with-bg-1.png">
   <meta property="og:locale" content="th_TH">
 
+  <link rel="alternate" type="application/rss+xml" title="ข่าวสารและกิจกรรม ราชบัณฑิตยสภา" href="../rss.xml">
   <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,25 +29,25 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
 
-  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/news.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/press.js?v=20261117f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
-  <script defer src="../assets/js/13-news-detail.js?v=20261117f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
+  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/news.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/press.js?v=20261123w"></script>
+  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
+  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
+  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
+  <script defer src="../assets/js/13-news-detail.js?v=20261123w"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
 </head>
 <body class="page-news-story">
   <div id="app-header"></div>
@@ -122,30 +123,19 @@
           </div>
         </div>
 
-        <!-- Under the story: its photographs (open full size) beside its attachments -->
-        <div class="story__extras" data-story-extras hidden>
-          <section class="story__album" aria-labelledby="story-album-title" data-story-album hidden>
-            <h2 class="story__extras-title" id="story-album-title"><span data-en="Photos">ภาพประกอบข่าว</span> <span class="story__files-count" data-story-album-count></span></h2>
-            <ul class="story__album-grid" role="list" data-story-album-list></ul>
-          </section>
+        <!-- Under the story: its attachments first, then its photographs (open full size) -->
+        <div class="story__extras story__extras--docs-first" data-story-extras hidden>
           <section class="story__docs" aria-labelledby="story-files-title" data-story-files hidden>
             <h2 class="story__extras-title" id="story-files-title"><span data-en="Attachments">เอกสารแนบ</span> <span class="story__files-count" data-story-files-count></span></h2>
             <ul class="story__docs-list" role="list" data-story-files-list></ul>
           </section>
+          <section class="story__album" aria-labelledby="story-album-title" data-story-album hidden>
+            <h2 class="story__extras-title" id="story-album-title"><span data-en="Photos">ภาพประกอบข่าว</span> <span class="story__files-count" data-story-album-count></span></h2>
+            <ul class="story__album-grid" role="list" data-story-album-list></ul>
+          </section>
         </div>
       </div>
     </article>
-
-    <!-- The photo viewer: one photo at a time, its caption, previous / next -->
-    <dialog class="story__viewer" aria-labelledby="story-viewer-caption" data-story-viewer>
-      <figure class="story__viewer-figure">
-        <img src="" alt="" data-story-viewer-img>
-        <figcaption id="story-viewer-caption"><span data-story-viewer-caption></span> <span class="story__viewer-count" data-story-viewer-count></span></figcaption>
-      </figure>
-      <button class="story__viewer-btn story__viewer-btn--prev" type="button" data-story-viewer-step="-1" aria-label="ภาพก่อนหน้า" data-en-aria-label="Previous photo"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg></button>
-      <button class="story__viewer-btn story__viewer-btn--next" type="button" data-story-viewer-step="1" aria-label="ภาพถัดไป" data-en-aria-label="Next photo"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg></button>
-      <button class="story__viewer-close" type="button" data-story-viewer-close aria-label="ปิด" data-en-aria-label="Close"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-    </dialog>
 
     <!-- Other stories in the home news band's card -->
     <section class="section section--alt story__more-band" aria-labelledby="story-more-title">
@@ -155,8 +145,8 @@
             <p class="kicker" data-en="News &amp; events">ข่าวสารและกิจกรรม</p>
             <h2 id="story-more-title" class="section-title" data-en="More news">ข่าวอื่น ๆ</h2>
           </div>
-          <a class="link-arrow link-arrow--strong" href="news.html">
-            <span data-en="All news">ดูข่าวทั้งหมด</span>
+          <a class="btn btn--primary btn--pill" href="news.html">
+            <span data-en="View all">ดูทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
         </div>

@@ -210,3 +210,14 @@ body.access-reduce-motion *::after {
   body { background: #fff; font-size: 12pt; }
   a { color: #000; }
 }
+
+/* ==========================================================================
+   Thai typography, site-wide (checked 2026-11-12 across every page)
+   - Thai is never letter-spaced: tracking pulls its vowels and tone marks
+     away from their consonants. Latin labels marked lang="en" keep theirs,
+     and the "readable" display setting keeps its own spacing.
+   - Dates, labels and counters set in the Latin face put TH Sarabun New
+     first while the site is in Thai, so Thai never falls back by accident.
+   ========================================================================== */
+html:not([lang="en"]) body:not(.access-readable) *:not(:lang(en)) { letter-spacing: normal; }
+html:not([lang="en"]) :is(time, .news-cat, .kn-row__month, .sitemap-rail__count, .sitemap-block__count, .pub-shelf__date, .academy-index__num, .feature-item__num, .eyebrow, .error-page__code, .story__file-meta, .cal-row__day, .event__day, .profile__year, .result-item__alt, .check__count, .feature-story__counter span) { font-family: var(--font-body); }

@@ -21,6 +21,7 @@
   <meta property="og:locale" content="th_TH">
   <meta property="og:locale:alternate" content="en_GB">
 
+  <link rel="alternate" type="application/rss+xml" title="ข่าวสารและกิจกรรม ราชบัณฑิตยสภา" href="../rss.xml">
   <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
   <link rel="apple-touch-icon" href="../assets/images/cropped-logo-with-bg-1.png">
 
@@ -32,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
 
   <script type="application/ld+json">
   {
@@ -50,15 +51,15 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
+  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
+  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
+  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
+  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -76,88 +77,306 @@
     </div>
   </div>
 
-  <main id="main-content" tabindex="-1">
-    <div class="page-header">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+  <!-- ==============================
+       Frequently asked questions: the green opening band with a search box;
+       topic filters; the questions as an accordion that opens smoothly and
+       can be linked to (#q-…); a band at the foot for anything not answered.
+       TODO (Office): confirm the questions and answers
+  ================================ -->
+  <main id="main-content" tabindex="-1" class="faq-page">
+    <div class="hhero hhero--study hhero--crestart faq-hero">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/about/executives-hero.jpg" alt="" decoding="async"></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
           <ol>
             <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
-            <li><a href="contact.html" data-en="Contact and Participation">ติดต่อและมีส่วนร่วม</a></li>
-            <li><span aria-current="page" data-en="Frequently Asked Questions (FAQ)">คำถามที่พบบ่อย (FAQ)</span></li>
+            <li><a href="contact.html" data-en="Contact the Royal Society">ติดต่อราชบัณฑิตยสภา</a></li>
+            <li><span aria-current="page" data-en="Frequently Asked Questions">คำถามที่พบบ่อย</span></li>
           </ol>
         </nav>
-        <h1 data-en="Frequently Asked Questions (FAQ)">คำถามที่พบบ่อย (FAQ)</h1>
-        <p class="page-header__lead" data-en="Answers to common questions about the dictionary, coined terms, books and contacting the Office.">คำตอบสำหรับคำถามที่พบบ่อย เรื่องพจนานุกรม ศัพท์บัญญัติ หนังสือ และการติดต่อสำนักงาน</p>
+        <div class="hhero__text">
+          <h1 class="hhero__title" data-en="Frequently Asked Questions">คำถามที่พบบ่อย</h1>
+          <p class="hhero__lead" data-en="Words and terms, contacting the Office, books and membership"><span class="story__ph">คำและศัพท์ การติดต่อสำนักงาน</span> <span class="story__ph">หนังสือ และการสมัครเป็นสมาชิก</span></p>
+          <label class="faq-search">
+            <span class="visually-hidden" data-en="Search the questions">ค้นหาคำถาม</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+            <input type="search" placeholder="พิมพ์คำที่ต้องการ เช่น พจนานุกรม หนังสือ สมัคร" data-en-placeholder="Type a word, e.g. dictionary, books, apply" autocomplete="off" data-faq-search>
+          </label>
+        </div>
       </div>
     </div>
 
-    <div class="container content-layout">
-      <!-- ==============================
-           8.3 Frequently asked questions
-      ================================ -->
-      <section class="topic-section" id="faq" aria-labelledby="faq-title">
-        <h2 id="faq-title" class="visually-hidden" data-en="Frequently Asked Questions (FAQ)">คำถามที่พบบ่อย (FAQ)</h2>
-        <!-- TODO (Office): confirm questions and answers -->
-        <div class="accordion">
-          <details class="accordion__item">
-            <summary>
-              <span data-en="How do I look up a word in the Royal Institute Dictionary?">ค้นหาคำในพจนานุกรม ฉบับราชบัณฑิตยสถาน ได้อย่างไร</span>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+    <div class="container faq-body">
+      <div class="faq-tools">
+        <div class="news-tabs faq-tabs" role="group" aria-label="กรองตามหมวด" data-en-aria-label="Filter by topic" data-faq-tabs><button class="news-tab is-active" type="button" data-faq-filter="all" aria-pressed="true"><span data-en="All">ทั้งหมด</span><span class="faq-n">๑๒</span></button><button class="news-tab" type="button" data-faq-filter="language" aria-pressed="false"><span data-en="Words and language">คำและภาษา</span><span class="faq-n">๓</span></button><button class="news-tab" type="button" data-faq-filter="contact" aria-pressed="false"><span data-en="Contacting the Office">การติดต่อ</span><span class="faq-n">๓</span></button><button class="news-tab" type="button" data-faq-filter="books" aria-pressed="false"><span data-en="Books and publications">หนังสือและสิ่งพิมพ์</span><span class="faq-n">๒</span></button><button class="news-tab" type="button" data-faq-filter="members" aria-pressed="false"><span data-en="Fellows and membership">สมาชิก</span><span class="faq-n">๒</span></button><button class="news-tab" type="button" data-faq-filter="website" aria-pressed="false"><span data-en="Using this website">การใช้เว็บไซต์</span><span class="faq-n">๒</span></button></div>
+        <button class="faq-all" type="button" data-faq-all data-en="Open all">เปิดทั้งหมด</button>
+      </div>
+      <p class="faq-count" aria-live="polite" data-faq-count></p>
+
+      <section class="faq-list" id="faq" aria-label="คำถามและคำตอบ" data-en-aria-label="Questions and answers">
+          <details class="faq-item" id="q-dictionary" data-faq-item data-cat="language">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Words and language">คำและภาษา</span>
+              <span class="faq-item__text" data-en="How do I look up a word in the Royal Institute Dictionary?">ค้นหาคำในพจนานุกรม ฉบับราชบัณฑิตยสถาน ได้อย่างไร</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
             </summary>
-            <div class="accordion__body">
-              <p data-en="Use the search box on the home page or open the online dictionary from Online Academic Services.">ใช้ช่องค้นหาในหน้าแรก หรือเปิดพจนานุกรมออนไลน์จากเมนูบริการวิชาการออนไลน์</p>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="Use the search box on the home page or open the online dictionary from Online Academic Services.">ใช้ช่องค้นหาในหน้าแรก หรือเปิด<a href="https://dictionary.orst.go.th/" target="_blank" rel="noopener">พจนานุกรมออนไลน์<span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a> จากเมนูบริการวิชาการออนไลน์</p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-dictionary"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
             </div>
           </details>
-          <details class="accordion__item">
-            <summary>
-              <span data-en="What is the difference between a coined term and a transliteration?">ศัพท์บัญญัติกับคำทับศัพท์ต่างกันอย่างไร</span>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+          <details class="faq-item" id="q-coined-vs-translit" data-faq-item data-cat="language">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Words and language">คำและภาษา</span>
+              <span class="faq-item__text" data-en="What is the difference between a coined term and a transliteration?">ศัพท์บัญญัติกับคำทับศัพท์ต่างกันอย่างไร</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
             </summary>
-            <div class="accordion__body">
-              <p data-en="A coined term is a Thai equivalent created for a foreign term; a transliteration writes the foreign word in Thai script according to the official rules.">ศัพท์บัญญัติคือคำภาษาไทยที่กำหนดขึ้นแทนศัพท์ต่างประเทศ ส่วนคำทับศัพท์คือการเขียนคำต่างประเทศด้วยอักษรไทยตามหลักเกณฑ์ที่กำหนด</p>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="A coined term is a Thai equivalent created for a foreign term; a transliteration writes the foreign word in Thai script according to the official rules.">ศัพท์บัญญัติคือคำภาษาไทยที่กำหนดขึ้นแทนศัพท์ต่างประเทศ ส่วนคำทับศัพท์คือการเขียนคำต่างประเทศด้วยอักษรไทยตามหลักเกณฑ์ที่กำหนด</p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-coined-vs-translit"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
             </div>
           </details>
-          <details class="accordion__item">
-            <summary>
-              <span data-en="How can I ask the Office an academic question?">สอบถามข้อมูลทางวิชาการกับสำนักงานได้อย่างไร</span>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+          <details class="faq-item" id="q-subject-terms" data-faq-item data-cat="language">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Words and language">คำและภาษา</span>
+              <span class="faq-item__text" data-en="Who answers questions about terms in a subject?">สอบถามศัพท์เฉพาะสาขาได้ที่ใด</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
             </summary>
-            <div class="accordion__body">
-              <p data-en="Use the online contact form, or email or telephone the Office during office hours.">ใช้<a href="contact-form.html">แบบฟอร์มติดต่อออนไลน์</a> หรือติดต่อทางอีเมลและโทรศัพท์ในเวลาทำการ</p>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="Call the division that looks after the subject; the Contact page lists each division, its subjects and telephone.">ติดต่อกองที่ดูแลสาขานั้นโดยตรง ดูหมายเลขโทรศัพท์และสาขาที่แต่ละกองดูแลได้ที่<a href="contact.html#units-title">หน้าติดต่อราชบัณฑิตยสภา</a></p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-subject-terms"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
             </div>
           </details>
-          <details class="accordion__item">
-            <summary>
-              <span data-en="Who answers questions about terms in a subject?">สอบถามศัพท์เฉพาะสาขาได้ที่ใด</span>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+          <details class="faq-item" id="q-academic-question" data-faq-item data-cat="contact">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Contacting the Office">การติดต่อ</span>
+              <span class="faq-item__text" data-en="How can I ask the Office an academic question?">สอบถามข้อมูลทางวิชาการกับสำนักงานได้อย่างไร</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
             </summary>
-            <div class="accordion__body">
-              <p data-en="Call the division that looks after the subject; the Contact page lists each division, its subjects and telephone.">ติดต่อกองที่ดูแลสาขานั้นโดยตรง ดูหมายเลขโทรศัพท์และสาขาที่แต่ละกองดูแลได้ที่<a href="contact.html">หน้าติดต่อราชบัณฑิตยสภา</a></p>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="Use the online contact form, or email or telephone the Office during office hours.">ใช้<a href="contact-form.html">แบบฟอร์มติดต่อออนไลน์</a> หรือติดต่อทางอีเมลและโทรศัพท์ในเวลาทำการ</p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-academic-question"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
             </div>
           </details>
-          <details class="accordion__item">
-            <summary>
-              <span data-en="How do I buy the Office’s books?">สั่งซื้อหนังสือของสำนักงานราชบัณฑิตยสภาได้อย่างไร</span>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+          <details class="faq-item" id="q-hours" data-faq-item data-cat="contact">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Contacting the Office">การติดต่อ</span>
+              <span class="faq-item__text" data-en="When is the Office open?">สำนักงานเปิดทำการวันและเวลาใด</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
             </summary>
-            <div class="accordion__body">
-              <p data-en="Contact the bookshop on 02 141 1718 or ribook@orst.go.th.">ติดต่อห้องจำหน่ายหนังสือ โทร 02 141 1718 หรืออีเมล ribook@orst.go.th</p>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="Monday to Friday, 08:30–16:30, except public holidays. Telephone 02 141 1717; the address and map are on the Contact page.">วันจันทร์–ศุกร์ เวลา 08:30–16:30 น. เว้นวันหยุดราชการ โทร <a href="tel:+6621411717">02 141 1717</a> ที่ตั้งและแผนที่อยู่ใน<a href="contact.html">หน้าติดต่อราชบัณฑิตยสภา</a></p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-hours"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
             </div>
           </details>
-          <details class="accordion__item">
-            <summary>
-              <span data-en="How do I apply to become an Associate Fellow?">สมัครเป็นภาคีสมาชิกได้อย่างไร</span>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
+          <details class="faq-item" id="q-complaint" data-faq-item data-cat="contact">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Contacting the Office">การติดต่อ</span>
+              <span class="faq-item__text" data-en="Where can I make a complaint?">แจ้งเรื่องร้องเรียนได้ที่ใด</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
             </summary>
-            <div class="accordion__body">
-              <p data-en="See the qualifications, criteria and how to apply on the Associate Fellow regulations page, and watch for each academy’s call for applications.">ดูคุณวุฒิ หลักเกณฑ์ และวิธีการสมัครได้ที่<a href="admissions-associate-rules.html">ระเบียบการรับสมัครบุคคลเป็นภาคีสมาชิก</a> และติดตามประกาศรับสมัครของแต่ละสำนัก</p>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="Use the online contact form and choose the topic “Complaint”.">ใช้<a href="contact-form.html?topic=complaint">แบบฟอร์มติดต่อออนไลน์</a> และเลือกเรื่อง “ร้องเรียน”</p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-complaint"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
             </div>
           </details>
+          <details class="faq-item" id="q-buy-books" data-faq-item data-cat="books">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Books and publications">หนังสือและสิ่งพิมพ์</span>
+              <span class="faq-item__text" data-en="How do I buy the Office’s books?">สั่งซื้อหนังสือของสำนักงานราชบัณฑิตยสภาได้อย่างไร</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="Contact the bookshop on 02 141 1718 or ribook@orst.go.th.">ติดต่อห้องจำหน่ายหนังสือ โทร <a href="tel:+6621411718">02 141 1718</a> หรืออีเมล <a class="font-latin" href="mailto:ribook@orst.go.th">ribook@orst.go.th</a></p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-buy-books"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
+            </div>
+          </details>
+          <details class="faq-item" id="q-journals" data-faq-item data-cat="books">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Books and publications">หนังสือและสิ่งพิมพ์</span>
+              <span class="faq-item__text" data-en="Where can I read past issues of the Journal?">อ่านวารสารราชบัณฑิตยสภาฉบับย้อนหลังได้ที่ใด</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="On the Journals and Publications page, which gathers the journals, newsletters and annual reports by year.">ดูได้ที่หน้า<a href="publications.html">วารสารและสิ่งพิมพ์</a> ซึ่งรวมวารสาร จดหมายข่าว และรายงานประจำปี จัดเรียงตามปี</p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-journals"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
+            </div>
+          </details>
+          <details class="faq-item" id="q-associate" data-faq-item data-cat="members">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Fellows and membership">สมาชิก</span>
+              <span class="faq-item__text" data-en="How do I apply to become an Associate Fellow?">สมัครเป็นภาคีสมาชิกได้อย่างไร</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="See the qualifications, criteria and how to apply on the Associate Fellow regulations page, and watch for each academy’s call for applications.">ดูคุณวุฒิ หลักเกณฑ์ และวิธีการสมัครได้ที่<a href="admissions-associate-rules.html">ระเบียบการรับสมัครบุคคลเป็นภาคีสมาชิก</a> และติดตามประกาศรับสมัครของแต่ละสำนัก</p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-associate"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
+            </div>
+          </details>
+          <details class="faq-item" id="q-find-fellow" data-faq-item data-cat="members">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Fellows and membership">สมาชิก</span>
+              <span class="faq-item__text" data-en="How do I find a Fellow or Associate Fellow?">ค้นหารายชื่อราชบัณฑิตและภาคีสมาชิกได้อย่างไร</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="Use the Search Fellows page by name, field or academy, or see the directory by academy.">ใช้หน้า<a href="fellows.html">ค้นหาสมาชิก</a> ค้นจากชื่อ สาขาวิชา หรือสำนัก หรือดู<a href="fellows-academies.html">รายนามตามสำนัก</a></p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-find-fellow"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
+            </div>
+          </details>
+          <details class="faq-item" id="q-cookies" data-faq-item data-cat="website">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Using this website">การใช้เว็บไซต์</span>
+              <span class="faq-item__text" data-en="What does this website keep about me?">เว็บไซต์นี้เก็บข้อมูลอะไรของผู้ใช้บ้าง</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="No analytics or advertising cookies; only your settings, kept in your browser. See the privacy and cookie policy.">เว็บไซต์นี้ไม่ใช้คุกกี้เพื่อการวิเคราะห์หรือการโฆษณา และเก็บเฉพาะการตั้งค่าไว้ในเบราว์เซอร์ของคุณ ดูรายละเอียดได้ที่<a href="policies.html#privacy-policy">นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้</a></p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-cookies"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
+            </div>
+          </details>
+          <details class="faq-item" id="q-text-size" data-faq-item data-cat="website">
+            <summary class="faq-item__q">
+              <span class="faq-item__cat" data-en="Using this website">การใช้เว็บไซต์</span>
+              <span class="faq-item__text" data-en="How do I change the text size or contrast?">ปรับขนาดตัวอักษรหรือความคมชัดของหน้าเว็บได้อย่างไร</span>
+              <span class="faq-item__toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-item__a" data-faq-answer>
+              <div class="faq-item__inner">
+                <p data-en="Use the accessibility button (a person) at the bottom right of every page to enlarge text, raise contrast or reduce motion.">กดปุ่มการเข้าถึง (รูปคน) ที่มุมขวาล่างของทุกหน้า เพื่อขยายตัวอักษร เพิ่มความคมชัด หรือลดการเคลื่อนไหว</p>
+                <button class="faq-item__link" type="button" data-faq-copy="q-text-size"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
+              </div>
+            </div>
+          </details>
+      </section>
+      <div class="faq-empty" data-faq-empty hidden>
+        <p class="faq-empty__title" data-en="No question matches">ไม่พบคำถามที่ตรงกับคำค้น</p>
+        <p data-en="Try another word, or ask the Office directly.">ลองใช้คำอื่น หรือส่งคำถามถึงสำนักงานโดยตรง</p>
+        <a class="btn btn--primary btn--pill btn--sm" href="contact-form.html" data-en="Ask the Office">ส่งคำถามถึงสำนักงาน</a>
+      </div>
+
+      <section class="faq-more" aria-labelledby="faq-more-title">
+        <div>
+          <h2 id="faq-more-title" class="faq-more__title" data-en="Didn't find your answer?">ไม่พบคำตอบที่ต้องการ</h2>
+          <p data-en="Ask the Office by form, or call during office hours.">ส่งคำถามถึงสำนักงานผ่านแบบฟอร์ม หรือโทรในเวลาทำการ</p>
+        </div>
+        <div class="faq-more__do">
+          <a class="btn btn--pill faq-more__main" href="contact-form.html"><span data-en="Online contact form">แบบฟอร์มติดต่อออนไลน์</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn--pill faq-more__alt" href="tel:+6621411717"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg><span>02 141 1717</span></a>
         </div>
       </section>
     </div>
   </main>
 
   <div id="app-footer"></div>
+  <script>
+    /* FAQ: search, topic filter, smooth open / close, open all, links to a question */
+    (() => {
+      const root = document.querySelector('.faq-page');
+      if (!root) return;
+      const items = [...root.querySelectorAll('[data-faq-item]')];
+      const search = root.querySelector('[data-faq-search]');
+      const count = root.querySelector('[data-faq-count]');
+      const empty = root.querySelector('[data-faq-empty]');
+      const allBtn = root.querySelector('[data-faq-all]');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const th = n => String(n).replace(/[0-9]/g, d => '๐๑๒๓๔๕๖๗๘๙'[d]);
+      const en = () => document.documentElement.lang === 'en';
+      let filter = 'all';
+      const plain = el => el.textContent.replace(/\s+/g, ' ').toLowerCase();
+      items.forEach(it => { it.dataset.text = plain(it.querySelector('.faq-item__text')) + ' ' + plain(it.querySelector('.faq-item__inner')); });
+
+      /* open and close with the answer's height eased, not snapped */
+      const animate = (it, open) => {
+        const box = it.querySelector('[data-faq-answer]');
+        if (reduce) { it.open = open; return; }
+        if (open) {
+          it.open = true;
+          const h = box.scrollHeight;
+          box.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.2,.7,.2,1)' });
+        } else {
+          const h = box.scrollHeight;
+          const anim = box.animate([{ height: h + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 200, easing: 'ease-in' });
+          anim.onfinish = () => { it.open = false; };
+        }
+      };
+      items.forEach(it => it.querySelector('summary').addEventListener('click', e => { e.preventDefault(); animate(it, !it.open); setTimeout(syncAll, 280); }));
+
+      const syncAll = () => {
+        const shown = items.filter(it => !it.hidden);
+        const allOpen = shown.length && shown.every(it => it.open);
+        allBtn.textContent = allOpen ? (en() ? 'Close all' : 'ปิดทั้งหมด') : (en() ? 'Open all' : 'เปิดทั้งหมด');
+        allBtn.dataset.state = allOpen ? 'close' : 'open';
+      };
+      allBtn.addEventListener('click', () => {
+        const open = allBtn.dataset.state !== 'close';
+        items.filter(it => !it.hidden && it.open !== open).forEach(it => animate(it, open));
+        setTimeout(syncAll, 280);
+      });
+
+      const render = () => {
+        const q = (search.value || '').trim().toLowerCase();
+        let n = 0;
+        items.forEach((it, i) => {
+          const show = (filter === 'all' || it.dataset.cat === filter) && (!q || it.dataset.text.includes(q));
+          it.hidden = !show;
+          if (show) { it.style.animationDelay = (n * 35) + 'ms'; it.classList.remove('is-in'); void it.offsetWidth; it.classList.add('is-in'); n++; }
+        });
+        count.textContent = en() ? `${n} question${n === 1 ? '' : 's'}` : `พบ ${th(n)} คำถาม`;
+        empty.hidden = n > 0;
+        syncAll();
+      };
+      root.querySelector('[data-faq-tabs]').addEventListener('click', e => {
+        const b = e.target.closest('[data-faq-filter]');
+        if (!b) return;
+        filter = b.dataset.faqFilter;
+        root.querySelectorAll('[data-faq-filter]').forEach(x => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', String(on)); });
+        render();
+      });
+      let t; search.addEventListener('input', () => { clearTimeout(t); t = setTimeout(render, 120); });
+
+      root.addEventListener('click', e => {
+        const b = e.target.closest('[data-faq-copy]');
+        if (!b) return;
+        const url = location.href.split('#')[0] + '#' + b.dataset.faqCopy;
+        (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => {
+          const label = b.querySelector('span'); const old = label.textContent;
+          label.textContent = en() ? 'Link copied' : 'คัดลอกลิงก์แล้ว'; b.classList.add('is-done');
+          setTimeout(() => { label.textContent = old; b.classList.remove('is-done'); }, 1600);
+        }).catch(() => { location.hash = b.dataset.faqCopy; });
+      });
+
+      /* a link to one question opens it */
+      const fromHash = () => {
+        const it = location.hash && root.querySelector(location.hash);
+        if (it && it.matches('[data-faq-item]')) { it.open = true; it.classList.add('is-target'); setTimeout(() => it.classList.remove('is-target'), 1800); it.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' }); syncAll(); }
+      };
+      window.addEventListener('hashchange', fromHash);
+      render();
+      setTimeout(fromHash, 300);
+    })();
+  </script>
 </body>
 </html>

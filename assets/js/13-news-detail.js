@@ -58,9 +58,13 @@
 
   function renderBody() {
     const img = qs('[data-story-img]', root);
-    if (img) {
+    if (img && !story.image && !story.fallback) {
+      /* a story without a photo: no empty frame, the headline takes the width */
+      img.closest('figure')?.setAttribute('hidden', '');
+      img.closest('.story__open')?.classList.add('story__open--solo');
+    } else if (img) {
       if (story.fallback) img.dataset.fallback = RS.url(story.fallback);
-      img.src = RS.url(story.image);
+      img.src = RS.url(story.image || story.fallback);
       img.alt = t(story.caption);
     }
     set('[data-story-caption]', te(story.caption));
@@ -109,29 +113,15 @@
     }).join(''));
   }
 
-  /* the viewer: a native dialog (Esc closes), arrow keys step through */
+  /* the site's photo viewer (RS.photoViewer, 04-interactions.js): the same
+     frosted slider with thumbnails as the activity reports */
   function initViewer() {
-    const dialog = qs('[data-story-viewer]', root);
     const photos = story.photos || [];
-    if (!dialog || typeof dialog.showModal !== 'function' || !photos.length) return;
-    const img = qs('[data-story-viewer-img]', dialog);
-    let at = 0;
-    const show = n => {
-      at = (n + photos.length) % photos.length;
-      img.src = RS.url(photos[at].src);
-      set('[data-story-viewer-caption]', te(photos[at].caption));
-      set('[data-story-viewer-count]', escapeHTML(RS.digits(`${at + 1} / ${photos.length}`)));
-    };
+    const open = RS.photoViewer(photos);
+    if (!open) return;
     root.addEventListener('click', event => {
-      const open = event.target.closest('[data-story-photo]');
-      if (open) { show(Number(open.dataset.storyPhoto)); dialog.showModal(); return; }
-      const step = event.target.closest('[data-story-viewer-step]');
-      if (step) { show(at + Number(step.dataset.storyViewerStep)); return; }
-      if (event.target.closest('[data-story-viewer-close]') || event.target === dialog) dialog.close();
-    });
-    dialog.addEventListener('keydown', event => {
-      if (event.key === 'ArrowRight') { event.preventDefault(); show(at + 1); }
-      if (event.key === 'ArrowLeft') { event.preventDefault(); show(at - 1); }
+      const b = event.target.closest('[data-story-photo]');
+      if (b) open(Number(b.dataset.storyPhoto));
     });
   }
 

@@ -664,9 +664,237 @@
     show(current);
   }
 
+  /* ---- events calendar page (pages/works-calendar.html) ----
+   *  markup: [data-planner] with [data-planner-cal], [data-planner-when]
+   *  buttons (next | past), [data-planner-kinds] and [data-planner-list].
+   *  A printed month calendar — hairline cells, each event's title set in
+   *  its day — beside the programme: every event month by month, the date
+   *  as an outlined numeral; the chosen one opens in place with its summary
+   *  and actions. Picking a day in the calendar opens that event in the
+   *  list and the reverse. Any number of events (CMS); academy-only
+   *  meetings stay off, as on the home page. */
+  const PL = {
+    next: { th: 'กำลังจะมาถึง', en: 'Coming up' },
+    past: { th: 'ที่ผ่านมา', en: 'Past' },
+    allKinds: { th: 'ทุกประเภท', en: 'All' },
+    thisMonth: { th: 'เดือนนี้', en: 'This month' },
+    more: { th: 'แสดงเพิ่มอีก {n} รายการ', en: 'Show {n} more' },
+    none: { th: 'ไม่มีกิจกรรมที่ตรงกับตัวเลือกนี้', en: 'No events match this choice' },
+    count: { th: '{n} กิจกรรม', en: '{n} events' },
+    nAt: { th: 'น.', en: '' }
+  };
+  function initPlanner(root) {
+    const calBox = qs('[data-planner-cal]', root);
+    const listBox = qs('[data-planner-list]', root);
+    const kindsBox = qs('[data-planner-kinds]', root);
+    if (!calBox || !listBox) return;
+    const today = todayDate();
+    const STEP = 10;
+    const all = EVENTS.filter(ev => !ev.academyOnly).slice().sort((a, b) => a.date.localeCompare(b.date) || (a.start || '').localeCompare(b.start || ''));
+    const isPast = ev => (ev.end ? parse(ev.end) : parse(ev.date)) < today;
+    const sets = { next: all.filter(ev => !isPast(ev)), past: all.filter(isPast).reverse() };
+    let when = sets.next.length ? 'next' : 'past';
+    let kind = '';
+    let shown = STEP;
+    let openId = sets[when][0]?.id || null;
+    const monthOf = d => new Date(d.getFullYear(), d.getMonth(), 1);
+    let month = openId ? monthOf(parse(all.find(ev => ev.id === openId).date)) : monthOf(today);
+    const dates = all.map(ev => parse(ev.date));
+    const firstMonth = monthOf(new Date(Math.min(today, ...dates)));
+    const lastMonth = monthOf(new Date(Math.max(today, ...dates)));
+
+    const countdown = ev => {
+      const days = Math.round((parse(ev.date) - today) / 86400000);
+      const endDays = ev.end ? Math.round((parse(ev.end) - today) / 86400000) : days;
+      if (days <= 0 && endDays >= 0) return `<strong>${te(L.todayIs)}</strong>`;
+      if (days < 0) return t(L.daysAgo).replace('{n}', -endDays);
+      if (days === 1) return `<strong>${te(L.tomorrow)}</strong>`;
+      return t(L.inDays).replace('{n}', days);
+    };
+    const timeLine = ev => (ev.start ? `${escapeHTML(timeText(ev))}${TH ? ` ${PL.nAt.th}` : ''}` : te(L.allDay));
+
+    /* the month calendar */
+    function renderCal(dir = 0) {
+      const last = new Date(month.getFullYear(), month.getMonth() + 1, 0);
+      const weeks = Math.ceil((month.getDay() + last.getDate()) / 7);
+      const start = startOfWeek(month);
+      const open = all.find(ev => ev.id === openId);
+      let cells = '';
+      for (let i = 0; i < weeks * 7; i++) {
+        const d = addDays(start, i);
+        if (d.getMonth() !== month.getMonth()) { cells += '<span class="pcal__d is-outside" aria-hidden="true"></span>'; continue; }
+        const evs = all.filter(ev => d >= parse(ev.date) && d <= (ev.end ? parse(ev.end) : parse(ev.date)));
+        const on = open && evs.includes(open);
+        const cls = `pcal__d${d.getDay() === 0 ? ' is-sun' : ''}${sameDay(d, today) ? ' is-today' : ''}${d < today ? ' is-past' : ''}${on ? ' is-on' : ''}`;
+        cells += evs.length
+          ? `<button class="${cls} has-ev" type="button" data-planner-day="${iso(d)}" data-type="${escapeHTML(evs[0].type)}" aria-pressed="${!!on}"
+                aria-label="${d.getDate()} ${MONTHS[d.getMonth()]} ${year(d)} · ${escapeHTML(evs.map(ev => t(ev.title)).join(' · '))}">
+              <span class="pcal__n">${d.getDate()}</span><span class="pcal__ev" aria-hidden="true">${te(evs[0].title)}</span>${evs.length > 1 ? `<span class="pcal__plus" aria-hidden="true">+${evs.length - 1}</span>` : ''}</button>`
+          : `<span class="${cls}"><span class="pcal__n">${d.getDate()}</span></span>`;
+      }
+      const n = all.filter(ev => { const d = parse(ev.date); return d.getFullYear() === month.getFullYear() && d.getMonth() === month.getMonth(); }).length;
+      const atToday = month.getFullYear() === today.getFullYear() && month.getMonth() === today.getMonth();
+      calBox.dataset.dir = dir > 0 ? 'next' : dir < 0 ? 'prev' : 'none';
+      calBox.innerHTML = `
+        <div class="pcal__head">
+          <p class="pcal__title" aria-live="polite"><span class="pcal__month">${MONTHS[month.getMonth()]}</span><span class="pcal__year">${year(month)}</span></p>
+          <div class="pcal__navs">
+            <button class="pcal__nav" type="button" data-planner-month="-1" aria-label="${te(L.prevMonth)}"${month <= firstMonth ? ' disabled' : ''}>${icon('chevron')}</button>
+            <button class="pcal__today" type="button" data-planner-month="0"${atToday ? ' disabled' : ''}>${te(PL.thisMonth)}</button>
+            <button class="pcal__nav" type="button" data-planner-month="1" aria-label="${te(L.nextMonth)}"${month >= lastMonth ? ' disabled' : ''}>${icon('chevron')}</button>
+          </div>
+        </div>
+        <p class="pcal__sub">${escapeHTML(n ? t(L.monthCount).replace('{n}', n) : t(L.monthNone))}</p>
+        <div class="pcal__wk" aria-hidden="true">${WEEKDAYS.map((w, i) => `<span${i === 0 ? ' class="is-sun"' : ''}>${w}</span>`).join('')}</div>
+        <div class="pcal__grid">${cells}</div>`;
+    }
+
+    /* the programme */
+    const item = ev => {
+      const d = parse(ev.date);
+      const end = ev.end ? parse(ev.end) : null;
+      const open = ev.id === openId;
+      const wd = WEEKDAYS_FULL[d.getDay()].replace(/^วัน/, '');
+      return `
+        <li class="pev${open ? ' is-open' : ''}${isPast(ev) ? ' is-past' : ''}" data-type="${escapeHTML(ev.type)}" id="pev-${escapeHTML(ev.id)}">
+          <button class="pev__row" type="button" data-planner-pick="${escapeHTML(ev.id)}" aria-expanded="${open}" aria-controls="pev-more-${escapeHTML(ev.id)}">
+            <span class="pev__date" aria-hidden="true"><span class="pev__day">${d.getDate()}${end ? `<small>–${end.getDate()}</small>` : ''}</span><span class="pev__wd">${escapeHTML(wd)}</span></span>
+            <span class="pev__body">
+              <span class="pev__kind">${te(TYPES[ev.type])}<span class="pev__count">${countdown(ev)}</span></span>
+              <span class="pev__title">${te(ev.title)}</span>
+              <span class="pev__meta"><span>${icon('clock')}${timeLine(ev)}</span><span>${icon('pin')}${te(ev.location)}</span></span>
+            </span>
+            <span class="pev__go" aria-hidden="true">${icon('chevron')}</span>
+          </button>
+          <div class="pev__more" id="pev-more-${escapeHTML(ev.id)}">
+            <div class="pev__inner">
+              <p class="pev__when">${icon('calendar')}<span>${escapeHTML(WEEKDAYS_FULL[d.getDay()])} ${escapeHTML(dateText(ev))}</span></p>
+              ${ev.summary ? `<p class="pev__summary">${te(ev.summary)}</p>` : ''}
+              <div class="pev__actions">
+                ${ev.href ? `<a class="btn btn--primary btn--sm" href="${escapeHTML(RS.url(ev.href))}"${open ? '' : ' tabindex="-1"'}><span>${te(L.details)}</span>${icon('arrow')}</a>` : ''}
+                ${isPast(ev) ? '' : `<button class="btn btn--secondary btn--sm" type="button" data-planner-ics="${escapeHTML(ev.id)}"${open ? '' : ' tabindex="-1"'}>${icon('calendar')}<span>${te(L.addCalShort)}</span></button>`}
+              </div>
+            </div>
+          </div>
+        </li>`;
+    };
+
+    function renderList() {
+      qsa('[data-planner-when]', root).forEach(b => {
+        const on = b.dataset.plannerWhen === when;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', String(on));
+        const n = qs('[data-planner-n]', b);
+        if (n) n.textContent = sets[b.dataset.plannerWhen].length;
+      });
+      const pool = sets[when];
+      const kinds = [...new Set(all.map(ev => ev.type))].filter(k => TYPES[k]);
+      if (kindsBox) {
+        kindsBox.hidden = kinds.length < 2;
+        kindsBox.innerHTML = [['', PL.allKinds], ...kinds.map(k => [k, TYPES[k]])].map(([k, label]) => `
+          <button class="planner__kind${kind === k ? ' is-active' : ''}" type="button" data-planner-kind="${k}" aria-pressed="${kind === k}"${k ? ` data-type="${escapeHTML(k)}"` : ''}>${te(label)}</button>`).join('');
+      }
+      const found = pool.filter(ev => !kind || ev.type === kind);
+      const page = found.slice(0, Math.max(shown, found.findIndex(ev => ev.id === openId) + 1));
+      let html = '';
+      let lastKey = '';
+      page.forEach(ev => {
+        const d = parse(ev.date);
+        const key = `${d.getFullYear()}-${d.getMonth()}`;
+        if (key !== lastKey) {
+          lastKey = key;
+          const n = found.filter(x => { const xd = parse(x.date); return xd.getFullYear() === d.getFullYear() && xd.getMonth() === d.getMonth(); }).length;
+          html += `<li class="planner__month" aria-hidden="true"><span class="planner__mname">${MONTHS[d.getMonth()]}</span><span class="planner__myear">${year(d)}</span><span class="planner__mcount">${escapeHTML(t(PL.count).replace('{n}', n))}</span></li>`;
+        }
+        html += item(ev);
+      });
+      listBox.innerHTML = html || `<li class="planner__empty">${icon('calendar')}<span>${te(PL.none)}</span></li>`;
+      const rest = found.length - page.length;
+      const moreBtn = qs('[data-planner-more]', root);
+      if (moreBtn) {
+        moreBtn.hidden = rest <= 0;
+        moreBtn.innerHTML = `<span>${escapeHTML(t(PL.more).replace('{n}', rest))}</span>${icon('chevron')}`;
+      }
+    }
+
+    const render = (dir = 0) => {
+      renderCal(dir);
+      renderList();
+      document.dispatchEvent(new CustomEvent('rs:content-added', { detail: root }));
+    };
+
+    const openEvent = (ev, { scroll } = {}) => {
+      if (!sets[when].includes(ev)) { when = isPast(ev) ? 'past' : 'next'; shown = STEP; }
+      if (kind && ev.type !== kind) kind = '';
+      openId = ev.id;
+      const target = monthOf(parse(ev.date));
+      const dir = target > month ? 1 : target < month ? -1 : 0;
+      month = target;
+      render(dir);
+      if (scroll) qs(`#pev-${CSS.escape(ev.id)}`, root)?.scrollIntoView({ block: 'nearest', behavior: RS.reduceMotion() ? 'auto' : 'smooth' });
+    };
+
+    root.addEventListener('click', event => {
+      const pick = event.target.closest('[data-planner-pick]');
+      if (pick) {
+        const ev = all.find(x => x.id === pick.dataset.plannerPick);
+        if (!ev) return;
+        if (ev.id === openId) { openId = null; render(); qs(`[data-planner-pick="${CSS.escape(ev.id)}"]`, root)?.focus({ preventScroll: true }); return; }
+        openEvent(ev);
+        qs(`[data-planner-pick="${CSS.escape(ev.id)}"]`, root)?.focus({ preventScroll: true });
+        return;
+      }
+      const day = event.target.closest('[data-planner-day]');
+      if (day) {
+        const d = parse(day.dataset.plannerDay);
+        const evs = all.filter(ev => d >= parse(ev.date) && d <= (ev.end ? parse(ev.end) : parse(ev.date)));
+        /* a second click on a day with two events opens the next one */
+        const at = evs.findIndex(ev => ev.id === openId);
+        const ev = evs[(at + 1) % evs.length];
+        if (ev) openEvent(ev, { scroll: true });
+        return;
+      }
+      const nav = event.target.closest('[data-planner-month]');
+      if (nav) {
+        const step = Number(nav.dataset.plannerMonth);
+        const next = step ? new Date(month.getFullYear(), month.getMonth() + step, 1) : monthOf(today);
+        const dir = next > month ? 1 : next < month ? -1 : 0;
+        month = next;
+        renderCal(dir);
+        document.dispatchEvent(new CustomEvent('rs:content-added', { detail: calBox }));
+        return;
+      }
+      const whenBtn = event.target.closest('[data-planner-when]');
+      if (whenBtn) {
+        when = whenBtn.dataset.plannerWhen;
+        shown = STEP;
+        const first = sets[when].find(ev => !kind || ev.type === kind);
+        openId = first?.id || null;
+        if (first) month = monthOf(parse(first.date));
+        render();
+        return;
+      }
+      const kindBtn = event.target.closest('[data-planner-kind]');
+      if (kindBtn) {
+        kind = kindBtn.dataset.plannerKind;
+        shown = STEP;
+        const first = sets[when].find(ev => !kind || ev.type === kind);
+        if (!sets[when].some(ev => ev.id === openId && (!kind || ev.type === kind))) openId = first?.id || null;
+        render();
+        return;
+      }
+      if (event.target.closest('[data-planner-more]')) { shown += STEP; renderList(); document.dispatchEvent(new CustomEvent('rs:content-added', { detail: listBox })); return; }
+      const ics = event.target.closest('[data-planner-ics]');
+      if (ics) { const ev = all.find(x => x.id === ics.dataset.plannerIcs); if (ev) downloadIcs(ev); }
+    });
+
+    render();
+  }
+
   RS.ready(() => {
     qsa('[data-calendar]').forEach(initCalendar);
     qsa('[data-tearoff]').forEach(initTearoff);
+    qsa('[data-planner]').forEach(initPlanner);
     checkReminders();
   });
 })();

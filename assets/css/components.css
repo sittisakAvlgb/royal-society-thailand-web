@@ -350,7 +350,7 @@
 
 .mega-inner {
   display: grid;
-  grid-template-columns: minmax(200px, 250px) minmax(0, 1fr);
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
   gap: var(--space-10);
   padding: var(--space-8) var(--space-8) var(--space-10);
 }
@@ -1549,7 +1549,7 @@ body.access-reduce-motion .chat-fab, body.access-reduce-motion .chat-panel { ani
 .cc-row__always {
   padding: 3px var(--space-2);
   border-radius: var(--radius-pill);
-  background: #FBF4E4;
+  background: #EBF4F0;
   color: var(--gold-700);
   font-size: 11px;
   font-weight: 600;
@@ -1830,3 +1830,7 @@ html.rs-ready .page-skel { animation: page-skel-out .25s ease forwards; }
 
 /* the skeleton's sheen stops as soon as the page is ready (the layer is then removed) */
 html.rs-ready .page-skel .sk { animation: none; }
+
+/* mega panel title: a Thai title breaks only before "และ", never inside a word */
+.mega-feature__ph { white-space: nowrap; }
+.mega-feature__desc { text-wrap: pretty; }

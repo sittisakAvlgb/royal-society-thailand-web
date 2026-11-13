@@ -181,7 +181,6 @@
         <div class="access-panel__foot">
           <button class="btn btn--secondary" type="button" data-access-reset>${icon('reset')}<span>${te(L.reset)}</span></button>
           <button class="btn btn--primary" type="button" data-access-save>${icon('check')}<span>${te(L.save)}</span></button>
-          <a class="access-panel__more" href="${RS.url('pages/accessibility.html')}">${te(L.more)}</a>
         </div>
       </div>`;
   }
@@ -316,7 +315,7 @@
 
   /* ==================================================================== *
    * Controls — delegated so buttons anywhere on the page work
-   * (e.g. the settings on pages/accessibility.html)
+   * (e.g. settings shown elsewhere on a page)
    * ==================================================================== */
 
   function initControls() {

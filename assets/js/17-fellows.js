@@ -296,7 +296,7 @@
 
   const L_ROLL = {
     search: { th: 'ค้นหาในสำนักนี้', en: 'Search this academy' },
-    total: { th: 'รวม {n} คน', en: '{n} members' }
+    total: { th: 'รวม <strong>{n}</strong> คน', en: '<strong>{n}</strong> members in all' }
   };
   /* the order the Office asked for: honorary, associate, then Fellows */
   const ROLL_ORDER = ['honorary', 'associate', 'fellow'];
@@ -342,11 +342,17 @@
         return `
         <section class="fellowx-roll__academy roll-academy" id="academy-${academy.id}" data-academy="${academy.id}" aria-labelledby="roll-${academy.id}">
           <header class="roll-academy__head">
-            <div>
-              <h2 class="fellowx-roll__title roll-academy__title" id="roll-${academy.id}">${te(academy.name)}</h2>
-              <p class="roll-academy__tally">${tally}<span class="roll-academy__tally-item">${num(t(L_ROLL.total).replace('{n}', members.length))}</span></p>
+            <div class="roll-academy__id">
+              <span class="roll-academy__no" aria-hidden="true">${num(String(CFG.academies.indexOf(academy) + 1).padStart(2, '0'))}</span>
+              <div>
+                <h2 class="fellowx-roll__title roll-academy__title" id="roll-${academy.id}">${te(academy.name)}</h2>
+                ${t(academy.fields) ? `<p class="roll-academy__fields">${te(academy.fields)}</p>` : ''}
+              </div>
             </div>
-            <a class="btn btn--secondary btn--sm btn--pill" href="${escapeHTML(RS.url(`pages/fellows.html?academy=${academy.id}`))}">${icon('search')}<span>${te(L_ROLL.search)}</span></a>
+            <div class="roll-academy__side">
+              <p class="roll-academy__tally">${tally}<span class="roll-academy__tally-item roll-academy__tally-item--total">${t(L_ROLL.total).replace('{n}', num(members.length))}</span></p>
+              <a class="btn btn--secondary btn--sm btn--pill" href="${escapeHTML(RS.url(`pages/fellows.html?academy=${academy.id}`))}">${icon('search')}<span>${te(L_ROLL.search)}</span></a>
+            </div>
           </header>
           ${groups}
         </section>`;

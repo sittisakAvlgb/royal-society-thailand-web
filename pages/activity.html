@@ -18,6 +18,7 @@
   <meta property="og:image" content="https://royalsociety.go.th/assets/images/cropped-logo-with-bg-1.png">
   <meta property="og:locale" content="th_TH">
 
+  <link rel="alternate" type="application/rss+xml" title="ข่าวสารและกิจกรรม ราชบัณฑิตยสภา" href="../rss.xml">
   <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,25 +29,26 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261117f">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261117f">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
 
-  <script defer src="../assets/js/00-core.js?v=20261117f"></script>
-  <script defer src="../assets/js/01-config.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/activities.js?v=20261117f"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261117f"></script>
-  <script defer src="../assets/js/02-components.js?v=20261117f"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261117f"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261117f"></script>
-  <script defer src="../assets/js/05-language.js?v=20261117f"></script>
-  <script defer src="../assets/js/06-search.js?v=20261117f"></script>
-  <script defer src="../assets/js/20-activity.js?v=20261117f"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261117f"></script>
+  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
+  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/activities.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/activity-bodies.js?v=20261123w"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261123w"></script>
+  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
+  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
+  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
+  <script defer src="../assets/js/20-activity.js?v=20261123w"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
 </head>
 <body class="page-news-story">
   <div id="app-header"></div>
@@ -68,57 +70,72 @@
        assets/js/data/news.js by ?id= (an unknown id shows the newest story) -->
   <!-- One template for every activity report: 20-activity.js fills it
        from assets/js/data/activities.js by ?id= -->
-  <main id="main-content" tabindex="-1" class="story activity" data-activity>
+  <!-- ==============================
+       One activity report, filled by 20-activity.js from data/activities.js
+       (title, date, academy, cover) and data/activity-bodies.js (the text,
+       photographs, videos and PDFs brought across from the earlier sites).
+       A green band with the topic; the cover photograph over its edge; the
+       facts in one line; the report; photographs, video and documents;
+       more from the series.
+  ================================ -->
+  <main id="main-content" tabindex="-1" class="act" data-activity>
     <article aria-labelledby="story-title" data-activity-article>
-      <header class="story__head">
+      <header class="act-head">
         <div class="container">
-          <div class="story__crumbbar">
-            <nav class="breadcrumb story__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
-              <ol>
-                <li><a href="../index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-institution"></use></svg><span data-en="Home">หน้าแรก</span></a></li>
-                <li><span data-en="Academic Activities">กิจกรรมวิชาการ</span></li>
-                <li><a href="works-on-tour.html" data-activity-series></a></li>
-                <li><span aria-current="page" data-activity-crumb></span></li>
-              </ol>
-            </nav>
-          </div>
-
-          <div class="story__open">
-            <div class="story__open-text">
-              <p class="story__meta"><span class="story__cat" data-activity-cat></span><time data-activity-date></time></p>
-              <h1 class="story__title" id="story-title" data-activity-title></h1>
-              <div class="story__bar">
-                <p class="story__by"><span data-en="By">จัดโดย</span> <strong data-activity-by></strong></p>
-                <div class="article-tools story__tools" role="group" aria-label="เครื่องมือ" data-en-aria-label="Tools">
-                  <button class="btn btn--secondary btn--sm" type="button" data-share>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-share"></use></svg><span data-en="Share">แชร์</span>
-                  </button>
-                  <button class="btn btn--secondary btn--sm" type="button" data-copy-link>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link">คัดลอกลิงก์</span>
-                  </button>
-                  <button class="btn btn--secondary btn--sm" type="button" data-print>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-print"></use></svg><span data-en="Print">พิมพ์</span>
-                  </button>
-                </div>
+          <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+            <ol>
+              <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
+              <li><span data-en="Academic Activities">กิจกรรมวิชาการ</span></li>
+              <li><a href="works-on-tour.html" data-activity-series></a></li>
+              <li><span aria-current="page" data-activity-crumb></span></li>
+            </ol>
+          </nav>
+          <div class="act-head__grid">
+          <div class="act-head__text">
+            <p class="act-head__meta"><span data-activity-cat></span><span class="act-head__dot" aria-hidden="true"></span><time data-activity-date></time></p>
+            <p class="act-head__kicker" data-activity-kicker hidden></p>
+            <h1 class="act-head__title" id="story-title" data-activity-title></h1>
+            <div class="act-facts">
+              <dl class="act-facts__list" data-activity-facts></dl>
+              <div class="act-facts__tools" role="group" aria-label="เครื่องมือ" data-en-aria-label="Tools">
+                <button class="act-tool" type="button" data-share><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-share"></use></svg><span data-en="Share">แชร์</span></button>
+                <button class="act-tool" type="button" data-copy-link><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link">คัดลอกลิงก์</span></button>
+                <button class="act-tool" type="button" data-print><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-print"></use></svg><span data-en="Print">พิมพ์</span></button>
               </div>
             </div>
-            <figure class="story__figure">
-              <img data-activity-img src="../assets/images/news/news-lead.jpg" alt="" width="1200" height="800" decoding="async">
-            </figure>
+          </div>
+          <figure class="act-cover">
+            <img data-activity-img alt="" width="1200" height="800" decoding="async" fetchpriority="high">
+          </figure>
           </div>
         </div>
       </header>
 
       <div class="container">
-        <div class="story__grid story__grid--plain">
-          <div class="story__main">
-            <p class="note-box" data-en-notice hidden>
-              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-              <span>This report is available in Thai only.</span>
-            </p>
-            <div class="prose story__body" data-th-only data-activity-body></div>
+
+        <p class="note-box act-en" data-en-notice hidden>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
+          <span>This report is available in Thai only.</span>
+        </p>
+        <div class="act-body" data-th-only data-activity-body></div>
+
+        <section class="act-sec" aria-labelledby="act-photos-title" data-activity-photos hidden>
+          <div class="act-sec__head">
+            <h2 class="act-sec__title" id="act-photos-title" data-en="Photographs">ภาพบรรยากาศ</h2>
+            <span class="act-sec__count" data-activity-photos-count></span>
           </div>
-        </div>
+          <ul class="act-photos" role="list" data-activity-photos-list></ul>
+        </section>
+
+        <section class="act-sec" aria-labelledby="act-videos-title" data-activity-videos hidden>
+          <div class="act-sec__head"><h2 class="act-sec__title" id="act-videos-title" data-en="Video">ชมวิดีโอ</h2></div>
+          <div class="act-videos" data-activity-videos-list></div>
+        </section>
+
+        <section class="act-sec" aria-labelledby="act-files-title" data-activity-files hidden>
+          <div class="act-sec__head"><h2 class="act-sec__title" id="act-files-title" data-en="Documents">เอกสารประกอบ</h2></div>
+          <ul class="act-files" role="list" data-activity-files-list></ul>
+        </section>
       </div>
     </article>
 
@@ -130,7 +147,7 @@
             <p class="kicker" data-en="Academic Activities">กิจกรรมวิชาการ</p>
             <h2 id="activity-more-title" class="section-title" data-activity-more-title></h2>
           </div>
-          <a class="btn btn--secondary btn--sm" href="works-on-tour.html" data-activity-all><span data-en="View all">ดูทั้งหมด</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn--primary btn--pill" href="works-on-tour.html" data-activity-all><span data-en="View all">ดูทั้งหมด</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
         </div>
         <ul class="newsx-items newsx-items--grid works-list__items" role="list" data-activity-more></ul>
       </div>
