@@ -317,11 +317,12 @@ window.RS_CONFIG = {
       key: 'news',
       label: { th: 'ข่าวสาร', en: 'News' },
       href: 'pages/news.html',
-      match: ['news.html', 'news-press.html', 'news-gallery.html', 'news-album.html', 'news-videos.html', 'news-detail.html'],
+      match: ['news.html', 'news-press.html', 'news-gallery.html', 'news-album.html', 'news-videos.html', 'news-detail.html', 'academy-news.html'],
       intro: { th: 'แถลงข่าว ข่าวประชาสัมพันธ์ คลังรูปภาพ และคลังวิดีโอของราชบัณฑิตยสภา', en: 'Press releases, news and announcements, and the photo and video galleries' },
       children: [
         { label: { th: 'แถลงข่าว', en: 'Press Releases' }, href: 'pages/news-press.html' },
         { label: { th: 'ข่าวประชาสัมพันธ์', en: 'News and Announcements' }, href: 'pages/news.html' },
+        { label: { th: 'ข่าวและกิจกรรมของสำนัก', en: 'News from the Academies' }, href: 'pages/academy-news.html' },
         { label: { th: 'คลังรูปภาพ', en: 'Photo Gallery' }, href: 'pages/news-gallery.html' },
         { label: { th: 'คลังวิดีโอ', en: 'Video Gallery' }, href: 'pages/news-videos.html' }
       ]
