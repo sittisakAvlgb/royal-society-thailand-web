@@ -9685,3 +9685,30 @@ html.splash-reveal body > :not(.splash) { animation: site-settle 1.05s cubic-bez
 /* only what is in view settles (fewer layers to start, no first-frame hitch) */
 html.splash-reveal body > :not(.splash) { animation: none; }
 html.splash-reveal :is(.site-header, main > :first-child) { animation: site-settle 1.05s cubic-bezier(.33, 1, .68, 1) both; transform-origin: 50% 0; }
+
+/* ==========================================================================
+   Leaving the entry page: zoom through (replaces the curtain)
+   The poster grows toward the viewer as it fades; the site behind settles
+   from a little larger into place over the same time and easing, so the
+   two read as one movement. Opacity and scale only (composited); the bar
+   fades first. ~1.1 s, quick start, long gentle finish.
+   ========================================================================== */
+.splash.is-leaving { animation: splash-through 1.1s cubic-bezier(.22, .61, .36, 1) forwards; pointer-events: none; }
+@keyframes splash-through { 0% { opacity: 1; } 55% { opacity: .35; } 100% { opacity: 0; visibility: hidden; } }
+.splash :is(.splash__poster, .splash__art, .splash__stage) { transition: transform 1.1s cubic-bezier(.22, .61, .36, 1); transform-origin: 50% 45%; }
+.splash.is-leaving :is(.splash__poster, .splash__art, .splash__stage) { transform: scale(1.14); }
+.splash__bar { transition: opacity .3s ease-out, transform .3s ease-out; }
+.splash.is-leaving .splash__bar { opacity: 0; transform: none; }
+html.splash-reveal :is(.site-header, main > :first-child) { animation: site-through 1.1s cubic-bezier(.22, .61, .36, 1) both; transform-origin: 50% 40%; }
+@keyframes site-through { from { transform: scale(1.06); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .splash.is-leaving { animation: splash-out .01s both; }
+  .splash :is(.splash__poster, .splash__art, .splash__stage) { transition: none; }
+  html.splash-reveal :is(.site-header, main > :first-child) { animation: none; }
+}
+/* the site's first view: on its own layer from the start, then moved */
+.site-through-prep { will-change: transform; transform-origin: 50% 40%; }
+.site-through { animation: site-through 1.1s cubic-bezier(.22, .61, .36, 1) both; }
+.splash { will-change: opacity; }
+.splash :is(.splash__poster, .splash__art, .splash__stage) { will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .site-through { animation: none; } }

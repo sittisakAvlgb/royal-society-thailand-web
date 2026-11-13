@@ -122,6 +122,9 @@
       </div>`;
     document.body.appendChild(el);
     document.documentElement.classList.add('splash-open');
+    /* the site's first view, made ready to move before the click */
+    const through = [document.querySelector('.site-header'), document.querySelector('main > :first-child')].filter(Boolean);
+    through.forEach(node => node.classList.add('site-through-prep'));
     const before = document.activeElement;
     const buttons = [...el.querySelectorAll('[data-splash-enter]')];
     (buttons[en ? 1 : 0] || buttons[0]).focus();
@@ -130,16 +133,20 @@
       try { sessionStorage.setItem(KEY, '1'); } catch { /* storage unavailable */ }
       if (toLang === 'en' && !en) { location.href = RS.url('index.html') + '?lang=en'; return; }
       if (toLang === 'th' && en) { location.href = RS.url('index.html') + '?lang=th'; return; }
-      /* the way out: the poster eases forward and fades, the bar drops away,
-         and the site rises into place behind it */
+      /* the way out (zoom through): only the entry page and the two blocks
+         of the site in view change; nothing on <html> until the end, so the
+         first frame does not restyle the whole page */
       el.classList.add('is-leaving');
-      document.documentElement.classList.remove('splash-open');
-      document.documentElement.classList.add('splash-reveal');
-      /* cleared when the lift has finished (a timer only as a fallback) */
+      through.forEach(node => node.classList.add('site-through'));
       let done = false;
-      const finish = () => { if (done) return; done = true; el.remove(); document.documentElement.classList.remove('splash-reveal'); };
+      const finish = () => {
+        if (done) return; done = true;
+        el.remove();
+        through.forEach(node => node.classList.remove('site-through', 'site-through-prep'));
+        document.documentElement.classList.remove('splash-open');
+      };
       el.addEventListener('animationend', event => { if (event.target === el) finish(); });
-      setTimeout(finish, 1600);
+      setTimeout(finish, 1700);
       if (before && before.focus) before.focus();
     };
     let leaving = false;
