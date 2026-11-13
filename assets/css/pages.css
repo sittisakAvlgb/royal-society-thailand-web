@@ -9640,3 +9640,25 @@ html.splash-reveal body > :not(.splash) { animation: site-rise .7s cubic-bezier(
   .splash :is(.splash__poster img, .splash__canvas, .splash__art img, .splash__stage, .splash__bar) { transition: none; }
   html.splash-reveal body > :not(.splash) { animation: none; }
 }
+
+/* Leaving the entry page, as a curtain lifting: the page is drawn up from
+   the bottom edge (clip-path) with one easing, the poster rising a little
+   slower than the curtain, the bar going first; behind it the site settles
+   from a touch larger into place. No fading wash. */
+.splash.is-leaving { animation: splash-lift .9s cubic-bezier(.76, 0, .24, 1) forwards; }
+@keyframes splash-lift { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+.splash :is(.splash__poster img, .splash__canvas, .splash__art img, .splash__stage, .splash__fill img) { transition: transform .9s cubic-bezier(.76, 0, .24, 1); }
+.splash.is-leaving :is(.splash__poster img, .splash__art img, .splash__stage) { transform: translateY(-9%) scale(1.03); }
+.splash.is-leaving .splash__canvas { transform: translateX(-50%) translateY(-9%) scale(1.03); }
+.splash.is-leaving .splash__fill img { transform: translateY(-9%) scale(1.13); }
+.splash__bar { transition: transform .4s cubic-bezier(.4, 0, 1, 1), opacity .3s ease; }
+.splash.is-leaving .splash__bar { transform: translateY(100%); opacity: 0; }
+.splash__enter { transition: transform .12s ease, background-color .2s ease, color .2s ease; }
+.splash__enter.is-pressed, .splash__enter:active { transform: scale(.96); }
+html.splash-reveal body > :not(.splash) { transform-origin: 50% 0; animation: site-settle .9s cubic-bezier(.22, .61, .36, 1) both; }
+@keyframes site-settle { from { transform: scale(1.04); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .splash.is-leaving { animation: splash-out .01s both; }
+  .splash :is(.splash__poster img, .splash__canvas, .splash__art img, .splash__stage, .splash__fill img, .splash__bar, .splash__enter) { transition: none; }
+  html.splash-reveal body > :not(.splash) { animation: none; }
+}

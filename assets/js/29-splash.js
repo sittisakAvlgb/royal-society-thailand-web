@@ -135,10 +135,17 @@
       el.classList.add('is-leaving');
       document.documentElement.classList.remove('splash-open');
       document.documentElement.classList.add('splash-reveal');
-      setTimeout(() => { el.remove(); document.documentElement.classList.remove('splash-reveal'); }, 700);
+      setTimeout(() => { el.remove(); document.documentElement.classList.remove('splash-reveal'); }, 1000);
       if (before && before.focus) before.focus();
     };
-    buttons.forEach(b => b.addEventListener('click', () => close(b.dataset.splashEnter)));
+    let leaving = false;
+    buttons.forEach(b => b.addEventListener('click', () => {
+      if (leaving) return;
+      leaving = true;
+      b.classList.add('is-pressed');
+      /* a beat for the press to show, then the curtain lifts */
+      setTimeout(() => close(b.dataset.splashEnter), 120);
+    }));
     el.addEventListener('keydown', event => {
       if (event.key === 'Escape') { event.preventDefault(); close(); }
       if (event.key === 'Tab') {
