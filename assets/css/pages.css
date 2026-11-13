@@ -9401,3 +9401,14 @@ html[lang="en"] .works-list--empty-en { display: none !important; }
   .search-hero .search-box__submit { padding-inline: 16px; }
 }
 .search-hero__popular a { white-space: nowrap; }
+
+/* Pages on the .auth layout (About, admissions, ITA) run the full width
+   of the container like every other page; running text keeps a readable
+   measure. The three-step flow on the authority page reads at body scale:
+   names one step smaller, descriptions at the reading size, set closer. */
+.auth__main { max-width: none; }
+.auth__lead { max-width: 38rem; line-height: 1.7; }
+.auth__main .auth__part > p:not(.kicker, .note-box), .dir-prose, .auth-sec__text { max-width: 40rem; }
+.auth-flow__who { font-size: var(--text-md); line-height: 1.35; }
+.auth-flow__what { font-size: var(--text-sm); line-height: 1.7; max-width: 30rem; }
+.auth-flow__step { margin-top: var(--space-4); font-size: var(--text-xs); letter-spacing: .02em; }
