@@ -37,7 +37,11 @@ window.RS_SEARCH_TYPES = {
   journal:         { label: { th: 'วารสาร', en: 'Journal' },                 icon: 'ebook' },
   ebook:           { label: { th: 'E-Book', en: 'E-Book' },                  icon: 'ebook' },
   news:            { label: { th: 'ข่าวและกิจกรรม', en: 'News & events' },    icon: 'calendar' },
-  person:          { label: { th: 'ราชบัณฑิตและผู้เชี่ยวชาญ', en: 'Fellows & experts' }, icon: 'people' }
+  person:          { label: { th: 'ราชบัณฑิตและผู้เชี่ยวชาญ', en: 'Fellows & experts' }, icon: 'people' },
+  activity:        { label: { th: 'กิจกรรมวิชาการ', en: 'Academic activities' }, icon: 'calendar' },
+  document:        { label: { th: 'กฎหมายและระเบียบ', en: 'Laws and regulations' }, icon: 'doc' },
+  video:           { label: { th: 'วิดีโอ', en: 'Videos' },                  icon: 'play' },
+  event:           { label: { th: 'กำหนดการ', en: 'Calendar' },               icon: 'calendar' }
 };
 
 window.RS_TOPICS = {
@@ -163,115 +167,5 @@ window.RS_SEARCH_INDEX = [
     source: { th: 'อักขรานุกรมภูมิศาสตร์ สำนักงานราชบัณฑิตยสภา', en: 'Gazetteer, Office of the Royal Society' },
     href: 'https://gazetteer.orst.go.th/', date: null, academy: 'moral', topic: 'social', contentLang: 'th-en',
     keywords: ['singapore']
-  },
-
-  /* ---- Articles / knowledge (fictional sample content) ------------------ */
-  {
-    id: 'article-coining', type: 'article',
-    title: { th: 'หลักการบัญญัติศัพท์วิชาการภาษาไทย', en: 'Principles of coining Thai academic terms' },
-    alt: '',
-    summary: { th: 'ทำความเข้าใจขั้นตอนการพิจารณาศัพท์ใหม่ ตั้งแต่การศึกษาความหมายจนถึงการประกาศใช้', en: 'How new terms are considered, from studying meaning to official announcement.' },
-    source: { th: 'บทความวิชาการ · สำนักศิลปกรรม', en: 'Academic article · Academy of Arts' },
-    href: 'pages/article.html', date: '2026-08-18', academy: 'arts', topic: 'language', contentLang: 'th',
-    keywords: ['ศัพท์บัญญัติ', 'coined terms', 'terminology']
-  },
-  {
-    id: 'article-ai-thai', type: 'article',
-    title: { th: 'ปัญญาประดิษฐ์กับการใช้ภาษาไทยในงานวิชาการ', en: 'Artificial intelligence and Thai in academic writing' },
-    alt: '',
-    summary: { th: 'ข้อควรพิจารณาในการใช้เครื่องมือปัญญาประดิษฐ์ช่วยเขียนและแปลงานวิชาการ', en: 'Considerations when using AI tools to write and translate academic work.' },
-    source: { th: 'บทความวิชาการ · สำนักวิทยาศาสตร์', en: 'Academic article · Academy of Science' },
-    href: 'pages/article.html', date: '2026-07-02', academy: 'science', topic: 'technology', contentLang: 'th',
-    keywords: ['ai', 'ปัญญาประดิษฐ์', 'artificial intelligence']
-  },
-  {
-    id: 'knowledge-translit', type: 'knowledge',
-    title: { th: 'เขียนคำทับศัพท์ภาษาอังกฤษอย่างไรให้ถูกหลัก', en: 'How to transliterate English words into Thai' },
-    alt: '',
-    summary: { th: 'สรุปหลักเกณฑ์ที่พบบ่อย เช่น การใช้วรรณยุกต์และตัวการันต์', en: 'A summary of common rules, such as tone marks and silent letters.' },
-    source: { th: 'คลังความรู้', en: 'Knowledge base' },
-    href: 'pages/article.html', date: '2026-05-21', academy: 'arts', topic: 'language', contentLang: 'th',
-    keywords: ['ทับศัพท์', 'transliteration', 'อีเมล']
-  },
-  {
-    id: 'research-biodiversity', type: 'research',
-    title: { th: 'ความหลากหลายทางชีวภาพของป่าชายเลนไทย', en: 'Biodiversity of Thai mangrove forests' },
-    alt: '',
-    summary: { th: 'รายงานการวิจัยด้านนิเวศวิทยาชายฝั่ง', en: 'A research report on coastal ecology.' },
-    source: { th: 'รายงานการวิจัย · สำนักวิทยาศาสตร์', en: 'Research report · Academy of Science' },
-    href: 'pages/article.html', date: '2025-11-10', academy: 'science', topic: 'science', contentLang: 'th-en',
-    keywords: ['mangrove', 'biodiversity', 'ป่าชายเลน']
-  },
-  {
-    id: 'research-ageing', type: 'research',
-    title: { th: 'สังคมสูงวัยกับความมั่นคงทางรายได้ของครัวเรือนไทย', en: 'Ageing society and household income security in Thailand' },
-    alt: '',
-    summary: { th: 'รายงานการวิจัยว่าด้วยการออมและสวัสดิการผู้สูงอายุ', en: 'A research report on savings and welfare for older people.' },
-    source: { th: 'รายงานการวิจัย · สำนักธรรมศาสตร์และการเมือง', en: 'Research report · Academy of Moral and Political Sciences' },
-    href: 'pages/article.html', date: '2026-02-12', academy: 'moral', topic: 'economics', contentLang: 'th',
-    keywords: ['สังคมสูงวัย', 'ผู้สูงอายุ', 'ageing society', 'aged society']
-  },
-  {
-    id: 'research-ai-thai-nlp', type: 'research',
-    title: { th: 'การประมวลผลภาษาไทยด้วยปัญญาประดิษฐ์: ปัญหาการตัดคำ', en: 'Thai language processing with AI: the word segmentation problem' },
-    alt: '',
-    summary: { th: 'รายงานการวิจัยเปรียบเทียบวิธีตัดคำภาษาไทยสำหรับระบบปัญญาประดิษฐ์', en: 'Research comparing Thai word segmentation methods for AI systems.' },
-    source: { th: 'รายงานการวิจัย · สำนักวิทยาศาสตร์', en: 'Research report · Academy of Science' },
-    href: 'pages/article.html', date: '2025-08-05', academy: 'science', topic: 'technology', contentLang: 'th-en',
-    keywords: ['ai', 'ปัญญาประดิษฐ์', 'nlp', 'ตัดคำ']
-  },
-  {
-    id: 'research-mural', type: 'research',
-    title: { th: 'จิตรกรรมฝาผนังสมัยรัตนโกสินทร์ตอนต้น', en: 'Early Rattanakosin mural painting' },
-    alt: '',
-    summary: { th: 'รายงานการวิจัยด้านประวัติศาสตร์ศิลปะไทย', en: 'A research report on Thai art history.' },
-    source: { th: 'รายงานการวิจัย · สำนักศิลปกรรม', en: 'Research report · Academy of Arts' },
-    href: 'pages/article.html', date: '2024-10-21', academy: 'arts', topic: 'history', contentLang: 'th',
-    keywords: ['จิตรกรรมฝาผนัง', 'mural', 'rattanakosin']
-  },
-  {
-    id: 'article-mangrove-carbon', type: 'article',
-    title: { th: 'ป่าชายเลนกับการกักเก็บคาร์บอน', en: 'Mangroves and carbon storage' },
-    alt: '',
-    summary: { th: 'บทความสรุปบทบาทของป่าชายเลนต่อการลดภาวะโลกร้อน', en: 'An article on the role of mangroves in mitigating climate change.' },
-    source: { th: 'บทความวิชาการ · สำนักวิทยาศาสตร์', en: 'Academic article · Academy of Science' },
-    href: 'pages/article.html', date: '2023-06-08', academy: 'science', topic: 'science', contentLang: 'th',
-    keywords: ['ป่าชายเลน', 'mangrove', 'carbon', 'คาร์บอน']
-  },
-  {
-    id: 'article-law-language', type: 'article',
-    title: { th: 'ภาษากฎหมายที่ประชาชนเข้าใจได้', en: 'Legal language the public can understand' },
-    alt: '',
-    summary: { th: 'แนวทางเขียนกฎหมายและประกาศราชการด้วยภาษาที่ชัดเจน', en: 'Guidance on writing laws and notices in plain language.' },
-    source: { th: 'บทความวิชาการ · สำนักธรรมศาสตร์และการเมือง', en: 'Academic article · Academy of Moral and Political Sciences' },
-    href: 'pages/article.html', date: '2026-03-14', academy: 'moral', topic: 'law', contentLang: 'th',
-    keywords: ['plain language', 'กฎหมาย']
-  },
-  {
-    id: 'journal-sample', type: 'journal',
-    title: { th: 'วารสารราชบัณฑิตยสภา', en: 'Journal of the Royal Society' },
-    alt: '',
-    summary: { th: 'รวมบทความวิชาการจากราชบัณฑิตและผู้ทรงคุณวุฒิ', en: 'Academic articles by Fellows and experts.' },
-    source: { th: 'วารสาร', en: 'Journal' },
-    href: 'pages/publication.html?id=journal-2569-1', date: '2026-06-30', academy: null, topic: null, contentLang: 'th-en',
-    keywords: ['journal', 'วารสาร']
-  },
-  {
-    id: 'ebook-translit-rules', type: 'ebook',
-    title: { th: 'หลักเกณฑ์การทับศัพท์ภาษาอังกฤษ', en: 'Rules for transliterating English' },
-    alt: '',
-    summary: { th: 'หนังสือหลักเกณฑ์ของสำนักงานราชบัณฑิตยสภา อ่านได้ในระบบ E-Book', en: 'Office of the Royal Society guideline book, available as an E-Book.' },
-    source: { th: 'E-Book สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society E-Books' },
-    href: 'pages/series.html?id=journal-th', date: null, academy: 'arts', topic: 'language', contentLang: 'th',
-    keywords: ['ทับศัพท์', 'transliteration', 'ebook']
-  },
-  {
-    id: 'news-lecture', type: 'news',
-    title: { th: 'บรรยายสาธารณะ “ภาษาไทยในยุคดิจิทัล”', en: 'Public lecture: “Thai in the digital age”' },
-    alt: '',
-    summary: { th: 'เปิดให้ประชาชนลงทะเบียนเข้าร่วม', en: 'Open for public registration.' },
-    source: { th: 'ข่าวและกิจกรรม', en: 'News & events' },
-    href: 'pages/news.html', date: '2026-09-02', academy: 'arts', topic: 'language', contentLang: 'th',
-    keywords: ['lecture', 'บรรยาย', 'ดิจิทัล']
   }
 ];

@@ -72,7 +72,113 @@
       contentLang: 'th-en',
       keywords: person.keywords || []
     }));
-    return [...(window.RS_SEARCH_INDEX || []), ...people];
+    return [...(window.RS_SEARCH_INDEX || []), ...people, ...siteRecords()];
+  }
+
+  /* Everything published on this site, indexed from its own data file
+     (the CMS feeds): news and press, academic activities and the
+     academies' posts, laws and regulations, knowledge, publications,
+     videos, the calendar and the Presidents. A page searches what it has
+     loaded; pages/search.html loads every feed. Built once per page. */
+  let siteCache = null;
+  function siteRecords() {
+    if (siteCache) return siteCache;
+    const w = window;
+    const out = [];
+    const ORST = { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' };
+    const obj = v => (v && typeof v === 'object' ? v : { th: v || '' });
+    const lang = title => (title && title.en ? 'th-en' : 'th');
+    const academyName = id => CFG.academies.find(a => a.id === id)?.name;
+    const push = r => { if (r.title && (r.title.th || r.title.en)) out.push({ academy: null, topic: null, keywords: [], ...r, contentLang: r.contentLang || lang(r.title) }); };
+
+    (w.RS_NEWS || []).forEach(n => push({
+      id: `news-${n.id}`, type: 'news', title: obj(n.title), summary: obj(n.dek),
+      source: n.cat === 'press' ? { th: 'แถลงข่าว', en: 'Press release' } : ORST,
+      href: `pages/news-detail.html?id=${encodeURIComponent(n.id)}`, date: n.date || null, keywords: n.tags || []
+    }));
+
+    const SERIES = { 'on-tour': { th: 'ราชบัณฑิตสัญจร', en: 'Fellows on Tour' }, 'ideas-forum': { th: 'อาศรมความคิด', en: 'Think Tank Forum' }, lectures: { th: 'การบรรยายและเสวนาวิชาการ', en: 'Lectures and seminars' }, proposals: { th: 'ข้อเสนอต่อรัฐบาล', en: 'Proposals to Government' }, knowledge: { th: 'โครงการนำความรู้สู่สังคม', en: 'Knowledge for Society' } };
+    (w.RS_ACTIVITIES || []).forEach(a => push({
+      id: `activity-${a.id}`, type: 'activity', title: obj(a.title), summary: obj(a.dek),
+      source: academyName(a.academy) || SERIES[a.series] || ORST, academy: a.academy || null,
+      href: `pages/activity.html?id=${encodeURIComponent(a.id)}`, date: a.date || null,
+      keywords: [t(SERIES[a.series] || {})].filter(Boolean)
+    }));
+    /* an academy's own posts, unless the same event is already a report */
+    const bodies = w.RS_ACTIVITY_BODY || {};
+    Object.entries(w.RS_ACADEMY_PAGES || {}).forEach(([key, page]) => (page.posts || []).forEach(post => {
+      if (bodies[post.id] && bodies[post.id].same) return;
+      push({
+        id: `post-${post.id}`, type: post.cat === 'article' ? 'article' : 'activity', title: post.title, summary: post.excerpt || null,
+        source: academyName(key) || ORST, academy: key,
+        href: `pages/activity.html?id=${encodeURIComponent(post.id)}`, date: post.date || null
+      });
+    }));
+
+    const DOC_PAGES = { acts: 'about-acts', bylaws: 'about-bylaws', rules: 'about-rules', announcements: 'about-announcements' };
+    const DOC_KINDS = { acts: { th: 'พระราชบัญญัติ', en: 'Act' }, bylaws: { th: 'ข้อบังคับ', en: 'Bylaw' }, rules: { th: 'ระเบียบ', en: 'Regulation' }, announcements: { th: 'ประกาศ', en: 'Notice' } };
+    Object.entries(w.RS_DOCUMENTS || {}).forEach(([key, list]) => (list || []).forEach((d, i) => push({
+      id: `doc-${key}-${i}`, type: 'document',
+      title: { th: d.full || d.title.th, en: d.title.en },
+      summary: { th: [t(DOC_KINDS[key]), d.subject, d.year ? `พ.ศ. ${RS.digits(d.year)}` : ''].filter(Boolean).join(' · ') },
+      source: DOC_KINDS[key], academy: d.academy || null,
+      href: /^https?:/.test(d.href) ? d.href : d.href.replace(/^(\.\.\/)+/, ''),
+      date: d.year ? `${d.year - 543}-01-01` : null,
+      keywords: [d.subject, DOC_KINDS[key].th, DOC_PAGES[key]].filter(Boolean)
+    })));
+
+    const K = w.RS_KNOWLEDGE;
+    (K && K.items || []).forEach(k => push({
+      id: `kn-${k.id}`, type: /คลังความรู้/.test(obj(k.type).th) ? 'knowledge' : 'article',
+      title: obj(k.title), summary: obj(k.excerpt), source: obj(k.type),
+      href: k.href || `pages/article.html?id=${encodeURIComponent(k.id)}`, date: k.date || null,
+      topic: TOPICS[k.field] ? k.field : null, keywords: k.tags || []
+    }));
+
+    (w.RS_SERIES || []).forEach(s => push({
+      id: `series-${s.id}`, type: s.kind === 'journal' ? 'journal' : 'ebook', title: obj(s.title), summary: obj(s.desc),
+      source: ORST, href: `pages/series.html?id=${encodeURIComponent(s.id)}`, date: null
+    }));
+    (w.RS_PUBLICATIONS || []).forEach(p => push({
+      id: `pub-${p.id}`, type: p.kind === 'journal' ? 'journal' : 'ebook', title: obj(p.title),
+      summary: p.issue ? obj(p.issue) : obj(p.series), source: obj(p.series || ORST),
+      href: `pages/publication.html?id=${encodeURIComponent(p.id)}`, date: p.date || null
+    }));
+
+    (w.RS_VIDEOS || []).forEach(v => push({
+      id: `video-${v.id}`, type: 'video', title: obj(v.title), summary: null, source: { th: v.cat || ORST.th },
+      href: v.report ? `pages/activity.html?id=${encodeURIComponent(v.report)}` : 'pages/news-videos.html', date: v.date || null
+    }));
+
+    (w.RS_EVENTS || []).forEach(e => push({
+      id: `event-${e.id}`, type: 'event', title: obj(e.title), summary: obj(e.location),
+      source: (w.RS_EVENT_TYPES || {})[e.type] || ORST, academy: e.academy || null,
+      href: 'pages/works-calendar.html', date: e.date || null
+    }));
+
+    const L2 = w.RS_LEADERS;
+    if (L2) {
+      [L2.president, ...(L2.vices || [])].filter(Boolean).forEach(p => push({
+        id: `exec-${p.fellow}`, type: 'person', title: p.name, alt: t(p.role), summary: p.field,
+        source: p.role, academy: p.academy, href: 'pages/about-executives.html', date: null,
+        keywords: [p.honorific, p.role.th]
+      }));
+      /* one result per person, every term they served */
+      const byName = new Map();
+      (L2.past || []).forEach(p => {
+        const seen = byName.get(p.name.th);
+        if (seen) seen.terms = seen.terms.concat(p.terms);
+        else byName.set(p.name.th, { ...p, terms: p.terms.slice() });
+      });
+      [...byName.values()].forEach((p, i) => push({
+        id: `president-${i}`, type: 'person', title: { th: [p.honorific, p.name.th].filter(Boolean).join(' '), en: p.name.en },
+        summary: { th: `นายกราชบัณฑิตยสภา พ.ศ. ${p.terms.map(x => `${x.from}${x.to ? `–${x.to === 'now' ? 'ปัจจุบัน' : x.to}` : ''}`).join(', ')}`, en: 'President of the Royal Society' },
+        source: { th: 'ทำเนียบนายกราชบัณฑิตยสภา', en: 'Past Presidents' },
+        href: 'pages/about-past-presidents.html', date: null, keywords: ['นายกราชบัณฑิตยสภา']
+      }));
+    }
+    siteCache = out;
+    return out;
   }
 
   function score(record, q) {
@@ -83,6 +189,11 @@
 
     if (title === q || alt === q || titleEn === q || keywords.includes(q)) return 100;
     if (title.startsWith(q) || alt.startsWith(q) || titleEn.startsWith(q)) return 70;
+    /* a whole English word ranks above part of one ("act" vs "activities") */
+    if (/^[a-z0-9 .'-]+$/.test(q)) {
+      const word = new RegExp(`(^|[^a-z0-9])${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`);
+      if (word.test(titleEn) || word.test(title) || word.test(alt)) return 60;
+    }
     if (title.includes(q) || titleEn.includes(q) || alt.includes(q)) return 50;
     if (keywords.some(k => k.includes(q))) return 35;
     if (normalize(record.summary?.th).includes(q) || normalize(record.summary?.en).includes(q)) return 15;
