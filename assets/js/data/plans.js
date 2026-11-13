@@ -17,6 +17,10 @@
  *    from    where it was published on orst.go.th, for the record only
  *    pages   page count
  *    thumb   its first page as a small picture (assets/docs/plans/covers/)
+ *    cover   'image' when that first page is a designed cover worth showing;
+ *            otherwise the card shows the printed cover template (the
+ *            crest, the kind of plan, the fiscal year), since most first
+ *            pages are a table or a plain title page
  *    bytes   file size
  * ========================================================================== */
 window.RS_PLAN_GROUPS = {
@@ -125,7 +129,8 @@ window.RS_PLANS = [
   "bytes": 333458,
   "from": "https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER005/GENERAL/DATA0000/00000968.PDF",
   "pages": 9,
-  "thumb": "assets/docs/plans/covers/2567-annual-1.jpg"
+  "thumb": "assets/docs/plans/covers/2567-annual-1.jpg",
+  "cover": "image"
  },
  {
   "group": "annual",
@@ -136,7 +141,8 @@ window.RS_PLANS = [
   "bytes": 296823,
   "from": "https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER005/GENERAL/DATA0000/00000981.PDF",
   "pages": 10,
-  "thumb": "assets/docs/plans/covers/2568-annual-1.jpg"
+  "thumb": "assets/docs/plans/covers/2568-annual-1.jpg",
+  "cover": "image"
  },
  {
   "group": "annual",
@@ -147,7 +153,8 @@ window.RS_PLANS = [
   "bytes": 1839934,
   "from": "https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER005/GENERAL/DATA0001/00001007.PDF",
   "pages": 13,
-  "thumb": "assets/docs/plans/covers/2569-annual-1.jpg"
+  "thumb": "assets/docs/plans/covers/2569-annual-1.jpg",
+  "cover": "image"
  },
  {
   "group": "strategy",
@@ -279,7 +286,8 @@ window.RS_PLANS = [
   "bytes": 157336,
   "from": "https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER005/GENERAL/DATA0000/00000960.PDF",
   "pages": 5,
-  "thumb": "assets/docs/plans/covers/2566-report-1.jpg"
+  "thumb": "assets/docs/plans/covers/2566-report-1.jpg",
+  "cover": "image"
  },
  {
   "group": "report",
@@ -345,7 +353,8 @@ window.RS_PLANS = [
   "bytes": 3380091,
   "from": "https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER005/GENERAL/DATA0000/00000868.PDF",
   "pages": 6,
-  "thumb": "assets/docs/plans/covers/2565-report-3.jpg"
+  "thumb": "assets/docs/plans/covers/2565-report-3.jpg",
+  "cover": "image"
  },
  {
   "group": "report",
@@ -565,7 +574,8 @@ window.RS_PLANS = [
   "bytes": 953051,
   "from": "https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER005/GENERAL/DATA0000/00000888.PDF",
   "pages": 53,
-  "thumb": "assets/docs/plans/covers/2565-assess-1.jpg"
+  "thumb": "assets/docs/plans/covers/2565-assess-1.jpg",
+  "cover": "image"
  },
  {
   "group": "assess",
@@ -576,7 +586,8 @@ window.RS_PLANS = [
   "bytes": 24437791,
   "from": "https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER005/GENERAL/DATA0000/00000841.PDF",
   "pages": 88,
-  "thumb": "assets/docs/plans/covers/2564-assess-1.jpg"
+  "thumb": "assets/docs/plans/covers/2564-assess-1.jpg",
+  "cover": "image"
  },
  {
   "group": "assess",
@@ -785,7 +796,8 @@ window.RS_PLANS = [
   "bytes": 3835633,
   "from": "https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER005/GENERAL/DATA0000/00000803.PDF",
   "pages": 18,
-  "thumb": "assets/docs/plans/covers/na-other-1.jpg"
+  "thumb": "assets/docs/plans/covers/na-other-1.jpg",
+  "cover": "image"
  },
  {
   "group": "other",

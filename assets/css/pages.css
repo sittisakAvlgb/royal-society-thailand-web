@@ -10117,3 +10117,42 @@ html[lang="en"] .hx-wk__since::before { content: "since "; }
 .vmb__quote p::after { content: none; }
 .vmb__q-end { white-space: nowrap; }
 .vmb__q-end::after { content: "\201D"; margin-left: .1em; font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 1.7em; line-height: 0; vertical-align: -.3em; color: var(--rst-green-800); }
+
+/* Plans: the cover template for documents without a designed cover — the
+   Office's green, the crest at the top right, the kind of plan, the fiscal
+   year large, the Office at the foot; a ring at the corner as on the
+   designed covers. One tone per kind so the grid reads at a glance. */
+.plans-cover { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto auto; align-content: stretch; gap: 4px; padding: 7% 8% 8%; overflow: hidden; background: linear-gradient(150deg, #0E6B47 0%, #0A3A29 100%); color: #fff; text-align: left; container-type: size; }
+.plans-cover::before { content: ""; position: absolute; right: -22%; bottom: -38%; width: 70%; aspect-ratio: 1; border: 1px solid rgba(143, 227, 188, .35); border-radius: 50%; }
+.plans-cover::after { content: ""; position: absolute; right: -10%; bottom: -26%; width: 46%; aspect-ratio: 1; border: 1px solid rgba(143, 227, 188, .22); border-radius: 50%; }
+.plans-cover__crest { justify-self: end; width: 15cqw !important; height: auto !important; padding: 1.6cqw; border-radius: 50%; background: #fff; object-fit: contain !important; }
+.plans-cover__kind { position: relative; align-self: end; max-width: 80%; font-family: var(--font-display); font-size: 7.4cqw; font-weight: 700; line-height: 1.2; }
+.plans-cover__year { position: relative; display: grid; font-family: var(--font-display); font-size: 13cqw; font-weight: 700; line-height: 1; color: var(--rst-green-300); }
+.plans-cover__year small { font-size: .36em; font-weight: 600; line-height: 1.4; color: rgba(255, 255, 255, .8); }
+.plans-cover__org { position: relative; margin-top: 2.5cqw; padding-top: 2.5cqw; border-top: 1px solid rgba(255, 255, 255, .3); font-size: 4.2cqw; line-height: 1.3; color: rgba(255, 255, 255, .78); }
+.plans-cover--strategy { background: linear-gradient(150deg, #12875A 0%, #0A3A29 100%); }
+.plans-cover--report { background: linear-gradient(150deg, #0A3A29 0%, #062519 100%); }
+.plans-cover--assess { background: linear-gradient(150deg, #17A86E 0%, #0E6B47 100%); }
+.plans-cover--assess .plans-cover__year { color: #fff; }
+.plans-cover--other { background: linear-gradient(150deg, #0E6B47 0%, #062519 100%); }
+.newsx-card:hover .plans-cover::before { border-color: rgba(143, 227, 188, .6); }
+/* list view: the media is small; keep the crest and the year */
+.newsx-items--list .plans-cover__org, .newsx-items--list .plans-cover__kind { display: none; }
+.newsx-items--list .plans-cover { grid-template-rows: auto 1fr auto; }
+.newsx-items--list .plans-cover__year { align-self: end; }
+/* on the template the page count sits at the top left, clear of the year */
+.plans-card__media:has(.plans-cover) .plans-card__pages { top: 12px; bottom: auto; }
+.plans-cover { padding-top: 6%; }
+.plans-cover__kind { font-size: 8cqw; }
+.plans-card__media:has(.plans-cover) .plans-card__pages { z-index: 1; background: #fff; color: var(--rst-green-900); }
+.plans-cover__kind { font-size: 9cqw; }
+.plans-cover__year { font-size: 15cqw; }
+.plans-cover__org { font-size: 4.8cqw; }
+/* sized by the smaller of the cover's width and height, so nothing is cut on wide cards */
+.plans-cover__kind { font-size: min(9cqw, 12cqh); }
+.plans-cover__year { font-size: min(15cqw, 19cqh); }
+.plans-cover__org { font-size: min(4.8cqw, 6.5cqh); margin-top: min(2.5cqw, 3cqh); padding-top: min(2.5cqw, 3cqh); }
+.plans-cover__crest { width: min(15cqw, 20cqh) !important; }
+.newsx-items--list .plans-cover { grid-template-rows: auto 1fr auto; padding: 10px 14px 12px; }
+.newsx-items--list .plans-cover__crest { grid-row: 1; }
+.newsx-items--list .plans-cover__year { grid-row: 3; align-self: end; }

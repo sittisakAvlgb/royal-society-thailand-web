@@ -210,7 +210,8 @@
   /** A printed cover for a record without a photograph of its own (a
       report, abstracts, an article whose PDF opens on a page of text): the
       crest, what it is, the period or date, the academy. Flat, no glow.
-      item: { title, cat, date, academy } (title Thai or {th,en}) */
+      item: { title, cat, date, academy } (title Thai or {th,en}); kind, when
+      and org ({th,en}) set those lines directly when the caller knows them */
   const COVER_KINDS = [
     [/จดหมายข่าว/, { th: 'จดหมายข่าว', en: 'Newsletter' }],
     [/บทคัดย่อ/, { th: 'บทคัดย่อการบรรยาย', en: 'Lecture abstracts' }],
@@ -223,11 +224,11 @@
   RS.docCover = item => {
     const t = v => (v && typeof v === 'object' ? (lang === 'en' && v.en ? v.en : v.th) : (v || ''));
     const title = typeof item.title === 'object' ? (item.title.th || '') : (item.title || '');
-    const kind = (COVER_KINDS.find(([re]) => re.test(title)) || [null, item.cat === 'article' ? { th: 'บทความ', en: 'Article' } : { th: 'รายงาน', en: 'Report' }])[1];
+    const kind = item.kind || (COVER_KINDS.find(([re]) => re.test(title)) || [null, item.cat === 'article' ? { th: 'บทความ', en: 'Article' } : { th: 'รายงาน', en: 'Report' }])[1];
     /* the period the record covers ("ระหว่างเดือน…"), else its date */
     const period = (title.match(/(?:ระหว่าง(?:เดือน)?|ประจำเดือน)\s*([^()]{4,40}?)(?:\s*\)|$)/) || [])[1];
-    const when = period ? period.trim() : (item.date ? RS.formatDate(item.date, { month: 'long', year: 'numeric' }) : '');
-    const academy = ACADEMY_NAMES[item.academy] || { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' };
+    const when = item.when !== undefined ? t(item.when) : period ? period.trim() : (item.date ? RS.formatDate(item.date, { month: 'long', year: 'numeric' }) : '');
+    const academy = item.org || ACADEMY_NAMES[item.academy] || { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' };
     return `<span class="doc-cover${item.academy ? ` doc-cover--${RS.escapeHTML(item.academy)}` : ''}" aria-hidden="true"><span class="doc-cover__sheet">
       <img src="${RS.escapeHTML(RS.url('assets/images/logo-image-160.png'))}" alt="" width="40" height="40" loading="lazy" decoding="async">
       <span class="doc-cover__kind">${RS.escapeHTML(t(kind))}</span>

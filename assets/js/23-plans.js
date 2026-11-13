@@ -30,6 +30,20 @@
   const fill = (s, map) => s.replace(/\{(\w)\}/g, (_, k) => map[k]);
   const date = iso => (iso ? RS.formatDate(iso, { day: 'numeric', month: 'short', year: 'numeric' }) : '');
   const meta = p => [RS.pdfMeta({ bytes: p.bytes, pages: p.pages }), p.posted ? fill(t(L.posted), { d: date(p.posted) }) : ''].filter(Boolean).join(' · ');
+  /* a designed cover is shown as it is; every other document (a table or a
+     plain title page) gets the printed cover template: the crest, the kind
+     of plan, the fiscal year, the Office */
+  const OFFICE = { th: 'สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society' };
+  const cover = p => {
+    if (p.cover === 'image' && p.thumb) return `<img src="${escapeHTML(RS.url(p.thumb))}" alt="" loading="lazy" decoding="async">`;
+    const kind = GROUPS[p.group] || { th: 'เอกสาร', en: 'Document' };
+    return `<span class="plans-cover plans-cover--${escapeHTML(p.group || 'other')}" aria-hidden="true">
+      <img class="plans-cover__crest" src="${escapeHTML(RS.url('assets/images/logo-image-160.png'))}" alt="" width="44" height="44" loading="lazy" decoding="async">
+      <span class="plans-cover__kind">${escapeHTML(t(kind))}</span>
+      ${p.year ? `<span class="plans-cover__year"><small>${escapeHTML(t({ th: 'ปีงบประมาณ', en: 'Fiscal year' }))}</small>${escapeHTML(RS.digits(String(p.year)))}</span>` : ''}
+      <span class="plans-cover__org">${escapeHTML(t(OFFICE))}</span>
+    </span>`;
+  };
   const actions = p => `
     <div class="plans-acts">
       <button class="act-doc__btn act-doc__btn--primary" type="button" data-plan="${p.i}">${svg('eye')}<span>${te(L.preview)}</span></button>
@@ -87,7 +101,7 @@
       <li class="newsx-item" style="animation-delay:${Math.min(n, 11) * 30}ms">
         <article class="newsx-card plans-card">
           <button class="newsx-card__media plans-card__media" type="button" data-plan="${p.i}" aria-label="${escapeHTML(`${t(L.preview)} ${p.title}`)}">
-            ${p.thumb ? `<img src="${escapeHTML(RS.url(p.thumb))}" alt="" loading="lazy" decoding="async">` : ''}
+            ${cover(p)}
             <span class="plans-card__pages">${escapeHTML(RS.pdfMeta({ pages: p.pages }).replace(/^PDF · /, '') || 'PDF')}</span>
           </button>
           <div class="newsx-card__body">
