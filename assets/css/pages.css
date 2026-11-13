@@ -9623,3 +9623,20 @@ html.rs-mourning { filter: grayscale(1); }
 .splash__overlay p { font-size: 1.36cqw; line-height: 1.32; }
 .splash__overlay .splash__overlay-from { font-size: 1.5cqw; }
 .splash__overlay-rule { margin: .35cqw 0; }
+
+/* Leaving the entry page: the poster eases forward as the page fades, the
+   bar drops away, the site rises a little into place (about 0.6 s) */
+.splash.is-leaving { animation: splash-out .6s cubic-bezier(.4, 0, .2, 1) both; }
+.splash :is(.splash__poster img, .splash__canvas, .splash__art img, .splash__stage) { transition: transform .6s cubic-bezier(.4, 0, .2, 1); }
+.splash.is-leaving :is(.splash__poster img, .splash__canvas, .splash__art img) { transform: scale(1.05); }
+.splash.is-leaving .splash__canvas { transform: translateX(-50%) scale(1.05); }
+.splash.is-leaving .splash__stage { transform: scale(1.03); }
+.splash__bar { transition: transform .45s cubic-bezier(.4, 0, .2, 1); }
+.splash.is-leaving .splash__bar { transform: translateY(100%); }
+html.splash-reveal body > :not(.splash) { animation: site-rise .7s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes site-rise { from { opacity: .4; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .splash.is-leaving { animation-duration: .01s; }
+  .splash :is(.splash__poster img, .splash__canvas, .splash__art img, .splash__stage, .splash__bar) { transition: none; }
+  html.splash-reveal body > :not(.splash) { animation: none; }
+}

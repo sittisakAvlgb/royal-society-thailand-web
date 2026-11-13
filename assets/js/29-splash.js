@@ -130,9 +130,12 @@
       try { sessionStorage.setItem(KEY, '1'); } catch { /* storage unavailable */ }
       if (toLang === 'en' && !en) { location.href = RS.url('index.html') + '?lang=en'; return; }
       if (toLang === 'th' && en) { location.href = RS.url('index.html') + '?lang=th'; return; }
+      /* the way out: the poster eases forward and fades, the bar drops away,
+         and the site rises into place behind it */
       el.classList.add('is-leaving');
       document.documentElement.classList.remove('splash-open');
-      setTimeout(() => el.remove(), 450);
+      document.documentElement.classList.add('splash-reveal');
+      setTimeout(() => { el.remove(); document.documentElement.classList.remove('splash-reveal'); }, 700);
       if (before && before.focus) before.focus();
     };
     buttons.forEach(b => b.addEventListener('click', () => close(b.dataset.splashEnter)));
