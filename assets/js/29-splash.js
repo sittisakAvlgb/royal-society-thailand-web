@@ -62,10 +62,12 @@
     const poster = S.poster && (typeof S.poster === 'object' ? S.poster : { desktop: S.poster });
     if (poster) {
       el.classList.add('splash--poster');
-      if (S.background) el.style.background = S.background;
+      if (S.background === 'blur') el.classList.add('splash--blurfill');
+      else if (S.background) el.style.background = S.background;
     }
     const posterHTML = poster ? `
       <h1 class="visually-hidden" id="splash-title">${esc(t(S.title) || t(S.alt))}</h1>
+      ${S.background === 'blur' ? `<span class="splash__fill" aria-hidden="true"><img src="${esc(RS.url(poster.desktop))}" alt="" decoding="async"></span>` : ''}
       <picture class="splash__poster">
         ${poster.mobile ? `<source media="(max-width: 767.98px)" srcset="${esc(RS.url(poster.mobile))}">` : ''}
         <img src="${esc(RS.url(poster.desktop))}" alt="${esc(t(S.alt))}" decoding="async">

@@ -12,13 +12,15 @@
  *              mourning: the black ribbon in the corner of every page and
  *              the site in grey for the period (start–end), as is custom
  *    poster    the entry page as one designed image, shown whole:
- *              { desktop: wide image (1920x1080), mobile: tall (1080x1350) }
+ *              { desktop: wide image (1920x840), mobile: tall (1080x1600) }
+ *              keep the wording inside the middle 1600x720 / 960x1400
  *              or a single path; the usual way — the Office's designer
  *              makes the image, the CMS uploads it here
  *    alt       {th,en} everything the poster says, read out to screen
  *              readers (required with a poster)
  *    background  the colour around the poster when the screen's shape
- *              differs from the image's
+ *              differs from the image's; 'blur' fills it with the poster
+ *              itself, softened
  *
  *  Without a poster the page is set from the text fields below instead:
  *    image     the background photograph (wide); darkened under the text
@@ -41,14 +43,15 @@ window.RS_SPLASH = {
   end: '2026-12-31',
   mode: 'celebration',
   poster: {
-    desktop: 'assets/images/splash/centenary-2569.jpg',
-    mobile: 'assets/images/splash/centenary-2569-mobile.jpg'
+    desktop: 'assets/images/splash/centenary-2569-poster.jpg'
+    /* mobile: a tall version (1080x1600) when designed; until then phones
+       show the wide one whole */
   },
   alt: {
     th: '๑๐๐ ปี ราชบัณฑิตยสภา ร้อยปีแห่งการบำรุงสรรพวิชา ๑๙ เมษายน ๒๔๖๙ ถึง ๑๙ เมษายน ๒๕๖๙ นับแต่พระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัวทรงสถาปนาราชบัณฑิตยสภา ราชบัณฑิตยสภาได้ค้นคว้า สร้างองค์ความรู้ และกำหนดมาตรฐานการใช้ภาษาไทย เพื่อประโยชน์ของประเทศและประชาชนตลอดมา ราชบัณฑิตยสภา และสำนักงานราชบัณฑิตยสภา',
     en: 'The Royal Society of Thailand at 100: a hundred years in the service of learning, 19 April 1926 to 19 April 2026.'
   },
-  background: '#06251A',
+  background: 'blur',
   image: 'assets/images/hero/hero-1.jpg',
   portrait: null,
   kicker: { th: '๑๙ เมษายน ๒๔๖๙ – ๑๙ เมษายน ๒๕๖๙', en: '19 April 1926 – 19 April 2026' },

@@ -9601,3 +9601,8 @@ html.rs-mourning { filter: grayscale(1); }
 .splash__poster { position: relative; display: block; grid-row: 1; height: 100%; }
 .splash__poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .splash--poster .splash__bar { grid-row: 2; }
+/* background: 'blur' — the space beside the poster filled with the poster
+   itself, softened and dimmed, so a bright design has no hard bands */
+.splash__fill { position: absolute; inset: 0; overflow: hidden; }
+.splash__fill img { width: 100%; height: 100%; object-fit: cover; filter: blur(28px) brightness(.75); transform: scale(1.1); }
+.splash--blurfill { background: #0d2a1e; }
