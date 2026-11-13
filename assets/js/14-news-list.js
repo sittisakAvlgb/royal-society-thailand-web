@@ -83,7 +83,7 @@
 
     /* every story at one size: the same markup serves the grid (photo on top)
        and the list (photo left, words right) — the view is a class on the list */
-    box.className = `newsx-items newsx-items--${view}`;
+    box.className = `newsx-items newsx-items--${view} works-list__items`;  /* the same rows as the activity lists (works-list) */
     const pages = Math.max(1, Math.ceil(found.length / size));
     page = Math.min(page, pages);
     box.innerHTML = found.slice((page - 1) * size, page * size).map((item, i) => `
