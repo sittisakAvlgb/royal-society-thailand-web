@@ -29,10 +29,20 @@
      (a white paper, a link elsewhere) stay, after the reports. */
   const SERIES_OF = { 'on-tour': 'on-tour', 'ideas-forum': 'ideas-forum', lectures: 'lectures', proposals: 'proposals', 'knowledge-to-society': 'knowledge' };
   const series = SERIES_OF[root.dataset.worksTopic];
-  if (series && Array.isArray(window.RS_ACTIVITIES)) {
+  /* the academies' own news (data/academies.js, academy-news.html): every
+     post of the three academies, opened on activity.html; a photo kept on
+     an old academy site or a PDF's page of text gives way to the cover
+     template, as on the academy page */
+  const ACADEMY_NEWS = root.dataset.worksTopic === 'academy-news' && window.RS_ACADEMY_PAGES;
+  const OLD_SITE = /^https?:\/\/(?:[a-z]+\.)?(?:royalsociety\.go\.th|orst\.go\.th)\//i;
+  const academyRecords = () => Object.entries(window.RS_ACADEMY_PAGES || {}).flatMap(([key, page]) => (page.posts || []).map(post => ({
+    id: post.id, academy: key, title: post.title, dek: post.excerpt || '', date: post.date,
+    image: OLD_SITE.test(post.image || '') || post.cover === 'template' ? '' : post.image
+  })));
+  if ((series && Array.isArray(window.RS_ACTIVITIES)) || ACADEMY_NEWS) {
     const ACADEMIES = (window.RS_CONFIG && window.RS_CONFIG.academies) || [];
     const esc = RS.escapeHTML;
-    const records = window.RS_ACTIVITIES.filter(a => a.series === series)
+    const records = (ACADEMY_NEWS ? academyRecords() : window.RS_ACTIVITIES.filter(a => a.series === series))
       .sort((a, b) => String(b.date).localeCompare(String(a.date)));
     const card = a => {
       const academy = ACADEMIES.find(x => x.id === a.academy);

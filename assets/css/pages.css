@@ -10210,3 +10210,11 @@ html[lang="en"] .hx-wk__since::before { content: "since "; }
 .acad-section .acad-post--lead .acad-post__excerpt { -webkit-line-clamp: 3; }
 .acad-section [data-acad-posts-all] .icon { transition: transform .25s ease; }
 .acad-section [data-acad-posts-all].is-open .icon { transform: rotate(-90deg); }
+/* academy news: four equal cards */
+.acad-section .acad-posts { display: block; }
+.acad-section .acad-post-grid--four { display: grid; gap: var(--space-4, 16px); grid-template-columns: 1fr; }
+@media (min-width: 40rem) { .acad-section .acad-post-grid--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64rem) { .acad-section .acad-post-grid--four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.acad-section .acad-post-grid--four .acad-post__media { aspect-ratio: 16 / 10; }
+.acad-section .acad-post-grid--four .acad-post__title { min-height: 2.8em; }
+.acad-section .acad-post-grid--four .acad-post__excerpt { min-height: 3em; }

@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261129r">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261129r">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261129r">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261129r">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261129r">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261129r">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261129s">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261129s">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261129s">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261129s">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261129s">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261129s">
 
   <script type="application/ld+json">
   {
@@ -54,23 +54,23 @@
 
   <!-- 12-academy.js fills the page before 08-directory.js and 09-calendar.js
        render the Fellows and the calendar, so it is loaded ahead of them -->
-  <script defer src="../assets/js/00-core.js?v=20261129r"></script>
-  <script defer src="../assets/js/01-config.js?v=20261129r"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261129r"></script>
-  <script defer src="../assets/js/data/fellows.js?v=20261129r"></script>
-  <script defer src="../assets/js/data/events.js?v=20261129r"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261129r"></script>
-  <script defer src="../assets/js/02-components.js?v=20261129r"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261129r"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261129r"></script>
-  <script defer src="../assets/js/05-language.js?v=20261129r"></script>
-  <script defer src="../assets/js/06-search.js?v=20261129r"></script>
-  <script defer src="../assets/js/12-academy.js?v=20261129r"></script>
-  <script defer src="../assets/js/08-directory.js?v=20261129r"></script>
-  <script defer src="../assets/js/09-calendar.js?v=20261129r"></script>
-  <script defer src="../assets/js/data/splash.js?v=20261129r"></script>
-  <script defer src="../assets/js/29-splash.js?v=20261129r"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261129r"></script>
+  <script defer src="../assets/js/00-core.js?v=20261129s"></script>
+  <script defer src="../assets/js/01-config.js?v=20261129s"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261129s"></script>
+  <script defer src="../assets/js/data/fellows.js?v=20261129s"></script>
+  <script defer src="../assets/js/data/events.js?v=20261129s"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261129s"></script>
+  <script defer src="../assets/js/02-components.js?v=20261129s"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261129s"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261129s"></script>
+  <script defer src="../assets/js/05-language.js?v=20261129s"></script>
+  <script defer src="../assets/js/06-search.js?v=20261129s"></script>
+  <script defer src="../assets/js/12-academy.js?v=20261129s"></script>
+  <script defer src="../assets/js/08-directory.js?v=20261129s"></script>
+  <script defer src="../assets/js/09-calendar.js?v=20261129s"></script>
+  <script defer src="../assets/js/data/splash.js?v=20261129s"></script>
+  <script defer src="../assets/js/29-splash.js?v=20261129s"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261129s"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -170,17 +170,17 @@
           </div>
         </div>
         <!-- the home news toolbar: the tabs at the left, View all at the right
-             (opens every post of the academy below the first four) -->
+             (every post of the academy on academy-news.html) -->
         <div class="news-toolbar reveal">
           <div class="news-tabs" role="group" aria-label="กรองตามหมวด" data-en-aria-label="Filter by category" data-acad-post-filter>
             <button class="news-tab is-active" type="button" data-filter="all" aria-pressed="true" data-en="All">ทั้งหมด</button>
             <button class="news-tab" type="button" data-filter="activity" aria-pressed="false" data-en="Activities">กิจกรรม</button>
             <button class="news-tab" type="button" data-filter="article" aria-pressed="false" data-en="Articles">บทความ</button>
           </div>
-          <button class="btn btn--primary btn--pill" type="button" aria-expanded="false" aria-controls="acad-posts" data-acad-posts-all hidden>
+          <a class="btn btn--primary btn--pill" href="academy-news.html" data-acad-posts-all>
             <span data-acad-posts-all-label>ดูทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
-          </button>
+          </a>
         </div>
         <div class="acad-posts reveal reveal--delay-1" id="acad-posts" data-acad-posts></div>
       </div>
