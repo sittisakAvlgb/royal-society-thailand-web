@@ -9501,3 +9501,9 @@ html:not([lang="en"]) .agenda-card__actions .btn { font-size: 15px; }
 /* the same for the journal-series cards and the series page cover */
 .series-card__media { background: #F4F6F5; }
 .series-head .series-open__cover::before { content: none; }
+
+/* Publication page: the head's facts and the sections below run the full
+   width like other pages; running text keeps a readable measure */
+.pub-body { max-width: none; }
+.pub-facts { max-width: none; }
+.pub-section > p, .pub-section__text, .pub-section .prose { max-width: 46rem; }
