@@ -9517,3 +9517,18 @@ html:not([lang="en"]) .agenda-card__actions .btn { font-size: 15px; }
 @media (min-width: 1024px) {
   .act-layout { grid-template-columns: 19rem minmax(0, 1fr); grid-template-areas: "aside main"; }
 }
+
+/* Academy lectures as a grid of cards: the date on top, then whether it is
+   coming or held, the title (two lines at most), speaker and place; the
+   next lecture tinted. Plain cards, one border, no shadow */
+.acad-ledger--grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: var(--space-4); border-top: 0; }
+.acad-ledger--grid > .prog-row { border: 0; }
+.acad-ledger--grid .prog-row a { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr; align-items: start; gap: var(--space-3) var(--space-4); height: 100%; padding: var(--space-5, 20px); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); }
+.acad-ledger--grid .prog-row a:hover { border-color: var(--rst-green-600); background: var(--white); }
+.acad-ledger--grid .prog-row.is-upcoming a { border-color: rgba(27, 115, 74, .35); background: var(--rst-green-50); }
+.acad-ledger--grid .prog-row__date { justify-items: start; padding: 0 var(--space-4) 0 0; text-align: left; }
+.acad-ledger--grid .prog-row__day { font-size: var(--text-xl); }
+.acad-ledger--grid .prog-row__body { gap: var(--space-1); }
+.acad-ledger--grid .prog-row__title { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--text-base); line-height: 1.4; }
+.acad-ledger--grid .prog-row__meta { display: grid; gap: 2px; margin-top: var(--space-2); }
+.acad-ledger--grid .prog-row__go { grid-column: 2; justify-self: end; align-self: end; }
