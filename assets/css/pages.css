@@ -9466,3 +9466,18 @@ html[lang="en"] .works-list--empty-en { display: none !important; }
   .cf-page .cf-card > form { grid-column: 2; grid-row: 1 / span 6; min-width: 0; }
 }
 @media (min-width: 1100px) { .cf-page .sv-card { max-width: none; margin-inline: 0; } }
+
+/* Responsive pass (Nov 2026, 60 pages x 10 widths): tap targets of at
+   least ~36px on phones, and no text below a readable size (Thai 15px,
+   Latin 12px) wherever small labels had been set in fractions of an em */
+@media (max-width: 767.98px) {
+  .lang-switch a { min-width: 40px; min-height: 34px; display: inline-grid; place-items: center; }
+  .tcal__nav, .tearoff--side .tcal__nav { width: 38px; height: 38px; }
+}
+html:not([lang="en"]) :is(.agenda-card__kind, .agenda-card__count, .agenda-card__count strong, .acts-doc__new, .oc__tag, .pres__term, .pres__acting) { font-size: 15px; }
+html:not([lang="en"]) :is(.hintro__portrait, .hlist__photo) figcaption, html:not([lang="en"]) :is(.hintro__portrait, .hlist__photo) figcaption .story__ph { font-size: 15px; }
+.tcal__year { font-size: max(11.5px, .62em); }
+html[lang="en"] :is(.pub-actions__size, .site-main .font-latin, main .font-latin) { font-size: 12px; }
+html:not([lang="en"]) :is(.agenda-card__summary, .agenda-card__meta li), html:not([lang="en"]) :is(.agenda-card__summary, .agenda-card__meta li) :is(span, .story__ph) { font-size: 15px; }
+html[lang="en"] :is(.hintro__portrait, .hlist__photo) figcaption, html[lang="en"] :is(.pres__term, .pres__acting) { font-size: 12px; }
+html:not([lang="en"]) .agenda-card__actions .btn { font-size: 15px; }
