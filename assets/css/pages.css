@@ -9507,3 +9507,24 @@ html:not([lang="en"]) .agenda-card__actions .btn { font-size: 15px; }
 .pub-body { max-width: none; }
 .pub-facts { max-width: none; }
 .pub-section > p, .pub-section__text, .pub-section .prose { max-width: 46rem; }
+
+/* Printed cover (RS.docCover) for a record without a photograph: a plain
+   page with the crest, what it is, its period and the academy, on one
+   flat tone; fills whatever media box it is given */
+.doc-cover { display: grid; place-items: center; width: 100%; height: 100%; min-height: 100%; aspect-ratio: inherit; background: #F4F6F5; }
+.doc-cover__sheet { display: grid; justify-items: center; align-content: center; gap: 4px; height: 84%; aspect-ratio: 210 / 297; padding: 6% 5%; border: 1px solid #DCE3DF; border-radius: 2px; background: var(--white); text-align: center; }
+.doc-cover__sheet img { width: 26%; height: auto; margin-bottom: 4px; }
+.doc-cover__kind { font-family: var(--font-display); font-size: clamp(.8rem, 1.1vw, .95rem); font-weight: 700; line-height: 1.2; color: var(--rst-green-900); }
+.doc-cover__when { font-size: clamp(.62rem, .8vw, .72rem); line-height: 1.3; color: var(--rst-green-700); }
+.doc-cover__rule { width: 36%; height: 1px; margin: 3px 0; background: var(--rst-green-600); }
+.doc-cover__org { font-size: clamp(.55rem, .7vw, .64rem); line-height: 1.25; color: #5b6b63; }
+:is(.newsx-card__media, .acad-post__media) .doc-cover { position: absolute; inset: 0; }
+.newsx-card__media { position: relative; }
+/* the cover's words scale with the page they are printed on */
+.doc-cover__sheet { container-type: inline-size; }
+@supports (font-size: 1cqw) {
+  .doc-cover__kind { font-size: 10.5cqw; }
+  .doc-cover__when { font-size: 7.4cqw; }
+  .doc-cover__org { font-size: 6.6cqw; }
+  .doc-cover__rule { margin: 2.5cqw 0; }
+}

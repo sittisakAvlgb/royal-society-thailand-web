@@ -41,7 +41,7 @@
       const shortDate = RS.formatDate(a.date, { day: 'numeric', month: 'short', year: 'numeric' });
       return `<li class="newsx-item" data-academy="${esc(a.filter || a.academy || '')}">
         <a class="newsx-card" href="${esc(RS.url(`pages/activity.html?id=${encodeURIComponent(a.id)}`))}">
-          <span class="newsx-card__media">${a.image ? `<img src="${esc(RS.url(a.image))}" alt="" width="640" height="427" loading="lazy" decoding="async">` : ''}</span>
+          <span class="newsx-card__media">${a.image ? `<img src="${esc(RS.url(a.image))}" alt="" width="640" height="427" loading="lazy" decoding="async">` : RS.docCover({ title: a.title, date: a.date, academy: a.academy })}</span>
           <span class="newsx-card__body">
             <span class="news-cat works-cat${a.academy ? ` works-cat--${esc(a.academy)}` : ''}"${academy ? ` data-en="${esc(academy.name.en)}"` : ' data-en="Royal Society"'}>${esc(a.cat || (academy ? academy.name.th : 'ราชบัณฑิตยสภา'))}</span>
             <span class="newsx-card__title"${title.en ? ` data-en="${esc(title.en)}"` : ''}>${esc(RS.lang === 'en' && title.en ? title.en : title.th)}</span>

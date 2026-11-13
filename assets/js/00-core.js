@@ -207,5 +207,35 @@
     }
   };
 
+  /** A printed cover for a record without a photograph of its own (a
+      report, abstracts, an article whose PDF opens on a page of text): the
+      crest, what it is, the period or date, the academy. Flat, no glow.
+      item: { title, cat, date, academy } (title Thai or {th,en}) */
+  const COVER_KINDS = [
+    [/จดหมายข่าว/, { th: 'จดหมายข่าว', en: 'Newsletter' }],
+    [/บทคัดย่อ/, { th: 'บทคัดย่อการบรรยาย', en: 'Lecture abstracts' }],
+    [/รายงานผลการตีพิมพ์|ผลงานอื่น|บทความทางวิชาการ หนังสือ/, { th: 'ผลงานทางวิชาการ', en: 'Publications' }],
+    [/รายงานสรุป/, { th: 'รายงานสรุป', en: 'Report' }],
+    [/ประชุม/, { th: 'การประชุมสำนัก', en: 'Academy meeting' }],
+    [/บทความ/, { th: 'บทความ', en: 'Article' }]
+  ];
+  const ACADEMY_NAMES = { moral: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' }, science: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' }, arts: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' } };
+  RS.docCover = item => {
+    const t = v => (v && typeof v === 'object' ? (lang === 'en' && v.en ? v.en : v.th) : (v || ''));
+    const title = typeof item.title === 'object' ? (item.title.th || '') : (item.title || '');
+    const kind = (COVER_KINDS.find(([re]) => re.test(title)) || [null, item.cat === 'article' ? { th: 'บทความ', en: 'Article' } : { th: 'รายงาน', en: 'Report' }])[1];
+    /* the period the record covers ("ระหว่างเดือน…"), else its date */
+    const period = (title.match(/(?:ระหว่าง(?:เดือน)?|ประจำเดือน)\s*([^()]{4,40}?)(?:\s*\)|$)/) || [])[1];
+    const when = period ? period.trim() : (item.date ? RS.formatDate(item.date, { month: 'long', year: 'numeric' }) : '');
+    const academy = ACADEMY_NAMES[item.academy] || { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' };
+    return `<span class="doc-cover${item.academy ? ` doc-cover--${RS.escapeHTML(item.academy)}` : ''}" aria-hidden="true"><span class="doc-cover__sheet">
+      <img src="${RS.escapeHTML(RS.url('assets/images/logo-image-160.png'))}" alt="" width="40" height="40" loading="lazy" decoding="async">
+      <span class="doc-cover__kind">${RS.escapeHTML(t(kind))}</span>
+      ${when ? `<span class="doc-cover__when">${RS.escapeHTML(lang === 'en' ? when : RS.digits(when))}</span>` : ''}
+      <span class="doc-cover__rule"></span>
+      <span class="doc-cover__org">${RS.escapeHTML(t(academy))}</span>
+    </span></span>`;
+  };
+
   window.RS = RS;
 })();

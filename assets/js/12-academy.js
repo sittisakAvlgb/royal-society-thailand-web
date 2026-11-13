@@ -97,7 +97,9 @@
   const ownPost = (post, i) => ({
     ...post,
     href: OLD_SITE.test(post.href || '') ? `pages/activity.html?id=${encodeURIComponent(post.id)}` : post.href,
-    image: OLD_SITE.test(post.image || '') ? STAND_INS[i % STAND_INS.length] : post.image,
+    /* a photo kept on the old site, or a PDF's page of text, gives way to a
+       printed cover (RS.docCover) rather than an unrelated stock photo */
+    image: OLD_SITE.test(post.image || '') || post.cover === 'template' ? '' : post.image,
     external: false
   });
 
@@ -111,7 +113,7 @@
     /* Posts from the academy websites open there, in a new tab */
     const target = post => post.external ? ' target="_blank" rel="noopener"' : '';
     /* Photos come from the academy websites; a local one stands in if one fails */
-    const img = (post, w, h) => `<img src="${href(post.image)}" alt="" width="${w}" height="${h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="${href('assets/images/news/news-01.jpg')}">`;
+    const img = (post, w, h) => post.image ? `<img src="${href(post.image)}" alt="" width="${w}" height="${h}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="${href('assets/images/news/news-01.jpg')}">` : RS.docCover({ ...post, academy: academy.id });
     const box = qs('[data-acad-posts]', root);
     if (box) box.classList.toggle('acad-posts--single', !rest.length);
     const external = post => post.external ? `<span class="visually-hidden"> ${te(L.external)}</span>` : '';

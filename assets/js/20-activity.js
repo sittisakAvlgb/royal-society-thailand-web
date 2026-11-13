@@ -40,7 +40,7 @@
       ALL.push({
         id: post.id, series: `academy-${key}`, academy: key, cat: academy.name.th,
         title: post.title.th, dek: post.excerpt ? post.excerpt.th : '', date: post.date, kind: post.cat,
-        image: OLD_SITE.test(post.image || '') ? STAND_INS[i % STAND_INS.length] : post.image
+        image: OLD_SITE.test(post.image || '') || post.cover === 'template' ? '' : post.image
       });
     });
   });
@@ -414,7 +414,7 @@
     else set('[data-activity-more]', more.map(a => `
       <li class="newsx-item">
         <a class="newsx-card" href="${link(a)}">
-          <span class="newsx-card__media"><img src="${escapeHTML(RS.url(a.image))}" alt="" width="640" height="427" loading="lazy" decoding="async"></span>
+          <span class="newsx-card__media">${a.image ? `<img src="${escapeHTML(RS.url(a.image))}" alt="" width="640" height="427" loading="lazy" decoding="async">` : RS.docCover({ title: a.title, cat: a.kind, date: a.date, academy: a.academy })}</span>
           <span class="newsx-card__body">
             <span class="news-cat works-cat${a.academy ? ` works-cat--${a.academy}` : ''}">${escapeHTML(a.cat)}</span>
             <span class="newsx-card__title">${escapeHTML(clean(a.title))}</span>

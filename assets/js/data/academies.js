@@ -9,7 +9,9 @@
  *    intro     { th, en }  a short paragraph about the academy
  *    photo     image path (optional) for the masthead; the Office building otherwise
  *    posts     [{ id, cat: 'activity' | 'article', title {th,en}, date 'YYYY-MM-DD',
- *                 excerpt {th,en}, image, href }]
+ *                 excerpt {th,en}, image, href, cover? }]
+ *              no image, or cover: 'template' (the image is a PDF's page of
+ *              text): the card shows a printed cover (RS.docCover) instead
  *    lectures  [{ title {th,en}, speaker {th,en}, date 'YYYY-MM-DD', place {th,en}, href }]
  *    links     [{ label {th,en}, href, external }]
  *
@@ -51,7 +53,7 @@ window.RS_ACADEMY_PAGES = {
       { id: "moral-meeting-10-2567", cat: "activity", date: "2024-05-16", image: "https://mps.royalsociety.go.th/wp-content/uploads/2024/06/427990881_856321889854163_6200346421818907739_n-890x530.jpg", href: "https://mps.royalsociety.go.th/10-2567/", external: true,
         title: { th: "การประชุมสำนักธรรมศาสตร์และการเมือง ครั้งที่ 10/2567", en: "Academy meeting 10/2567" },
         excerpt: { th: "วันพุธที่ 15 พฤษภาคม พ.ศ. 2567 เวลา 09.00 น. ศาสตราจารย์กิตติคุณ ดร.ปิยนาถ บุนนาค ประธานสำนักธรรมศาสตร์และการเมือง", en: "Wednesday 15 May 2024, 9 a.m., with Professor Emeritus Dr Piyanart Bunnag, President of the Academy." } },
-      { id: "moral-amulets", cat: "article", date: "2024-04-01", image: "assets/images/activities/moral-amulets/doc-1.jpg", href: "https://mps.royalsociety.go.th/%E0%B8%9A%E0%B8%97%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87/", external: true,
+      { id: "moral-amulets", cat: "article", date: "2024-04-01", cover: "template", image: "assets/images/activities/moral-amulets/doc-1.jpg", href: "https://mps.royalsociety.go.th/%E0%B8%9A%E0%B8%97%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87/", external: true,
         title: { th: "บทความเรื่อง พระเครื่อง : มหัศจรรย์แห่งเมืองสยาม โดย ศ. ดร.ไผทชิต เอกจริยกร", en: "Amulets: a wonder of Siam — by Professor Dr Phaitoonchit Ekachariyakorn" },
         excerpt: { th: "บทความวิชาการโดย ศ. ดร.ไผทชิต เอกจริยกร", en: "An academic article by Professor Dr Phaitoonchit Ekachariyakorn." } }
     ],
@@ -88,22 +90,22 @@ window.RS_ACADEMY_PAGES = {
       { title: { th: 'ติดต่อสำนัก', en: 'Contact the academy' }, text: { th: 'ที่อยู่และช่องทางติดต่อ', en: 'Address and how to get in touch' }, href: 'pages/contact.html' }
     ],
     posts: [
-      { id: "science-centenary-coast", cat: "article", date: "2026-07-13", image: "assets/images/activities/science-centenary-coast/doc-1.jpg", href: "https://science.royalsociety.go.th/100year-coastal-erosion/", external: true,
+      { id: "science-centenary-coast", cat: "article", date: "2026-07-13", cover: "template", image: "assets/images/activities/science-centenary-coast/doc-1.jpg", href: "https://science.royalsociety.go.th/100year-coastal-erosion/", external: true,
         title: { th: "รายงานสรุปการจัดกิจกรรมโครงการ 100 ปี ราชบัณฑิตยสภา สำนักวิทยาศาสตร์ปีงบประมาณ พ.ศ. 2569", en: "Report on the Academy of Science centenary activities, fiscal year 2026" },
         excerpt: { th: "การสัมมนาทางวิชาการเรื่อง ปัญหาการกัดเซาะชายฝั่งของอ่าวไทยและแนวทางแก้ไขอย่างยั่งยืน เมื่อวันศุกร์ที่ 22 พฤษภาคม พ.ศ. 2569", en: "A seminar on coastal erosion in the Gulf of Thailand and lasting remedies, Friday 22 May 2026." } },
-      { id: "science-works-2569-1-2", cat: "article", date: "2026-03-03", image: "assets/images/activities/science-works-2569-1-2/doc-1.jpg", href: "https://science.royalsociety.go.th/book-academic-articles-2569-1-2/", external: true,
+      { id: "science-works-2569-1-2", cat: "article", date: "2026-03-03", cover: "template", image: "assets/images/activities/science-works-2569-1-2/doc-1.jpg", href: "https://science.royalsociety.go.th/book-academic-articles-2569-1-2/", external: true,
         title: { th: "บทความทางวิชาการ หนังสือ และผลงานอื่น เผยแพร่โดยราชบัณฑิตและภาคีสมาชิก สำนักวิทยาศาสตร์ ระหว่างเดือนมกราคมถึงกุมภาพันธ์ 2569", en: "Articles, books and other works by Fellows of the Academy of Science, January–February 2026" },
         excerpt: { th: "รายงานผลการตีพิมพ์ของสำนักวิทยาศาสตร์ ฉบับเอกสาร PDF", en: "The academy's publication report, as a PDF." } },
-      { id: "science-works-2568-11-12", cat: "article", date: "2026-03-03", image: "assets/images/activities/science-works-2568-11-12/doc-1.jpg", href: "https://science.royalsociety.go.th/book-academic-articles-2568-11-12/", external: true,
+      { id: "science-works-2568-11-12", cat: "article", date: "2026-03-03", cover: "template", image: "assets/images/activities/science-works-2568-11-12/doc-1.jpg", href: "https://science.royalsociety.go.th/book-academic-articles-2568-11-12/", external: true,
         title: { th: "บทความทางวิชาการ หนังสือ และผลงานอื่น เผยแพร่โดยราชบัณฑิตและภาคีสมาชิก สำนักวิทยาศาสตร์ ระหว่างเดือนพฤศจิกายนถึงธันวาคม 2568", en: "Articles, books and other works by Fellows of the Academy of Science, November–December 2025" },
         excerpt: { th: "รายงานผลการตีพิมพ์ของสำนักวิทยาศาสตร์ ฉบับเอกสาร PDF", en: "The academy's publication report, as a PDF." } },
-      { id: "science-abstracts-2568-11-12", cat: "activity", date: "2026-03-03", image: "assets/images/activities/science-abstracts-2568-11-12/doc-1.jpg", href: "https://science.royalsociety.go.th/abstract2568-6/", external: true,
+      { id: "science-abstracts-2568-11-12", cat: "activity", date: "2026-03-03", cover: "template", image: "assets/images/activities/science-abstracts-2568-11-12/doc-1.jpg", href: "https://science.royalsociety.go.th/abstract2568-6/", external: true,
         title: { th: "บทคัดย่อการบรรยายของราชบัณฑิตและภาคีสมาชิก ระหว่างเดือนพฤศจิกายนถึงธันวาคม พ.ศ. 2568", en: "Abstracts of lectures by Fellows and Associate Fellows, November–December 2025" },
         excerpt: { th: "บทคัดย่อการบรรยายในการประชุมสำนักวิทยาศาสตร์ ฉบับเอกสาร PDF", en: "Abstracts of the lectures given at the academy's meetings, as a PDF." } },
-      { id: "science-works-2568-9-10", cat: "article", date: "2026-03-03", image: "assets/images/activities/science-works-2568-9-10/doc-1.jpg", href: "https://science.royalsociety.go.th/book-academic-articles-2568-9-10/", external: true,
+      { id: "science-works-2568-9-10", cat: "article", date: "2026-03-03", cover: "template", image: "assets/images/activities/science-works-2568-9-10/doc-1.jpg", href: "https://science.royalsociety.go.th/book-academic-articles-2568-9-10/", external: true,
         title: { th: "บทความทางวิชาการ หนังสือ และผลงานอื่น เผยแพร่โดยราชบัณฑิตและภาคีสมาชิก สำนักวิทยาศาสตร์ ระหว่างเดือนกันยายนถึงตุลาคม 2568", en: "Articles, books and other works by Fellows of the Academy of Science, September–October 2025" },
         excerpt: { th: "รายงานผลการตีพิมพ์ของสำนักวิทยาศาสตร์ ฉบับเอกสาร PDF", en: "The academy's publication report, as a PDF." } },
-      { id: "science-abstracts-2568-9-10", cat: "activity", date: "2026-03-03", image: "assets/images/activities/science-abstracts-2568-9-10/doc-1.jpg", href: "https://science.royalsociety.go.th/abstract2568-5/", external: true,
+      { id: "science-abstracts-2568-9-10", cat: "activity", date: "2026-03-03", cover: "template", image: "assets/images/activities/science-abstracts-2568-9-10/doc-1.jpg", href: "https://science.royalsociety.go.th/abstract2568-5/", external: true,
         title: { th: "บทคัดย่อการบรรยายของราชบัณฑิตและภาคีสมาชิก ระหว่างเดือนกันยายนถึงตุลาคม พ.ศ. 2568", en: "Abstracts of lectures by Fellows and Associate Fellows, September–October 2025" },
         excerpt: { th: "บทคัดย่อการบรรยายในการประชุมสำนักวิทยาศาสตร์ ฉบับเอกสาร PDF", en: "Abstracts of the lectures given at the academy's meetings, as a PDF." } }
     ],
