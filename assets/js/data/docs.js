@@ -394,14 +394,14 @@ window.RS_DOCS = [
   {
     "id": "doc-0bc98213",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ ก.ย. ธ.ค. 66",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2024/07/จดหมายข่าวออนไลน์-ก.ย.-ธ.ค.-66.pdf"
   },
   {
     "id": "doc-21af9bfd",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ ต.ค. 65",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2024/07/จดหมายข่าวออนไลน์-ต.ค.-65.pdf"
   },
@@ -415,21 +415,21 @@ window.RS_DOCS = [
   {
     "id": "doc-376d31bc",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ พ.ค. ส.ค. 66",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2024/07/จดหมายข่าวออนไลน์-พ.ค.-ส.ค.-66.pdf"
   },
   {
     "id": "doc-4c9af41d",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ พ.ค. ส.ค. 67",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2025/01/จดหมายข่าวออนไลน์-พ.ค.-ส.ค.-67-final.pdf"
   },
   {
     "id": "doc-7e48a72c",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ ก.ค. 65",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2024/07/จดหมายข่าวออนไลน์-ก.ค.-65.pdf"
   },
@@ -443,21 +443,21 @@ window.RS_DOCS = [
   {
     "id": "doc-9f7c3ff2",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ ม.ค. 66",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2024/07/จดหมายข่าวออนไลน์-ม.ค.-66.pdf"
   },
   {
     "id": "doc-a154fb44",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ ก.ย. ธ.ค. 67",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2025/01/จดหมายข่าวออนไลน์-ก.ย.-ธ.ค.-67-final.pdf"
   },
   {
     "id": "doc-a8cdcf5d",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ ม.ค. เม.ย. 69",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2026/07/จดหมายข่าวออนไลน์-ม.ค.-เม.ย.-69-final.pdf"
   },
@@ -471,28 +471,28 @@ window.RS_DOCS = [
   {
     "id": "doc-c4c7ba69",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ พ.ค. ส.ค. 68",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2025/10/จดหมายข่าวออนไลน์-พ.ค.-ส.ค.-68.pdf"
   },
   {
     "id": "doc-cc783580",
     "title": "จดหมายข่าวภาษาอังกฤษ ม.ค. เม.ย. 68",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2025/06/จดหมายข่าวภาษาอังกฤษออนไลน์-ม.ค.-เม.ย.-68.pdf"
   },
   {
     "id": "doc-d545cd7b",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ ม.ค. เม.ย. 67",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2024/07/จดหมายข่าวออนไลน์-ม.ค.-เม.ย.-67.pdf"
   },
   {
     "id": "doc-ebd9df89",
     "title": "จดหมายข่าวราชบัณฑิตยสภา ฉบับภาษาอังกฤษ ก.ย. ธ.ค. 68",
-    "page": "publications.html",
+    "page": "series.html?id=newsletter",
     "file": null,
     "from": "https://royalsociety.go.th/wp-content/uploads/2026/07/จดหมายข่าวออนไลน์-ก.ย.-ธ.ค.-68.pdf"
   },

@@ -1,5 +1,5 @@
 /* ============================================================================
- * data/videos.js — videos for the gallery (pages/news-gallery.html#videos)
+ * data/videos.js — videos for the gallery (pages/news-videos.html)
  * ============================================================================
  *  The YouTube recordings found in the activity reports brought across from
  *  the earlier sites (data/activity-bodies.js), one per video, newest first;

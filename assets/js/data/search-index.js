@@ -262,7 +262,7 @@ window.RS_SEARCH_INDEX = [
     alt: '',
     summary: { th: 'หนังสือหลักเกณฑ์ของสำนักงานราชบัณฑิตยสภา อ่านได้ในระบบ E-Book', en: 'Office of the Royal Society guideline book, available as an E-Book.' },
     source: { th: 'E-Book สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society E-Books' },
-    href: 'pages/publications.html', date: null, academy: 'arts', topic: 'language', contentLang: 'th',
+    href: 'pages/series.html?id=journal-th', date: null, academy: 'arts', topic: 'language', contentLang: 'th',
     keywords: ['ทับศัพท์', 'transliteration', 'ebook']
   },
   {

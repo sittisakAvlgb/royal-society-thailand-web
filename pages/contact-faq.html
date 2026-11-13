@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -51,15 +51,15 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -213,7 +213,7 @@
             </summary>
             <div class="faq-item__a" data-faq-answer>
               <div class="faq-item__inner">
-                <p data-en="On the Journals and Publications page, which gathers the journals, newsletters and annual reports by year.">ดูได้ที่หน้า<a href="publications.html">วารสารและสิ่งพิมพ์</a> ซึ่งรวมวารสาร จดหมายข่าว และรายงานประจำปี จัดเรียงตามปี</p>
+                <p data-en="Each series has its own page under Academic Works: the journals, the newsletter and the annual reports, newest first.">แต่ละชุดมีหน้าของตนเองในเมนูผลงานทางวิชาการ ได้แก่ <a href="series.html?id=journal-th">วารสารราชบัณฑิตยสภา</a> <a href="series.html?id=newsletter">จดหมายข่าว</a> และ<a href="series.html?id=annual-report">รายงานประจำปี</a> เรียงฉบับใหม่สุดก่อน</p>
                 <button class="faq-item__link" type="button" data-faq-copy="q-journals"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-copy"></use></svg><span data-en="Copy link to this question">คัดลอกลิงก์คำถามนี้</span></button>
               </div>
             </div>
@@ -293,7 +293,7 @@
   <div id="app-footer"></div>
   <script>
     /* FAQ: search, topic filter, smooth open / close, open all, links to a question */
-    (() => {
+    document.addEventListener('DOMContentLoaded', () => {
       const root = document.querySelector('.faq-page');
       if (!root) return;
       const items = [...root.querySelectorAll('[data-faq-item]')];
@@ -376,7 +376,7 @@
       window.addEventListener('hashchange', fromHash);
       render();
       setTimeout(fromHash, 300);
-    })();
+    });
   </script>
 </body>
 </html>

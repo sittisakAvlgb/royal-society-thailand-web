@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -51,17 +51,17 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/knowledge.js?v=20261123w"></script>
-  <script defer src="../assets/js/13-knowledge.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/knowledge.js?v=20261126p"></script>
+  <script defer src="../assets/js/13-knowledge.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -84,23 +84,23 @@
     <!-- ==============================
          Knowledge: one catalogue, read like a library index. The fields sit
          in a sticky index on the left (with counts); choosing one narrows
-         the list on the right. The newest article of the current choice
-         opens the list in larger type. Content: data/knowledge.js
+         the articles on the right, framed cards in a grid or a list with a
+         pager, so the catalogue takes any number from the CMS.
+         Content: data/knowledge.js
     ================================ -->
-    <div class="page-header kn-head">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+    <div class="hhero hhero--study kn-hero">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/news/press/6287eda558.jpg" alt="" decoding="async"></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
           <ol>
             <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
             <li><span aria-current="page" data-en="Knowledge">องค์ความรู้</span></li>
           </ol>
         </nav>
-        <div class="kn-head__grid">
-          <div class="kn-head__text">
-            <h1 data-en="Knowledge">องค์ความรู้</h1>
-            <p class="page-header__lead" data-en="Articles and knowledge from Fellows and experts, arranged by field. Choose a field or search for a topic.">บทความและความรู้จากราชบัณฑิตและผู้เชี่ยวชาญ จัดตามสาขาวิชา เลือกสาขาที่สนใจหรือค้นหาเรื่องที่ต้องการ</p>
-          </div>
-          <form class="kn-search" action="search.html" role="search" data-kn-search>
+        <div class="hhero__text">
+          <h1 class="hhero__title" data-en="Knowledge">องค์ความรู้</h1>
+          <p class="hhero__lead" data-en="Articles and knowledge from Fellows and experts, arranged by field. Choose a field or search for a topic.">บทความและความรู้จากราชบัณฑิตและผู้เชี่ยวชาญ จัดตามสาขาวิชา เลือกสาขาที่สนใจหรือค้นหาเรื่องที่ต้องการ</p>
+          <form class="kn-search kn-hero__search" action="search.html" role="search" data-kn-search>
             <label class="visually-hidden" for="kn-q" data-en="Search knowledge">ค้นหาองค์ความรู้</label>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
             <input id="kn-q" name="q" type="search" autocomplete="off" placeholder="ค้นหาบทความ เช่น คำยืม ภูมิอากาศ" data-en-placeholder="Search articles, e.g. loanwords, climate">
@@ -114,24 +114,6 @@
       <aside class="kn-index" aria-label="สาขาวิชา" data-en-aria-label="Fields">
         <p class="kn-index__label" data-en="Fields">สาขาวิชา</p>
         <ul class="kn-index__list" role="list" data-kn-fields></ul>
-
-        <div class="kn-pubs">
-          <p class="kn-index__label" data-en="Publications &amp; Journal">สิ่งพิมพ์และวารสาร</p>
-          <ul class="kn-pubs__list" role="list">
-            <li>
-              <a href="publications.html">
-                <span data-en="Journals and publications">วารสารและสิ่งพิมพ์</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
-              </a>
-            </li>
-            <li>
-              <a href="search.html?type=journal">
-                <span data-en="Search the Journal">ค้นหาบทความในวารสาร</span>
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
-              </a>
-            </li>
-          </ul>
-        </div>
       </aside>
 
       <section class="kn-main" aria-labelledby="kn-title">
@@ -140,15 +122,23 @@
             <h2 id="kn-title" class="kn-main__title" data-kn-title>บทความทั้งหมด</h2>
             <p class="kn-main__desc" data-kn-desc></p>
           </div>
-          <a class="link-arrow kn-main__more" href="search.html" data-kn-more>
-            <span data-kn-more-label>ค้นหาเพิ่มเติม</span>
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
-          </a>
         </div>
-        <div aria-live="polite" data-kn-results>
-          <article class="kn-lead" data-kn-lead></article>
-          <ol class="kn-list" role="list" data-kn-list></ol>
+        <!-- one bar: how many, then the grid / list switch (as on the news page) -->
+        <div class="newsx-tools kn-tools">
+          <p class="newsx-count" aria-live="polite" data-kn-count></p>
+            <div class="newsx-view" role="group" aria-label="รูปแบบการแสดงผล" data-en-aria-label="View">
+              <button class="btn btn--secondary btn--sm newsx-view__btn is-active" type="button" data-newsx-view="grid" aria-pressed="true" title="แบบตาราง" data-en-title="Grid view">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                <span data-en="Grid">ตาราง</span>
+              </button>
+              <button class="btn btn--secondary btn--sm newsx-view__btn" type="button" data-newsx-view="list" aria-pressed="false" title="แบบรายการ" data-en-title="List view">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="15" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span data-en="List">รายการ</span>
+              </button>
+            </div>
         </div>
+        <ul class="newsx-items newsx-items--grid kn-items" role="list" data-kn-list></ul>
+        <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-kn-pages hidden></nav>
       </section>
     </div>
   </main>

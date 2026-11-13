@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Photo Album | The Royal Society of Thailand">อัลบั้มภาพ | ราชบัณฑิตยสภา</title>
+  <meta name="description" content="ภาพกิจกรรมของราชบัณฑิตยสภา จัดเป็นอัลบั้มตามข่าว" data-en-content="Photos from Royal Society events, one album per story.">
+  <meta name="theme-color" content="#123D2B">
+
+  <link rel="canonical" href="https://royalsociety.go.th/pages/news-album.html">
+  <link rel="alternate" hreflang="th" href="https://royalsociety.go.th/pages/news-album.html">
+  <link rel="alternate" hreflang="en" href="https://royalsociety.go.th/pages/news-album.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://royalsociety.go.th/pages/news-album.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ราชบัณฑิตยสภา The Royal Society of Thailand">
+  <meta property="og:title" content="อัลบั้มภาพ | ราชบัณฑิตยสภา">
+  <meta property="og:description" content="ภาพกิจกรรมของราชบัณฑิตยสภา จัดเป็นอัลบั้มตามข่าว">
+  <meta property="og:url" content="https://royalsociety.go.th/pages/news-album.html">
+  <meta property="og:image" content="https://royalsociety.go.th/assets/images/cropped-logo-with-bg-1.png">
+  <meta property="og:locale" content="th_TH">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <link rel="alternate" type="application/rss+xml" title="ข่าวสารและกิจกรรม ราชบัณฑิตยสภา" href="../rss.xml">
+  <link rel="icon" type="image/png" href="../assets/images/cropped-logo-with-bg-1.png">
+  <link rel="apple-touch-icon" href="../assets/images/cropped-logo-with-bg-1.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": "https://royalsociety.go.th/" },
+      { "@type": "ListItem", "position": 2, "name": "คลังรูปภาพ", "item": "https://royalsociety.go.th/pages/news-gallery.html" }
+    ]
+  }
+  </script>
+
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/news.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/press.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/24-album.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
+</head>
+<body>
+  <div id="app-header"></div>
+  <!-- Shown while the page sets itself up (header, Thai font); 02-components.js
+       lifts it, and CSS lifts it on its own after a few seconds regardless -->
+  <div class="page-skel" aria-hidden="true">
+    <div class="page-skel__bar"><span class="sk sk--logo"></span><span class="sk sk--nav"></span><span class="sk sk--btn"></span></div>
+    <div class="page-skel__body">
+      <span class="sk sk--crumb"></span>
+      <div class="page-skel__hero">
+        <div class="page-skel__text"><span class="sk sk--kicker"></span><span class="sk sk--title"></span><span class="sk sk--line"></span><span class="sk sk--line sk--short"></span></div>
+        <span class="sk sk--art"></span>
+      </div>
+      <div class="page-skel__cards"><span class="sk sk--card"></span><span class="sk sk--card"></span><span class="sk sk--card"></span></div>
+    </div>
+  </div>
+
+  <!-- ==============================
+       News → Photo Gallery → one album (news-album.html?id=…)
+       Only the photographs: the album's title, kind, date and count, then
+       every photo in a grid that opens the site's photo viewer; the news
+       story stays one link away. Filled by 24-album.js from data/news.js
+       and data/press.js.
+  ================================ -->
+  <main id="main-content" tabindex="-1" data-album>
+    <!-- Opening: the green band with the album's own cover photograph -->
+    <div class="hhero hhero--study">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/news/news-lead.jpg" alt="" decoding="async" data-album-art></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
+            <li><a href="news.html" data-en="News">ข่าวสาร</a></li>
+            <li><a href="news-gallery.html" data-en="Photo Gallery">คลังรูปภาพ</a></li>
+            <li><span aria-current="page" data-album-crumb data-en="Album">อัลบั้มภาพ</span></li>
+          </ol>
+        </nav>
+        <div class="hhero__text">
+          <p class="hhero__title album-hero__title" data-en="Photo Gallery">คลังรูปภาพ</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="section album" aria-labelledby="album-title">
+      <div class="container">
+        <header class="album__head">
+          <h1 class="album__title" id="album-title" data-album-title></h1>
+          <div class="album__meta">
+            <ul class="album__facts" role="list" data-album-facts></ul>
+            <div class="album__links">
+              <a class="news-cta news-cta--back album__back" href="news-gallery.html"><span class="news-cta__dot" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span><span data-en="All albums">อัลบั้มทั้งหมด</span></a>
+              <a class="news-cta album__story" href="news.html" data-album-story hidden><span data-en="Read the story">อ่านข่าว</span><span class="news-cta__dot" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span></a>
+            </div>
+          </div>
+        </header>
+        <ul class="album__grid" role="list" data-album-grid></ul>
+        <p class="album__empty" data-album-empty hidden data-en="This album could not be found.">ไม่พบอัลบั้มนี้ <a href="news-gallery.html">กลับไปคลังรูปภาพ</a></p>
+      </div>
+    </section>
+
+    <!-- Other albums, as the gallery's framed cards -->
+    <section class="section section--alt album-more" aria-labelledby="album-more-title" data-album-more-box hidden>
+      <div class="container">
+        <h2 class="album-more__title" id="album-more-title" data-en="Other albums">อัลบั้มอื่น ๆ</h2>
+        <ul class="newsx-items newsx-items--grid newsx-albumlist" role="list" data-album-more></ul>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+</body>
+</html>

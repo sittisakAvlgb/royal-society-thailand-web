@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -51,17 +51,17 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/news.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/14-news-list.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/news.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/14-news-list.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -80,23 +80,23 @@
   </div>
 
   <main id="main-content" tabindex="-1" data-news-list data-news-cats="news,announcement,activity">
-    <!-- Opening: the cream band of the story pages with the inner-page leaf
-         artwork — breadcrumb, title and lead; the filter bar overlaps its edge -->
-    <header class="story__head newsx-head">
-      <div class="container">
-        <div class="story__crumbbar">
-          <nav class="breadcrumb story__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
-            <ol>
-              <li><a href="../index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-institution"></use></svg><span data-en="Home">หน้าแรก</span></a></li>
-              <li><span aria-current="page" data-en="News">ข่าวสาร</span></li>
-            </ol>
-          </nav>
+    <!-- Opening: the green band with a photograph, as on the other news pages -->
+    <div class="hhero hhero--study">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/news/news-02.jpg" alt="" decoding="async"></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
+            <li><a href="news.html" data-en="News">ข่าวสาร</a></li>
+            <li><span aria-current="page" data-en="News and Announcements">ข่าวประชาสัมพันธ์</span></li>
+          </ol>
+        </nav>
+        <div class="hhero__text">
+          <h1 class="hhero__title" data-en="News and Announcements">ข่าวประชาสัมพันธ์</h1>
+          <p class="hhero__lead" data-en="News, announcements and activities of the Royal Society of Thailand.">ข่าว ประกาศ และกิจกรรมของราชบัณฑิตยสภา</p>
         </div>
-        <h1 class="story__title newsx-head__title" data-en="News and Announcements">ข่าวประชาสัมพันธ์</h1>
-        <p class="story__dek newsx-head__lead" data-en="News, announcements and activities of the Royal Society of Thailand.">ข่าว ประกาศ และกิจกรรมของราชบัณฑิตยสภา</p>
-
       </div>
-    </header>
+    </div>
 
     <!-- One control bar: category tabs on the left; search and the grid / list switch on the right -->
     <div class="container newsx-toolbar">

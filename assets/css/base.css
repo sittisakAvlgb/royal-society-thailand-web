@@ -20,21 +20,24 @@ html {
    a smaller root for everything, and the display sizes reined in further so
    headings don't shout. */
 html[lang="en"] {
-  font-size: clamp(16.5px, 0.5vw + 10px, 20px);
-  --text-lg: 1.375rem;
-  --text-xl: 1.625rem;
-  --text-2xl: 1.9375rem;
-  --text-3xl: 2.375rem;
-  /* English pairing: Newsreader, a book serif with optical sizes, carries
-     headings, numerals and names — the voice of a learned society; Geist
-     stays for running text and UI. Thai words inside English pages still
-     fall back to TH Sarabun New. */
-  --font-display: "Newsreader", "TH Sarabun New", Georgia, serif;
-  --font-body: "Geist", "TH Sarabun New", system-ui, sans-serif;
-  --text-xs: 0.875rem;
-  --text-sm: 0.96875rem;
-  --text-base: 1.125rem;
-  --text-md: 1.3125rem;
+  /* THE English type scale — the one place English sizes are set. Every
+     component reads these tokens (or rem, which follows the root), so a
+     change here moves the whole English site together. Latin reads larger
+     than TH Sarabun New at the same size, so English runs a full step
+     smaller than Thai: body 16px, the root steady from 15px to 16px. */
+  font-size: clamp(15px, 0.15vw + 13px, 16px);
+  --text-xs: 0.8125rem;   /* 13 — meta */
+  --text-sm: 0.875rem;    /* 14 — secondary, UI */
+  --text-base: 1rem;      /* 16 — body */
+  --text-md: 1.125rem;    /* 18 — lead, card title */
+  --text-lg: 1.3125rem;   /* 21 — sub-heading */
+  --text-xl: 1.625rem;    /* 26 — section heading */
+  --text-2xl: 2rem;       /* 32 — page title */
+  --text-3xl: 2.375rem;   /* 38 — display */
+  /* English pairing: Newsreader, a book serif, carries headings and names;
+     Geist carries running text and the interface */
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Geist", system-ui, sans-serif;
 }
 html[lang="en"] :is(h1, h2, h3, h4) { letter-spacing: -0.01em; }
 html[lang="en"] :where(h1, h2, h3, h4) { font-family: var(--font-display); font-optical-sizing: auto; }
@@ -221,3 +224,20 @@ body.access-reduce-motion *::after {
    ========================================================================== */
 html:not([lang="en"]) body:not(.access-readable) *:not(:lang(en)) { letter-spacing: normal; }
 html:not([lang="en"]) :is(time, .news-cat, .kn-row__month, .sitemap-rail__count, .sitemap-block__count, .pub-shelf__date, .academy-index__num, .feature-item__num, .eyebrow, .error-page__code, .story__file-meta, .cal-row__day, .event__day, .profile__year, .result-item__alt, .check__count, .feature-story__counter span) { font-family: var(--font-body); }
+
+
+/* English only: whatever is still Thai on an English page is not shown */
+html[lang="en"] .en-hidden { display: none !important; }
+html[lang="en"] .hero__title-sub { display: none; }
+html[lang="en"] :is(.nav-link, .header-btn, .topbar) { font-size: 0.9375rem; }
+/* English mega menu: links one step below the Thai size, regular weight,
+   tighter rows; wrapped names keep a normal line height */
+html[lang="en"] .mega-group ul a { min-height: 34px; padding-block: 4px; font-size: 0.9375rem; font-weight: 400; line-height: 1.35; }
+html[lang="en"] .mega-group__title { font-size: 0.8125rem; letter-spacing: .01em; }
+html[lang="en"] .mega-feature__title { font-size: 1.125rem; }
+html[lang="en"] .mega-feature__desc { font-size: 0.875rem; font-weight: 400; line-height: 1.55; }
+/* English mobile menu: third-level links readable on a phone */
+html[lang="en"] .rs-mobile-subsub { font-size: 0.9375rem; color: #2c3833; }
+/* English footer: headings and links closer in size */
+html[lang="en"] .footer-col h2 { font-size: 1.0625rem; }
+html[lang="en"] .site-footer :is(.footer-links a, .footer-links .footer-action, .footer-address a) { font-size: 0.875rem; }

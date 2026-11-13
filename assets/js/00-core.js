@@ -81,6 +81,38 @@
     history.replaceState(history.state, '', next);
   }
 
+  /* English shows English only. Records without an English title are kept
+     out of every list on an English page: the data files assign these
+     globals, and the setter filters them as they arrive, before any page
+     script reads them, so lists, counts and pagers agree. A record is
+     English when its title (or name) has an `en` value, or `en` itself is
+     set. TODO (CMS): give every record its English title to show it here. */
+  if (lang === 'en') {
+    const THAI = /[\u0E00-\u0E7F]/;
+    const english = item => {
+      if (!item || typeof item !== 'object') return true;
+      const t = item.title || item.name;
+      if (t && typeof t === 'object') return !!(t.en && !THAI.test(t.en));
+      if (typeof item.en === 'string') return !THAI.test(item.en);
+      if (typeof t === 'string') return !THAI.test(t);
+      return true;
+    };
+    const LISTS = ['RS_NEWS', 'RS_ACTIVITIES', 'RS_DOCS', 'RS_VIDEOS', 'RS_EVENTS', 'RS_RECRUIT', 'RS_PUBLICATIONS'];
+    LISTS.forEach(name => {
+      let value;
+      Object.defineProperty(window, name, {
+        configurable: true,
+        get: () => value,
+        set: next => {
+          if (!Array.isArray(next)) { value = next; return; }
+          value = next.filter(english);
+          /* remembered so the page can say that Thai-only items were left out */
+          window.RS_EN_FILTERED = (window.RS_EN_FILTERED || 0) + (next.length - value.length);
+        }
+      });
+    });
+  }
+
   /** Pages inside /pages/ need ../ to reach the project root */
   const base = /\/pages\//.test(location.pathname) ? '../' : '';
 

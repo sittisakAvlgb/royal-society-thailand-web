@@ -525,7 +525,7 @@
       return `
           <li class="agenda__item is-active">
             <article class="agenda-card" data-type="${escapeHTML(ev.type)}" aria-labelledby="agenda-title-${escapeHTML(ev.id)}" tabindex="-1">
-              <p class="agenda-card__date"><span class="agenda-card__day">${d.getDate()}</span><span class="agenda-card__my">${MONTHS_SHORT[d.getMonth()]} ${year(d)}</span></p>
+              <p class="agenda-card__date"><span class="agenda-card__day">${d.getDate()}</span><span class="agenda-card__my">${MONTHS_SHORT[d.getMonth()]}</span><span class="agenda-card__yr">${year(d)}</span></p>
               <div class="agenda-card__body">
                 <p class="agenda-card__kind">${te(TYPES[ev.type])}<span class="agenda-card__count">${countText(ev)}</span></p>
                 <h3 class="agenda-card__title" id="agenda-title-${escapeHTML(ev.id)}">${te(ev.title)}</h3>

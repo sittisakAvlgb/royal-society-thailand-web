@@ -53,7 +53,7 @@
     qs('meta[name="description"]')?.setAttribute('content', item.desc);
 
     const groupLink = qs('[data-ita-group-link]', root);
-    if (groupLink) { groupLink.href = RS.url(`pages/ita.html#${item.group}`); groupLink.textContent = groupName; }
+    if (groupLink) { groupLink.href = RS.url(`pages/ita.html?academy=${encodeURIComponent(item.group)}#oit`); groupLink.textContent = groupName; }
     set('[data-ita-crumb]', escapeHTML(name(item)));
     set('[data-ita-kicker]', escapeHTML(groupName));
     set('[data-ita-title]', escapeHTML(name(item)));

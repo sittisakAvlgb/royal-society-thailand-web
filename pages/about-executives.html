@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -53,17 +53,19 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261123w"></script>
-  <script defer src="../assets/js/14-about.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261126p"></script>
+  <script defer src="../assets/js/14-about.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/leaders.js?v=20261126p"></script>
+  <script defer src="../assets/js/28-leaders.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -118,47 +120,15 @@
           <section class="auth__part" id="leaders" aria-labelledby="leaders-title">
             <p class="kicker" data-en="Current term">วาระปัจจุบัน</p>
             <h2 id="leaders-title" class="auth__title" data-en="The President">นายกราชบัณฑิตยสภา</h2>
-            <article class="exec-lead exec--science">
-              <a class="exec-lead__photo" href="fellow.html?id=science-025" tabindex="-1" aria-hidden="true"><img src="../assets/images/about/leaders/surapol-issaragrisil.jpg" alt="" width="320" height="410" loading="lazy" decoding="async"></a>
-              <div class="exec-lead__text">
-                <p class="exec__role" data-en="President of the Royal Society">นายกราชบัณฑิตยสภา</p>
-                <h3 class="exec-lead__name"><a href="fellow.html?id=science-025" data-en="Professor Emeritus Surapol Issaragrisil, M.D."><span class="story__ph">ศาสตราจารย์เกียรติคุณ</span> <span class="story__ph">นพ.สุรพล อิสรไกรศีล</span></a></h3>
-                <p class="exec__acad"><a href="academy.html?id=science" data-en="Fellow, Academy of Science">ราชบัณฑิต สำนักวิทยาศาสตร์</a></p>
-                <p class="exec__field" data-en="Medicine · health sciences">สาขาวิชาแพทยศาสตร์ · กลุ่มวิทยาศาสตร์สุขภาพ</p>
-                <dl class="exec-duties">
-                  <div><dt data-en="Chairs the council">เป็นนายกสภา</dt><dd><span data-th-only>ประธานการประชุมราชบัณฑิตยสภา ซึ่งราชบัณฑิตทุกคนเป็นกรรมการ</span><span class="auth-ref">มาตรา ๒๔</span></dd></div>
-                  <div><dt data-en="Oversees the academic work">กำกับงานวิชาการ</dt><dd><span data-th-only>ให้เป็นไปตามนโยบาย ข้อบังคับ ระเบียบ และมติของราชบัณฑิตยสภา</span><span class="auth-ref">มาตรา ๒๖</span></dd></div>
-                </dl>
-                <p class="exec-lead__links">
-                  <a class="btn btn--secondary btn--sm btn--pill" href="about-president-message.html"><span data-en="The President's message">สารจากนายกราชบัณฑิตยสภา</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
-                  <a class="exec-lead__more" href="fellow.html?id=science-025" data-en="Fellow's profile">ประวัติราชบัณฑิต</a>
-                </p>
-              </div>
-            </article>
+            <!-- Drawn from data/leaders.js (president) by 28-leaders.js (CMS) -->
+            <article class="exec-lead" data-leaders-president></article>
           </section>
 
           <section class="auth__part" id="vice" aria-labelledby="vice-title">
             <p class="kicker" data-en="Vice-Presidents of the council">อุปนายกสภา</p>
             <h2 id="vice-title" class="auth__title" data-en="The Vice-Presidents">อุปนายกราชบัณฑิตยสภา</h2>
-            <ul class="exec-vices" role="list">
-                <li class="exec-vice exec--moral">
-                  <a class="exec-vice__photo" href="fellow.html?id=mps-012" tabindex="-1" aria-hidden="true"><img src="../assets/images/about/leaders/phalin-phoocharoon.jpg" alt="" width="320" height="410" loading="lazy" decoding="async"></a>
-                  <div class="exec-vice__text">
-                    <p class="exec__role" data-en="First Vice-President">อุปนายกราชบัณฑิตยสภา คนที่ ๑</p>
-                    <h3 class="exec-vice__name"><a href="fellow.html?id=mps-012" data-en="Professor Phalin Phoocharoon, Ph.D."><span class="story__ph">ศาสตราจารย์</span> <span class="story__ph">ดร.ผลิน ภู่จรูญ</span></a></h3>
-                    <p class="exec__acad"><a href="academy.html?id=moral" data-en="Fellow, Academy of Moral and Political Sciences">ราชบัณฑิต สำนักธรรมศาสตร์และการเมือง</a></p>
-                    <p class="exec__field" data-en="Business administration · social sciences">สาขาวิชาบริหารธุรกิจ · กลุ่มสังคมศาสตร์</p>
-                  </div>
-                </li>
-                <li class="exec-vice exec--arts">
-                  <a class="exec-vice__photo" href="fellow.html?id=arts-011" tabindex="-1" aria-hidden="true"><img src="../assets/images/about/leaders/viboon-leesuwan.jpg" alt="" width="320" height="410" loading="lazy" decoding="async"></a>
-                  <div class="exec-vice__text">
-                    <p class="exec__role" data-en="Second Vice-President">อุปนายกราชบัณฑิตยสภา คนที่ ๒</p>
-                    <h3 class="exec-vice__name"><a href="fellow.html?id=arts-011" data-en="Professor Viboon Leesuwan"><span class="story__ph">ศาสตราจารย์</span> <span class="story__ph">วิบูลย์ ลี้สุวรรณ</span></a></h3>
-                    <p class="exec__acad"><a href="academy.html?id=arts" data-en="Fellow, Academy of Arts">ราชบัณฑิต สำนักศิลปกรรม</a></p>
-                    <p class="exec__field" data-en="Painting · fine arts">สาขาวิชาจิตรกรรม · กลุ่มวิจิตรศิลป์</p>
-                  </div>
-                </li>
+            <ul class="exec-vices" role="list" data-leaders-vices>
+              <!-- Drawn from data/leaders.js (vices) by 28-leaders.js (CMS) -->
             </ul>
           </section>
 
@@ -172,11 +142,11 @@
               </li>
               <li>
                 <h3 class="exec-steps__title" data-en="Elected by the Society">ราชบัณฑิตยสภามีมติเลือก</h3>
-                <p class="exec-steps__text" data-th-only>ที่ประชุมราชบัณฑิตยสภาเลือกนายกและอุปนายกราชบัณฑิตยสภา <span class="auth-ref">มาตรา ๓๑</span></p>
+                <p class="exec-steps__text" data-th-only>ที่ประชุมราชบัณฑิตยสภา เลือกนายกและอุปนายก <span class="auth-ref">มาตรา ๓๑</span></p>
               </li>
               <li>
                 <h3 class="exec-steps__title" data-en="Appointed by royal command">ทรงพระกรุณาโปรดเกล้าฯ แต่งตั้ง</h3>
-                <p class="exec-steps__text" data-th-only>นำความกราบบังคมทูลเพื่อทรงพระกรุณาโปรดเกล้าโปรดกระหม่อมแต่งตั้ง</p>
+                <p class="exec-steps__text" data-th-only>นำความกราบบังคมทูล เพื่อทรงพระกรุณาโปรดเกล้าฯ แต่งตั้ง</p>
               </li>
             </ol>
           </section>

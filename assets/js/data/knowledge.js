@@ -1,7 +1,7 @@
 /* ============================================================================
  * data/knowledge.js — the knowledge page: fields and their articles
  *  fields: { id, name {th,en}, desc {th,en} } in page order
- *  items:  { field, type {th,en}, date (ISO), href (from project root),
+ *  items:  { id, field, type {th,en}, date (ISO), href (pages/article.html?id=…),
  *            title {th,en}, excerpt {th,en} }
  *  Sample content: replace with the Office's articles before launch.
  * ========================================================================== */
@@ -109,13 +109,32 @@ window.RS_KNOWLEDGE = {
   ],
   "items": [
     {
+      "id": "kn-coined-terms",
       "field": "language",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-08-18",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-coined-terms",
+      "title": {
+        "th": "หลักการบัญญัติศัพท์วิชาการภาษาไทย",
+        "en": "Principles of coining Thai academic terms"
+      },
+      "excerpt": {
+        "th": "ศัพท์บัญญัติคืออะไร ต่างจากคำทับศัพท์อย่างไร และควรเลือกใช้อย่างไรในงานเขียนวิชาการ",
+        "en": "What coined terms are, how they differ from transliteration, and how to choose between them in academic writing."
+      }
+    },
+    {
+      "id": "kn-language-2026-08-18",
+      "field": "language",
+      "type": {
+        "th": "บทความวิชาการ",
+        "en": "Academic article"
+      },
+      "date": "2026-08-18",
+      "href": "pages/article.html?id=kn-language-2026-08-18",
       "title": {
         "th": "การใช้ลักษณนามในภาษาไทยปัจจุบัน",
         "en": "Classifiers in contemporary Thai"
@@ -126,13 +145,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-language-2026-06-09",
       "field": "language",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-06-09",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-language-2026-06-09",
       "title": {
         "th": "คำยืมภาษาบาลีและสันสกฤตในภาษาไทย",
         "en": "Pali and Sanskrit loanwords in Thai"
@@ -143,13 +163,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-language-2026-02-20",
       "field": "language",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-02-20",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-language-2026-02-20",
       "title": {
         "th": "การอ่านวรรณคดีไทยในห้องเรียนยุคใหม่",
         "en": "Reading Thai classical literature in today’s classroom"
@@ -160,13 +181,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-science-2025-11-10",
       "field": "science",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2025-11-10",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-science-2025-11-10",
       "title": {
         "th": "ความหลากหลายทางชีวภาพของป่าชายเลน",
         "en": "Biodiversity in mangrove forests"
@@ -177,13 +199,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-science-2026-07-21",
       "field": "science",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-07-21",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-science-2026-07-21",
       "title": {
         "th": "ศัพท์วิทยาศาสตร์พื้นฐานที่ควรใช้ให้ถูกต้อง",
         "en": "Basic science terms to use correctly"
@@ -194,13 +217,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-science-2026-04-02",
       "field": "science",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-04-02",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-science-2026-04-02",
       "title": {
         "th": "การอธิบายเรื่องการเปลี่ยนแปลงสภาพภูมิอากาศแก่สาธารณะ",
         "en": "Explaining climate change to the public"
@@ -211,13 +235,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-technology-2026-07-02",
       "field": "technology",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-07-02",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-technology-2026-07-02",
       "title": {
         "th": "ปัญญาประดิษฐ์กับการใช้ภาษาไทยในงานวิชาการ",
         "en": "Artificial intelligence and Thai in academic writing"
@@ -228,13 +253,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-technology-2026-05-12",
       "field": "technology",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-05-12",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-technology-2026-05-12",
       "title": {
         "th": "การบัญญัติศัพท์ในสาขาที่เปลี่ยนแปลงเร็ว",
         "en": "Coining Thai terms in fast-changing fields"
@@ -245,13 +271,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-technology-2026-01-27",
       "field": "technology",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-01-27",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-technology-2026-01-27",
       "title": {
         "th": "การประมวลผลภาษาธรรมชาติสำหรับภาษาไทย",
         "en": "Natural language processing for Thai"
@@ -262,13 +289,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-medicine-2026-08-04",
       "field": "medicine",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-08-04",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-medicine-2026-08-04",
       "title": {
         "th": "ศัพท์แพทย์ภาษาไทยที่ประชาชนควรรู้",
         "en": "Thai medical terms for everyday use"
@@ -279,13 +307,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-medicine-2026-03-19",
       "field": "medicine",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-03-19",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-medicine-2026-03-19",
       "title": {
         "th": "การสื่อสารความเสี่ยงด้านสุขภาพ",
         "en": "Communicating health risks"
@@ -296,13 +325,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-medicine-2025-12-08",
       "field": "medicine",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2025-12-08",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-medicine-2025-12-08",
       "title": {
         "th": "ตำราการแพทย์แผนไทยในมุมมองวิชาการ",
         "en": "Thai traditional medicine texts as scholarly sources"
@@ -313,13 +343,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-social-2026-08-25",
       "field": "social",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-08-25",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-social-2026-08-25",
       "title": {
         "th": "การเรียนรู้ตลอดชีวิตในสังคมสูงวัย",
         "en": "Lifelong learning in an ageing society"
@@ -330,13 +361,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-social-2026-06-17",
       "field": "social",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-06-17",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-social-2026-06-17",
       "title": {
         "th": "ความรู้เท่าทันสื่อในยุคดิจิทัล",
         "en": "Media literacy in the digital age"
@@ -347,13 +379,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-social-2025-10-30",
       "field": "social",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2025-10-30",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-social-2025-10-30",
       "title": {
         "th": "โลกาภิวัตน์กับอัตลักษณ์ท้องถิ่น",
         "en": "Globalisation and local identity"
@@ -364,13 +397,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-arts-2026-07-14",
       "field": "arts",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-07-14",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-arts-2026-07-14",
       "title": {
         "th": "การสืบทอดดนตรีไทยในสถาบันการศึกษา",
         "en": "Passing on Thai classical music"
@@ -381,13 +415,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-arts-2026-04-23",
       "field": "arts",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-04-23",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-arts-2026-04-23",
       "title": {
         "th": "ลวดลายประดับในสถาปัตยกรรมไทย",
         "en": "Ornament in Thai architecture"
@@ -398,13 +433,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-arts-2026-01-15",
       "field": "arts",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-01-15",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-arts-2026-01-15",
       "title": {
         "th": "หลักการอนุรักษ์จิตรกรรมฝาผนัง",
         "en": "Principles of mural painting conservation"
@@ -415,13 +451,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-history-2026-08-11",
       "field": "history",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-08-11",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-history-2026-08-11",
       "title": {
         "th": "การอ่านจารึกในฐานะหลักฐานทางประวัติศาสตร์",
         "en": "Reading inscriptions as historical sources"
@@ -432,13 +469,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-history-2026-05-28",
       "field": "history",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-05-28",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-history-2026-05-28",
       "title": {
         "th": "ชื่อบ้านนามเมืองกับร่องรอยทางประวัติศาสตร์",
         "en": "Place names as traces of the past"
@@ -449,13 +487,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-history-2025-09-22",
       "field": "history",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2025-09-22",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-history-2025-09-22",
       "title": {
         "th": "ประวัติศาสตร์เอเชียตะวันออกเฉียงใต้ในมุมมองเปรียบเทียบ",
         "en": "Southeast Asian history in comparative perspective"
@@ -466,13 +505,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-law-2026-03-14",
       "field": "law",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-03-14",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-law-2026-03-14",
       "title": {
         "th": "ภาษากฎหมายที่ประชาชนเข้าใจได้",
         "en": "Legal language the public can understand"
@@ -483,13 +523,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-law-2026-06-24",
       "field": "law",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-06-24",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-law-2026-06-24",
       "title": {
         "th": "หลักนิติธรรมกับการบริหารราชการ",
         "en": "The rule of law in public administration"
@@ -500,13 +541,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-law-2026-02-05",
       "field": "law",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-02-05",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-law-2026-02-05",
       "title": {
         "th": "ศัพท์กฎหมายที่มักใช้สับสน",
         "en": "Legal terms that are often confused"
@@ -517,13 +559,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-economics-2026-07-30",
       "field": "economics",
       "type": {
         "th": "บทความวิชาการ",
         "en": "Academic article"
       },
       "date": "2026-07-30",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-economics-2026-07-30",
       "title": {
         "th": "คำถามสำคัญของเศรษฐศาสตร์การพัฒนา",
         "en": "Development economics: key questions"
@@ -534,13 +577,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-economics-2026-05-06",
       "field": "economics",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2026-05-06",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-economics-2026-05-06",
       "title": {
         "th": "การคลังสาธารณะสำหรับผู้อ่านทั่วไป",
         "en": "Public finance for general readers"
@@ -551,13 +595,14 @@ window.RS_KNOWLEDGE = {
       }
     },
     {
+      "id": "kn-economics-2025-11-26",
       "field": "economics",
       "type": {
         "th": "คลังความรู้",
         "en": "Knowledge base"
       },
       "date": "2025-11-26",
-      "href": "pages/article.html",
+      "href": "pages/article.html?id=kn-economics-2025-11-26",
       "title": {
         "th": "ศัพท์เศรษฐศาสตร์ในข่าวที่ควรเข้าใจ",
         "en": "Economic terms you meet in the news"

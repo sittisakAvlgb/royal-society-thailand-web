@@ -677,10 +677,7 @@
 
     return `
       <li class="result-item stretched">
-        <div class="result-item__badges">
-          ${typeBadge(record.type)}
-          ${type.official ? `<span class="badge badge--official">${icon('verified')}${te(L.official)}</span>` : ''}
-        </div>
+        <p class="result-item__kind">${te(type.label)}${type.official ? `<span class="result-item__official">${icon('verified')}${te(L.official)}</span>` : ''}</p>
         <h3 class="result-item__title">
           <a class="stretched-link" href="${escapeHTML(recordHref(record))}"${external ? ' target="_blank" rel="noopener"' : ''}>
             ${highlight(t(record.title), query)}${external ? `${icon('external')}<span class="visually-hidden">${te(CFG.ui.external)}</span>` : ''}
@@ -766,6 +763,41 @@
     let { q, filters } = readParams();
     if (input) input.value = q;
 
+    /* tabs by kind of result, with counts over the whole query; one kind
+       at a time, the same choice as the kind checkboxes */
+    const typeTabs = qs('[data-type-tabs]');
+    function renderTypeTabs(records) {
+      if (!typeTabs) return;
+      const kinds = facetOptions(records).type;
+      const current = filters.type?.length === 1 ? filters.type[0] : '';
+      typeTabs.hidden = kinds.length < 2;
+      typeTabs.innerHTML = [{ value: '', n: records.length, label: { th: 'ทั้งหมด', en: 'All' } }, ...kinds].map(k => `
+        <button class="news-tab${current === k.value ? ' is-active' : ''}" type="button" data-type-tab="${escapeHTML(k.value)}" aria-pressed="${current === k.value}">${te(k.label)}<span class="works-list__n">${escapeHTML(RS.digits(String(k.n)))}</span></button>`).join('');
+    }
+    typeTabs?.addEventListener('click', event => {
+      const tab = event.target.closest('[data-type-tab]');
+      if (!tab) return;
+      filters = { ...filters, type: tab.dataset.typeTab ? [tab.dataset.typeTab] : [] };
+      page = 1;
+      update();
+    });
+
+    /* results come a page at a time (RS.pagerHTML): any number of records
+       from the CMS stays one short page; the reader picks how many */
+    const SIZES = [10, 20, 40];
+    const SIZE_KEY = 'rs-search-size';
+    let size = SIZES[0];
+    try { const saved = Number(localStorage.getItem(SIZE_KEY)); if (SIZES.includes(saved)) size = saved; } catch { /* storage unavailable */ }
+    let page = 1;
+    let pages = qs('[data-results-pages]', root);
+    if (!pages) {
+      pages = document.createElement('nav');
+      pages.className = 'newsx-pages search-pages';
+      pages.setAttribute('aria-label', t({ th: 'แบ่งหน้า', en: 'Pagination' }));
+      pages.dataset.resultsPages = '';
+      list.after(pages);
+    }
+
     function update({ push = true } = {}) {
       const { all, results } = engine.query(q, filters);
       const hasFilters = FILTER_KEYS.some(key => filters[key]?.length);
@@ -777,10 +809,19 @@
 
       summary.textContent = fill(L.count, results.length);
       renderFilters(filterRoot, all, filters);
+      renderTypeTabs(all);
 
+      const count = Math.max(1, Math.ceil(results.length / size));
+      page = Math.min(page, count);
       list.innerHTML = results.length
-        ? `<ol class="result-list" role="list">${results.map(record => renderResult(record, q)).join('')}</ol>`
+        ? `<ol class="result-list" role="list" start="${(page - 1) * size + 1}">${results.slice((page - 1) * size, page * size).map(record => renderResult(record, q)).join('')}</ol>`
         : renderEmpty(q, hasFilters);
+      pages.hidden = !results.length;
+      pages.classList.add('pager');
+      pages.classList.toggle('pager--single', count < 2);
+      pages.innerHTML = results.length
+        ? RS.pagerHTML({ page, pages: count, total: results.length, size, sizes: SIZES, unit: { th: 'รายการ', en: results.length === 1 ? 'result' : 'results' } })
+        : '';
 
       list.setAttribute('aria-busy', 'false');
       if (answerSlot) renderOfficialAnswer(answerSlot, q);
@@ -794,6 +835,7 @@
       const values = new Set(filters[box.name] || []);
       box.checked ? values.add(box.value) : values.delete(box.value);
       filters[box.name] = [...values];
+      page = 1;
       update();
       /* Filter markup is re-rendered — keep keyboard focus on the same option */
       qs(`input[name="${box.name}"][value="${CSS.escape(box.value)}"]`, filterRoot)?.focus();
@@ -802,6 +844,7 @@
     root.addEventListener('click', event => {
       if (!event.target.closest('[data-clear-filters]')) return;
       filters = {};
+      page = 1;
       update();
       input?.focus();
     });
@@ -815,9 +858,27 @@
         q = input.value.trim().slice(0, MAX_QUERY);
         recent.add(q);
         combo.hide();
+        page = 1;
         update();
       }, { capture: true });
     }
+
+    pages.addEventListener('click', event => {
+      const sizeBtn = event.target.closest('[data-pager-size]');
+      if (sizeBtn) {
+        size = Number(sizeBtn.dataset.pagerSize);
+        try { localStorage.setItem(SIZE_KEY, String(size)); } catch { /* storage unavailable */ }
+        page = 1;
+        update({ push: false });
+        qs('.pager__menu-btn', pages)?.focus();
+        return;
+      }
+      const btn = event.target.closest('[data-pager-page]');
+      if (!btn || btn.disabled) return;
+      page = Number(btn.dataset.pagerPage);
+      update({ push: false });
+      (summary || list).scrollIntoView({ block: 'start', behavior: RS.reduceMotion() ? 'auto' : 'smooth' });
+    });
 
     /* Mobile: filters collapse behind a toggle */
     if (filterToggle && filterPanel) {

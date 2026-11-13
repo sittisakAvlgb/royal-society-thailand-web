@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -51,17 +51,17 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/events.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/09-calendar.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/events.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/09-calendar.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -86,9 +86,11 @@
        WordPress feeds on 2026-11-11; each card opens the original report.
   ================================ -->
   <main id="main-content" tabindex="-1" class="about-sub works-sub" data-works-topic="calendar">
-    <div class="page-header about-sub__head">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+    <!-- Opening: the green band with a photograph, as on the other works pages -->
+    <div class="hhero hhero--study">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/activities/lecture-03/01.jpg" alt="" decoding="async"></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
           <ol>
             <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
             <li><span data-en="Academic Works">ผลงานทางวิชาการ</span></li>
@@ -96,29 +98,28 @@
             <li><span aria-current="page" data-en="Events Calendar">ปฏิทินกิจกรรม</span></li>
           </ol>
         </nav>
-        <p class="about-mast__kicker" data-en="Academic Activities">กิจกรรมวิชาการ</p>
-        <h1 data-en="Events Calendar">ปฏิทินกิจกรรม</h1>
-        <p class="page-header__lead" data-en="Lectures, training, meetings and ceremonies coming up at the Royal Society.">บรรยาย อบรม ประชุม และกิจกรรมต่าง ๆ ที่ราชบัณฑิตยสภาจะจัดขึ้น</p>
+        <div class="hhero__text">
+          <h1 class="hhero__title" data-en="Events Calendar">ปฏิทินกิจกรรม</h1>
+          <p class="hhero__lead" data-en="Lectures, training, meetings and ceremonies coming up at the Royal Society.">บรรยาย อบรม ประชุม และกิจกรรมต่าง ๆ ที่ราชบัณฑิตยสภาจะจัดขึ้น</p>
+        </div>
       </div>
     </div>
 
     <div class="container about-sub__body">
-        <!-- The events calendar: a printed month calendar beside the programme,
-             both filled by 09-calendar.js (initPlanner) from data/events.js,
-             so any number of events from the CMS fits -->
-        <section class="about-part works-calendar planner" data-planner aria-labelledby="planner-title">
+        <!-- The events calendar, the same as the home page's: a month calendar
+             beside one agenda list, the chosen event opening as a card with its
+             banner photo. Filled by 09-calendar.js (initTearoff) from
+             data/events.js; data-tearoff sets how many upcoming events are listed -->
+        <section class="about-part works-calendar events-band" aria-labelledby="planner-title">
           <h2 class="visually-hidden" id="planner-title" data-en="Events calendar">ปฏิทินกิจกรรม</h2>
-          <div class="planner__cal pcal" data-planner-cal></div>
-          <div class="planner__main">
-            <div class="planner__bar">
-              <div class="planner__when" role="group" aria-label="ช่วงเวลา" data-en-aria-label="When">
-                <button class="planner__tab is-active" type="button" data-planner-when="next" aria-pressed="true"><span data-en="Coming up">กำลังจะมาถึง</span><span class="planner__n" data-planner-n></span></button>
-                <button class="planner__tab" type="button" data-planner-when="past" aria-pressed="false"><span data-en="Past">ที่ผ่านมา</span><span class="planner__n" data-planner-n></span></button>
-              </div>
-              <div class="planner__kinds" role="group" aria-label="ประเภทกิจกรรม" data-en-aria-label="Kind of event" data-planner-kinds></div>
+          <div class="tearoff tearoff--side" data-tearoff="20">
+            <div class="tearoff__main">
+              <div class="tearoff__pad" data-tearoff-pad></div>
+              <div class="tearoff__detail" data-tearoff-detail aria-live="polite"></div>
+              <div class="tearoff__cal" data-tearoff-cal></div>
             </div>
-            <ol class="planner__list" role="list" aria-live="polite" data-planner-list></ol>
-            <button class="planner__more" type="button" data-planner-more hidden></button>
+            <p class="tearoff__next-label" data-en="Upcoming events — choose one to see it">กิจกรรมที่จะจัดขึ้น — เลือกเพื่อดูรายละเอียด</p>
+            <ol class="tearoff__stack" role="list" data-tearoff-stack></ol>
           </div>
         </section>
 

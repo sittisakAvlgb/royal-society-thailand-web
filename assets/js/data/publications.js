@@ -2,7 +2,7 @@
  * data/publications.js — Publications for pages/publication.html?id=<id>
  * ============================================================================
  *
- *  SAMPLE CONTENT. Titles follow the series on pages/publications.html;
+ *  SAMPLE CONTENT. Titles follow the series pages (pages/series.html);
  *  issues, contents, authors (the site's fictional Fellows), page counts and
  *  sizes are stand-ins. No ISSN/ISBN is shown until the Office supplies them.
  *  TODO (Office): replace with the real catalogue and link each PDF.

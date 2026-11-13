@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -51,15 +51,17 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/activities.js?v=20261126p"></script>
+  <script defer src="../assets/js/19-works-list.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -83,110 +85,65 @@
        topic pages. Lists were read from the Royal Society websites'
        WordPress feeds on 2026-11-11; each card opens the original report.
   ================================ -->
-  <main id="main-content" tabindex="-1" class="about-sub works-sub" data-works-topic="knowledge-to-society">
-    <div class="page-header about-sub__head">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
+  <main id="main-content" tabindex="-1" class="about-sub works-sub works-list" data-works-topic="knowledge-to-society" data-works-list>
+    <!-- Opening: the green band with a photograph, as on the other works pages -->
+    <div class="hhero hhero--study">
+      <div class="hhero__art" aria-hidden="true"><img src="../assets/images/activities/k2s-03/04.jpg" alt="" decoding="async"></div>
+      <div class="container hhero__inner">
+        <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
           <ol>
             <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
             <li><span data-en="Academic Works">ผลงานทางวิชาการ</span></li>
             <li><span aria-current="page" data-en="Knowledge for Society Programme">โครงการนำความรู้สู่สังคม</span></li>
           </ol>
         </nav>
-        <p class="about-mast__kicker" data-en="Academic Works">ผลงานทางวิชาการ</p>
-        <h1 data-en="Knowledge for Society Programme">โครงการนำความรู้สู่สังคม</h1>
-        <p class="page-header__lead" data-en="The Royal Society’s programme to take knowledge to schools, communities and the media.">โครงการราชบัณฑิตยสภานำความรู้สู่สังคม ผ่านโรงเรียน ชุมชน และสื่อมวลชน</p>
+        <div class="hhero__text">
+          <h1 class="hhero__title" data-en="Knowledge for Society Programme">โครงการนำความรู้สู่สังคม</h1>
+          <p class="hhero__lead" data-en="The Royal Society’s programme to take knowledge to schools, communities and the media.">โครงการราชบัณฑิตยสภานำความรู้สู่สังคม ผ่านโรงเรียน ชุมชน และสื่อมวลชน</p>
+        </div>
       </div>
     </div>
 
-    <div class="container about-sub__body">
-        <section class="about-part">
-          <p class="about-part__lead" data-en="Fellows take what they know beyond the academy, to the people who can use it — through schools, communities and the media.">ราชบัณฑิตนำความรู้จากงานวิชาการออกไปสู่ผู้คนที่นำไปใช้ได้จริง ผ่านโรงเรียน ชุมชน และสื่อมวลชน</p>
-          <ul class="works-channels" role="list">
-              <li>
-                <span class="works-channels__label" data-en="Schools">โรงเรียน</span>
-                <span class="works-channels__text" data-en="Lectures and workshops for students and teachers">บรรยายและอบรมสำหรับนักเรียนและครู</span>
-              </li>
-              <li>
-                <span class="works-channels__label" data-en="Communities">ชุมชน</span>
-                <span class="works-channels__text" data-en="Fellows on Tour in every region">ราชบัณฑิตสัญจรไปยังภูมิภาคต่าง ๆ</span>
-              </li>
-              <li>
-                <span class="works-channels__label" data-en="Media">สื่อมวลชน</span>
-                <span class="works-channels__text" data-en="Articles, broadcasts and programmes for the public">บทความ รายการ และสื่อเผยแพร่เพื่อประชาชน</span>
-              </li>
-          </ul>
-          <p class="works-sub__actions"><a class="btn btn--secondary" href="knowledge.html"><span data-en="Browse knowledge">เรียกดูองค์ความรู้</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a></p>
-        </section>
-
-        <section class="about-part">
-        <h2 class="about-docs-head"><span data-en="Programme activities">กิจกรรมของโครงการ</span> <span class="about-docs-head__count" data-en="4 items">4 รายการ</span></h2>
+    <!-- The programme's activities in one list (19-works-list.js): subject
+         tabs, a search, the grid / list switch and a pager, so it takes any
+         number of items. CMS: write one li.newsx-item per activity, newest
+         first, with data-academy set to its subject tab (safety, society,
+         culture). -->
+    <section class="works-list__body" id="activities" aria-labelledby="activities-title">
+      <div class="container">
+        <h2 id="activities-title" class="works-list__title" data-en="Programme activities">กิจกรรมของโครงการ</h2>
         <p class="note-box" data-en-notice hidden>
           <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
-          <span>These reports are published in Thai on the academy websites.</span>
+          <span>These reports are published in Thai.</span>
         </p>
-        <ul class="newsx-items newsx-items--grid works-posts" role="list">
-          <li class="newsx-item">
-            <a class="newsx-card" href="activity.html?id=k2s-01">
-              <span class="newsx-card__media"><img src="../assets/images/works/c820b711bd.jpg" alt="" width="640" height="427" loading="lazy" decoding="async"></span>
-              <span class="newsx-card__body">
-                <span class="news-cat" data-en="Royal Society">ราชบัณฑิตยสภา</span>
-                <span class="newsx-card__title"><span class="story__ph">การป้องกันอาชญากรรมออนไลน์</span></span>
-                <span class="newsx-card__dek" data-th-only>การบรรยายให้ความรู้ในโครงการราชบัณฑิตยสภานำความรู้สู่สังคมครั้งที่ ๔ เรื่อง การป้องกันอาชญากรรมออนไลน์ ปัจจุบันการเกิดเหตุอาชญากรรมออนไลน์ เฉพาะที่ได้รับแจ้งผ่านการรับแจ้งความออนไลน์มีเกิดขึ้นเป็นจำนวนมาก เฉลี่ยอย่างน้อยวันละ ๑,๐๐๐ คดี รูปแบบและวิวัฒนาการของกา</span>
-                <span class="news-card__foot newsx-card__foot">
-                  <time datetime="2024-08-01" data-en="1 Aug 2024">1 ส.ค. 2567</time>
-                  <span class="news-cta"><span data-en="Read">อ่านต่อ</span><span class="news-cta__dot" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span></span>
-                </span>
-              </span>
-            </a>
-          </li>
-          <li class="newsx-item">
-            <a class="newsx-card" href="activity.html?id=k2s-02">
-              <span class="newsx-card__media"><img src="../assets/images/works/a16a9276f1.jpg" alt="" width="640" height="427" loading="lazy" decoding="async"></span>
-              <span class="newsx-card__body">
-                <span class="news-cat" data-en="Royal Society">ราชบัณฑิตยสภา</span>
-                <span class="newsx-card__title"><span class="story__ph">ท่องเที่ยวไทย</span> <span class="story__ph">:</span> <span class="story__ph">อานิสงส์ถ้วนหน้า</span></span>
-                <span class="newsx-card__dek" data-th-only>การบรรยายให้ความรู้ในโครงการราชบัณฑิตยสภานำความรู้สู่สังคมครั้งที่ ๓ เรื่อง ท่องเที่ยวไทย : อานิสงส์ถ้วนหน้า ขอเชิญร่วมฟังการบรรยายให้ความรู้ในโครงการราชบัณฑิตยสภานำความรู้สู่สังคมครั้งที่ ๓ เรื่อง ท่องเที่ยวไทย : อานิสงส์ถ้วนหน้า โดย ศ. ดร.มิ่งสรรพ์ ขาวสอาด ภ</span>
-                <span class="news-card__foot newsx-card__foot">
-                  <time datetime="2024-06-27" data-en="27 Jun 2024">27 มิ.ย. 2567</time>
-                  <span class="news-cta"><span data-en="Read">อ่านต่อ</span><span class="news-cta__dot" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span></span>
-                </span>
-              </span>
-            </a>
-          </li>
-          <li class="newsx-item">
-            <a class="newsx-card" href="activity.html?id=k2s-03">
-              <span class="newsx-card__media"><img src="../assets/images/works/1bb6e315b4.jpg" alt="" width="640" height="427" loading="lazy" decoding="async"></span>
-              <span class="newsx-card__body">
-                <span class="news-cat" data-en="Royal Society">ราชบัณฑิตยสภา</span>
-                <span class="newsx-card__title"><span class="story__ph">ราชบัณฑิตยสภาบรรยายให้ความรู้เพื่อเตรียมพร้อมการรับมือกับ</span> <span class="story__ph">AI</span></span>
-                <span class="newsx-card__dek" data-th-only>วันเสาร์ที่ ๑๘ พฤษภาคม พ.ศ. ๒๕๖๗ ระหว่างเวลา ๑๓.๓๐-๑๕.๓๐ น. ศาสตราจารย์เกียรติคุณ นายแพทย์สุรพล อิสรไกรศีล นายกราชบัณฑิตยสภา เป็นประธานกล่าวเปิดกิจกรรมภายใต้โครงการราชบัณฑิตยสภานำความรู้สู่สังคม และร่วมฟังการบรรยายพิเศษ เรื่อง “เมื่อ AI ครองโลก มนุษย์จะอยู่อย่</span>
-                <span class="news-card__foot newsx-card__foot">
-                  <time datetime="2024-05-19" data-en="19 May 2024">19 พ.ค. 2567</time>
-                  <span class="news-cta"><span data-en="Read">อ่านต่อ</span><span class="news-cta__dot" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span></span>
-                </span>
-              </span>
-            </a>
-          </li>
-          <li class="newsx-item">
-            <a class="newsx-card" href="activity.html?id=k2s-04">
-              <span class="newsx-card__media"><img src="../assets/images/works/0fe0571fd4.jpg" alt="" width="640" height="427" loading="lazy" decoding="async"></span>
-              <span class="newsx-card__body">
-                <span class="news-cat" data-en="Royal Society">ราชบัณฑิตยสภา</span>
-                <span class="newsx-card__title"><span class="story__ph">ท่านจะปลอดภัยจากแคดเมียมได้อย่างไร</span></span>
-                <span class="newsx-card__dek" data-th-only>โครงการราชบัณฑิตยสภานำความรู้สู่สังคม บรรยายพิเศษ เรื่อง “ท่านจะปลอดภัยจากแคดเมียมได้อย่างไร” โดย รศ. นพ.สัมมน โฉมฉาย</span>
-                <span class="news-card__foot newsx-card__foot">
-                  <time datetime="2024-04-26" data-en="26 Apr 2024">26 เม.ย. 2567</time>
-                  <span class="news-cta"><span data-en="Read">อ่านต่อ</span><span class="news-cta__dot" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span></span>
-                </span>
-              </span>
-            </a>
-          </li>
+        <div class="newsx-tools works-list__tools" data-works-tools>
+          <div class="news-tabs" role="group" aria-label="กรองตามหมวดหัวข้อ" data-en-aria-label="Filter by subject" data-works-tabs>
+            <button class="news-tab is-active" type="button" data-filter="all" aria-pressed="true" data-en="All">ทั้งหมด</button><button class="news-tab" type="button" data-filter="safety" aria-pressed="false" data-en="Health and safety">สุขภาพและความปลอดภัย</button><button class="news-tab" type="button" data-filter="society" aria-pressed="false" data-en="Society and economy">สังคมและเศรษฐกิจ</button><button class="news-tab" type="button" data-filter="culture" aria-pressed="false" data-en="Language and culture">ภาษาและวัฒนธรรม</button>
+          </div>
+          <div class="newsx-tools__end">
+            <label class="newsx-search">
+              <span class="visually-hidden" data-en="Search the reports">ค้นหารายงาน</span>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+              <input type="search" placeholder="ค้นหากิจกรรม เช่น AI" data-en-placeholder="Search topics" autocomplete="off" data-works-search>
+            </label>
+            <div class="newsx-view" role="group" aria-label="รูปแบบการแสดงผล" data-en-aria-label="View" data-works-views>
+              <button class="btn btn--secondary btn--sm newsx-view__btn is-active" type="button" data-works-view="grid" aria-pressed="true" title="แบบตาราง" data-en-title="Grid view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-en="Grid">ตาราง</span></button>
+              <button class="btn btn--secondary btn--sm newsx-view__btn" type="button" data-works-view="list" aria-pressed="false" title="แบบรายการ" data-en-title="List view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="15" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-en="List">รายการ</span></button>
+            </div>
+          </div>
+        </div>
+        <p class="newsx-count" aria-live="polite" data-works-count></p>
+        <ul class="newsx-items newsx-items--grid works-list__items" role="list" data-works-items>
+          <!-- Reports: drawn from data/activities.js by 19-works-list.js (CMS).
+               Items below are not reports and stay as written. -->
         </ul>
-        </section>
-
-
-    </div>
+        <p class="newsx-empty" data-works-empty hidden>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+          <span data-en="No activity matches your search.">ไม่พบรายการที่ตรงกับคำค้น</span>
+        </p>
+        <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-works-pages></nav>
+      </div>
+    </section>
   </main>
 
   <div id="app-footer"></div>

@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -53,17 +53,19 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261123w"></script>
-  <script defer src="../assets/js/14-about.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261126p"></script>
+  <script defer src="../assets/js/14-about.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/documents.js?v=20261126p"></script>
+  <script defer src="../assets/js/19-works-list.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -109,9 +111,8 @@
       </div>
     </div>
 
-    <!-- The announcements as a printed booklet beside an index of four
-         subjects; then each subject with its announcements as ruled contents
-         lines, the academy named in its colour where there is one -->
+    <!-- The announcements in one searchable, paged list with subject tabs;
+         each a ruled line naming its subject (and academy, in its colour) -->
     <div class="container about-sub__body">
       <div class="auth acts-page bylaw-page">
         <div class="auth__main">
@@ -120,233 +121,38 @@
             <span>These documents are published in Thai only.</span>
           </p>
 
-          <section class="auth__part" id="docs" aria-labelledby="docs-title">
-            <p class="kicker" data-en="19 announcements of the Office">ประกาศสำนักงานราชบัณฑิตยสภา ๑๙ ฉบับ</p>
-            <h2 id="docs-title" class="auth__title" data-en="Find by subject"><span class="story__ph">เลือกตามเรื่อง</span><span class="story__ph">ที่ต้องการ</span></h2>
-            <div class="acts-lead">
-              <div class="acts-cover" aria-hidden="true">
-                <img src="../assets/images/logo-image.png" alt="" width="64" height="64" decoding="async">
-                <span class="acts-cover__kind">ประกาศ</span>
-                <span class="acts-cover__name">ราชบัณฑิตยสภา</span>
-                <span class="acts-cover__year">๑๙ ฉบับ</span>
+          <!-- Every announcement in one list (19-works-list.js, rows mode):
+               subject tabs with counts, a search and a pager, so it takes any
+               number of items. CMS: write one li per announcement, newest
+               first, with data-academy set to its subject (associates, posts,
+               guidance, awards); a new subject needs a tab of its own. -->
+          <section class="auth__part works-list" id="docs" aria-labelledby="docs-title" data-works-list data-works-docs="announcements" data-works-rows data-works-cover-kind="ประกาศ">
+            <h2 id="docs-title" class="auth__title" data-en="All announcements">ประกาศทั้งหมด</h2>
+            <div class="newsx-tools works-list__tools ann-tools" data-works-tools>
+              <div class="news-tabs" role="group" aria-label="กรองตามเรื่อง" data-en-aria-label="Filter by subject" data-works-tabs>
+                <button class="news-tab is-active" type="button" data-filter="all" aria-pressed="true" data-en="All">ทั้งหมด</button><button class="news-tab" type="button" data-filter="associates" aria-pressed="false" data-en="Associates: calls and appointments">ภาคีสมาชิก</button><button class="news-tab" type="button" data-filter="posts" aria-pressed="false" data-en="Academy chairs and spokespeople">ผู้บริหารสำนักและโฆษก</button><button class="news-tab" type="button" data-filter="guidance" aria-pressed="false" data-en="How the work is done">แนวทางการดำเนินงาน</button><button class="news-tab" type="button" data-filter="awards" aria-pressed="false" data-en="Awards and entitlements">เงินรางวัลและสิทธิประโยชน์</button>
               </div>
-              <div class="acts-lead__text">
-                <p class="auth__lead" data-th-only><span class="story__ph">ประกาศของสำนักงานราชบัณฑิตยสภา</span><span class="story__ph">และราชบัณฑิตยสถานเดิม</span> <span class="story__ph">จัดเป็น ๔ หมวดตามเรื่อง</span> <span class="story__ph">ประกาศที่เกี่ยวกับสำนักใด</span><span class="story__ph">บอกชื่อสำนักไว้ใต้หัวเรื่อง</span></p>
-                <ul class="bylaw-index" role="list">
-                  <li><a href="#associates"><span class="bylaw-index__name" data-en="Associates: calls and appointments">ภาคีสมาชิก</span><span class="bylaw-index__count">๗ <span data-en="items">ฉบับ</span></span></a></li>
-                  <li><a href="#posts"><span class="bylaw-index__name" data-en="Academy chairs and spokespeople">ผู้บริหารสำนักและโฆษก</span><span class="bylaw-index__count">๔ <span data-en="items">ฉบับ</span></span></a></li>
-                  <li><a href="#guidance"><span class="bylaw-index__name" data-en="How the work is done">แนวทางการดำเนินงาน</span><span class="bylaw-index__count">๕ <span data-en="items">ฉบับ</span></span></a></li>
-                  <li><a href="#awards"><span class="bylaw-index__name" data-en="Awards and entitlements">เงินรางวัลและสิทธิประโยชน์</span><span class="bylaw-index__count">๓ <span data-en="items">ฉบับ</span></span></a></li>
-                </ul>
+              <div class="newsx-tools__end">
+                <label class="newsx-search">
+                  <span class="visually-hidden" data-en="Search the announcements">ค้นหาประกาศ</span>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+                  <input type="search" placeholder="ค้นหาประกาศ เช่น ภาคีสมาชิก" data-en-placeholder="Search announcements" autocomplete="off" data-works-search>
+                </label>
+              <div class="newsx-view" role="group" aria-label="รูปแบบการแสดงผล" data-en-aria-label="View" data-works-views>
+                <button class="btn btn--secondary btn--sm newsx-view__btn is-active" type="button" data-works-view="grid" aria-pressed="true" title="แบบตาราง" data-en-title="Grid view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-en="Grid">ตาราง</span></button>
+                <button class="btn btn--secondary btn--sm newsx-view__btn" type="button" data-works-view="list" aria-pressed="false" title="แบบรายการ" data-en-title="List view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="15" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-en="List">รายการ</span></button>
+              </div>
               </div>
             </div>
-
-            <section class="bylaw-group" id="associates" aria-labelledby="associates-title">
-              <header class="bylaw-group__head">
-                <h3 id="associates-title" class="bylaw-group__name" data-en="Associates: calls and appointments">ภาคีสมาชิก</h3>
-                <p class="bylaw-group__what" data-en="Calls for candidates and appointments in each academy">การรับสมัครคัดเลือก และการแต่งตั้งภาคีสมาชิกของแต่ละสำนัก</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000107.PDF" target="_blank" rel="noopener" aria-label="รับสมัครคัดเลือกเพื่อแต่งตั้งเป็นภาคีสมาชิก สำนักวิทยาศาสตร์">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">รับสมัครคัดเลือกเพื่อแต่งตั้งเป็นภาคีสมาชิก สำนักวิทยาศาสตร์</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--science">สำนักวิทยาศาสตร์</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000109.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งนางสาวกรรณิการ์ วิมลเกษม เป็นภาคีสมาชิก สำนักศิลปกรรม">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งนางสาวกรรณิการ์ วิมลเกษม เป็นภาคีสมาชิก สำนักศิลปกรรม</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--arts">สำนักศิลปกรรม</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000110.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งศาสตราจารย์สุกัญญา สุดบรรทัด เป็นภาคีสมาชิก สำนักธรรมศาสตร์และการเมือง">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งศาสตราจารย์สุกัญญา สุดบรรทัด เป็นภาคีสมาชิก สำนักธรรมศาสตร์และการเมือง</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--moral">สำนักธรรมศาสตร์และการเมือง</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000111.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งนายเลิศศิริร์ บวรกิตติ เป็นภาคีสมาชิก สำนักวิทยาศาสตร์">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งนายเลิศศิริร์ บวรกิตติ เป็นภาคีสมาชิก สำนักวิทยาศาสตร์</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--science">สำนักวิทยาศาสตร์</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000113.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งศาสตราจารย์ ดร.วัลลภ สุระกำพลธร เป็นภาคีสมาชิก สำนักวิทยาศาสตร์">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งศาสตราจารย์ ดร.วัลลภ สุระกำพลธร เป็นภาคีสมาชิก สำนักวิทยาศาสตร์</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--science">สำนักวิทยาศาสตร์</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000114.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งศาสตราจารย์ ดร.ปริญญา จินดาประเสริฐ เป็นภาคีสมาชิก สำนักวิทยาศาสตร์">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งศาสตราจารย์ ดร.ปริญญา จินดาประเสริฐ เป็นภาคีสมาชิก สำนักวิทยาศาสตร์</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--science">สำนักวิทยาศาสตร์</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000118.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งภาคีสมาชิก สำนักธรรมศาสตร์และการเมือง">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งภาคีสมาชิก สำนักธรรมศาสตร์และการเมือง</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--moral">สำนักธรรมศาสตร์และการเมือง</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="posts" aria-labelledby="posts-title">
-              <header class="bylaw-group__head">
-                <h3 id="posts-title" class="bylaw-group__name" data-en="Academy chairs and spokespeople">ผู้บริหารสำนักและโฆษก</h3>
-                <p class="bylaw-group__what" data-en="Academy chairs, secretaries and spokespeople">การแต่งตั้งประธานสำนัก เลขานุการสำนัก และโฆษก</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000106.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งประธานสำนักและเลขานุการสำนักศิลปกรรม">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งประธานสำนักและเลขานุการสำนักศิลปกรรม</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--arts">สำนักศิลปกรรม</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000117.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งประธานสำนักธรรมศาสตร์และการเมือง">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งประธานสำนักธรรมศาสตร์และการเมือง</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--moral">สำนักธรรมศาสตร์และการเมือง</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000120.PDF" target="_blank" rel="noopener" aria-label="แต่งตั้งประธานสำนักและเลขานุการสำนักวิทยาศาสตร์">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แต่งตั้งประธานสำนักและเลขานุการสำนักวิทยาศาสตร์</span>
-                        <span class="acts-doc__meta"><span class="ann-acad ann-acad--science">สำนักวิทยาศาสตร์</span> · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000115.PDF" target="_blank" rel="noopener" aria-label="ยกเลิกและแต่งตั้งโฆษกราชบัณฑิตยสถาน รองโฆษกราชบัณฑิตยสถาน">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ยกเลิกและแต่งตั้งโฆษกราชบัณฑิตยสถาน รองโฆษกราชบัณฑิตยสถาน</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="guidance" aria-labelledby="guidance-title">
-              <header class="bylaw-group__head">
-                <h3 id="guidance-title" class="bylaw-group__name" data-en="How the work is done">แนวทางการดำเนินงาน</h3>
-                <p class="bylaw-group__what" data-en="Publishing information, ethics, appraisal and timeframes">การเผยแพร่ข้อมูล มาตรฐานจริยธรรม การประเมินผล และระยะเวลาของงาน</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000105.PDF" target="_blank" rel="noopener" aria-label="ประกาศสำนักงานราชบัณฑิตยสภา เรื่อง แนวทางการเผยแพร่ข้อมูลต่อสาธารณะผ่านเว็บไซต์ของสำนักงานราชบัณฑิตยสภา">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แนวทางการเผยแพร่ข้อมูลต่อสาธารณะผ่านเว็บไซต์ของสำนักงานราชบัณฑิตยสภา</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000125.PDF" target="_blank" rel="noopener" aria-label="มาตรฐานทางคุณธรรมและจริยธรรมของเจ้าหน้าที่ราชบัณฑิตยสถาน">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">มาตรฐานทางคุณธรรมและจริยธรรมของเจ้าหน้าที่ราชบัณฑิตยสถาน</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000121.PDF" target="_blank" rel="noopener" aria-label="หลักเกณฑ์และวิธีการประเมินผลการปฏิบัติราชการของข้าราชการราชบัณฑิตยสถาน">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">หลักเกณฑ์และวิธีการประเมินผลการปฏิบัติราชการของข้าราชการราชบัณฑิตยสถาน</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000126.PDF" target="_blank" rel="noopener" aria-label="การกำหนดระยะเวลาแล้วเสร็จของงาน พ.ศ. ๒๕๔๘">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">การกำหนดระยะเวลาแล้วเสร็จของงาน พ.ศ. ๒๕๔๘</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000119.PDF" target="_blank" rel="noopener" aria-label="หลักเกณฑ์และเงื่อนไขการเข้าร่วมมาตรการปรับปรุงอัตรากำลังของราชบัณฑิตยสถาน">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">หลักเกณฑ์และเงื่อนไขการเข้าร่วมมาตรการปรับปรุงอัตรากำลังของราชบัณฑิตยสถาน</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="awards" aria-labelledby="awards-title">
-              <header class="bylaw-group__head">
-                <h3 id="awards-title" class="bylaw-group__name" data-en="Awards and entitlements">เงินรางวัลและสิทธิประโยชน์</h3>
-                <p class="bylaw-group__what" data-en="Awards and what Fellows are entitled to">การจัดสรรเงินรางวัล และสิทธิของราชบัณฑิต</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000112.PDF" target="_blank" rel="noopener" aria-label="หลักเกณฑ์และวิธีการจัดสรรเงินรางวัล ประจำปีงบประมาณ พ.ศ. ๒๕๕๕">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">หลักเกณฑ์และวิธีการจัดสรรเงินรางวัล ประจำปีงบประมาณ พ.ศ. ๒๕๕๕</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000116.PDF" target="_blank" rel="noopener" aria-label="หลักเกณฑ์และวิธีการจัดสรรเงินรางวัล ประจำปีงบประมาณ พ.ศ. ๒๕๕๔">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">หลักเกณฑ์และวิธีการจัดสรรเงินรางวัล ประจำปีงบประมาณ พ.ศ. ๒๕๕๔</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000122.PDF" target="_blank" rel="noopener" aria-label="ขอให้ราชบัณฑิตได้รับพระราชทานน้ำอาบศพและได้รับพระราชทานเพลิงศพ">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ขอให้ราชบัณฑิตได้รับพระราชทานน้ำอาบศพและได้รับพระราชทานเพลิงศพ</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
+            <p class="newsx-count" aria-live="polite" data-works-count></p>
+            <ul class="acts-docs ann-list" role="list" data-works-items>
+              <!-- Drawn from data/documents.js ("announcements") by 19-works-list.js (CMS) -->
+            </ul>
+            <p class="newsx-empty" data-works-empty hidden>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+              <span data-en="No announcement matches your search.">ไม่พบประกาศที่ตรงกับคำค้น</span>
+            </p>
+            <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-works-pages></nav>
           </section>
 
           <section class="auth__part" id="more" aria-labelledby="more-title">

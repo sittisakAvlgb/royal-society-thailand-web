@@ -661,6 +661,218 @@
     return src === '#' || (img.complete && !img.naturalWidth && !!img.currentSrc);
   };
 
+  /* ==================================================================== *
+   * Keep Thai phrases whole
+   *   Thai has no spaces between words, only between phrases, and browsers
+   *   break a Thai line wherever their dictionary allows, so a phrase can be
+   *   cut at the line end ("และให้ / บริการ"). In the reading text of the
+   *   main content each run between spaces becomes span.story__ph, which
+   *   moves to the next line whole (a run longer than the line still wraps
+   *   inside). Skipped: links and buttons (cards), forms, navigation, text
+   *   clamped to a few lines, English, code, and [data-no-phrases].
+   *   Content added later is handled through the rs:content-added event.
+   * ==================================================================== */
+  const THAI_RE = /[\u0E00-\u0E7F]/;
+  const PHRASE_BLOCKS = 'p, li, dd, dt, blockquote, figcaption, td, th';
+  const PHRASE_SKIP = 'a, button, label, select, textarea, nav, form, .pager, [data-no-phrases], [contenteditable], code, pre, svg, .story__ph, [lang="en"]';
+  function keepPhrases(scope) {
+    const main = document.getElementById('main-content');
+    if (!main) return;
+    const base = scope && scope.nodeType === 1 ? scope : main;
+    if (!main.contains(base) && base !== main) return;
+    const blocks = base.matches?.(PHRASE_BLOCKS) ? [base, ...base.querySelectorAll(PHRASE_BLOCKS)] : [...base.querySelectorAll(PHRASE_BLOCKS)];
+    blocks.forEach(block => {
+      if (block.dataset.phrases || !THAI_RE.test(block.textContent) || block.closest(PHRASE_SKIP)) return;
+      const cs = getComputedStyle(block);
+      if (cs.webkitLineClamp && cs.webkitLineClamp !== 'none') return;
+      block.dataset.phrases = '1';
+      const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => {
+        const value = node.nodeValue;
+        if (!THAI_RE.test(value) || !/\S\s+\S/.test(value) || node.parentElement.closest(PHRASE_SKIP)) return;
+        const frag = document.createDocumentFragment();
+        /* "ต่าง ๆ" stays one piece: a lone ๆ joins the word before it */
+        value.replace(/[ \t\n\r]+ๆ/g, '\u00A0ๆ').split(/([ \t\n\r]+)/).forEach(part => {
+          if (!part) return;
+          if (/^[ \t\n\r]+$/.test(part) || !THAI_RE.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const span = document.createElement('span');
+          span.className = 'story__ph';
+          span.textContent = part;
+          frag.appendChild(span);
+        });
+        node.replaceWith(frag);
+      });
+    });
+  }
+  RS.keepPhrases = keepPhrases;
+
+  function initPhrases() {
+    if (RS.lang !== 'th' && document.documentElement.lang !== 'th') return;
+    /* after every module has filled its part of the page */
+    setTimeout(() => keepPhrases(document), 0);
+    document.addEventListener('rs:content-added', event => {
+      const el = event.detail && event.detail.nodeType === 1 ? event.detail : document;
+      requestAnimationFrame(() => keepPhrases(el));
+    });
+  }
+
+  /* ==================================================================== *
+   * English pages: Thai interface words and Thai numerals
+   *   Lists drawn from Thai records (documents, notices, ITA, covers) carry
+   *   short Thai labels: a language, an academy, a section of the Act, a
+   *   Buddhist-era year. On English pages these become English, and Thai
+   *   numerals become 0–9. Thai content itself (titles, names, Thai-only
+   *   text: [data-th-only], [lang="th"]) is left as it is.
+   * ==================================================================== */
+  const EN_WORDS = [
+    ['สำนักงานราชบัณฑิตยสภา', 'Office of the Royal Society'],
+    ['สำนักธรรมศาสตร์และการเมือง', 'Academy of Moral and Political Sciences'],
+    ['สำนักวิทยาศาสตร์', 'Academy of Science'],
+    ['สำนักศิลปกรรม', 'Academy of Arts'],
+    ['ราชบัณฑิตยสถาน', 'Royal Institute'],
+    ['ราชบัณฑิตยสภา', 'Royal Society'],
+    ['ภาษาอังกฤษ', 'English'],
+    ['ภาษาไทย', 'Thai'],
+    ['ฉบับเต็ม', 'Full text'],
+    ['ฉบับแปล', 'Translation'],
+    ['สรุปสาระสำคัญ', 'Summary'],
+    ['อ่านเข้าใจง่าย', 'Plain summary'],
+    ['สมัยราชบัณฑิตยสถาน', 'Royal Institute era'],
+    ['พระราชบัญญัติ', 'Act'],
+    ['ข้อบังคับ', 'Bylaw'],
+    ['ระเบียบ', 'Regulation'],
+    ['ประกาศ', 'Notice'],
+    ['จำนวนที่นั่ง', 'Seats'],
+    ['ประเภทวิชาและสาขา', 'Fields and disciplines'],
+    ['การรับภาคีสมาชิก', 'Electing Associate Fellows'],
+    ['การเลือกราชบัณฑิต', 'Electing Fellows'],
+    ['หน้า', 'pages'],
+    ['ล่าสุด', 'Latest']
+  ];
+  const EN_LABELS = '.acts-doc__meta, .ann-acad, .auth-ref, .auth-flow__ref, .auth-sec__no, .rec-doc__kind, .rec-doc__meta, .act-doc__d, .ann-cover__kind, .ann-cover__org, .ann-cover__subject, .acts-doc__new';
+  const TH_DIGITS = /[๐-๙]/g;
+  const toArabic = text => text.replace(TH_DIGITS, d => String(d.charCodeAt(0) - 0x0E50));
+  /* subject names: the tab with the same Thai label holds its English;
+     read before 05-language.js swaps the tabs' text */
+  const tabEn = {};
+  function englishLabels(scope) {
+    if (document.documentElement.lang !== 'en') return;
+    const base = scope && scope.nodeType === 1 ? scope : document.body;
+    base.querySelectorAll(EN_LABELS).forEach(el => {
+      if (el.closest('[data-th-only], [lang="th"]')) return;
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => {
+        const v = node.nodeValue;
+        if (!THAI_RE.test(v) && !/[๐-๙]/.test(v)) return;
+        /* translate whole items between the "·" separators only, so a Thai
+           phrase is never half-translated */
+        const out = v.split(/(\s*·\s*)/).map(part => {
+          const word = part.trim();
+          if (!word || part.includes('·')) return part;
+          const lead = part.slice(0, part.indexOf(word));
+          const tail = part.slice(part.indexOf(word) + word.length);
+          let en = tabEn[word];
+          if (!en) { const hit = EN_WORDS.find(([th]) => th === word); if (hit) en = hit[1]; }
+          if (!en && /^พ\.ศ\.\s*[๐-๙\d]{4}$/.test(word)) en = String(Number(toArabic(word.replace(/[^๐-๙\d]/g, ''))) - 543);
+          if (!en && /^มาตรา(\s|$)/.test(word)) en = word.replace(/^มาตรา/, word.includes(' ', 6) ? 'Sections' : 'Section');
+          if (!en && /^[๐-๙\d]+\s*หน้า$/.test(word)) en = word.replace(/\s*หน้า$/, ' p.');
+          return en ? lead + en + tail : part;
+        }).join('');
+        node.nodeValue = toArabic(out);
+      });
+    });
+    /* Thai numerals anywhere outside Thai content */
+    const walker = document.createTreeWalker(base, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      if (!/[๐-๙]/.test(node.nodeValue)) continue;
+      const el = node.parentElement;
+      if (!el || el.closest('[data-th-only], [lang="th"], script, style, [data-keep-digits]')) continue;
+      /* a run that is otherwise Thai prose keeps its numerals */
+      if (/[ก-๏]/.test(node.nodeValue)) continue;
+      node.nodeValue = toArabic(node.nodeValue);
+    }
+  }
+  function initEnglishLabels() {
+    if (document.documentElement.lang !== 'en') return;
+    document.querySelectorAll('.news-tab[data-en]').forEach(tab => {
+      const thText = (tab.childNodes[0] ? tab.childNodes[0].textContent : tab.textContent).trim();
+      if (thText) tabEn[thText] = tab.dataset.en;
+    });
+    setTimeout(() => englishLabels(document.body), 0);
+    document.addEventListener('rs:content-added', event => {
+      requestAnimationFrame(() => englishLabels(event.detail && event.detail.nodeType === 1 ? event.detail : document.body));
+    });
+  }
+
+  /* ==================================================================== *
+   * English only
+   *   The last pass on an English page, after every module has drawn its
+   *   part: Thai-only blocks ([data-th-only]) give way to their English
+   *   notice, and any element still showing Thai text is hidden. Labels the
+   *   English pass above could translate are already English by now.
+   * ==================================================================== */
+  const LATIN_RE = /[A-Za-z]/;
+  function englishOnly(scope) {
+    if (document.documentElement.lang !== 'en') return;
+    const base = scope && scope.nodeType === 1 ? scope : document.body;
+    base.querySelectorAll('[data-th-only]').forEach(el => el.classList.add('en-hidden'));
+    document.querySelectorAll('[data-en-notice]').forEach(el => { el.hidden = false; });
+    const walker = document.createTreeWalker(base, NodeFilter.SHOW_TEXT);
+    const hits = new Set();
+    let node;
+    while ((node = walker.nextNode())) {
+      if (!THAI_RE.test(node.nodeValue)) continue;
+      const el = node.parentElement;
+      if (!el || el.closest('script, style, title, .en-hidden, .visually-hidden')) continue;
+      hits.add(el);
+    }
+    hits.forEach(el => {
+      /* hide the smallest box that holds the Thai: the element itself, or
+         its list item / card when nothing English is left in it */
+      const item = el.closest('li, article, tr, .newsx-item, .fellowx-card, .result-item');
+      if (item && !LATIN_RE.test(item.textContent.replace(/[฀-๿]+/g, ''))) { item.classList.add('en-hidden'); return; }
+      const ownLatin = [...el.childNodes].some(n => n.nodeType === 3 && LATIN_RE.test(n.nodeValue));
+      if (!ownLatin) { el.classList.add('en-hidden'); return; }
+      /* English and Thai in one run: keep the English words only */
+      [...el.childNodes].forEach(n => {
+        if (n.nodeType === 3 && THAI_RE.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/[฀-๿][฀-๿\s.]*/g, ' ').replace(/\s{2,}/g, ' ');
+      });
+    });
+  }
+  /* where Thai was hidden, say so once and offer the Thai page; on a page
+     left with almost nothing, this note becomes its content */
+  function thaiOnlyNote() {
+    const main = document.getElementById('main-content');
+    if (!main || main.querySelector('.en-thai-note')) return;
+    const thUrl = new URL(location.href);
+    thUrl.searchParams.set('lang', 'th');
+    const words = [...main.querySelectorAll('h1, h2, h3, p, li')].filter(el => el.getClientRects().length && el.textContent.trim()).length;
+    const leftOut = main.querySelector('.en-hidden') || window.RS_EN_FILTERED > 0;
+    if (!leftOut && words >= 10) return;
+    const note = document.createElement('div');
+    note.className = `container en-thai-note${words < 10 ? ' en-thai-note--page' : ''}`;
+    note.innerHTML = words < 10
+      ? `<p class="en-thai-note__title">This page is published in Thai only</p><p class="en-thai-note__text">An English version will follow. You can read it in Thai now.</p><a class="btn btn--primary btn--pill" href="${escapeHTML(thUrl.href)}" hreflang="th">Read in Thai ${icon('arrow')}</a>`
+      : `<p class="en-thai-note__text">${icon('info')}<span>Some items on this page are available in Thai only. <a href="${escapeHTML(thUrl.href)}" hreflang="th">View this page in Thai</a></span></p>`;
+    const hero = main.querySelector('.hhero, .page-header, .story__head, .article-header, .kn-hero');
+    if (hero) hero.after(note); else main.prepend(note);
+  }
+  function initEnglishOnly() {
+    if (document.documentElement.lang !== 'en') return;
+    /* after the modules and the English labels pass, and once more when the
+       page has settled (late drawings: quotes, sliders, embeds) */
+    setTimeout(() => setTimeout(() => { englishOnly(document.body); thaiOnlyNote(); }, 0), 0);
+    window.addEventListener('load', () => setTimeout(() => { englishOnly(document.body); thaiOnlyNote(); }, 300));
+    document.addEventListener('rs:content-added', event => {
+      requestAnimationFrame(() => requestAnimationFrame(() => englishOnly(event.detail && event.detail.nodeType === 1 ? event.detail : document.body)));
+    });
+  }
+
   function initImageFallbacks() {
     document.addEventListener('error', event => {
       const img = event.target;
@@ -971,6 +1183,9 @@
     initScrollers();
     initSelects();
     initImageFallbacks();
+    initPhrases();
+    initEnglishLabels();
+    initEnglishOnly();
     initTabs();
     initTocSpy();
     initUtilities();

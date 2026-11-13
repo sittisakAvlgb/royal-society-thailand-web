@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -53,17 +53,19 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261123w"></script>
-  <script defer src="../assets/js/14-about.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261126p"></script>
+  <script defer src="../assets/js/14-about.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/documents.js?v=20261126p"></script>
+  <script defer src="../assets/js/19-works-list.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -109,8 +111,8 @@
       </div>
     </div>
 
-    <!-- The bylaws as a printed booklet beside an index of four subjects; then
-         each subject with its bylaws as ruled lines of a contents page -->
+    <!-- The bylaws in one searchable, paged list with subject tabs;
+         each a ruled line, or a card with a printed cover in the grid -->
     <div class="container about-sub__body">
       <div class="auth acts-page bylaw-page">
         <div class="auth__main">
@@ -119,170 +121,38 @@
             <span>These documents are published in Thai only.</span>
           </p>
 
-          <section class="auth__part" id="docs" aria-labelledby="docs-title">
-            <p class="kicker" data-en="12 bylaws">ข้อบังคับ ๑๒ ฉบับ</p>
-            <h2 id="docs-title" class="auth__title" data-en="Find by subject"><span class="story__ph">เลือกตามเรื่อง</span><span class="story__ph">ที่ต้องการ</span></h2>
-            <div class="acts-lead">
-              <div class="acts-cover" aria-hidden="true">
-                <img src="../assets/images/logo-image.png" alt="" width="64" height="64" decoding="async">
-                <span class="acts-cover__kind">ข้อบังคับ</span>
-                <span class="acts-cover__name">ราชบัณฑิตยสภา</span>
-                <span class="acts-cover__year">๑๒ ฉบับ</span>
+          <!-- Every bylaw in one list (19-works-list.js, rows mode):
+               subject tabs with counts, a search, the grid / list switch and a
+               pager; in the grid each gets a printed cover from data.
+               CMS: one li per document, newest first, with data-academy set
+               to its subject (members elect meet work); a new subject needs a tab of its own. -->
+          <section class="auth__part works-list" id="docs" aria-labelledby="docs-title" data-works-list data-works-docs="bylaws" data-works-rows data-works-cover-kind="ข้อบังคับ">
+            <h2 id="docs-title" class="auth__title" data-en="All bylaws">ข้อบังคับทั้งหมด</h2>
+            <div class="newsx-tools works-list__tools ann-tools" data-works-tools>
+              <div class="news-tabs" role="group" aria-label="กรองตามเรื่อง" data-en-aria-label="Filter by subject" data-works-tabs>
+                <button class="news-tab is-active" type="button" data-filter="all" aria-pressed="true" data-en="All">ทั้งหมด</button><button class="news-tab" type="button" data-filter="members" aria-pressed="false" data-en="Members">สมาชิก</button><button class="news-tab" type="button" data-filter="elect" aria-pressed="false" data-en="Elections">การเลือกผู้บริหาร</button><button class="news-tab" type="button" data-filter="meet" aria-pressed="false" data-en="Meetings">การประชุม</button><button class="news-tab" type="button" data-filter="work" aria-pressed="false" data-en="Academic work">งานวิชาการ</button>
               </div>
-              <div class="acts-lead__text">
-                <p class="auth__lead" data-th-only><span class="story__ph">ข้อบังคับที่ราชบัณฑิตยสภาออก</span><span class="story__ph">ตามพระราชบัญญัติราชบัณฑิตยสภา พ.ศ. ๒๕๕๘</span> <span class="story__ph">จัดเป็น ๔ หมวดตามเรื่อง</span> <span class="story__ph">เลือกหมวดเพื่อไปยังข้อบังคับที่ต้องการ</span></p>
-                <ul class="bylaw-index" role="list">
-                  <li><a href="#members"><span class="bylaw-index__name" data-en="Members">สมาชิก</span><span class="bylaw-index__count">๕ <span data-en="bylaws">ฉบับ</span></span></a></li>
-                  <li><a href="#elect"><span class="bylaw-index__name" data-en="Elections">การเลือกผู้บริหาร</span><span class="bylaw-index__count">๓ <span data-en="bylaws">ฉบับ</span></span></a></li>
-                  <li><a href="#meet"><span class="bylaw-index__name" data-en="Meetings">การประชุม</span><span class="bylaw-index__count">๒ <span data-en="bylaws">ฉบับ</span></span></a></li>
-                  <li><a href="#work"><span class="bylaw-index__name" data-en="Academic work">งานวิชาการ</span><span class="bylaw-index__count">๒ <span data-en="bylaws">ฉบับ</span></span></a></li>
-                </ul>
+              <div class="newsx-tools__end">
+                <label class="newsx-search">
+                  <span class="visually-hidden" data-en="Search the bylaws">ค้นหาข้อบังคับ</span>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+                  <input type="search" placeholder="ค้นหาข้อบังคับ เช่น การประชุม" data-en-placeholder="Search bylaws" autocomplete="off" data-works-search>
+                </label>
+              <div class="newsx-view" role="group" aria-label="รูปแบบการแสดงผล" data-en-aria-label="View" data-works-views>
+                <button class="btn btn--secondary btn--sm newsx-view__btn is-active" type="button" data-works-view="grid" aria-pressed="true" title="แบบตาราง" data-en-title="Grid view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-en="Grid">ตาราง</span></button>
+                <button class="btn btn--secondary btn--sm newsx-view__btn" type="button" data-works-view="list" aria-pressed="false" title="แบบรายการ" data-en-title="List view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="15" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-en="List">รายการ</span></button>
+              </div>
               </div>
             </div>
-
-            <section class="bylaw-group" id="members" aria-labelledby="members-title">
-              <header class="bylaw-group__head">
-                <h3 id="members-title" class="bylaw-group__name" data-en="Members">สมาชิก</h3>
-                <p class="bylaw-group__what" data-en="Admission, appointment, numbers and leaving office">การรับ การแต่งตั้ง จำนวน และการพ้นจากตำแหน่ง</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000156.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยคุณวุฒิของผู้สมัครเป็นภาคีสมาชิก หลักเกณฑ์ วิธีการสมัครและวิธีการรับบุคคลเป็นภาคีสมาชิก พ.ศ. ๒๕๖๓">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยคุณวุฒิของผู้สมัครเป็นภาคีสมาชิก หลักเกณฑ์ วิธีการสมัครและวิธีการรับบุคคลเป็นภาคีสมาชิก</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๖๓ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000157.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยหลักเกณฑ์และวิธีการเลือกภาคีสมาชิก เพื่อแต่งตั้งเป็นราชบัณฑิตในตำแหน่งที่ตั้งขึ้นใหม่หรือตำแหน่งที่ว่าง">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยหลักเกณฑ์และวิธีการเลือกภาคีสมาชิก เพื่อแต่งตั้งเป็นราชบัณฑิตในตำแหน่งที่ตั้งขึ้นใหม่หรือตำแหน่งที่ว่าง</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000158.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยการกำหนดจำนวนภาคีสมาชิกและจำนวนราชบัณฑิต พ.ศ. ๒๕๖๓">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการกำหนดจำนวนภาคีสมาชิกและจำนวนราชบัณฑิต</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๖๓ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000242.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยหลักเกณฑ์และวิธีการในการแต่งตั้งราชบัณฑิตกิตติมศักดิ์ พ.ศ. ๒๕๖๙">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยหลักเกณฑ์และวิธีการในการแต่งตั้งราชบัณฑิตกิตติมศักดิ์</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๖๙ · ภาษาไทย <span class="acts-doc__new" data-en="Latest">ล่าสุด</span></span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000193.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยการให้สมาชิกราชบัณฑิตยสภาพ้นจากตำแหน่ง พ.ศ. ๒๕๕๙">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการให้สมาชิกราชบัณฑิตยสภาพ้นจากตำแหน่ง</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๕๙ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="elect" aria-labelledby="elect-title">
-              <header class="bylaw-group__head">
-                <h3 id="elect-title" class="bylaw-group__name" data-en="Elections">การเลือกผู้บริหาร</h3>
-                <p class="bylaw-group__what" data-en="President, Vice-Presidents, academy chairs and committee">นายก อุปนายก ประธานสำนัก และกรรมการ</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000159.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยหลักเกณฑ์และวิธีการในการเลือกนายกราชบัณฑิตยสภา และอุปนายกราชบัณฑิตยสภา พ.ศ. ๒๕๖๓">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยหลักเกณฑ์และวิธีการในการเลือกนายกราชบัณฑิตยสภา และอุปนายกราชบัณฑิตยสภา</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๖๓ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000235.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยหลักเกณฑ์และวิธีการเลือกประธานสำนักและเลขานุการสำนัก พ.ศ. ๒๕๖๗">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยหลักเกณฑ์และวิธีการเลือกประธานสำนักและเลขานุการสำนัก</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๖๗ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000061.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยการแต่งตั้งและวาระการดำรงตำแหน่งของกรรมการผู้ทรงคุณวุฒิ และการประชุมของคณะกรรมการกิจการสำนักงานราชบัณฑิตยสภา">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการแต่งตั้งและวาระการดำรงตำแหน่งของกรรมการผู้ทรงคุณวุฒิ และการประชุมของคณะกรรมการกิจการสำนักงานราชบัณฑิตยสภา</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="meet" aria-labelledby="meet-title">
-              <header class="bylaw-group__head">
-                <h3 id="meet-title" class="bylaw-group__name" data-en="Meetings">การประชุม</h3>
-                <p class="bylaw-group__what" data-en="The Society and the academies in session">ที่ประชุมราชบัณฑิตยสภาและที่ประชุมสำนัก</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000154.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยการประชุมราชบัณฑิตยสภา พ.ศ. ๒๕๖๓">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการประชุมราชบัณฑิตยสภา</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๖๓ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000155.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยการประชุมสำนัก พ.ศ. ๒๕๖๓">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการประชุมสำนัก</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๖๓ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="work" aria-labelledby="work-title">
-              <header class="bylaw-group__head">
-                <h3 id="work-title" class="bylaw-group__name" data-en="Academic work">งานวิชาการ</h3>
-                <p class="bylaw-group__what" data-en="Fields of study and academic services">ประเภทวิชา และการให้บริการทางวิชาการ</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000236.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยการกำหนดประเภทวิชาในแต่ละสำนัก และการแบ่งประเภทวิชาออกเป็นสาขาวิชา พ.ศ. ๒๕๖๘">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการกำหนดประเภทวิชาในแต่ละสำนัก และการแบ่งประเภทวิชาออกเป็นสาขาวิชา</span>
-                        <span class="acts-doc__meta">พ.ศ. ๒๕๖๘ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="../assets/docs/bylaws/00000170.pdf" target="_blank" rel="noopener" aria-label="ข้อบังคับราชบัณฑิตยสภา ว่าด้วยการให้บริการทางวิชาการ การจัดการศึกษาอบรมและพัฒนาทางวิชาการ และการเรียกเก็บค่าใช้จ่าย ค่าธรรมเนียมและค่าบริการ">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการให้บริการทางวิชาการ การจัดการศึกษาอบรมและพัฒนาทางวิชาการ และการเรียกเก็บค่าใช้จ่าย ค่าธรรมเนียมและค่าบริการ</span>
-                        <span class="acts-doc__meta">ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
+            <p class="newsx-count" aria-live="polite" data-works-count></p>
+            <ul class="acts-docs ann-list" role="list" data-works-items>
+              <!-- Drawn from data/documents.js ("bylaws") by 19-works-list.js (CMS) -->
+            </ul>
+            <p class="newsx-empty" data-works-empty hidden>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+              <span data-en="Nothing matches your search.">ไม่พบรายการที่ตรงกับคำค้น</span>
+            </p>
+            <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-works-pages></nav>
           </section>
 
           <section class="auth__part" id="more" aria-labelledby="more-title">

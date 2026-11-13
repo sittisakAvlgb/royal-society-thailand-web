@@ -126,15 +126,19 @@
       btn.setAttribute('aria-pressed', String(on));
     });
     render();
+    if (qs('[data-newsx-gallery="albums"]', root)) renderGallery();
   }
 
-  /* the gallery page: one album per story, its cover and how many photos */
+  /* the gallery page: one album per story, its cover and how many photos;
+     each opens its own album page (news-album.html, 24-album.js) */
   const L_PHOTOS = { th: '{n} ภาพ', en: '{n} photos' };
   const L_ALBUMS = { th: '{n} อัลบั้ม · {p} ภาพ', en: '{n} albums · {p} photos' };
   const ALBUM_KEY = 'rs-gallery-size';
   let albumPage = 1;
-  let albumSize = SIZES[0];
-  try { const saved = Number(localStorage.getItem(ALBUM_KEY)); if (SIZES.includes(saved)) albumSize = saved; } catch { /* storage unavailable */ }
+  /* albums per page: whole rows of the four-across grid */
+  const ALBUM_SIZES = [12, 24, 48];
+  let albumSize = ALBUM_SIZES[0];
+  try { const saved = Number(localStorage.getItem(ALBUM_KEY)); if (ALBUM_SIZES.includes(saved)) albumSize = saved; } catch { /* storage unavailable */ }
 
   function renderAlbums(box) {
     /* a story with its own photos, or a press release with a set of them */
@@ -151,14 +155,23 @@
     if (nav) {
       nav.hidden = !albums.length;
       nav.classList.add('pager');
-      nav.innerHTML = albums.length ? RS.pagerHTML({ page: albumPage, pages, total: albums.length, size: albumSize, sizes: SIZES, unit: { th: 'อัลบั้ม', en: albums.length === 1 ? 'album' : 'albums' } }) : '';
+      nav.classList.toggle('pager--single', pages < 2);
+      nav.innerHTML = albums.length ? RS.pagerHTML({ page: albumPage, pages, total: albums.length, size: albumSize, sizes: ALBUM_SIZES, unit: { th: 'อัลบั้ม', en: albums.length === 1 ? 'album' : 'albums' } }) : '';
     }
+    /* the news page's framed cards, in its grid or list view */
+    box.className = `newsx-items newsx-items--${view} newsx-albumlist`;
     box.innerHTML = albums.slice((albumPage - 1) * albumSize, albumPage * albumSize).map((item, i) => `
       <li class="newsx-item" style="animation-delay:${Math.min(i, 11) * 30}ms">
-        <a class="newsx-photo newsx-album" href="${link(item)}"${away(item)}>
-          <span class="newsx-photo__media">${img(item, 600, 450, i < 4)}<span class="newsx-album__count">${icon('eye')}<span>${escapeHTML(RS.digits(t(L_PHOTOS).replace('{n}', photoCount(item))))}</span></span></span>
-          <span class="newsx-album__date"><time datetime="${escapeHTML(item.date)}">${date(item.date)}</time></span>
-          <span class="newsx-album__title">${te(item.title)}</span>
+        <a class="newsx-card newsx-album" href="${escapeHTML(RS.url(`pages/news-album.html?id=${encodeURIComponent(item.id)}`))}">
+          <span class="newsx-card__media">${img(item, 600, 400, i < 4)}</span>
+          <span class="newsx-card__body">
+            <span class="news-cat">${cat(item)}</span>
+            <span class="newsx-card__title">${te(item.title)}</span>
+            <span class="news-card__foot newsx-card__foot">
+              <time datetime="${escapeHTML(item.date)}">${date(item.date)}</time>
+              <span class="newsx-album__n">${icon('eye')}<span>${escapeHTML(RS.digits(t(L_PHOTOS).replace('{n}', photoCount(item))))}</span></span>
+            </span>
+          </span>
         </a>
       </li>`).join('');
   }

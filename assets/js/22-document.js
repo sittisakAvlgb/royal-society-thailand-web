@@ -45,7 +45,7 @@
     'admissions-associate-rules.html': { th: 'ระเบียบการรับสมัครภาคีสมาชิก', en: 'Associate Fellow regulations' },
     'admissions-fellow-rules.html': { th: 'ระเบียบการรับสมัครราชบัณฑิต', en: 'Fellow regulations' },
     'fellows-recruitment.html': { th: 'ตำแหน่งว่างและการสรรหาสมาชิก', en: 'Vacancies and Election' },
-    'publications.html': { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' },
+    'series.html': { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' },
     'works-proposals.html': { th: 'ข้อเสนอต่อรัฐบาล', en: 'Proposals to Government' }
   };
   const set = (sel, html) => { const el = qs(sel, root); if (el) el.innerHTML = html; };
@@ -58,7 +58,7 @@
     }
     const pageFile = (doc.page || '').split('?')[0];
     const pageName = PAGES[pageFile] || (pageFile === 'publication.html' ? { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' } : { th: 'เอกสาร', en: 'Documents' });
-    const pageHref = RS.url(`pages/${doc.page || 'publications.html'}`);
+    const pageHref = RS.url(`pages/${doc.page || 'series.html?id=journal-th'}`);
     document.title = `${doc.title} | ${t(L.org)}`;
     qs('meta[name="description"]')?.setAttribute('content', doc.title);
 

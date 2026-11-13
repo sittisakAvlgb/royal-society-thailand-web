@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -52,15 +52,18 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/ita.js?v=20261126p"></script>
+  <script defer src="../assets/js/27-ita-list.js?v=20261126p"></script>
+  <script defer src="../assets/js/19-works-list.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -117,330 +120,42 @@
               </ul>
             </div>
             <div class="tour-intro__topics ita-progress">
-              <p class="tour-intro__label" data-en="Disclosure, fiscal year 2026">การเปิดเผยข้อมูล ปีงบประมาณ ๒๕๖๙</p>
-              <p class="ita-progress__num"><strong>๑๑</strong><span>/๒๘ <span data-en="items published">รายการเผยแพร่แล้ว</span></span></p>
-              <div class="ita-progress__bar" role="img" aria-label="เผยแพร่แล้ว ๓๙%" data-en-aria-label="39% published"><span style="width:39%"></span></div>
+              <p class="tour-intro__label" data-ita-year data-en="Disclosure, fiscal year 2026">การเปิดเผยข้อมูล ปีงบประมาณ ๒๕๖๙</p>
+              <p class="ita-progress__num" data-ita-num><strong>๑๑</strong><span>/๒๘ <span data-en="items published">รายการเผยแพร่แล้ว</span></span></p>
+              <div class="ita-progress__bar" data-ita-bar role="img" aria-label="เผยแพร่แล้ว ๓๙%" data-en-aria-label="39% published"><span style="width:39%"></span></div>
               <p class="ita-progress__note" data-en="The remaining items are being gathered from the Office.">รายการที่เหลืออยู่ระหว่างรวบรวมจากสำนักงาน</p>
             </div>
           </section>
 
-          <section class="auth__part" id="oit" aria-labelledby="oit-title">
+          <!-- Every disclosure item from data/ita.js (27-ita-list.js draws the
+               tabs and rows; 19-works-list.js, rows mode, adds counts, search,
+               grid / list and pager). CMS: the items, groups and fiscal year
+               live in data/ita.js only. -->
+          <section class="auth__part works-list" id="oit" aria-labelledby="oit-title" data-ita-list data-works-list data-works-rows data-works-cover-kind="ITA">
             <p class="kicker" data-en="Public disclosure (OIT)">การเปิดเผยข้อมูลสาธารณะ (OIT)</p>
-            <h2 id="oit-title" class="auth__title" data-en="Find by group"><span class="story__ph">เลือกตามหมวด</span><span class="story__ph">ข้อมูล</span></h2>
-            <ul class="bylaw-index" role="list">
-                  <li><a href="#basic"><span class="bylaw-index__name" data-en="Basic information">ข้อมูลพื้นฐาน</span><span class="bylaw-index__count">๘/๘ <span data-en="published">เผยแพร่</span></span></a></li>
-                  <li><a href="#plan"><span class="bylaw-index__name" data-en="Management">การบริหารงาน</span><span class="bylaw-index__count">๒/๔ <span data-en="published">เผยแพร่</span></span></a></li>
-                  <li><a href="#budget"><span class="bylaw-index__name" data-en="Budget and procurement">งบประมาณและการจัดซื้อจัดจ้าง</span><span class="bylaw-index__count">๐/๕ <span data-en="published">เผยแพร่</span></span></a></li>
-                  <li><a href="#people"><span class="bylaw-index__name" data-en="Human resources">การบริหารทรัพยากรบุคคล</span><span class="bylaw-index__count">๐/๓ <span data-en="published">เผยแพร่</span></span></a></li>
-                  <li><a href="#complaints"><span class="bylaw-index__name" data-en="Corruption complaints">การจัดการเรื่องร้องเรียนการทุจริต</span><span class="bylaw-index__count">๑/๒ <span data-en="published">เผยแพร่</span></span></a></li>
-                  <li><a href="#integrity"><span class="bylaw-index__name" data-en="Preventing corruption">การป้องกันการทุจริตและส่งเสริมคุณธรรม</span><span class="bylaw-index__count">๐/๖ <span data-en="published">เผยแพร่</span></span></a></li>
-            </ul>
-
-            <section class="bylaw-group" id="basic" aria-labelledby="basic-title">
-              <header class="bylaw-group__head">
-                <h3 id="basic-title" class="bylaw-group__name" data-en="Basic information">ข้อมูลพื้นฐาน</h3>
-                <p class="bylaw-group__what" data-th-only>โครงสร้าง ผู้บริหาร อำนาจหน้าที่ กฎหมาย และช่องทางติดต่อ</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=structure">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Organisation chart">โครงสร้างหน่วยงาน</span>
-                        <span class="acts-doc__meta">แผนผังการบริหาร</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=executives">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Executives">ข้อมูลผู้บริหาร</span>
-                        <span class="acts-doc__meta">นายกและอุปนายก</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=authority">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Mandate and authority">อำนาจหน้าที่</span>
-                        <span class="acts-doc__meta">ตามพระราชบัญญัติ</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=laws">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Relevant laws">กฎหมายที่เกี่ยวข้อง</span>
-                        <span class="acts-doc__meta">พระราชบัญญัติ ข้อบังคับ ระเบียบ</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=news">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="News">ข่าวประชาสัมพันธ์</span>
-                        <span class="acts-doc__meta">ข่าวและประกาศ</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=contact">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Contact information">ข้อมูลการติดต่อ</span>
-                        <span class="acts-doc__meta">ที่อยู่ แผนที่ โทรศัพท์</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=faq">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Frequently asked questions">คำถามที่พบบ่อย</span>
-                        <span class="acts-doc__meta">Q&A</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=feedback">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Feedback">ช่องทางรับฟังความคิดเห็น</span>
-                        <span class="acts-doc__meta">แบบฟอร์มติดต่อออนไลน์</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="plan" aria-labelledby="plan-title">
-              <header class="bylaw-group__head">
-                <h3 id="plan-title" class="bylaw-group__name" data-en="Management">การบริหารงาน</h3>
-                <p class="bylaw-group__what" data-th-only>ทิศทาง แผนประจำปี และผลการดำเนินงาน</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=direction">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Direction and operations">ทิศทางและการดำเนินงาน</span>
-                        <span class="acts-doc__meta">ยุทธศาสตร์และแนวทาง</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=annual-plan">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Annual operating plan">แผนปฏิบัติราชการประจำปี</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๙</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=progress-6m">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Six-month progress report">รายงานการกำกับติดตามการดำเนินงานรอบ ๖ เดือน</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๙</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=annual-report">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Annual report">รายงานผลการดำเนินงานประจำปี</span>
-                        <span class="acts-doc__meta">รายงานประจำปี</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="budget" aria-labelledby="budget-title">
-              <header class="bylaw-group__head">
-                <h3 id="budget-title" class="bylaw-group__name" data-en="Budget and procurement">งบประมาณและการจัดซื้อจัดจ้าง</h3>
-                <p class="bylaw-group__what" data-th-only>แผนการใช้จ่าย แผนและผลการจัดซื้อจัดจ้าง</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=spending-plan">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Annual spending plan">แผนการใช้จ่ายงบประมาณประจำปี</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๙</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=spending-6m">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Six-month spending report">รายงานการกำกับติดตามการใช้จ่ายงบประมาณรอบ ๖ เดือน</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๙</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=procurement-plan">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Procurement plan">แผนการจัดซื้อจัดจ้าง</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๙</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=procurement-notices">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Procurement notices">ประกาศต่าง ๆ เกี่ยวกับการจัดซื้อจัดจ้าง</span>
-                        <span class="acts-doc__meta">ประกาศเชิญชวนและผลการพิจารณา</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=procurement-report">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Annual procurement report">รายงานผลการจัดซื้อจัดจ้างประจำปี</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๘</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="people" aria-labelledby="people-title">
-              <header class="bylaw-group__head">
-                <h3 id="people-title" class="bylaw-group__name" data-en="Human resources">การบริหารทรัพยากรบุคคล</h3>
-                <p class="bylaw-group__what" data-th-only>นโยบาย การดำเนินการ และรายงานผล</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=hr-policy">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="HR policy">นโยบายการบริหารทรัพยากรบุคคล</span>
-                        <span class="acts-doc__meta">สำนักงานราชบัณฑิตยสภา</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=hr-practice">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="HR in practice">การดำเนินการตามนโยบายการบริหารทรัพยากรบุคคล</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๙</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=hr-report">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Annual HR report">รายงานผลการบริหารและพัฒนาทรัพยากรบุคคลประจำปี</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๘</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="complaints" aria-labelledby="complaints-title">
-              <header class="bylaw-group__head">
-                <h3 id="complaints-title" class="bylaw-group__name" data-en="Corruption complaints">การจัดการเรื่องร้องเรียนการทุจริต</h3>
-                <p class="bylaw-group__what" data-th-only>ช่องทางแจ้งเรื่องและสถิติ</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="ita-item.html?id=complaint-channel">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="How to report corruption">ช่องทางการแจ้งเรื่องร้องเรียนการทุจริต</span>
-                        <span class="acts-doc__meta">แบบฟอร์มออนไลน์ โทรศัพท์ หรือหนังสือ</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="View">ดูข้อมูล</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=complaint-stats">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Annual complaint statistics">ข้อมูลเชิงสถิติเรื่องร้องเรียนการทุจริตประจำปี</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๘</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="integrity" aria-labelledby="integrity-title">
-              <header class="bylaw-group__head">
-                <h3 id="integrity-title" class="bylaw-group__name" data-en="Preventing corruption">การป้องกันการทุจริตและส่งเสริมคุณธรรม</h3>
-                <p class="bylaw-group__what" data-th-only>เจตจำนง แผน มาตรการ และประมวลจริยธรรม</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=integrity-statement">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Statement of integrity">เจตจำนงการบริหารงานด้วยความซื่อสัตย์สุจริต</span>
-                        <span class="acts-doc__meta">ผู้บริหารสำนักงาน</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=moral-pledge">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Pledge as a moral organisation">ประกาศเจตนารมณ์เป็นองค์กรคุณธรรม</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๙</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=anti-corruption-plan">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Anti-corruption action plan">แผนปฏิบัติการป้องกันและปราบปรามการทุจริต</span>
-                        <span class="acts-doc__meta">ศูนย์ปฏิบัติการต่อต้านการทุจริต</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=integrity-measures">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Measures for integrity and transparency">มาตรการส่งเสริมคุณธรรมและความโปร่งใสภายในหน่วยงาน</span>
-                        <span class="acts-doc__meta">ศูนย์ปฏิบัติการต่อต้านการทุจริต</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=ethics-code">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Code of ethics">ประมวลจริยธรรม</span>
-                        <span class="acts-doc__meta">ข้าราชการสำนักงานราชบัณฑิตยสภา</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="acts-doc acts-doc--pending" href="ita-item.html?id=risk-assessment">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name" data-en="Annual corruption risk assessment">การประเมินความเสี่ยงการทุจริตประจำปี</span>
-                        <span class="acts-doc__meta">ปีงบประมาณ ๒๕๖๙</span>
-                      </span>
-                      <span class="ita-pending" data-en="Awaiting the Office">รอข้อมูลจากสำนักงาน</span>
-                    </a>
-                  </li>
-              </ul>
-            </section>
+            <h2 id="oit-title" class="auth__title" data-en="All items">รายการทั้งหมด</h2>
+            <div class="newsx-tools works-list__tools ann-tools" data-works-tools>
+              <div class="news-tabs" role="group" aria-label="กรองตามหมวดข้อมูล" data-en-aria-label="Filter by group" data-works-tabs>
+              </div>
+              <div class="newsx-tools__end">
+                <label class="newsx-search">
+                  <span class="visually-hidden" data-en="Search the items">ค้นหารายการ</span>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+                  <input type="search" placeholder="ค้นหา เช่น งบประมาณ ร้องเรียน" data-en-placeholder="Search, e.g. budget, complaints" autocomplete="off" data-works-search>
+                </label>
+              <div class="newsx-view" role="group" aria-label="รูปแบบการแสดงผล" data-en-aria-label="View" data-works-views>
+                <button class="btn btn--secondary btn--sm newsx-view__btn is-active" type="button" data-works-view="grid" aria-pressed="true" title="แบบตาราง" data-en-title="Grid view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-en="Grid">ตาราง</span></button>
+                <button class="btn btn--secondary btn--sm newsx-view__btn" type="button" data-works-view="list" aria-pressed="false" title="แบบรายการ" data-en-title="List view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="15" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-en="List">รายการ</span></button>
+              </div>
+              </div>
+            </div>
+            <p class="newsx-count" aria-live="polite" data-works-count></p>
+            <ul class="acts-docs ann-list" role="list" data-works-items></ul>
+            <p class="newsx-empty" data-works-empty hidden>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+              <span data-en="Nothing matches your search.">ไม่พบรายการที่ตรงกับคำค้น</span>
+            </p>
+            <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-works-pages></nav>
           </section>
 
           <section class="auth__part" id="more" aria-labelledby="more-title">

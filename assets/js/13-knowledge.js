@@ -1,9 +1,10 @@
 /* ============================================================================
  * 13-knowledge.js — the knowledge page (pages/knowledge.html)
  *  One catalogue from data/knowledge.js: a field index on the left (with
- *  counts) narrows the list on the right; the newest article of the current
- *  choice leads in larger type. The choice lives in the URL hash (#science),
- *  so the home page and the menu can link straight to a field.
+ *  counts) narrows the articles on the right, framed cards in a grid or a
+ *  list (the reader's choice, remembered in this browser) with a pager, so
+ *  it takes any number of articles from the CMS. The field lives in the
+ *  URL hash (#science), so the home page and the menu can link to it.
  * ========================================================================== */
 (() => {
   'use strict';
@@ -15,10 +16,11 @@
     all: { th: 'บทความทั้งหมด', en: 'All articles' },
     allDesc: { th: 'ความรู้จากราชบัณฑิตและผู้เชี่ยวชาญทุกสาขา เรียงจากล่าสุด', en: 'Knowledge from Fellows and experts in every field, newest first' },
     allIndex: { th: 'ทุกสาขา', en: 'All fields' },
-    searchField: { th: 'ค้นหาในสาขานี้', en: 'Search this field' },
-    searchAll: { th: 'ค้นหาเพิ่มเติม', en: 'Search more' },
     read: { th: 'อ่านบทความ', en: 'Read the article' },
-    latest: { th: 'ล่าสุด', en: 'Latest' }
+    latest: { th: 'ล่าสุด', en: 'Latest' },
+    found: { th: 'พบ {n} บทความ', en: '{n} articles' },
+    unit: { th: 'บทความ', en: 'articles' },
+    readShort: { th: 'อ่านต่อ', en: 'Read' }
   };
 
   RS.ready(() => {
@@ -26,8 +28,17 @@
     if (!root) return;
 
     const index = qs('[data-kn-fields]', root);
-    const lead = qs('[data-kn-lead]', root);
     const list = qs('[data-kn-list]', root);
+    const nav = qs('[data-kn-pages]', root);
+    const VIEW_KEY = 'rs-kn-view';
+    const SIZE_KEY = 'rs-kn-size';
+    const SIZES = [12, 24, 48];
+    let view = 'grid';
+    try { if (localStorage.getItem(VIEW_KEY) === 'list') view = 'list'; } catch { /* storage unavailable */ }
+    let size = SIZES[0];
+    try { const saved = Number(localStorage.getItem(SIZE_KEY)); if (SIZES.includes(saved)) size = saved; } catch { /* storage unavailable */ }
+    let page = 1;
+    let currentField = '';
     const fieldOf = id => DATA.fields.find(field => field.id === id);
     const sorted = [...DATA.items].sort((a, b) => b.date.localeCompare(a.date));
     const date = iso => escapeHTML(RS.formatDate(iso));
@@ -51,43 +62,39 @@
       const items = field ? sorted.filter(item => item.field === field.id) : sorted;
       qs('[data-kn-title]', root).textContent = field ? t(field.name) : t(L.all);
       qs('[data-kn-desc]', root).textContent = field ? t(field.desc) : t(L.allDesc);
-      const more = qs('[data-kn-more]', root);
-      more.href = RS.url(field ? `pages/search.html?topic=${field.id}` : 'pages/search.html');
-      qs('[data-kn-more-label]', root).textContent = t(field ? L.searchField : L.searchAll);
 
-      const [first, ...rest] = items;
-      lead.innerHTML = first ? `
-        <a href="${href(first.href)}">
-          <span class="kn-lead__kicker"><span class="kn-lead__flag">${te(L.latest)}</span>${field ? '' : `<span>${te(fieldOf(first.field)?.name)}</span>`}<span>${te(first.type)}</span><time datetime="${first.date}">${date(first.date)}</time></span>
-          <span class="kn-lead__title">${te(first.title)}</span>
-          <span class="kn-lead__excerpt">${te(first.excerpt)}</span>
-          <span class="link-arrow kn-lead__go"><span>${te(L.read)}</span>${icon('arrow')}</span>
-        </a>` : '';
-      list.innerHTML = rest.map((item, i) => {
-        const d = new Date(`${item.date}T00:00:00`);
-        return `
-        <li class="kn-row" style="--i:${i}">
-          <a href="${href(item.href)}">
-            <time class="kn-row__date" datetime="${item.date}">
-              <span class="kn-row__day">${escapeHTML(RS.formatDate(item.date, { day: 'numeric' }))}</span>
-              <span class="kn-row__month">${escapeHTML(RS.formatDate(item.date, { month: 'short', year: '2-digit' }))}</span>
-            </time>
-            <span class="kn-row__body">
-              <span class="kn-row__kicker">${field ? '' : `<span>${te(fieldOf(item.field)?.name)}</span>`}<span>${te(item.type)}</span></span>
-              <span class="kn-row__title">${te(item.title)}</span>
-              <span class="kn-row__excerpt">${te(item.excerpt)}</span>
+      const pages = Math.max(1, Math.ceil(items.length / size));
+      page = Math.min(page, pages);
+      const count = qs('[data-kn-count]', root);
+      if (count) count.textContent = RS.digits(t(L.found).replace('{n}', items.length));
+      list.className = `newsx-items newsx-items--${view} kn-items`;
+      list.innerHTML = items.slice((page - 1) * size, page * size).map((item, i) => `
+        <li class="newsx-item" style="animation-delay:${Math.min(i, 11) * 30}ms">
+          <a class="newsx-card kn-card" href="${href(item.href)}">
+            <span class="newsx-card__body">
+              <span class="news-cat kn-card__kicker">${field ? '' : `<span>${te(fieldOf(item.field)?.name)}</span>`}<span>${te(item.type)}</span></span>
+              <span class="newsx-card__title">${te(item.title)}</span>
+              <span class="newsx-card__dek">${te(item.excerpt)}</span>
+              <span class="news-card__foot newsx-card__foot">
+                <time datetime="${item.date}">${date(item.date)}</time>
+                <span class="news-cta"><span>${te(L.readShort)}</span><span class="news-cta__dot" aria-hidden="true">${icon('arrow')}</span></span>
+              </span>
             </span>
-            <span class="kn-row__go" aria-hidden="true">${icon('arrow')}</span>
           </a>
-        </li>`;
-      }).join('');
-      /* replay the entrance so the change reads */
-      [lead, list].forEach(el => { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; });
+        </li>`).join('');
+      if (nav) {
+        nav.hidden = !items.length;
+        nav.classList.add('pager');
+        nav.classList.toggle('pager--single', pages < 2);
+        nav.innerHTML = items.length ? RS.pagerHTML({ page, pages, total: items.length, size, sizes: SIZES, unit: L.unit }) : '';
+      }
       document.dispatchEvent(new CustomEvent('rs:content-added', { detail: root }));
     }
 
     function choose(id, push) {
       const current = fieldOf(id) ? id : '';
+      if (current !== currentField) page = 1;
+      currentField = current;
       renderIndex(current);
       render(current);
       if (push) history.replaceState(null, '', current ? `#${current}` : location.pathname + location.search);
@@ -103,6 +110,40 @@
       }
     });
     window.addEventListener('hashchange', () => choose(location.hash.slice(1), false));
+
+    /* grid or list */
+    const syncViews = () => qsa('[data-newsx-view]', root).forEach(btn => {
+      const on = btn.dataset.newsxView === view;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-pressed', String(on));
+    });
+    qs('.newsx-view', root)?.addEventListener('click', event => {
+      const btn = event.target.closest('[data-newsx-view]');
+      if (!btn) return;
+      view = btn.dataset.newsxView === 'list' ? 'list' : 'grid';
+      try { localStorage.setItem(VIEW_KEY, view); } catch { /* storage unavailable */ }
+      syncViews();
+      render(currentField);
+    });
+    syncViews();
+
+    /* pages of articles, and how many per page */
+    nav?.addEventListener('click', event => {
+      const sizeBtn = event.target.closest('[data-pager-size]');
+      if (sizeBtn) {
+        size = Number(sizeBtn.dataset.pagerSize);
+        try { localStorage.setItem(SIZE_KEY, String(size)); } catch { /* storage unavailable */ }
+        page = 1;
+        render(currentField);
+        qs('.pager__menu-btn', nav)?.focus();
+        return;
+      }
+      const btn = event.target.closest('[data-pager-page]');
+      if (!btn || btn.disabled) return;
+      page = Number(btn.dataset.pagerPage);
+      render(currentField);
+      qs('.kn-main', root).scrollIntoView({ behavior: RS.reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+    });
 
     choose(location.hash.slice(1), false);
   });

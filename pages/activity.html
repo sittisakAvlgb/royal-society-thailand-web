@@ -29,26 +29,27 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/activities.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/activity-bodies.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/20-activity.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/activities.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/activity-bodies.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/fellows.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/20-activity.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body class="page-news-story">
   <div id="app-header"></div>
@@ -111,7 +112,22 @@
         </div>
       </header>
 
-      <div class="container">
+      <!-- The report beside its overview: what it was, when, where, who
+           (Fellows linked to their pages), what this page holds, and the
+           academy that held it. The overview comes from the record's
+           `overview` fields (CMS) or, until they are filled, is read from the
+           report's own text (20-activity.js). -->
+      <div class="container act-layout">
+        <aside class="act-aside" aria-labelledby="act-overview-title" data-activity-aside>
+          <h2 class="act-aside__title" id="act-overview-title" data-en="At a glance">ภาพรวม</h2>
+          <dl class="act-over" data-activity-overview></dl>
+          <div class="act-people" data-activity-people hidden>
+            <h3 class="act-aside__sub" data-activity-people-title></h3>
+            <ul class="act-people__list" role="list" data-activity-people-list></ul>
+          </div>
+          <div class="act-acad" data-activity-academy hidden></div>
+        </aside>
+        <div class="act-main">
 
         <p class="note-box act-en" data-en-notice hidden>
           <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
@@ -136,6 +152,7 @@
           <div class="act-sec__head"><h2 class="act-sec__title" id="act-files-title" data-en="Documents">เอกสารประกอบ</h2></div>
           <ul class="act-files" role="list" data-activity-files-list></ul>
         </section>
+        </div>
       </div>
     </article>
 

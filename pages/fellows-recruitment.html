@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -52,15 +52,17 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/recruitment.js?v=20261126p"></script>
+  <script defer src="../assets/js/26-recruitment.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -106,23 +108,26 @@
       <div class="auth acts-page">
         <div class="auth__main">
 
-          <section class="auth__part" id="latest" aria-labelledby="latest-title">
+          <!-- The latest call, filled from data/recruitment.js (26-recruitment.js):
+               the newest open call, its academy, closing date and PDF; the
+               count beside it and the notices under it come from the same list -->
+          <section class="auth__part" id="latest" aria-labelledby="latest-title" data-recruit>
             <p class="kicker" data-en="Now">ล่าสุด</p>
             <h2 id="latest-title" class="auth__title" data-en="The latest call"><span class="story__ph">ประกาศรับสมัคร</span><span class="story__ph">ครั้งล่าสุด</span></h2>
             <div class="rec-latest">
               <article class="rec-call">
-                <p class="rec-call__tag"><span class="rec-call__dot" aria-hidden="true"></span><span data-en="Call for applications">ประกาศรับสมัคร</span></p>
-                <p class="rec-call__acad" data-en="Academy of Science">สำนักวิทยาศาสตร์</p>
-                <h3 class="rec-call__title" data-en="Applications to be elected an Associate Fellow"><span class="story__ph">รับสมัครคัดเลือก</span><span class="story__ph">เพื่อแต่งตั้งเป็นภาคีสมาชิก</span></h3>
+                <p class="rec-call__tag"><span class="rec-call__dot" aria-hidden="true"></span><span data-recruit-kind data-en="Call for applications">ประกาศรับสมัคร</span></p>
+                <p class="rec-call__acad" data-recruit-academy data-en="Academy of Science">สำนักวิทยาศาสตร์</p>
+                <h3 class="rec-call__title" data-recruit-title data-en="Applications to be elected an Associate Fellow"><span class="story__ph">รับสมัครคัดเลือก</span><span class="story__ph">เพื่อแต่งตั้งเป็นภาคีสมาชิก</span></h3>
+                <p class="rec-call__closes" data-recruit-closes hidden></p>
                 <div class="rec-call__do">
-                  <a class="btn btn--sm btn--pill rec-call__main" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000107.PDF" target="_blank" rel="noopener"><span data-en="Read the call (PDF)">อ่านประกาศ (PDF)</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg><span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
+                  <a class="btn btn--sm btn--pill rec-call__main" data-recruit-pdf href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000107.PDF" target="_blank" rel="noopener"><span data-en="Read the call (PDF)">อ่านประกาศ (PDF)</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg><span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
                   <a class="btn btn--sm btn--pill rec-call__alt" href="admissions.html"><span data-en="Criteria and applications">หลักเกณฑ์และการสมัคร</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg></a>
                 </div>
-                <!-- TODO (Office): current vacancies by academy and discipline, with closing dates -->
               </article>
               <aside class="rec-side" aria-label="ประกาศอื่น" data-en-aria-label="Other calls">
-                <a class="rec-side__link" href="about-announcements.html#associates">
-                  <span class="rec-side__num">๗</span>
+                <a class="rec-side__link" href="about-announcements.html?academy=associates#docs">
+                  <span class="rec-side__num" data-recruit-count>๗</span>
                   <span class="rec-side__body"><strong data-en="Calls and appointments">ประกาศรับสมัครและแต่งตั้ง</strong><span data-en="Associate Fellows, all academies">ภาคีสมาชิก ทุกสำนัก</span></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
                 </a>
                 <a class="rec-side__link" href="contact.html">
@@ -131,6 +136,7 @@
                 </a>
               </aside>
             </div>
+            <ul class="rec-more" role="list" data-recruit-more hidden></ul>
           </section>
 
           <section class="auth__part" id="seats" aria-labelledby="seats-title">

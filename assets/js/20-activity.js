@@ -39,7 +39,7 @@
       if (ALL.some(a => a.id === post.id)) return;
       ALL.push({
         id: post.id, series: `academy-${key}`, academy: key, cat: academy.name.th,
-        title: post.title.th, dek: post.excerpt ? post.excerpt.th : '', date: post.date,
+        title: post.title.th, dek: post.excerpt ? post.excerpt.th : '', date: post.date, kind: post.cat,
         image: OLD_SITE.test(post.image || '') ? STAND_INS[i % STAND_INS.length] : post.image
       });
     });
@@ -67,8 +67,68 @@
     all: { th: 'ดูทั้งหมด', en: 'View all' },
     read: { th: 'อ่านต่อ', en: 'Read' },
     notFound: { th: 'ไม่พบรายงานนี้', en: 'Report not found' },
-    back: { th: 'กลับไปหน้ากิจกรรม', en: 'Back to the activities' }
+    back: { th: 'กลับไปหน้ากิจกรรม', en: 'Back to the activities' },
+    kind: { th: 'ประเภท', en: 'Type' },
+    time: { th: 'วันและเวลา', en: 'Date and time' },
+    venue: { th: 'สถานที่', en: 'Venue' },
+    online: { th: 'ออนไลน์', en: 'Online' },
+    topics: { th: 'หัวข้อ', en: 'Topics' },
+    holds: { th: 'ในหน้านี้', en: 'On this page' },
+    nPhotos: { th: '{n} ภาพ', en: '{n} photos' },
+    nFiles: { th: 'เอกสาร {n} ฉบับ', en: '{n} documents' },
+    nPages: { th: '{n} หน้า', en: '{n} pp.' },
+    chair: { th: 'ประธาน', en: 'Chair' },
+    people: { th: 'ราชบัณฑิตและภาคีสมาชิก ({n})', en: 'Fellows in this report ({n})' },
+    academy: { th: 'สำนักผู้จัด', en: 'Held by' },
+    toAcademy: { th: 'ไปหน้าสำนัก', en: 'Visit the academy' },
+    moreAcademy: { th: 'ข่าวและกิจกรรมอื่นของ{s}', en: 'More from the {s}' }
   };
+  /* what the report is, from the record or its title */
+  const KINDS = [
+    [/^ขอเชิญ|เชิญชวน/, { th: 'ประกาศเชิญร่วมกิจกรรม', en: 'Invitation' }],
+    [/จดหมายข่าว/, { th: 'จดหมายข่าว', en: 'Newsletter' }],
+    [/บทคัดย่อ/, { th: 'บทคัดย่อการบรรยาย', en: 'Lecture abstracts' }],
+    [/รายงานผลการตีพิมพ์|ผลงานอื่น/, { th: 'รายงานผลงานวิชาการ', en: 'Publications report' }],
+    [/ประชุม/, { th: 'การประชุมสำนัก', en: 'Academy meeting' }],
+    [/สัมมนา|สัมนา|เสวนา/, { th: 'สัมมนาและเสวนา', en: 'Seminar' }],
+    [/ปาฐกถา|บรรยาย/, { th: 'การบรรยาย', en: 'Lecture' }],
+    [/บทความ/, { th: 'บทความ', en: 'Article' }]
+  ];
+  /* a report filed twice (an academy's post and the series' report) shows
+     the one body: { same: '<id>' } in data/activity-bodies.js */
+  const bodyOf = id => {
+    const b = BODY[id] || {};
+    return b.same && BODY[b.same] ? BODY[b.same] : b;
+  };
+  const FELLOWS = window.RS_FELLOWS || [];
+  const TH_NUM = s => (s || '').replace(/[๐-๙]/g, d => String(d.charCodeAt(0) - 0x0E50));
+
+  /* The overview, read from the report until the record's `overview` fields
+     (CMS: when, venue, online, topics) are filled. */
+  function readOverview(text) {
+    const s = clean(text);
+    const out = {};
+    const w = s.match(/(?:วัน\S{0,10}ที่\s*)?[๐-๙\d]{1,2}\s+(?:มกราคม|กุมภาพันธ์|มีนาคม|เมษายน|พฤษภาคม|มิถุนายน|กรกฎาคม|สิงหาคม|กันยายน|ตุลาคม|พฤศจิกายน|ธันวาคม)\s+พ\.ศ\.\s*[๐-๙\d]{4}(?:\s*เวลา\s*[๐-๙\d]{1,2}[.:][๐-๙\d]{2}(?:\s*[-–]\s*[๐-๙\d]{1,2}[.:][๐-๙\d]{2})?\s*น\.)?/);
+    if (w) out.when = w[0].replace(/\s*-\s*/, '–');
+    if (/Zoom|ออนไลน์|Facebook Live|ถ่ายทอดสด/i.test(s.slice(0, 600))) out.online = true;
+    /* the venue: the first "ณ …" of the opening, up to the next clause */
+    const opening = s.slice(0, 600);
+    const v = opening.match(/(?:^|\s)ณ\s*((?:ห้อง|อาคาร|โรงแรม|มหาวิทยาลัย|สำนักงาน|ศูนย์|จังหวัด|วัด|หอ)[^“”]{3,90}?)(?=\s*(?:และ|โดย|เมื่อ|เพื่อ|ซึ่ง|ทั้งนี้|โครงการ)|\s[ก-ฮ]{1,3}\.|[,;]|$)/);
+    if (v) out.venue = v[1].trim();
+    const topics = [...s.matchAll(/“([^“”]{6,140})”/g)].map(m => m[1].trim());
+    if (topics.length) out.topics = [...new Set(topics)];
+    return out;
+  }
+  /* Fellows named in the report, the one who chaired it first */
+  function readPeople(text) {
+    const s = clean(text);
+    const hits = FELLOWS.map(f => ({ f, at: s.indexOf(f.name.th) }))
+      .filter(h => h.at >= 0 && f2(h.f.name.th))
+      .sort((a, b) => a.at - b.at);
+    const chair = hits.find(h => /^.{0,90}?เป็นประธาน/.test(s.slice(h.at + h.f.name.th.length)));
+    return hits.map(h => ({ ...h.f, chair: h === chair })).sort((a, b) => b.chair - a.chair);
+  }
+  const f2 = name => name.length > 6;
 
   const set = (sel, value) => { const el = qs(sel, root); if (el) el.innerHTML = value; };
   const date = iso => RS.formatDate(iso, { day: 'numeric', month: 'short', year: 'numeric' });
@@ -168,9 +228,9 @@
     }
 
     const series = SERIES[item.series] || SERIES['on-tour'];
-    const body = BODY[item.id] || {};
+    const body = bodyOf(item.id);
     const head = headline(item.title);
-    document.title = `${head.title} | ${t(L.org)}`;
+    document.title = `${RS.lang === 'en' && /[฀-๿]/.test(head.title) ? t(series) : head.title} | ${t(L.org)}`;
     qs('meta[name="description"]')?.setAttribute('content', tidy(item.dek) || clean(item.title));
 
     const crumb = qs('[data-activity-series]', root);
@@ -284,13 +344,72 @@
       });
     }
 
-    /* more from the series: the nearest in time first */
-    const more = ALL.filter(a => a.series === item.series && a !== item)
-      .sort((a, b) => Math.abs(new Date(a.date) - new Date(item.date)) - Math.abs(new Date(b.date) - new Date(item.date)))
-      .slice(0, 4);
-    set('[data-activity-more-title]', escapeHTML(t(L.more).replace('{s}', t(series))));
+    /* the overview beside the report */
+    const ov = item.overview || {};
+    const allText = blocks.map(b => b[1]).join(' ') + ' ' + (item.dek || '');
+    const read = readOverview(allText);
+    const kindOf = KINDS.find(([re]) => re.test(item.title));
+    const kind = ov.kind || (kindOf ? kindOf[1] : item.kind === 'article' ? { th: 'บทความ', en: 'Article' } : null);
+    /* an English page shows only what is English: the date in English,
+       a venue or topic only when the record gives it in English */
+    const en = RS.lang === 'en';
+    const enOnly = v => (en ? (v && typeof v === 'object' ? v.en : (/[฀-๿]/.test(v || '') ? '' : v)) : (v && typeof v === 'object' ? v.th : v));
+    const when = en ? '' : (ov.when ? t(ov.when) : read.when);
+    const venue = enOnly(ov.venue || read.venue);
+    const online = ov.online ?? read.online;
+    const topics = (ov.topics || read.topics || []).map(enOnly).filter(x => x && !clean(item.title).includes(x)).slice(0, 6);
+    const pages = files.reduce((n, f) => n + (f.pages || 0), 0);
+    const holds = [
+      photos.length > 1 ? fill(t(L.nPhotos), { n: RS.digits(photos.length) }) : '',
+      files.length ? fill(t(L.nFiles), { n: RS.digits(files.length) }) + (pages ? ` (${fill(t(L.nPages), { n: RS.digits(pages) })})` : '') : '',
+      videos.length ? `${t({ th: 'วิดีโอ', en: 'video' })} ${RS.digits(videos.length)}` : ''
+    ].filter(Boolean).join(' · ');
+    const rows = [
+      kind ? [L.kind, escapeHTML(t(kind))] : null,
+      [L.time, when ? escapeHTML(clean(when)) : `<time datetime="${escapeHTML(item.date)}">${longDate(item.date)}</time>`],
+      venue || online ? [L.venue, [venue ? escapeHTML(venue) : '', online ? `<span class="act-over__tag">${te(L.online)}</span>` : ''].filter(Boolean).join(' ')] : null,
+      topics.length ? [L.topics, `<ul>${topics.map(x => `<li>${escapeHTML(x)}</li>`).join('')}</ul>`] : null,
+      holds ? [L.holds, escapeHTML(holds)] : null
+    ].filter(Boolean);
+    set('[data-activity-overview]', rows.map(([k, v]) => `<div class="act-over__row"><dt>${te(k)}</dt><dd>${v}</dd></div>`).join(''));
+
+    /* Fellows in the report, linked to their pages (CMS: overview.people, ids) */
+    const people = ov.people ? ov.people.map(id => FELLOWS.find(f => f.id === id)).filter(Boolean) : readPeople(allText);
+    if (people.length) {
+      set('[data-activity-people-title]', escapeHTML(fill(t(L.people), { n: RS.digits(people.length) })));
+      set('[data-activity-people-list]', people.slice(0, 12).map(f => `
+        <li><a class="act-person" href="${escapeHTML(RS.url(`pages/fellow.html?id=${encodeURIComponent(f.id)}`))}">
+          <span class="act-person__photo" aria-hidden="true">${f.photo ? `<img src="${escapeHTML(RS.url(f.photo))}" alt="" loading="lazy" decoding="async">` : escapeHTML(t(f.name).slice(0, 1))}</span>
+          <span class="act-person__text"><span class="act-person__name">${escapeHTML([t(f.title), t(f.name)].filter(Boolean).join(' '))}</span>
+          <span class="act-person__role">${f.chair ? `${te(L.chair)} · ` : ''}${escapeHTML(t({ th: f.memberType === 'fellow' ? 'ราชบัณฑิต' : f.memberType === 'honorary' ? 'ราชบัณฑิตกิตติมศักดิ์' : 'ภาคีสมาชิก', en: f.memberType === 'fellow' ? 'Fellow' : f.memberType === 'honorary' ? 'Honorary Fellow' : 'Associate Fellow' }))}</span></span>
+        </a></li>`).join(''));
+      qs('[data-activity-people]', root).hidden = false;
+    }
+
+    /* the academy that held it */
+    const academy = ACADEMIES.find(a => a.id === item.academy);
+    const acadPage = academy && (window.RS_ACADEMY_PAGES || {})[academy.id];
+    if (academy) {
+      const intro = acadPage && acadPage.intro ? t(acadPage.intro) : t(academy.fields || {});
+      set('[data-activity-academy]', `
+        <p class="act-aside__sub">${te(L.academy)}</p>
+        <p class="act-acad__name">${escapeHTML(t(academy.name))}</p>
+        ${intro ? `<p class="act-acad__intro">${escapeHTML(intro)}</p>` : ''}
+        <a class="link-arrow" href="${escapeHTML(RS.url(`pages/academy.html?id=${academy.id}`))}"><span>${te(L.toAcademy)}</span>${svg('arrow')}</a>`);
+      qs('[data-activity-academy]', root).hidden = false;
+    }
+
+    /* more: the academy's other news and activities (every series), else
+       the series; the nearest in time first; a report filed twice once */
+    const twin = BODY[item.id] && BODY[item.id].same;
+    const pool = ALL.filter(a => a !== item && a.id !== twin && !(BODY[a.id] && BODY[a.id].same));
+    const near = (a, b) => Math.abs(new Date(a.date) - new Date(item.date)) - Math.abs(new Date(b.date) - new Date(item.date));
+    const byAcademy = academy ? pool.filter(a => a.academy === academy.id).sort(near) : [];
+    const useAcademy = byAcademy.length >= 2;
+    const more = (useAcademy ? byAcademy : pool.filter(a => a.series === item.series).sort(near)).slice(0, 4);
+    set('[data-activity-more-title]', escapeHTML(useAcademy ? fill(t(L.moreAcademy), { s: t(academy.name) }) : t(L.more).replace('{s}', t(series))));
     const all = qs('[data-activity-all]', root);
-    if (all) all.href = RS.url(series.href);
+    if (all) all.href = RS.url(useAcademy ? `pages/academy.html?id=${academy.id}` : series.href);
     if (!more.length) qs('[data-activity-more]', root)?.closest('section')?.remove();
     else set('[data-activity-more]', more.map(a => `
       <li class="newsx-item">

@@ -277,15 +277,15 @@ window.RS_CONFIG = {
       label: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' },
       short: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' },
       /* no landing page: the menu opens the topics, each with its own page */
-      match: ['publications.html', 'knowledge.html', 'article.html', 'series.html', 'publication.html', 'works-proposals.html', 'works-on-tour.html', 'works-ideas-forum.html', 'works-lectures.html', 'works-calendar.html', 'works-knowledge-to-society.html'],
+      match: ['knowledge.html', 'article.html', 'series.html', 'publication.html', 'works-proposals.html', 'works-on-tour.html', 'works-ideas-forum.html', 'works-lectures.html', 'works-calendar.html', 'works-knowledge-to-society.html'],
       intro: { th: 'วารสาร สิ่งพิมพ์ ข้อเสนอต่อรัฐบาล กิจกรรมวิชาการ และโครงการนำความรู้สู่สังคม', en: 'Journals, publications, proposals to Government, academic activities and the Knowledge for Society Programme' },
       children: [
         {
           label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' },   /* a heading: the journals are below */
           children: [
-            { label: { th: 'วารสารราชบัณฑิตยสภา', en: 'Journal of the Royal Society of Thailand (Thai)' }, href: 'pages/series.html?id=journal-th' },
-            { label: { th: 'The Journal of the Royal Society of Thailand', en: 'The Journal of the Royal Society of Thailand' }, href: 'pages/series.html?id=journal-en' },
-            { label: { th: 'จดหมายข่าวราชบัณฑิตยสภา', en: 'The Royal Society of Thailand Newsletter' }, href: 'pages/series.html?id=newsletter' },
+            { label: { th: 'วารสารราชบัณฑิตยสภา', en: 'Journal, Thai edition' }, href: 'pages/series.html?id=journal-th' },
+            { label: { th: 'The Journal of the Royal Society of Thailand', en: 'Journal, English edition' }, href: 'pages/series.html?id=journal-en' },
+            { label: { th: 'จดหมายข่าวราชบัณฑิตยสภา', en: 'Newsletter' }, href: 'pages/series.html?id=newsletter' },
             { label: { th: 'จุลสารสำนักวิทยาศาสตร์', en: 'Academy of Science Bulletin' }, href: 'pages/series.html?id=science-bulletin' },
             { label: { th: 'รายงานประจำปี', en: 'Annual Report' }, href: 'pages/series.html?id=annual-report' },
             { label: { th: 'สืบค้นผลงานวิชาการ', en: 'Search Academic Publications' }, href: 'pages/knowledge.html' }
@@ -317,12 +317,13 @@ window.RS_CONFIG = {
       key: 'news',
       label: { th: 'ข่าวสาร', en: 'News' },
       href: 'pages/news.html',
-      match: ['news.html', 'news-press.html', 'news-gallery.html', 'news-detail.html'],
-      intro: { th: 'แถลงข่าว ข่าวประชาสัมพันธ์ และคลังภาพและวิดีโอของราชบัณฑิตยสภา', en: 'Press releases, news and announcements, and the photo and video gallery' },
+      match: ['news.html', 'news-press.html', 'news-gallery.html', 'news-album.html', 'news-videos.html', 'news-detail.html'],
+      intro: { th: 'แถลงข่าว ข่าวประชาสัมพันธ์ คลังรูปภาพ และคลังวิดีโอของราชบัณฑิตยสภา', en: 'Press releases, news and announcements, and the photo and video galleries' },
       children: [
         { label: { th: 'แถลงข่าว', en: 'Press Releases' }, href: 'pages/news-press.html' },
         { label: { th: 'ข่าวประชาสัมพันธ์', en: 'News and Announcements' }, href: 'pages/news.html' },
-        { label: { th: 'คลังภาพและวิดีโอ', en: 'Photo and Video Gallery' }, href: 'pages/news-gallery.html' }
+        { label: { th: 'คลังรูปภาพ', en: 'Photo Gallery' }, href: 'pages/news-gallery.html' },
+        { label: { th: 'คลังวิดีโอ', en: 'Video Gallery' }, href: 'pages/news-videos.html' }
       ]
     },
 
@@ -466,7 +467,7 @@ window.RS_CONFIG = {
     { id: 'ebook', group: 'knowledge', primary: true, icon: 'ebook',
       title: { th: 'E-Book', en: 'E-Books' },
       desc: { th: 'อ่านหนังสือและสิ่งพิมพ์ของราชบัณฑิตยสภาออนไลน์', en: 'Read Royal Society publications online' },
-      href: 'pages/publications.html' },
+      href: 'pages/series.html?id=journal-th' },
     { id: 'encyclopedia', group: 'knowledge', icon: 'archive',
       title: { th: 'สารานุกรมไทย', en: 'Thai Encyclopedia' },
       desc: { th: 'อ่านสารานุกรมฉบับราชบัณฑิตยสภา', en: 'Read the Royal Society encyclopedia' },
@@ -530,7 +531,7 @@ window.RS_CONFIG = {
           { label: { th: 'หน้าแรก', en: 'Home' }, href: 'index.html' },
           { label: { th: 'เกี่ยวกับราชบัณฑิตยสภา', en: 'About the Royal Society' }, href: 'pages/about.html' },
           { label: { th: 'ราชบัณฑิตและภาคีสมาชิก', en: 'Fellows and Associate Fellows' }, href: 'pages/fellows.html' },
-          { label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' }, href: 'pages/publications.html' },
+          { label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' }, href: 'pages/series.html?id=journal-th' },
           { label: { th: 'ข่าวสาร', en: 'News' }, href: 'pages/news.html' },
           { label: { th: 'การรับสมัคร', en: 'Applications for Membership' }, href: 'pages/admissions.html' },
           { label: { th: 'ติดต่อและมีส่วนร่วม', en: 'Contact and Participation' }, href: 'pages/contact.html' }

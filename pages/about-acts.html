@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -53,17 +53,19 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261123w"></script>
-  <script defer src="../assets/js/14-about.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261126p"></script>
+  <script defer src="../assets/js/14-about.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/documents.js?v=20261126p"></script>
+  <script defer src="../assets/js/19-works-list.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -109,9 +111,8 @@
       </div>
     </div>
 
-    <!-- The Act in force as a printed booklet beside its three documents and
-         the sections most often asked about; then how the law came to be, in
-         four dates; then where to read on -->
+    <!-- The Act in force in a few words; then every Act and its documents in
+         one searchable, paged list; then the rules made under the Act -->
     <div class="container about-sub__body">
       <div class="auth acts-page">
         <div class="auth__main">
@@ -123,58 +124,44 @@
           <section class="auth__part" id="current" aria-labelledby="current-title">
             <p class="kicker" data-en="In force">ฉบับที่ใช้ปัจจุบัน</p>
             <h2 id="current-title" class="auth__title" data-en="The Royal Society Act B.E. 2558 (2015)"><span class="story__ph">พระราชบัญญัติ</span><span class="story__ph">ราชบัณฑิตยสภา พ.ศ. ๒๕๕๘</span></h2>
-            <div class="acts-lead">
-              <div class="acts-cover" aria-hidden="true">
-                <img src="../assets/images/logo-image.png" alt="" width="64" height="64" decoding="async">
-                <span class="acts-cover__kind">พระราชบัญญัติ</span>
-                <span class="acts-cover__name">ราชบัณฑิตยสภา</span>
-                <span class="acts-cover__year">พ.ศ. ๒๕๕๘</span>
+            <p class="auth__lead" data-th-only><span class="story__ph">กฎหมายที่ใช้อยู่ในปัจจุบัน</span> <span class="story__ph">เปลี่ยนชื่อราชบัณฑิตยสถานกลับเป็นราชบัณฑิตยสภา</span> <span class="story__ph">และกำหนดวัตถุประสงค์ สมาชิก</span> <span class="story__ph">และอำนาจหน้าที่ขององค์กร</span></p>
+          </section>
+
+          <!-- Every Act and its documents in one list (19-works-list.js, rows
+               mode): status tabs with counts, a search, the grid / list switch
+               and a pager; in the grid each gets a printed cover from data.
+               CMS: one li per document, newest first, with data-academy
+               "current" or "previous", data-cover-name (the body named in
+               the Act) and data-cover-sub (year or kind of document). When a
+               new Act passes, its documents become "current" and the old
+               ones "previous". -->
+          <section class="auth__part works-list" id="docs" aria-labelledby="docs-title" data-works-list data-works-docs="acts" data-works-rows data-works-cover-kind="พระราชบัญญัติ">
+            <h2 id="docs-title" class="auth__title" data-en="The Acts and their documents">พระราชบัญญัติและเอกสาร</h2>
+            <div class="newsx-tools works-list__tools ann-tools" data-works-tools>
+              <div class="news-tabs" role="group" aria-label="กรองตามสถานะ" data-en-aria-label="Filter by status" data-works-tabs>
+                <button class="news-tab is-active" type="button" data-filter="all" aria-pressed="true" data-en="All">ทั้งหมด</button><button class="news-tab" type="button" data-filter="current" aria-pressed="false" data-en="In force">ฉบับที่ใช้ปัจจุบัน</button><button class="news-tab" type="button" data-filter="previous" aria-pressed="false" data-en="Earlier Acts">ฉบับก่อนหน้า</button>
               </div>
-              <div class="acts-lead__text">
-                <p class="auth__lead" data-th-only><span class="story__ph">กฎหมายที่ใช้อยู่ในปัจจุบัน</span> <span class="story__ph">เปลี่ยนชื่อราชบัณฑิตยสถานกลับเป็นราชบัณฑิตยสภา</span> <span class="story__ph">และกำหนดวัตถุประสงค์ สมาชิก</span> <span class="story__ph">และอำนาจหน้าที่ขององค์กร</span></p>
-                <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000048.PDF" target="_blank" rel="noopener">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">พระราชบัญญัติราชบัณฑิตยสภา พ.ศ. ๒๕๕๘</span>
-                        <span class="acts-doc__meta" data-en="Full text · Thai">ฉบับเต็ม · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000047.PDF" target="_blank" rel="noopener">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">Royal Society Act, B.E. 2558 (2015)</span>
-                        <span class="acts-doc__meta" data-en="Translation · English">ฉบับแปล · ภาษาอังกฤษ</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000160.PDF" target="_blank" rel="noopener">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">คำอธิบายสรุปสาระสำคัญของพระราชบัญญัติ</span>
-                        <span class="acts-doc__meta" data-en="Plain summary · Thai">อ่านเข้าใจง่าย · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                </ul>
-                <p class="acts-label" data-en="The Act before it">ฉบับก่อนหน้า</p>
-                <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000049.PDF" target="_blank" rel="noopener">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">พระราชบัญญัติราชบัณฑิตยสถาน พ.ศ. ๒๕๔๔</span>
-                        <span class="acts-doc__meta" data-en="Royal Institute era · Thai">สมัยราชบัณฑิตยสถาน · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                </ul>
+              <div class="newsx-tools__end">
+                <label class="newsx-search">
+                  <span class="visually-hidden" data-en="Search the Acts">ค้นหาพระราชบัญญัติ</span>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+                  <input type="search" placeholder="ค้นหา เช่น ๒๕๕๘ ฉบับแปล" data-en-placeholder="Search, e.g. 2015, translation" autocomplete="off" data-works-search>
+                </label>
+              <div class="newsx-view" role="group" aria-label="รูปแบบการแสดงผล" data-en-aria-label="View" data-works-views>
+                <button class="btn btn--secondary btn--sm newsx-view__btn is-active" type="button" data-works-view="grid" aria-pressed="true" title="แบบตาราง" data-en-title="Grid view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-en="Grid">ตาราง</span></button>
+                <button class="btn btn--secondary btn--sm newsx-view__btn" type="button" data-works-view="list" aria-pressed="false" title="แบบรายการ" data-en-title="List view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="15" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-en="List">รายการ</span></button>
+              </div>
               </div>
             </div>
+            <p class="newsx-count" aria-live="polite" data-works-count></p>
+            <ul class="acts-docs ann-list" role="list" data-works-items>
+              <!-- Drawn from data/documents.js ("acts") by 19-works-list.js (CMS) -->
+            </ul>
+            <p class="newsx-empty" data-works-empty hidden>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+              <span data-en="No document matches your search.">ไม่พบเอกสารที่ตรงกับคำค้น</span>
+            </p>
+            <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-works-pages></nav>
           </section>
 
           <section class="auth__part" id="more" aria-labelledby="more-title">

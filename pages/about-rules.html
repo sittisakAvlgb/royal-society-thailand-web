@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261123w">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261123w">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261126p">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261126p">
 
   <script type="application/ld+json">
   {
@@ -53,17 +53,19 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261123w"></script>
-  <script defer src="../assets/js/01-config.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261123w"></script>
-  <script defer src="../assets/js/02-components.js?v=20261123w"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261123w"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261123w"></script>
-  <script defer src="../assets/js/05-language.js?v=20261123w"></script>
-  <script defer src="../assets/js/06-search.js?v=20261123w"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261123w"></script>
-  <script defer src="../assets/js/14-about.js?v=20261123w"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261123w"></script>
+  <script defer src="../assets/js/00-core.js?v=20261126p"></script>
+  <script defer src="../assets/js/01-config.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261126p"></script>
+  <script defer src="../assets/js/02-components.js?v=20261126p"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261126p"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261126p"></script>
+  <script defer src="../assets/js/05-language.js?v=20261126p"></script>
+  <script defer src="../assets/js/06-search.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261126p"></script>
+  <script defer src="../assets/js/14-about.js?v=20261126p"></script>
+  <script defer src="../assets/js/data/documents.js?v=20261126p"></script>
+  <script defer src="../assets/js/19-works-list.js?v=20261126p"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261126p"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -109,9 +111,8 @@
       </div>
     </div>
 
-    <!-- The regulations as a printed booklet beside an index of five subjects;
-         then each subject with its regulations as ruled contents lines, the
-         issuer and year beneath each title -->
+    <!-- The regulations in one searchable, paged list with subject tabs;
+         each a ruled line, or a card with a printed cover in the grid -->
     <div class="container about-sub__body">
       <div class="auth acts-page bylaw-page">
         <div class="auth__main">
@@ -120,243 +121,38 @@
             <span>These documents are published in Thai only.</span>
           </p>
 
-          <section class="auth__part" id="docs" aria-labelledby="docs-title">
-            <p class="kicker" data-en="18 regulations and a form">ระเบียบ ๑๘ ฉบับ · แบบคำขอ ๑ แบบ</p>
-            <h2 id="docs-title" class="auth__title" data-en="Find by subject"><span class="story__ph">เลือกตามเรื่อง</span><span class="story__ph">ที่ต้องการ</span></h2>
-            <div class="acts-lead">
-              <div class="acts-cover" aria-hidden="true">
-                <img src="../assets/images/logo-image.png" alt="" width="64" height="64" decoding="async">
-                <span class="acts-cover__kind">ระเบียบ</span>
-                <span class="acts-cover__name">ราชบัณฑิตยสภา</span>
-                <span class="acts-cover__year">๑๘ ฉบับ</span>
+          <!-- Every regulation in one list (19-works-list.js, rows mode):
+               subject tabs with counts, a search, the grid / list switch and a
+               pager; in the grid each gets a printed cover from data.
+               CMS: one li per document, newest first, with data-academy set
+               to its subject (members funds authors publish office); a new subject needs a tab of its own. -->
+          <section class="auth__part works-list" id="docs" aria-labelledby="docs-title" data-works-list data-works-docs="rules" data-works-rows data-works-cover-kind="ระเบียบ">
+            <h2 id="docs-title" class="auth__title" data-en="All regulations">ระเบียบทั้งหมด</h2>
+            <div class="newsx-tools works-list__tools ann-tools" data-works-tools>
+              <div class="news-tabs" role="group" aria-label="กรองตามเรื่อง" data-en-aria-label="Filter by subject" data-works-tabs>
+                <button class="news-tab is-active" type="button" data-filter="all" aria-pressed="true" data-en="All">ทั้งหมด</button><button class="news-tab" type="button" data-filter="members" aria-pressed="false" data-en="Members and their welfare">สมาชิกและสวัสดิการ</button><button class="news-tab" type="button" data-filter="funds" aria-pressed="false" data-en="Finance and funds">การเงินและกองทุน</button><button class="news-tab" type="button" data-filter="authors" aria-pressed="false" data-en="Writing and compiling books">การแต่งและเรียบเรียงหนังสือ</button><button class="news-tab" type="button" data-filter="publish" aria-pressed="false" data-en="Books and publishing">หนังสือและการเผยแพร่</button><button class="news-tab" type="button" data-filter="office" aria-pressed="false" data-en="Welfare within the Office">สวัสดิการภายในสำนักงาน</button>
               </div>
-              <div class="acts-lead__text">
-                <p class="auth__lead" data-th-only><span class="story__ph">ระเบียบที่ออกโดยราชบัณฑิตยสภา</span> <span class="story__ph">สำนักงานราชบัณฑิตยสภา</span> <span class="story__ph">และราชบัณฑิตยสถานเดิม</span> <span class="story__ph">จัดเป็น ๕ หมวดตามเรื่อง</span> <span class="story__ph">ใต้ชื่อแต่ละฉบับบอกผู้ออกระเบียบและปี</span></p>
-                <ul class="bylaw-index" role="list">
-                  <li><a href="#members"><span class="bylaw-index__name" data-en="Members and their welfare">สมาชิกและสวัสดิการ</span><span class="bylaw-index__count">๔ <span data-en="items">ฉบับ</span></span></a></li>
-                  <li><a href="#funds"><span class="bylaw-index__name" data-en="Finance and funds">การเงินและกองทุน</span><span class="bylaw-index__count">๓ <span data-en="items">ฉบับ</span></span></a></li>
-                  <li><a href="#authors"><span class="bylaw-index__name" data-en="Writing and compiling books">การแต่งและเรียบเรียงหนังสือ</span><span class="bylaw-index__count">๔ <span data-en="items">ฉบับ</span></span></a></li>
-                  <li><a href="#publish"><span class="bylaw-index__name" data-en="Books and publishing">หนังสือและการเผยแพร่</span><span class="bylaw-index__count">๕ <span data-en="items">ฉบับ</span></span></a></li>
-                  <li><a href="#office"><span class="bylaw-index__name" data-en="Welfare within the Office">สวัสดิการภายในสำนักงาน</span><span class="bylaw-index__count">๓ <span data-en="items">ฉบับ</span></span></a></li>
-                </ul>
+              <div class="newsx-tools__end">
+                <label class="newsx-search">
+                  <span class="visually-hidden" data-en="Search the regulations">ค้นหาระเบียบ</span>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+                  <input type="search" placeholder="ค้นหาระเบียบ เช่น กองทุน" data-en-placeholder="Search regulations" autocomplete="off" data-works-search>
+                </label>
+              <div class="newsx-view" role="group" aria-label="รูปแบบการแสดงผล" data-en-aria-label="View" data-works-views>
+                <button class="btn btn--secondary btn--sm newsx-view__btn is-active" type="button" data-works-view="grid" aria-pressed="true" title="แบบตาราง" data-en-title="Grid view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-en="Grid">ตาราง</span></button>
+                <button class="btn btn--secondary btn--sm newsx-view__btn" type="button" data-works-view="list" aria-pressed="false" title="แบบรายการ" data-en-title="List view"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="15" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-en="List">รายการ</span></button>
+              </div>
               </div>
             </div>
-
-            <section class="bylaw-group" id="members" aria-labelledby="members-title">
-              <header class="bylaw-group__head">
-                <h3 id="members-title" class="bylaw-group__name" data-en="Members and their welfare">สมาชิกและสวัสดิการ</h3>
-                <p class="bylaw-group__what" data-en="Allowances, the welfare fund, admitting associates and the insignia">เงินอุปการะ กองทุนสวัสดิการ การรับภาคีสมาชิก และเข็มเครื่องหมาย</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000247.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสภา ว่าด้วยเงินอุปการะและเงินอุปการะพิเศษราชบัณฑิตและภาคีสมาชิก พ.ศ. ๒๕๖๗">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยเงินอุปการะและเงินอุปการะพิเศษราชบัณฑิตและภาคีสมาชิก</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสภา · พ.ศ. ๒๕๖๗ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000090.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสภา ว่าด้วยกองทุนสวัสดิการ การจัดสวัสดิการ การสงเคราะห์และสิทธิประโยชน์อื่นแก่สมาชิกราชบัณฑิตยสภา พ.ศ. ๒๕๖๐">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยกองทุนสวัสดิการ การจัดสวัสดิการ การสงเคราะห์และสิทธิประโยชน์อื่นแก่สมาชิกราชบัณฑิตยสภา</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสภา · พ.ศ. ๒๕๖๐ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000088.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสภา ว่าด้วยแนวทางปฏิบัติในการรับบุคคลเป็นภาคีสมาชิกและการแต่งตั้ง พ.ศ. ๒๕๔๖">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยแนวทางปฏิบัติในการรับบุคคลเป็นภาคีสมาชิกและการแต่งตั้ง</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสภา · พ.ศ. ๒๕๔๖ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000248.PDF" target="_blank" rel="noopener" aria-label="ระเบียบสภาราชบัณฑิต ว่าด้วยการประดับเข็มเครื่องหมาย พ.ศ. ๒๕๔๘">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการประดับเข็มเครื่องหมาย</span>
-                        <span class="acts-doc__meta">สภาราชบัณฑิต · พ.ศ. ๒๕๔๘ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="funds" aria-labelledby="funds-title">
-              <header class="bylaw-group__head">
-                <h3 id="funds-title" class="bylaw-group__name" data-en="Finance and funds">การเงินและกองทุน</h3>
-                <p class="bylaw-group__what" data-en="Running costs and the funds that support the work">ค่าใช้จ่ายในกิจการ และกองทุนส่งเสริมกิจการ</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000086.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสภา ว่าด้วยเงินกองทุนส่งเสริมกิจการราชบัณฑิตยสถาน พ.ศ. ๒๕๔๙">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยเงินกองทุนส่งเสริมกิจการราชบัณฑิตยสถาน</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสภา · พ.ศ. ๒๕๔๙ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000245.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสถาน ว่าด้วยค่าใช้จ่ายในกิจการราชบัณฑิตยสถาน พ.ศ. ๒๕๓๓">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยค่าใช้จ่ายในกิจการราชบัณฑิตยสถาน</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสถาน · พ.ศ. ๒๕๓๓ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000246.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสถาน ว่าด้วยเงินทุนพิมพ์ตำรา พ.ศ. ๒๕๓๑">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยเงินทุนพิมพ์ตำรา</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสถาน · พ.ศ. ๒๕๓๑ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="authors" aria-labelledby="authors-title">
-              <header class="bylaw-group__head">
-                <h3 id="authors-title" class="bylaw-group__name" data-en="Writing and compiling books">การแต่งและเรียบเรียงหนังสือ</h3>
-                <p class="bylaw-group__what" data-en="Fees for authors, translators and writers">ค่าตอบแทนผู้แต่ง ผู้แปล และนักวรรณศิลป์</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000243.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสถาน ว่าด้วยการจ่ายเงินตอบแทนผู้แต่ง แปล หรือเรียบเรียงหนังสือ (ฉบับที่ ๒) พ.ศ. ๒๕๓๙">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการจ่ายเงินตอบแทนผู้แต่ง แปล หรือเรียบเรียงหนังสือ (ฉบับที่ ๒)</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสถาน · พ.ศ. ๒๕๓๙ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000244.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสถาน ว่าด้วยการจ่ายเงินตอบแทนผู้แต่ง แปล หรือเรียบเรียงหนังสือ พ.ศ. ๒๕๒๕">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการจ่ายเงินตอบแทนผู้แต่ง แปล หรือเรียบเรียงหนังสือ</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสถาน · พ.ศ. ๒๕๒๕ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000102.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสถาน ว่าด้วยการแต่ง เรียบเรียงหนังสือหรือตำราทางวิชาการของนักวรรณศิลป์ (ฉบับที่ ๒) พ.ศ. ๒๕๕๗">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการแต่ง เรียบเรียงหนังสือหรือตำราทางวิชาการของนักวรรณศิลป์ (ฉบับที่ ๒)</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสถาน · พ.ศ. ๒๕๕๗ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000240.PDF" target="_blank" rel="noopener" aria-label="ระเบียบราชบัณฑิตยสถาน ว่าด้วยการแต่ง เรียบเรียงหนังสือหรือตำราทางวิชาการของนักวรรณศิลป์ พ.ศ. ๒๕๕๕">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการแต่ง เรียบเรียงหนังสือหรือตำราทางวิชาการของนักวรรณศิลป์</span>
-                        <span class="acts-doc__meta">ราชบัณฑิตยสถาน · พ.ศ. ๒๕๕๕ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="publish" aria-labelledby="publish-title">
-              <header class="bylaw-group__head">
-                <h3 id="publish-title" class="bylaw-group__name" data-en="Books and publishing">หนังสือและการเผยแพร่</h3>
-                <p class="bylaw-group__what" data-en="Prices, complimentary copies and permission to publish">ราคาจำหน่าย อภินันทนาการ และการขออนุญาตจัดพิมพ์</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000239.PDF" target="_blank" rel="noopener" aria-label="ระเบียบสำนักงานราชบัณฑิตยสภา ว่าด้วยการกำหนดราคาจำหน่ายหนังสือของสำนักงานราชบัณฑิตยสภา พ.ศ. ๒๕๖๓">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการกำหนดราคาจำหน่ายหนังสือของสำนักงานราชบัณฑิตยสภา</span>
-                        <span class="acts-doc__meta">สำนักงานราชบัณฑิตยสภา · พ.ศ. ๒๕๖๓ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000238.PDF" target="_blank" rel="noopener" aria-label="ระเบียบสำนักงานราชบัณฑิตยสภา ว่าด้วยการให้อภินันทนาการหนังสือที่สำนักงานราชบัณฑิตยสภาผลิตขึ้นเพื่อเผยแพร่และจำหน่าย พ.ศ. ๒๕๖๙">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการให้อภินันทนาการหนังสือที่สำนักงานราชบัณฑิตยสภาผลิตขึ้นเพื่อเผยแพร่และจำหน่าย</span>
-                        <span class="acts-doc__meta">สำนักงานราชบัณฑิตยสภา · พ.ศ. ๒๕๖๙ · ภาษาไทย <span class="acts-doc__new" data-en="Latest">ล่าสุด</span></span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000097.PDF" target="_blank" rel="noopener" aria-label="ระเบียบสำนักงานราชบัณฑิตยสภา ว่าด้วยการอนุญาตให้ใช้สิทธิในการจัดพิมพ์และจำหน่ายหนังสือที่สำนักงานราชบัณฑิตยสภาผลิตขึ้น">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการอนุญาตให้ใช้สิทธิในการจัดพิมพ์และจำหน่ายหนังสือที่สำนักงานราชบัณฑิตยสภาผลิตขึ้น</span>
-                        <span class="acts-doc__meta">สำนักงานราชบัณฑิตยสภา · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000100.PDF" target="_blank" rel="noopener" aria-label="ระเบียบสำนักงานราชบัณฑิตยสภา ว่าด้วยการอนุญาตให้จัดพิมพ์และเผยแพร่สิ่งพิมพ์ สื่ออิเล็กทรอนิกส์ ข้อมูลอิเล็กทรอนิกส์ และสื่ออื่น ๆ">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการอนุญาตให้จัดพิมพ์และเผยแพร่สิ่งพิมพ์ สื่ออิเล็กทรอนิกส์ ข้อมูลอิเล็กทรอนิกส์ และสื่ออื่น ๆ</span>
-                        <span class="acts-doc__meta">สำนักงานราชบัณฑิตยสภา · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000101.PDF" target="_blank" rel="noopener" aria-label="แบบคำขออนุญาตจัดพิมพ์หรือใช้สิ่งพิมพ์ สื่ออิเล็กทรอนิกส์ และสื่ออื่น ๆ ของสำนักงานราชบัณฑิตยสภา">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">แบบคำขออนุญาตจัดพิมพ์หรือใช้สิ่งพิมพ์ สื่ออิเล็กทรอนิกส์ และสื่ออื่น ๆ ของสำนักงานราชบัณฑิตยสภา</span>
-                        <span class="acts-doc__meta"><span class="acts-doc__form" data-en="Form">แบบฟอร์ม</span> ใช้คู่กับระเบียบการอนุญาตจัดพิมพ์</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
-
-            <section class="bylaw-group" id="office" aria-labelledby="office-title">
-              <header class="bylaw-group__head">
-                <h3 id="office-title" class="bylaw-group__name" data-en="Welfare within the Office">สวัสดิการภายในสำนักงาน</h3>
-                <p class="bylaw-group__what" data-en="Staff welfare, support and loans">สวัสดิการ การสงเคราะห์ และเงินกู้ยืมของบุคลากร</p>
-              </header>
-              <ul class="acts-docs" role="list">
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000093.PDF" target="_blank" rel="noopener" aria-label="ระเบียบสำนักงานราชบัณฑิตยสภา ว่าด้วยการจัดสวัสดิการภายในสำนักงานราชบัณฑิตยสภา พ.ศ. ๒๕๖๘">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการจัดสวัสดิการภายในสำนักงานราชบัณฑิตยสภา</span>
-                        <span class="acts-doc__meta">สำนักงานราชบัณฑิตยสภา · พ.ศ. ๒๕๖๘ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000094.PDF" target="_blank" rel="noopener" aria-label="ระเบียบสวัสดิการสำนักงานราชบัณฑิตยสภา ว่าด้วยการสงเคราะห์สมาชิก พ.ศ. ๒๕๖๒">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการสงเคราะห์สมาชิก</span>
-                        <span class="acts-doc__meta">สวัสดิการสำนักงาน · พ.ศ. ๒๕๖๒ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-                  <li>
-                    <a class="acts-doc" href="https://www.orst.go.th/FILEROOM/CABROYINWEB/DRAWER001/GENERAL/DATA0000/00000241.PDF" target="_blank" rel="noopener" aria-label="ระเบียบสวัสดิการสำนักงานราชบัณฑิตยสภา ว่าด้วยการให้กู้ยืมเงินสวัสดิการ พ.ศ. ๒๕๖๒">
-                      <span class="acts-doc__body">
-                        <span class="acts-doc__name">ว่าด้วยการให้กู้ยืมเงินสวัสดิการ</span>
-                        <span class="acts-doc__meta">สวัสดิการสำนักงาน · พ.ศ. ๒๕๖๒ · ภาษาไทย</span>
-                      </span>
-                      <span class="acts-doc__open"><span data-en="Open PDF">เปิด PDF</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg></span>
-                    <span class="visually-hidden" data-en="(opens in a new tab)">(เปิดในแท็บใหม่)</span></a>
-                  </li>
-              </ul>
-            </section>
+            <p class="newsx-count" aria-live="polite" data-works-count></p>
+            <ul class="acts-docs ann-list" role="list" data-works-items>
+              <!-- Drawn from data/documents.js ("rules") by 19-works-list.js (CMS) -->
+            </ul>
+            <p class="newsx-empty" data-works-empty hidden>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+              <span data-en="Nothing matches your search.">ไม่พบรายการที่ตรงกับคำค้น</span>
+            </p>
+            <nav class="newsx-pages" aria-label="แบ่งหน้า" data-en-aria-label="Pagination" data-works-pages></nav>
           </section>
 
           <section class="auth__part" id="more" aria-labelledby="more-title">
