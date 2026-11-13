@@ -123,8 +123,10 @@
     document.body.appendChild(el);
     document.documentElement.classList.add('splash-open');
     /* the site's first view, made ready to move before the click */
-    const through = [document.querySelector('.site-header'), document.querySelector('main > :first-child')].filter(Boolean);
-    through.forEach(node => node.classList.add('site-through-prep'));
+    /* the site itself does not move: the hero under it carries filtered
+       photographs and its own slow zoom, and scaling them repaints every
+       frame; the entry page alone moves (one layer, opacity and scale) */
+    const through = [];
     const before = document.activeElement;
     const buttons = [...el.querySelectorAll('[data-splash-enter]')];
     (buttons[en ? 1 : 0] || buttons[0]).focus();

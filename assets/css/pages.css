@@ -9712,3 +9712,13 @@ html.splash-reveal :is(.site-header, main > :first-child) { animation: site-thro
 .splash { will-change: opacity; }
 .splash :is(.splash__poster, .splash__art, .splash__stage) { will-change: transform; }
 @media (prefers-reduced-motion: reduce) { .site-through { animation: none; } }
+
+/* Final exit: only the entry page moves (the site stays still under it).
+   One fade of the whole page and a slight forward ease of the poster, both
+   on their own compositor layers; the bar fades with them. */
+.splash.is-leaving { animation: splash-fade .8s cubic-bezier(.4, 0, .2, 1) forwards; }
+@keyframes splash-fade { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+.splash :is(.splash__poster, .splash__art, .splash__stage) { transition: transform .8s cubic-bezier(.4, 0, .2, 1); transform-origin: 50% 50%; }
+.splash.is-leaving :is(.splash__poster, .splash__art, .splash__stage) { transform: scale(1.06); }
+.splash.is-leaving .splash__bar { opacity: 0; transform: none; transition: opacity .35s ease-out; }
+.site-through, .site-through-prep { animation: none; will-change: auto; }
