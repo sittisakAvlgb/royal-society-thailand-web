@@ -619,3 +619,37 @@ html:not([lang="en"]) .site-footer :is(.font-latin, [lang="en"]):not(.footer-org
 .site-footer .footer-bottom :is(p, span, time, a, strong, .footer-updated) { font-size: var(--text-xs); color: rgba(255, 255, 255, .7); opacity: 1; }
 .site-footer .visitor-count strong { font-weight: 600; color: rgba(255, 255, 255, .7); }
 .site-footer .footer-bottom .footer-top, .site-footer .footer-bottom .footer-top span { color: rgba(255, 255, 255, .85); }
+
+/* Footer, quieter: one step smaller, rows set close like an index, the
+   contact icons on the first line, the policy column a little wider so
+   its long names break less; the bottom row a step smaller again */
+.site-footer .footer-address,
+.site-footer .footer-address :is(dd, span, a),
+.site-footer .footer-links :is(a, .footer-action) { font-size: var(--text-xs); line-height: 1.5; }
+.site-footer .footer-links { display: grid; gap: 2px; margin-top: var(--space-3); }
+.site-footer .footer-links :is(a, .footer-action) { min-height: 0; padding-block: 5px; }
+.site-footer .footer-address { gap: 0; }
+.site-footer .footer-address__line { padding-block: 5px; }
+.site-footer .footer-address__line .icon { width: 14px; height: 14px; margin-top: .3em; }
+.site-footer .footer-bottom,
+.site-footer .footer-bottom :is(p, span, time, a, strong, .footer-updated) { font-size: calc(var(--text-xs) * .9); }
+html[lang="en"] .site-footer .footer-address,
+html[lang="en"] .site-footer .footer-address :is(dd, span, a),
+html[lang="en"] .site-footer .footer-links :is(a, .footer-action) { font-size: .875rem; }
+html[lang="en"] .site-footer .footer-bottom,
+html[lang="en"] .site-footer .footer-bottom :is(p, span, time, a, strong, .footer-updated) { font-size: .8125rem; }
+@media (min-width: 1180px) {
+  .site-footer .footer-main { grid-template-columns: 1.35fr 1.55fr 1fr 1.35fr; }
+}
+@media (pointer: coarse) {
+  .site-footer .footer-links :is(a, .footer-action), .site-footer .footer-address a { min-height: 40px; padding-block: 8px; }
+}
+.site-footer .footer-col--main .footer-links { display: block; }
+.site-footer .footer-col--main .footer-links li + li { margin-top: 2px; }
+@media (max-width: 1023.98px) {
+  html:not([lang="en"]) .site-footer .footer-address,
+  html:not([lang="en"]) .site-footer .footer-address :is(dd, span, a),
+  html:not([lang="en"]) .site-footer .footer-links :is(a, .footer-action) { font-size: var(--text-sm); }
+  html:not([lang="en"]) .site-footer .footer-bottom,
+  html:not([lang="en"]) .site-footer .footer-bottom :is(p, span, time, a, strong, .footer-updated) { font-size: var(--text-xs); }
+}
