@@ -603,3 +603,19 @@ html[lang="en"] .site-footer :is(.font-latin, [lang="en"]):not(.footer-org__name
 .footer-bottom__start { display: grid; gap: 2px; }
 .footer-bottom__start p { margin: 0; }
 .footer-updated { font-size: var(--text-xs); opacity: .75; }
+
+/* Footer, one voice: on Thai pages the English words (the email, the
+   English name in the copyright) are set in TH Sarabun New with the Thai
+   around them, same size and colour; every line of the contact block and
+   every link share one size and one colour, and the bottom row shares one
+   smaller size and colour. The brand lines (THE ROYAL SOCIETY OF THAILAND,
+   MAIN MENU …) keep their Latin capitals. */
+html:not([lang="en"]) .site-footer :is(.font-latin, [lang="en"]):not(.footer-org__name-en, .footer-col h2 span) { font-family: inherit; font-size: inherit; }
+.site-footer .footer-address,
+.site-footer .footer-address :is(dd, span, a),
+.site-footer .footer-links :is(a, .footer-action) { font-size: var(--text-sm); color: rgba(255, 255, 255, .8); }
+.site-footer .footer-links a:hover, .site-footer .footer-address a:hover { color: var(--white); }
+.site-footer .footer-bottom,
+.site-footer .footer-bottom :is(p, span, time, a, strong, .footer-updated) { font-size: var(--text-xs); color: rgba(255, 255, 255, .7); opacity: 1; }
+.site-footer .visitor-count strong { font-weight: 600; color: rgba(255, 255, 255, .7); }
+.site-footer .footer-bottom .footer-top, .site-footer .footer-bottom .footer-top span { color: rgba(255, 255, 255, .85); }
