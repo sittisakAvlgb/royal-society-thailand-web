@@ -9490,3 +9490,14 @@ html:not([lang="en"]) .agenda-card__actions .btn { font-size: 15px; }
 .act-doc--slides { grid-template-columns: 13rem minmax(0, 1fr); }
 .act-doc--slides .act-doc__thumb { aspect-ratio: 16 / 9; }
 @media (max-width: 479.98px) { .act-doc--slides { grid-template-columns: 1fr; } }
+
+/* Document covers (grid view of laws, bylaws, rules, notices): a plain
+   printed page on one flat tone, upright; no glow behind it, no tilt or
+   lift on hover — the card's border alone answers the pointer */
+.ann-list.is-grid .ann-cover { background: #F4F6F5; }
+.ann-cover__sheet { border-color: #DCE3DF; border-radius: 2px; transition: none; }
+.ann-list.is-grid .acts-doc:hover .ann-cover__sheet { transform: none; }
+.ann-list.is-grid .acts-doc:hover { transform: none; border-color: var(--rst-green-600); }
+/* the same for the journal-series cards and the series page cover */
+.series-card__media { background: #F4F6F5; }
+.series-head .series-open__cover::before { content: none; }
