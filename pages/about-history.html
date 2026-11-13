@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261129g">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261129g">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261129g">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261129g">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261129g">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261129g">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261129i">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261129i">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261129i">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261129i">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261129i">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261129i">
 
   <script type="application/ld+json">
   {
@@ -53,19 +53,19 @@
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261129g"></script>
-  <script defer src="../assets/js/01-config.js?v=20261129g"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261129g"></script>
-  <script defer src="../assets/js/02-components.js?v=20261129g"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261129g"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261129g"></script>
-  <script defer src="../assets/js/05-language.js?v=20261129g"></script>
-  <script defer src="../assets/js/06-search.js?v=20261129g"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261129g"></script>
-  <script defer src="../assets/js/14-about.js?v=20261129g"></script>
-  <script defer src="../assets/js/data/splash.js?v=20261129g"></script>
-  <script defer src="../assets/js/29-splash.js?v=20261129g"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261129g"></script>
+  <script defer src="../assets/js/00-core.js?v=20261129i"></script>
+  <script defer src="../assets/js/01-config.js?v=20261129i"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261129i"></script>
+  <script defer src="../assets/js/02-components.js?v=20261129i"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261129i"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261129i"></script>
+  <script defer src="../assets/js/05-language.js?v=20261129i"></script>
+  <script defer src="../assets/js/06-search.js?v=20261129i"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261129i"></script>
+  <script defer src="../assets/js/14-about.js?v=20261129i"></script>
+  <script defer src="../assets/js/data/splash.js?v=20261129i"></script>
+  <script defer src="../assets/js/29-splash.js?v=20261129i"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261129i"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -236,25 +236,49 @@
       </div>
     </section>
 
-    <!-- 3. Its homes: the four buildings in order beside the one it uses today -->
-    <section class="hx-homes" aria-labelledby="hx-homes-title">
-      <div class="container hx-homes__inner">
-        <figure class="hx-homes__photo reveal">
-          <img src="../assets/images/about/about-office.jpg" alt="อาคารสำนักงานราชบัณฑิตยสภา สนามเสือป่า" loading="lazy" decoding="async">
-          <figcaption data-en="Sanam Suea Pa, Dusit — since 2006">สนามเสือป่า เขตดุสิต · ตั้งแต่ พ.ศ. ๒๕๔๙</figcaption>
-        </figure>
-        <div class="hx-homes__text">
-          <div class="hx-sec-head reveal">
+    <!-- 3. Its homes: the four buildings as stops along one line, oldest at
+         the left, then today's building wide beneath -->
+    <section class="hx-homes hx-homes--route" aria-labelledby="hx-homes-title">
+      <div class="container">
+        <div class="hx-homes__head reveal">
+          <div class="hx-time__heading">
             <p class="hx-kicker" data-en="Homes">ที่ทำการ</p>
-            <h2 id="hx-homes-title" class="hx-sec-title" data-en="Four homes in a hundred years">สี่ที่ทำการในหนึ่งร้อยปี</h2>
+            <h2 id="hx-homes-title" class="hx-homes__title" data-en="Four homes in a hundred years">สี่ที่ทำการในหนึ่งร้อยปี</h2>
           </div>
-          <ol class="hx-homes__list" role="list">
-            <li class="reveal"><span class="hx-homes__no" aria-hidden="true">๑</span><div><p class="hx-homes__t" data-en="Bang Khun Phrom Palace">วังบางขุนพรหม</p><p class="hx-homes__d" data-en="The upper floor of the Somdet residence">ตำหนักสมเด็จชั้นบน</p></div></li>
-            <li class="reveal reveal--delay-1"><span class="hx-homes__no" aria-hidden="true">๒</span><div><p class="hx-homes__t" data-en="Thawon Watthu Building, Na Phra That Road">ตึกถาวรวัตถุ ถนนหน้าพระธาตุ</p><p class="hx-homes__d" data-en="North side of the Vajiravudh Library · until 1988">อาคารหอสมุดวชิราวุธด้านทิศเหนือ · ถึง พ.ศ. ๒๕๓๑</p></div></li>
-            <li class="reveal reveal--delay-2"><span class="hx-homes__no" aria-hidden="true">๓</span><div><p class="hx-homes__t" data-en="Ratchawanlop Building, the Grand Palace">อาคารราชวัลลภ ในพระบรมมหาราชวัง</p><p class="hx-homes__d" data-en="1988–2006">พ.ศ. ๒๕๓๑–๒๕๔๙</p></div></li>
-            <li class="is-now reveal reveal--delay-3"><span class="hx-homes__no" aria-hidden="true">๔</span><div><p class="hx-homes__t" data-en="Sanam Suea Pa, Dusit, Bangkok">สนามเสือป่า เขตดุสิต กรุงเทพมหานคร</p><p class="hx-homes__d" data-en="2006 to today">พ.ศ. ๒๕๔๙–ปัจจุบัน</p></div></li>
-          </ol>
+          <p class="hx-homes__lead" data-en="Three moves, from Bang Khun Phrom Palace to Sanam Suea Pa.">ย้ายมาแล้วสามครั้ง จากวังบางขุนพรหมถึงสนามเสือป่า</p>
         </div>
+
+        <ol class="hx-route reveal" role="list">
+          <li class="hx-route__stop">
+            <span class="hx-route__dot" aria-hidden="true"></span>
+            <p class="hx-route__when" data-en="The first home">แห่งแรก</p>
+            <h3 class="hx-route__name" data-en="Bang Khun Phrom Palace">วังบางขุนพรหม</h3>
+            <p class="hx-route__note" data-en="The upper floor of the Somdet residence">ตำหนักสมเด็จชั้นบน</p>
+          </li>
+          <li class="hx-route__stop">
+            <span class="hx-route__dot" aria-hidden="true"></span>
+            <p class="hx-route__when" data-en="Until 1988">ถึง พ.ศ. ๒๕๓๑</p>
+            <h3 class="hx-route__name" data-en="Thawon Watthu Building">ตึกถาวรวัตถุ</h3>
+            <p class="hx-route__note" data-en="Na Phra That Road, north side of the Vajiravudh Library">ถนนหน้าพระธาตุ อาคารหอสมุดวชิราวุธด้านทิศเหนือ</p>
+          </li>
+          <li class="hx-route__stop">
+            <span class="hx-route__dot" aria-hidden="true"></span>
+            <p class="hx-route__when" data-en="1988–2006">พ.ศ. ๒๕๓๑–๒๕๔๙</p>
+            <h3 class="hx-route__name" data-en="Ratchawanlop Building">อาคารราชวัลลภ</h3>
+            <p class="hx-route__note" data-en="In the Grand Palace">ในพระบรมมหาราชวัง</p>
+          </li>
+          <li class="hx-route__stop is-now">
+            <span class="hx-route__dot" aria-hidden="true"></span>
+            <p class="hx-route__when" data-en="2006 to today">พ.ศ. ๒๕๔๙–ปัจจุบัน</p>
+            <h3 class="hx-route__name" data-en="Sanam Suea Pa">สนามเสือป่า</h3>
+            <p class="hx-route__note" data-en="Dusit, Bangkok">เขตดุสิต กรุงเทพมหานคร</p>
+          </li>
+        </ol>
+
+        <figure class="hx-route__photo reveal">
+          <img src="../assets/images/about/about-office.jpg" alt="อาคารสำนักงานราชบัณฑิตยสภา สนามเสือป่า" loading="lazy" decoding="async">
+          <figcaption><span data-en="Today">ที่ทำการปัจจุบัน</span><strong data-en="The Office of the Royal Society, Sanam Suea Pa">สำนักงานราชบัณฑิตยสภา สนามเสือป่า</strong></figcaption>
+        </figure>
       </div>
     </section>
 
