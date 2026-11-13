@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261128t">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261128t">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261128t">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261128t">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261128t">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261128t">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261128u">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261128u">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261128u">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261128u">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261128u">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261128u">
 
   <script type="application/ld+json">
   {
@@ -54,23 +54,23 @@
 
   <!-- 12-academy.js fills the page before 08-directory.js and 09-calendar.js
        render the Fellows and the calendar, so it is loaded ahead of them -->
-  <script defer src="../assets/js/00-core.js?v=20261128t"></script>
-  <script defer src="../assets/js/01-config.js?v=20261128t"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261128t"></script>
-  <script defer src="../assets/js/data/fellows.js?v=20261128t"></script>
-  <script defer src="../assets/js/data/events.js?v=20261128t"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261128t"></script>
-  <script defer src="../assets/js/02-components.js?v=20261128t"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261128t"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261128t"></script>
-  <script defer src="../assets/js/05-language.js?v=20261128t"></script>
-  <script defer src="../assets/js/06-search.js?v=20261128t"></script>
-  <script defer src="../assets/js/12-academy.js?v=20261128t"></script>
-  <script defer src="../assets/js/08-directory.js?v=20261128t"></script>
-  <script defer src="../assets/js/09-calendar.js?v=20261128t"></script>
-  <script defer src="../assets/js/data/splash.js?v=20261128t"></script>
-  <script defer src="../assets/js/29-splash.js?v=20261128t"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261128t"></script>
+  <script defer src="../assets/js/00-core.js?v=20261128u"></script>
+  <script defer src="../assets/js/01-config.js?v=20261128u"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261128u"></script>
+  <script defer src="../assets/js/data/fellows.js?v=20261128u"></script>
+  <script defer src="../assets/js/data/events.js?v=20261128u"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261128u"></script>
+  <script defer src="../assets/js/02-components.js?v=20261128u"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261128u"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261128u"></script>
+  <script defer src="../assets/js/05-language.js?v=20261128u"></script>
+  <script defer src="../assets/js/06-search.js?v=20261128u"></script>
+  <script defer src="../assets/js/12-academy.js?v=20261128u"></script>
+  <script defer src="../assets/js/08-directory.js?v=20261128u"></script>
+  <script defer src="../assets/js/09-calendar.js?v=20261128u"></script>
+  <script defer src="../assets/js/data/splash.js?v=20261128u"></script>
+  <script defer src="../assets/js/29-splash.js?v=20261128u"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261128u"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -222,47 +222,20 @@
           <div class="band-head__text">
             <p class="kicker" data-en="Fellows">ราชบัณฑิต</p>
             <h2 id="fellows-title" class="section-title acad-pair__title" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</h2>
-            <p class="section-desc" data-en="Search this academy’s Fellows and Associate Fellows by name, field or expertise.">ค้นหาราชบัณฑิตและภาคีสมาชิกของสำนัก ตามชื่อ สาขาวิชา หรือความเชี่ยวชาญ</p>
+            <p class="section-desc" data-en="Fellows and Associate Fellows of this academy, in fields across its disciplines.">ราชบัณฑิตและภาคีสมาชิกของสำนัก ผู้เชี่ยวชาญในสาขาวิชาของสำนัก</p>
           </div>
         </div>
 
-        <!-- The home page's Fellows band, narrowed to this academy (12-academy.js
-             sets the academy on the form, the chips and the card track) -->
-        <form class="fellow-search fellow-search--academy reveal" action="fellows.html" role="search">
-          <label class="visually-hidden" for="acad-fellow-q" data-en="Name, field or expertise">ชื่อ สาขาวิชา หรือความเชี่ยวชาญ</label>
-          <div class="fellow-search__field">
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
-            <input class="fellow-search__input" id="acad-fellow-q" name="q" type="search" autocomplete="off" placeholder="ค้นหาชื่อ สาขาวิชา หรือความเชี่ยวชาญ…" data-en-placeholder="Name, field or expertise…">
-          </div>
-          <input type="hidden" name="academy" value="" data-acad-fellow-academy>
-          <button class="fellow-search__submit" type="submit">
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
-            <span data-en="Search">ค้นหา</span>
-          </button>
-        </form>
-
-        <div class="fellow-chips-row reveal reveal--delay-1">
-          <p class="fellow-chips">
-            <span class="fellow-chips__label" data-en="Fields:">ประเภทวิชา:</span>
-            <span class="fellow-chips__list" data-acad-fellow-chips></span>
-          </p>
-          <a class="link-arrow link-arrow--strong" href="fellows.html" data-acad-fellows-more>
-            <span data-en="Full list">ดูรายชื่อทั้งหมด</span>
+        <!-- As on the home page: two rows of the academy's members, the
+             full list behind "ดูทั้งหมด" (12-academy.js narrows the grid to
+             this academy and points the button at its directory) -->
+        <ul class="fellowx-grid fellows-band__grid reveal reveal--delay-1" role="list" data-fellows-preview="8"></ul>
+        <p class="band-foot">
+          <a class="btn btn--primary btn--pill" href="fellows.html" data-acad-fellows-more>
+            <span data-en="View all">ดูทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
-        </div>
-
-        <div class="fellow-scroller reveal reveal--delay-2" data-scroller>
-          <ul class="fellow-scroller__track" role="list" data-fellows-preview="12" data-scroller-track></ul>
-          <div class="fellow-scroller__nav">
-            <button class="fellow-scroller__btn" type="button" data-scroller-prev aria-label="เลื่อนไปทางซ้าย" data-en-aria-label="Scroll left">
-              <svg class="icon icon--left" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-            <button class="fellow-scroller__btn" type="button" data-scroller-next aria-label="เลื่อนไปทางขวา" data-en-aria-label="Scroll right">
-              <svg class="icon icon--right" aria-hidden="true" focusable="false"><use href="#i-chevron"></use></svg>
-            </button>
-          </div>
-        </div>
+        </p>
       </div>
     </section>
 
