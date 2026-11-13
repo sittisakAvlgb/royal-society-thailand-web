@@ -10221,3 +10221,4 @@ html[lang="en"] .hx-wk__since::before { content: "since "; }
 /* a Latin email inside Thai text is set in the Latin face, which runs larger
    at the same size: brought down to sit level with the Thai beside it */
 html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-size: .78em; font-weight: 600; letter-spacing: 0; }
+html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-size: .7em; font-weight: 500; }
