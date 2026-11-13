@@ -10156,3 +10156,23 @@ html[lang="en"] .hx-wk__since::before { content: "since "; }
 .newsx-items--list .plans-cover { grid-template-rows: auto 1fr auto; padding: 10px 14px 12px; }
 .newsx-items--list .plans-cover__crest { grid-row: 1; }
 .newsx-items--list .plans-cover__year { grid-row: 3; align-self: end; }
+
+/* Plans cover template, lighter: pale green paper, dark green type, the
+   crest as it is (no white disc), the rings in a soft green. Each kind a
+   slightly different pale tone. */
+.plans-cover { background: linear-gradient(150deg, #F3FBF7 0%, #DDF3E8 100%); color: var(--rst-green-900); }
+.plans-cover::before { border-color: rgba(23, 168, 110, .28); }
+.plans-cover::after { border-color: rgba(23, 168, 110, .18); }
+.newsx-card:hover .plans-cover::before { border-color: rgba(23, 168, 110, .5); }
+.plans-cover__crest { padding: 0; border-radius: 0; background: none; }
+.plans-cover__kind { color: var(--rst-green-900); }
+.plans-cover__year, .plans-cover--assess .plans-cover__year { color: var(--rst-green-700); }
+.plans-cover__year small { color: #4a5a52; }
+.plans-cover__org { border-top-color: rgba(14, 107, 71, .25); color: #4a5a52; }
+.plans-cover--annual { background: linear-gradient(150deg, #F3FBF7 0%, #DDF3E8 100%); }
+.plans-cover--strategy { background: linear-gradient(150deg, #EEF8F3 0%, #CFEEDF 100%); }
+.plans-cover--report { background: linear-gradient(150deg, #F7FBF9 0%, #E6F3EC 100%); }
+.plans-cover--assess { background: linear-gradient(150deg, #EAF8F1 0%, #C8EEDB 100%); }
+.plans-cover--other { background: linear-gradient(150deg, #F1F7F4 0%, #DCEDE4 100%); }
+/* the page count back in the card's own green on the pale cover */
+.plans-card__media:has(.plans-cover) .plans-card__pages { background: var(--rst-green-800); color: #fff; }
