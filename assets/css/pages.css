@@ -9776,3 +9776,13 @@ button.adm-route2__pdf { padding: 0; border: 0; background: none; cursor: pointe
 .pdf-acts .act-doc__btn { min-height: 36px; padding: 0 var(--space-3, 12px); font-size: var(--text-xs); }
 [data-pdf-card] { cursor: pointer; }
 .pdf-acts.news-cta { min-height: 0; padding: 0; border: 0; border-radius: 0; }
+
+/* Entry page on tall or squarish screens (phones, tablets upright): a wide
+   poster set to cover keeps only its middle there and cuts the title, so
+   until the Office supplies a tall version it is shown whole, on its own
+   softened image (background: 'blur'). At 6/5 and wider the cover crop
+   still keeps the wording (the middle two-thirds). */
+@media (max-aspect-ratio: 6/5) {
+  .splash--cover:not(.splash--has-mobile) .splash__poster img { object-fit: contain; object-position: 50% 50%; }
+  .splash--cover:not(.splash--has-mobile) .splash__fill { display: block; }
+}

@@ -62,6 +62,7 @@
     const poster = S.poster && (typeof S.poster === 'object' ? S.poster : { desktop: S.poster });
     if (poster) {
       el.classList.add('splash--poster');
+      if (poster.mobile) el.classList.add('splash--has-mobile');
       if (S.fit === 'cover') { el.classList.add('splash--cover'); if (S.focus) el.style.setProperty('--poster-focus', S.focus); }
       if (S.background === 'blur') el.classList.add('splash--blurfill');
       else if (S.background) el.style.background = S.background;
