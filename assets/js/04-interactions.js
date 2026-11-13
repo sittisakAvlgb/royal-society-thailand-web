@@ -692,15 +692,22 @@
       nodes.forEach(node => {
         const value = node.nodeValue;
         if (!THAI_RE.test(value) || !/\S\s+\S/.test(value) || node.parentElement.closest(PHRASE_SKIP)) return;
+        /* a text run whose parent lays its children out as grid or flex
+           cells (a numbered list item: number | text) stays one cell: its
+           phrases go inside one wrapper, or each would become a cell */
+        const display = getComputedStyle(node.parentElement).display;
+        const cellParent = /grid|flex/.test(display);
         const frag = document.createDocumentFragment();
+        const target = cellParent ? document.createElement('span') : frag;
+        if (cellParent) { target.className = 'story__run'; frag.appendChild(target); }
         /* "ต่าง ๆ" stays one piece: a lone ๆ joins the word before it */
         value.replace(/[ \t\n\r]+ๆ/g, '\u00A0ๆ').split(/([ \t\n\r]+)/).forEach(part => {
           if (!part) return;
-          if (/^[ \t\n\r]+$/.test(part) || !THAI_RE.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          if (/^[ \t\n\r]+$/.test(part) || !THAI_RE.test(part)) { target.appendChild(document.createTextNode(part)); return; }
           const span = document.createElement('span');
           span.className = 'story__ph';
           span.textContent = part;
-          frag.appendChild(span);
+          target.appendChild(span);
         });
         node.replaceWith(frag);
       });
