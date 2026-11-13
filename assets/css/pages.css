@@ -9451,22 +9451,6 @@ html[lang="en"] .works-list--empty-en { display: none !important; }
   .msg-news__list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-12, 48px); }
 }
 
-/* Contact form and survey: the card runs the full width like other pages;
-   on wide screens the title, note (and the Office's other channels) sit
-   in a column beside the form, which keeps a comfortable field width */
-.cf-card__channels { display: grid; margin: var(--space-6) 0 0; border-top: 1px solid var(--border); }
-.cf-card__channels > div { padding: var(--space-3) 0; border-bottom: 1px solid var(--border); }
-.cf-card__channels dt { font-size: var(--text-xs); font-weight: 700; color: var(--rst-green-700); }
-.cf-card__channels dd { margin: 2px 0 0; font-size: var(--text-sm); color: #26332d; }
-.cf-card__channels a { color: var(--rst-green-900); text-underline-offset: .2em; }
-@media (min-width: 1100px) {
-  .cf-page .cf-body { max-width: none; margin-inline: 0; }
-  .cf-page .cf-card { display: grid; grid-template-columns: minmax(15rem, 22rem) minmax(0, 1fr); grid-auto-rows: min-content; column-gap: var(--space-16, 64px); align-items: start; }
-  .cf-page .cf-card > :not(form) { grid-column: 1; }
-  .cf-page .cf-card > form { grid-column: 2; grid-row: 1 / span 6; min-width: 0; }
-}
-@media (min-width: 1100px) { .cf-page .sv-card { max-width: none; margin-inline: 0; } }
-
 /* Responsive pass (Nov 2026, 60 pages x 10 widths): tap targets of at
    least ~36px on phones, and no text below a readable size (Thai 15px,
    Latin 12px) wherever small labels had been set in fractions of an em */
