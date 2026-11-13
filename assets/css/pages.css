@@ -10252,3 +10252,15 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 .kn-items.newsx-items--grid .kn-card { grid-template-rows: auto 1fr; }
 .kn-card__media { position: relative; aspect-ratio: 16 / 9; }
 .newsx-items--list .kn-card__media { display: none; }
+/* list view: the cover too, a small one at the left of each row */
+.newsx-items--list .kn-card__media { display: block; }
+.newsx-items--list .kn-card { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 40rem) {
+  .newsx-items--list .kn-card { grid-template-columns: 13rem minmax(0, 1fr); align-items: stretch; }
+  .newsx-items--list .kn-card__media { aspect-ratio: auto; min-height: 100%; border-bottom: 0; border-right: 1px solid var(--border); }
+}
+@media (max-width: 39.98rem) { .newsx-items--list .kn-card__media { aspect-ratio: 16 / 7; } }
+/* in the knowledge list the small cover keeps the crest and the field name */
+.newsx-items--list .kn-card .plans-cover { grid-template-rows: auto 1fr auto; padding: 12px 14px; }
+.newsx-items--list .kn-card .plans-cover__kind { display: block; grid-row: 3; align-self: end; max-width: 100%; font-size: min(11cqw, 22cqh); }
+.newsx-items--list .kn-card :is(.plans-cover__when, .plans-cover__org) { display: none; }
