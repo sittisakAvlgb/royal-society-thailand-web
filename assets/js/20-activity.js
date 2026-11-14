@@ -235,6 +235,12 @@
 
     const crumb = qs('[data-activity-series]', root);
     if (crumb) { crumb.href = RS.url(series.href); crumb.textContent = t(series); }
+    /* proposals and the knowledge programme are academic works, not activities */
+    const group = qs('[data-activity-group]', root);
+    if (group && (item.series === 'proposals' || item.series === 'knowledge')) {
+      group.href = RS.url('pages/knowledge.html');
+      group.textContent = t({ th: 'ผลงานทางวิชาการ', en: 'Academic Works' });
+    }
     set('[data-activity-crumb]', escapeHTML(head.title));
     set('[data-activity-cat]', `<a class="act-head__series" href="${escapeHTML(RS.url(series.href))}">${escapeHTML(t(series))}</a>`);
     const time = qs('[data-activity-date]', root);
