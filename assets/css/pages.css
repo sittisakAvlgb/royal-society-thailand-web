@@ -10336,3 +10336,14 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 .newsx-items--grid:not(.series-items) .series-card__media { display: grid !important; place-items: center; aspect-ratio: 3 / 2 !important; background: var(--rst-green-50); }
 .newsx-items--grid:not(.series-items) .series-card__media > .pub-cover { position: static; width: auto; height: 84%; aspect-ratio: 210 / 297; border-radius: 2px; padding: 8% 6%; }
 .newsx-card__media--tpl { position: relative; display: block !important; background: none !important; }
+/* list view of the laws, notices and ITA: a small cover at the left of each row */
+.ann-list:not(.is-grid) .acts-doc:has(.ann-cover--tpl) { grid-template-columns: 8.5rem minmax(0, 1fr) auto; column-gap: var(--space-5, 20px); }
+.ann-list:not(.is-grid) .ann-cover--tpl { display: block; position: relative; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; align-self: center; }
+.ann-list:not(.is-grid) .ann-cover--tpl .plans-cover { grid-template-rows: 1fr auto auto 1fr; justify-items: center; align-content: center; gap: 4px; padding: 8px; text-align: center; }
+.ann-list:not(.is-grid) .ann-cover--tpl .plans-cover__crest { grid-row: 2; justify-self: center; position: static !important; width: 30px !important; height: auto !important; }
+.ann-list:not(.is-grid) .ann-cover--tpl .plans-cover__kind { grid-row: 3; align-self: start; max-width: 100%; font-size: var(--text-xs); line-height: 1.25; }
+.ann-list:not(.is-grid) .ann-cover--tpl :is(.plans-cover__when, .plans-cover__org) { display: none; }
+.ann-list:not(.is-grid) .ann-cover--tpl .plans-cover::after { display: none; }
+@media (max-width: 47.98rem) { .ann-list:not(.is-grid) .acts-doc:has(.ann-cover--tpl) { grid-template-columns: 5.5rem minmax(0, 1fr); } .ann-list:not(.is-grid) .acts-doc:has(.ann-cover--tpl) > .pdf-acts { grid-column: 1 / -1; } }
+.ann-list:not(.is-grid) .ann-cover--tpl { aspect-ratio: 16 / 10; }
+.ann-list:not(.is-grid) .acts-doc:has(.ann-cover--tpl) { grid-template-columns: 7.5rem minmax(0, 1fr) auto; }
