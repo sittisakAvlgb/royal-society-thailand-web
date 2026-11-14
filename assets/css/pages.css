@@ -10396,3 +10396,11 @@ a.notice__poster:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 }
 @media (prefers-reduced-motion: reduce) { .notice, .notice::backdrop, .notice__slide.is-in, a.notice__poster img { transition: none; animation: none; transform: none; filter: none; } }
 @media print { .notice { display: none !important; } }
+
+/* Phones, list view: the cover tile is under 100px wide, too small for its
+   wording; the crest alone, centred, stands for the cover */
+@media (max-width: 47.98rem) {
+  .newsx-items--list .plans-cover { display: grid; grid-template-rows: 1fr; place-items: center; padding: 6px; }
+  .newsx-items--list .plans-cover > :not(.plans-cover__crest) { display: none !important; }
+  .newsx-items--list .plans-cover__crest { grid-row: 1; justify-self: center; align-self: center; position: static !important; width: 40% !important; max-width: 40px; }
+}
