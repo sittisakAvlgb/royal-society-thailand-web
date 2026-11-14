@@ -187,7 +187,12 @@
         const sub = li.dataset.coverSub || tabName[li.dataset.academy] || '';
         cover.classList.add('ann-cover--tpl');
         cover.setAttribute('aria-hidden', 'true');
-        cover.innerHTML = RS.docCover({ kind: { th: sub, en: sub }, when: { th: root.dataset.worksCoverWhen || '', en: root.dataset.worksCoverWhenEn || '' }, org: { th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' }, tone: TONES[Math.max(0, keys.indexOf(li.dataset.academy)) % TONES.length] });
+        /* with a fixed line (ITA): the tab as the kind; otherwise (laws,
+           notices): the document's kind (ประกาศ, ระเบียบ…) with its subject */
+        const fixed = root.dataset.worksCoverWhen;
+        const kindTh = fixed ? sub : (li.dataset.coverKind || root.dataset.worksCoverKind || sub);
+        const whenTh = fixed ? fixed : sub;
+        cover.innerHTML = RS.docCover({ kind: { th: kindTh, en: kindTh }, when: { th: whenTh, en: fixed ? (root.dataset.worksCoverWhenEn || '') : whenTh }, org: { th: li.dataset.coverName || root.dataset.worksCoverName || 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' }, tone: TONES[Math.max(0, keys.indexOf(li.dataset.academy)) % TONES.length] });
         a.prepend(cover);
         return;
       }
