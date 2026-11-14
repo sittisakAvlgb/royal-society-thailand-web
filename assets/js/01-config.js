@@ -100,7 +100,7 @@ window.RS_CONFIG = {
           th: 'จดจำการตั้งค่าการแสดงผล คำค้นล่าสุด รายการที่บันทึกไว้ และการเตือนกิจกรรม',
           en: 'Remembers display settings, recent searches, saved items and event reminders.'
         },
-        keys: ['rs-accessibility-settings', 'rs-recent-searches', 'rs.bookmarks', 'rs.reminders',
+        keys: ['rs-accessibility-settings', 'rs-notices-hidden', 'rs-recent-searches', 'rs.bookmarks', 'rs.reminders',
                'rs-mobile-panel', 'rs-mobile-sub', 'rs-mobile-subsub',
                /* how lists are shown: grid or list, and per page */
                'rs-news-view', 'rs-news-size', 'rs-gallery-size', 'rs-works-view', 'rs-works-size',

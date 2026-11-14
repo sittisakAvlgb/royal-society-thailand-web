@@ -10354,3 +10354,38 @@ html:not([lang="en"]) :is(.cio-contact, .exec-duties) a[href^="mailto:"] { font-
 .works-list__items.newsx-items--list .newsx-card__media--tpl .plans-cover__crest { grid-row: 2; justify-self: center; position: static !important; inset: auto; width: 34px !important; height: auto !important; }
 .works-list__items.newsx-items--list .newsx-card__media--tpl .plans-cover__kind { display: block; grid-row: 3; align-self: start; max-width: 100%; font-size: var(--text-sm); line-height: 1.3; }
 .works-list__items.newsx-items--list .newsx-card__media--tpl :is(.plans-cover__when, .plans-cover__org), .works-list__items.newsx-items--list .newsx-card__media--tpl .plans-cover::after { display: none; }
+
+/* Announcement popup (30-notice.js, data/notices.js): a small white card
+   over a soft green scrim, picture on top, the notice, its one button; a
+   thin foot for "don't show again" and the pager. No shadow: the scrim
+   sets it apart. Rises in, fades out. */
+.notice { width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 0; overflow: auto; border: 1px solid var(--rst-green-100, #d6eee2); border-radius: 18px; background: #fff; color: var(--text-primary); opacity: 0; transform: translateY(14px) scale(.98); transition: opacity .22s ease, transform .32s cubic-bezier(.2, .8, .2, 1); }
+.notice.is-open { opacity: 1; transform: none; }
+.notice::backdrop { background: rgba(6, 37, 25, .5); backdrop-filter: blur(2px); }
+.notice__close { position: absolute; top: 12px; right: 12px; z-index: 2; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid var(--rst-green-100, #d6eee2); border-radius: 50%; background: #fff; color: var(--rst-green-900); cursor: pointer; transition: background .2s ease, transform .2s ease; }
+.notice__close:hover { background: var(--rst-green-50, #eef8f3); transform: rotate(90deg); }
+.notice__close .icon { width: 18px; height: 18px; }
+.notice__slide.is-in { animation: notice-in .35s ease both; }
+@keyframes notice-in { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
+.notice__media { margin: 0; aspect-ratio: 2 / 1; overflow: hidden; background: var(--rst-green-50, #eef8f3); }
+.notice__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.notice__body { display: grid; gap: 8px; padding: 22px 24px 20px; }
+.notice__slide:not(:has(.notice__media)) .notice__body { padding-top: 26px; padding-right: 60px; }
+.notice__kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 0; font-size: var(--text-xs); color: var(--text-secondary, #4a5a52); }
+.notice__kicker span { padding: 1px 10px; border-radius: 999px; background: var(--rst-green-800); font-weight: 700; color: #fff; }
+.notice__title { margin: 0; font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; line-height: 1.3; color: var(--rst-green-900); }
+.notice__text { margin: 0; font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary, #4a5a52); }
+.notice__go { justify-self: start; margin-top: 6px; }
+.notice__go .icon { width: 16px; height: 16px; transition: transform .2s ease; }
+.notice__go:hover .icon { transform: translateX(3px); }
+.notice__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px 10px 24px; border-top: 1px solid var(--rst-green-100, #d6eee2); }
+.notice__keep { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-xs); color: var(--text-secondary, #4a5a52); cursor: pointer; }
+.notice__keep input { width: 16px; height: 16px; margin: 0; accent-color: var(--rst-green-800); }
+.notice__pager { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-xs); color: var(--text-secondary, #4a5a52); }
+.notice__pager button { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 1px solid var(--rst-green-100, #d6eee2); border-radius: 50%; background: #fff; color: var(--rst-green-800); cursor: pointer; }
+.notice__pager button:hover { background: var(--rst-green-50, #eef8f3); }
+.notice__pager button .icon { width: 16px; height: 16px; }
+.notice__pager [data-notice-step="-1"] .icon { transform: rotate(90deg); }
+.notice__pager [data-notice-step="1"] .icon { transform: rotate(-90deg); }
+@media (prefers-reduced-motion: reduce) { .notice, .notice__slide.is-in { transition: none; animation: none; transform: none; } }
+@media print { .notice { display: none !important; } }
