@@ -42,7 +42,7 @@
   const today = new Date().toISOString().slice(0, 10);
   const inDates = n => (!n.start || today >= n.start) && (!n.end || today <= n.end);
 
-  const notices = LIST.filter(n => n && n.enabled && n.id && t(n.title) && onThisPage(n) &&
+  const notices = LIST.filter(n => n && n.enabled && n.id && n.image && onThisPage(n) &&
     (force === '1' || (inDates(n) && !closedNow.includes(n.id) && !hidden.includes(n.id))));
   if (!notices.length) return;
 
@@ -55,19 +55,20 @@
     of: { th: 'จาก', en: 'of' }
   };
 
+  /* the notice is its picture: wide on screens, the tall one on phones when
+     there is one; the whole picture opens the link */
   function slide(n) {
+    const img = typeof n.image === 'object' ? n.image : { desktop: n.image };
     const link = n.link && n.link.href;
     const external = link && (n.link.external || RS.isExternal(link));
     const href = link ? (external ? link : RS.url(link)) : '';
-    const date = n.date ? `<time datetime="${esc(n.date)}">${esc(RS.formatDate(n.date, { day: 'numeric', month: 'long', year: 'numeric' }))}</time>` : '';
-    return `
-      ${n.image ? `<figure class="notice__media"><img src="${esc(RS.url(n.image))}" alt="${esc(t(n.imageAlt))}" decoding="async"></figure>` : ''}
-      <div class="notice__body">
-        ${n.kicker || date ? `<p class="notice__kicker">${n.kicker ? `<span>${esc(t(n.kicker))}</span>` : ''}${date}</p>` : ''}
-        <h2 class="notice__title" id="notice-title">${esc(t(n.title))}</h2>
-        ${n.text ? `<p class="notice__text">${esc(t(n.text))}</p>` : ''}
-        ${href ? `<a class="btn btn--primary btn--pill notice__go" href="${esc(href)}"${external ? ' target="_blank" rel="noopener"' : ''} data-notice-go>${esc(t(n.link.label) || t({ th: 'อ่านต่อ', en: 'Read more' }))}${RS.icon(external ? 'external' : 'arrow')}</a>` : ''}
-      </div>`;
+    const picture = `<picture>
+        ${img.mobile ? `<source media="(max-width: 767.98px)" srcset="${esc(RS.url(img.mobile))}">` : ''}
+        <img src="${esc(RS.url(img.desktop))}" alt="${esc(t(n.alt))}" decoding="async">
+      </picture>`;
+    return href
+      ? `<a class="notice__poster" href="${esc(href)}"${external ? ' target="_blank" rel="noopener"' : ''} data-notice-go>${picture}</a>`
+      : `<div class="notice__poster">${picture}</div>`;
   }
 
   function open() {
@@ -75,15 +76,18 @@
     const many = notices.length > 1;
     const dialog = document.createElement('dialog');
     dialog.className = 'notice';
-    dialog.setAttribute('aria-labelledby', 'notice-title');
+    dialog.setAttribute('aria-label', t({ th: 'ประกาศ', en: 'Notice' }));
     dialog.innerHTML = `
-      <button class="notice__close" type="button" data-notice-close aria-label="${esc(t(L.close))}">${RS.icon('x')}</button>
-      <div class="notice__slide" data-notice-slide aria-live="polite"></div>
+      <div class="notice__frame">
+        <div class="notice__slide" data-notice-slide aria-live="polite"></div>
+        <button class="notice__close" type="button" data-notice-close aria-label="${esc(t(L.close))}">${RS.icon('x')}</button>
+      </div>
       <div class="notice__foot">
         <label class="notice__keep"><input type="checkbox" data-notice-keep> <span>${esc(t(L.keep))}</span></label>
         ${many ? `<div class="notice__pager">
           <button type="button" data-notice-step="-1" aria-label="${esc(t(L.prev))}">${RS.icon('chevron')}</button>
-          <span data-notice-count></span>
+          <span class="notice__dots" aria-hidden="true">${notices.map(() => '<i></i>').join('')}</span>
+          <span class="visually-hidden" data-notice-count></span>
           <button type="button" data-notice-step="1" aria-label="${esc(t(L.next))}">${RS.icon('chevron')}</button>
         </div>` : ''}
       </div>`;
@@ -95,6 +99,7 @@
       index = (i + notices.length) % notices.length;
       box.innerHTML = slide(notices[index]);
       box.classList.remove('is-in'); void box.offsetWidth; box.classList.add('is-in');
+      dialog.querySelectorAll('.notice__dots i').forEach((dot, k) => dot.classList.toggle('is-on', k === index));
       if (count) count.textContent = RS.digits(`${index + 1} ${t(L.of)} ${notices.length}`);
     };
 
@@ -109,7 +114,7 @@
       remember();
       dialog.classList.remove('is-open');
       const done = () => { if (dialog.open) dialog.close(); dialog.remove(); };
-      if (RS.reduceMotion()) done(); else setTimeout(done, 220);
+      if (RS.reduceMotion()) done(); else setTimeout(done, 260);
     };
 
     dialog.addEventListener('click', event => {
