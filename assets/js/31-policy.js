@@ -21,7 +21,10 @@
 
   const { qs, escapeHTML: esc, icon } = RS;
   const t = v => RS.t(v);
-  const te = v => esc(t(v));
+  /* names the line-breaker would split (พระ|ราชบัญญัติ, ราชบัณฑิต|ยสภา) are
+     kept on one line; the rest of the Thai still breaks between words */
+  const KEEP = /(พระราชบัญญัติ|ราชบัณฑิตยสภา|ราชกิจจานุเบกษา|พ\.ร\.บ\.|พ\.ศ\. [๐-๙0-9]+)/g;
+  const te = v => esc(t(v)).replace(KEEP, '<span class="nobr">$1</span>');
   const en = RS.lang === 'en';
   const num = n => (en ? String(n) : RS.digits(String(n)));
   const pad = n => num(String(n).padStart(2, '0'));
