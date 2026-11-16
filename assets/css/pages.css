@@ -10566,3 +10566,16 @@ html[lang="en"] .plc-steps li::before { content: counter(plc); }
   div.sitemap-layout { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: var(--space-12); }
   nav.sitemap-rail .sitemap-rail__item { grid-template-columns: 1.7em minmax(0, 1fr) auto; padding-inline: 12px; }
 }
+
+/* gallery: pointing at an album shows a round "open the photos" button on
+   its cover, like the play button on the videos; the cover dims a touch */
+.newsx-album .newsx-card__media { position: relative; }
+.newsx-album__open { position: absolute; left: 50%; top: 50%; z-index: 2; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #2DBE7A; color: var(--rst-green-900); opacity: 0; transform: translate(-50%, -50%) scale(.7); transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1); pointer-events: none; }
+.newsx-album__open .icon { width: 28px; height: 28px; }
+.newsx-album .newsx-card__media::after { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(6, 37, 25, .28); opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+.newsx-album:hover .newsx-album__open, .newsx-album:focus-visible .newsx-album__open { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.newsx-album:hover .newsx-card__media::after, .newsx-album:focus-visible .newsx-card__media::after { opacity: 1; }
+.newsx-items--list .newsx-album__open { width: 44px; height: 44px; }
+.newsx-items--list .newsx-album__open .icon { width: 20px; height: 20px; }
+@media (hover: none) { .newsx-album__open { opacity: .92; transform: translate(-50%, -50%) scale(.8); } }
+@media (prefers-reduced-motion: reduce) { .newsx-album__open { transition: opacity .1s linear; } }

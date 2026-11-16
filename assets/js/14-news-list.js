@@ -163,7 +163,7 @@
     box.innerHTML = albums.slice((albumPage - 1) * albumSize, albumPage * albumSize).map((item, i) => `
       <li class="newsx-item" style="animation-delay:${Math.min(i, 11) * 30}ms">
         <a class="newsx-card newsx-album" href="${escapeHTML(RS.url(`pages/news-album.html?id=${encodeURIComponent(item.id)}`))}">
-          <span class="newsx-card__media">${img(item, 600, 400, i < 4)}</span>
+          <span class="newsx-card__media">${img(item, 600, 400, i < 4)}<span class="newsx-album__open" aria-hidden="true">${icon('photos')}</span></span>
           <span class="newsx-card__body">
             <span class="news-cat">${cat(item)}</span>
             <span class="newsx-card__title">${te(item.title)}</span>

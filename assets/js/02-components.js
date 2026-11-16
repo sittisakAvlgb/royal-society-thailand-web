@@ -44,6 +44,7 @@
       <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" ${S}/></symbol>
       <symbol id="i-access" viewBox="0 0 24 24"><path d="M4 18 8.5 6h1L14 18M5.6 14h6.8" ${S}/><path d="M16 18l2.6-7h.8L22 18M16.8 16h4.4" ${S}/></symbol>
       <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2" ${S}/><path d="M5 9.5c4.5 1 9.5 1 14 0M12 10.5v4l-3 6M12 14.5l3 6" ${S}/></symbol>
+      <symbol id="i-photos" viewBox="0 0 24 24"><rect x="3" y="6" width="15" height="13" rx="2" ${S}/><path d="M7 3h12a2 2 0 0 1 2 2v11" ${S}/><circle cx="8.5" cy="10.5" r="1.5" ${S}/><path d="m3.5 17 4.5-4.5 3.5 3.5 2-2 4 4" ${S}/></symbol>
       <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" ${S}/><circle cx="12" cy="12" r="3" ${S}/></symbol>
       <symbol id="i-text-plus" viewBox="0 0 24 24"><path d="M3 18 8 6h1l5 12M4.8 14h7.4M17 8v6M14 11h6" ${S}/></symbol>
       <symbol id="i-text" viewBox="0 0 24 24"><path d="M5 6h14M12 6v13M9 19h6" ${S}/></symbol>
