@@ -10579,3 +10579,8 @@ html[lang="en"] .plc-steps li::before { content: counter(plc); }
 .newsx-items--list .newsx-album__open .icon { width: 20px; height: 20px; }
 @media (hover: none) { .newsx-album__open { opacity: .92; transform: translate(-50%, -50%) scale(.8); } }
 @media (prefers-reduced-motion: reduce) { .newsx-album__open { transition: opacity .1s linear; } }
+/* the album button, steadier: centred by margins (no translate to round to
+   half pixels while the card lifts), only fading in with a slight grow */
+.newsx-album__open { left: 0; right: 0; top: 0; bottom: 0; margin: auto; transform: scale(.88); transition: opacity .2s ease, transform .2s ease; will-change: opacity, transform; backface-visibility: hidden; }
+.newsx-album:hover .newsx-album__open, .newsx-album:focus-visible .newsx-album__open { transform: scale(1); }
+@media (hover: none) { .newsx-album__open { transform: scale(.9); } }
