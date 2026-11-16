@@ -10540,3 +10540,9 @@ html[lang="en"] .plc-steps li::before { content: counter(plc); }
 .plc-table td:first-child { width: 26%; }
 @media (max-width: 63.98rem) { .plc-nav li { flex: none; } .plc-nav a { display: inline-flex; align-items: center; gap: 8px; } .plc-nav a .icon { width: 16px; height: 16px; } }
 .plc-side__block, .plc-layout > * { min-width: 0; }
+/* in brief: a quieter box, the points at the reading size of a side note */
+.plc-brief { padding: clamp(18px, 2.4vw, 26px) clamp(20px, 2.6vw, 30px); }
+.plc-brief h2 { margin-bottom: 12px; font-size: var(--text-base); }
+.plc-brief ul { gap: 8px 32px; }
+.plc-brief li { grid-template-columns: 20px minmax(0, 1fr); gap: 10px; font-size: var(--text-sm); line-height: 1.55; color: #2c3a33; }
+.plc-brief li .icon { width: 20px; height: 20px; margin-top: .2em; padding: 4px; }
