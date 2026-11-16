@@ -10552,3 +10552,17 @@ html[lang="en"] .plc-steps li::before { content: counter(plc); }
 .plc-hero .hhero__title { font-size: clamp(2rem, 3.2vw, 2.75rem); line-height: 1.25; text-wrap: balance; }
 .plc-hero .hhero__lead { max-width: 46rem; text-wrap: pretty; }
 .nobr { white-space: nowrap; }
+
+/* Sitemap: a group of single pages is one list in columns; the rail keeps
+   its numbers in one column, the names wrapping beside them */
+.sitemap-col--flat ul { grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: var(--space-1) var(--space-8); }
+@media (min-width: 64rem) {
+  .sitemap-layout { grid-template-columns: minmax(0, 290px) minmax(0, 1fr); }
+  .sitemap-rail__item { display: grid; grid-template-columns: 2.1em minmax(0, 1fr) auto; align-items: center; gap: var(--space-2); padding-block: 8px; }
+  .sitemap-rail__label { line-height: 1.35; }
+  .sitemap-rail__count { justify-self: end; }
+}
+@media (min-width: 64rem) {
+  div.sitemap-layout { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: var(--space-12); }
+  nav.sitemap-rail .sitemap-rail__item { grid-template-columns: 1.7em minmax(0, 1fr) auto; padding-inline: 12px; }
+}

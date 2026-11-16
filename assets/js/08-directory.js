@@ -286,6 +286,23 @@
 
   function renderSitemapGroup(group, number) {
     const children = group.children || [];
+    /* a group whose pages have no pages of their own is one list of links,
+       set in columns, not a heading per page */
+    const flat = children.length && children.every(child => !child.children?.length);
+    if (flat) {
+      const key = escapeHTML(group.key);
+      return `
+      <section class="sitemap-block reveal" id="sm-${key}" aria-labelledby="sm-${key}-title">
+        <div class="sitemap-block__head">
+          ${number ? `<span class="sitemap-block__num" aria-hidden="true">${outlineNumber(number)}</span>` : ''}
+          <h2 class="sitemap-block__title" id="sm-${key}-title">
+            ${group.href ? outlineLink(group) : `<span class="sm-text" data-text="${escapeHTML(t(group.label))}">${te(group.label)}</span>`}
+          </h2>
+          <span class="sitemap-block__count">${countPages(group)}</span>
+        </div>
+        <div class="sitemap-col sitemap-col--flat"><ul role="list">${children.map(child => `<li>${outlineLink(child)}</li>`).join('')}</ul></div>
+      </section>`;
+    }
     const columns = children.map(child => `
       <div class="sitemap-col">
         <p class="sitemap-col__title">${outlineLink(child)}</p>
@@ -371,7 +388,7 @@
 
       block.hidden = !(headHit || blockHits > 0);
       if (!block.hidden) {
-        shown += qsa('.sitemap-col:not([hidden])', block).length
+        shown += qsa('.sitemap-col:not([hidden]):not(.sitemap-col--flat)', block).length
                + qsa('.sitemap-col:not([hidden]) li:not([hidden])', block).length;
       }
 
@@ -404,12 +421,12 @@
       <div class="sitemap-layout">
         <nav class="sitemap-rail" aria-label="${te(L.jump)}">
           ${menu.map((group, i) => renderRailItem(group, i + 1)).join('')}
-          ${extra.map(group => renderRailItem(group, 0)).join('')}
+          ${extra.map((group, i) => renderRailItem(group, menu.length + i + 1)).join('')}
         </nav>
 
         <div class="sitemap-outline">
           ${menu.map((group, i) => renderSitemapGroup(group, i + 1)).join('')}
-          ${extra.map(group => renderSitemapGroup(group, 0)).join('')}
+          ${extra.map((group, i) => renderSitemapGroup(group, menu.length + i + 1)).join('')}
           <p class="sitemap-empty" hidden></p>
         </div>
       </div>`;
