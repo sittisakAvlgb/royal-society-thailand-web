@@ -4,10 +4,10 @@
  *
  *  pages/policies.html  [data-policy-hub]  every policy as a card, the
  *                                          principles, and where to ask
- *  pages/policy.html    [data-policy]      one policy: its facts, the policy
- *                                          in brief, its sections, the other
- *                                          policies beside it and a contents
- *                                          list that follows the reading
+ *  pages/policy.html    [data-policy]      one policy on a page of its own:
+ *                                          its facts, the policy in brief, its
+ *                                          sections and a contents list that
+ *                                          follows the reading
  *
  *  Links from before the split (policies.html#privacy-policy and the like)
  *  open the policy they named.
@@ -99,9 +99,6 @@
       [L.version, num(p.version)], [L.effective, date(p.effective)], [L.updated, date(p.updated)]
     ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${te(k)}</dt><dd>${v}</dd></div>`).join(''));
 
-    /* the other policies, this one marked */
-    set('[data-policy-nav]', LIST.map(o => `<li><a href="${esc(pageOf(o))}"${o.id === p.id ? ' aria-current="page"' : ''}>${icon(o.icon || 'doc')}<span>${te(o.title)}</span></a></li>`).join(''));
-
     /* contents */
     set('[data-policy-toc]', p.sections.map((s, k) => `<li><a href="#${esc(s.id)}" data-toc="${esc(s.id)}"><span class="plc-toc__no">${num(k + 1)}</span>${te(s.title)}</a></li>`).join(''));
 
@@ -126,13 +123,7 @@
         </div>
         <a class="btn btn--primary btn--pill" href="${esc(RS.url(`pages/contact-form.html?topic=${topic}`))}">${te(L.ask)}${icon('arrow')}</a>
       </aside>`;
-    const prev = LIST[i - 1], next = LIST[i + 1];
-    const pager = `
-      <nav class="plc-pager" aria-label="${te(L.all)}">
-        ${prev ? `<a class="plc-pager__prev" href="${esc(pageOf(prev))}"><span>${icon('arrow')}${te(L.prev)}</span><strong>${te(prev.title)}</strong></a>` : '<span></span>'}
-        ${next ? `<a class="plc-pager__next" href="${esc(pageOf(next))}"><span>${te(L.next)}${icon('arrow')}</span><strong>${te(next.title)}</strong></a>` : '<span></span>'}
-      </nav>`;
-    set('[data-policy-body]', brief + sections + contact + pager);
+    set('[data-policy-body]', brief + sections + contact);
 
     qs('[data-policy-print]', root)?.addEventListener('click', () => window.print());
 

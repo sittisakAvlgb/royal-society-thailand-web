@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261201k">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261201k">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261201k">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261201k">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261201k">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261201k">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261201l">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261201l">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261201l">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261201l">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261201l">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261201l">
 
   <script type="application/ld+json">
   {
@@ -46,26 +46,26 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": "https://royalsociety.go.th/" },
-      { "@type": "ListItem", "position": 2, "name": "นโยบายและข้อกำหนด", "item": "https://royalsociety.go.th/pages/policies.html" }
+      { "@type": "ListItem", "position": 2, "name": "นโยบาย", "item": "https://royalsociety.go.th/pages/policy.html" }
     ]
   }
   </script>
 
-  <script defer src="../assets/js/00-core.js?v=20261201k"></script>
-  <script defer src="../assets/js/01-config.js?v=20261201k"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261201k"></script>
-  <script defer src="../assets/js/02-components.js?v=20261201k"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261201k"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261201k"></script>
-  <script defer src="../assets/js/05-language.js?v=20261201k"></script>
-  <script defer src="../assets/js/06-search.js?v=20261201k"></script>
-  <script defer src="../assets/js/data/splash.js?v=20261201k"></script>
-  <script defer src="../assets/js/29-splash.js?v=20261201k"></script>
-  <script defer src="../assets/js/data/policies.js?v=20261201k"></script>
-  <script defer src="../assets/js/31-policy.js?v=20261201k"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261201k"></script>
-  <script defer src="../assets/js/data/notices.js?v=20261201k"></script>
-  <script defer src="../assets/js/30-notice.js?v=20261201k"></script>
+  <script defer src="../assets/js/00-core.js?v=20261201l"></script>
+  <script defer src="../assets/js/01-config.js?v=20261201l"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261201l"></script>
+  <script defer src="../assets/js/02-components.js?v=20261201l"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261201l"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261201l"></script>
+  <script defer src="../assets/js/05-language.js?v=20261201l"></script>
+  <script defer src="../assets/js/06-search.js?v=20261201l"></script>
+  <script defer src="../assets/js/data/splash.js?v=20261201l"></script>
+  <script defer src="../assets/js/29-splash.js?v=20261201l"></script>
+  <script defer src="../assets/js/data/policies.js?v=20261201l"></script>
+  <script defer src="../assets/js/31-policy.js?v=20261201l"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261201l"></script>
+  <script defer src="../assets/js/data/notices.js?v=20261201l"></script>
+  <script defer src="../assets/js/30-notice.js?v=20261201l"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -85,9 +85,9 @@
 
   <!-- ==============================
        One policy (policy.html?id=…, data/policies.js, 31-policy.js): its
-       edition and dates in the opening band; the other policies and the
-       contents at the side; the policy in brief, then its sections; where
-       to ask; the policies before and after it.
+       edition and dates in the opening band; its contents at the side; the
+       policy in brief, then its sections; where to ask. Each policy stands
+       on its own page, as the footer links them.
   ================================ -->
   <main id="main-content" tabindex="-1" class="plc-page" data-policy>
     <div class="hhero hhero--study hhero--slim plc-hero">
@@ -96,7 +96,6 @@
         <nav class="breadcrumb hhero__crumb" aria-label="เส้นทางนำทาง" data-en-aria-label="Breadcrumb">
           <ol>
             <li><a href="../index.html" data-en="Home">หน้าแรก</a></li>
-            <li><a href="policies.html" data-en="Policies &amp; Legal">นโยบายและข้อกำหนด</a></li>
             <li><span aria-current="page" data-policy-crumb></span></li>
           </ol>
         </nav>
@@ -110,10 +109,6 @@
 
     <div class="container plc-layout">
       <aside class="plc-side">
-        <nav class="plc-side__block" aria-labelledby="plc-all-title">
-          <p class="plc-side__label" id="plc-all-title" data-en="All policies">นโยบายทั้งหมด</p>
-          <ul class="plc-nav" role="list" data-policy-nav></ul>
-        </nav>
         <nav class="plc-side__block plc-side__toc" aria-labelledby="plc-toc-title">
           <p class="plc-side__label" id="plc-toc-title" data-en="On this page">ในหน้านี้</p>
           <ol class="plc-toc" role="list" data-policy-toc></ol>
