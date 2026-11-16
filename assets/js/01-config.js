@@ -63,12 +63,12 @@ window.RS_CONFIG = {
    *  that a new feature needs to be covered.
    *
    *  The Office must confirm this wording, and the table in
-   *  pages/policies.html#privacy-policy has to list the same keys.
+   *  pages/policy.html?id=cookies (RS_STORAGE in data/policies.js) has to list the same keys.
    * ---------------------------------------------------------------------- */
   cookies: {
     enabled: true,
     version: 1,                        /* raise it to ask everyone again */
-    policyHref: 'pages/policies.html#privacy-policy',
+    policyHref: 'pages/policy.html?id=privacy',
     title: { th: 'เว็บไซต์นี้ใช้คุกกี้', en: 'This website uses cookies' },
     intro: {
       th: 'ราชบัณฑิตยสภาจัดเก็บข้อมูลบางอย่างไว้ในเบราว์เซอร์ของคุณ เพื่อให้เว็บไซต์ทำงานได้และจดจำตัวเลือกของคุณ เว็บไซต์นี้ไม่ใช้คุกกี้เพื่อการวิเคราะห์ การติดตาม หรือการโฆษณา',
@@ -427,11 +427,11 @@ window.RS_CONFIG = {
       key: 'website',
       label: { th: 'ข้อมูลเว็บไซต์และนโยบาย', en: 'Website Information and Policies' },
       children: [
-        { label: { th: 'นโยบายเว็บไซต์', en: 'Website Policy' }, href: 'pages/policies.html#website-policy' },
-        { label: { th: 'นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้', en: 'Privacy and Cookie Policy' }, href: 'pages/policies.html#privacy-policy' },
-        { label: { th: 'นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์', en: 'Website Security Policy' }, href: 'pages/policies.html#security-policy' },
-        { label: { th: 'คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด', en: 'Copyright and Disclaimer' }, href: 'pages/policies.html#copyright' },
-        { label: { th: 'นโยบายคุกกี้', en: 'Cookie Policy' }, href: 'pages/policies.html#device-storage-title' },
+        { label: { th: 'นโยบายเว็บไซต์', en: 'Website Policy' }, href: 'pages/policy.html?id=website' },
+        { label: { th: 'นโยบายคุ้มครองข้อมูลส่วนบุคคล', en: 'Privacy Policy' }, href: 'pages/policy.html?id=privacy' },
+        { label: { th: 'นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์', en: 'Website Security Policy' }, href: 'pages/policy.html?id=security' },
+        { label: { th: 'คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด', en: 'Copyright and Disclaimer' }, href: 'pages/policy.html?id=copyright' },
+        { label: { th: 'นโยบายคุกกี้', en: 'Cookie Policy' }, href: 'pages/policy.html?id=cookies' },
         { label: { th: 'RSS ข่าวสาร', en: 'RSS feed' }, href: 'rss.xml' },
         { label: { th: 'ผังเว็บไซต์', en: 'Sitemap' }, href: 'pages/sitemap.html' }
       ]
@@ -553,11 +553,11 @@ window.RS_CONFIG = {
         heading: { th: 'นโยบายและข้อกำหนด', en: 'Policies & Legal' },
         links: [
           { label: { th: 'การประเมินคุณธรรมและความโปร่งใส (ITA)', en: 'Integrity and Transparency (ITA)' }, href: 'pages/ita.html' },
-          { label: { th: 'นโยบายเว็บไซต์', en: 'Website Policy' }, href: 'pages/policies.html#website-policy' },
-          { label: { th: 'นโยบายคุ้มครองข้อมูลส่วนบุคคลและคุกกี้', en: 'Privacy and Cookie Policy' }, href: 'pages/policies.html#privacy-policy' },
-          { label: { th: 'นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์', en: 'Website Security Policy' }, href: 'pages/policies.html#security-policy' },
-          { label: { th: 'คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด', en: 'Copyright and Disclaimer' }, href: 'pages/policies.html#copyright' },
-          { label: { th: 'นโยบายคุกกี้', en: 'Cookie Policy' }, href: 'pages/policies.html#device-storage-title' },
+          { label: { th: 'นโยบายเว็บไซต์', en: 'Website Policy' }, href: 'pages/policy.html?id=website' },
+          { label: { th: 'นโยบายคุ้มครองข้อมูลส่วนบุคคล', en: 'Privacy Policy' }, href: 'pages/policy.html?id=privacy' },
+          { label: { th: 'นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์', en: 'Website Security Policy' }, href: 'pages/policy.html?id=security' },
+          { label: { th: 'คำสงวนลิขสิทธิ์และการปฏิเสธความรับผิด', en: 'Copyright and Disclaimer' }, href: 'pages/policy.html?id=copyright' },
+          { label: { th: 'นโยบายคุกกี้', en: 'Cookie Policy' }, href: 'pages/policy.html?id=cookies' },
           { label: { th: 'ตั้งค่าคุกกี้', en: 'Cookie settings' }, action: 'cookie-settings' }
         ]
       }
