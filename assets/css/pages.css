@@ -10660,3 +10660,8 @@ html[lang="en"] .mega-tab { font-size: .9375rem; }
 .mega-pane__list > li { break-inside: avoid; }
 /* the side title on one line: a step smaller */
 .mega-side__title { font-size: var(--text-md); text-wrap: balance; }
+/* the side never breaks a word: a wider side, the title on one line at a
+   size that fits it, the description and tabs wrapping only between words */
+.mega-inner--tabs { grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); }
+.mega-side__title { font-size: var(--text-base); white-space: nowrap; }
+.mega-tab span, .mega-side__desc { word-break: keep-all; overflow-wrap: normal; }
