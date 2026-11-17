@@ -261,9 +261,6 @@
         <div class="mega-feature">
           <p class="mega-feature__title">${te(item.label).replace(/^(.+?)(และ.+)$/, '<span class="mega-feature__ph">$1</span><wbr><span class="mega-feature__ph">$2</span>')}</p>
           ${item.intro ? `<p class="mega-feature__desc">${te(item.intro)}</p>` : ''}
-          ${item.href ? `<a class="link-arrow" href="${escapeHTML(url(item.href))}"${detectActive() === key ? ' aria-current="page"' : ''}>
-            <span>${te(item.viewLabel || ui.viewSection)}</span>${icon('arrow')}
-          </a>` : ''}
         </div>
         <div class="mega-groups">${columns}${leafColumn}</div>
       </div>`;
