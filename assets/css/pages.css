@@ -10713,3 +10713,19 @@ html:not([lang="en"]) .mega-pane__sub a { -webkit-text-stroke: .012em currentCol
    the size and weight of the text around them (as in the footer) */
 html:not([lang="en"]) :is(.ct-quick, .ct-card, .ct-units) :is(.font-latin, [lang="en"]) { font-family: inherit; font-size: inherit; letter-spacing: normal; }
 html:not([lang="en"]) .ct-quick__item strong.font-latin { font-size: var(--text-md); }
+
+/* Mobile menu, clearer: the open section in green; each group's name a
+   small green heading; its pages full-strength text a step larger, along a
+   thin green rule, each row a clear target */
+.rs-mobile-acc details[open] > summary { color: var(--rst-green-800); font-weight: 700; border-bottom-color: transparent; }
+.rs-mobile-acc details[open] > summary .icon { color: var(--rst-green-800); }
+.rs-mobile-links { padding: 4px 0 14px 0; gap: 2px; }
+.rs-mobile-links .rs-mobile-sub { min-height: 36px; margin-top: 12px; padding: 0 4px; font-size: var(--text-sm); font-weight: 700; color: var(--rst-green-700); }
+.rs-mobile-links .rs-mobile-sub:first-child { margin-top: 0; }
+.rs-mobile-links .rs-mobile-subsub { min-height: 46px; margin-left: 6px; padding: 6px 10px 6px 16px; border-left: 2px solid var(--rst-green-100); border-radius: 0 10px 10px 0; font-size: var(--text-base); line-height: 1.35; color: var(--text-primary); transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
+.rs-mobile-links .rs-mobile-subsub:hover, .rs-mobile-links .rs-mobile-subsub:focus-visible { border-left-color: var(--rst-green-700); background: var(--rst-green-50); color: var(--rst-green-900); }
+.rs-mobile-links .rs-mobile-subsub[aria-current="page"] { border-left-color: var(--rst-green-800); background: var(--rst-green-50); font-weight: 700; color: var(--rst-green-900); }
+.rs-mobile-links .rs-mobile-subsub--deep { margin-left: 22px; padding-left: 14px !important; font-size: var(--text-sm); color: var(--text-secondary); }
+html:not([lang="en"]) .rs-mobile-links .rs-mobile-subsub { -webkit-text-stroke: .015em currentColor; }
+html[lang="en"] .rs-mobile-links .rs-mobile-subsub { font-size: 1rem; color: var(--text-primary); }
+.rs-mobile-links .rs-mobile-sub { font-size: var(--text-base); }
