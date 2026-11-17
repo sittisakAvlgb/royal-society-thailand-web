@@ -219,7 +219,8 @@ window.RS_CONFIG = {
             { label: { th: 'ผู้บริหารราชบัณฑิตยสภาปัจจุบัน', en: 'Current Executives' }, menu: { th: 'ผู้บริหารปัจจุบัน', en: 'Current Executives' }, href: 'pages/about-executives.html' },
             { label: { th: 'สารจากผู้บริหารราชบัณฑิตยสภา', en: 'Message from the President' }, menu: { th: 'สารจากผู้บริหาร', en: 'Message from the President' }, href: 'pages/about-president-message.html' },
             { label: { th: 'ทำเนียบผู้บริหาร', en: 'Past Executives' }, href: 'pages/about-past-presidents.html' },
-            { label: { th: 'พันธกิจของราชบัณฑิตยสภาด้านภาษาไทย', en: 'Thai Language Mission' }, menu: { th: 'พันธกิจด้านภาษาไทย', en: 'Thai Language Mission' }, href: 'pages/about-thai-language.html' },
+            /* hidden for now (Nov 2026), the page stays: pages/about-thai-language.html
+            { label: { th: 'พันธกิจของราชบัณฑิตยสภาด้านภาษาไทย', en: 'Thai Language Mission' }, menu: { th: 'พันธกิจด้านภาษาไทย', en: 'Thai Language Mission' }, href: 'pages/about-thai-language.html' }, */
             { label: { th: 'สุขภาวะโดยองค์รวมกับคุณภาพชีวิต', en: 'Holistic Well-being and Quality of Life' }, menu: { th: 'สุขภาวะและคุณภาพชีวิต', en: 'Well-being' }, href: 'pages/about-wellbeing.html' }
           ]
         },
@@ -364,8 +365,9 @@ window.RS_CONFIG = {
           label: { th: 'ติดต่อสำนักงาน', en: 'Contact the Office' }, href: 'pages/contact.html',
           children: [
             { label: { th: 'ติดต่อราชบัณฑิตยสภา', en: 'Contact the Royal Society' }, href: 'pages/contact.html' },
-            { label: { th: 'แบบฟอร์มติดต่อออนไลน์', en: 'Online Contact Form' }, href: 'pages/contact-form.html' },
-            { label: { th: 'คำถามที่พบบ่อย (FAQ)', en: 'Frequently Asked Questions (FAQ)' }, href: 'pages/contact-faq.html' }
+            { label: { th: 'แบบฟอร์มติดต่อออนไลน์', en: 'Online Contact Form' }, href: 'pages/contact-form.html' }
+            /* hidden for now (Nov 2026), the page stays:
+            { label: { th: 'คำถามที่พบบ่อย (FAQ)', en: 'Frequently Asked Questions (FAQ)' }, href: 'pages/contact-faq.html' } */
           ]
         },
         /* the Office's own feedback form and complaint channels (orst.go.th, Nov 2026) */
@@ -383,8 +385,9 @@ window.RS_CONFIG = {
         {
           label: { th: 'ความโปร่งใสและข้อมูลเปิด', en: 'Transparency and Open Data' },
           children: [
-            /* the public disclosure assessed each year by the NACC */
-            { label: { th: 'การประเมินคุณธรรมและความโปร่งใส (ITA)', en: 'Integrity and Transparency Assessment (ITA)' }, menu: { th: 'การประเมิน ITA', en: 'ITA' }, href: 'pages/ita.html' },
+            /* the public disclosure assessed each year by the NACC; hidden for now
+               (Nov 2026), the pages stay: pages/ita.html, pages/ita-item.html
+            { label: { th: 'การประเมินคุณธรรมและความโปร่งใส (ITA)', en: 'Integrity and Transparency Assessment (ITA)' }, menu: { th: 'การประเมิน ITA', en: 'ITA' }, href: 'pages/ita.html' }, */
             /* sitemap 1.15: the national open-data portal
                TODO (Office): confirm whether the Royal Society publishes its own datasets */
             { label: { th: 'ข้อมูลเปิดภาครัฐ (Open Data)', en: 'Government Open Data' }, menu: { th: 'ข้อมูลเปิดภาครัฐ', en: 'Open Data' }, href: 'https://data.go.th/', external: true }
@@ -551,7 +554,7 @@ window.RS_CONFIG = {
         id: 'policies',
         heading: { th: 'นโยบายและข้อกำหนด', en: 'Policies & Legal' },
         links: [
-          { label: { th: 'การประเมินคุณธรรมและความโปร่งใส (ITA)', en: 'Integrity and Transparency (ITA)' }, href: 'pages/ita.html' },
+          /* hidden for now (Nov 2026): { label: { th: 'การประเมินคุณธรรมและความโปร่งใส (ITA)', en: 'Integrity and Transparency (ITA)' }, href: 'pages/ita.html' }, */
           { label: { th: 'นโยบายเว็บไซต์', en: 'Website Policy' }, href: 'pages/policy.html?id=website' },
           { label: { th: 'นโยบายคุ้มครองข้อมูลส่วนบุคคล', en: 'Privacy Policy' }, href: 'pages/policy.html?id=privacy' },
           { label: { th: 'นโยบายการรักษาความมั่นคงปลอดภัยเว็บไซต์', en: 'Website Security Policy' }, href: 'pages/policy.html?id=security' },
