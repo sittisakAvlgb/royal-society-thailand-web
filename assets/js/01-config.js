@@ -600,13 +600,12 @@ window.RS_CONFIG = {
         id: 'main',
         heading: { th: 'เมนูหลัก', en: 'Main Menu' },
         links: [
-          { label: { th: 'หน้าแรก', en: 'Home' }, href: 'index.html' },
+          /* the menu bar, in its order (the client's sitemap) */
+          { label: { th: 'หน้าหลัก', en: 'Home' }, href: 'index.html' },
           { label: { th: 'เกี่ยวกับราชบัณฑิตยสภา', en: 'About the Royal Society' }, href: 'pages/about.html' },
           { label: { th: 'ราชบัณฑิตและภาคีสมาชิก', en: 'Fellows and Associate Fellows' }, href: 'pages/fellows.html' },
-          { label: { th: 'วารสารและสิ่งพิมพ์', en: 'Journals and Publications' }, href: 'pages/series.html?id=journal-th' },
-          { label: { th: 'ข่าวสาร', en: 'News' }, href: 'pages/news.html' },
-          { label: { th: 'การรับสมัคร', en: 'Applications for Membership' }, href: 'pages/admissions.html' },
-          { label: { th: 'ติดต่อและมีส่วนร่วม', en: 'Contact and Participation' }, href: 'pages/contact.html' }
+          { label: { th: 'ข่าวสารและกิจกรรม', en: 'Activities' }, href: 'pages/news.html' },
+          { label: { th: 'สำนัก', en: 'Academies' }, href: 'pages/about.html#academies' }
         ]
       },
       {
