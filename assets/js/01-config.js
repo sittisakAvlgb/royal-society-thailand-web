@@ -198,12 +198,12 @@ window.RS_CONFIG = {
       key: 'about',
       label: { th: 'เกี่ยวกับราชบัณฑิตยสภา', en: 'About the Royal Society' },
       href: 'pages/about.html',
-      match: ['about.html', 'academy.html', 'about-history.html', 'about-authority.html', 'about-direction.html', 'about-structure.html', 'about-executives.html', 'about-past-presidents.html', 'about-president-message.html', 'about-vision.html', 'about-thai-language.html', 'about-wellbeing.html', 'about-acts.html', 'about-bylaws.html', 'about-rules.html', 'about-announcements.html'],
+      match: ['about.html', 'about-history.html', 'about-authority.html', 'about-direction.html', 'about-structure.html', 'about-executives.html', 'about-past-presidents.html', 'about-president-message.html', 'about-vision.html', 'about-thai-language.html', 'about-wellbeing.html', 'about-acts.html', 'about-bylaws.html', 'about-rules.html', 'about-announcements.html'],
       intro: { th: 'ประวัติ อำนาจหน้าที่ ผู้บริหาร สำนัก และกฎหมายที่เกี่ยวข้อง', en: 'History, mandate and authority, executives, academies, laws and regulations' },
       /* the order of the client's sitemap (Royalsociety Sitemap, section 1):
          1.1–1.3 executives · 1.5–1.13 the organisation · 1.14 laws ·
          1.16 contact; numbers not here are hidden for now. The academies
-         are not in section 1 of the sitemap; they stay last until placed. */
+         are section 4, a menu of their own. */
       children: [
         {
           label: { th: 'ผู้บริหาร', en: 'Executives' }, href: 'pages/about.html#executives',
@@ -248,14 +248,6 @@ window.RS_CONFIG = {
           children: [
             { label: { th: 'ติดต่อเรา', en: 'Contact the Office of the Royal Society' }, href: 'pages/contact.html' },
             { label: { th: 'เครือข่ายสังคมออนไลน์ (Social Media)', en: 'Social Media' }, href: 'pages/contact.html#social' }
-          ]
-        },
-        {
-          label: { th: 'สำนัก', en: 'Academies' }, href: 'pages/about.html#academies',
-          children: [
-            { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' }, href: 'pages/academy.html?id=moral' },
-            { label: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' }, href: 'pages/academy.html?id=science' },
-            { label: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' }, href: 'pages/academy.html?id=arts' }
           ]
         }
       ]
@@ -352,6 +344,21 @@ window.RS_CONFIG = {
             { label: { th: 'RSS ข่าวสาร', en: 'RSS Feed' }, href: 'rss.xml' }
           ]
         }
+      ]
+    },
+
+    {
+      key: 'academies',
+      label: { th: 'สำนัก', en: 'Academies' },
+      href: 'pages/about.html#academies',
+      match: ['academy.html'],
+      intro: { th: 'สำนักทั้งสามของราชบัณฑิตยสภา และสำนักงานราชบัณฑิตยสภา', en: 'The three academies of the Royal Society, and its Office' },
+      /* the client's sitemap, section 4 */
+      children: [
+        { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' }, href: 'pages/academy.html?id=moral' },
+        { label: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' }, href: 'pages/academy.html?id=science' },
+        { label: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' }, href: 'pages/academy.html?id=arts' },
+        { label: { th: 'สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society' }, href: 'https://www.orst.go.th/', external: true }
       ]
     },
 
