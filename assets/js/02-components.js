@@ -242,7 +242,14 @@
           ${item.intro ? `<p class="mega-side__desc">${te(item.intro)}</p>` : ''}
           <ul class="mega-tabs" role="tablist" aria-orientation="vertical" aria-label="${te(item.label)}">${tabs}</ul>
         </div>
-        <div class="mega-panes">${panes}</div>
+        <div class="mega-panes${item.feature ? ' has-feature' : ''}">
+          <div class="mega-panes__list">${panes}</div>
+          ${item.feature ? `<a class="mega-card" href="${escapeHTML(url(item.feature.href))}">
+            <img src="${escapeHTML(url(item.feature.image))}" alt="" loading="lazy" decoding="async">
+            <span class="mega-card__text"><span class="mega-card__kicker">${te(item.feature.kicker)}</span><strong>${te(item.feature.title)}</strong></span>
+            <span class="mega-card__go" aria-hidden="true">${icon('arrow')}</span>
+          </a>` : ''}
+        </div>
       </div>`;
     }
 

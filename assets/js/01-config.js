@@ -196,6 +196,8 @@ window.RS_CONFIG = {
 
     {
       key: 'about',
+      /* the picture card at the right of the menu panel */
+      feature: { image: 'assets/images/about/about-office.jpg', kicker: { th: 'พ.ศ. ๒๔๖๙–๒๕๖๙', en: '1926–2026' }, title: { th: '๑๐๐ ปีแห่งการบำรุงสรรพวิชา', en: 'A hundred years in the service of learning' }, href: 'pages/about-history.html' },
       label: { th: 'เกี่ยวกับราชบัณฑิตยสภา', en: 'About the Royal Society' },
       href: 'pages/about.html',
       match: ['about.html', 'about-history.html', 'about-authority.html', 'about-direction.html', 'about-structure.html', 'about-executives.html', 'about-past-presidents.html', 'about-president-message.html', 'about-vision.html', 'about-thai-language.html', 'about-wellbeing.html', 'about-acts.html', 'about-bylaws.html', 'about-rules.html', 'about-announcements.html'],
@@ -260,6 +262,8 @@ window.RS_CONFIG = {
 
     {
       key: 'fellows',
+      /* the picture card at the right of the menu panel */
+      feature: { image: 'assets/images/news/news-lead.jpg', kicker: { th: 'รายนาม', en: 'Directory' }, title: { th: 'ค้นหาราชบัณฑิตและภาคีสมาชิกตามสาขาวิชา', en: 'Find Fellows by field' }, href: 'pages/fellows.html' },
       label: { th: 'ราชบัณฑิตและภาคีสมาชิก', en: 'Fellows and Associate Fellows' },
       href: 'pages/fellows.html',
       match: ['fellows.html', 'fellow.html', 'admissions.html', 'fellows-academies.html', 'fellows-recruitment.html', 'fellows-past.html', 'admissions-associate-rules.html', 'admissions-associate-form.html', 'admissions-fellow-rules.html', 'admissions-fellow-form.html'],
@@ -304,6 +308,8 @@ window.RS_CONFIG = {
 
     {
       key: 'news',
+      /* the picture card at the right of the menu panel */
+      feature: { image: 'assets/images/news/news-01.jpg', kicker: { th: 'ปฏิทินกิจกรรม', en: 'Event Calendar' }, title: { th: 'บรรยายและกิจกรรมที่จะจัดขึ้น', en: 'Lectures and events to come' }, href: 'pages/works-calendar.html' },
       label: { th: 'ข่าวสารและกิจกรรม', en: 'Activities' },
       href: 'pages/news.html',
       match: ['news.html', 'news-press.html', 'news-gallery.html', 'news-album.html', 'news-videos.html', 'news-detail.html', 'academy-news.html'],
