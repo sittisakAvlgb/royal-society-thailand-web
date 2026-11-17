@@ -10754,3 +10754,17 @@ html[lang="en"] .rs-mobile-links .rs-mobile-subsub { font-size: 1rem; color: var
 .mega-inner--plain .mega-sub { border-left-color: var(--rst-green-100); }
 .mega-inner--plain .mega-sub a:hover { color: var(--rst-green-800); text-decoration: underline; text-underline-offset: .2em; }
 @media (prefers-reduced-motion: reduce) { .mega-inner--plain .mega-group > ul > li > a, .mega-inner--plain .mega-group > ul > li > a::before, .mega-inner--plain .mega-group__title::after { transition: none; } }
+
+/* balanced columns: each as wide as its pages need (shrinking only when the
+   panel runs short), the space shared out between them; pointing at a page
+   moves it without reflow, so no name breaks onto a second line */
+.mega-inner--plain .mega-groups { display: flex; justify-content: space-between; align-items: flex-start; }
+.mega-inner--plain .mega-group { flex: 0 1 auto; min-width: 0; padding-inline: 32px; align-self: stretch; }
+.mega-inner--plain .mega-group:last-child { padding-right: 0; }
+.mega-inner--plain .mega-group > ul > li > a { padding-left: 0 !important; transition: color .2s ease, transform .25s ease; }
+.mega-inner--plain .mega-group > ul > li > a::before { left: -18px; }
+.mega-inner--plain .mega-group > ul > li > a:hover { transform: translateX(18px); }
+/* every page name on one line; the columns a little closer below 1440 */
+.mega-inner--plain .mega-group a, .mega-inner--plain .mega-group__title { white-space: nowrap; }
+.mega-inner--plain .mega-sub a { white-space: normal; }
+@media (max-width: 89.98rem) { .mega-inner--plain .mega-group { padding-inline: 20px; } .mega-inner--plain { padding-inline: 32px; } }
