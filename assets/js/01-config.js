@@ -220,8 +220,7 @@ window.RS_CONFIG = {
             { label: { th: 'สารจากผู้บริหารราชบัณฑิตยสภา', en: 'Message from the President' }, menu: { th: 'สารจากผู้บริหาร', en: 'Message from the President' }, href: 'pages/about-president-message.html' },
             { label: { th: 'ทำเนียบผู้บริหาร', en: 'Past Executives' }, href: 'pages/about-past-presidents.html' },
             { label: { th: 'พันธกิจของราชบัณฑิตยสภาด้านภาษาไทย', en: 'Thai Language Mission' }, menu: { th: 'พันธกิจด้านภาษาไทย', en: 'Thai Language Mission' }, href: 'pages/about-thai-language.html' },
-            { label: { th: 'สุขภาวะโดยองค์รวมกับคุณภาพชีวิต', en: 'Holistic Well-being and Quality of Life' }, menu: { th: 'สุขภาวะและคุณภาพชีวิต', en: 'Well-being' }, href: 'pages/about-wellbeing.html' },
-            { label: { th: 'ผู้บริหารเทคโนโลยีสารสนเทศระดับสูง (CIO)', en: 'Chief Information Officer (CIO)' }, menu: { th: 'ผู้บริหารสารสนเทศ (CIO)', en: 'Chief Information Officer' }, href: 'pages/about-cio.html' }
+            { label: { th: 'สุขภาวะโดยองค์รวมกับคุณภาพชีวิต', en: 'Holistic Well-being and Quality of Life' }, menu: { th: 'สุขภาวะและคุณภาพชีวิต', en: 'Well-being' }, href: 'pages/about-wellbeing.html' }
           ]
         },
         {
