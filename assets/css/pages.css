@@ -10729,3 +10729,6 @@ html:not([lang="en"]) .ct-quick__item strong.font-latin { font-size: var(--text-
 html:not([lang="en"]) .rs-mobile-links .rs-mobile-subsub { -webkit-text-stroke: .015em currentColor; }
 html[lang="en"] .rs-mobile-links .rs-mobile-subsub { font-size: 1rem; color: var(--text-primary); }
 .rs-mobile-links .rs-mobile-sub { font-size: var(--text-base); }
+/* panels without the intro column: the groups across the whole width */
+.mega-inner--plain { grid-template-columns: minmax(0, 1fr); padding-inline: var(--space-10, 40px); }
+.mega-inner--plain .mega-groups { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-8); }

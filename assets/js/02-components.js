@@ -218,33 +218,6 @@
     /* Top-level items kept out of the bar (bar: false) can ride along as a column */
     const guests = (item.alsoShow || []).map(key => CFG.nav.find(entry => entry.key === key)).filter(Boolean);
 
-    /* Two or more groups: the groups listed down the side as tabs, the one
-       chosen showing its pages beside them in two columns (hover, click or
-       the arrow keys choose) */
-    if (branches.length >= 2 && !guests.length) {
-      const k = escapeHTML(item.key);
-      const sub = parent => (parent.children?.length && parent.panel !== 'flat')
-        ? `<ul class="mega-pane__sub" role="list">${parent.children.map(x => `<li>${link(menuName(x))}</li>`).join('')}</ul>` : '';
-      const tabs = branches.map((child, i) => `
-          <li role="presentation"><button class="mega-tab" type="button" role="tab" id="mt-${k}-${i}" aria-controls="mp-${k}-${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-mega-tab>
-            <span>${te(menuName(child).label)}</span>${icon('chevron')}
-          </button></li>`).join('');
-      const panes = branches.map((child, i) => `
-          <section class="mega-pane" role="tabpanel" id="mp-${k}-${i}" aria-labelledby="mt-${k}-${i}"${i === 0 ? '' : ' hidden'}>
-            <p class="mega-pane__title">${child.href ? `<a href="${escapeHTML(url(child.href))}">${te(child.label)}</a>` : te(child.label)}</p>
-            <ul class="mega-pane__list" role="list">${child.children.map(c => `<li>${link(menuName(c), 'mega-pane__link')}${sub(c)}</li>`).join('')}</ul>
-          </section>`).join('');
-      return `
-      <div class="mega-inner mega-inner--tabs">
-        <div class="mega-side">
-          <ul class="mega-tabs" role="tablist" aria-orientation="vertical" aria-label="${te(item.label)}">${tabs}</ul>
-        </div>
-        <div class="mega-panes">
-          <div class="mega-panes__list">${panes}</div>
-        </div>
-      </div>`;
-    }
-
     const columns = [...branches, ...guests].map(child => `
       <div class="mega-group">
         <p class="mega-group__title">${link({ ...menuName(child), href: null })}</p>
@@ -257,11 +230,7 @@
       </div>` : '';
 
     return `
-      <div class="mega-inner">
-        <div class="mega-feature">
-          <p class="mega-feature__title">${te(item.label).replace(/^(.+?)(และ.+)$/, '<span class="mega-feature__ph">$1</span><wbr><span class="mega-feature__ph">$2</span>')}</p>
-          ${item.intro ? `<p class="mega-feature__desc">${te(item.intro)}</p>` : ''}
-        </div>
+      <div class="mega-inner mega-inner--plain">
         <div class="mega-groups">${columns}${leafColumn}</div>
       </div>`;
   }
