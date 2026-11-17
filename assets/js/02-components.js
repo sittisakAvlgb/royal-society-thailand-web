@@ -221,7 +221,7 @@
     const columns = [...branches, ...guests].map(child => `
       <div class="mega-group">
         <p class="mega-group__title">${link({ ...menuName(child), href: null })}</p>
-        <ul role="list">${child.children.map(sub => `<li>${link(menuName(sub))}${sub.children?.length ? `<ul class="mega-sub" role="list">${sub.children.map(x => `<li>${link(menuName(x))}</li>`).join('')}</ul>` : ''}</li>`).join('')}</ul>
+        <ul role="list">${child.children.map(sub => `<li>${link(menuName(sub))}${sub.children?.length && sub.panel !== 'flat' ? `<ul class="mega-sub" role="list">${sub.children.map(x => `<li>${link(menuName(x))}</li>`).join('')}</ul>` : ''}</li>`).join('')}</ul>
       </div>`).join('');
 
     const leafColumn = leaves.length ? `

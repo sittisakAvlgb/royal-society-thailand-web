@@ -10604,3 +10604,10 @@ html[lang="en"] .plc-steps li::before { content: counter(plc); }
 .sitemap-col li.sitemap-deep a { min-height: 30px; font-size: var(--text-xs); }
 /* five groups (About): one row of five, not four and one left alone below */
 @media (min-width: 80rem) { .mega-groups:has(> .mega-group:nth-child(5):last-child) { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-5, 20px); } }
+/* five groups: a narrower opening column and tighter gaps, so each group
+   has room for its names on one line */
+@media (min-width: 80rem) {
+  .mega-inner:has(.mega-groups > .mega-group:nth-child(5):last-child) { grid-template-columns: minmax(200px, 240px) minmax(0, 1fr); gap: var(--space-8); }
+  .mega-groups:has(> .mega-group:nth-child(5):last-child) { gap: 16px; }
+  .mega-groups:has(> .mega-group:nth-child(5):last-child) .mega-group__title { text-wrap: balance; }
+}
