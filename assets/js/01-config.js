@@ -266,24 +266,40 @@ window.RS_CONFIG = {
       label: { th: 'ราชบัณฑิตและภาคีสมาชิก', en: 'Fellows and Associate Fellows' },
       href: 'pages/fellows.html',
       match: ['fellows.html', 'fellow.html', 'admissions.html', 'fellows-academies.html', 'fellows-recruitment.html', 'fellows-past.html', 'admissions-associate-rules.html', 'admissions-associate-form.html', 'admissions-fellow-rules.html', 'admissions-fellow-form.html'],
-      /* the panel's own link goes to the search, so it says so */
-      viewLabel: { th: 'ค้นหาสมาชิก', en: 'Search Fellows' },
-      intro: { th: 'ค้นหาสมาชิก รายนามตามสำนัก การสรรหา และทำเนียบอดีตราชบัณฑิต', en: 'Search Fellows, directory by academy, vacancies and election, and past Fellows' },
+      /* the order of the client's sitemap (Royalsociety Sitemap, section 2):
+         2.1 the directory, by academy · 2.2 applications, each with its
+         regulations and form */
+      intro: { th: 'รายนามราชบัณฑิตและภาคีสมาชิกตามสำนัก และการรับสมัคร', en: 'The directory of Fellows by academy, and applications' },
       children: [
         {
           label: { th: 'รายนามราชบัณฑิตและภาคีสมาชิก', en: 'Directory of Fellows and Associate Fellows' }, href: 'pages/fellows.html',
           children: [
-            { label: { th: 'ค้นหาสมาชิก', en: 'Search Fellows' }, href: 'pages/fellows.html' },
+            { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Members: Academy of Moral and Political Sciences' }, href: 'pages/fellows.html?academy=moral' },
+            { label: { th: 'สำนักวิทยาศาสตร์', en: 'Members: Academy of Science' }, href: 'pages/fellows.html?academy=science' },
+            { label: { th: 'สำนักศิลปกรรม', en: 'Members: Academy of Arts' }, href: 'pages/fellows.html?academy=arts' }
+            /* not in the client's sitemap, hidden for now (Nov 2026), the pages stay:
             { label: { th: 'รายนามตามสำนัก', en: 'Directory by Academy' }, href: 'pages/fellows-academies.html' },
-            { label: { th: 'ทำเนียบอดีตราชบัณฑิต', en: 'Past Fellows' }, href: 'pages/fellows-past.html' }
+            { label: { th: 'ทำเนียบอดีตราชบัณฑิต', en: 'Past Fellows' }, href: 'pages/fellows-past.html' },
+            { label: { th: 'ตำแหน่งว่างและการสรรหาสมาชิก', en: 'Vacancies and Election of Fellows' }, href: 'pages/fellows-recruitment.html' } */
           ]
         },
         {
-          label: { th: 'การสรรหาและรับสมัคร', en: 'Election and Applications' }, href: 'pages/fellows-recruitment.html',
+          label: { th: 'การรับสมัคร', en: 'Applications' }, href: 'pages/admissions.html',
           children: [
-            { label: { th: 'ตำแหน่งว่างและการสรรหาสมาชิก', en: 'Vacancies and Election of Fellows' }, href: 'pages/fellows-recruitment.html' },
-            { label: { th: 'การรับสมัครบุคคลเป็นภาคีสมาชิก', en: 'Applying to Become an Associate Fellow' }, href: 'pages/admissions.html#associate-fellow' },
-            { label: { th: 'การรับสมัครภาคีสมาชิกเป็นราชบัณฑิต', en: 'Associate Fellows Applying to Become Fellows' }, href: 'pages/admissions.html#fellow' }
+            {
+              label: { th: 'การรับสมัครบุคคลเป็นภาคีสมาชิก', en: 'Application for Associate Fellowship' }, href: 'pages/admissions.html#associate-fellow',
+              children: [
+                { label: { th: 'ระเบียบการรับสมัครบุคคลเป็นภาคีสมาชิก', en: 'Associate Fellowship Regulations' }, href: 'pages/admissions-associate-rules.html' },
+                { label: { th: 'แบบฟอร์มการรับสมัครบุคคลเป็นภาคีสมาชิก', en: 'Associate Fellowship Application Form' }, href: 'pages/admissions-associate-form.html' }
+              ]
+            },
+            {
+              label: { th: 'การรับสมัครภาคีสมาชิกเป็นราชบัณฑิต', en: 'Application for Fellowship' }, href: 'pages/admissions.html#fellow',
+              children: [
+                { label: { th: 'ระเบียบการรับสมัครภาคีสมาชิกเป็นราชบัณฑิต', en: 'Fellowship Regulations' }, href: 'pages/admissions-fellow-rules.html' },
+                { label: { th: 'แบบฟอร์มการรับสมัครภาคีสมาชิกเป็นราชบัณฑิต', en: 'Fellowship Application Form' }, href: 'pages/admissions-fellow-form.html' }
+              ]
+            }
           ]
         }
       ]

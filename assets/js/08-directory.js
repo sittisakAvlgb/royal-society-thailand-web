@@ -403,7 +403,9 @@
     const host = qs('[data-sitemap]');
     if (!host) return;
 
-    const menu = CFG.nav || [];
+    /* the sitemap follows the menu bar; an entry kept off the bar (bar: false)
+       is already inside another section */
+    const menu = (CFG.nav || []).filter(item => item.bar !== false);
     const extra = CFG.sitemapExtra || [];
     const total = [...menu, ...extra].reduce((sum, group) => sum + countPages(group), 0);
 
