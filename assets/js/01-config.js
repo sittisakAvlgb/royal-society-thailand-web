@@ -306,6 +306,56 @@ window.RS_CONFIG = {
     },
 
     {
+      key: 'news',
+      label: { th: 'ข่าวสารและกิจกรรม', en: 'Activities' },
+      href: 'pages/news.html',
+      match: ['news.html', 'news-press.html', 'news-gallery.html', 'news-album.html', 'news-videos.html', 'news-detail.html', 'academy-news.html'],
+      intro: { th: 'โครงการ วารสาร บรรยายวิชาการ แถลงข่าว กิจกรรมสำนัก ปฏิทิน และคลังภาพและวิดีโอ', en: 'Projects, journals, lectures, press conferences, academy activities, the calendar, photos and videos' },
+      /* the order of the client's sitemap (Royalsociety Sitemap, section 3),
+         3.1–3.15, under headings for the menu panel. 3.14 Photos & Videos
+         stays two entries, the gallery and the videos being pages of their
+         own. ข่าวประชาสัมพันธ์ (news.html) is not in the sitemap: hidden from
+         the menu for now; the page stays and the panel's own link opens it. */
+      children: [
+        {
+          label: { th: 'โครงการและวารสาร', en: 'Projects and Journals' },
+          children: [
+            { label: { th: 'โครงการราชบัณฑิตยสภานำความรู้สู่สังคม', en: 'Royal Society Knowledge to Society Project' }, href: 'pages/works-knowledge-to-society.html' },
+            { label: { th: 'The Royal Society of Thailand Newsletter', en: 'The Royal Society of Thailand Newsletter' }, href: 'pages/series.html?id=newsletter' },
+            { label: { th: 'The Journal of the Royal Society of Thailand', en: 'The Journal of the Royal Society of Thailand' }, href: 'pages/series.html?id=journal-en' },
+            { label: { th: 'วารสารราชบัณฑิตยสภา', en: 'Journal of the Royal Society (Thai)' }, href: 'pages/series.html?id=journal-th' }
+          ]
+        },
+        {
+          label: { th: 'กิจกรรม', en: 'Activities' },
+          children: [
+            { label: { th: 'บรรยายวิชาการ', en: 'Academic Lectures' }, href: 'pages/works-lectures.html' },
+            { label: { th: 'แถลงข่าว', en: 'Press Conferences' }, href: 'pages/news-press.html' },
+            { label: { th: 'กิจกรรมอื่น ๆ', en: 'Other Activities' }, href: 'pages/news.html?cat=activity' }
+          ]
+        },
+        {
+          label: { th: 'กิจกรรมสำนัก', en: 'Academy Activities' }, href: 'pages/academy-news.html',
+          children: [
+            { label: { th: 'ราชบัณฑิตสัญจร สำนักธรรมศาสตร์และการเมือง', en: 'Fellows on Tour: Moral and Political Sciences' }, href: 'pages/works-on-tour.html?academy=moral' },
+            { label: { th: 'ราชบัณฑิตสัญจร สำนักวิทยาศาสตร์', en: 'Fellows on Tour: Science' }, href: 'pages/works-on-tour.html?academy=science' },
+            { label: { th: 'อาศรมความคิด สำนักวิทยาศาสตร์', en: 'Ashram of Thought: Science' }, href: 'pages/works-ideas-forum.html' },
+            { label: { th: 'ราชบัณฑิตสัญจร สำนักศิลปกรรม', en: 'Fellows on Tour: Arts' }, href: 'pages/works-on-tour.html?academy=arts' }
+          ]
+        },
+        {
+          label: { th: 'ปฏิทินและสื่อ', en: 'Calendar and Media' },
+          children: [
+            { label: { th: 'ปฏิทินกิจกรรม', en: 'Event Calendar' }, href: 'pages/works-calendar.html' },
+            { label: { th: 'คลังรูปภาพ', en: 'Photos' }, href: 'pages/news-gallery.html' },
+            { label: { th: 'คลังวิดีโอ', en: 'Videos' }, href: 'pages/news-videos.html' },
+            { label: { th: 'RSS ข่าวสาร', en: 'RSS Feed' }, href: 'rss.xml' }
+          ]
+        }
+      ]
+    },
+
+    {
       key: 'works',
       label: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' },
       short: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' },
@@ -343,21 +393,6 @@ window.RS_CONFIG = {
             { label: { th: 'โครงการนำความรู้สู่สังคม', en: 'Knowledge for Society Programme' }, href: 'pages/works-knowledge-to-society.html' }
           ]
         }
-      ]
-    },
-
-    {
-      key: 'news',
-      label: { th: 'ข่าวสาร', en: 'News' },
-      href: 'pages/news.html',
-      match: ['news.html', 'news-press.html', 'news-gallery.html', 'news-album.html', 'news-videos.html', 'news-detail.html', 'academy-news.html'],
-      intro: { th: 'แถลงข่าว ข่าวประชาสัมพันธ์ คลังรูปภาพ และคลังวิดีโอของราชบัณฑิตยสภา', en: 'Press releases, news and announcements, and the photo and video galleries' },
-      children: [
-        { label: { th: 'แถลงข่าว', en: 'Press Releases' }, href: 'pages/news-press.html' },
-        { label: { th: 'ข่าวประชาสัมพันธ์', en: 'News and Announcements' }, href: 'pages/news.html' },
-        { label: { th: 'ข่าวและกิจกรรมของสำนัก', en: 'News from the Academies' }, href: 'pages/academy-news.html' },
-        { label: { th: 'คลังรูปภาพ', en: 'Photo Gallery' }, href: 'pages/news-gallery.html' },
-        { label: { th: 'คลังวิดีโอ', en: 'Video Gallery' }, href: 'pages/news-videos.html' }
       ]
     },
 
@@ -436,19 +471,6 @@ window.RS_CONFIG = {
    *   sitemap can never drift out of step with the header.
    * ---------------------------------------------------------------------- */
   sitemapExtra: [
-    {
-      key: 'academy-activities',
-      label: { th: 'กิจกรรมสำนัก', en: 'Academy Activities' },
-      children: [
-        { label: { th: 'ราชบัณฑิตสัญจร สำนักธรรมศาสตร์และการเมือง', en: 'Fellows on Tour: Moral and Political Sciences' }, href: 'pages/works-on-tour.html?academy=moral' },
-        { label: { th: 'ราชบัณฑิตสัญจร สำนักวิทยาศาสตร์', en: 'Fellows on Tour: Science' }, href: 'pages/works-on-tour.html?academy=science' },
-        { label: { th: 'ราชบัณฑิตสัญจร สำนักศิลปกรรม', en: 'Fellows on Tour: Arts' }, href: 'pages/works-on-tour.html?academy=arts' },
-        { label: { th: 'อาศรมความคิด สำนักวิทยาศาสตร์', en: 'Think Tank Forum: Science' }, href: 'pages/works-ideas-forum.html' },
-        { label: { th: 'ข่าวและกิจกรรม สำนักธรรมศาสตร์และการเมือง', en: 'News: Moral and Political Sciences' }, href: 'pages/academy.html?id=moral#news' },
-        { label: { th: 'ข่าวและกิจกรรม สำนักวิทยาศาสตร์', en: 'News: Science' }, href: 'pages/academy.html?id=science#news' },
-        { label: { th: 'ข่าวและกิจกรรม สำนักศิลปกรรม', en: 'News: Arts' }, href: 'pages/academy.html?id=arts#news' }
-      ]
-    },
     {
       key: 'explore',
       label: { th: 'ค้นคว้า', en: 'Explore' },
