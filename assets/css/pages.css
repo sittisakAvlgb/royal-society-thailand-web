@@ -10709,3 +10709,7 @@ html[lang="en"] .mega-tab { font-size: .9375rem; }
 html:not([lang="en"]) .mega-pane__sub a { -webkit-text-stroke: .012em currentColor; }
 /* the three academies under the directory: one column, read straight down */
 #mp-fellows-0 .mega-pane__list { columns: 1; max-width: 560px; }
+/* contact page, Thai: emails and other English runs in the Thai face, at
+   the size and weight of the text around them (as in the footer) */
+html:not([lang="en"]) :is(.ct-quick, .ct-card, .ct-units) :is(.font-latin, [lang="en"]) { font-family: inherit; font-size: inherit; letter-spacing: normal; }
+html:not([lang="en"]) .ct-quick__item strong.font-latin { font-size: var(--text-md); }
