@@ -233,11 +233,11 @@ window.RS_CONFIG = {
           ]
         },
         {
-          label: { th: 'กฎหมาย ระเบียบ และข้อบังคับที่เกี่ยวข้อง', en: 'Laws and Regulations' }, menu: { th: 'กฎหมายและระเบียบ', en: 'Laws and Regulations' }, href: 'pages/about.html#laws',
+          label: { th: 'กฎหมาย ระเบียบ และข้อบังคับที่เกี่ยวข้อง', en: 'Laws, Regulations and Bylaws' }, href: 'pages/about.html#laws',
           children: [
             { label: { th: 'พระราชบัญญัติที่เกี่ยวข้อง', en: 'Relevant Acts' }, href: 'pages/about-acts.html' },
-            { label: { th: 'ข้อบังคับราชบัณฑิตยสภา', en: 'Royal Society Bylaws' }, href: 'pages/about-bylaws.html' },
             { label: { th: 'ระเบียบราชบัณฑิตยสภา', en: 'Royal Society Regulations' }, href: 'pages/about-rules.html' },
+            { label: { th: 'ข้อบังคับราชบัณฑิตยสภา', en: 'Royal Society Bylaws' }, href: 'pages/about-bylaws.html' },
             { label: { th: 'ประกาศราชบัณฑิตยสภา', en: 'Royal Society Notifications' }, href: 'pages/about-announcements.html' }
           ]
         }

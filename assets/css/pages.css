@@ -10584,3 +10584,12 @@ html[lang="en"] .plc-steps li::before { content: counter(plc); }
 .newsx-album__open { left: 0; right: 0; top: 0; bottom: 0; margin: auto; transform: scale(.88); transition: opacity .2s ease, transform .2s ease; will-change: opacity, transform; backface-visibility: hidden; }
 .newsx-album:hover .newsx-album__open, .newsx-album:focus-visible .newsx-album__open { transform: scale(1); }
 @media (hover: none) { .newsx-album__open { transform: scale(.9); } }
+
+/* About hub: the headings of a row share one height (subgrid), set at its
+   foot, so a two-line heading keeps its rule and its links level with the
+   one-line headings beside it */
+@media (min-width: 1024px) {
+  .about-hub__groups { grid-auto-rows: auto auto; row-gap: 0; }
+  .about-hub__group { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; padding-bottom: var(--space-10); }
+  .about-hub__title { align-self: end; text-wrap: balance; }
+}
