@@ -218,6 +218,35 @@
     /* Top-level items kept out of the bar (bar: false) can ride along as a column */
     const guests = (item.alsoShow || []).map(key => CFG.nav.find(entry => entry.key === key)).filter(Boolean);
 
+    /* Two or more groups: the groups listed down the side as tabs, the one
+       chosen showing its pages beside them in two columns (hover, click or
+       the arrow keys choose) */
+    if (branches.length >= 2 && !guests.length) {
+      const k = escapeHTML(item.key);
+      const sub = parent => (parent.children?.length && parent.panel !== 'flat')
+        ? `<ul class="mega-pane__sub" role="list">${parent.children.map(x => `<li>${link(menuName(x))}</li>`).join('')}</ul>` : '';
+      const tabs = branches.map((child, i) => `
+          <li role="presentation"><button class="mega-tab" type="button" role="tab" id="mt-${k}-${i}" aria-controls="mp-${k}-${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-mega-tab>
+            <span>${te(menuName(child).label)}</span>${icon('chevron')}
+          </button></li>`).join('');
+      const panes = branches.map((child, i) => `
+          <section class="mega-pane" role="tabpanel" id="mp-${k}-${i}" aria-labelledby="mt-${k}-${i}"${i === 0 ? '' : ' hidden'}>
+            <p class="mega-pane__title">${child.href ? `<a href="${escapeHTML(url(child.href))}">${te(child.label)}</a>` : te(child.label)}</p>
+            <ul class="mega-pane__list" role="list">${child.children.map(c => `<li>${link(menuName(c), 'mega-pane__link')}${sub(c)}</li>`).join('')}</ul>
+          </section>`).join('');
+      return `
+      <div class="mega-inner mega-inner--tabs">
+        <div class="mega-side">
+          <p class="mega-side__kicker">${te({ th: 'ราชบัณฑิตยสภา', en: 'The Royal Society of Thailand' })}</p>
+          <p class="mega-side__title">${te(item.label)}</p>
+          ${item.intro ? `<p class="mega-side__desc">${te(item.intro)}</p>` : ''}
+          <ul class="mega-tabs" role="tablist" aria-orientation="vertical" aria-label="${te(item.label)}">${tabs}</ul>
+          ${item.href ? `<a class="link-arrow mega-side__all" href="${escapeHTML(url(item.href))}"${detectActive() === key ? ' aria-current="page"' : ''}><span>${te(item.viewLabel || ui.viewSection)}</span>${icon('arrow')}</a>` : ''}
+        </div>
+        <div class="mega-panes">${panes}</div>
+      </div>`;
+    }
+
     const columns = [...branches, ...guests].map(child => `
       <div class="mega-group">
         <p class="mega-group__title">${link({ ...menuName(child), href: null })}</p>
@@ -534,6 +563,45 @@
       hoverTimer = setTimeout(() => close(), 180);
     });
     header.addEventListener('pointerenter', () => clearTimeout(hoverTimer));
+
+    /* Side tabs in a panel: pointing at, clicking or arrowing to a group shows it */
+    const choose = tab => {
+      const list = tab.closest('[role="tablist"]');
+      const panel = tab.closest('.mega-menu');
+      RS.qsa('[data-mega-tab]', list).forEach(t => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        const pane = document.getElementById(t.getAttribute('aria-controls'));
+        if (pane) pane.hidden = !on;
+      });
+      panel?.classList.add('is-switched');
+    };
+    header.addEventListener('pointerover', event => {
+      if (event.pointerType !== 'mouse') return;
+      const tab = event.target.closest('[data-mega-tab]');
+      if (tab && tab.getAttribute('aria-selected') !== 'true') choose(tab);
+    });
+    header.addEventListener('click', event => {
+      const tab = event.target.closest('[data-mega-tab]');
+      if (tab) choose(tab);
+    });
+    header.addEventListener('keydown', event => {
+      const tab = event.target.closest('[data-mega-tab]');
+      if (!tab) return;
+      const tabs = RS.qsa('[data-mega-tab]', tab.closest('[role="tablist"]'));
+      const i = tabs.indexOf(tab);
+      let next = null;
+      if (event.key === 'ArrowDown') next = tabs[(i + 1) % tabs.length];
+      if (event.key === 'ArrowUp') next = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (event.key === 'Home') next = tabs[0];
+      if (event.key === 'End') next = tabs[tabs.length - 1];
+      if (next) { event.preventDefault(); choose(next); next.focus(); return; }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        document.getElementById(tab.getAttribute('aria-controls'))?.querySelector('a')?.focus();
+      }
+    });
 
     /* Links to a section of the current page don't unload it — close the panel */
     header.addEventListener('click', event => {
