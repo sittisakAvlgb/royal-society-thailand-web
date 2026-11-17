@@ -303,7 +303,6 @@
         <details${item.key === active ? ' open' : ''}>
           <summary>${te(item.label)}${icon('chevron')}</summary>
           <div class="rs-mobile-links">
-            ${href ? `<a class="rs-mobile-landing" href="${href}"${current}>${te(item.viewLabel || ui.viewSection)}</a>` : ''}
             ${links}
           </div>
         </details>`;
