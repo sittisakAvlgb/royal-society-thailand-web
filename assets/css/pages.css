@@ -10774,3 +10774,6 @@ html[lang="en"] .rs-mobile-links .rs-mobile-subsub { font-size: 1rem; color: var
 .mega-inner--plain .mega-group:first-child { padding-left: 0; }
 .mega-inner--plain .mega-group:last-child { padding-right: 40px; }
 @media (max-width: 89.98rem) { .mega-inner--plain .mega-group { padding-inline: 24px; } .mega-inner--plain .mega-group:first-child { padding-left: 0; } }
+/* two groups or fewer: centred in the panel, not left with an empty half */
+.mega-inner--plain .mega-groups:not(:has(> .mega-group:nth-child(3))) { justify-content: center; }
+.mega-inner--plain .mega-groups:not(:has(> .mega-group:nth-child(3))) > .mega-group { padding-inline: 56px; }
