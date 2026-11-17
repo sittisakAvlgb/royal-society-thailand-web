@@ -221,7 +221,7 @@
     const columns = [...branches, ...guests].map(child => `
       <div class="mega-group">
         <p class="mega-group__title">${link({ ...menuName(child), href: null })}</p>
-        <ul role="list">${child.children.map(sub => `<li>${link(menuName(sub))}</li>`).join('')}</ul>
+        <ul role="list">${child.children.map(sub => `<li>${link(menuName(sub))}${sub.children?.length ? `<ul class="mega-sub" role="list">${sub.children.map(x => `<li>${link(menuName(x))}</li>`).join('')}</ul>` : ''}</li>`).join('')}</ul>
       </div>`).join('');
 
     const leafColumn = leaves.length ? `
@@ -273,7 +273,7 @@
 
       const links = item.children.map(child => `
         ${link(child.children?.length ? { ...menuName(child), href: null } : menuName(child), 'rs-mobile-sub')}
-        ${(child.children || []).map(sub => link(menuName(sub), 'rs-mobile-subsub')).join('')}`).join('');
+        ${(child.children || []).map(sub => link(menuName(sub), 'rs-mobile-subsub') + (sub.children || []).map(x => link(menuName(x), 'rs-mobile-subsub rs-mobile-subsub--deep')).join('')).join('')}`).join('');
 
       return `
         <details${item.key === active ? ' open' : ''}>

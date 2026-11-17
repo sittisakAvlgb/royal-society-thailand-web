@@ -10593,3 +10593,14 @@ html[lang="en"] .plc-steps li::before { content: counter(plc); }
   .about-hub__group { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; padding-bottom: var(--space-10); }
   .about-hub__title { align-self: end; text-wrap: balance; }
 }
+
+/* a third level in the menus (the proposals under ข้อเสนอต่อรัฐบาล): indented,
+   smaller, a thin rule at the left */
+.mega-sub { margin: 0 0 6px 4px !important; padding: 0 0 0 14px !important; border-left: 1px solid var(--border); list-style: none; }
+.mega-sub a { min-height: 32px !important; font-size: var(--text-xs) !important; line-height: 1.4; color: var(--text-secondary); }
+.mega-sub a:hover { color: var(--rst-green-800); }
+.rs-mobile-subsub--deep { padding-left: 2.6rem !important; font-size: .95em; }
+.sitemap-col li.sitemap-deep { padding-left: 16px; border-left: 1px solid var(--border); margin-left: 4px; }
+.sitemap-col li.sitemap-deep a { min-height: 30px; font-size: var(--text-xs); }
+/* five groups (About): one row of five, not four and one left alone below */
+@media (min-width: 80rem) { .mega-groups:has(> .mega-group:nth-child(5):last-child) { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-5, 20px); } }

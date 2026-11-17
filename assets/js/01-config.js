@@ -200,28 +200,54 @@ window.RS_CONFIG = {
       href: 'pages/about.html',
       match: ['about.html', 'academy.html', 'about-history.html', 'about-authority.html', 'about-direction.html', 'about-structure.html', 'about-executives.html', 'about-past-presidents.html', 'about-president-message.html', 'about-vision.html', 'about-thai-language.html', 'about-wellbeing.html', 'about-acts.html', 'about-bylaws.html', 'about-rules.html', 'about-announcements.html'],
       intro: { th: 'ประวัติ อำนาจหน้าที่ ผู้บริหาร สำนัก และกฎหมายที่เกี่ยวข้อง', en: 'History, mandate and authority, executives, academies, laws and regulations' },
+      /* the order of the client's sitemap (Royalsociety Sitemap, section 1):
+         1.1–1.3 executives · 1.5–1.13 the organisation · 1.14 laws ·
+         1.16 contact; numbers not here are hidden for now. The academies
+         are not in section 1 of the sitemap; they stay last until placed. */
       children: [
+        {
+          label: { th: 'ผู้บริหาร', en: 'Executives' }, href: 'pages/about.html#executives',
+          children: [
+            { label: { th: 'ผู้บริหารราชบัณฑิตยสภาปัจจุบัน', en: 'Current Executives' }, href: 'pages/about-executives.html' },
+            { label: { th: 'สารจากผู้บริหารราชบัณฑิตยสภา', en: 'Message from the President' }, href: 'pages/about-president-message.html' },
+            { label: { th: 'ทำเนียบผู้บริหาร', en: 'Past Executives' }, href: 'pages/about-past-presidents.html' }
+            /* 1.4, hidden for now (Nov 2026), the page stays:
+            { label: { th: 'พันธกิจของราชบัณฑิตยสภาด้านภาษาไทย', en: 'Thai Language Mission' }, href: 'pages/about-thai-language.html' } */
+          ]
+        },
         {
           label: { th: 'ข้อมูลองค์กร', en: 'Organisation Profile' }, href: 'pages/about.html#organization',
           children: [
             { label: { th: 'ประวัติความเป็นมา', en: 'History' }, href: 'pages/about-history.html' },
-            { label: { th: 'วิสัยทัศน์และพันธกิจ', en: 'Vision and Mission' }, href: 'pages/about-vision.html' },
-            { label: { th: 'อำนาจหน้าที่ของราชบัณฑิตยสภา', en: 'Powers and Duties' }, menu: { th: 'อำนาจหน้าที่', en: 'Powers and Duties' }, href: 'pages/about-authority.html' },
+            { label: { th: 'วิสัยทัศน์ และพันธกิจ', en: 'Vision and Mission' }, href: 'pages/about-vision.html' },
+            { label: { th: 'อำนาจหน้าที่ของราชบัณฑิตยสภา', en: 'Powers and Duties' }, href: 'pages/about-authority.html' },
             { label: { th: 'ทิศทางและการดำเนินงาน', en: 'Direction and Operations' }, href: 'pages/about-direction.html' },
-            { label: { th: 'แผนผังการบริหารราชบัณฑิตยสภาและสำนักงานราชบัณฑิตยสภา', en: 'Administrative Chart of the Royal Society and its Office' }, menu: { th: 'แผนผังการบริหาร', en: 'Governance Chart' }, href: 'pages/about-structure.html' },
-            /* the Office publishes the annual plans and reports (sitemap 1.9) */
-            { label: { th: 'แผนงาน โครงการ และรายงานผลการดำเนินงานประจำปี', en: 'Annual Plans and Performance Reports' }, menu: { th: 'แผนงานและผลการดำเนินงาน', en: 'Plans and Reports' }, href: 'pages/about-plans.html' }
+            { label: { th: 'แผนงาน โครงการ และรายงานผลการดำเนินงานประจำปี', en: 'Annual Plans and Performance Reports' }, href: 'pages/about-plans.html' },
+            { label: { th: 'แผนผังการบริหารราชบัณฑิตยสภาและสำนักงานราชบัณฑิตยสภา', en: 'Administrative Chart of the Royal Society and its Office' }, href: 'pages/about-structure.html' },
+            {
+              label: { th: 'ข้อเสนอต่อรัฐบาล', en: 'Proposals to the Government' }, href: 'pages/works-proposals.html',
+              children: [
+                { label: { th: 'สังคมคนไทยอายุยืน', en: "Thailand's Ageing Society" }, href: 'pages/activity.html?id=proposal-01' },
+                { label: { th: 'ข้อเท็จจริงเกี่ยวกับสถานการณ์ความเหลื่อมล้ำและข้อเสนอแนะเชิงนโยบาย', en: 'Inequality: Facts and Policy Recommendations' }, href: 'pages/document.html?id=doc-29796879' }
+              ]
+            },
+            { label: { th: 'สุขภาวะโดยองค์รวมกับคุณภาพชีวิต', en: 'Holistic Well-being and Quality of Life' }, href: 'pages/about-wellbeing.html' }
           ]
         },
         {
-          label: { th: 'ผู้บริหาร', en: 'Executives' }, href: 'pages/about.html#executives',
+          label: { th: 'กฎหมาย ระเบียบ และข้อบังคับที่เกี่ยวข้อง', en: 'Laws and Regulations' }, href: 'pages/about.html#laws',
           children: [
-            { label: { th: 'ผู้บริหารราชบัณฑิตยสภาปัจจุบัน', en: 'Current Executives' }, menu: { th: 'ผู้บริหารปัจจุบัน', en: 'Current Executives' }, href: 'pages/about-executives.html' },
-            { label: { th: 'สารจากผู้บริหารราชบัณฑิตยสภา', en: 'Message from the President' }, menu: { th: 'สารจากผู้บริหาร', en: 'Message from the President' }, href: 'pages/about-president-message.html' },
-            { label: { th: 'ทำเนียบผู้บริหาร', en: 'Past Executives' }, href: 'pages/about-past-presidents.html' },
-            /* hidden for now (Nov 2026), the page stays: pages/about-thai-language.html
-            { label: { th: 'พันธกิจของราชบัณฑิตยสภาด้านภาษาไทย', en: 'Thai Language Mission' }, menu: { th: 'พันธกิจด้านภาษาไทย', en: 'Thai Language Mission' }, href: 'pages/about-thai-language.html' }, */
-            { label: { th: 'สุขภาวะโดยองค์รวมกับคุณภาพชีวิต', en: 'Holistic Well-being and Quality of Life' }, menu: { th: 'สุขภาวะและคุณภาพชีวิต', en: 'Well-being' }, href: 'pages/about-wellbeing.html' }
+            { label: { th: 'พระราชบัญญัติที่เกี่ยวข้องกับราชบัณฑิตยสภา', en: 'Acts Relating to the Royal Society' }, href: 'pages/about-acts.html' },
+            { label: { th: 'ข้อบังคับราชบัณฑิตยสภา', en: 'Royal Society Rules' }, href: 'pages/about-bylaws.html' },
+            { label: { th: 'ระเบียบราชบัณฑิตยสภา', en: 'Royal Society Regulations' }, href: 'pages/about-rules.html' },
+            { label: { th: 'ประกาศราชบัณฑิตยสภา', en: 'Royal Society Notifications' }, href: 'pages/about-announcements.html' }
+          ]
+        },
+        {
+          label: { th: 'ติดต่อเรา', en: 'Contact the Office of the Royal Society' }, href: 'pages/contact.html',
+          children: [
+            { label: { th: 'ติดต่อเรา', en: 'Contact the Office of the Royal Society' }, href: 'pages/contact.html' },
+            { label: { th: 'เครือข่ายสังคมออนไลน์ (Social Media)', en: 'Social Media' }, href: 'pages/contact.html#social' }
           ]
         },
         {
@@ -230,15 +256,6 @@ window.RS_CONFIG = {
             { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' }, href: 'pages/academy.html?id=moral' },
             { label: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' }, href: 'pages/academy.html?id=science' },
             { label: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' }, href: 'pages/academy.html?id=arts' }
-          ]
-        },
-        {
-          label: { th: 'กฎหมาย ระเบียบ และข้อบังคับที่เกี่ยวข้อง', en: 'Laws, Regulations and Bylaws' }, href: 'pages/about.html#laws',
-          children: [
-            { label: { th: 'พระราชบัญญัติที่เกี่ยวข้อง', en: 'Relevant Acts' }, href: 'pages/about-acts.html' },
-            { label: { th: 'ระเบียบราชบัณฑิตยสภา', en: 'Royal Society Regulations' }, href: 'pages/about-rules.html' },
-            { label: { th: 'ข้อบังคับราชบัณฑิตยสภา', en: 'Royal Society Bylaws' }, href: 'pages/about-bylaws.html' },
-            { label: { th: 'ประกาศราชบัณฑิตยสภา', en: 'Royal Society Notifications' }, href: 'pages/about-announcements.html' }
           ]
         }
       ]

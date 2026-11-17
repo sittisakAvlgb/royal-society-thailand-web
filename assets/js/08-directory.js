@@ -281,7 +281,7 @@
 
   function countPages(group) {
     const children = group.children || [];
-    return children.reduce((total, child) => total + 1 + (child.children?.length || 0), 0) || 1;
+    return children.reduce((total, child) => total + 1 + (child.children || []).reduce((n, sub) => n + 1 + (sub.children?.length || 0), 0), 0) || 1;
   }
 
   function renderSitemapGroup(group, number) {
@@ -307,7 +307,7 @@
       <div class="sitemap-col">
         <p class="sitemap-col__title">${outlineLink(child)}</p>
         ${child.children?.length
-          ? `<ul role="list">${child.children.map(sub => `<li>${outlineLink(sub)}</li>`).join('')}</ul>`
+          ? `<ul role="list">${child.children.map(sub => `<li>${outlineLink(sub)}</li>${(sub.children || []).map(x => `<li class="sitemap-deep">${outlineLink(x)}</li>`).join('')}`).join('')}</ul>`
           : ''}
       </div>`).join('');
 
