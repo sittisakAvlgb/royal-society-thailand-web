@@ -263,7 +263,7 @@
   }
 
   function renderMobilePanel(active) {
-    const items = CFG.nav.map(item => {
+    const items = CFG.nav.filter(item => item.bar !== false).map(item => {
       const href = item.href ? escapeHTML(url(item.href)) : '';
       const current = item.key === active ? ' aria-current="page"' : '';
 

@@ -364,6 +364,7 @@ window.RS_CONFIG = {
 
     {
       key: 'works',
+      bar: false,   /* hidden for now (Nov 2026): off the bar, the drawer and the sitemap; the pages stay */
       label: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' },
       short: { th: 'ผลงานทางวิชาการ', en: 'Academic Works' },
       /* no landing page: the menu opens the topics, each with its own page */
@@ -430,6 +431,7 @@ window.RS_CONFIG = {
 
     {
       key: 'contact',
+      bar: false,   /* hidden for now (Nov 2026): off the bar, the drawer and the sitemap; the pages stay */
       label: { th: 'ติดต่อและมีส่วนร่วม', en: 'Contact and Participation' },
       short: { th: 'ติดต่อเรา', en: 'Contact' },
       href: 'pages/contact.html',
