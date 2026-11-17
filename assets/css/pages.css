@@ -10658,3 +10658,5 @@ html[lang="en"] .mega-tab { font-size: .9375rem; }
 /* pages read down the first column, then the second (the sitemap order) */
 .mega-pane__list { display: block; columns: 2; column-gap: 48px; }
 .mega-pane__list > li { break-inside: avoid; }
+/* the side title on one line: a step smaller */
+.mega-side__title { font-size: var(--text-md); text-wrap: balance; }

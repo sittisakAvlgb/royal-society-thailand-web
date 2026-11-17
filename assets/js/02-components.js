@@ -241,7 +241,6 @@
           <p class="mega-side__title">${te(item.label)}</p>
           ${item.intro ? `<p class="mega-side__desc">${te(item.intro)}</p>` : ''}
           <ul class="mega-tabs" role="tablist" aria-orientation="vertical" aria-label="${te(item.label)}">${tabs}</ul>
-          ${item.href ? `<a class="link-arrow mega-side__all" href="${escapeHTML(url(item.href))}"${detectActive() === key ? ' aria-current="page"' : ''}><span>${te(item.viewLabel || ui.viewSection)}</span>${icon('arrow')}</a>` : ''}
         </div>
         <div class="mega-panes">${panes}</div>
       </div>`;
