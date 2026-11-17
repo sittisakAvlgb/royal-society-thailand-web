@@ -10768,3 +10768,9 @@ html[lang="en"] .rs-mobile-links .rs-mobile-subsub { font-size: 1rem; color: var
 .mega-inner--plain .mega-group a, .mega-inner--plain .mega-group__title { white-space: nowrap; }
 .mega-inner--plain .mega-sub a { white-space: normal; }
 @media (max-width: 89.98rem) { .mega-inner--plain .mega-group { padding-inline: 20px; } .mega-inner--plain { padding-inline: 32px; } }
+/* columns from the left, an even gap between them, not pushed to the edges */
+.mega-inner--plain .mega-groups { justify-content: flex-start; }
+.mega-inner--plain .mega-group { padding-inline: 40px; }
+.mega-inner--plain .mega-group:first-child { padding-left: 0; }
+.mega-inner--plain .mega-group:last-child { padding-right: 40px; }
+@media (max-width: 89.98rem) { .mega-inner--plain .mega-group { padding-inline: 24px; } .mega-inner--plain .mega-group:first-child { padding-left: 0; } }
