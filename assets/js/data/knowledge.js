@@ -1,12 +1,20 @@
 /* ============================================================================
  * data/knowledge.js — the knowledge page: fields and their articles
  *  fields: { id, name {th,en}, desc {th,en} } in page order
- *  items:  { id, field, type {th,en}, date (ISO), href (pages/article.html?id=…),
- *            title {th,en}, excerpt {th,en},
+ *  items:  { id, field, type {th,en}, academy 'science'|'moral'|'arts',
+ *            date (ISO, as first published), href (pages/article.html?id=…),
+ *            image (the article's own picture), title {th,en}, excerpt {th,en},
  *            pdf { src, pages, bytes } — the article as a PDF; the article page
- *            offers ดูตัวอย่าง / เปิดเอกสาร (the sample PDFs are printed from
- *            this site's article pages) }
- *  Sample content: replace with the Office's articles before launch.
+ *            offers ดูตัวอย่าง / เปิดเอกสาร (printed from this site's article
+ *            pages),
+ *            from — where the article was first published. Kept only so the
+ *            Office can trace each text; never shown or linked on this site. }
+ *  The articles are the academies' own, as published on
+ *  science.royalsociety.go.th, mps.royalsociety.go.th and
+ *  arts.royalsociety.go.th (title, author, date, text and picture as there;
+ *  the summary is the article's opening; English titles and summaries are
+ *  translations for this site). Each is filed under the nearest field.
+ *  TODO (CMS): the Office adds new articles here.
  * ========================================================================== */
 window.RS_KNOWLEDGE = {
   "fields": [
@@ -112,536 +120,888 @@ window.RS_KNOWLEDGE = {
   ],
   "items": [
     {
-      "id": "kn-coined-terms",
-      "pdf": { "src": "assets/docs/knowledge/kn-coined-terms.pdf", "pages": 3, "bytes": 611865 },
+      "id": "kn-arts-698",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-arts-698.pdf",
+        "pages": 2,
+        "bytes": 433387
+      },
       "field": "language",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทคัดย่อ",
+        "en": "Abstract"
       },
-      "date": "2026-08-18",
-      "href": "pages/article.html?id=kn-coined-terms",
+      "academy": "arts",
+      "date": "2020-02-04",
+      "href": "pages/article.html?id=kn-arts-698",
+      "image": "assets/images/knowledge/kn-arts-698.jpg",
       "title": {
-        "th": "หลักการบัญญัติศัพท์วิชาการภาษาไทย",
-        "en": "Principles of coining Thai academic terms"
+        "th": "ศัพทมูลของคำว่า กั้นหยั่น",
+        "en": "The etymology of the word kanyan"
       },
       "excerpt": {
-        "th": "ศัพท์บัญญัติคืออะไร ต่างจากคำทับศัพท์อย่างไร และควรเลือกใช้อย่างไรในงานเขียนวิชาการ",
-        "en": "What coined terms are, how they differ from transliteration, and how to choose between them in academic writing."
-      }
+        "th": "มีผู้เสนอว่า กั้นหยั่น เป็นคำที่มีศัพทมูลมาจากภาษาจีน เดิมเป็นชื่อเฉพาะของกระบี่เล่มหนึ่ง เรียกกระบี่ กันจีอ่อง (乾將) ในภาษาจีนฮกเกี้ยน หรือ กังเจี่ยง…",
+        "en": "Traces the Thai word for a short curved dagger to the Persian khanjar rather than to Chinese, as was once proposed."
+      },
+      "from": "https://arts.royalsociety.go.th/ศัพทมูลของคำว่า-กั้นหยั/"
     },
     {
-      "id": "kn-language-2026-08-18",
-      "pdf": { "src": "assets/docs/knowledge/kn-language-2026-08-18.pdf", "pages": 4, "bytes": 555358 },
+      "id": "kn-arts-707",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-arts-707.pdf",
+        "pages": 2,
+        "bytes": 468891
+      },
       "field": "language",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทคัดย่อ",
+        "en": "Abstract"
       },
-      "date": "2026-08-18",
-      "href": "pages/article.html?id=kn-language-2026-08-18",
+      "academy": "arts",
+      "date": "2020-03-19",
+      "href": "pages/article.html?id=kn-arts-707",
+      "image": "assets/images/knowledge/kn-arts-707.jpg",
       "title": {
-        "th": "การใช้ลักษณนามในภาษาไทยปัจจุบัน",
-        "en": "Classifiers in contemporary Thai"
+        "th": "ภาษาไทย : การรวมอำนาจ กับ การกระจายอำนาจ",
+        "en": "Thai spelling: centralisation and decentralisation"
       },
       "excerpt": {
-        "th": "ลักษณนามที่มักใช้สับสน และหลักการเลือกใช้ให้เหมาะกับบริบท",
-        "en": "Commonly confused classifiers and how to choose the right one."
-      }
+        "th": "บทความนี้กล่าวถึงความเป็นมาของรูปการเขียนคำไทยที่แต่เดิมเขียนได้หลายแบบ ดังที่ปรากฏในเอกสารโบราณหลายฉบับ แต่เมื่อถึง พ.ศ. ๒๔๗๐…",
+        "en": "How written Thai moved from many spellings to one official standard, and the pressures on that standard today."
+      },
+      "from": "https://arts.royalsociety.go.th/ภาษาไทย-การรวมอำนาจ-กับ/"
     },
     {
-      "id": "kn-language-2026-06-09",
-      "pdf": { "src": "assets/docs/knowledge/kn-language-2026-06-09.pdf", "pages": 4, "bytes": 535776 },
+      "id": "kn-arts-695",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-arts-695.pdf",
+        "pages": 2,
+        "bytes": 348978
+      },
       "field": "language",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทคัดย่อ",
+        "en": "Abstract"
       },
-      "date": "2026-06-09",
-      "href": "pages/article.html?id=kn-language-2026-06-09",
+      "academy": "arts",
+      "date": "2020-01-07",
+      "href": "pages/article.html?id=kn-arts-695",
+      "image": "assets/images/knowledge/kn-arts-695.jpg",
       "title": {
-        "th": "คำยืมภาษาบาลีและสันสกฤตในภาษาไทย",
-        "en": "Pali and Sanskrit loanwords in Thai"
+        "th": "สวัสดิมงคล",
+        "en": "Sawatdi-mongkhon: the meaning of a blessing"
       },
       "excerpt": {
-        "th": "ที่มาของคำยืม และความหมายที่เปลี่ยนไปเมื่อเข้ามาอยู่ในภาษาไทย",
-        "en": "Where these loanwords come from and how their meanings shifted in Thai."
-      }
+        "th": "สวัสดิมงคล เป็นคำสำคัญคำหนึ่งที่คนไทยนิยมใช้พูดใช้เขียนที่หมายถึงความดีงาม ความเจริญรุ่งเรือง ความปลอดภัย ความยั่งยืน เป็นต้น…",
+        "en": "What the auspicious word sawatdi-mongkhon means and how Thais use it to wish others well."
+      },
+      "from": "https://arts.royalsociety.go.th/สวัสดิมงคล/"
     },
     {
-      "id": "kn-language-2026-02-20",
-      "pdf": { "src": "assets/docs/knowledge/kn-language-2026-02-20.pdf", "pages": 3, "bytes": 540682 },
-      "field": "language",
-      "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+      "id": "kn-science-806",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-806.pdf",
+        "pages": 5,
+        "bytes": 1353576
       },
-      "date": "2026-02-20",
-      "href": "pages/article.html?id=kn-language-2026-02-20",
-      "title": {
-        "th": "การอ่านวรรณคดีไทยในห้องเรียนยุคใหม่",
-        "en": "Reading Thai classical literature in today’s classroom"
-      },
-      "excerpt": {
-        "th": "แนวทางช่วยให้ผู้เรียนเข้าใจบริบทและคุณค่าของวรรณคดี",
-        "en": "Ways to help learners understand the context and value of classical works."
-      }
-    },
-    {
-      "id": "kn-science-2025-11-10",
-      "pdf": { "src": "assets/docs/knowledge/kn-science-2025-11-10.pdf", "pages": 3, "bytes": 560090 },
       "field": "science",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2025-11-10",
-      "href": "pages/article.html?id=kn-science-2025-11-10",
+      "academy": "science",
+      "date": "2019-02-20",
+      "href": "pages/article.html?id=kn-science-806",
+      "image": "assets/images/knowledge/kn-science-806.jpg",
       "title": {
-        "th": "ความหลากหลายทางชีวภาพของป่าชายเลน",
-        "en": "Biodiversity in mangrove forests"
+        "th": "กลวิธานการเกิดมลภาวะอากาศ PM2.5 ในประเทศไทย เดือนมกราคม ๒๕๖๒",
+        "en": "How the January 2019 PM2.5 haze formed in Thailand"
       },
       "excerpt": {
-        "th": "บทบาทของป่าชายเลนต่อระบบนิเวศชายฝั่ง",
-        "en": "The role of mangroves in coastal ecosystems."
-      }
+        "th": "ช่วงเดือนมกราคม ๒๕๖๒ ที่ผ่านไป ได้เกิดปัญหาฝุ่นละอองขนาด PM2.5 สูงเกินค่ามาตรฐานบริเวณกรุงเทพฯและจังหวัดใกล้เคียงอย่างน้อย ๑๒ จังหวัด ได้แก่ นครปฐม…",
+        "en": "Where the fine dust around Bangkok came from, why it built up under a temperature inversion, and what policy should do."
+      },
+      "from": "https://science.royalsociety.go.th/กลวิธานการเกิดมลภาวะอา/"
     },
     {
-      "id": "kn-science-2026-07-21",
-      "pdf": { "src": "assets/docs/knowledge/kn-science-2026-07-21.pdf", "pages": 3, "bytes": 496106 },
+      "id": "kn-science-185",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-185.pdf",
+        "pages": 3,
+        "bytes": 555749
+      },
       "field": "science",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-07-21",
-      "href": "pages/article.html?id=kn-science-2026-07-21",
+      "academy": "science",
+      "date": "2017-06-21",
+      "href": "pages/article.html?id=kn-science-185",
+      "image": "assets/images/knowledge/kn-science-185.jpg",
       "title": {
-        "th": "ศัพท์วิทยาศาสตร์พื้นฐานที่ควรใช้ให้ถูกต้อง",
-        "en": "Basic science terms to use correctly"
+        "th": "พืชดัดแปรพันธุกรรม: เราจะไปทางไหนดี?",
+        "en": "Genetically modified crops: which way forward?"
       },
       "excerpt": {
-        "th": "คำที่มักใช้ปะปนกัน เช่น มวลกับน้ำหนัก",
-        "en": "Terms that are often mixed up, such as mass and weight."
-      }
+        "th": "GMO หรือ Genetically modified organisms ได้แก่ สิ่งมีชีวิต (พืช สัตว์ จุลินทรีย์) ที่ถูกดัดแปรพันธุกรรมด้วยกระบวนการทางพันธุวิศวกรรม…",
+        "en": "What GMOs are, their benefits and risks, and the choices Thailand faces."
+      },
+      "from": "https://science.royalsociety.go.th/พืชดัดแปรพันธุกรรม/"
     },
     {
-      "id": "kn-science-2026-04-02",
-      "pdf": { "src": "assets/docs/knowledge/kn-science-2026-04-02.pdf", "pages": 3, "bytes": 587133 },
+      "id": "kn-science-823",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-823.pdf",
+        "pages": 2,
+        "bytes": 431256
+      },
       "field": "science",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-04-02",
-      "href": "pages/article.html?id=kn-science-2026-04-02",
+      "academy": "science",
+      "date": "2019-03-06",
+      "href": "pages/article.html?id=kn-science-823",
+      "image": "assets/images/knowledge/kn-science-823.jpg",
       "title": {
-        "th": "การอธิบายเรื่องการเปลี่ยนแปลงสภาพภูมิอากาศแก่สาธารณะ",
-        "en": "Explaining climate change to the public"
+        "th": "ความหลากหลายและการพัฒนาเห็ดทรัฟเฟิลในประเทศไทย",
+        "en": "Truffle diversity and development in Thailand"
       },
       "excerpt": {
-        "th": "หลักการสื่อสารข้อมูลทางวิทยาศาสตร์ให้ถูกต้องและเข้าใจง่าย",
-        "en": "Communicating scientific evidence accurately and plainly."
-      }
+        "th": "เห็ดทรัฟเฟิลเป็นเห็ดรับประทานได้และมีราคาแพงแพงที่สุดในโลก…",
+        "en": "The truffles found in Thailand and research towards cultivating them."
+      },
+      "from": "https://science.royalsociety.go.th/ความหลากหลายและการพัฒน/"
     },
     {
-      "id": "kn-technology-2026-07-02",
-      "pdf": { "src": "assets/docs/knowledge/kn-technology-2026-07-02.pdf", "pages": 3, "bytes": 536939 },
+      "id": "kn-science-457",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-457.pdf",
+        "pages": 2,
+        "bytes": 477675
+      },
+      "field": "science",
+      "type": {
+        "th": "บทความ",
+        "en": "Article"
+      },
+      "academy": "science",
+      "date": "2017-11-15",
+      "href": "pages/article.html?id=kn-science-457",
+      "image": "assets/images/knowledge/kn-science-457.jpg",
+      "title": {
+        "th": "น้ำแข็งติดไฟ",
+        "en": "Fire ice: methane hydrate"
+      },
+      "excerpt": {
+        "th": "ในช่วงเวลาที่ผ่านมาไม่นานนี้ มีรายงานที่เกี่ยวกับความสำเร็จในการผลิตก๊าซมีเทนจากมีเทนไฮเดรต (methane hydrate) หรือที่เรียกกันว่า “น้ำแข็งติดไฟ”…",
+        "en": "What methane hydrate is, where it is found, and the promise and risks of producing gas from it."
+      },
+      "from": "https://science.royalsociety.go.th/methane-hydrate/"
+    },
+    {
+      "id": "kn-science-374",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-374.pdf",
+        "pages": 5,
+        "bytes": 583229
+      },
       "field": "technology",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-07-02",
-      "href": "pages/article.html?id=kn-technology-2026-07-02",
+      "academy": "science",
+      "date": "2017-10-04",
+      "href": "pages/article.html?id=kn-science-374",
+      "image": "assets/images/knowledge/kn-science-374.jpg",
       "title": {
-        "th": "ปัญญาประดิษฐ์กับการใช้ภาษาไทยในงานวิชาการ",
-        "en": "Artificial intelligence and Thai in academic writing"
+        "th": "แนวคิดการพัฒนาเมืองอัจฉริยะ",
+        "en": "Developing smart cities"
       },
       "excerpt": {
-        "th": "ข้อควรพิจารณาเมื่อใช้เครื่องมือปัญญาประดิษฐ์ช่วยเขียนและแปลงานวิชาการ",
-        "en": "What to consider when AI tools help write and translate academic work."
-      }
+        "th": "เมืองอัจฉริยะ (Smart cities) เป็นคำที่มีความหมายค่อนข้างกว้าง เนื่องจากสามารถพิจารณาถึงความเป็นอัจฉริยะได้จากหลากหลายประเด็น อย่างไรก็ตาม…",
+        "en": "What makes a city smart beyond its technology, and how cities can plan to become one."
+      },
+      "from": "https://science.royalsociety.go.th/smart-cities-develop-concept/"
     },
     {
-      "id": "kn-technology-2026-05-12",
-      "pdf": { "src": "assets/docs/knowledge/kn-technology-2026-05-12.pdf", "pages": 3, "bytes": 510865 },
+      "id": "kn-science-364",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-364.pdf",
+        "pages": 4,
+        "bytes": 666202
+      },
       "field": "technology",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-05-12",
-      "href": "pages/article.html?id=kn-technology-2026-05-12",
+      "academy": "science",
+      "date": "2017-10-04",
+      "href": "pages/article.html?id=kn-science-364",
+      "image": "assets/images/knowledge/kn-science-364.jpg",
       "title": {
-        "th": "การบัญญัติศัพท์ในสาขาที่เปลี่ยนแปลงเร็ว",
-        "en": "Coining Thai terms in fast-changing fields"
+        "th": "ปัญญาประดิษฐ์ (การเรียนรู้เชิงลึกและเทคโนโลยีหุ่นยนต์โต้ตอบการสนทนา)",
+        "en": "Artificial intelligence: deep learning and conversational robots"
       },
       "excerpt": {
-        "th": "เหตุใดศัพท์ด้านเทคโนโลยีจึงต้องทั้งพิจารณาอย่างรอบคอบและเผยแพร่ให้ทันการใช้งาน",
-        "en": "Why technology terms need both careful study and timely publication."
-      }
+        "th": "ปัญญาประดิษฐ์ (Artificial intelligence) นับเป็นศูนย์กลางของศาสตร์ที่เกี่ยวข้องอีกหลาย ๆ แขนง เช่น Big data, Fintech, Internet of Things (IoT) และอื่น…",
+        "en": "How deep learning works and how it powers chatbots and social robots."
+      },
+      "from": "https://science.royalsociety.go.th/ai-chatbot/"
     },
     {
-      "id": "kn-technology-2026-01-27",
-      "pdf": { "src": "assets/docs/knowledge/kn-technology-2026-01-27.pdf", "pages": 4, "bytes": 502476 },
+      "id": "kn-science-873",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-873.pdf",
+        "pages": 2,
+        "bytes": 498779
+      },
       "field": "technology",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-01-27",
-      "href": "pages/article.html?id=kn-technology-2026-01-27",
+      "academy": "science",
+      "date": "2019-12-18",
+      "href": "pages/article.html?id=kn-science-873",
+      "image": "assets/images/knowledge/kn-science-873.jpg",
       "title": {
-        "th": "การประมวลผลภาษาธรรมชาติสำหรับภาษาไทย",
-        "en": "Natural language processing for Thai"
+        "th": "เครื่องพิมพ์ ๓ มิติ (3D Printer) กับการพัฒนาอุตสาหกรรม",
+        "en": "3D printing and industrial development"
       },
       "excerpt": {
-        "th": "ความท้าทายของการตัดคำในภาษาที่ไม่เว้นวรรคระหว่างคำ",
-        "en": "The challenge of word segmentation in a language written without spaces between words."
-      }
+        "th": "เทคโนโลยีการพิมพ์ ๓ มิติ หรือ 3D Printing เป็นหนึ่งในเทคโนโลยีสมัยใหม่และเป็น Disruption Technology ที่จะมีส่วนสำคัญในการปฏิวัติอุตสาหกรรมครั้งที่ ๔…",
+        "en": "3D printing technologies and their part in the fourth industrial revolution."
+      },
+      "from": "https://science.royalsociety.go.th/เครื่องพิมพ์-๓-มิติ-3d-printer-กับ/"
     },
     {
-      "id": "kn-medicine-2026-08-04",
-      "pdf": { "src": "assets/docs/knowledge/kn-medicine-2026-08-04.pdf", "pages": 4, "bytes": 549277 },
+      "id": "kn-science-952",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-952.pdf",
+        "pages": 5,
+        "bytes": 710430
+      },
+      "field": "technology",
+      "type": {
+        "th": "บทความ",
+        "en": "Article"
+      },
+      "academy": "science",
+      "date": "2020-05-14",
+      "href": "pages/article.html?id=kn-science-952",
+      "image": "assets/images/knowledge/kn-science-952.jpg",
+      "title": {
+        "th": "ประเภทของเงินดิจิตอลและเทคโนโลยีที่เกี่ยวข้อง",
+        "en": "Types of digital currency and their technologies"
+      },
+      "excerpt": {
+        "th": "เมื่อเดือนต้นเดือนพฤษภาคม ๒๕๖๓ ที่ผ่านมานี้ ได้มีข่าวว่าธนาคารกลางจีน (PBoC) ได้เริ่มมีการทดสอบเงินหยวนดิจิทัลแล้วใน ๔ เมืองหลัก คือ ซูโจว เซินเจิ้น…",
+        "en": "From cryptocurrencies to China’s digital yuan: how kinds of digital money differ and work."
+      },
+      "from": "https://science.royalsociety.go.th/ประเภทของเงินดิจิตอลแล/"
+    },
+    {
+      "id": "kn-science-436",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-436.pdf",
+        "pages": 3,
+        "bytes": 520324
+      },
       "field": "medicine",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-08-04",
-      "href": "pages/article.html?id=kn-medicine-2026-08-04",
+      "academy": "science",
+      "date": "2017-10-18",
+      "href": "pages/article.html?id=kn-science-436",
+      "image": "assets/images/knowledge/kn-science-436.jpg",
       "title": {
-        "th": "ศัพท์แพทย์ภาษาไทยที่ประชาชนควรรู้",
-        "en": "Thai medical terms for everyday use"
+        "th": "วัคซีนป้องกันมะเร็ง",
+        "en": "Cancer vaccines"
       },
       "excerpt": {
-        "th": "การเลือกใช้คำที่ช่วยให้ผู้ป่วยเข้าใจการรักษา",
-        "en": "Choosing words that help patients understand their care."
-      }
+        "th": "วัคซีนป้องกันโรคมะเร็งสามารถจำแนกออกได้เป็น ๒ กลุ่ม ได้แก่ วัคซีนที่ใช้ในการป้องกัน และวัคซีนที่ใช้ในการบำบัดรักษา…",
+        "en": "Preventive and therapeutic vaccines against cancer, and how each works."
+      },
+      "from": "https://science.royalsociety.go.th/cancer-vaccines/"
     },
     {
-      "id": "kn-medicine-2026-03-19",
-      "pdf": { "src": "assets/docs/knowledge/kn-medicine-2026-03-19.pdf", "pages": 4, "bytes": 650313 },
+      "id": "kn-science-480",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-480.pdf",
+        "pages": 3,
+        "bytes": 548185
+      },
       "field": "medicine",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-03-19",
-      "href": "pages/article.html?id=kn-medicine-2026-03-19",
+      "academy": "science",
+      "date": "2017-09-20",
+      "href": "pages/article.html?id=kn-science-480",
+      "image": "assets/images/knowledge/kn-science-480.jpg",
       "title": {
-        "th": "การสื่อสารความเสี่ยงด้านสุขภาพ",
-        "en": "Communicating health risks"
+        "th": "สถานการณ์วัณโรคในประเทศไทย",
+        "en": "Tuberculosis in Thailand"
       },
       "excerpt": {
-        "th": "การอธิบายความเสี่ยงและความไม่แน่นอนอย่างตรงไปตรงมาและชัดเจน",
-        "en": "Explaining risk and uncertainty honestly and clearly."
-      }
+        "th": "วัณโรค (Tuberculosis: TB) อาจจัดได้ว่าเป็นโรคอุบัติซ้ำ (Re-emerging disease) โดยเหตุที่เคยเป็นปัญหาด้านสุขภาพของโลกและของประเทศไทย…",
+        "en": "Why TB has re-emerged as a health problem and how Thailand is responding."
+      },
+      "from": "https://science.royalsociety.go.th/tuberculosis-in-thailand/"
     },
     {
-      "id": "kn-medicine-2025-12-08",
-      "pdf": { "src": "assets/docs/knowledge/kn-medicine-2025-12-08.pdf", "pages": 4, "bytes": 644232 },
+      "id": "kn-science-429",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-429.pdf",
+        "pages": 5,
+        "bytes": 613700
+      },
       "field": "medicine",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2025-12-08",
-      "href": "pages/article.html?id=kn-medicine-2025-12-08",
+      "academy": "science",
+      "date": "2017-08-16",
+      "href": "pages/article.html?id=kn-science-429",
+      "image": "assets/images/knowledge/kn-science-429.jpg",
       "title": {
-        "th": "ตำราการแพทย์แผนไทยในมุมมองวิชาการ",
-        "en": "Thai traditional medicine texts as scholarly sources"
+        "th": "การลดสารพิษปนเปื้อนในผักและผลไม้ก่อนการบริโภค",
+        "en": "Reducing pesticide residues in fruit and vegetables"
       },
       "excerpt": {
-        "th": "การศึกษาตำราดั้งเดิมด้วยวิธีการทางวิชาการ",
-        "en": "Studying traditional texts with scholarly methods."
-      }
+        "th": "ในปัจจุบันการพัฒนาระบบการปลูกพืชและการดูแลพืชเปลี่ยนแปลงไปเป็นอย่างมากเมื่อเทียบกับการเกษตรในอดีต ทั้งนี้ เนื่องจากสภาพแวดล้อมที่เปลี่ยนแปลงไป…",
+        "en": "Practical ways to wash and prepare produce to remove contaminants before eating."
+      },
+      "from": "https://science.royalsociety.go.th/reduction-of-toxin-contamination-in-vegetables-and-fruits-before-consumption/"
     },
     {
-      "id": "kn-social-2026-08-25",
-      "pdf": { "src": "assets/docs/knowledge/kn-social-2026-08-25.pdf", "pages": 4, "bytes": 560865 },
+      "id": "kn-science-800",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-800.pdf",
+        "pages": 5,
+        "bytes": 661743
+      },
+      "field": "medicine",
+      "type": {
+        "th": "บทความ",
+        "en": "Article"
+      },
+      "academy": "science",
+      "date": "2019-02-06",
+      "href": "pages/article.html?id=kn-science-800",
+      "image": "assets/images/knowledge/kn-science-800.jpg",
+      "title": {
+        "th": "กัญชง/กัญชา",
+        "en": "Hemp and cannabis"
+      },
+      "excerpt": {
+        "th": "กัญชงมีชื่อวิทยาศาสตร์ว่า Cannabis sativa subspecies sativa กัญชามีชื่อวิทยาศาสตร์เดียวกัน แต่อยู่ใน subsp. indica ชื่อสามัญที่นิยมใช้เรียกกัญชง คือ…",
+        "en": "How hemp and cannabis differ, their active compounds and their uses."
+      },
+      "from": "https://science.royalsociety.go.th/กัญชง-กัญชา/"
+    },
+    {
+      "id": "kn-mps-772",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-772.pdf",
+        "pages": 2,
+        "bytes": 437644
+      },
       "field": "social",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-08-25",
-      "href": "pages/article.html?id=kn-social-2026-08-25",
+      "academy": "moral",
+      "date": "2019-09-04",
+      "href": "pages/article.html?id=kn-mps-772",
+      "image": "assets/images/knowledge/kn-mps-772.jpg",
       "title": {
-        "th": "การเรียนรู้ตลอดชีวิตในสังคมสูงวัย",
-        "en": "Lifelong learning in an ageing society"
+        "th": "โฉมหน้าครอบครัวไทย : อดีตและปัจจุบัน",
+        "en": "The Thai family: past and present"
       },
       "excerpt": {
-        "th": "แนวคิดสำคัญและบทบาทของชุมชนในการส่งเสริมการเรียนรู้",
-        "en": "Key ideas and the role of communities in supporting learning."
-      }
+        "th": "บทความนี้มีวัตถุประสงค์จะเสนอภาพครอบครัวไทย ตั้งแต่อดีตจนถึงปัจจุบัน โดยแบ่งเนื้อหาหลักออกเป็น 2 ส่วน คือส่วนที่ว่าด้วยครอบครัวไทยในอดีต…",
+        "en": "Evidence that most Thai families have long been nuclear, and the seven kinds of family found today."
+      },
+      "from": "https://mps.royalsociety.go.th/โฉมหน้าครอบครัวไทย-อดี/"
     },
     {
-      "id": "kn-social-2026-06-17",
-      "pdf": { "src": "assets/docs/knowledge/kn-social-2026-06-17.pdf", "pages": 3, "bytes": 558101 },
+      "id": "kn-mps-720",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-720.pdf",
+        "pages": 2,
+        "bytes": 454792
+      },
       "field": "social",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-06-17",
-      "href": "pages/article.html?id=kn-social-2026-06-17",
+      "academy": "moral",
+      "date": "2019-03-06",
+      "href": "pages/article.html?id=kn-mps-720",
+      "image": "assets/images/knowledge/kn-mps-720.jpg",
       "title": {
-        "th": "ความรู้เท่าทันสื่อในยุคดิจิทัล",
-        "en": "Media literacy in the digital age"
+        "th": "การศึกษาแบบเรียนรวมเพื่อความเป็นธรรมในสังคม (Inclusive Education for Social Justice)",
+        "en": "Inclusive education for social justice"
       },
       "excerpt": {
-        "th": "ตรวจสอบแหล่งข้อมูลก่อนเชื่อและก่อนแบ่งปัน",
-        "en": "Checking a source before believing and sharing it."
-      }
+        "th": "การศึกษาแบบเรียนรวม คือ การจัดการการศึกษาเพื่อให้ผู้เรียนที่มีความต้องการพิเศษได้บรรลุศักยภาพสูงสุดแห่งตนในโรงเรียนเดียวกันกับเด็กปรกติ…",
+        "en": "Teaching learners with special needs alongside their peers in local schools."
+      },
+      "from": "https://mps.royalsociety.go.th/การศึกษาแบบเรียนรวมเพื/"
     },
     {
-      "id": "kn-social-2025-10-30",
-      "pdf": { "src": "assets/docs/knowledge/kn-social-2025-10-30.pdf", "pages": 3, "bytes": 572962 },
+      "id": "kn-mps-748",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-748.pdf",
+        "pages": 2,
+        "bytes": 347469
+      },
       "field": "social",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2025-10-30",
-      "href": "pages/article.html?id=kn-social-2025-10-30",
+      "academy": "moral",
+      "date": "2019-06-19",
+      "href": "pages/article.html?id=kn-mps-748",
+      "image": "assets/images/knowledge/kn-mps-748.jpg",
       "title": {
-        "th": "โลกาภิวัตน์กับอัตลักษณ์ท้องถิ่น",
-        "en": "Globalisation and local identity"
+        "th": "ความลึกลับของสื่อสังคม (The Mystery of Social Media)",
+        "en": "The mystery of social media"
       },
       "excerpt": {
-        "th": "กระแสโลกและวัฒนธรรมท้องถิ่นส่งผลต่อกันอย่างไร",
-        "en": "How global currents and local cultures shape each other."
-      }
+        "th": "ปัจจุบันมีคนจำนวนมากใช้อินเทอร์เน็ตโดยมองไม่เห็นบางสิ่งที่ซ่อนอยู่ นั่นคือปรากฏการณ์อันเป็นผลจาก กลไกข่าวสาร ขับเคลื่อนไปพร้อมกับ กลไกของเกม…",
+        "en": "The hidden mechanisms of information and gaming that shape what people see online."
+      },
+      "from": "https://mps.royalsociety.go.th/ความลึกลับของสื่อสังคม/"
     },
     {
-      "id": "kn-arts-2026-07-14",
-      "pdf": { "src": "assets/docs/knowledge/kn-arts-2026-07-14.pdf", "pages": 3, "bytes": 534645 },
+      "id": "kn-arts-717",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-arts-717.pdf",
+        "pages": 2,
+        "bytes": 396212
+      },
       "field": "arts",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทคัดย่อ",
+        "en": "Abstract"
       },
-      "date": "2026-07-14",
-      "href": "pages/article.html?id=kn-arts-2026-07-14",
+      "academy": "arts",
+      "date": "2020-04-23",
+      "href": "pages/article.html?id=kn-arts-717",
+      "image": "assets/images/knowledge/kn-arts-717.png",
       "title": {
-        "th": "การสืบทอดดนตรีไทยในสถาบันการศึกษา",
-        "en": "Passing on Thai classical music"
+        "th": "จิตรกรรมฝีมือกลุ่มช่างพื้นบ้านชลบุรี",
+        "en": "Murals by the folk painters of Chonburi"
       },
       "excerpt": {
-        "th": "การถ่ายทอดจากครูสู่ศิษย์ และการปรับตัวในระบบการศึกษา",
-        "en": "Teacher-to-student transmission and how it adapts to formal education."
-      }
+        "th": "จิตรกรรมเป็นงานศิลปะประเภทหนึ่งของไทยที่ส่วนมากเกี่ยวเนื่องกับพุทธศาสนา ปรากฏอยู่ทุกภาค…",
+        "en": "The style and subjects of temple murals by local painters in eastern Thailand."
+      },
+      "from": "https://arts.royalsociety.go.th/จิตรกรรมฝีมือกลุ่มช่าง/"
     },
     {
-      "id": "kn-arts-2026-04-23",
-      "pdf": { "src": "assets/docs/knowledge/kn-arts-2026-04-23.pdf", "pages": 4, "bytes": 536756 },
+      "id": "kn-arts-704",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-arts-704.pdf",
+        "pages": 2,
+        "bytes": 383082
+      },
       "field": "arts",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทคัดย่อ",
+        "en": "Abstract"
       },
-      "date": "2026-04-23",
-      "href": "pages/article.html?id=kn-arts-2026-04-23",
+      "academy": "arts",
+      "date": "2020-03-03",
+      "href": "pages/article.html?id=kn-arts-704",
+      "image": "assets/images/knowledge/kn-arts-704.png",
       "title": {
-        "th": "ลวดลายประดับในสถาปัตยกรรมไทย",
-        "en": "Ornament in Thai architecture"
+        "th": "พระขรรค์ในนาฏกรรมไทย",
+        "en": "The phra khan sword in Thai dance drama"
       },
       "excerpt": {
-        "th": "ความหมายและหน้าที่ของลวดลายประดับในอาคารแบบไทย",
-        "en": "The meaning and function of decorative motifs in Thai buildings."
-      }
+        "th": "ขรรค์ พจนานุกรม ฉบับราชบัณฑิตยสถาน พ.ศ. ๒๕๕๔ ขรรค์ [ขัน] น. ศัสตราวุธชนิดหนึ่งมีคม ๒ ข้าง ที่กลางใบมีดทั้งใบและหลังเป็นสันเล็กคล้ายคมรูปหอก ด้ามสั้น…",
+        "en": "The royal sword as a symbol of kingship and its place in Thai classical performance."
+      },
+      "from": "https://arts.royalsociety.go.th/พระขรรค์ในนาฏกรรมไทย/"
     },
     {
-      "id": "kn-arts-2026-01-15",
-      "pdf": { "src": "assets/docs/knowledge/kn-arts-2026-01-15.pdf", "pages": 3, "bytes": 571460 },
+      "id": "kn-arts-701",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-arts-701.pdf",
+        "pages": 2,
+        "bytes": 427076
+      },
       "field": "arts",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทคัดย่อ",
+        "en": "Abstract"
       },
-      "date": "2026-01-15",
-      "href": "pages/article.html?id=kn-arts-2026-01-15",
+      "academy": "arts",
+      "date": "2020-02-04",
+      "href": "pages/article.html?id=kn-arts-701",
+      "image": "assets/images/knowledge/kn-arts-701.jpg",
       "title": {
-        "th": "หลักการอนุรักษ์จิตรกรรมฝาผนัง",
-        "en": "Principles of mural painting conservation"
+        "th": "เปลี่ยนสลับ ทับซ้อน ซ่อนร่าง ให้เป็นงานสร้างสรรค์",
+        "en": "Shifting, overlapping, hidden: disguise as creative work"
       },
       "excerpt": {
-        "th": "หลักพื้นฐานในการดูแลจิตรกรรมฝาผนังให้คงสภาพ",
-        "en": "Basic principles for keeping mural paintings in good condition."
-      }
+        "th": "บทความนี้เป็นส่วนหนึ่งของปาฐกถานำในการประชุมสัมมนาวิชาการเรื่อง เปลี่ยนสลับ ทับซ้อน ซ่อนร่างในประเพณี และการละเล่นสวมหน้ากากในประเทศไทย…",
+        "en": "Masks and disguise in Thai traditions and play as a source for new creative work."
+      },
+      "from": "https://arts.royalsociety.go.th/เปลี่ยนสลับ-ทับซ้อน-ซ่อน/"
     },
     {
-      "id": "kn-history-2026-08-11",
-      "pdf": { "src": "assets/docs/knowledge/kn-history-2026-08-11.pdf", "pages": 4, "bytes": 557415 },
+      "id": "kn-arts-711",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-arts-711.pdf",
+        "pages": 3,
+        "bytes": 497211
+      },
+      "field": "arts",
+      "type": {
+        "th": "บทคัดย่อ",
+        "en": "Abstract"
+      },
+      "academy": "arts",
+      "date": "2020-03-19",
+      "href": "pages/article.html?id=kn-arts-711",
+      "image": "assets/images/knowledge/kn-arts-711.jpg",
+      "title": {
+        "th": "แนวทางการออกแบบสภาพแวดล้อมสำหรับชุมชนสูงอายุ (Design Guidelines for Aged Community Environment)",
+        "en": "Design guidelines for ageing communities"
+      },
+      "excerpt": {
+        "th": "ในช่วงเวลาอีก ๒๓ ปีข้างหน้า ประเทศไทยจะเข้าสู่ “สังคมสูงอายุอย่างสมบูรณ์” เมื่อประชากร ร้อยละ ๒๐ จะมีอายุตั้งแต่ ๖๐ ปีขึ้นไป…",
+        "en": "Designing community environments for a fully aged Thai society."
+      },
+      "from": "https://arts.royalsociety.go.th/แนวทางการออกแบบสภาพแวด/"
+    },
+    {
+      "id": "kn-mps-799",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-799.pdf",
+        "pages": 5,
+        "bytes": 588100
+      },
       "field": "history",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-08-11",
-      "href": "pages/article.html?id=kn-history-2026-08-11",
+      "academy": "moral",
+      "date": "2020-01-15",
+      "href": "pages/article.html?id=kn-mps-799",
+      "image": "assets/images/knowledge/kn-mps-799.jpg",
       "title": {
-        "th": "การอ่านจารึกในฐานะหลักฐานทางประวัติศาสตร์",
-        "en": "Reading inscriptions as historical sources"
+        "th": "ทฤษฎีระบบราชการกับการจัดระเบียบบริหารราชการแผ่นดินในสมัยกรุงศรีอยุธยา",
+        "en": "Bureaucracy theory and the government of Ayutthaya"
       },
       "excerpt": {
-        "th": "จารึกบอกอะไรเราได้ และข้อควรระวังในการตีความ",
-        "en": "What inscriptions can tell us, and what to watch for when interpreting them."
-      }
+        "th": "ทฤษฎีการบริหารองค์การขนาดใหญ่ที่เป็นที่ยอมรับและมีการใช้กันอย่างกว้างขวางมาจนกระทั่งปัจจุบันคือ ทฤษฎีระบบราชการ (Bureaucracy) ของแมกซ์ เวเบอร์ (Max…",
+        "en": "Reading the organisation of government in the Ayutthaya kingdom through Max Weber’s theory of bureaucracy."
+      },
+      "from": "https://mps.royalsociety.go.th/ทฤษฎีระบบราชการกับการจ/"
     },
     {
-      "id": "kn-history-2026-05-28",
-      "pdf": { "src": "assets/docs/knowledge/kn-history-2026-05-28.pdf", "pages": 4, "bytes": 501120 },
+      "id": "kn-mps-786",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-786.pdf",
+        "pages": 2,
+        "bytes": 440958
+      },
       "field": "history",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-05-28",
-      "href": "pages/article.html?id=kn-history-2026-05-28",
+      "academy": "moral",
+      "date": "2019-11-06",
+      "href": "pages/article.html?id=kn-mps-786",
+      "image": "assets/images/knowledge/kn-mps-786.png",
       "title": {
-        "th": "ชื่อบ้านนามเมืองกับร่องรอยทางประวัติศาสตร์",
-        "en": "Place names as traces of the past"
+        "th": "คดีพญาระกา–บทเรียนจากประวัติศาสตร์ไทย",
+        "en": "The Phaya Raka case: a lesson from Thai history"
       },
       "excerpt": {
-        "th": "ชื่อสถานที่สะท้อนภูมิประเทศ ผู้คน และความเปลี่ยนแปลงอย่างไร",
-        "en": "How place names reflect landscape, people and change."
-      }
+        "th": "คดีพญาระกาเป็นคดีสำคัญในประวัติศาสตร์ไทยคดีหนึ่ง ซึ่งเป็นคดีพิพาทในข้อหาหมิ่นประมาทโดยการโฆษณา เนื่องจากพระเจ้าบรมวงศ์เธอ กรมพระนราธิปประพันธ์พงศ์…",
+        "en": "A famous 1910 defamation case over a satirical play, and what it teaches."
+      },
+      "from": "https://mps.royalsociety.go.th/คดีพญาระกา-บทเรียนจากป/"
     },
     {
-      "id": "kn-history-2025-09-22",
-      "pdf": { "src": "assets/docs/knowledge/kn-history-2025-09-22.pdf", "pages": 3, "bytes": 569400 },
+      "id": "kn-mps-754",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-754.pdf",
+        "pages": 2,
+        "bytes": 353681
+      },
       "field": "history",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2025-09-22",
-      "href": "pages/article.html?id=kn-history-2025-09-22",
+      "academy": "moral",
+      "date": "2019-07-03",
+      "href": "pages/article.html?id=kn-mps-754",
+      "image": "assets/images/knowledge/kn-mps-754.png",
       "title": {
-        "th": "ประวัติศาสตร์เอเชียตะวันออกเฉียงใต้ในมุมมองเปรียบเทียบ",
-        "en": "Southeast Asian history in comparative perspective"
+        "th": "ล้านนา-เชียงใหม่ : ส่งบรรณาการไปจีน สมัยราชวงศ์หยวนและราชวงศ์หมิง",
+        "en": "Lan Na–Chiang Mai tribute to China under the Yuan and Ming"
       },
       "excerpt": {
-        "th": "การศึกษาความเชื่อมโยงของรัฐและสังคมในภูมิภาค",
-        "en": "Studying the links between states and societies across the region."
-      }
+        "th": "ดินแดนล้านนา-เชียงใหม่ เอกสาร จีนเรียกว่า “ปาไป่สีฟู” ปรากฏใน “จดหมายเหตุประจำรัชกาล” ของจักรพรรดิจีนตั้งแต่สมัยราชวงศ์หยวน เรียกว่า “หยวนสื่อ”…",
+        "en": "What Chinese court records reveal about Chiang Mai’s tribute missions to the Yuan and Ming emperors."
+      },
+      "from": "https://mps.royalsociety.go.th/ล้านนา-เชียงใหม่-ส่งบรร/"
     },
     {
-      "id": "kn-law-2026-03-14",
-      "pdf": { "src": "assets/docs/knowledge/kn-law-2026-03-14.pdf", "pages": 3, "bytes": 595616 },
+      "id": "kn-mps-751",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-751.pdf",
+        "pages": 2,
+        "bytes": 454359
+      },
+      "field": "history",
+      "type": {
+        "th": "บทความ",
+        "en": "Article"
+      },
+      "academy": "moral",
+      "date": "2019-07-03",
+      "href": "pages/article.html?id=kn-mps-751",
+      "image": "assets/images/knowledge/kn-mps-751.jpg",
+      "title": {
+        "th": "การตั้งถิ่นฐานของสังคมไทย : ปริทัศน์เชิงภูมิศาสตร์มนุษย์",
+        "en": "Settlement in Thai society: a human-geography review"
+      },
+      "excerpt": {
+        "th": "ภูมิศาสตร์ (Geography) ซึ่งเป็นศาสตร์ที่ว่าด้วยพื้นดินหรือพื้นโลกสามารถแบ่งสาระได้ออกเป็น 3 แขนงคือ ภูมิศาสตร์กายภาพ (Physical Geography)…",
+        "en": "How Thai settlements formed and spread, seen through human geography."
+      },
+      "from": "https://mps.royalsociety.go.th/การตั้งถิ่นฐานของสังคม/"
+    },
+    {
+      "id": "kn-mps-810",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-810.pdf",
+        "pages": 2,
+        "bytes": 455392
+      },
       "field": "law",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-03-14",
-      "href": "pages/article.html?id=kn-law-2026-03-14",
+      "academy": "moral",
+      "date": "2020-03-05",
+      "href": "pages/article.html?id=kn-mps-810",
+      "image": "assets/images/knowledge/kn-mps-810.jpg",
       "title": {
-        "th": "ภาษากฎหมายที่ประชาชนเข้าใจได้",
-        "en": "Legal language the public can understand"
+        "th": "ข่าวปลอม (fake news) บนโลกอินเตอร์เนต ๔.๐ ในมิติทางกฎหมาย",
+        "en": "Fake news on the internet: the legal dimension"
       },
       "excerpt": {
-        "th": "แนวทางเขียนกฎหมายและประกาศราชการด้วยภาษาที่ชัดเจน",
-        "en": "Writing laws and public notices in clear language."
-      }
+        "th": "ขณะนี้ “ข่าวปลอม (Fake News)” กลายเป็นปัญหาสำคัญของโลกและไม่ว่าใครก็อาจแพร่กระจายข่าวปลอมโดยไม่รู้ตัว…",
+        "en": "Why fake news is hard to regulate and how the law deals with it."
+      },
+      "from": "https://mps.royalsociety.go.th/ข่าวปลอม-fake-news-บนโลกอินเตอร/"
     },
     {
-      "id": "kn-law-2026-06-24",
-      "pdf": { "src": "assets/docs/knowledge/kn-law-2026-06-24.pdf", "pages": 4, "bytes": 576965 },
+      "id": "kn-mps-783",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-783.pdf",
+        "pages": 2,
+        "bytes": 458681
+      },
       "field": "law",
       "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-06-24",
-      "href": "pages/article.html?id=kn-law-2026-06-24",
+      "academy": "moral",
+      "date": "2019-10-16",
+      "href": "pages/article.html?id=kn-mps-783",
+      "image": "assets/images/knowledge/kn-mps-783.jpg",
       "title": {
-        "th": "หลักนิติธรรมกับการบริหารราชการ",
-        "en": "The rule of law in public administration"
+        "th": "เงินทดแทนเมื่อได้รับอันตรายจากการทำงาน",
+        "en": "Compensation for work-related injury"
       },
       "excerpt": {
-        "th": "ความหมายของหลักนิติธรรม และการนำไปใช้ในการปฏิบัติราชการ",
-        "en": "What the rule of law means and how it applies to government work."
-      }
+        "th": "ประเทศไทยให้ความสำคัญในการคุ้มครองลูกจ้างจากการประสบอันตราย เจ็บป่วย หรือสูญหายจากการทำงาน โดยตรากฎหมายเงินทดแทนขึ้นมาใช้บังคับตั้งแต่ พ.ศ. ๒๔๙๙…",
+        "en": "How Thai law protects employees injured, taken ill or lost through their work."
+      },
+      "from": "https://mps.royalsociety.go.th/เงินทดแทนเมื่อได้รับอั/"
     },
     {
-      "id": "kn-law-2026-02-05",
-      "pdf": { "src": "assets/docs/knowledge/kn-law-2026-02-05.pdf", "pages": 3, "bytes": 539313 },
+      "id": "kn-mps-710",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-710.pdf",
+        "pages": 2,
+        "bytes": 380520
+      },
       "field": "law",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-02-05",
-      "href": "pages/article.html?id=kn-law-2026-02-05",
+      "academy": "moral",
+      "date": "2019-02-20",
+      "href": "pages/article.html?id=kn-mps-710",
+      "image": "assets/images/knowledge/kn-mps-710.jpg",
       "title": {
-        "th": "ศัพท์กฎหมายที่มักใช้สับสน",
-        "en": "Legal terms that are often confused"
+        "th": "ความมั่นคงปลอดภัยไซเบอร์ (Cyber Security) และมาตรการทางกฎหมายเพื่อรับมือภัยคุกคาม",
+        "en": "Cyber security and legal measures against threats"
       },
       "excerpt": {
-        "th": "คำที่มีความหมายใกล้เคียงกันแต่มีผลทางกฎหมายต่างกัน",
-        "en": "Words with similar meanings but different legal effects."
-      }
+        "th": "เทคโนโลยีสำหรับเศรษฐกิจดิจิทัลเข้ามามีบทบาทต่อประชาชนในสังคมของทุกรัฐในการใช้ชีวิตประจำวันเพื่ออำนวยความสะดวกในการติดต่อสื่อสาร ประกอบวิชาชีพ…",
+        "en": "The threats that come with the digital economy and the laws that respond to them."
+      },
+      "from": "https://mps.royalsociety.go.th/ความมั่นคงปลอดภัยไซเบอ/"
     },
     {
-      "id": "kn-economics-2026-07-30",
-      "pdf": { "src": "assets/docs/knowledge/kn-economics-2026-07-30.pdf", "pages": 3, "bytes": 634864 },
-      "field": "economics",
-      "type": {
-        "th": "บทความวิชาการ",
-        "en": "Academic article"
+      "id": "kn-mps-694",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-694.pdf",
+        "pages": 2,
+        "bytes": 593546
       },
-      "date": "2026-07-30",
-      "href": "pages/article.html?id=kn-economics-2026-07-30",
+      "field": "law",
+      "type": {
+        "th": "บทความ",
+        "en": "Article"
+      },
+      "academy": "moral",
+      "date": "2019-01-16",
+      "href": "pages/article.html?id=kn-mps-694",
+      "image": "assets/images/knowledge/kn-mps-694.png",
       "title": {
-        "th": "คำถามสำคัญของเศรษฐศาสตร์การพัฒนา",
-        "en": "Development economics: key questions"
+        "th": "ความเสมอภาคในความยุติธรรม",
+        "en": "Equality in justice"
       },
       "excerpt": {
-        "th": "แนวคิดหลักว่าเศรษฐกิจเติบโตอย่างไร และใครได้รับประโยชน์",
-        "en": "Core ideas behind how economies grow and who benefits."
-      }
+        "th": "ความเสมอภาคในความยุติธรรม แปลเป็นภาษาอังกฤษได้ว่า equality in justice ซึ่งแผลงมาจากภาษาละตินว่า equalitas in justitia คำแรกมีความหมายเหมือน equation…",
+        "en": "What equality in justice means across languages and philosophical traditions."
+      },
+      "from": "https://mps.royalsociety.go.th/ความเสมอภาคในความยุติธ/"
     },
     {
-      "id": "kn-economics-2026-05-06",
-      "pdf": { "src": "assets/docs/knowledge/kn-economics-2026-05-06.pdf", "pages": 3, "bytes": 560757 },
+      "id": "kn-science-760",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-760.pdf",
+        "pages": 2,
+        "bytes": 390052
+      },
       "field": "economics",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2026-05-06",
-      "href": "pages/article.html?id=kn-economics-2026-05-06",
+      "academy": "science",
+      "date": "2019-01-02",
+      "href": "pages/article.html?id=kn-science-760",
+      "image": "assets/images/knowledge/kn-science-760.jpg",
       "title": {
-        "th": "การคลังสาธารณะสำหรับผู้อ่านทั่วไป",
-        "en": "Public finance for general readers"
+        "th": "เศรษฐกิจแบบแบ่งปัน (Sharing Economy)",
+        "en": "The sharing economy"
       },
       "excerpt": {
-        "th": "รายได้ รายจ่าย และหนี้สาธารณะของรัฐทำงานอย่างไร",
-        "en": "How government revenue, spending and public debt work."
-      }
+        "th": "Sharing Economy หรือเศรษฐกิจแบ่งปัน เป็นรูปแบบทางธุรกิจ (Business Model) ใหม่ที่มีการเติบโตอย่างรวดเร็วนับตั้งแต่ปี ค.ศ. 2010…",
+        "en": "A business model that connects buyers and sellers on digital platforms, from Uber to Airbnb."
+      },
+      "from": "https://science.royalsociety.go.th/เศรษฐกิจแบบแบ่งปัน-sharing-economy/"
     },
     {
-      "id": "kn-economics-2025-11-26",
-      "pdf": { "src": "assets/docs/knowledge/kn-economics-2025-11-26.pdf", "pages": 4, "bytes": 596970 },
+      "id": "kn-mps-813",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-813.pdf",
+        "pages": 2,
+        "bytes": 360944
+      },
       "field": "economics",
       "type": {
-        "th": "คลังความรู้",
-        "en": "Knowledge base"
+        "th": "บทความ",
+        "en": "Article"
       },
-      "date": "2025-11-26",
-      "href": "pages/article.html?id=kn-economics-2025-11-26",
+      "academy": "moral",
+      "date": "2020-03-18",
+      "href": "pages/article.html?id=kn-mps-813",
+      "image": "assets/images/knowledge/kn-mps-813.jpg",
       "title": {
-        "th": "ศัพท์เศรษฐศาสตร์ในข่าวที่ควรเข้าใจ",
-        "en": "Economic terms you meet in the news"
+        "th": "จากเศรษฐกิจซบเซาสู่อนาคตสีเขียว",
+        "en": "From economic slowdown to a green future"
       },
       "excerpt": {
-        "th": "คำที่พบบ่อย เช่น เงินเฟ้อ และอัตราแลกเปลี่ยน",
-        "en": "Common terms such as inflation and exchange rates."
-      }
+        "th": "จากกลางทศวรรษ ๒๕๕๐ การลงทุนภาคเอกชนมีแนวโน้มถดถอย ส่งผลให้เศรษฐกิจไทยโตช้ากว่าประเทศเพื่อนบ้านในอาเซียนทั้งหมด ส่วนหนึ่งเกิดจากภาวะเศรษฐกิจโลกซบเซา…",
+        "en": "Why Thai growth slowed and how a green economy could renew it."
+      },
+      "from": "https://mps.royalsociety.go.th/จากเศรษฐกิจซบเซาสู่อนา/"
+    },
+    {
+      "id": "kn-science-423",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-science-423.pdf",
+        "pages": 4,
+        "bytes": 549161
+      },
+      "field": "economics",
+      "type": {
+        "th": "บทความ",
+        "en": "Article"
+      },
+      "academy": "science",
+      "date": "2017-09-20",
+      "href": "pages/article.html?id=kn-science-423",
+      "image": "assets/images/knowledge/kn-science-423.jpg",
+      "title": {
+        "th": "เกษตรพันธสัญญากับการจัดการโซ่อุปทานสินค้าเกษตร",
+        "en": "Contract farming and agricultural supply chains"
+      },
+      "excerpt": {
+        "th": "เกษตรพันธสัญญา (Contract farming) เริ่มมีการใช้เป็นครั้งแรกโดยบริษัทญี่ปุ่นที่เข้าไปทำธุรกิจในไต้หวันตั้งแต่ช่วงทศวรรษปี ค.ศ. ๑๙๓๐ เพื่อให้มีอุปทาน…",
+        "en": "How contract farming works and how it can be fair to farmers."
+      },
+      "from": "https://science.royalsociety.go.th/contract-farming/"
+    },
+    {
+      "id": "kn-mps-742",
+      "pdf": {
+        "src": "assets/docs/knowledge/kn-mps-742.pdf",
+        "pages": 2,
+        "bytes": 454869
+      },
+      "field": "economics",
+      "type": {
+        "th": "บทความ",
+        "en": "Article"
+      },
+      "academy": "moral",
+      "date": "2019-06-05",
+      "href": "pages/article.html?id=kn-mps-742",
+      "image": "assets/images/knowledge/kn-mps-742.jpg",
+      "title": {
+        "th": "การเปลี่ยนผ่านสู่ดิจิทัล : ความก้าวหน้าของฟินเทคไทย (Digital Transformation: Progress of Thailand’s FinTech)",
+        "en": "Digital transformation: the progress of Thai FinTech"
+      },
+      "excerpt": {
+        "th": "ผลจากความก้าวหน้าทางเทคโนโลยีทำให้ระบบนิเวศทางธุรกิจเปลี่ยนแปลงไปอย่างรวดเร็ว มีการนำเทคโนโลยีทางการเงินหรือฟินเทค (FinTech)…",
+        "en": "How financial technology is changing financial services in Thailand."
+      },
+      "from": "https://mps.royalsociety.go.th/การเปลี่ยนผ่านสู่ดิจิท/"
     }
   ]
 };

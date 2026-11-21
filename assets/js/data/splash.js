@@ -51,7 +51,7 @@ window.RS_SPLASH = {
   end: '2026-12-31',
   mode: 'celebration',
   poster: {
-    desktop: 'assets/images/splash/centenary-2569-poster.jpg'
+    desktop: 'assets/images/splash/centenary-2569-poster-v2.jpg'
     /* mobile: a tall version (1080x1600) when designed; until then phones
        show the wide one whole */
   },

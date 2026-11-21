@@ -71,6 +71,12 @@
     ? body.body
     : `<p class="note-box">${icon('info')}<span>${te(L.pending)}</span></p>`;
 
+  /* a summary that is only the text's own opening is not said twice */
+  const squash = s => (s || '').replace(/…$/, '').replace(/\s+/g, '');
+  const firstPara = qs('p', bodyBox);
+  const dek = qs('[data-article-dek]', root);
+  if (body && dek && firstPara && squash(firstPara.textContent).startsWith(squash(t(item.excerpt)))) dek.hidden = true;
+
   /* contents, from the body's h2 headings (each gets an id if it has none) */
   const heads = qsa('h2', bodyBox);
   heads.forEach((h, i) => { if (!h.id) h.id = `section-${i + 1}`; });

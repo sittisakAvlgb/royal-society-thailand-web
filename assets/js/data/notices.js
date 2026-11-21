@@ -29,7 +29,7 @@ window.RS_NOTICES = [
     start: '2026-04-01',
     end: '2026-12-31',
     pages: 'home',
-    image: { desktop: 'assets/images/notices/centenary-2569.jpg' },
+    image: { desktop: 'assets/images/notices/centenary-2569-v2.jpg' },
     alt: {
       th: '๑๐๐ ปี ราชบัณฑิตยสภา ร้อยปีแห่งการบำรุงสรรพวิชา ๑๙ เมษายน ๒๔๖๙ ถึง ๑๙ เมษายน ๒๕๖๙',
       en: 'The Royal Society of Thailand at 100: a hundred years in the service of learning, 19 April 1926 to 19 April 2026.'

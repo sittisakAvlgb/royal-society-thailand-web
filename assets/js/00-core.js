@@ -182,11 +182,14 @@
      * Everything is authored with 0-9; this is the single place that decides
      * which numerals the reader sees. Anything that must stay Latin (a
      * telephone number, an e-mail address, a domain, a file name) is marked
-     * with [data-keep-digits] and never passes through here.
+     * with [data-keep-digits] and never passes through here. A code whose
+     * digits are joined to Latin letters (PM2.5, 3D, H2O, 4th) keeps them.
      */
     digits(value) {
       const text = String(value ?? '');
-      return lang === 'th' ? text.replace(/[0-9]/g, d => THAI_DIGITS[Number(d)]) : text;
+      if (lang !== 'th') return text;
+      return text.replace(/[A-Za-z]+[0-9][0-9.]*[A-Za-z0-9]*|[0-9][0-9.]*[A-Za-z]+|[0-9]/g,
+        run => (run.length === 1 && /[0-9]/.test(run) ? THAI_DIGITS[Number(run)] : run));
     },
 
     /** ISO date -> localised date (Buddhist era for Thai) */

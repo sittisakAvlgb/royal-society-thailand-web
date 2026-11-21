@@ -2406,7 +2406,7 @@ body.access-reduce-motion .hero-slider__controls { animation: none; }
 
 /* ==============================
    Home — About + three academies
-   Left: photo slot (assets/images/about/about-bg.png) that switches to the
+   Left: photo slot (the royal portrait, assets/images/about/about-portrait.jpg) that switches to the
    academy being pointed at. Right: an index of the three academies —
    numeral · name · disciplines, separated by hairlines. Rows rendered by
    08-directory.js from RS_CONFIG.academies.
@@ -9131,6 +9131,15 @@ button.pcal__d.is-past .pcal__ev { border-left-color: #B9C7C0; color: #6d7d75; }
 .article-page .prose td[lang="en"] { font-size: .8em; color: #3d4a44; }
 .article-page .prose tbody tr:nth-child(even) { background: transparent; }
 
+/* The academies' own articles: a keyword line under the abstract, figures
+   with their captions, and the picture credit as a small last line */
+.article-page .prose .article-keywords { font-size: .9em; color: #3d4a44; }
+.article-page .prose .article-keywords strong { margin-right: .35em; }
+.article-page .prose figure { margin-block: 1.4em; }
+.article-page .prose figure img { margin-inline: auto; }
+.article-page .prose .article-credit { margin-top: 2.2em; padding-top: var(--space-3, 12px); border-top: 1px solid var(--rst-green-100, #dfe9e3); font-size: var(--text-xs); color: var(--text-secondary); -webkit-text-stroke: 0; }
+.article-page .prose .article-credit a { color: inherit; }
+
 /* Article end matter: references, download, citation and related topics as
    one quiet set — small headings over a hairline, no boxes, no pill tags */
 .article-page .article-end { gap: 0; margin-top: var(--space-12, 48px); }
@@ -9214,6 +9223,8 @@ button.pcal__d.is-past .pcal__ev { border-left-color: #B9C7C0; color: #6d7d75; }
 .ann-list.is-grid .ann-cover { aspect-ratio: 16 / 10; }
 .ann-list.is-grid .acts-doc__body { padding: var(--space-3) var(--space-4) 0; }
 .ann-list.is-grid .acts-doc__name { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--text-sm); line-height: 1.45; }
+/* bylaws are named in full, year included, in the grid as in the list */
+.bylaw-page .ann-list.is-grid .acts-doc__name { display: block; -webkit-line-clamp: unset; line-clamp: none; overflow: visible; }
 .ann-list.is-grid .acts-doc__meta { font-size: var(--text-xs); }
 .ann-list.is-grid .acts-doc__open { margin: var(--space-3) var(--space-4) var(--space-3); padding-top: var(--space-2); border-top: 1px solid var(--border); align-self: stretch; }
 
