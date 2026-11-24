@@ -429,3 +429,17 @@
 
   .hero__title { font-size: var(--text-2xl); }
 }
+
+/* Footer on phones: the two short link groups (main menu, website) side by
+   side, the policies — longer names — across the full width beneath, each
+   group with clear room above its rule so it does not run on from the last */
+@media (max-width: 767.98px) {
+  .footer-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-5, 20px); margin-top: var(--space-4); padding-top: var(--space-8); border-top: 1px solid rgba(255, 255, 255, .12); }
+  .footer-col--policies { grid-column: 1 / -1; }
+  .footer-col h2 { font-size: 1.125rem; }
+  .site-footer .footer-links :is(a, .footer-action) { min-height: 40px; padding-block: 8px; }
+  .site-footer .footer-col--main .footer-links li + li { margin-top: 0; }
+  /* the English line under each heading stays on one line, so both
+     columns' links start level */
+  .footer-col h2 span { font-size: .6875rem; letter-spacing: .03em; white-space: nowrap; }
+}

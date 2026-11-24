@@ -42,6 +42,9 @@
       <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-8 8M17 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4" ${S}/></symbol>
       <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" ${S}/></symbol>
       <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" ${S}/></symbol>
+      <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></symbol>
+      <symbol id="i-messenger" viewBox="0 0 24 24"><path fill="currentColor" d="M0 11.64C0 4.95 5.24 0 12 0s12 4.95 12 11.64c0 6.69-5.24 11.64-12 11.64-1.21 0-2.38-.16-3.47-.46a.96.96 0 0 0-.64.05l-2.39 1.05a.96.96 0 0 1-1.35-.85l-.07-2.14a.97.97 0 0 0-.32-.68A11.39 11.39 0 0 1 0 11.64zm8.32-2.19-3.52 5.6c-.35.53.32 1.14.82.75l3.79-2.87c.26-.2.6-.2.87 0l2.8 2.1c.84.63 2.04.4 2.6-.48l3.52-5.6c.35-.53-.32-1.13-.82-.75l-3.79 2.87c-.25.2-.6.2-.86 0l-2.8-2.1a1.8 1.8 0 0 0-2.61.48z"/></symbol>
+      <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></symbol>
       <symbol id="i-access" viewBox="0 0 24 24"><path d="M4 18 8.5 6h1L14 18M5.6 14h6.8" ${S}/><path d="M16 18l2.6-7h.8L22 18M16.8 16h4.4" ${S}/></symbol>
       <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2" ${S}/><path d="M5 9.5c4.5 1 9.5 1 14 0M12 10.5v4l-3 6M12 14.5l3 6" ${S}/></symbol>
       <symbol id="i-photos" viewBox="0 0 24 24"><rect x="3" y="6" width="15" height="13" rx="2" ${S}/><path d="M7 3h12a2 2 0 0 1 2 2v11" ${S}/><circle cx="8.5" cy="10.5" r="1.5" ${S}/><path d="m3.5 17 4.5-4.5 3.5 3.5 2-2 4 4" ${S}/></symbol>
@@ -450,6 +453,13 @@
                 <span class="visually-hidden">${te(ui.external)}</span>
               </a>
             </div>
+            ${(contact.social || []).length ? `
+            <div class="footer-social">
+              <span class="footer-social__label">${te(ui.followUs)}</span>
+              <ul class="footer-social__list" role="list">${contact.social.map(item => `
+                <li><a class="footer-social__link" href="${escapeHTML(item.href)}" target="_blank" rel="noopener" aria-label="${escapeHTML(t(item.label))} ${escapeHTML(t(ui.external))}">${icon(item.icon || 'external')}</a></li>`).join('')}
+              </ul>
+            </div>` : ''}
           </section>
 
           <nav class="footer-nav" aria-label="${te(ui.footerNav)}">${columns}</nav>

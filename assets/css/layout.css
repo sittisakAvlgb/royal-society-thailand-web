@@ -678,3 +678,25 @@ html[lang="en"] .site-footer .footer-bottom :is(p, span, time, a, strong, .foote
 .utility-bar__links .utility-bar__cta:hover,
 .utility-bar__links .utility-bar__cta:focus-visible { border-color: var(--white); background: var(--white); color: var(--rst-green-900); }
 .utility-bar__links .utility-bar__cta:hover .icon { transform: translate(2px, -2px); }
+
+/* Footer, ติดตามเรา: the Office's official channels as logos under the
+   contact buttons — white on the dark green, brightening on hover */
+.footer-social { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-6); }
+.footer-social__label { font-size: var(--text-sm); color: rgba(255, 255, 255, .8); }
+.footer-social__list { display: flex; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+.site-footer .footer-social__link { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: rgba(255, 255, 255, .85); text-decoration: none; transition: color var(--duration) var(--ease), background-color var(--duration) var(--ease), transform var(--duration) var(--ease); }
+.site-footer .footer-social__link .icon { width: 26px; height: 26px; }
+.site-footer .footer-social__link:hover,
+.site-footer .footer-social__link:focus-visible { color: var(--white); background: rgba(255, 255, 255, .1); transform: translateY(-2px); text-decoration: none; }
+html:not([lang="en"]) .footer-social__label { font-size: var(--text-sm); }
+/* …each channel a round button with a soft outline, the label centred
+   against them; on hover the button fills white and the logo takes the
+   footer's green */
+.footer-social { flex-wrap: wrap; gap: var(--space-3) var(--space-4); margin-top: var(--space-6); padding-top: var(--space-5, 20px); border-top: 1px solid rgba(255, 255, 255, .12); }
+.footer-social__label { display: inline-flex; align-items: center; min-height: 44px; line-height: 1; font-weight: 600; color: rgba(255, 255, 255, .85); }
+.footer-social__list { gap: var(--space-2); }
+.site-footer .footer-social__link { width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, .28); background: rgba(255, 255, 255, .06); color: var(--white); }
+.site-footer .footer-social__link .icon { width: 20px; height: 20px; }
+.site-footer .footer-social__link:hover,
+.site-footer .footer-social__link:focus-visible { border-color: var(--white); background: var(--white); color: var(--rst-green-900); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .site-footer .footer-social__link { transition: none; } .site-footer .footer-social__link:hover { transform: none; } }

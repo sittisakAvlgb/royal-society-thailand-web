@@ -146,10 +146,13 @@ window.RS_CONFIG = {
        TODO (Office): supply the page — none is published on royalsociety.go.th.
        While empty, "Start chat" opens the contact page instead. */
     messenger: '',
-    /* official channels (sitemap 1.16.5). The YouTube channel is the one
-       orst.go.th links to. TODO (Office): add the Facebook page */
+    /* official channels (sitemap 1.16.5), shown as logos under "ติดตามเรา" in
+       the footer: the Messenger and YouTube links orst.go.th publishes; the
+       Facebook page is the one that Messenger link belongs to (page id) */
     social: [
-      { label: { th: 'YouTube สำนักงานราชบัณฑิตยสภา', en: 'YouTube: Office of the Royal Society' }, href: 'https://www.youtube.com/channel/UCFGKmCXh_pWaawbilPgZ69g' }
+      { icon: 'facebook', label: { th: 'Facebook สำนักงานราชบัณฑิตยสภา', en: 'Facebook: Office of the Royal Society' }, href: 'https://www.facebook.com/206167399441363' },
+      { icon: 'messenger', label: { th: 'Messenger สำนักงานราชบัณฑิตยสภา', en: 'Messenger: Office of the Royal Society' }, href: 'https://m.me/206167399441363' },
+      { icon: 'youtube', label: { th: 'YouTube สำนักงานราชบัณฑิตยสภา', en: 'YouTube: Office of the Royal Society' }, href: 'https://www.youtube.com/channel/UCFGKmCXh_pWaawbilPgZ69g' }
     ],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B8%B4%E0%B8%95%E0%B8%A2%E0%B8%AA%E0%B8%A0%E0%B8%B2+%E0%B8%A8%E0%B8%B9%E0%B8%99%E0%B8%A2%E0%B9%8C%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%81%E0%B8%B2%E0%B8%A3+%E0%B8%AD%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%A3%E0%B8%8B%E0%B8%B5'
   },
@@ -247,8 +250,8 @@ window.RS_CONFIG = {
         {
           label: { th: 'ติดต่อเรา', en: 'Contact the Office of the Royal Society' }, href: 'pages/contact.html',
           children: [
-            { label: { th: 'ติดต่อเรา', en: 'Contact the Office of the Royal Society' }, href: 'pages/contact.html' },
-            { label: { th: 'เครือข่ายสังคมออนไลน์ (Social Media)', en: 'Social Media' }, href: 'pages/contact.html#social' }
+            { label: { th: 'ติดต่อเรา', en: 'Contact the Office of the Royal Society' }, href: 'pages/contact.html' }
+            /* Social Media: now logos in the footer (removed from the menu at the client's request, Nov 2026) */
           ]
         }
       ]
