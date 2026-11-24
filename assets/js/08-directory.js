@@ -239,7 +239,7 @@
     qsa('[data-fellows-preview]').forEach(list => {
       const limit = Number(list.dataset.fellowsPreview) || 4;
       const academy = list.dataset.fellowsAcademy;      /* academy page: that academy only, */
-      const rank = { honorary: 0, fellow: 1, associate: 2 }; /* honorary Fellows first, Associates last */
+      const rank = { honorary: 0, fellow: 1, associate: 2 }; /* the order the Office asked for: honorary, Fellows, then Associates */
       const people = academy
         ? PEOPLE.filter(person => person.academy === academy).sort((a, b) => (rank[a.memberType] ?? 3) - (rank[b.memberType] ?? 3))
         : PEOPLE;

@@ -10785,3 +10785,70 @@ html[lang="en"] .rs-mobile-links .rs-mobile-subsub { font-size: 1rem; color: var
 .mega-inner--plain .mega-group:first-child { padding-left: 0; }
 .mega-inner--plain .mega-group:last-child { padding-right: 40px; }
 @media (max-width: 89.98rem) { .mega-inner--plain .mega-group { padding-inline: 24px; } .mega-inner--plain .mega-group:first-child { padding-left: 0; } }
+
+/* Column menu panels in a narrow window (a desktop browser made narrow or
+   zoomed in): the groups can no longer sit side by side with one-line
+   names, so they flow down balanced newspaper columns — a short group sits
+   on top of the next one instead of leaving an empty block beside a long
+   one. Names break between words; the hairlines between columns give way
+   to space; the rows sit closer than in the wide panel. */
+@media (max-width: 1279.98px) {
+  .mega-inner--plain { padding: 28px 32px 30px; max-height: calc(100vh - var(--header-overlap) - 16px); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; }
+  .mega-inner--plain::after { right: 0; bottom: 0; width: 160px; height: 160px; }
+  .mega-inner--plain .mega-groups { display: block; columns: 3 220px; column-gap: 40px; }
+  .mega-inner--plain .mega-group,
+  .mega-inner--plain .mega-group:first-child,
+  .mega-inner--plain .mega-group:last-child { display: block; padding: 0; break-inside: avoid; }
+  .mega-inner--plain .mega-group + .mega-group { border-left: 0; margin-top: 0; }
+  .mega-inner--plain .mega-group:not(:last-child) { padding-bottom: 26px; }
+  .mega-inner--plain .mega-group__title { margin-bottom: 6px; padding-bottom: 10px; }
+  .mega-inner--plain .mega-group__title .menu-label { min-height: 0; }
+  .mega-inner--plain .mega-group a,
+  .mega-inner--plain .mega-group__title { white-space: normal; text-wrap: pretty; }
+  .mega-inner--plain .mega-group > ul > li > a { min-height: 0; padding-block: 6px; line-height: 1.35; }
+  .mega-inner--plain .mega-sub { margin-block: 0 4px !important; }
+  .mega-inner--plain .mega-sub a { min-height: 0 !important; padding-block: 3px; }
+}
+
+/* Article page: the original article on an Academy's website, in place of
+   a PDF the Academies do not publish (25-article.js) */
+.article-file__icon--web { height: 48px; border-radius: 50%; }
+.article-file__icon--web .icon { width: 20px; height: 20px; }
+
+/* Academy masthead, ประเภทวิชา: the official lists run from 4 to 12 names,
+   some long, so they read as one quiet run of text — a step smaller, set
+   apart by small green dots instead of rules — and wrap within a measure
+   that keeps the lines even rather than stretching across the page */
+.acad-mast__field-list { max-width: 44rem; margin: 0; column-gap: 0; row-gap: 2px; }
+.acad-mast__field-list li { padding: 0; border-left: 0; font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary); white-space: nowrap; }
+.acad-mast__field-list li:not(:last-child)::after { content: ""; display: inline-block; width: 4px; height: 4px; margin: 0 var(--space-3); border-radius: 50%; background: var(--rst-green-600); vertical-align: middle; opacity: .7; }
+html[lang="en"] .acad-mast__field-list li { white-space: normal; }
+/* …and stated clearly: full body size in dark green, a touch of weight, the
+   label above it a step larger */
+.acad-mast__fields-label { font-size: var(--text-base); }
+.acad-mast__field-list { max-width: 48rem; row-gap: 4px; }
+.acad-mast__field-list li { font-size: var(--text-md, 1.25rem); font-weight: 500; line-height: 1.55; color: var(--rst-green-900); }
+.acad-mast__field-list li:not(:last-child)::after { width: 5px; height: 5px; background: var(--rst-green-700); opacity: 1; }
+.acad-mast__field-list li { line-height: 1.4; }
+
+/* In Memoriam (fellows-past.html, 32-past.js): the book's numbered rolls,
+   one per group, set in columns like the printed list; names with a
+   profile on the site are links */
+.past-roll__nav { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-4) 0 0; padding: 0; list-style: none; }
+.past-roll__nav a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 40px; padding: 6px var(--space-4); border: 1px solid var(--border); border-radius: 999px; font-size: var(--text-sm); color: var(--rst-green-900); text-decoration: none; transition: background-color .2s ease, border-color .2s ease; }
+.past-roll__nav a:hover { border-color: var(--rst-green-600); background: var(--rst-green-50, #eef5f1); }
+.past-roll__n { font-weight: 700; color: var(--rst-green-700); }
+.past-roll__group { padding-top: var(--space-8); scroll-margin-top: calc(var(--header-overlap) + var(--space-4)); }
+.past-roll__group + .past-roll__group { margin-top: var(--space-4); border-top: 1px solid var(--border); }
+.past-roll__title { display: flex; align-items: baseline; gap: var(--space-3); margin: 0 0 var(--space-4); font-family: var(--font-display); font-size: var(--text-md); font-weight: 700; color: var(--rst-green-800); }
+.past-roll__count { font-size: var(--text-sm); font-weight: 600; color: var(--text-secondary); }
+.past-roll__list { margin: 0; padding: 0; list-style: none; columns: 1; column-gap: var(--space-10, 40px); }
+@media (min-width: 768px) { .past-roll__list { columns: 2; } }
+.past-roll__list li { display: grid; grid-template-columns: 2.6em minmax(0, 1fr); gap: var(--space-2); padding: 6px 0; border-bottom: 1px dotted var(--border); break-inside: avoid; line-height: 1.45; }
+.past-roll__no { color: var(--text-secondary); font-variant-numeric: tabular-nums; text-align: right; }
+.past-roll__name { color: var(--text-primary); }
+a.past-roll__name { color: var(--rst-green-800); text-decoration: underline; text-decoration-color: var(--rst-green-200, #b9dcc8); text-underline-offset: .2em; }
+a.past-roll__name:hover { text-decoration-color: currentColor; }
+.fellow-deceased { color: var(--text-secondary); font-weight: 500; }
+.past-roll__note { margin: var(--space-6) 0 0; font-size: var(--text-sm); color: var(--text-secondary); }
+.past-roll__note a { color: var(--rst-green-800); }

@@ -164,7 +164,8 @@ window.RS_CONFIG = {
     /* an entry with `menu: '<nav key>'` would open that item's children as a
        dropdown here (02-components.js); Contact now has its own place in the
        main menu, so the top bar keeps only the Office link */
-    { label: { th: 'สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society' }, href: 'https://www.orst.go.th/', external: true }
+    /* highlight: drawn as an outlined pill so it reads as the way to the Office's own site */
+    { label: { th: 'สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society' }, href: 'https://www.orst.go.th/', external: true, highlight: true }
   ],
 
   /* ---------------------------------------------------------------------- *
@@ -268,10 +269,11 @@ window.RS_CONFIG = {
           children: [
             { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Members: Academy of Moral and Political Sciences' }, href: 'pages/fellows.html?academy=moral' },
             { label: { th: 'สำนักวิทยาศาสตร์', en: 'Members: Academy of Science' }, href: 'pages/fellows.html?academy=science' },
-            { label: { th: 'สำนักศิลปกรรม', en: 'Members: Academy of Arts' }, href: 'pages/fellows.html?academy=arts' }
+            { label: { th: 'สำนักศิลปกรรม', en: 'Members: Academy of Arts' }, href: 'pages/fellows.html?academy=arts' },
+            /* added at the client's request (Nov 2026), from the directory's list */
+            { label: { th: 'รายนามผู้วายชนม์', en: 'In Memoriam' }, href: 'pages/fellows-past.html' }
             /* not in the client's sitemap, hidden for now (Nov 2026), the pages stay:
             { label: { th: 'รายนามตามสำนัก', en: 'Directory by Academy' }, href: 'pages/fellows-academies.html' },
-            { label: { th: 'ทำเนียบอดีตราชบัณฑิต', en: 'Past Fellows' }, href: 'pages/fellows-past.html' },
             { label: { th: 'ตำแหน่งว่างและการสรรหาสมาชิก', en: 'Vacancies and Election of Fellows' }, href: 'pages/fellows-recruitment.html' } */
           ]
         },
@@ -352,13 +354,13 @@ window.RS_CONFIG = {
       label: { th: 'สำนัก', en: 'Academies' },
       href: 'pages/about.html#academies',
       match: ['academy.html'],
-      intro: { th: 'สำนักทั้งสามของราชบัณฑิตยสภา และสำนักงานราชบัณฑิตยสภา', en: 'The three academies of the Royal Society, and its Office' },
-      /* the client's sitemap, section 4 */
+      intro: { th: 'สำนักทั้งสามของราชบัณฑิตยสภา', en: 'The three academies of the Royal Society' },
+      /* the client's sitemap, section 4 — the Office's own site is linked
+         from the top bar, not from this menu (removed at the client's request, Nov 2026) */
       children: [
         { label: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' }, href: 'pages/academy.html?id=moral' },
         { label: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' }, href: 'pages/academy.html?id=science' },
-        { label: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' }, href: 'pages/academy.html?id=arts' },
-        { label: { th: 'สำนักงานราชบัณฑิตยสภา', en: 'Office of the Royal Society' }, href: 'https://www.orst.go.th/', external: true }
+        { label: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' }, href: 'pages/academy.html?id=arts' }
       ]
     },
 
@@ -573,17 +575,20 @@ window.RS_CONFIG = {
    * ---------------------------------------------------------------------- */
   academies: [
     { id: 'moral', icon: 'scale', name: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' },
-      fields: { th: 'ปรัชญา นิติศาสตร์ รัฐศาสตร์ เศรษฐศาสตร์ สังคมศาสตร์ ประวัติศาสตร์', en: 'Philosophy, law, political science, economics, social sciences, history' },
-      tags: { th: ['ปรัชญา', 'นิติศาสตร์', 'รัฐศาสตร์', 'เศรษฐศาสตร์', 'สังคมศาสตร์', 'ประวัติศาสตร์'],
-              en: ['Philosophy', 'Law', 'Political science', 'Economics', 'Social sciences', 'History'] } },
+      /* ประเภทวิชา as set by ข้อบังคับราชบัณฑิตยสภา พ.ศ. ๒๕๖๘ (ทำเนียบ, 3rd printing) */
+      fields: { th: "ปรัชญา นิติศาสตร์ รัฐศาสตร์และรัฐประศาสนศาสตร์ สังคมวิทยาและมานุษยวิทยา สังคมสงเคราะห์ศาสตร์และสวัสดิการสังคม เศรษฐศาสตร์ บริหารธุรกิจ นิเทศศาสตร์ จิตวิทยา ภูมิศาสตร์ ศึกษาศาสตร์ ประวัติศาสตร์", en: "Philosophy, Law, Political Science and Public Administration, Sociology and Anthropology, Social Work and Social Welfare, Economics, Business Administration, Communication Arts, Psychology, Geography, Education, History" },
+      tags: { th: ["ปรัชญา", "นิติศาสตร์", "รัฐศาสตร์และรัฐประศาสนศาสตร์", "สังคมวิทยาและมานุษยวิทยา", "สังคมสงเคราะห์ศาสตร์และสวัสดิการสังคม", "เศรษฐศาสตร์", "บริหารธุรกิจ", "นิเทศศาสตร์", "จิตวิทยา", "ภูมิศาสตร์", "ศึกษาศาสตร์", "ประวัติศาสตร์"],
+              en: ["Philosophy", "Law", "Political Science and Public Administration", "Sociology and Anthropology", "Social Work and Social Welfare", "Economics", "Business Administration", "Communication Arts", "Psychology", "Geography", "Education", "History"] } },
     { id: 'science', icon: 'atom', name: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' },
-      fields: { th: 'วิทยาศาสตร์กายภาพ ชีวภาพ ประยุกต์ แพทยศาสตร์ วิศวกรรมศาสตร์ เทคโนโลยี', en: 'Physical, biological and applied sciences, medicine, engineering, technology' },
-      tags: { th: ['วิทยาศาสตร์กายภาพ', 'ชีวภาพ', 'ประยุกต์', 'แพทยศาสตร์', 'วิศวกรรมศาสตร์', 'เทคโนโลยี'],
-              en: ['Physical sciences', 'Biology', 'Applied sciences', 'Medicine', 'Engineering', 'Technology'] } },
+      /* ประเภทวิชา as set by ข้อบังคับราชบัณฑิตยสภา พ.ศ. ๒๕๖๘ (ทำเนียบ, 3rd printing) */
+      fields: { th: "วิศวกรรมศาสตร์ เทคโนโลยี วิทยาศาสตร์ธรรมชาติ วิทยาศาสตร์และเทคโนโลยีการเกษตร และสัตวแพทยศาสตร์ แพทยศาสตร์ วิทยาศาสตร์สุขภาพ", en: "Engineering, Technology, Natural Sciences, Agricultural Science and Technology, and Veterinary Science, Medicine, Health Sciences" },
+      tags: { th: ["วิศวกรรมศาสตร์", "เทคโนโลยี", "วิทยาศาสตร์ธรรมชาติ", "วิทยาศาสตร์และเทคโนโลยีการเกษตร และสัตวแพทยศาสตร์", "แพทยศาสตร์", "วิทยาศาสตร์สุขภาพ"],
+              en: ["Engineering", "Technology", "Natural Sciences", "Agricultural Science and Technology, and Veterinary Science", "Medicine", "Health Sciences"] } },
     { id: 'arts', icon: 'palette', name: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' },
-      fields: { th: 'ภาษาและวรรณกรรม ภาษาศาสตร์ ดุริยางคศิลป์ ทัศนศิลป์ สถาปัตยกรรม', en: 'Language and literature, linguistics, music, visual arts, architecture' },
-      tags: { th: ['ภาษาและวรรณกรรม', 'ภาษาศาสตร์', 'ดุริยางคศิลป์', 'ทัศนศิลป์', 'สถาปัตยกรรม'],
-              en: ['Language & literature', 'Linguistics', 'Music', 'Visual arts', 'Architecture'] } }
+      /* ประเภทวิชา as set by ข้อบังคับราชบัณฑิตยสภา พ.ศ. ๒๕๖๘ (ทำเนียบ, 3rd printing) */
+      fields: { th: "วรรณศิลป์ สถาปัตยศิลป์ วิจิตรศิลป์ ประยุกต์ศิลป์", en: "Literary Arts, Architectural Arts, Fine Arts, Applied Arts" },
+      tags: { th: ["วรรณศิลป์", "สถาปัตยศิลป์", "วิจิตรศิลป์", "ประยุกต์ศิลป์"],
+              en: ["Literary Arts", "Architectural Arts", "Fine Arts", "Applied Arts"] } }
   ],
 
   /* ---------------------------------------------------------------------- *

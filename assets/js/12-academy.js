@@ -274,7 +274,7 @@
   function renderRoll() {
     const people = (window.RS_FELLOWS || []).filter(person => person.academy === academy.id);
     const types = window.RS_MEMBER_TYPES || {};
-    const order = ['honorary', 'fellow', 'associate'];
+    const order = ['honorary', 'fellow', 'associate'];  /* the order the Office asked for */
     const groups = order.map(type => ({ type, people: people.filter(person => person.memberType === type) }))
       .filter(group => group.people.length);
     set('[data-acad-roll]', groups.length ? groups.map((group, g) => `

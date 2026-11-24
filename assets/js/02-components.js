@@ -107,6 +107,12 @@
   /** The organisation name in the language that is NOT currently shown */
   const otherLang = () => (RS.lang === 'th' ? 'en' : 'th');
 
+  /* Names the Thai line-breaker would split (ราชบัณฑิต|ยสภา, พระ|ราชบัญญัติ)
+     stay on one line when a menu name wraps; the rest still breaks between
+     words. Same list as 31-policy.js. */
+  const KEEP = /(พระราชบัญญัติ|ราชบัณฑิตยสภา|ราชกิจจานุเบกษา)/g;
+  const tk = v => te(v).replace(KEEP, '<span class="nobr">$1</span>');
+
   /** <a> for a config link, with external-link indication */
   function link(item, className = '') {
     /* An entry with `action` is a control, not a destination: the cookie bar
@@ -117,7 +123,7 @@
     }
     /* An entry without `href` is a heading over its links, not a destination */
     if (!item.href) {
-      return `<span class="menu-label${className ? ` ${className}` : ''}"><span>${te(item.label)}</span></span>`;
+      return `<span class="menu-label${className ? ` ${className}` : ''}"><span>${tk(item.label)}</span></span>`;
     }
     const href = item.href.replace('{webmaster}', CFG.contact.webmaster);
     const external = item.external || RS.isExternal(href);
@@ -126,7 +132,7 @@
     const extra = external
       ? `${icon('external')}<span class="visually-hidden"> ${te(ui.external)}</span>`
       : '';
-    return `<a${cls} href="${escapeHTML(url(href))}"${attrs}><span>${te(item.label)}</span>${extra}</a>`;
+    return `<a${cls} href="${escapeHTML(url(href))}"${attrs}><span>${tk(item.label)}</span>${extra}</a>`;
   }
 
   function logo(className, width, height) {
@@ -174,7 +180,7 @@
     /* an item with `menu` opens that nav item's children as a dropdown */
     const links = CFG.utilityLinks.map(item => {
       const menu = item.menu && CFG.nav.find(entry => entry.key === item.menu);
-      if (!menu?.children?.length) return `<li>${link(item)}</li>`;
+      if (!menu?.children?.length) return `<li>${link(item, item.highlight ? 'utility-bar__cta' : '')}</li>`;
       const id = `utility-menu-${menu.key}`;
       return `
             <li class="utility-menu" data-utility-menu>
@@ -586,12 +592,19 @@
       if (openTrigger) close(openTrigger);
     });
 
-    window.matchMedia(`(max-width: ${CFG.breakpoints.mobileNav}px)`).addEventListener('change', () => close());
+    window.matchMedia(desktopNavQuery()).addEventListener('change', () => close());
   }
 
   /* ==================================================================== *
    * Mobile menu
    * ==================================================================== */
+
+  /* When the full menu is in the bar: always in a desktop browser (mouse or
+     trackpad, at any zoom), and on touch devices from mobileNav + 1 up.
+     Mirrors responsive.css. */
+  function desktopNavQuery() {
+    return `(hover: hover) and (pointer: fine), (min-width: ${CFG.breakpoints.mobileNav + 1}px)`;
+  }
 
   function initMobileMenu() {
     const panel = document.getElementById('rs-mobile-panel');
@@ -660,7 +673,7 @@
     /* The accessibility button inside the drawer hands over to the header panel */
     panel.querySelector('[data-access-open]')?.addEventListener('click', () => close({ restoreFocus: false }));
 
-    window.matchMedia(`(min-width: ${CFG.breakpoints.mobileNav + 1}px)`).addEventListener('change', event => {
+    window.matchMedia(desktopNavQuery()).addEventListener('change', event => {
       if (event.matches && panel.classList.contains('is-open')) close({ restoreFocus: false });
     });
   }

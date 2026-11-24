@@ -31,7 +31,16 @@
     readTime: { th: 'เวลาอ่าน', en: 'Reading time' },
     pending: { th: 'บทความฉบับเต็มจะเผยแพร่โดยสำนักงานราชบัณฑิตยสภา ระหว่างนี้อ่านบทความอื่นในสาขาเดียวกันได้ด้านล่าง', en: 'The full text will be published by the Office. Meanwhile, see other articles in this field below.' },
     cite: { th: 'อ้างอิงบทความนี้', en: 'Cite this article' },
-    read: { th: 'อ่านต่อ', en: 'Read' }
+    read: { th: 'อ่านต่อ', en: 'Read' },
+    sourceTitle: { th: 'บทความต้นฉบับ', en: 'Original article' },
+    sourceRead: { th: 'อ่านที่เว็บไซต์สำนัก', en: 'Read on the Academy website' },
+    newTab: { th: '(เปิดในแท็บใหม่)', en: '(opens in a new tab)' }
+  };
+  /* the Academy each original article was published by, from its web address */
+  const SOURCE_SITES = {
+    science: { th: 'สำนักวิทยาศาสตร์', en: 'Academy of Science' },
+    mps: { th: 'สำนักธรรมศาสตร์และการเมือง', en: 'Academy of Moral and Political Sciences' },
+    arts: { th: 'สำนักศิลปกรรม', en: 'Academy of Arts' }
   };
 
   const sorted = [...DATA.items].sort((a, b) => b.date.localeCompare(a.date));
@@ -91,21 +100,42 @@
   if (!hasToc) qs('.article-layout', root)?.classList.add('article-layout--single');
 
   /* the article's PDF: the file named and measured, with ดูตัวอย่าง (the
-     preview dialog, RS.pdfPreview) and เปิดเอกสาร; without one, the note
-     and the print button stay */
+     preview dialog, RS.pdfPreview) and เปิดเอกสาร. An article taken from an
+     Academy's website (item.from) has no PDF of its own — the Academies
+     publish these as web pages only — so the section links to the original
+     page instead. Without either, the note and the print button stay. */
   const pdf = item.pdf;
   const fileBox = qs('[data-article-file]', root);
+  const showFile = html => {
+    fileBox.innerHTML = html;
+    fileBox.hidden = false;
+    qsa('[data-article-nofile]', root).forEach(el => { el.hidden = true; });
+  };
   if (pdf && pdf.src && fileBox && RS.pdfActions) {
     const file = { src: RS.url(pdf.src), title, pages: pdf.pages, bytes: pdf.bytes };
-    fileBox.innerHTML = `
+    showFile(`
       <span class="article-file__icon" aria-hidden="true">PDF</span>
       <span class="article-file__body">
         <span class="article-file__name">${escapeHTML(title)}</span>
         <span class="article-file__meta">${escapeHTML(RS.pdfMeta ? RS.pdfMeta({ pages: pdf.pages, bytes: pdf.bytes }) : 'PDF')}</span>
       </span>
-      ${RS.pdfActions(file, 'article-file__acts')}`;
-    fileBox.hidden = false;
-    qsa('[data-article-nofile]', root).forEach(el => { el.hidden = true; });
+      ${RS.pdfActions(file, 'article-file__acts')}`);
+  } else if (item.from && fileBox) {
+    let host = '';
+    try { host = new URL(item.from).hostname; } catch (e) { host = ''; }
+    const site = SOURCE_SITES[host.split('.')[0]];
+    const heading = qs('#download-title', root);
+    if (heading) { heading.textContent = t(L.sourceTitle); heading.dataset.en = L.sourceTitle.en; }
+    fileBox.classList.add('article-file--source');
+    showFile(`
+      <span class="article-file__icon article-file__icon--web" aria-hidden="true">${icon('external')}</span>
+      <span class="article-file__body">
+        <span class="article-file__name">${escapeHTML(title)}</span>
+        <span class="article-file__meta">${site ? `${te(site)} · ` : ''}${escapeHTML(host)}</span>
+      </span>
+      <span class="pdf-acts article-file__acts">
+        <a class="act-doc__btn act-doc__btn--primary" href="${escapeHTML(item.from)}" target="_blank" rel="noopener">${icon('external')}<span>${te(L.sourceRead)}</span><span class="visually-hidden"> ${te(L.newTab)}</span></a>
+      </span>`);
   }
 
   /* references */

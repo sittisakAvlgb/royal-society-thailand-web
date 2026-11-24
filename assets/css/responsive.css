@@ -349,6 +349,79 @@
 }
 
 /* ==============================
+   Desktop browsers (mouse or trackpad): the full menu stays in the bar
+   at any window width and any browser zoom — zooming in only narrows the
+   viewport, it never swaps the menu for the ☰ button. Tablets and phones
+   (touch, no hover) keep the width breakpoints above.
+   (mirror DESKTOP_NAV in 02-components.js)
+================================ */
+@media (hover: hover) and (pointer: fine) {
+  html .main-nav,
+  html[data-font-size] .main-nav { display: block; margin-inline: auto; }
+  html .mobile-toggle,
+  html[data-font-size] .mobile-toggle { display: none; }
+  html .brand,
+  html[data-font-size] .brand { margin-right: 0; }
+}
+
+/* Under 1280px the bar tightens step by step instead of collapsing */
+@media (hover: hover) and (pointer: fine) and (max-width: 1279.98px) {
+  .header-inner { gap: var(--space-3, 12px); }
+  .brand-sub { display: none; }
+  .search-action .header-btn__label { display: none; }
+  .search-action { padding-inline: var(--space-2); }
+  .nav-link {
+    padding-inline: clamp(6px, .8vw, 10px);
+    font-size: clamp(14px, 1.65vw, 19.6px);
+  }
+  .nav-link.is-current::after { left: clamp(6px, .8vw, 10px); right: clamp(6px, .8vw, 10px); }
+  html[lang="en"] .brand-title { font-size: var(--text-base); white-space: normal; max-width: 9.5em; }
+  html[lang="en"] .nav-link { font-size: clamp(12.5px, 1.45vw, 15px); }
+}
+/* Under 1024px (a desktop window made narrow, or zoomed in a lot) one row
+   cannot hold the menu at a size worth reading, so the card takes two:
+   crest, name and search on top, the full menu beneath at its normal size. --header-h grows with it, so every page that
+   pads itself by --header-overlap moves down to match. */
+@media (hover: hover) and (pointer: fine) and (max-width: 1023.98px) {
+  :root { --header-h: 118px; }
+  .header-inner { flex-wrap: wrap; align-content: stretch; row-gap: 0; padding-block: 0; }
+  html .brand, html[data-font-size] .brand { margin-right: auto; min-height: 64px; }
+  .brand-sub { display: block; }
+  .header-actions { min-height: 64px; }
+  html .main-nav, html[data-font-size] .main-nav {
+    order: 3;
+    flex: 0 0 calc(100% + var(--space-3) + var(--space-2));
+    margin-inline: calc(-1 * var(--space-3)) calc(-1 * var(--space-2));
+    padding: 0 var(--space-2) 8px;
+  }
+  .main-nav__list { justify-content: center; flex-wrap: wrap; gap: 0; }
+  /* the hover / open tint is a rounded tile floating in the row, clear of
+     the hairline above and the card's edge below */
+  .nav-link { min-height: 40px; padding-inline: 12px; font-size: 1.125rem; }
+  .nav-link.is-current::after { left: 12px; right: 12px; }
+  html[lang="en"] .nav-link { padding-inline: 8px; font-size: clamp(.8125rem, 1.8vw, .9375rem); }
+  html[lang="en"] .nav-link.is-current::after { left: 8px; right: 8px; }
+}
+/* Narrower still: the menu names a step smaller so the row still holds them */
+@media (hover: hover) and (pointer: fine) and (max-width: 767.98px) {
+  .brand-sub { display: none; }
+  .nav-link { padding-inline: 8px; font-size: 1rem; }
+  html[lang="en"] .nav-link { padding-inline: 6px; font-size: .875rem; }
+  .nav-link.is-current::after { left: 8px; right: 8px; }
+  html[lang="en"] .nav-link.is-current::after { left: 6px; right: 6px; }
+  /* the chevrons give their room to the names, so the row stays one line */
+  .nav-link .icon { display: none; }
+  /* the top bar keeps everything it shows on a wide screen — phone, hours,
+     the office link and TH/EN — wrapping to a second line only if it must */
+  .utility-bar__contact { display: inline-flex; }
+  .utility-bar__links { display: block; }
+  .utility-btn__label { display: inline; }
+  .utility-bar__inner { flex-wrap: wrap; column-gap: var(--space-4); row-gap: 0; }
+  /* TH/EN at its desktop size — the phone-sized tap target is for fingers */
+  .lang-switch a { display: inline-flex; min-width: 28px; min-height: 24px; }
+}
+
+/* ==============================
    ≥ 1440px
 ================================ */
 @media (min-width: 1440px) {

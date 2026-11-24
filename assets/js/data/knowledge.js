@@ -4,11 +4,12 @@
  *  items:  { id, field, type {th,en}, academy 'science'|'moral'|'arts',
  *            date (ISO, as first published), href (pages/article.html?id=…),
  *            image (the article's own picture), title {th,en}, excerpt {th,en},
- *            pdf { src, pages, bytes } — the article as a PDF; the article page
- *            offers ดูตัวอย่าง / เปิดเอกสาร (printed from this site's article
- *            pages),
- *            from — where the article was first published. Kept only so the
- *            Office can trace each text; never shown or linked on this site. }
+ *            pdf { src, pages, bytes } — optional: the Office's own PDF of the
+ *            article; the article page offers ดูตัวอย่าง / เปิดเอกสาร. Never a
+ *            PDF printed from a web page.
+ *            from — the article's original page on its Academy's website. The
+ *            Academies publish these articles as web pages only (no PDF), so
+ *            the article page links here under "บทความต้นฉบับ". }
  *  The articles are the academies' own, as published on
  *  science.royalsociety.go.th, mps.royalsociety.go.th and
  *  arts.royalsociety.go.th (title, author, date, text and picture as there;
@@ -121,11 +122,6 @@ window.RS_KNOWLEDGE = {
   "items": [
     {
       "id": "kn-arts-698",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-arts-698.pdf",
-        "pages": 2,
-        "bytes": 433387
-      },
       "field": "language",
       "type": {
         "th": "บทคัดย่อ",
@@ -147,11 +143,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-707",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-arts-707.pdf",
-        "pages": 2,
-        "bytes": 468891
-      },
       "field": "language",
       "type": {
         "th": "บทคัดย่อ",
@@ -173,11 +164,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-695",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-arts-695.pdf",
-        "pages": 2,
-        "bytes": 348978
-      },
       "field": "language",
       "type": {
         "th": "บทคัดย่อ",
@@ -199,11 +185,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-806",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-806.pdf",
-        "pages": 5,
-        "bytes": 1353576
-      },
       "field": "science",
       "type": {
         "th": "บทความ",
@@ -225,11 +206,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-185",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-185.pdf",
-        "pages": 3,
-        "bytes": 555749
-      },
       "field": "science",
       "type": {
         "th": "บทความ",
@@ -251,11 +227,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-823",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-823.pdf",
-        "pages": 2,
-        "bytes": 431256
-      },
       "field": "science",
       "type": {
         "th": "บทความ",
@@ -277,11 +248,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-457",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-457.pdf",
-        "pages": 2,
-        "bytes": 477675
-      },
       "field": "science",
       "type": {
         "th": "บทความ",
@@ -303,11 +269,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-374",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-374.pdf",
-        "pages": 5,
-        "bytes": 583229
-      },
       "field": "technology",
       "type": {
         "th": "บทความ",
@@ -329,11 +290,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-364",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-364.pdf",
-        "pages": 4,
-        "bytes": 666202
-      },
       "field": "technology",
       "type": {
         "th": "บทความ",
@@ -355,11 +311,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-873",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-873.pdf",
-        "pages": 2,
-        "bytes": 498779
-      },
       "field": "technology",
       "type": {
         "th": "บทความ",
@@ -381,11 +332,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-952",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-952.pdf",
-        "pages": 5,
-        "bytes": 710430
-      },
       "field": "technology",
       "type": {
         "th": "บทความ",
@@ -407,11 +353,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-436",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-436.pdf",
-        "pages": 3,
-        "bytes": 520324
-      },
       "field": "medicine",
       "type": {
         "th": "บทความ",
@@ -433,11 +374,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-480",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-480.pdf",
-        "pages": 3,
-        "bytes": 548185
-      },
       "field": "medicine",
       "type": {
         "th": "บทความ",
@@ -459,11 +395,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-429",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-429.pdf",
-        "pages": 5,
-        "bytes": 613700
-      },
       "field": "medicine",
       "type": {
         "th": "บทความ",
@@ -485,11 +416,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-800",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-800.pdf",
-        "pages": 5,
-        "bytes": 661743
-      },
       "field": "medicine",
       "type": {
         "th": "บทความ",
@@ -511,11 +437,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-772",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-772.pdf",
-        "pages": 2,
-        "bytes": 437644
-      },
       "field": "social",
       "type": {
         "th": "บทความ",
@@ -537,11 +458,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-720",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-720.pdf",
-        "pages": 2,
-        "bytes": 454792
-      },
       "field": "social",
       "type": {
         "th": "บทความ",
@@ -563,11 +479,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-748",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-748.pdf",
-        "pages": 2,
-        "bytes": 347469
-      },
       "field": "social",
       "type": {
         "th": "บทความ",
@@ -589,11 +500,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-717",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-arts-717.pdf",
-        "pages": 2,
-        "bytes": 396212
-      },
       "field": "arts",
       "type": {
         "th": "บทคัดย่อ",
@@ -615,11 +521,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-704",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-arts-704.pdf",
-        "pages": 2,
-        "bytes": 383082
-      },
       "field": "arts",
       "type": {
         "th": "บทคัดย่อ",
@@ -641,11 +542,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-701",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-arts-701.pdf",
-        "pages": 2,
-        "bytes": 427076
-      },
       "field": "arts",
       "type": {
         "th": "บทคัดย่อ",
@@ -667,11 +563,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-arts-711",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-arts-711.pdf",
-        "pages": 3,
-        "bytes": 497211
-      },
       "field": "arts",
       "type": {
         "th": "บทคัดย่อ",
@@ -693,11 +584,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-799",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-799.pdf",
-        "pages": 5,
-        "bytes": 588100
-      },
       "field": "history",
       "type": {
         "th": "บทความ",
@@ -719,11 +605,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-786",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-786.pdf",
-        "pages": 2,
-        "bytes": 440958
-      },
       "field": "history",
       "type": {
         "th": "บทความ",
@@ -745,11 +626,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-754",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-754.pdf",
-        "pages": 2,
-        "bytes": 353681
-      },
       "field": "history",
       "type": {
         "th": "บทความ",
@@ -771,11 +647,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-751",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-751.pdf",
-        "pages": 2,
-        "bytes": 454359
-      },
       "field": "history",
       "type": {
         "th": "บทความ",
@@ -797,11 +668,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-810",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-810.pdf",
-        "pages": 2,
-        "bytes": 455392
-      },
       "field": "law",
       "type": {
         "th": "บทความ",
@@ -823,11 +689,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-783",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-783.pdf",
-        "pages": 2,
-        "bytes": 458681
-      },
       "field": "law",
       "type": {
         "th": "บทความ",
@@ -849,11 +710,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-710",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-710.pdf",
-        "pages": 2,
-        "bytes": 380520
-      },
       "field": "law",
       "type": {
         "th": "บทความ",
@@ -875,11 +731,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-694",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-694.pdf",
-        "pages": 2,
-        "bytes": 593546
-      },
       "field": "law",
       "type": {
         "th": "บทความ",
@@ -901,11 +752,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-760",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-760.pdf",
-        "pages": 2,
-        "bytes": 390052
-      },
       "field": "economics",
       "type": {
         "th": "บทความ",
@@ -927,11 +773,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-813",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-813.pdf",
-        "pages": 2,
-        "bytes": 360944
-      },
       "field": "economics",
       "type": {
         "th": "บทความ",
@@ -953,11 +794,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-science-423",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-science-423.pdf",
-        "pages": 4,
-        "bytes": 549161
-      },
       "field": "economics",
       "type": {
         "th": "บทความ",
@@ -979,11 +815,6 @@ window.RS_KNOWLEDGE = {
     },
     {
       "id": "kn-mps-742",
-      "pdf": {
-        "src": "assets/docs/knowledge/kn-mps-742.pdf",
-        "pages": 2,
-        "bytes": 454869
-      },
       "field": "economics",
       "type": {
         "th": "บทความ",

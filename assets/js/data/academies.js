@@ -28,8 +28,8 @@ window.RS_POST_CATS = {
 window.RS_ACADEMY_PAGES = {
   moral: {
     intro: {
-      th: 'สำนักธรรมศาสตร์และการเมืองศึกษา ค้นคว้า และวิจัยในสาขาปรัชญา นิติศาสตร์ รัฐศาสตร์ เศรษฐศาสตร์ สังคมศาสตร์ และประวัติศาสตร์ จัดทำศัพท์บัญญัติและพจนานุกรมเฉพาะสาขา และนำความรู้สู่สังคมผ่านการบรรยาย การประชุมวิชาการ และโครงการราชบัณฑิตสัญจร',
-      en: 'The Academy of Moral and Political Sciences studies and researches philosophy, law, political science, economics, the social sciences and history; it coins terminology and compiles specialist dictionaries, and takes its work to the public through lectures, conferences and the Fellows on Tour programme.'
+      th: 'สำนักธรรมศาสตร์และการเมืองศึกษา ค้นคว้า และวิจัยใน ๑๒ ประเภทวิชา ได้แก่ ปรัชญา นิติศาสตร์ รัฐศาสตร์และรัฐประศาสนศาสตร์ สังคมวิทยาและมานุษยวิทยา สังคมสงเคราะห์ศาสตร์และสวัสดิการสังคม เศรษฐศาสตร์ บริหารธุรกิจ นิเทศศาสตร์ จิตวิทยา ภูมิศาสตร์ ศึกษาศาสตร์ และประวัติศาสตร์ จัดทำศัพท์บัญญัติและพจนานุกรมเฉพาะสาขา และนำความรู้สู่สังคมผ่านการบรรยาย การประชุมวิชาการ และโครงการราชบัณฑิตสัญจร',
+      en: 'The Academy of Moral and Political Sciences studies and researches twelve disciplines: philosophy, law, political science and public administration, sociology and anthropology, social work and social welfare, economics, business administration, communication arts, psychology, geography, education and history; it coins terminology and compiles specialist dictionaries, and takes its work to the public through lectures, conferences and the Fellows on Tour programme.'
     },
     /* The academy's information, kept on this site */
     info: [
@@ -80,8 +80,8 @@ window.RS_ACADEMY_PAGES = {
 
   science: {
     intro: {
-      th: 'สำนักวิทยาศาสตร์ศึกษา ค้นคว้า และวิจัยในสาขาวิทยาศาสตร์กายภาพ วิทยาศาสตร์ชีวภาพ วิทยาศาสตร์ประยุกต์ แพทยศาสตร์ วิศวกรรมศาสตร์ และเทคโนโลยี บัญญัติศัพท์วิทยาศาสตร์ภาษาไทย และเผยแพร่บทความ หนังสือ และผลงานของราชบัณฑิตและภาคีสมาชิกเป็นประจำ',
-      en: 'The Academy of Science studies and researches the physical, biological and applied sciences, medicine, engineering and technology; it coins Thai scientific terminology and regularly publishes the articles, books and other work of its Fellows and Associate Fellows.'
+      th: 'สำนักวิทยาศาสตร์ศึกษา ค้นคว้า และวิจัยใน ๖ ประเภทวิชา ได้แก่ วิศวกรรมศาสตร์ เทคโนโลยี วิทยาศาสตร์ธรรมชาติ วิทยาศาสตร์และเทคโนโลยีการเกษตร และสัตวแพทยศาสตร์ แพทยศาสตร์ และวิทยาศาสตร์สุขภาพ บัญญัติศัพท์วิทยาศาสตร์ภาษาไทย และเผยแพร่บทความ หนังสือ และผลงานของราชบัณฑิตและภาคีสมาชิกเป็นประจำ',
+      en: 'The Academy of Science studies and researches six disciplines: engineering, technology, the natural sciences, agricultural science and technology and veterinary science, medicine, and the health sciences; it coins Thai scientific terminology and regularly publishes the articles, books and other work of its Fellows and Associate Fellows.'
     },
     /* The academy's information, kept on this site */
     info: [
@@ -132,8 +132,8 @@ window.RS_ACADEMY_PAGES = {
 
   arts: {
     intro: {
-      th: 'สำนักศิลปกรรมศึกษา ค้นคว้า และวิจัยในสาขาภาษาและวรรณกรรม ภาษาศาสตร์ ดุริยางคศิลป์ ทัศนศิลป์ และสถาปัตยกรรม ดูแลงานพจนานุกรม หลักเกณฑ์การใช้ภาษาไทย และจัดประชุมสำนักพร้อมการบรรยายผลงานของราชบัณฑิตและภาคีสมาชิกทุกเดือน',
-      en: 'The Academy of Arts studies and researches language and literature, linguistics, music, the visual arts and architecture; it looks after the dictionaries and the rules of written Thai, and meets every month to hear the work of its Fellows and Associate Fellows.'
+      th: 'สำนักศิลปกรรมศึกษา ค้นคว้า และวิจัยใน ๔ ประเภทวิชา ได้แก่ วรรณศิลป์ สถาปัตยศิลป์ วิจิตรศิลป์ และประยุกต์ศิลป์ ดูแลงานพจนานุกรม หลักเกณฑ์การใช้ภาษาไทย และจัดประชุมสำนักพร้อมการบรรยายผลงานของราชบัณฑิตและภาคีสมาชิกทุกเดือน',
+      en: 'The Academy of Arts studies and researches four disciplines: the literary arts, architectural arts, fine arts and applied arts; it looks after the dictionaries and the rules of written Thai, and meets every month to hear the work of its Fellows and Associate Fellows.'
     },
     /* The academy's information, kept on this site */
     info: [

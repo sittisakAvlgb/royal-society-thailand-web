@@ -36,8 +36,8 @@
   const VIEW_KEY = 'rs-fellows-view';
   const SIZES = [12, 24, 48];                       /* per page: rows of four — the reader picks */
   const SIZE_KEY = 'rs-fellows-size';
-  /* membership in the order the Office asked for: honorary, associate, then Fellows */
-  const ORDER = ['honorary', 'associate', 'fellow'];
+  /* membership in the order the Office asked for (Nov 2026): honorary, Fellows, then Associates */
+  const ORDER = ['honorary', 'fellow', 'associate'];
   const rankOf = person => { const i = ORDER.indexOf(person.memberType); return i < 0 ? ORDER.length : i; };
 
   const L = {
@@ -82,6 +82,9 @@
     return (name.match(/[ก-ฮA-Za-z]/) || [name.charAt(0)])[0].toUpperCase();
   };
   const byName = (a, b) => t(a.name).localeCompare(t(b.name), RS.lang === 'th' ? 'th' : 'en');
+  /* the order of the Royal Society's own directory (ทำเนียบ, by seniority):
+     `order` in data/fellows.js; anyone not in it comes after, by name */
+  const bySeniority = (a, b) => (a.order || Infinity) - (b.order || Infinity) || byName(a, b);
 
   /* the portrait, the name with its title and the card are shared with the
      home and academy pages (08-directory.js) */
@@ -198,7 +201,7 @@
     }
 
     function render() {
-      const found = PEOPLE.filter(matches).sort((a, b) => rankOf(a) - rankOf(b) || byName(a, b));
+      const found = PEOPLE.filter(matches).sort((a, b) => rankOf(a) - rankOf(b) || bySeniority(a, b));
       const pages = Math.max(1, Math.ceil(found.length / size));
       page = Math.min(page, pages);
       const shown = found.slice((page - 1) * size, page * size);
@@ -298,8 +301,8 @@
     search: { th: 'ค้นหาในสำนักนี้', en: 'Search this academy' },
     total: { th: 'รวม <strong>{n}</strong> คน', en: '<strong>{n}</strong> members in all' }
   };
-  /* the order the Office asked for: honorary, associate, then Fellows */
-  const ROLL_ORDER = ['honorary', 'associate', 'fellow'];
+  /* the order the Office asked for (Nov 2026): honorary, Fellows, then Associates */
+  const ROLL_ORDER = ['honorary', 'fellow', 'associate'];
   const ROLL_VIEW_KEY = 'rs-roll-view';
 
   /** Directory by academy: a bar with the academies to jump to and a grid /
@@ -332,7 +335,7 @@
         const tally = ROLL_ORDER.filter(type => countOf(members, type)).map(type =>
           `<span class="roll-academy__tally-item"><strong>${num(countOf(members, type))}</strong> ${typeName({ memberType: type })}</span>`).join('');
         const groups = ROLL_ORDER.filter(type => countOf(members, type)).map(type => {
-          const list = members.filter(person => person.memberType === type).sort(byName);
+          const list = members.filter(person => person.memberType === type).sort(bySeniority);
           return `
             <section class="fellowx-roll__group roll-group roll-group--${type}">
               <h3 class="fellowx-roll__type roll-group__title">${typeName({ memberType: type })} <span class="fellowx-roll__n">${num(list.length)}</span></h3>
@@ -400,7 +403,8 @@
     if (!root) return;
 
     const id = new URLSearchParams(location.search).get('id');
-    const person = PEOPLE.find(item => item.id === id) || (id ? null : PEOPLE[0]);
+    /* a member who has passed away is off the lists but keeps this page */
+    const person = (window.RS_FELLOWS_ALL || PEOPLE).find(item => item.id === id) || (id ? null : PEOPLE[0]);
     const set = (selector, html) => { const el = qs(selector, root); if (el) el.innerHTML = html; };
 
     if (!person) {
@@ -424,7 +428,7 @@
 
     set('[data-fellow-crumb]', te(person.name));
     set('[data-fellow-portrait]', portrait(person, ' fellowx-photo--lg'));
-    set('[data-fellow-type]', typeName(person));
+    set('[data-fellow-type]', typeName(person) + (person.deceased ? ` <span class="fellow-deceased">· ${te({ th: 'ผู้วายชนม์', en: 'deceased' })}</span>` : ''));
     set('[data-fellow-academy]', te(academy?.name));
     /* the title and the name as one heading, the same size, each part kept whole */
     set('[data-fellow-name]', RS.fellowName(person));
