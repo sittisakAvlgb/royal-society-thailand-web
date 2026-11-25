@@ -671,10 +671,13 @@ html[lang="en"] .site-footer .footer-bottom :is(p, span, time, a, strong, .foote
 /* …solid, so it reads at a glance: a bright green button with white bold
    type, lighter on hover — set apart from the white TH/EN switch beside it */
 .utility-bar__links .utility-bar__cta {
-  min-height: 32px; padding: 3px 14px 3px 16px;
-  border: 1px solid rgba(255, 255, 255, .35); background: var(--rst-green-700); color: var(--white); font-weight: 700;
+  min-height: 30px; padding: 0 12px 0 14px; gap: 7px;
+  border: 0; border-radius: 6px; background: var(--rst-green-700); color: var(--white); font-weight: 700;
+  font-size: 16px; line-height: 1;
 }
-.utility-bar__links .utility-bar__cta .icon { width: 14px; height: 14px; transition: transform var(--duration) var(--ease); }
+/* same height, corners and line as the TH/EN switch beside it */
+.utility-bar__links .utility-bar__cta .icon { width: 13px; height: 13px; opacity: .85; transition: transform var(--duration) var(--ease), opacity var(--duration) var(--ease); }
+.utility-bar__links .utility-bar__cta:hover .icon { opacity: 1; }
 .utility-bar__links .utility-bar__cta:hover,
 .utility-bar__links .utility-bar__cta:focus-visible { border-color: var(--white); background: var(--white); color: var(--rst-green-900); }
 .utility-bar__links .utility-bar__cta:hover .icon { transform: translate(2px, -2px); }
