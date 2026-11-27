@@ -307,9 +307,10 @@ window.RS_CONFIG = {
       label: { th: 'ข่าวสารและกิจกรรม', en: 'Activities' },
       href: 'pages/news.html',
       match: ['news.html', 'news-press.html', 'news-gallery.html', 'news-album.html', 'news-videos.html', 'news-detail.html', 'academy-news.html'],
-      intro: { th: 'โครงการ วารสาร บรรยายวิชาการ แถลงข่าว กิจกรรมสำนัก ปฏิทิน และคลังภาพและวิดีโอ', en: 'Projects, journals, lectures, press conferences, academy activities, the calendar, photos and videos' },
+      intro: { th: 'โครงการ วารสาร บรรยายวิชาการ แถลงข่าว ปฏิทิน และคลังภาพและวิดีโอ', en: 'Projects, journals, lectures, press conferences, the calendar, photos and videos' },
       /* the order of the client's sitemap (Royalsociety Sitemap, section 3),
-         3.1–3.15, under headings for the menu panel. 3.14 Photos & Videos
+         3.1–3.15, under headings for the menu panel. 3.9–3.12 (Fellows on Tour,
+         Ashram of Thought) moved to each academy's News & activities. 3.14 Photos & Videos
          stays two entries, the gallery and the videos being pages of their
          own. ข่าวประชาสัมพันธ์ (news.html) is not in the sitemap: hidden from
          the menu for now; the page stays and the panel's own link opens it. */
@@ -329,15 +330,6 @@ window.RS_CONFIG = {
             { label: { th: 'บรรยายวิชาการ', en: 'Academic Lectures' }, href: 'pages/works-lectures.html' },
             { label: { th: 'แถลงข่าว', en: 'Press Conferences' }, href: 'pages/news-press.html' },
             { label: { th: 'กิจกรรมอื่น ๆ', en: 'Other Activities' }, href: 'pages/news.html?cat=activity' }
-          ]
-        },
-        {
-          label: { th: 'กิจกรรมสำนัก', en: 'Academy Activities' }, href: 'pages/academy-news.html',
-          children: [
-            { label: { th: 'ราชบัณฑิตสัญจร สำนักธรรมศาสตร์และการเมือง', en: 'Fellows on Tour: Moral and Political Sciences' }, href: 'pages/works-on-tour.html?academy=moral' },
-            { label: { th: 'ราชบัณฑิตสัญจร สำนักวิทยาศาสตร์', en: 'Fellows on Tour: Science' }, href: 'pages/works-on-tour.html?academy=science' },
-            { label: { th: 'อาศรมความคิด สำนักวิทยาศาสตร์', en: 'Ashram of Thought: Science' }, href: 'pages/works-ideas-forum.html' },
-            { label: { th: 'ราชบัณฑิตสัญจร สำนักศิลปกรรม', en: 'Fellows on Tour: Arts' }, href: 'pages/works-on-tour.html?academy=arts' }
           ]
         },
         {

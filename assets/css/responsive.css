@@ -271,7 +271,7 @@
   .sitemap-block + .sitemap-block { margin-top: var(--space-16); }
 
   /* Footer: 4 columns */
-  .footer-main { grid-template-columns: 1.5fr 1.7fr 1fr 1.15fr; grid-template-rows: auto; gap: var(--space-8); padding-block: var(--space-10) var(--space-8); }
+  .footer-main { grid-template-columns: 1.5fr 1fr 1fr 1.15fr; grid-template-rows: auto; gap: var(--space-8); padding-block: var(--space-10) var(--space-8); }
   .footer-nav { grid-column: 2 / 5; grid-row: 1; grid-template-rows: auto; }
   .footer-col--main,
   .footer-col--website,
@@ -299,11 +299,6 @@
    Six items sit in the bar (items 7 and 8 have bar: false — see 01-config.js).
 ================================ */
 @media (min-width: 1280px) {
-  /* Footer: the menu in two ranks */
-  /* Two ranks that read top to bottom, not left to right */
-  .footer-col--main .footer-links { columns: 2; column-gap: var(--space-8); }
-  .footer-col--main .footer-links li { break-inside: avoid; }
-
   /* Brand left · menu centred · search right */
   .main-nav { display: block; margin-inline: auto; }
   .mobile-toggle { display: none; }

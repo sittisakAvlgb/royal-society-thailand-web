@@ -6585,7 +6585,7 @@ a.ct-quick__item:hover { background: #F4F8F5; }
 .ct-quick__note { font-size: var(--text-xs); color: #55625b; }
 @media (min-width: 900px) { .contact-page .ct-quick { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
-.ct-body { display: grid; gap: var(--space-16); padding-block: var(--space-12) 0; }
+.ct-body { display: grid; gap: var(--space-16); padding-block: var(--space-12) var(--space-16); }
 /* the map and the address */
 .ct-visit { display: grid; gap: var(--space-4); }
 .ct-map { position: relative; min-height: 320px; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--border); background: #EEF2EC; }
@@ -6630,32 +6630,9 @@ a.ct-quick__item:hover { background: #F4F8F5; }
 @media (min-width: 768px) { .ct-routes__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ct-route--lead { grid-row: span 2; } }
 @media (min-width: 1100px) { .ct-routes__list { grid-template-columns: 1.3fr 1fr 1fr; } }
 
-/* the divisions */
-.ct-units { margin-bottom: 0; }
-.ct-units__lead { max-width: 46rem; margin: var(--space-3) 0 var(--space-6); font-size: var(--text-sm); color: #3d4a44; }
-.ct-units__list { display: grid; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
-.ct-unit { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6); border-radius: var(--radius-lg); background: var(--white); border: 1px solid rgba(27, 115, 74, .16); }
-.ct-unit__name { display: flex; align-items: center; gap: var(--space-2); margin: 0; font-size: var(--text-base); font-weight: 700; color: var(--rst-green-900); }
-.ct-unit__name::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--acad, var(--gold-500)); }
-.ct-unit--moral { --acad: var(--academy-moral); }
-.ct-unit--science { --acad: var(--academy-science); }
-.ct-unit--arts { --acad: var(--academy-arts); }
-.ct-unit__tels { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
-.ct-unit__tel { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-display); font-size: var(--text-md); font-weight: 700; color: var(--rst-green-800); text-decoration: none; }
-.ct-unit__tel .icon { width: 18px; height: 18px; color: var(--gold-700); }
-.ct-unit__tel:hover { text-decoration: underline; text-underline-offset: .2em; }
-.ct-unit__tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.ct-unit__tags li { padding: 0 var(--space-2); border-radius: 999px; background: #F2F6F3; font-size: var(--text-xs); line-height: 1.8; color: #3d4a44; }
-.ct-unit__more { display: grid; gap: 4px; margin: 0; }
-.ct-unit__more div { display: flex; justify-content: space-between; gap: var(--space-3); font-size: var(--text-sm); }
-.ct-unit__more dt { color: #55625b; }
-.ct-unit__more dd { margin: 0; font-weight: 700; }
-.ct-unit__more a { color: var(--rst-green-800); text-decoration: none; }
-@media (min-width: 768px) { .ct-units__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1200px) { .ct-units__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .ct-map__pin { animation: none; } .ct-route__link:hover { transform: none; } }
 .contact-page .auth__title { margin: var(--space-2) 0 0; font-size: clamp(1.5rem, 2.4vw, 1.9rem); line-height: 1.3; }
-.ct-card__list .font-latin, .ct-units__lead .font-latin { font-size: .82em; }
+.ct-card__list .font-latin { font-size: .82em; }
 /* phone: the four quick ways as compact rows, the label beside the value */
 @media (max-width: 639px) {
   .contact-page .ct-quick { grid-template-columns: minmax(0, 1fr); gap: 0; }
@@ -9532,6 +9509,25 @@ html:not([lang="en"]) .agenda-card__actions .btn { font-size: 15px; }
 /* Academy lectures as a grid of cards: the date on top, then whether it is
    coming or held, the title (two lines at most), speaker and place; the
    next lecture tinted. Plain cards, one border, no shadow */
+/* an academy's projects, in the filter row after a hairline: set like the
+   tabs, an arrow saying they open a page rather than filter */
+.acad-programmes { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0 auto 0 0; padding: 0 0 0 var(--space-4); border-left: 1px solid var(--border); list-style: none; }
+.acad-programmes[hidden] { display: none; }
+.acad-programme { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.acad-programme .icon { width: 14px; height: 14px; transition: transform var(--duration) var(--ease); }
+.acad-programme:hover { text-decoration: none; }
+.acad-programme:hover .icon { transform: translateX(3px); }
+@media (max-width: 639px) { .acad-programmes { flex-basis: 100%; order: 2; padding-left: 0; border-left: 0; } .news-toolbar:has(> .acad-programmes) > .btn { order: 3; } }
+@media (prefers-reduced-motion: reduce) { .acad-programme:hover .icon { transform: none; } }
+/* Academy of Science bulletin: covers in a row, the issue and month beneath */
+.acad-bulletin { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)); gap: var(--space-8) var(--space-6); margin: 0; padding: 0; list-style: none; }
+.acad-bulletin__item { display: grid; gap: 4px; color: inherit; text-decoration: none; }
+.acad-bulletin__item .pub-cover { margin-bottom: var(--space-2); transition: transform var(--duration) var(--ease); }
+.acad-bulletin__issue { font-weight: 700; color: var(--rst-green-800); }
+.acad-bulletin__date { font-size: var(--text-sm); color: #55625b; }
+.acad-bulletin__item:hover .pub-cover { transform: translateY(-4px); }
+.acad-bulletin__item:hover .acad-bulletin__issue { text-decoration: underline; text-underline-offset: .2em; }
+@media (prefers-reduced-motion: reduce) { .acad-bulletin__item:hover .pub-cover { transform: none; } }
 .acad-ledger--grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: var(--space-4); border-top: 0; }
 .acad-ledger--grid > .prog-row { border: 0; }
 .acad-ledger--grid .prog-row a { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr; align-items: start; gap: var(--space-3) var(--space-4); height: 100%; padding: var(--space-5, 20px); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); }
@@ -10722,7 +10718,7 @@ html:not([lang="en"]) .mega-pane__sub a { -webkit-text-stroke: .012em currentCol
 #mp-fellows-0 .mega-pane__list { columns: 1; max-width: 560px; }
 /* contact page, Thai: emails and other English runs in the Thai face, at
    the size and weight of the text around them (as in the footer) */
-html:not([lang="en"]) :is(.ct-quick, .ct-card, .ct-units) :is(.font-latin, [lang="en"]) { font-family: inherit; font-size: inherit; letter-spacing: normal; }
+html:not([lang="en"]) :is(.ct-quick, .ct-card) :is(.font-latin, [lang="en"]) { font-family: inherit; font-size: inherit; letter-spacing: normal; }
 html:not([lang="en"]) .ct-quick__item strong.font-latin { font-size: var(--text-md); }
 
 /* Mobile menu, clearer: the open section in green; each group's name a

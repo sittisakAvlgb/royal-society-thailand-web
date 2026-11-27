@@ -344,7 +344,36 @@
     sections.forEach(section => observer.observe(section));
   }
 
+  /* ---- the academy's projects, above its posts ---- */
+  function renderProgrammes() {
+    const list = qs('[data-acad-programmes]', root);
+    if (!list) return;
+    const items = page.programmes || [];
+    list.hidden = !items.length;
+    list.innerHTML = items.map(item => `
+      <li><a class="news-tab acad-programme" href="${href(item.href)}">
+        <span>${te(item.label)}</span>${icon('arrow')}
+      </a></li>`).join('');
+  }
+
+  /* ---- parts only one academy carries (the Science bulletin) ---- */
+  function renderOnly() {
+    qsa('[data-acad-only]', root).forEach(el => { el.hidden = el.dataset.acadOnly !== academy.id; });
+    const list = qs('[data-acad-bulletin]', root);
+    if (!list || academy.id !== 'science' || !RS.pubCover) return;
+    const issues = (window.RS_PUBLICATIONS || []).filter(p => p.kind === 'bulletin')
+      .sort((a, b) => b.date.localeCompare(a.date));
+    list.innerHTML = issues.map(item => `
+      <li><a class="acad-bulletin__item" href="${escapeHTML(RS.url(`pages/publication.html?id=${encodeURIComponent(item.id)}`))}">
+        <span class="acad-bulletin__cover">${RS.pubCover(item)}</span>
+        <span class="acad-bulletin__issue">${te(item.issue)}</span>
+        <span class="acad-bulletin__date">${escapeHTML(RS.formatDate(item.date, { month: 'long', year: 'numeric' }))}</span>
+      </a></li>`).join('');
+  }
+
   RS.ready(() => {
+    renderOnly();
+    renderProgrammes();
     renderMast();
     renderAbout();
     initImageFallback();

@@ -639,7 +639,7 @@ html[lang="en"] .site-footer .footer-links :is(a, .footer-action) { font-size: .
 html[lang="en"] .site-footer .footer-bottom,
 html[lang="en"] .site-footer .footer-bottom :is(p, span, time, a, strong, .footer-updated) { font-size: .8125rem; }
 @media (min-width: 1180px) {
-  .site-footer .footer-main { grid-template-columns: 1.35fr 1.55fr 1fr 1.35fr; }
+  .site-footer .footer-main { grid-template-columns: 1.5fr 1fr 1fr 1.35fr; }
 }
 @media (pointer: coarse) {
   .site-footer .footer-links :is(a, .footer-action), .site-footer .footer-address a { min-height: 40px; padding-block: 8px; }

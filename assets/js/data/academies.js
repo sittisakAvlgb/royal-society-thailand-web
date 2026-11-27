@@ -13,6 +13,7 @@
  *              no image, or cover: 'template' (the image is a PDF's page of
  *              text): the card shows a printed cover (RS.docCover) instead
  *    lectures  [{ title {th,en}, speaker {th,en}, date 'YYYY-MM-DD', place {th,en}, href }]
+ *    programmes [{ label {th,en}, href }] — its projects, under News & activities
  *    links     [{ label {th,en}, href, external }]
  *
  *  Names, fields and website addresses live in RS_CONFIG.academies. Post
@@ -71,6 +72,9 @@ window.RS_ACADEMY_PAGES = {
         speaker: { th: 'ภาคีสมาชิก สาขาวิชาจิตวิทยา', en: 'Associate Fellow in Psychology' },
         place: { th: 'ห้องประชุม 301 สำนักงานราชบัณฑิตยสภา', en: 'Room 301, Office of the Royal Society' } }
     ],
+    programmes: [
+      { label: { th: 'ราชบัณฑิตสัญจร สำนักธรรมศาสตร์และการเมือง', en: 'Fellows on Tour: Moral and Political Sciences' }, href: 'pages/works-on-tour.html?academy=moral' }
+    ],
     links: [
       { label: { th: 'พจนานุกรมศัพท์รัฐศาสตร์', en: 'Dictionary of political science terms' }, href: 'https://coined-word.orst.go.th/', external: true },
       { label: { th: 'พจนานุกรมศัพท์นิติศาสตร์', en: 'Dictionary of legal terms' }, href: 'https://coined-word.orst.go.th/', external: true },
@@ -123,6 +127,10 @@ window.RS_ACADEMY_PAGES = {
         speaker: { th: 'ภาคีสมาชิก สาขาวิชาแพทยศาสตร์', en: 'Associate Fellow in Medicine' },
         place: { th: 'ออนไลน์', en: 'Online' } }
     ],
+    programmes: [
+      { label: { th: 'ราชบัณฑิตสัญจร สำนักวิทยาศาสตร์', en: 'Fellows on Tour: Science' }, href: 'pages/works-on-tour.html?academy=science' },
+      { label: { th: 'อาศรมความคิด สำนักวิทยาศาสตร์', en: 'Ashram of Thought: Science' }, href: 'pages/works-ideas-forum.html' }
+    ],
     links: [
       { label: { th: 'ศัพท์บัญญัติวิทยาศาสตร์', en: 'Coined scientific terms' }, href: 'https://coined-word.orst.go.th/', external: true },
       { label: { th: 'คำทับศัพท์', en: 'Transliteration' }, href: 'https://transliteration.orst.go.th/', external: true },
@@ -174,6 +182,9 @@ window.RS_ACADEMY_PAGES = {
         title: { th: 'คำยืมภาษาต่างประเทศในภาษาไทยปัจจุบัน', en: 'Foreign loanwords in present-day Thai' },
         speaker: { th: 'ราชบัณฑิต สาขาวิชาภาษาศาสตร์', en: 'Fellow in Linguistics' },
         place: { th: 'ห้องประชุม 301 สำนักงานราชบัณฑิตยสภา', en: 'Room 301, Office of the Royal Society' } }
+    ],
+    programmes: [
+      { label: { th: 'ราชบัณฑิตสัญจร สำนักศิลปกรรม', en: 'Fellows on Tour: Arts' }, href: 'pages/works-on-tour.html?academy=arts' }
     ],
     links: [
       { label: { th: 'พจนานุกรม ฉบับราชบัณฑิตยสถาน', en: 'Royal Institute Dictionary' }, href: 'https://dictionary.orst.go.th/', external: true },

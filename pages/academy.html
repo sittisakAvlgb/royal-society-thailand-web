@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-en="Academy | The Royal Society of Thailand">สำนักวิชาการ | ราชบัณฑิตยสภา</title>
-  <meta name="description" content="สำนักวิชาการของราชบัณฑิตยสภา: ข้อมูลหน่วยงาน ข่าวและกิจกรรม ตารางกิจกรรม บรรยายวิชาการ และราชบัณฑิตในสำนัก" data-en-content="An academy of the Royal Society of Thailand: about, news and activities, events, lectures and Fellows.">
+  <meta name="description" content="สำนักวิชาการของราชบัณฑิตยสภา: ข้อมูลหน่วยงาน ราชบัณฑิตและภาคีสมาชิก การบรรยาย ข่าวและกิจกรรม ตารางกิจกรรม บรรยายวิชาการ และราชบัณฑิตในสำนัก" data-en-content="An academy of the Royal Society of Thailand: about, news and activities, events, lectures and Fellows.">
   <meta name="theme-color" content="#123D2B">
 
   <link rel="canonical" href="https://royalsociety.go.th/pages/academy.html">
@@ -33,12 +33,12 @@
 
   <link rel="preload" href="../assets/fonts/THSarabunNew-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261204p">
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261204p">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=20261204p">
-  <link rel="stylesheet" href="../assets/css/components.css?v=20261204p">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=20261204p">
-  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261204p">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=20261205j">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261205j">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=20261205j">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20261205j">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=20261205j">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20261205j">
 
   <script type="application/ld+json">
   {
@@ -54,25 +54,27 @@
 
   <!-- 12-academy.js fills the page before 08-directory.js and 09-calendar.js
        render the Fellows and the calendar, so it is loaded ahead of them -->
-  <script defer src="../assets/js/00-core.js?v=20261204p"></script>
-  <script defer src="../assets/js/01-config.js?v=20261204p"></script>
-  <script defer src="../assets/js/data/search-index.js?v=20261204p"></script>
-  <script defer src="../assets/js/data/fellows.js?v=20261204p"></script>
-  <script defer src="../assets/js/data/events.js?v=20261204p"></script>
-  <script defer src="../assets/js/data/academies.js?v=20261204p"></script>
-  <script defer src="../assets/js/02-components.js?v=20261204p"></script>
-  <script defer src="../assets/js/03-accessibility.js?v=20261204p"></script>
-  <script defer src="../assets/js/04-interactions.js?v=20261204p"></script>
-  <script defer src="../assets/js/05-language.js?v=20261204p"></script>
-  <script defer src="../assets/js/06-search.js?v=20261204p"></script>
-  <script defer src="../assets/js/12-academy.js?v=20261204p"></script>
-  <script defer src="../assets/js/08-directory.js?v=20261204p"></script>
-  <script defer src="../assets/js/09-calendar.js?v=20261204p"></script>
-  <script defer src="../assets/js/data/splash.js?v=20261204p"></script>
-  <script defer src="../assets/js/29-splash.js?v=20261204p"></script>
-  <script defer src="../assets/js/10-consent.js?v=20261204p"></script>
-  <script defer src="../assets/js/data/notices.js?v=20261204p"></script>
-  <script defer src="../assets/js/30-notice.js?v=20261204p"></script>
+  <script defer src="../assets/js/00-core.js?v=20261205j"></script>
+  <script defer src="../assets/js/01-config.js?v=20261205j"></script>
+  <script defer src="../assets/js/data/search-index.js?v=20261205j"></script>
+  <script defer src="../assets/js/data/fellows.js?v=20261205j"></script>
+  <script defer src="../assets/js/data/events.js?v=20261205j"></script>
+  <script defer src="../assets/js/data/academies.js?v=20261205j"></script>
+  <script defer src="../assets/js/data/publications.js?v=20261205j"></script>
+  <script defer src="../assets/js/07-pub-cover.js?v=20261205j"></script>
+  <script defer src="../assets/js/02-components.js?v=20261205j"></script>
+  <script defer src="../assets/js/03-accessibility.js?v=20261205j"></script>
+  <script defer src="../assets/js/04-interactions.js?v=20261205j"></script>
+  <script defer src="../assets/js/05-language.js?v=20261205j"></script>
+  <script defer src="../assets/js/06-search.js?v=20261205j"></script>
+  <script defer src="../assets/js/12-academy.js?v=20261205j"></script>
+  <script defer src="../assets/js/08-directory.js?v=20261205j"></script>
+  <script defer src="../assets/js/09-calendar.js?v=20261205j"></script>
+  <script defer src="../assets/js/data/splash.js?v=20261205j"></script>
+  <script defer src="../assets/js/29-splash.js?v=20261205j"></script>
+  <script defer src="../assets/js/10-consent.js?v=20261205j"></script>
+  <script defer src="../assets/js/data/notices.js?v=20261205j"></script>
+  <script defer src="../assets/js/30-notice.js?v=20261205j"></script>
 </head>
 <body>
   <div id="app-header"></div>
@@ -136,9 +138,11 @@
       <div class="container">
         <ul role="list" data-acad-nav>
           <li><a href="#about" data-en="About">ข้อมูลหน่วยงาน</a></li>
+          <li><a href="#fellows" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</a></li>
+          <li><a href="#lectures" data-en="Lectures">การบรรยาย</a></li>
           <li><a href="#news" data-en="News &amp; activities">ข่าวและกิจกรรม</a></li>
-          <li><a href="#events" data-en="Events">ตารางกิจกรรม</a></li>
-          <li><a href="#lectures" data-en="Lectures">บรรยายวิชาการ</a></li>          <li><a href="#fellows" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</a></li>        </ul>
+          <li data-acad-only="science" hidden><a href="#bulletin" data-en="Academy of Science Bulletin">จุลสารสำนักวิทยาศาสตร์</a></li>
+        </ul>
       </div>
     </nav>
 
@@ -162,6 +166,41 @@
       </div>
     </section>
 
+    <!-- Fellows of the academy — the home tiles, narrowed to this academy -->
+    <section class="section section--alt acad-section" id="fellows" aria-labelledby="fellows-title">
+      <div class="container">
+        <div class="band-head reveal">
+          <div class="band-head__text">
+            <p class="kicker" data-en="Fellows">ราชบัณฑิต</p>
+            <h2 id="fellows-title" class="section-title acad-pair__title" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</h2>
+            <p class="section-desc" data-en="Fellows and Associate Fellows of this academy, in fields across its disciplines.">ราชบัณฑิตและภาคีสมาชิกของสำนัก ผู้เชี่ยวชาญในสาขาวิชาของสำนัก</p>
+          </div>
+        </div>
+
+        <!-- As on the home page: two rows of the academy's members, the
+             full list behind "ดูทั้งหมด" (12-academy.js narrows the grid to
+             this academy and points the button at its directory) -->
+        <ul class="fellowx-grid fellows-band__grid reveal reveal--delay-1" role="list" data-fellows-preview="8"></ul>
+        <p class="band-foot">
+          <a class="btn btn--primary btn--pill" href="fellows.html" data-acad-fellows-more>
+            <span data-en="View all">ดูทั้งหมด</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Lectures (the works list beside it was removed at the client's request) -->
+    <div class="section acad-section">
+      <div class="container">
+        <section id="lectures" aria-labelledby="lectures-title" class="reveal">
+          <p class="kicker" data-en="Lectures">การบรรยาย</p>
+          <h2 id="lectures-title" class="section-title acad-pair__title" data-en="Academic lectures">การบรรยายทางวิชาการ</h2>
+          <ol class="acad-ledger acad-ledger--grid" role="list" data-acad-lectures></ol>
+        </section>
+      </div>
+    </div>
+
     <!-- News and activities -->
     <section class="section acad-section" id="news" aria-labelledby="news-title">
       <div class="container">
@@ -179,6 +218,9 @@
             <button class="news-tab" type="button" data-filter="activity" aria-pressed="false" data-en="Activities">กิจกรรม</button>
             <button class="news-tab" type="button" data-filter="article" aria-pressed="false" data-en="Articles">บทความ</button>
           </div>
+          <!-- the academy's own projects (Fellows on Tour, Ashram of Thought):
+               links to their pages, set like the tabs, after a hairline -->
+          <ul class="acad-programmes" role="list" aria-label="โครงการของสำนัก" data-en-aria-label="The academy's projects" data-acad-programmes></ul>
           <a class="btn btn--primary btn--pill" href="academy-news.html" data-acad-posts-all>
             <span data-acad-posts-all-label>ดูทั้งหมด</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
@@ -214,38 +256,21 @@
       </div>
     </section>
 
-    <!-- Lectures (the works list beside it was removed at the client's request) -->
-    <div class="section acad-section">
-      <div class="container">
-        <section id="lectures" aria-labelledby="lectures-title" class="reveal">
-          <p class="kicker" data-en="Lectures">บรรยายวิชาการ</p>
-          <h2 id="lectures-title" class="section-title acad-pair__title" data-en="Academic lectures">การบรรยายทางวิชาการ</h2>
-          <ol class="acad-ledger acad-ledger--grid" role="list" data-acad-lectures></ol>
-        </section>
-      </div>
-    </div>
-
-    <!-- Fellows of the academy — the home tiles, narrowed to this academy -->
-    <section class="section section--alt acad-section" id="fellows" aria-labelledby="fellows-title">
+    <!-- Academy of Science only: its bulletin (12-academy.js shows it on ?id=science) -->
+    <section class="section acad-section" id="bulletin" aria-labelledby="bulletin-title" data-acad-only="science" hidden>
       <div class="container">
         <div class="band-head reveal">
           <div class="band-head__text">
-            <p class="kicker" data-en="Fellows">ราชบัณฑิต</p>
-            <h2 id="fellows-title" class="section-title acad-pair__title" data-en="Fellows and Associate Fellows">ราชบัณฑิตและภาคีสมาชิก</h2>
-            <p class="section-desc" data-en="Fellows and Associate Fellows of this academy, in fields across its disciplines.">ราชบัณฑิตและภาคีสมาชิกของสำนัก ผู้เชี่ยวชาญในสาขาวิชาของสำนัก</p>
+            <p class="kicker" data-en="Bulletin">จุลสาร</p>
+            <h2 id="bulletin-title" class="section-title acad-pair__title" data-en="Academy of Science Bulletin">จุลสารสำนักวิทยาศาสตร์</h2>
+            <p class="section-desc" data-en="Readable science from the Fellows of the Academy of Science.">เรื่องเล่าวิทยาศาสตร์อ่านง่ายจากราชบัณฑิตสำนักวิทยาศาสตร์</p>
           </div>
-        </div>
-
-        <!-- As on the home page: two rows of the academy's members, the
-             full list behind "ดูทั้งหมด" (12-academy.js narrows the grid to
-             this academy and points the button at its directory) -->
-        <ul class="fellowx-grid fellows-band__grid reveal reveal--delay-1" role="list" data-fellows-preview="8"></ul>
-        <p class="band-foot">
-          <a class="btn btn--primary btn--pill" href="fellows.html" data-acad-fellows-more>
-            <span data-en="View all">ดูทั้งหมด</span>
+          <a class="btn btn--secondary btn--pill" href="series.html?id=science-bulletin">
+            <span data-en="All issues">ทุกฉบับ</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
           </a>
-        </p>
+        </div>
+        <ul class="acad-bulletin reveal reveal--delay-1" role="list" data-acad-bulletin></ul>
       </div>
     </section>
 
